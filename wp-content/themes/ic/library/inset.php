@@ -47,7 +47,8 @@ if(get_option('cebo_accent_color')) { ?>
 }
 
 
- #room-featured-slider .button:hover {
+ #room-featured-slider .button:hover,
+ .upcoming-calendar .tribe-mini-calendar td.tribe-events-has-events:hover {
         background: none repeat scroll 0 0 <?php echo $accent; ?> !important;
     }
 

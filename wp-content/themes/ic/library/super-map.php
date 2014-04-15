@@ -390,7 +390,7 @@
 				  overlay:{
 				    latLng: latlon,
 				    options:{
-				      content:  '<div id="mako" class="placeMark ' + type + '"><a href="' + val["permalink"] +'" target="_blank" rel="' + i + '" title="' + val["name"] + '"><p class="infobox"><i class="piccontainer" style="background-image: url(' + val["photo"] + ');"></i><span>'+ val["name"] +'</span><span class="info">'+ val["address"] +'<br>'+ val["phone"] +'<br>'+ val["distance"] +'</span><b class="monumental" id="' + val["cater"] + '">' + val["cater"] + '</b></p><small></small></a></div>',
+				      content:  '<div id="mako" class="placeMark ' + type + '"><a target="_blank" rel="' + i + '" title="' + val["name"] + '"><p class="infobox"><i class="piccontainer" style="background-image: url(' + val["photo"] + ');"></i><span>'+ val["name"] +'</span><span class="info">'+ val["address"] +'<br>'+ val["phone"] +'<br>'+ val["distance"] +'</span><b class="monumental" id="' + val["cater"] + '">' + val["cater"] + '</b></p><small></small></a></div>',
 				      offset:{
 				         y: -12,
                    		 x: -15
