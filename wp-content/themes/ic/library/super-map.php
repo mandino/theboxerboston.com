@@ -369,7 +369,7 @@
          function(data) {
            list = $.parseJSON(data);
            $.each(data["places"], function(key, val){
-             var docRoot = 'http://milo.lurnglier.com/wp-content/themes/ic';
+             var docRoot = '<?php bloginfo ('template_url'); ?>';
              var coords = val["coords"].split(",", 2);
              var latlon = [coords[0], coords[1]];
              var goid = val["cater"];

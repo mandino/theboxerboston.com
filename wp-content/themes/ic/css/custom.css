@@ -531,7 +531,7 @@ color: #333;
 #primary-nav {
     clear: both;
     overflow: auto;
-    margin: -1px !important;
+    /*margin: -1px !important;*/
 }
 
 #primary-nav nav {
@@ -539,15 +539,16 @@ color: #333;
     -moz-transition: all 0.5s;
     -webkit-transition: all 0.5s;
     -o-transition: all 0.5s;
-    background: transparent;
-    height: auto;
-    margin: 23px 20px 23px 0;
-    width: 100%;
-    float: none;
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    float: right;
     font-weight: bold;
+    height: auto;
+    margin: 22px 0;
+    width: 88%;
 }
+
 #primary-nav nav ul {
-	text-align: center;
+	text-align: right;
 }
 #primary-nav nav ul li {
 	color: #868282;
@@ -674,6 +675,7 @@ color: #333;
 	width: 100%;
 	background: #eee;
 	position: relative;
+	overflow: hidden;
 }
 
 .slide-header {
@@ -1509,7 +1511,7 @@ h3.featured-gallery-thumb-title {
 
 .room-list p {
     color: #606060;
-    font-size:18px;
+    font-size:17px;
     line-height: 28px;
 }
 
@@ -3807,12 +3809,12 @@ position: relative !important;
  
  
  #navigation-sticky-wrapper #primary-nav .nothingness {
-	background: #eee;
+	/*background: #eee;*/
         color: #444;
 }
  
   #navigation-sticky-wrapper #primary-nav .fixeer {
-	background: #1c93d1;
+	/*background: #1c93d1;*/
         color: #fff;
 }
  

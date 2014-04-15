@@ -712,7 +712,7 @@
 						
 						
 						
-						<ul>
+						<ul style="margin-right: 0;">
 						
 							<?php query_posts('post_type=post&posts_per_page=2&offset=3&cat=-10'); if(have_posts()) : while(have_posts()) : the_post(); $imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full"); ?>
 							
