@@ -1279,6 +1279,10 @@ footer nav ul.footling li a {
     height: 500px;
 }
 
+.home .flexslider .slides img {
+	width: auto;
+}
+
 .narrow {
     position: relative;
     height: 235px !important;

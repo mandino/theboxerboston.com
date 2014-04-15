@@ -30,6 +30,18 @@
 		
 		
 		});
+
+		$("#primary-nav .button.input-append.date").toggle(function() {
+					
+			$(".ressys").addClass("dropit");
+			$(this).removeClass("fixeer");
+		
+		},function(){
+		
+			$(".ressys").removeClass("dropit");
+		
+		
+		});
 		
 		
 
