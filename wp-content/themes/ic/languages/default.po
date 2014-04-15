@@ -1,0 +1,520 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Alpha\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-09-29 12:54-0600\n"
+"PO-Revision-Date: 2012-09-29 12:54-0600\n"
+"Last-Translator: Cebo <cebo@cebocampbell.com>\n"
+"Language-Team: Cebo <cebo@cebocampbell>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-SearchPath-1: \n"
+
+#: ../404.php:20
+msgid "Sorry to 404 you, my friend"
+msgstr ""
+
+#: ../404.php:23
+msgid "You have landed on a page that does not exist. Try using the navigation to find what you are looking for."
+msgstr ""
+
+#: ../archive.php:20
+#, php-format
+msgid "Daily Archives: <span>%s</span>"
+msgstr ""
+
+#: ../archive.php:22
+#, php-format
+msgid "Monthly Archives: <span>%s</span>"
+msgstr ""
+
+#: ../archive.php:24
+#, php-format
+msgid "Yearly Archives: <span>%s</span>"
+msgstr ""
+
+#: ../archive.php:26
+msgid "Blog Archives"
+msgstr ""
+
+#: ../archive.php:109
+#: ../author.php:120
+#: ../category.php:113
+#: ../index.php:97
+#: ../search.php:98
+msgid "Written by"
+msgstr ""
+
+#: ../archive.php:112
+#: ../author.php:123
+#: ../category.php:116
+#: ../index.php:100
+#: ../index.php:270
+#: ../index.php:387
+#: ../search.php:101
+msgid "Read More"
+msgstr ""
+
+#: ../archive.php:164
+#: ../author.php:175
+#: ../category.php:168
+#: ../index.php:152
+#: ../search.php:153
+msgid " Older Entries"
+msgstr ""
+
+#: ../archive.php:165
+#: ../author.php:176
+#: ../category.php:169
+#: ../index.php:153
+#: ../search.php:154
+msgid "Newer Entries "
+msgstr ""
+
+#: ../attachment.php:30
+msgid "Pages:"
+msgstr ""
+
+#: ../author.php:28
+#, php-format
+msgid "Author Archives: %s"
+msgstr ""
+
+#: ../author.php:38
+#, php-format
+msgid "About %s"
+msgstr ""
+
+#: ../category.php:19
+msgid "Results for the &#8216;"
+msgstr ""
+
+#: ../category.php:19
+msgid "Category"
+msgstr ""
+
+#: ../category.php:21
+msgid "Posts Tagged &#8216;"
+msgstr ""
+
+#: ../category.php:23
+#: ../category.php:25
+#: ../category.php:27
+msgid "Results for"
+msgstr ""
+
+#: ../category.php:29
+msgid "Results Archive"
+msgstr ""
+
+#: ../category.php:31
+msgid "Results"
+msgstr ""
+
+#: ../comments.php:9
+msgid "This post is password protected. Enter the password to view any comments."
+msgstr ""
+
+#: ../comments.php:32
+#: ../comments.php:47
+msgid "Comment navigation"
+msgstr ""
+
+#: ../comments.php:33
+#: ../comments.php:48
+msgid "&larr; Older Comments"
+msgstr ""
+
+#: ../comments.php:34
+#: ../comments.php:49
+msgid "Newer Comments &rarr;"
+msgstr ""
+
+#: ../comments.php:59
+msgid "Comments are closed."
+msgstr ""
+
+#: ../header.php:28
+#, php-format
+msgid "Page %s"
+msgstr ""
+
+#: ../index.php:8
+msgid "Writings"
+msgstr ""
+
+#: ../index.php:196
+msgid "Portfolio"
+msgstr ""
+
+#: ../index.php:212
+msgid "View Project"
+msgstr ""
+
+#: ../index.php:225
+msgid "See More Portfolio Items"
+msgstr ""
+
+#: ../index.php:279
+#: ../index.php:396
+msgid "No category Chosen"
+msgstr ""
+
+#: ../page-portfolio.php:75
+msgid "See More Of This"
+msgstr ""
+
+#: ../page_about.php:51
+msgid "Contact Us"
+msgstr ""
+
+#: ../search.php:18
+#, php-format
+msgid "Search Results for: %s"
+msgstr ""
+
+#: ../tag.php:16
+#, php-format
+msgid "Tag Archives: %s"
+msgstr ""
+
+#: ../library/filter.php:7
+msgid "All"
+msgstr ""
+
+#: ../library/lownav_breadcrumbs.php:12
+msgid "See All"
+msgstr ""
+
+#: ../library/panel.php:6
+#: ../library/panel.php:65
+msgid "Send message"
+msgstr ""
+
+#: ../library/panel.php:19
+msgid "Your Name (required)"
+msgstr ""
+
+#: ../library/panel.php:25
+msgid "Your Email (required"
+msgstr ""
+
+#: ../library/panel.php:30
+msgid "Your Website (optional)"
+msgstr ""
+
+#: ../library/panel.php:36
+msgid "Your Telephone (optional)"
+msgstr ""
+
+#: ../library/panel.php:50
+msgid "Your Message (required)"
+msgstr ""
+
+#: ../library/post_types.php:20
+msgid "Add New Portfolio Item"
+msgstr ""
+
+#: ../library/post_types.php:21
+msgid "Edit Portfolio"
+msgstr ""
+
+#: ../library/post_types.php:22
+msgid "New Portfolio Item"
+msgstr ""
+
+#: ../library/post_types.php:23
+msgid "View Portfolio Items"
+msgstr ""
+
+#: ../library/post_types.php:24
+msgid "Search Portfolio Items"
+msgstr ""
+
+#: ../library/post_types.php:25
+msgid "No Portfolio Item found"
+msgstr ""
+
+#: ../library/post_types.php:26
+msgid "No Portfolio Item found in Trash"
+msgstr ""
+
+#: ../library/post_types.php:82
+msgid "Search Project Types"
+msgstr ""
+
+#: ../library/post_types.php:83
+msgid "All Project Types"
+msgstr ""
+
+#: ../library/post_types.php:84
+msgid "Parent Project Type"
+msgstr ""
+
+#: ../library/post_types.php:85
+msgid "Parent Project Type:"
+msgstr ""
+
+#: ../library/post_types.php:86
+msgid "Edit Project Type"
+msgstr ""
+
+#: ../library/post_types.php:87
+msgid "Update Project Type"
+msgstr ""
+
+#: ../library/post_types.php:88
+msgid "Add New Project Type"
+msgstr ""
+
+#: ../library/post_types.php:89
+msgid "New Project Type Name"
+msgstr ""
+
+#: ../library/simple_functions.php:4
+msgid "Primary Navigation"
+msgstr ""
+
+#: ../options/furu-ajax.php:42
+msgid "Unable to remove image"
+msgstr ""
+
+#: ../options/furu-ajax.php:90
+msgid "Image Removed"
+msgstr ""
+
+#: ../options/furu-ajax.php:92
+msgid "Error"
+msgstr ""
+
+#: ../options/options_panel.php:1407
+msgid "General Options"
+msgstr ""
+
+#: ../options/options_panel.php:1411
+msgid "Website Logo"
+msgstr ""
+
+#: ../options/options_panel.php:1412
+msgid "Upload and insert your sparkling new logo here. Good dimensions would be 320w x 120h. If blank, the theme logo will display, which can be used as well."
+msgstr ""
+
+#: ../options/options_panel.php:1418
+msgid "Custom Favicon"
+msgstr ""
+
+#: ../options/options_panel.php:1419
+msgid "Have a favorite favicon? Upload and insert your favorite 16px x 16px Png/Gif that will hang out next to the address bar."
+msgstr ""
+
+#: ../options/options_panel.php:1425
+msgid "Tracking Code"
+msgstr ""
+
+#: ../options/options_panel.php:1426
+msgid "If you would like to add your tracking code into the footer, please put it here."
+msgstr ""
+
+#: ../options/options_panel.php:1434
+msgid "Styling Options"
+msgstr ""
+
+#: ../options/options_panel.php:1439
+msgid "Change accent color"
+msgstr ""
+
+#: ../options/options_panel.php:1440
+msgid "If you would like to change the current accent color (pink) select your color here."
+msgstr ""
+
+#: ../options/options_panel.php:1446
+msgid "Show Sidebar"
+msgstr ""
+
+#: ../options/options_panel.php:1447
+msgid "You can remove the default widgetized sidebar by disabling it here."
+msgstr ""
+
+#: ../options/options_panel.php:1453
+msgid "Custom CSS"
+msgstr ""
+
+#: ../options/options_panel.php:1454
+msgid "Want to add any custom CSS code? Put in here, and the rest is taken care of. This overrides any other stylesheets. eg: a.button{color:green}"
+msgstr ""
+
+#: ../options/options_panel.php:1463
+msgid "Personalization Options"
+msgstr ""
+
+#: ../options/options_panel.php:1467
+msgid "Email"
+msgstr ""
+
+#: ../options/options_panel.php:1473
+msgid "Contact Me Label"
+msgstr ""
+
+#: ../options/options_panel.php:1479
+msgid "Contact Form Title"
+msgstr ""
+
+#: ../options/options_panel.php:1486
+msgid "Form Welcome Text"
+msgstr ""
+
+#: ../options/options_panel.php:1493
+msgid "Your Facebook Page link ex: http://facebook.com/somethinghere"
+msgstr ""
+
+#: ../options/options_panel.php:1499
+msgid "Twitter ID, no @ ex: CEBOCAMPBELL"
+msgstr ""
+
+#: ../options/options_panel.php:1505
+msgid "Instagram Access Token"
+msgstr ""
+
+#: ../options/options_panel.php:1511
+msgid "Dribbble Link"
+msgstr ""
+
+#: ../options/options_panel.php:1519
+msgid "Home Page Columns"
+msgstr ""
+
+#: ../options/options_panel.php:1523
+msgid "Start Label"
+msgstr ""
+
+#: ../options/options_panel.php:1529
+msgid "Portfolio Label"
+msgstr ""
+
+#: ../options/options_panel.php:1536
+msgid "About Me Label"
+msgstr ""
+
+#: ../options/options_panel.php:1542
+msgid "Show Twitter Column"
+msgstr ""
+
+#: ../options/options_panel.php:1543
+msgid "Would you like show your tweets on the homepage column? It will also display on the sidebar as well."
+msgstr ""
+
+#: ../options/options_panel.php:1549
+msgid "Show Instagram Column"
+msgstr ""
+
+#: ../options/options_panel.php:1550
+msgid "Would you like show your instagram images on the homepage column? It will also display on the sidebar as well."
+msgstr ""
+
+#: ../options/options_panel.php:1555
+msgid "Show Special Category Column"
+msgstr ""
+
+#: ../options/options_panel.php:1556
+msgid "This will a category column and remove that category from the primary posts on the homepage"
+msgstr ""
+
+#: ../options/options_panel.php:1561
+msgid "Which Category Would You Like To Display?"
+msgstr ""
+
+#: ../options/options_panel.php:1562
+msgid "This will display the category in the special category column."
+msgstr ""
+
+#: ../options/options_panel.php:1568
+msgid "Category Label"
+msgstr ""
+
+#: ../options/options_panel.php:1575
+msgid "Category Column Order"
+msgstr ""
+
+#: ../options/options_panel.php:1576
+msgid "You can place your special category column before or after your pages (just after the twitter, or just before the ABOUT ME place)."
+msgstr ""
+
+#: ../options/options_panel.php:1587
+msgid "Your Skill Bars"
+msgstr ""
+
+#: ../options/options_panel.php:1590
+msgid "Skill Bar One Name"
+msgstr ""
+
+#: ../options/options_panel.php:1596
+msgid "Skill Bar One Color Picker"
+msgstr ""
+
+#: ../options/options_panel.php:1597
+#: ../options/options_panel.php:1616
+#: ../options/options_panel.php:1635
+#: ../options/options_panel.php:1654
+#: ../options/options_panel.php:1672
+msgid "This is the background color for the skill. Otherwise it will be blue."
+msgstr ""
+
+#: ../options/options_panel.php:1602
+msgid "Skill Bar One Percentage"
+msgstr ""
+
+#: ../options/options_panel.php:1609
+msgid "Skill Bar Two Name"
+msgstr ""
+
+#: ../options/options_panel.php:1615
+msgid "Skill Bar Two Color Picker"
+msgstr ""
+
+#: ../options/options_panel.php:1621
+msgid "Skill Bar Two Percentage"
+msgstr ""
+
+#: ../options/options_panel.php:1628
+msgid "Skill Bar Three Name"
+msgstr ""
+
+#: ../options/options_panel.php:1634
+msgid "Skill Bar Three Color Picker"
+msgstr ""
+
+#: ../options/options_panel.php:1640
+msgid "Skill Bar Three Percentage"
+msgstr ""
+
+#: ../options/options_panel.php:1647
+msgid "Skill Bar Four Name"
+msgstr ""
+
+#: ../options/options_panel.php:1653
+msgid "Skill Bar Four Color Picker"
+msgstr ""
+
+#: ../options/options_panel.php:1659
+msgid "Skill Bar Four Percentage"
+msgstr ""
+
+#: ../options/options_panel.php:1665
+msgid "Skill Bar Five Name"
+msgstr ""
+
+#: ../options/options_panel.php:1671
+msgid "Skill Bar Five Color Picker"
+msgstr ""
+
+#: ../options/options_panel.php:1677
+msgid "Skill Bar Five Percentage"
+msgstr ""
+

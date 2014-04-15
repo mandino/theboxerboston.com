@@ -1,0 +1,87 @@
+/* ======================================================== OCEANA HOTEL COLORS =====================================================  */
+
+
+
+
+
+
+
+/* Color */
+
+
+
+a {
+
+	color: #AB0303;
+
+}
+
+
+
+/* Hover Color*/
+
+#primary-nav nav ul li a:hover,
+
+footer nav ul li.navitem a:hover,
+
+.social-buttons a:hover, .social-buttons i:hover,
+
+#room-featured-slider .iosslider-next:hover i, 
+
+#room-featured-slider .iosslider-prev:hover i, 
+
+#room-details-slider .iosslider-next:hover i, 
+
+#room-details-slider .iosslider-prev:hover i,
+
+.cbp-qtrotator blockquote p:hover,
+
+#primary-nav nav ul li.current-menu-item a {
+
+		color: #AB0303;
+
+	}
+
+
+
+/* Background */
+
+
+
+#primary-nav .button,
+
+#neighborhood .section-header .fr li,
+
+.newsletter-form input[type="submit"],
+
+.slideSelectors .selected {
+
+    background: none repeat scroll 0 0 #AB0303;
+
+}
+
+
+
+/* Hover Background */
+
+
+
+#room-featured-slider .button:hover,
+
+.room-details-content .button:hover,
+
+.room-box .button:hover {
+
+    background: none repeat scroll 0 0 #AB0303 !important;
+
+}
+
+/*#room-featured-slider .button:hover,
+
+.room-details-content .button:hover,
+
+.room-box .button:hover {
+
+    background: none repeat scroll 0 0 #38BABF !important;
+
+}*/

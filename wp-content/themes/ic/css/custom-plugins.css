@@ -1,0 +1,195 @@
+/* Use this stylesheet for customizing the CSS of plugins */
+
+
+
+/* ======================================================== QUOTES ROTATOR =====================================================  */
+
+.cbp-qtrotator {
+    margin: 0 auto;
+    max-width: 740px;
+    min-height: 100px;
+    position: relative;
+    width: 100%;
+}
+
+.cbp-qtrotator .cbp-qtcontent {
+    border-bottom: 0 none !important;
+    border-top: 0 none !important;
+    min-height: 200px;
+    opacity: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 0;
+}
+
+.cbp-qtprogress {
+    display: none;
+}
+
+.cbp-qtrotator blockquote p {
+    transition: color 0.4s;
+    -moz-transition: color 0.4s;
+    -webkit-transition: color 0.4s;
+    -o-transition: color 0.4s;
+    font-family: didot;
+    color: #403f3f;
+    font-size: 23px;
+    font-weight: normal;
+    font-style: italic;
+    line-height: 1.7;
+    margin: 0.4em 0 1em;
+    text-align: center;
+}
+
+.cbp-qtrotator blockquote p:hover {
+    color: #403f3f !important;
+}
+
+.cbp-qtrotator blockquote footer:before {
+    content: none;
+}
+
+.cbp-qtrotator blockquote footer {
+    font-family: 'Libre Baskerville';
+    color: #B7B7B7;
+    font-size: 22px;
+    text-align: center;
+}
+
+
+
+/* ROOMS - Quote */
+
+
+
+.room-details .quote {
+    margin: 40px 0;
+}
+
+.room-details .cbp-qtrotator {
+    width: 75%;
+}
+
+.room-details .quote-left {
+    background-image: url("../images/ico-quote-left.png");
+    float: none;
+    margin-left: 60px;
+}
+
+.room-details .quote-right {
+    background-image: url("../images/ico-quote-right.png");
+    bottom: 0;
+    left: 77%;
+    margin-right: auto;
+    position: relative;
+}
+
+.room-details .cbp-qtrotator blockquote p {
+    color: #A44144;
+    font-family: scala-sans;
+    font-size: 43px;
+    font-style: italic;
+    font-weight: normal;
+    line-height: 1;
+    margin: 0.4em 0 0;
+    text-align: left;
+}
+
+
+
+
+
+
+
+/* ======================================================== FLEX SLIDER =====================================================  */
+
+.flexslider {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+    position: relative;
+}
+
+#home-slider .flex-direction-nav a.flex-disabled, .flex-direction-nav, .flex-control-nav {
+    display: none;
+}
+
+.flex-control-nav {
+    display: block;
+    z-index: 99;
+}
+
+
+
+/* ======================================================== Map directions WP Plugin =====================================================  */
+
+.wpgmaps_directions_outer_div td {
+    font-size: 16px;
+    text-align: right;
+}
+
+.wpgmaps_directions_outer_div td:nth-child(2) {
+    text-align: left;
+}
+.wpgmaps_directions_outer_div td {
+    font-size: 16px;
+    text-align: right;
+}
+
+.wpgmaps_directions_outer_div td select {
+    transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    border: 3px solid;
+    margin-bottom: 7px;
+    margin-left: 10px;
+    padding: 8px;
+}
+
+.wpgmaps_directions_outer_div input, .wpgmaps_directions_outer_div input:focus {
+    transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    border: 3px solid;
+    margin-bottom: 0;
+    margin-left: 10px;
+}
+
+.wpgmaps_directions_outer_div input:focus,.wpgmaps_directions_outer_div select:focus {
+    border-color: #1C93D1;
+    color: #333;
+}
+
+.wpgmaps_directions_outer_div .wpgmaps_get_directions {
+    transition: background-color 0.4s;
+    -moz-transition: background-color 0.4s;
+    -webkit-transition: background-color 0.4s;
+    -o-transition: background-color 0.4s;
+    background: none repeat scroll 0 0 #1C93D1;
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 8px;
+    padding: 7px 30px;
+    text-transform: uppercase;
+    width: auto;
+    cursor: pointer;
+}
+    .wpgmaps_directions_outer_div .wpgmaps_get_directions:hover {
+        background-color: #333;
+        color: #fff;
+    }
+
+#wpgmza_options_box_1 > input {
+    display: block;
+    float: left;
+    margin-right: 7px;
+    margin-top: 2px;
+    width: auto;
+}

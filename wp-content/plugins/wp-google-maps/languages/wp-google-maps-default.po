@@ -1,0 +1,1120 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: wp-google-maps\n"
+"POT-Creation-Date: 2013-10-31 11:14+0200\n"
+"PO-Revision-Date: 2013-10-31 11:14+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: C:\\wamp\\www\\wordpress361\\wp-content\\plugins\\wp-"
+"google-maps\n"
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:408
+msgid "including Pro &amp; Gold add-ons"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:408
+msgid "including Pro add-on"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:434
+msgid "Download this as a CSV file"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:434
+msgid "Download this data as a CSV file"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:448
+msgid "Create your Map"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:493
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1738
+msgid "Short code"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:494
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1739
+msgid "copy this into your post or page to display the map"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:497
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1742
+msgid "Map Name"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:501
+msgid "Map Dimensions"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:503
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1576
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1746
+msgid "Width"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:510
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1577
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1757
+msgid "Height"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:527
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1797
+msgid "Default Marker Image"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:528
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:693
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:697
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1798
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1945
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1949
+msgid "Upload Image"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:528
+msgid ""
+"Get great map markers <a href='http://mapicons.nicolasmollet.com/' "
+"target='_BLANK' title='Great Google Map Markers'>here</a>"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:532
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1777
+msgid "Map type"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:534
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1584
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1779
+msgid "Roadmap"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:535
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1585
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1780
+msgid "Satellite"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:536
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1586
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1781
+msgid "Hybrid"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:537
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1587
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1782
+msgid "Terrain"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:542
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1802
+msgid "List all Markers"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:544
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1804
+msgid "List all markers below the map"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:545
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1805
+msgid "Select this for the advanced listing functionality"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:550
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1810
+msgid "Filter by Category"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:552
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1812
+msgid "Allow users to filter by category?"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:557
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1817
+msgid "Order markers by"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:560
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_categories.php:163
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_polygons.php:465
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_polylines.php:493
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1574
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1631
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1820
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2048
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2242
+msgid "ID"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:561
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:680
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1575
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1634
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1821
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1932
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2244
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2263
+msgid "Title"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:562
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1635
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1822
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2246
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2265
+msgid "Address"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:563
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:690
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1823
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1942
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2247
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2266
+msgid "Description"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:564
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:699
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_categories.php:164
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1951
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2245
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2264
+msgid "Category"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:567
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1827
+msgid "Ascending"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:568
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1826
+msgid "Descending"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:574
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1767
+msgid "Map Alignment"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:576
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1769
+msgid "Left"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:577
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1770
+msgid "Center"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:578
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1771
+msgid "Right"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:579
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:709
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1772
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1961
+msgid "None"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:585
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1834
+msgid "Show User's Location?"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:587
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:595
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:615
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:622
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:719
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1368
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1445
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1837
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1845
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1865
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1873
+msgid "Yes"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:588
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:596
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:601
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:616
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:623
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:718
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1368
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1445
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1836
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1844
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1850
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1864
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1872
+msgid "No"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:593
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1842
+msgid "Enable Directions?"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:599
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1848
+msgid "Directions Box Open by Default?"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:602
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1851
+msgid "Yes, on the left"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:603
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1852
+msgid "Yes, on the right"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:604
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1853
+msgid "Yes, above"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:605
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1854
+msgid "Yes, below"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:608
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1857
+msgid "Directions Box Width"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:613
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1862
+msgid "Enable Bicycle Layer?"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:620
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1870
+msgid "Enable Traffic Layer?"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:633
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1883
+msgid "KML/GeoRSS URL"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:635
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1885
+msgid "The KML/GeoRSS layer will over-ride most of your map settings"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:639
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1889
+msgid "Fusion table ID"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:641
+msgid ""
+"Read data directly from your Fusion Table. For more information, see <a "
+"href='http://googlemapsmania.blogspot.com/2010/05/fusion-tables-google-maps-"
+"api.html'>http://googlemapsmania.blogspot.com/2010/05/fusion-tables-google-"
+"maps-api.html</a>"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:646
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1901
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1912
+msgid "Remember to save your map!"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:659
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1905
+msgid "Save Map"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:661
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1907
+msgid ""
+"Tip: Use your mouse to change the layout of your map. When you have "
+"positioned the map to your desired location, press \"Save Map\" to keep your "
+"settings."
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:668
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1919
+msgid "Markers"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:669
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1920
+msgid "Polygons"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:670
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1921
+msgid "Polylines"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:675
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1927
+msgid "Add a marker"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:685
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1937
+msgid "Address/GPS"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:692
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1944
+msgid "Pic URL"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:693
+msgid "Or paste image URL"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:694
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1946
+msgid "Link URL"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:695
+msgid "Format: http://www.domain.com"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:696
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1948
+msgid "Custom Marker"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:697
+msgid "ignore if you want to use the default marker"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:706
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1958
+msgid "Animation"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:710
+msgid "Bounce"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:711
+msgid "Drop"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:715
+msgid "InfoWindow open by default"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:725
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1968
+msgid "Add Marker"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:725
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1968
+msgid "Adding"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:726
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1969
+msgid "Save Marker"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:726
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1969
+msgid "Saving"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:730
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1976
+msgid "Your Markers"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:736
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_polygons.php:25
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1984
+msgid "Add a Polygon"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:737
+msgid "Add a New Polygon"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:741
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_polylines.php:25
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1993
+msgid "Add a Polyline"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:742
+msgid "Add a New Polyline"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:752
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2022
+msgid ""
+"WP Google Maps encourages you to make use of the amazing icons created by "
+"Nicolas Mollet's Maps Icons Collection"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:752
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2022
+msgid "and to credit him when doing so."
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:902
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:903
+msgid "Use my location"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:918
+msgid "Filter by"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:1006
+msgid "Get directions to"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:1006
+msgid "Directions"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:1036
+msgid "Get Directions"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:1040
+msgid "For"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:1042
+msgid "Driving"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:1043
+msgid "Walking"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:1044
+msgid "Bicycling"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:1047
+msgid "show options"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:1048
+msgid "hide options"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:1050
+msgid "Avoid Tolls"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:1051
+msgid "Avoid Highways"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:1056
+msgid "From"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:1057
+msgid "To"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:1062
+msgid "Go"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:1091
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:1107
+msgid "Fetching directions..."
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:1092
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:1108
+msgid "Reset directions"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2605
+msgid "WP Google Maps"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2605
+msgid ""
+"Please ensure you have <strong>both</strong> the <strong>Basic</strong> and "
+"<strong>Pro</strong> versions of WP Google Maps installed and activated at "
+"the same time in order for the plugin to function correctly."
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2619
+msgid "Header 1 should be 'id', not"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2620
+msgid "Header 2 should be 'map_id', not"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2621
+msgid "Header 3 should be 'address', not"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2622
+msgid "Header 4 should be 'description', not"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2623
+msgid "Header 5 should be 'pic', not"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2624
+msgid "Header 6 should be 'link', not"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2625
+msgid "Header 7 should be 'icon', not"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2626
+msgid "Header 8 should be 'lat', not"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2627
+msgid "Header 9 should be 'lng', not"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2628
+msgid "Header 10 should be 'anim', not"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2629
+msgid "Header 11 should be 'title', not"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2630
+msgid "Header 12 should be 'infoopen', not"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2631
+msgid "Header 13 should be 'category', not"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2633
+msgid "CSV import failed"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2661
+msgid "Your CSV file has been successfully imported"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2683
+msgid "Download ALL marker data to a CSV file"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2686
+msgid "Advanced Options"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2689
+msgid "OR"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2690
+msgid "Upload CSV File"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2692
+msgid "Replace existing data with data in file"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2693
+msgid "Upload File"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2708
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1467
+msgid "WP Google Map Settings"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2733
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1517
+msgid "Save Settings"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2819
+msgid ""
+"An Unexpected HTTP Error occurred during the API request.</p> <p><a href=\"?"
+"\" onclick=\"document.location.reload(); return false;\">Try again</a>"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2824
+msgid "An unknown error occurred"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2864
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1496
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1700
+msgid "Map Settings"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2867
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1499
+msgid "General Map Settings"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2869
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1501
+msgid "Disable StreetView"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2870
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1502
+msgid "Disable Zoom Controls"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2871
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1503
+msgid "Disable Pan Controls"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2872
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1504
+msgid "Disable Map Type Controls"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2873
+msgid "Disable Mouse Wheel Zoom"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2874
+msgid "Disable Mouse Dragging"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2875
+msgid "Disable Mouse Double Click Zooming"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2879
+msgid "Marker Listing Settings"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2881
+msgid "Hide the Category column"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2885
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1508
+msgid "Troubleshooting Options"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2887
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1510
+msgid ""
+"Over-ride current jQuery with version 1.8.3 (Tick this box if you are "
+"receiving jQuery related errors)"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2917
+msgid "InfoWindow Settings"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2920
+msgid "Default Image Width"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2924
+msgid "Default Image Height"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2928
+msgid "Image Thumbnails"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2930
+msgid "Do not use TimThumb"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2931
+msgid "(Tick this if you are having problems viewing your thumbnail images)"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2935
+msgid "Max InfoWindow Width"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2936
+msgid "(Minimum: 200px)"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2939
+msgid "Other settings"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2941
+msgid "Open links in a new window"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2942
+msgid "(Tick this if you want to open your links in a new window)"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro.php:2943
+msgid "Hide the address field"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_categories.php:15
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_categories.php:18
+msgid "Marker Categories"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_categories.php:15
+msgid "Add New Category"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_categories.php:19
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1544
+msgid "Pro Version"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_categories.php:19
+msgid "Create marker categories"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_categories.php:19
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1544
+msgid "with the"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_categories.php:19
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1544
+msgid "of WP Google Maps for only"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_categories.php:24
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1550
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1611
+msgid "Problems with the plugin? See the troubleshooting manual."
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_categories.php:43
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_categories.php:66
+msgid "Add a Marker Category"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_categories.php:46
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_categories.php:70
+msgid "Save Category"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_categories.php:142
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1954
+msgid "Select"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_categories.php:165
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1632
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2243
+msgid "Icon"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_categories.php:171
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1589
+msgid "Trash"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_categories.php:175
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_polygons.php:490
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_polylines.php:518
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1593
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2221
+msgid "Edit"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_polygons.php:42
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_polygons.php:90
+msgid "Save Polygon"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_polygons.php:73
+msgid "Edit Polygon"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_polygons.php:466
+msgid "Polygon Data"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_polygons.php:467
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_polylines.php:495
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2250
+msgid "Action"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_polygons.php:491
+msgid "Delete this polygon"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_polygons.php:491
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_polylines.php:519
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2223
+msgid "Delete"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_polylines.php:42
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_polylines.php:90
+msgid "Save Polyline"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_polylines.php:73
+msgid "Edit Polyline"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_polylines.php:494
+msgid "Polyline Data"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wp-google-maps-pro_polylines.php:519
+msgid "Delete this polyline"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1331
+msgid "Maps"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1335
+msgid "Categories"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1336
+msgid "Advanced"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1338
+msgid "Settings"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1354
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1431
+msgid "Experiencing problems with the plugin?"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1354
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1431
+msgid "See the troubleshooting manual."
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1354
+msgid "Or ask a question on our "
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1354
+msgid "Support forum."
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1368
+msgid "Delete your map"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1368
+msgid "Are you sure you want to delete the map"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1445
+msgid "Delete Marker"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1445
+msgid "Are you sure you want to delete this marker:"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1539
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1543
+msgid "My Maps"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1539
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1608
+msgid "Add New"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1544
+msgid "Create unlimited maps"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1578
+msgid "Type"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1608
+msgid "My Markers"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1633
+msgid "Linked to"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1636
+msgid "GPS"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1637
+msgid "Pic"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1638
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2249
+msgid "Link"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1689
+msgid ""
+"Add custom icons, titles, descriptions, pictures and links to your markers "
+"with the"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1689
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1690
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2016
+msgid "Pro Edition"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1689
+msgid "of this plugin for just"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1690
+msgid "Purchase the Pro Edition"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1690
+msgid "of WP Google Maps and save your markers to a CSV file!"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1792
+msgid ""
+"Get all of these advanced features with the Pro version for only <a href="
+"\"http://www.wpgmaps.com/purchase-professional-version/?"
+"utm_source=plugin&utm_medium=link&utm_campaign=advanced\">$14.99 once off</"
+"a>. Support and updates included forever."
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1891
+msgid "Read data directly from your Fusion Table."
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1987
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1996
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2007
+msgid "Add detailed information to your markers!"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1987
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1996
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2007
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2011
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2015
+msgid "Add custom markers to your map!"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1988
+msgid "Add Polygons to your maps for only"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1988
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1997
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2008
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2016
+msgid "Click"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1988
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1997
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2008
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2016
+msgid "here"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:1997
+msgid "Add Polylines and routes to your maps for only"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2008
+msgid "Add detailed information to your markers for only"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2012
+msgid ""
+"Add different marker icons, or your own icons to make your map really stand "
+"out!"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2016
+msgid "Allow your visitors to get directions to your markers!"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2048
+msgid "Edit Marker Location"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2057
+msgid "Marker Latitude"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2061
+msgid "Marker Longitude"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2066
+msgid "Save Marker Location"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2067
+msgid ""
+"Tip: Use your mouse to change the location of the marker. Simply click and "
+"drag it to your desired location."
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2186
+msgid ""
+"There are too many markers to make use of the live edit function. The "
+"maximum amount for this functionality is 2000 markers. Anything more than "
+"that could crash your browser. In order to edit your markers, you would need "
+"to download the table in CSV format, edit it and re-upload it."
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2207
+msgid "View this link"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2221
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2222
+msgid "Edit this marker"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2222
+msgid "Edit Location"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2223
+msgid "Delete this marker"
+msgstr ""
+
+#: C:\wamp\www\wordpress361\wp-content\plugins\wp-google-maps/wpGoogleMaps.php:2248
+msgid "Image"
+msgstr ""

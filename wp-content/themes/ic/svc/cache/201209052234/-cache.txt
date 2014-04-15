@@ -1,0 +1,1 @@
+{"completed_in":0.3,"max_id":243552664389042176,"max_id_str":"243552664389042176","page":1,"query":"","refresh_url":"?since_id=243552664389042176&q=&geocode=%2C-85.8476829%2C1mi&result_type=mixed","results":[],"results_per_page":50,"since_id":0,"since_id_str":"0"}

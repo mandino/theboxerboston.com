@@ -1,0 +1,1 @@
+{"completed_in":0.077,"max_id":203973093893480448,"max_id_str":"203973093893480448","page":1,"query":"","refresh_url":"?since_id=203973093893480448&q=&geocode=%2Cundefined%2C1mi&result_type=mixed","results":[],"results_per_page":50,"since_id":0,"since_id_str":"0"}

@@ -1,0 +1,2 @@
+[24-Jan-2014 20:10:08 America/Detroit] PHP Fatal error:  Call to undefined function get_header() in /home/admin/public_html/milo/wp-content/themes/ic/index.php on line 1
+[27-Jan-2014 01:29:13 America/Detroit] PHP Fatal error:  Call to undefined function get_header() in /home/admin/public_html/milo/wp-content/themes/ic/index.php on line 1

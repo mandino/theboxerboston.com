@@ -1,0 +1,48 @@
+/* ===================================================================================================      
+	|  																								 |
+	| 									FACEBOOK  & MAILCHIMP  										 |
+	|																								 |
+   =================================================================================================== */
+   
+.facecontainer {
+	width: 500px;
+	margin: auto;
+}
+.facebookcontainer {
+	padding-top: 20px;
+}
+.facebookcontainer img {
+	background: none repeat scroll 0 0 #FDFBEE;
+    padding: 4px;
+}
+.specialfooter p {
+	color: #fff;
+}
+.smalllogo {
+	text-align: center;
+	width: 520px;
+	padding-top: 15px;
+}
+.smalllogo h2.major {
+	line-height: 15px;
+}
+.smalllogo h2.major a {
+	font-family: 'BuffetScriptRegular';
+	color: #7e7752;
+	font-size: 30px;
+} 
+.smalllogo h3.tag a {
+    font-family: 'CheboyganRegular';
+	color: #539c4b;
+	font-size: 22px;
+	text-transform: lowercase;
+}
+.slide-out-div {
+	background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #AAAAAA;
+    padding: 20px;
+    width: 290px;
+	}      
+.handle {
+	background: url(images/facebook.png) no-repeat;
+}

@@ -1,0 +1,32 @@
+/* ======================================================== NU HOTEL COLORS =====================================================  */
+
+
+
+/* Color */
+
+a {
+	color: #f1621c;
+}
+
+/* Hover Color*/
+#primary-nav nav ul li a:hover,
+footer nav ul li.navitem a:hover,
+.social-buttons a:hover, .social-buttons i:hover {
+		color: #f1621c;
+	}
+
+/* Background */
+
+#primary-nav .button,
+#neighborhood .section-header .fr li,
+.newsletter-form input[type="submit"],
+.slideSelectors .selected {
+    background: none repeat scroll 0 0 #f1621c;
+}
+
+/* Hover Background */
+
+#room-featured-slider .button:hover,
+.room-details-content .button:hover {
+    background: none repeat scroll 0 0 #f1621c !important;
+}

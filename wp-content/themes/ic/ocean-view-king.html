@@ -1,0 +1,514 @@
+<!DOCTYPE HTML>
+<!--[if lt IE 7 ]> <html lang="en" class="ie ie6"> <![endif]--> 
+<!--[if IE 7 ]>	<html lang="en" class="ie ie7"> <![endif]--> 
+<!--[if IE 8 ]>	<html lang="en" class="ie ie8"> <![endif]--> 
+<!--[if IE 9 ]>	<html lang="en" class="ie ie9"> <![endif]--> 
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>OCEANA | OCEAN VIEW KING</title>
+<meta name="description" content="">
+<link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- Defualt Stylesheets -->
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/custom.css">
+
+<!-- Fonts -->
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700' rel='stylesheet' type='text/css'>
+
+<!-- Jquery -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+<!-- Jquery Stuffs -->
+<script type="text/javascript" src="js/jquery-clicknav.js"></script>
+
+<!-- responsive style -->
+<link rel="stylesheet" type="text/css" href="css/media.css">
+
+<!-- Plugins -->
+
+<!-- Quotes Rotator -->
+<link rel="stylesheet" type="text/css" href="css/quotes-rotator/component.css" />
+<script src="js/quotes-rotator/modernizr.custom.js"></script>
+<script src="js/quotes-rotator/jquery.cbpQTRotator.min.js"></script>
+<script>
+	$( function() {
+		/*
+		- how to call the plugin:
+		$( selector ).cbpQTRotator( [options] );
+		- options:
+		{
+			// default transition speed (ms)
+			speed : 700,
+			// default transition easing
+			easing : 'ease',
+			// rotator interval (ms)
+			interval : 8000
+		}
+		- destroy:
+		$( selector ).cbpQTRotator( 'destroy' );
+		*/
+
+		$( '#cbp-qtrotator' ).cbpQTRotator();
+
+	} );
+</script>
+
+<!-- SlideJS -->
+<link rel="stylesheet" href="css/slidejs.css" type="text/css" media="screen" />
+<script src="js/jquery.slides.min.js"></script>
+<script>
+	$(document).ready(function() {
+	  $('.slides-mini').slidesjs({
+	    width: 540,
+	    height: 292,
+	    navigation: false,
+	    effect: {
+		      slide: {
+		        // Slide effect settings.
+		        speed: 500
+		          // [number] Speed in milliseconds of the slide animation.
+		      },
+		      fade: {
+		      	speed: 1000,
+		      	crossfade: true
+		      }
+		  },
+		  navigation: {
+		      active: true,
+		        // [boolean] Generates next and previous buttons.
+		        // You can set to false and use your own buttons.
+		        // User defined buttons must have the following:
+		        // previous button: class="slidesjs-previous slidesjs-navigation"
+		        // next button: class="slidesjs-next slidesjs-navigation"
+		      effect: "fade"
+		        // [string] Can be either "slide" or "fade".
+		    },
+	    pagination: {
+	    	effect: 'fade',
+	    }
+	  });
+	});
+</script>
+
+<!-- Flex Slider -->
+<!-- <link rel="stylesheet" href="js/flexslider/css/demo.css" type="text/css" media="screen" /> -->
+<link rel="stylesheet" href="js/flexslider/flexslider.css" type="text/css" media="screen" />
+<script defer src="js/flexslider/jquery.flexslider.js"></script>
+<!-- <script src="js/flexslider/js/modernizr.js"></script> -->
+<script type="text/javascript">
+	$(document).ready(function() {
+	  $('.flexslider').flexslider({
+	    animation: "fade",
+	    animationSpeed: 600,
+	  });
+	});
+</script>
+
+<!-- Datepicker -->
+<link rel="stylesheet" href="css/datepicker.css" type="text/css" media="screen" />
+<script defer src="js/bootstrap-datepicker.js"></script>
+<script type="text/javascript">
+	// $(function(){
+	// 	$('#idp3').datepicker();
+	// });
+</script>
+
+<!-- Jquery Sticky -->
+<script type="text/javascript" src="js/jquery.sticky.js"></script>
+<script>
+	 $(window).load(function(){
+      $(".searchbox").sticky({ topSpacing: 61, className: 'sticky', wrapperClassName: 'my-wrapper' });
+      $("#navigation").sticky({ topSpacing: 0, className: 'sticky', wrapperClassName: 'my-wrapper' });
+    });
+</script>
+
+<!-- iosslider -->
+<link rel="stylesheet" type="text/css" href="css/iosslider.css">
+<script defer src="js/jquery.iosslider.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+	
+		// $('.iosSlider').iosSlider({
+		// 	snapToChildren: true,
+		// 	desktopClickDrag: true,
+		// 	infiniteSlider: true,
+		// 	snapSlideCenter: true,
+		// 	onSlideChange: slideChange,
+		// 	autoSlideTransTimer: 2000,
+		// 	onSlideChange: slideChange,
+		// 	scrollbar: true,
+		// 	scrollbarHide: false,
+		// 	desktopClickDrag: true,
+		// 	scrollbarLocation: 'bottom',
+		// 	scrollbarHeight: '6px',
+		// 	scrollbarBackground: 'url(_img/some-img.png) repeat 0 0',
+		// 	scrollbarBorder: '1px solid #000',
+		// 	scrollbarMargin: '0 30px 16px 30px',
+		// 	scrollbarOpacity: '0.75',
+
+		// 	navSlideSelector: '.sliderContainer .slideSelectors .item',
+		// 	navPrevSelector: '.sliderContainer .slideSelectors .prev',
+		// 	navNextSelector: '.sliderContainer .slideSelectors .next',
+		// 	scrollbarContainer: '.sliderContainer .scrollbarContainer',
+		// 	scrollbarMargin: '0',
+		// 	scrollbarBorderRadius: '0',
+		// 	keyboardControls: true,
+		// });
+
+		$('#room-details-slider .iosSlider').iosSlider({
+			snapToChildren: true,
+			desktopClickDrag: true,
+			infiniteSlider: true,
+			snapSlideCenter: true,
+			onSlideChange: slideChange,
+			autoSlideTransTimer: 2000,
+			keyboardControls: true,
+			onSlideComplete: slideComplete,
+			navNextSelector: $('.iosslider-next'),
+		    navPrevSelector: $('.iosslider-prev'),
+		});
+
+		function slideComplete(args) {
+				
+			$('.iosslider-next, .iosslider-prev').removeClass('unselectable');
+		    if(args.currentSlideNumber == 1) {
+		        $('.iosslider-prev').addClass('unselectable');
+		    } else if(args.currentSliderOffset == args.data.sliderMax) {
+		        $('.iosslider-next').addClass('unselectable');
+	    	}
+
+	    }
+
+		function slideChange(args) {
+
+			try {
+				console.log('changed: ' + (args.currentSlideNumber - 1));
+			} catch(err) {
+			}
+			
+			$('.indicators .item').removeClass('selected');
+			$('.indicators .item:eq(' + (args.currentSlideNumber - 1) + ')').addClass('selected');
+
+			$('.slideSelectors .item').removeClass('selected');
+			$('.slideSelectors .item:eq(' + (args.currentSlideNumber - 1) + ')').addClass('selected');
+
+			$('.iosSlider .item').removeClass('current');
+		    $(args.currentSlideObject).addClass('current');
+
+		}
+
+		// $('.iosSlider').bind('mousewheel', function(event, delta) {
+		//     var slider = $(this);
+		//     if(delta > 0) {
+		//       slider.iosSlider('prevSlide');
+		//     } else if (delta < 0) {
+		//       slider.iosSlider('nextSlide');
+		//     }
+		//   });
+
+		$('.iosSlider').bind('mousewheel', function(event, delta) {
+
+		    var currentSlide = $('.iosSlider').data('args').currentSlideNumber;
+
+		    //if delta is a positive number, go to prev slide. If delta is a negative number, go to next slide.
+		    if(delta > 0) {
+
+		        $('.iosSlider').iosSlider('goToSlide', currentSlide - 1);
+
+		    } else {
+
+		        $('.iosSlider').iosSlider('goToSlide', currentSlide + 1);
+
+		    }
+
+		});
+		
+	});
+
+</script>
+
+<!-- Custom Plugin Settings -->
+<link rel="stylesheet" type="text/css" href="css/custom-plugins.css">
+
+<!-- Scripts -->
+<!-- Optional FlexSlider Additions -->
+<script src="js/jquery.easing.js"></script>
+<script src="js/jquery.mousewheel.js"></script>
+
+<!-- Color Override CSS -->
+<link rel="stylesheet" type="text/css" href="css/oceana-hotel.css">
+
+</head>
+
+<body id="ocean-view-king" class="room-details">
+
+	<div id="navigation">
+
+		<div id="property-nav">
+			
+			<nav class="click-nav">
+				<ul class="container no-js">
+					<li>
+	
+						<a href="#" class="clicknav-clicker">Independent <span>Collection</span></a>
+	
+						<!-- <ul>
+							<li class="navitem"><a href="#">Independet Collection</a></li>
+							<li class="navitem"><a href="#">Independet Collection</a></li>
+							<li class="navitem"><a href="#">Independet Collection</a></li>
+							<li class="navitem"><a href="#">Independet Collection</a></li>
+							<li class="navitem"><a href="#">Independet Collection</a></li>
+						</ul> -->
+	
+					</li>
+				</ul>
+			</nav>
+	
+		</div>
+	
+		<div id="primary-nav">
+	
+			<div class="container">
+	
+				<nav class="fl">
+					<ul>
+						<li class="navitem"><a href="/hersha">The Hotel</a></li>
+						<li class="navitem"><a href="/hersha/oceana-hotel-list.html">Rooms & Suites</a></li>
+						<li class="navitem"><a href="#">Dining</a></li>
+						<li class="navitem"><a href="#">Photos</a></li>
+						<li class="navitem"><a href="#">Specials</a></li>
+						<li class="navitem"><a href="#">Weddings</a></li>
+						<li class="navitem"><a href="#">Meetings & Events</a></li>
+						<li class="navitem"><a href="#">Hotel Programs</a></li>
+					</ul>
+				</nav>
+	
+			</div>
+	
+			<a class="reserve button fr input-append date" id="idp3" data-date="12-02-2012" data-date-format="mm-dd-yyyy">RESERVE</a>
+	
+		</div>
+
+	</div>
+
+	<div id="room-featured-slider">
+
+		<div class="featured-point"></div>
+				
+		<div class="flexslider">
+			<ul class="slides">
+				<li>
+					<div class="room-slider-gradience"></div>
+					<div class="slide-header">
+						<a class="button" href="#">RESERVE NOW</a>
+					</div>
+					<img src="images/deluxe-king.png" />
+				</li>
+				<li>
+					<div class="room-slider-gradience"></div>
+					<div class="slide-header">
+						<a class="button" href="#">RESERVE NOW</a>
+					</div>
+					<img src="images/oceana/oceana-featured-room.jpg" />
+				</li>
+				<li>
+					<div class="room-slider-gradience"></div>
+					<div class="slide-header">
+						<a class="button" href="#">RESERVE NOW</a>
+					</div>
+					<img src="images/deluxe-king.png" />
+				</li>
+			</ul>
+		</div>
+
+	</div>
+
+	<div id="intro" class="section">
+		
+		<div class="container">
+
+			<div class="section-header">
+					
+				<div class="fl">
+	
+					<h2 class="section-pre-title fl">CA</h2>
+				
+					<div class="section-header-divider fl"></div>
+		
+					<h2 class="section-title fr">OCEAN VIEW KING</h2>
+	
+				</div>
+	
+				<div class="fr">
+					
+					<ul class="social-buttons">
+						<li class="facebook"><a href="http://facebook.com" target="_blank"><i class="fa fa-facebook fa-2x"></i><span>facebook</span></a></li>
+						<li class="twitter"><a href="http://twitter.com" target="_blank"><i class="fa fa-twitter fa-2x"></i><span>twitter</span></a></li>
+					</ul>
+	
+				</div>
+	
+			</div>
+
+			<div class="room-details-content">
+
+				<div class="section-photos fl">
+				
+					<img src="images/ocean-view-king-room-details.jpg">
+
+					<p>All guest rooms provide down comforters and pillows, C.O. Bigelow bath toiletries, a variety of mini bar items, wireless internet access, ceiling fans, high definition flat-screen LCD TV's, Pay-Per-View, and iPod docking stations.  Our Santa Barbara Accommodations include the following room categories: </p>
+
+					<p>Premier King rooms with beautiful Pacific Ocean Views that are by far the best of Ocean View Hotels in Santa Barbara, as well as views of Santa Barbara's famous Stearns Wharf, West Beach and Harbor.</p>
+
+				</div>
+
+				<div class="room-details-gallery fr">
+					
+					<a class="button" href="#">RESERVE NOW</a>
+
+					<a class="button" href="#">SEE ALL AMENITIES</a>
+
+					<div class="room-gallery">
+						
+						<ul>
+							<li><a href="#"><img src="images/placeholder-gallery-photo.jpg" /></a></li>
+							<li><a href="#"><img src="images/placeholder-gallery-photo.jpg" /></a></li>
+							<li class="list-third"><a href="#"><img src="images/placeholder-gallery-photo.jpg" /></a></li>
+							<li><a href="#"><img src="images/placeholder-gallery-photo.jpg" /></a></li>
+							<li><a href="#"><img src="images/placeholder-gallery-photo.jpg" /></a></li>
+							<li class="list-third"><a href="#"><img src="images/placeholder-gallery-photo.jpg" /></a></li>
+							<li><a href="#"><img src="images/placeholder-gallery-photo.jpg" /></a></li>
+							<li><a href="#"><img src="images/placeholder-gallery-photo.jpg" /></a></li>
+							<li class="list-third"><a href="#"><img src="images/placeholder-gallery-photo.jpg" /></a></li>
+						</ul>
+
+						<ul>
+							<li>
+								<div class="from-price">
+									<div>FROM</div>
+									<div>$249</div>
+								</div>
+								<img src="images/family-stay-package.jpg">
+								<h3 class="featured-gallery-thumb-title">Family Stay Package</h3>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<div id="room-details-slider">
+
+		<div class='slideSelectors'>
+			
+			<div class='item selected'></div>
+			<div class='item'></div>					
+			<div class='item'></div>
+		
+		</div>
+
+				
+		<div class='iosSlider'>
+		
+			<div class='slider'>
+			
+				<div class='item item1 current'>
+					<img src = 'images/ocean-view-king-2.jpg' />
+				</div>
+				
+				<div class='item item2'>
+					<img src = 'images/ocean-view-king-3.jpg' />
+				</div>
+				
+				<div class='item item3'>
+					<img src = 'images/ocean-view-king-2.jpg' />
+				</div>
+			
+			</div>
+		
+		</div>
+
+		<div class="iosslider-prev"><i class="fa fa-chevron-left"></i></div>
+		<div class="iosslider-next"><i class="fa fa-chevron-right"></i></div>
+
+	</div>
+
+	<footer>
+
+		<div id="footer-newsletter" class="section">
+			
+			<div class="container">
+
+				<h2 class="newsletter-title">Hotel Oceana, Santa Barbara</h2>
+			
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac magna non augue porttitor scelerisque ac id diam. Mauris elit velit, lobortis sed interdum at, vestibulum vitae libero. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque iaculis ligula ut ipsum mattis viverra. Nulla a libero metus. Integer gravida tempor metus eget condimentum. Integer eget iaculis tortor. Nunc sed ligula sed augue rutrum ultrices eget nec odio. Morbi rhoncus, sem laoreet tempus pulvinar, leo diam varius nisi, sed accumsan ligula urna sed felis. Mauris molestie augue sed nunc adipiscing et pharetra ligula suscipit. In euismod lectus ac sapien fringilla ut eleifend lacus venenatis.</p>
+	
+				<ul class="contact-details">
+					<li class="location"><i class="fa fa-map-marker fa-lg"></i> 202 W. Cabrillo Boulevard Santa Barbara, CA 93101</li>
+					<li class="phone"><i class="fa fa-mobile-phone fa-lg"></i> 718.852.8585 | Fax: 805.962.1372</li>
+					<li class="email"><i class="fa fa-envelope fa-lg"></i> info_sb@hoteloceana.com</li>
+				</ul>
+	
+				<div class="newsletter-form">
+					
+					<form name="newsletter-submission">
+						<input type="text" name="firstname" placeholder="Sign up for updates, specials and more">
+						<input type="submit" value="Newsletter">
+					</form>
+	
+				</div>
+				
+			</div>
+
+		</div>
+
+		<div id="property-name"></div>
+
+		<div class="footer-nav container">
+
+			<nav>
+		
+				<ul class="fl">
+					<li class="navitem"><a href="/hersha">The Hotel</a></li>
+					<li class="navitem"><a href="/hersha/oceana-hotel-list.html">Rooms & Suites</a></li>
+					<li class="navitem"><a href="#">Dining</a></li>
+					<li class="navitem"><a href="#">Photos</a></li>
+					<li class="navitem"><a href="#">Specials</a></li>
+					<li class="navitem"><a href="#">Weddings</a></li>
+					<li class="navitem"><a href="#">Meetings & Events</a></li>
+					<li class="navitem"><a href="#">Hotel Programs</a></li>
+				</ul>
+
+				<ul class="social-buttons fr">
+					<li class="facebook"><a href="http://facebook.com" target="_blank"><i class="fa fa-facebook fa-2x"></i><span>facebook</span></a></li>
+					<li class="instagram"><a href="http://instagram.com" target="_blank"><i class="fa fa-instagram fa-2x"></i><span>instagram</span></a></li>
+					<li class="twitter"><a href="http://twitter.com" target="_blank"><i class="fa fa-twitter fa-2x"></i><span>twitter</span></a></li>
+					<li class="youtube"><a href="http://youtube.com" target="_blank"><i class="fa fa-youtube fa-2x"></i><span>youtube</span></a></li>
+				</ul>
+
+			</nav>
+
+		</div>		
+
+		<div id="footer-details">
+			<div class="container">
+				<p>202 W. Cabrillo Boulevard Santa Barbara, CA 93101</p>
+			</div>
+		</div>
+
+	</footer>
+
+</body>
+
+</html>
