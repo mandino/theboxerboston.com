@@ -15,7 +15,7 @@
 <link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/media.css">
 
 <!-- Color Override CSS -->
-<!-- <link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/oceana-hotel.css"> -->
+<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/oceana-hotel.css">
 
 <!-- JS -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>

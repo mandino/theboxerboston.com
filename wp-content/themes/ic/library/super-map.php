@@ -157,7 +157,7 @@
       options: {
           center:[<?php echo get_option('cebo_mapcenter'); ?>],
           scrollwheel: false,
-          zoom: 15,
+          zoom: 14,
           mapTypeId: "style2",
           mapTypeControlOptions: {
             mapTypeIds: [google.maps.MapTypeId.ROADMAP, "style1", "style2"]
@@ -426,7 +426,7 @@
       options: {
           center:[<?php echo get_option('cebo_mapcenter'); ?>],
           scrollwheel: false,
-          zoom: 15,
+          zoom: 14,
           mapTypeId: "style2",
           mapTypeControlOptions: {
             mapTypeIds: [google.maps.MapTypeId.ROADMAP, "style1", "style2"]
