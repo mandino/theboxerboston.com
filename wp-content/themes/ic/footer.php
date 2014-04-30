@@ -124,12 +124,6 @@ js = d.createElement(s); js.id = id;
 js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
 fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-
-<?php if(get_option('cebo_tracking_code')) {
-
-	echo get_option('cebo_tracking_code');
-
-} ?>
 		
 </body>
 </html>

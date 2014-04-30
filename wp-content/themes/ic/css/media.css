@@ -29,11 +29,11 @@ and (max-width : 1439px) {
 	/* Navigation */
 
 	#primary-nav .container {
-	    width: 908px;
+	    width: 770px;
 	}
 
 	#primary-nav nav {
-	    margin: 25px 20px 22px 0;
+	    margin: 25px 0px 22px 0;
 	}
 
 	#primary-nav nav ul li a {
@@ -97,6 +97,7 @@ and (max-width : 1099px) {
 	.logo img {
 	    max-width: 150px;
 	    padding: 0;
+	    margin: -13px 0 20px -10px;
 	}
 	
 	#primary-nav span.navdrop, #primary-nav span.navdrop ul {
@@ -382,8 +383,15 @@ and (max-width : 1099px) {
 	    width: 23.6%;
 	}
 
-	
+	/* logo */
 
+	.logo {
+	padding: 14px 15px 17px;
+	}
+
+	.slicer {
+		width: 370px !important;
+	}
 }
 
 
@@ -664,7 +672,9 @@ and (max-width : 940px)
 	}
 
 
-
+	.slicer {
+		width: 270px !important;
+	}
 
 }
 
@@ -707,7 +717,6 @@ and (max-width : 939px) {
 		height: 38px;
 		left: 40px;
 		margin-left: 13px;
-		padding: 1px 0 0;
 		top: 29px;
 		background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
 		border: none;
@@ -721,7 +730,7 @@ and (max-width : 939px) {
 	min-height: 50px;
 	}
 	.logo.mobile > img {
-	    height: 100%;
+	    height: 97%;
 	}
 
 	#primary-nav .navdrop i {
@@ -962,7 +971,7 @@ and (max-width : 640px)
 	}
 	
 	.slide-header {
-		top: 20%;
+   	 top: 15%;
 	}
 
 	#home-slider h2 {
@@ -1280,7 +1289,7 @@ and (max-width : 480px)
 {	
 
 	#home-slider {
-height: 250px;
+height: 200px;
 }
 
 

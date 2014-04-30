@@ -51,6 +51,44 @@
 
 	<!-- Scripts -->
 	<?php include(TEMPLATEPATH. "/library/scripts.php"); ?>	
+	
+		<script type="text/javascript">
+		
+		
+		function createURL() {
+		var checkin = jQuery("#arrival_date").val();
+		var checkout = jQuery("#departure_date").val();
+		var adults = jQuery("#adults").val();
+		var children = jQuery("#children").val();
+		
+		var bookinglink = "https://res.windsurfercrs.com/bbe/page2.aspx?" + 
+											"hgID=148" +
+											"&propertyID=12122" +
+											"&checkin=" + checkin + 
+											"&checkout=" + checkout + 
+											"&adults=" + adults + 
+											"&children=" + children;
+	
+		return bookinglink;
+	}
+	
+	$(document).ready(function() {
+	
+	
+		jQuery('form a.button').click(function(e) {
+					e.preventDefault();
+					_gaq.push(['_link', createURL() ]);
+					return false;
+				});
+	
+	});
+	
+	
+	
+	</script>
+
+
+
 
 	<style>
 		<?php
@@ -58,6 +96,45 @@
 			include(TEMPLATEPATH. "/library/inset.php");
 		?>	
 	</style>
+
+
+<script type="text/javascript">
+
+var _gaq = _gaq || [];
+
+_gaq.push(['_setAccount', 'UA-38668012-1']);
+
+_gaq.push(['_setAllowLinker', true]);
+
+_gaq.push(['_setDomainName', 'capitolhillhotel-dc.com']);
+
+_gaq.push(['_trackPageview']);
+
+
+
+_gaq.push(['secondTracker._setAccount', 'UA-38668012-1']);
+
+_gaq.push(['secondTracker._setAllowLinker', true]);
+
+_gaq.push(['secondTracker._setDomainName', 'capitolhillhotel-dc.com']);
+
+_gaq.push(['secondTracker._trackPageview']);
+
+
+
+
+
+(function() {
+
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();
+
+</script>
 
 
 
@@ -87,22 +164,23 @@
 					<div class="reservationform">
 					
 					
-					<form method="get" action="<?php echo get_option('cebo_genbooklink'); ?>/search?" target="_blank">
-						
+<form method="get" action="https://res.windsurfercrs.com/bbe/page2.aspx?">
+						<input type="hidden" name="hgID" value="148" />
+						<input type="hidden" name="propertyID" value="12122" />
 						<span class="calsec">
-							<input type="text"  id="arrival_date" name="arrival_date" placeholder="<?php _e('Arrival','cebolang'); ?>" class="calendarsection" />
+							<input type="text"  id="arrival_date" name="checkin" placeholder="<?php _e('Arrival','cebolang'); ?>" class="calendarsection" />
 							<input type="hidden"  id="arv">
 							<i class="fa fa-calendar"></i>
 						</span>
 						
 						<span class="calsec">
-							<input type="text" id="departure_date" name="departure_date" placeholder="<?php _e('Departure','cebolang'); ?>" class="calendarsection" />
+							<input type="text" id="departure_date" name="checkout" placeholder="<?php _e('Departure','cebolang'); ?>" class="calendarsection" />
 							<input type="hidden" id="dep">
 							<i class="fa fa-calendar"></i>
 						</span>
 						
 						<span class="dropsec" style="margin-right: 6px">
-							<select name="adults[]" class="halfsies">
+							<select name="adults" id="adults" class="halfsies">
 								<option value="1"><?php _e('1 Adult','cebolang'); ?></option>
 								<option value="2"><?php _e('2 Adults','cebolang'); ?></option>
 								<option value="3"><?php _e('3 Adults','cebolang'); ?></option>
@@ -111,7 +189,7 @@
 						</span>
 						
 						<span class="dropsec">
-							<select name="children[]" class="halfsies">
+							<select name="children[]" id="children" class="halfsies">
 								<option value=""><?php _e('0 Kids','cebolang'); ?></option>
 								<option value="1"><?php _e('1 Kid','cebolang'); ?></option>
 								<option value="2"><?php _e('2 Kids','cebolang'); ?></option>
@@ -119,7 +197,7 @@
 							</select>
 						</span>
 						
-						<button class="button" type="submit"><?php _e('Search Now','cebolang'); ?></button>
+						<a href="#" class="button">Search Now</a>
 						
 					
 					</form>
@@ -174,7 +252,7 @@
 			
 			<a class="reserve fixeer button fr input-append date" id="idp3" data-date="12-02-2012" data-date-format="mm-dd-yyyy">RESERVE</a>
 
-			<a class="reserve fixeer mobile button fr" id="idp4" href="<?php echo get_option('cebo_genbooklink'); ?>" target="_blank">RESERVE</a>
+			<a class="reserve fixeer mobile button fr" id="idp4"  onclick="_gaq.push(['_link', this.href]);return false;" href="<?php echo get_option('cebo_genbooklink'); ?>" target="_blank">RESERVE</a>
 			
 			<div class="container" style="float: right;">
 
