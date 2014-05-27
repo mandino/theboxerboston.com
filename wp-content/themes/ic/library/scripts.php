@@ -100,7 +100,7 @@
 
 
 		// Datepicker
-		$.datepicker._defaults.dateFormat = 'mm/dd/yy';
+		$.datepicker._defaults.dateFormat = 'yy-mm-dd';
 		
 		$(".datepicker").datepicker({
 			minDate: 0,
