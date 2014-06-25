@@ -45,6 +45,9 @@
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 	<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700' rel='stylesheet' type='text/css'>
 
+	<!-- pinterest -->
+	<meta name="p:domain_verify" content="fdcd1755542385831e526a2a712cc134"/>
+
 	<!-- Jquery -->
 	<?php include(TEMPLATEPATH. "/library/jquery.php"); ?>	
 
