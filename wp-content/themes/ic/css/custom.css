@@ -3895,3 +3895,7 @@ position: relative;
 text-align: left;
 padding: 0 !important;
 }
+
+strong {
+	font-weight: bold;
+}
