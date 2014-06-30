@@ -725,6 +725,14 @@
 						</ul>
 						
 						<div class="clear"></div>
+
+						<?php 
+							$projects = get_page_with_template('page_blog');
+				  			$projecturl= get_permalink($projects);	
+						?>
+
+						<a href="<?php echo $projecturl; ?>" style="width: 99%; display: block; padding: 20px 0; font-family: didot, serif; font-size: 20px;" class="button">View All Posts</a>
+
 					</div>
 	
 				</div>
