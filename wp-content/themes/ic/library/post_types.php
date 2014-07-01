@@ -139,6 +139,24 @@ function creaters_post_types() {
 
 
 
+add_action( 'init', 'popout_box_post_type' );
+function popout_box_post_type() {
+  register_post_type( 'popout-box',
+    array(
+      'labels' => array(
+        'name' => __( 'Popout Box' ),
+        'singular_name' => __( 'Popout Box' )
+      ),
+      'public' => true,
+      'rewrite' => array('slug' => 'popout-box'),
+      'menu_icon' => get_bloginfo('template_url').'/options/images/icon_team.png',
+      'supports' => array('title','author')
+    )
+  );
+}
+
+
+
 
 create_loctype_taxonomies();
 function create_loctype_taxonomies()

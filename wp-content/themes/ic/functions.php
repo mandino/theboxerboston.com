@@ -31,6 +31,11 @@ include(TEMPLATEPATH . '/library/post_types.php');
 include(TEMPLATEPATH . '/options/single-options.php'); 
 
 
+ /* ................. SOME OPTIONS FOR POPOUT BOXES .................... */
+/* Below is an include to a few options for your popout boxes.*/
+include(TEMPLATEPATH . '/options/popout-box-options.php'); 
+
+
  /* ................. SOME OPTIONS FOR SLIDES .................... */
 /* Below is an include to a few options for your slides.*/
 include(TEMPLATEPATH . '/library/videobox.php'); 

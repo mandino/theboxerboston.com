@@ -43,31 +43,43 @@
 		</ul>
 	</div>
 		
-	<div class="specialsbox">
-		
-		<div class="closebox"><a href="#">X</a></div>
-		
-		<?php query_posts(array(
-			'post_type' => 'specials',
-			'posts_per_page' => 1,
-			'meta_key' => 'cebo_available_on_header',
-			'meta_value' => 'on'
-			
-			)); if(have_posts()) : while(have_posts()) : the_post(); ?>
-		<div class="span">
-			<?php echo get_post_meta($post->ID, 'cebo_pricepoint', true); ?>
-		
-		</div>
-		
-		
-		<div class="specialtab">
-			
-			<a href="<?php the_permalink(); ?>"><h3><?php echo get_post_meta($post->ID, 'cebo_tagline', true); ?><br><span><?php echo get_post_meta($post->ID, 'cebo_subtagline', true); ?></span></h3></a>
-		
-		
-		</div>
-		
-		<?php endwhile; endif; wp_reset_query(); ?>	
+	<?php 
+
+		$popout_query = new WP_Query(
+			array(
+				'post_type' => 'popout-box', 
+				'posts_per_page' => 1,
+			)
+		);
+
+		if($popout_query->have_posts()) :
 	
-	</div>
+	?>
+
+		<div class="specialsbox">
+				
+			<div class="closebox"><a href="#">X</a></div>
+
+			<?php while($popout_query->have_posts()) : $popout_query->the_post(); ?>
+				
+				<div class="specialtab">
+					
+					<?php if(get_post_meta($post->ID, 'cebo_popout_url', true)) { ?>
+						<a href="<?php echo get_post_meta($post->ID, 'cebo_popout_url', true); ?>"><h3 style="font-size: 30px;">
+					<?php } ?>
+
+						<span><?php echo get_post_meta($post->ID, 'cebo_popout_subtitle', true); ?></span>
+						<?php echo get_post_meta($post->ID, 'cebo_popout_title', true); ?><br>
+						<span><?php echo get_post_meta($post->ID, 'cebo_popout_tagline', true); ?></span></h3>
+
+					<?php if(get_post_meta($post->ID, 'cebo_popout_url', true)) { ?></a><?php } ?>
+						
+				</div>
+
+			<?php endwhile; ?>
+	
+		</div>
+
+	<?php endif; ?>
+	
 </div>
