@@ -245,17 +245,16 @@ input[type="submit"] {
 	-o-animation-delay:4s;
 }
 
-.specialsbox:before {
+.welcome-text {
 	font-weight: bold;
 	color: #fff;
 	font-size: 15px;
-	content: 'latest special';
 	padding: 6px 10px;
-	background: #AB0303;
+	background: #1C93D1;
 	position: absolute;
 	right: -1px;
 	top: -22px;
-	width: 30%;
+	width: auto;
 	height: 15px;
 	text-align: center;
 }

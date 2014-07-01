@@ -61,6 +61,10 @@
 			<div class="closebox"><a href="#">X</a></div>
 
 			<?php while($popout_query->have_posts()) : $popout_query->the_post(); ?>
+
+				<?php if(get_post_meta($post->ID, 'cebo_popout_welcome', true)) { ?>
+					<span class="welcome-text"><?php echo get_post_meta($post->ID, 'cebo_popout_welcome', true); ?></span>
+				<?php } ?>
 				
 				<div class="specialtab">
 					
@@ -81,5 +85,5 @@
 		</div>
 
 	<?php endif; ?>
-	
+
 </div>
