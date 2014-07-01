@@ -225,18 +225,29 @@
 	
 				<div class="ico-quote quote-left fl"></div>
 				
-				
-				<?php query_posts('post_type=testimonials&posts_per_page=108'); if(have_posts()) : while(have_posts()) : the_post(); ?>
-				<div id="cbp-qtrotator" class="cbp-qtrotator">
+				<?php 
 
-					<div class="cbp-qtcontent">
-						<blockquote>
-						  <p><?php echo excerpt(40); ?></p>
-						  <footer><?php the_title(); ?></footer>
-						</blockquote>
+					query_posts('post_type=testimonials&posts_per_page=4'); 
+					if(have_posts()) : 
+
+				?>
+
+					<div id="cbp-qtrotator" class="cbp-qtrotator">
+
+						<?php while(have_posts()) : the_post(); ?>
+
+							<div class="cbp-qtcontent">
+								<blockquote>
+								  <p><?php echo excerpt(40); ?></p>
+								  <footer><?php the_title(); ?></footer>
+								</blockquote>
+							</div>
+						
+						<?php endwhile; ?>	
+
 					</div>
-				
-				<?php endwhile; endif; wp_reset_query(); ?>	
+
+				<?php endif; wp_reset_query(); ?>
 				
 				</div>
 
