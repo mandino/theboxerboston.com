@@ -519,7 +519,17 @@ color: #333;
 
 
 
+/* ======================================================== TRANSITION EFFECTS =====================================================  */
 
+/* 4s */
+
+.tribe-mini-calendar-nav span {
+	transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -ms-transition: all 0.4s;
+}
 
 
 
@@ -3157,6 +3167,13 @@ body .ui-tooltip {
     margin-top: 0;
 }
 
+.tribe-mini-calendar-nav span {
+	color: #ccc !important;
+}
+	.tribe-mini-calendar-nav span:hover {
+		color: #333 !important;
+	}
+	
 
 
 /* Around The Neighborhood */
