@@ -22,7 +22,7 @@ get_header(); ?>
 				
 
 		
-					<h2 class="section-title fr">Hotel Milo Santa Barbara Blog</h2>
+					<h2 class="section-title fr">The Boxer Boston Blog</h2>
 	
 				</div>
 
@@ -84,7 +84,7 @@ get_header(); ?>
 							<h3><?php the_title(); ?></h3>
 								<span><?php the_time('F jS, Y') ?>&nbsp;&nbsp;&bull;&nbsp;&nbsp;<?php $project_terms = wp_get_object_terms($post->ID, 'category'); if(!empty($project_terms)) { if(!is_wp_error( $project_terms )) { echo ''; $count = 0; foreach($project_terms as $term){ if($count > 0) { echo ', '; } echo '<a href="'.get_term_link($term->slug, 'category'). '">'.$term->name. '</a>';  $count++; }  } } ?></span>
 
-							<p><?php echo excerpt(15); ?></p>
+							<p><?php echo excerpt(13); ?></p>
 
 							<div class="room-list-buttons">
 								

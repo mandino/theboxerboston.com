@@ -3915,3 +3915,65 @@ padding: 0 !important;
 strong {
 	font-weight: bold;
 }
+
+
+/*==== ========================= blog formatting ===================== */
+
+
+.catlist.fl {
+    border-right: 1px solid #d9d9d9;
+    padding: 20px 20px 0 0 !important;
+    width: 72%;
+}
+
+.catlist.fl  h3 {
+	font-size: 21px;
+}
+
+.catlist li {
+    height: 290px !important;
+}
+
+.catlist .fl {
+    background-position: center center;
+    background-size: cover;
+    height: 100%;
+    width: 50%;
+}
+
+
+.catlist.fl > ul {
+	padding-left: 0 !important;
+}
+
+
+.sidebar fieldset {
+	position: relative;
+}
+.sidebar .icon-search {
+	position: absolute;
+	right: 14px;
+	top: 13px;
+	font-size: 23px;
+	color: #888;
+}
+
+
+.sidewidgets ul li {
+	padding: 10px 0;
+}
+
+.sidewidgets h4 {
+	border-bottom: 1px solid #ddd;
+	margin: 15px 0 15px 0;
+	padding: 0 0px 10px 0;
+}
+.catlist.fl {
+	border-right: 1px solid #D9D9D9;
+	padding: 20px 20px 0 0 !important;
+	width: 72%;
+}
+
+.catlist li {
+	height: 330px !important;
+}
