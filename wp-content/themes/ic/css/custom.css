@@ -523,7 +523,8 @@ color: #333;
 
 /* 4s */
 
-.tribe-mini-calendar-nav span {
+.tribe-mini-calendar-nav span,
+.quote-nav {
 	transition: all 0.4s;
     -moz-transition: all 0.4s;
     -webkit-transition: all 0.4s;
@@ -917,7 +918,25 @@ color: #333;
 .quote {
 	border-top: 1px solid #CBCBCB;
 	padding-top: 40px;
+	position: relative;
 }
+
+.quote-nav {
+	color: #ddd;
+	font-size: 40px;
+	position: absolute;
+	top: 50%;
+	cursor: pointer;
+}
+
+.quote-prev {    
+    left: 0;    
+}
+
+.quote-next {    
+    right: 0;    
+}
+
 .ico-quote {
 	width: 65px;
 	height: 47px;

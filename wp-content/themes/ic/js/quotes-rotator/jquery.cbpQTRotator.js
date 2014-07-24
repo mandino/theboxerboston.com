@@ -16,6 +16,7 @@
 	var Modernizr = window.Modernizr;
 
 	$.CBPQTRotator = function( options, element ) {
+		this.paused = false;
 		this.$el = $( element );
 		this._init( options );
 	};
@@ -33,6 +34,7 @@
 	$.CBPQTRotator.prototype = {
 		_init : function( options ) {
 
+			var THIS = this;
 			// options
 			this.options = $.extend( true, {}, $.CBPQTRotator.defaults, options );
 			// cache some elements and initialize some variables
@@ -45,6 +47,23 @@
 			}
 			// start rotating the items
 			this._startRotator();
+
+			// Pause on hover in, resume on hover out
+            this.$items.hover(function(){
+                console.log("Paused");
+                THIS.paused = true;
+            }, function(){
+                console.log("Resumed");
+                THIS.paused = false;
+            });
+
+            $('a.quote-next').on('click',function() {
+            	THIS._next();
+            });
+
+             $('a.quote-prev').on('click',function() {
+            	THIS._prev();
+            });
 
 		},
 		_config : function() {
@@ -74,13 +93,25 @@
 				this._startProgress();
 			}
 
-			setTimeout( $.proxy( function() {
-				if( this.support ) {
-					this._resetProgress();
-				}
-				this._next();
-				this._startRotator();
-			}, this ), this.options.interval );
+			// setTimeout( $.proxy( function() {
+			// 	if( this.support ) {
+			// 		this._resetProgress();
+			// 	}
+			// 	this._next();
+			// 	this._startRotator();
+			// }, this ), this.options.interval );
+
+			// For the PAUSED timeout
+			setTimeout($.proxy(function () {
+                if (this.support) {
+                    this._resetProgress();
+                }
+                if (!THIS.paused)
+                {
+                    this._next();
+                }
+                this._startRotator();
+            }, this), this.options.interval);
 
 		},
 		_next : function() {
@@ -89,6 +120,16 @@
 			this.$items.eq( this.current ).removeClass( 'cbp-qtcurrent' );
 			// update current value
 			this.current = this.current < this.itemsCount - 1 ? this.current + 1 : 0;
+			// show next item
+			this.$items.eq( this.current ).addClass('cbp-qtcurrent');
+
+		},
+		_prev : function() {
+
+			// hide previous item
+			this.$items.eq( this.current ).removeClass( 'cbp-qtcurrent' );
+			// update current value
+			this.current = this.current < this.itemsCount + 1 ? this.current - 1 : 0;
 			// show next item
 			this.$items.eq( this.current ).addClass('cbp-qtcurrent');
 

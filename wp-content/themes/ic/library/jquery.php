@@ -29,13 +29,13 @@
 <link rel="stylesheet" href="<?php bloginfo ('template_url'); ?>/css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet"/>	
 
 <!-- Pinterest -->
-<script async type="text/javascript" async src="http://assets.pinterest.com/js/pinit.js"></script>
+<script async type="text/javascript" src="http://assets.pinterest.com/js/pinit.js"></script>
 
 <!-- Custom Modernizr for Quotes Rotator -->
 <script async src="<?php bloginfo ('template_url'); ?>/js/quotes-rotator/modernizr.custom.js"></script>
 
 <!-- Quotes Rotator -->
-<script async src="<?php bloginfo ('template_url'); ?>/js/quotes-rotator/jquery.cbpQTRotator.min.js"></script>
+<script async src="<?php bloginfo ('template_url'); ?>/js/quotes-rotator/jquery.cbpQTRotator.js"></script>
 
 <!-- SlideJS -->
 <script async src="<?php bloginfo ('template_url'); ?>/js/jquery.slides.min.js"></script>
