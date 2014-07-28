@@ -181,6 +181,8 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
 		wp_head();
 	?>
 
+<script type="text/javascript" src="https://www.zdirect.com/scripts/newApp.js"></script>
+
 </head> 
 	
 <body id="oceana" <?php body_class($class); ?>>
