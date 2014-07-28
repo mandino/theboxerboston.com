@@ -32,7 +32,7 @@
 <script async type="text/javascript" src="http://assets.pinterest.com/js/pinit.js"></script>
 
 <!-- Custom Modernizr for Quotes Rotator -->
-<script async src="<?php bloginfo ('template_url'); ?>/js/quotes-rotator/modernizr.custom.js"></script>
+<script src="<?php bloginfo ('template_url'); ?>/js/quotes-rotator/modernizr.custom.js"></script>
 
 <!-- Quotes Rotator -->
 <script async src="<?php bloginfo ('template_url'); ?>/js/quotes-rotator/jquery.cbpQTRotator.js"></script>
