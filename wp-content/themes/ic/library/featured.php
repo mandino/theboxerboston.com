@@ -69,7 +69,7 @@
 				<div class="specialtab">
 					
 					<?php if(get_post_meta($post->ID, 'cebo_popout_url', true)) { ?>
-						<a href="<?php echo get_post_meta($post->ID, 'cebo_popout_url', true); ?>"><h3 style="font-size: 30px;">
+						<a href="<?php echo get_post_meta($post->ID, 'cebo_popout_url', true); ?>"><h3 style="font-size: 25px;">
 					<?php } ?>
 
 						<span><?php echo get_post_meta($post->ID, 'cebo_popout_subtitle', true); ?></span>
