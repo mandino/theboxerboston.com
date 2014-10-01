@@ -45,12 +45,15 @@
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 	<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700' rel='stylesheet' type='text/css'>
 
-	<!-- Jquery -->
-	<?php include(TEMPLATEPATH. "/library/jquery.php"); ?>	
-
 	<!-- pinterest -->
 	<meta name="p:domain_verify" content="fdcd1755542385831e526a2a712cc134"/>
 
+	<!-- Jquery -->
+	<?php include(TEMPLATEPATH. "/library/jquery.php"); ?>	
+
+
+	<!-- Scripts -->
+	<?php include(TEMPLATEPATH. "/library/scripts.php"); ?>	
 	
 		<script type="text/javascript">
 		
@@ -85,8 +88,7 @@
 	
 	</script>
 
-	<!-- Scripts -->
-	<?php include(TEMPLATEPATH. "/library/scripts.php"); ?>	
+
 
 
 	<style>
@@ -127,7 +129,7 @@ _gaq.push(['_setDomainName', 'theboxerboston.com']);
 
 _gaq.push(['_trackPageview']);
 
-/*
+
 
 _gaq.push(['secondTracker._setAccount', 'UA-37161096-1']);
 
@@ -137,7 +139,9 @@ _gaq.push(['secondTracker._setDomainName', 'theboxerboston.com']);
 
 _gaq.push(['secondTracker._trackPageview']);
 
-*/
+
+
+
 
 (function() {
 
@@ -151,20 +155,6 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
 
 </script>
 
-<!-- zdirect script -->
-
-<script type="text/javascript" src="https://www.zdirect.com/scripts/newApp.js"></script>
-
-<!-- Sojern script  -->
-<script>
-(function () {
-var pl = document.createElement('script');
-pl.type = 'text/javascript';
-pl.async = true;
-pl.src = 'https://beacon.sojern.com/pixel/p/3677?cid=[destination_searched]&ha1=[destination_searched]&et=hs';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(pl);
-})();
-</script>
-<!-- End Sojern script -->
 
 
 	<?php
@@ -176,6 +166,8 @@ pl.src = 'https://beacon.sojern.com/pixel/p/3677?cid=[destination_searched]&ha1=
 			wp_enqueue_script( 'comment-reply' );
 		wp_head();
 	?>
+
+<script type="text/javascript" src="https://www.zdirect.com/scripts/newApp.js"></script>
 
 </head> 
 	
@@ -276,7 +268,7 @@ pl.src = 'https://beacon.sojern.com/pixel/p/3677?cid=[destination_searched]&ha1=
 
 			<a href="<?php bloginfo('url'); ?>" class="logo mobile"><img src="<?php echo get_option('cebo_logo'); ?>" alt="<?php echo wp_title(); ?>" /></a>
 			
-			<a href="https://theboxerboston.reztrip.com" class="reserve fixeer button fr input-append date" id="idp3" data-date="12-02-2012" data-date-format="mm-dd-yyyy">RESERVE</a>
+			<a class="reserve fixeer button fr input-append date" id="idp3" data-date="12-02-2012" data-date-format="mm-dd-yyyy">RESERVE</a>
 
 			<a class="reserve fixeer mobile button fr" id="idp4"  onclick="_gaq.push(['_link', this.href]);return false;" href="<?php echo get_option('cebo_genbooklink'); ?>" target="_blank">RESERVE</a>
 			
