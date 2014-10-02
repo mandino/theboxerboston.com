@@ -84,15 +84,16 @@
 						<ul>
 							
 							 <?php  query_posts(
-					array(
-					'post_type' => 'specials',
-					'posts_per_page'=> 8
-					
-					)); if(have_posts()) : while(have_posts()) : the_post(); 
-					$imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full"); ?>
+							array(
+							'post_type' => 'specials',
+							'posts_per_page'=> 8
+							
+							)); if(have_posts()) : while(have_posts()) : the_post(); 
+							$imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full"); ?>
 							
 							<li>
 								
+								<a href="<?php the_permalink(); ?>" class="overlink"></a>
 					
 								<?php if(get_post_meta($post->ID, 'cebo_pricepoint', true)) { ?>
 								

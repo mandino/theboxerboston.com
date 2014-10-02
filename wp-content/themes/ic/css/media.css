@@ -573,8 +573,19 @@ and (max-width : 940px)
 	.post-content .imagegal ul li {
 	    margin-bottom: 20px;
 	    width: 32%;
+	    position: relative;
+	    display:block !important;
+		height: 275px;
 	}
-
+	.post-content .imagegal ul li a.overlink {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: block;
+		z-index: 99999;
+	}
 	.post-content .imagegal.photos ul li:nth-child(4n) {
 	    margin-right: 7px;
 	}
