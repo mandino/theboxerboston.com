@@ -149,9 +149,29 @@
     right: 0;
 }
 
+.fl .slidesjs-slide .post-date {
+background: rgba(0,0,0,.8);
+padding: 10px;
+position: absolute;
+right: 20px;
+top: 20px;
+}
+.fl .slidesjs-slide .post-date.post-date-start {
+right: 123px;
+}
+.slidesjs-slide .post-date span {
+bottom: auto;
+clear: left;
+font-size: 60px;
+font-style: italic;
+height: auto;
+right: 0;
+}
+
 .slidesjs-slide .post-date span.date-number {
     display: block;
     margin-top: -14px;
+    right: 8px;
 }
 
 .slidesjs-slide .post-date span.date-month {

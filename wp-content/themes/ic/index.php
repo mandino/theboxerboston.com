@@ -325,6 +325,13 @@
 								      
 								<span class="date-number"><?php echo $shortdatez; ?></span>
 							</div>
+
+							<div class="post-date post-date-start">
+							<span class="date-month"><?php echo $shortdaterz; ?></span>
+							<span class="date-number"><?php echo $shortdatez; ?></span>
+							</div>
+							<div style="right: 109px; padding: 10px 0;" class="post-date"><span style="font-size: 30px; line-height: 2.5;">-</span></div>
+
 							<a href="<?php the_permalink(); ?>"><img src="<?php echo $imgsrc[0]; ?>"></a>
 							<div class="ptit"> 
 								<a href="<?php the_permalink(); ?>"><span><?php the_title(); ?></span></a>
