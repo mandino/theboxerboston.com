@@ -177,6 +177,17 @@ pl.src = 'https://beacon.sojern.com/pixel/p/3677?cid=[destination_searched]&ha1=
 		wp_head();
 	?>
 
+<!-- Sojern -->
+<script>
+(function () {
+var pl = document.createElement('script');
+pl.type = 'text/javascript';
+pl.async = true;
+pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(pl);
+})();
+</script>
+<!-- End Sojern -->
+
 </head> 
 	
 <body id="oceana" <?php body_class($class); ?>>
