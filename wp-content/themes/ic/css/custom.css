@@ -822,7 +822,7 @@ color: #333;
 
 .post-content .imagegal ul li {
 		display: inline-block; /* Display inline-block, and absolutely NO FLOATS! */
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         width: 23.8%; 
         position: relative;
 }
@@ -853,6 +853,7 @@ color: #333;
     -webkit-transition: all 0.5s;
     -o-transition: all 0.5s;
 	max-width: 100%;
+	max-height: 290px;
 }
 .post-content .imagegal ul li:nth-child(3n+3) {
 
