@@ -313,29 +313,48 @@
 					
 					
 						<div>
-							<div class="post-date">
 							
-							<?php $shortdater = tribe_get_start_date($post->ID, true, 'M');
-								      $shortdaterz = substr($shortdater, 0, 3);  ?>
-								      
-								<span class="date-month"><?php echo $shortdaterz; ?></span>
-								
-								<?php $shortdate = tribe_get_start_date($post->ID, true, 'j');
-								      $shortdatez = substr($shortdate, 0, 2);  ?>
-								      
-								<span class="date-number"><?php echo $shortdatez; ?></span>
-							</div>
+							
+							<?php 
+								$shortdater = tribe_get_start_date($post->ID, true, 'M');
+								$shortdaterend = tribe_get_end_date($post->ID, true, 'M');
+							    $shortdaterz = substr($shortdater, 0, 3);
+							    $shortdaterendz = substr($shortdaterend, 0, 3);
 
-							<div class="post-date post-date-start">
-							<span class="date-month"><?php echo $shortdaterz; ?></span>
-							<span class="date-number"><?php echo $shortdatez; ?></span>
-							</div>
-							<div style="right: 109px; padding: 10px 0;" class="post-date"><span style="font-size: 30px; line-height: 2.5;">-</span></div>
+							    $shortdate = tribe_get_start_date($post->ID, true, 'j');
+								$shortdateend = tribe_get_end_date($post->ID, true, 'j');
+							    $shortdatez = substr($shortdate, 0, 2);
+							    $shortdateendz = substr($shortdateend, 0, 2);
+							?>
+
+							<?php if( tribe_event_is_all_day() == true ) { ?>
+
+								<div class="post-date post-date-start" style="right: 20px;">     
+									<span class="date-month"><?php echo $shortdaterz; ?></span>
+									<span class="date-number"><?php echo $shortdatez; ?></span>
+								</div>
+
+							<?php } else { ?>	
+
+								<div class="post-date post-date-start">     
+									<span class="date-month"><?php echo $shortdaterz; ?></span>
+									<span class="date-number"><?php echo $shortdatez; ?></span>
+								</div>
+
+								<div style="right: 109px; padding: 10px 0;" class="post-date"><span style="font-size: 30px; line-height: 2.5;">-</span></div>
+
+								<div class="post-date">
+									<span class="date-month"><?php echo $shortdaterendz; ?></span>
+									<span class="date-number date-number-end"><?php echo $shortdateendz; ?></span>
+								</div>
+
+							<?php } ?>							
 
 							<a href="<?php the_permalink(); ?>"><img src="<?php echo $imgsrc[0]; ?>"></a>
 							<div class="ptit"> 
 								<a href="<?php the_permalink(); ?>"><span><?php the_title(); ?></span></a>
 							</div>
+
 						</div>
 						
 						<?php endwhile; endif; wp_reset_query(); ?>	
