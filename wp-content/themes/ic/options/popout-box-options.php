@@ -112,7 +112,7 @@ add_action('admin_menu', 'mythemes_add_popout_box');
 // Add meta boxel
 function mythemes_add_popout_box() {
 	global $meta_popout_box;
-	foreach ( array( 'page', 'popout-box' ) as $page )
+	foreach ( array( 'popout-box' ) as $page )
 	add_meta_box($meta_popout_box['id'], $meta_popout_box['title'], 'mythemes_show_popout_box', $page, $meta_popout_box['context'], 			$meta_popout_box['priority']);
 }
 // Callback function to show fields in meta boxel
