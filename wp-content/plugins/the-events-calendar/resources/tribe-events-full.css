@@ -9,8 +9,6 @@
  * To replace our stylsheet altogether, you can use the 'tribe_events_stylesheet_url' filter.
  *
  * @package TribeEventsCalendar
- * @since  1.0
- * @author Modern Tribe Inc.
  *
  */
 
@@ -1125,7 +1123,7 @@ table.tribe-events-tickets td.wpec {
 	line-height: 0;
 }
 
-table.tribe-events-tickets td.woocommerce {
+table.tribe-events-tickets td.woocommerce.add-to-cart {
 	border-bottom: 0;
 }
 

@@ -11,6 +11,7 @@ if ( ! class_exists( 'TribeEventsTickets' ) ) {
 
 		/**
 		 * All TribeEventsTickets api consumers. It's static, so it's shared across all child.
+		 *
 		 * @var array
 		 */
 		protected static $active_modules = array();
@@ -89,6 +90,26 @@ if ( ! class_exists( 'TribeEventsTickets' ) ) {
 		 * @return mixed
 		 */
 		abstract function get_ticket( $event_id, $ticket_id );
+
+		/**
+		 * Returns the event post corresponding to the possible ticket object/ticket ID.
+		 *
+		 * This is used to help differentiate between products which act as tickets for an
+		 * event and those which do not. If $possible_ticket is not related to any events
+		 * then boolean false will be returned.
+		 *
+		 * This stub method should be treated as if it were an abstract method - ie, the
+		 * concrete class ought to provide the implementation.
+		 *
+		 * @todo convert to abstract method in 4.0
+		 *
+		 * @param $possible_ticket
+		 *
+		 * @return bool|WP_Post
+		 */
+		public function get_event_for_ticket( $possible_ticket ) {
+			return false;
+		}
 
 		/**
 		 * Deletes a ticket
@@ -192,7 +213,9 @@ if ( ! class_exists( 'TribeEventsTickets' ) ) {
 		 *
 		 * @return string
 		 */
-		function get_price_html( $product ){ return '';  }
+		function get_price_html( $product ) {
+			return '';
+		}
 
 		/**
 		 * Returns instance of the child class (singleton)
@@ -241,13 +264,16 @@ if ( ! class_exists( 'TribeEventsTickets' ) ) {
 		/* AJAX Handlers */
 
 		/**
-		 *	Sanitizes the data for the new/edit ticket ajax call,
+		 *    Sanitizes the data for the new/edit ticket ajax call,
 		 *  and calls the child save_ticket function.
 		 */
 		public final function ajax_handler_ticket_add() {
 
-			if ( ! isset( $_POST["formdata"] ) ) $this->ajax_error( 'Bad post' );
-			if ( ! isset( $_POST["post_ID"] ) ) $this->ajax_error( 'Bad post' );
+			if ( ! isset( $_POST["formdata"] ) ) {
+				$this->ajax_error( 'Bad post' );
+			}
+			if ( ! isset( $_POST["post_ID"] ) )
+				$this->ajax_error( 'Bad post' );
 
 			/*
 			 This is needed because a provider can implement a dynamic set of fields.
@@ -261,16 +287,17 @@ if ( ! class_exists( 'TribeEventsTickets' ) ) {
 			if ( empty( $_POST["nonce"] ) || ! wp_verify_nonce( $_POST["nonce"], 'add_ticket_nonce' ) || ! current_user_can( 'edit_tribe_events' ) )
 				$this->ajax_error( "Cheatin' huh?" );
 
-			if ( ! isset( $data["ticket_provider"] ) || ! $this->module_is_valid( $data["ticket_provider"] ) ) $this->ajax_error( 'Bad module' );
+			if ( ! isset( $data["ticket_provider"] ) || ! $this->module_is_valid( $data["ticket_provider"] ) )
+				$this->ajax_error( 'Bad module' );
 
 			$ticket = new TribeEventsTicketObject();
 
 			$ticket->ID          = isset( $data["ticket_id"] ) ? absint( $data["ticket_id"] ) : null;
 			$ticket->name        = isset( $data["ticket_name"] ) ? esc_html( $data["ticket_name"] ) : null;
 			$ticket->description = isset( $data["ticket_description"] ) ? esc_html( $data["ticket_description"] ) : null;
-			$ticket->price       = !empty( $data["ticket_price"] ) ? trim( $data["ticket_price"] ) : 0;
+			$ticket->price       = ! empty( $data["ticket_price"] ) ? trim( $data["ticket_price"] ) : 0;
 
-			if ( !empty( $ticket->price ) ) {
+			if ( ! empty( $ticket->price ) ) {
 				//remove non-money characters
 				$ticket->price = preg_replace( '/[^0-9\.]/Uis', '', $ticket->price );
 			}
@@ -303,7 +330,7 @@ if ( ! class_exists( 'TribeEventsTickets' ) ) {
 
 
 		/**
-		 *	Handles the check-in ajax call, and calls the
+		 *    Handles the check-in ajax call, and calls the
 		 *  checkin method.
 		 */
 		public final function ajax_handler_attendee_checkin() {
@@ -314,7 +341,7 @@ if ( ! class_exists( 'TribeEventsTickets' ) ) {
 				$this->ajax_error( 'Bad module' );
 
 			if ( empty( $_POST["nonce"] ) || ! wp_verify_nonce( $_POST["nonce"], 'checkin' ) || ! current_user_can( 'edit_tribe_events' ) )
-					$this->ajax_error( "Cheatin' huh?" );
+				$this->ajax_error( "Cheatin' huh?" );
 
 			$order_id = $_POST["order_ID"];
 
@@ -359,7 +386,7 @@ if ( ! class_exists( 'TribeEventsTickets' ) ) {
 				$this->ajax_error( 'Bad post' );
 
 			if ( empty( $_POST["nonce"] ) || ! wp_verify_nonce( $_POST["nonce"], 'remove_ticket_nonce' ) || ! current_user_can( 'edit_tribe_events' ) )
-					$this->ajax_error( "Cheatin' huh?" );
+				$this->ajax_error( "Cheatin' huh?" );
 
 			$post_id   = $_POST["post_ID"];
 			$ticket_id = $_POST["ticket_id"];
@@ -410,6 +437,7 @@ if ( ! class_exists( 'TribeEventsTickets' ) ) {
 
 		/**
 		 * Returns the markup for a notice in the admin
+		 *
 		 * @param string $msg Text for the notice
 		 *
 		 * @return string Notice with markup
@@ -432,13 +460,52 @@ if ( ! class_exists( 'TribeEventsTickets' ) ) {
 		 *
 		 * @return array
 		 */
-		final static public function get_event_attendees( $event_id ) {
+		public static function get_event_attendees( $event_id ) {
 			$attendees = array();
-			foreach ( self::$active_modules as $class=> $module ) {
+
+			foreach ( self::$active_modules as $class => $module ) {
 				$obj       = call_user_func( array( $class, 'get_instance' ) );
 				$attendees = array_merge( $attendees, $obj->get_attendees( $event_id ) );
 			}
+
 			return $attendees;
+		}
+
+		/**
+		 * Returns all tickets for an event (all providers are queried for this information).
+		 *
+		 * @param $event_id
+		 *
+		 * @return array
+		 */
+		public static function get_all_event_tickets( $event_id ) {
+			$tickets = array();
+
+			foreach ( self::$active_modules as $class => $module ) {
+				$obj     = call_user_func( array( $class, 'get_instance' ) );
+				$tickets = array_merge( $tickets, $obj->get_tickets( $event_id ) );
+			}
+
+			return $tickets;
+		}
+
+		/**
+		 * Tests to see if the provided object/ID functions as a ticket for the event
+		 * and returns the corresponding event if so (or else boolean false).
+		 *
+		 * All registered providers are asked to perform this test.
+		 *
+		 * @param $possible_ticket
+		 * @return bool
+		 */
+		public static function find_matching_event( $possible_ticket ) {
+			foreach ( self::$active_modules as $class => $module ) {
+				$obj   = call_user_func( array( $class, 'get_instance' ) );
+				$event = $obj->get_event_for_ticket( $possible_ticket );
+				if ( false !== $event ) return $event;
+			}
+
+			return false;
 		}
 
 		/**
@@ -452,6 +519,7 @@ if ( ! class_exists( 'TribeEventsTickets' ) ) {
 		 */
 		final static public function get_event_checkedin_attendees_count( $event_id ) {
 			$checkedin = TribeEventsTickets::get_event_attendees( $event_id );
+
 			return array_reduce( $checkedin, array( "TribeEventsTickets", "_checkedin_attendees_array_filter" ), 0 );
 		}
 
@@ -520,7 +588,7 @@ if ( ! class_exists( 'TribeEventsTickets' ) ) {
 
 			$tickets = array();
 
-			foreach ( self::$active_modules as $class=> $module ) {
+			foreach ( self::$active_modules as $class => $module ) {
 				$obj     = call_user_func( array( $class, 'get_instance' ) );
 				$tickets = array_merge( $tickets, $obj->get_tickets( $event_id ) );
 			}
@@ -530,18 +598,24 @@ if ( ! class_exists( 'TribeEventsTickets' ) ) {
 
 		/**
 		 * Sets an AJAX error, returns a JSON array and ends the execution.
+		 *
 		 * @param string $message
 		 */
 		protected final function ajax_error( $message = "" ) {
 			header( 'Content-type: application/json' );
 
-			echo json_encode( array( "success" => false,
-									 "message" => $message ) );
+			echo json_encode(
+				array(
+					"success" => false,
+					"message" => $message
+				)
+			);
 			exit;
 		}
 
 		/**
 		 * Sets an AJAX response, returns a JSON array and ends the execution.
+		 *
 		 * @param $data
 		 */
 		protected final function ajax_ok( $data ) {
@@ -555,8 +629,12 @@ if ( ! class_exists( 'TribeEventsTickets' ) ) {
 			}
 
 			header( 'Content-type: application/json' );
-			echo json_encode( array( "success" => true,
-									 "data"    => $return ) );
+			echo json_encode(
+				array(
+					"success" => true,
+					"data"    => $return
+				)
+			);
 			exit;
 		}
 

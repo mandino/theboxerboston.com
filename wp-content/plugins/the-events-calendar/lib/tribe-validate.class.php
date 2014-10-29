@@ -1,15 +1,15 @@
 <?php
 
 // Don't load directly
-if ( !defined( 'ABSPATH' ) ) die( '-1' );
+if ( ! defined( 'ABSPATH' ) ) {
+	die( '-1' );
+}
 
-if ( !class_exists( 'TribeValidate' ) ) {
+if ( ! class_exists( 'TribeValidate' ) ) {
 	/**
 	 * helper class that validates fields for use in Settings, MetaBoxes, Users, anywhere.
 	 * Instantiate whenever you want to validate a field
 	 *
-	 * @since 2.0.5
-	 * @author jkudish
 	 */
 	class TribeValidate {
 
@@ -55,35 +55,36 @@ if ( !class_exists( 'TribeValidate' ) ) {
 		/**
 		 * Class constructor
 		 *
-		 * @since 2.0.5
-		 * @author jkudish
 		 * @param string $field_id the field ID to validate
-		 * @param array $field_id the field object to validate
-		 * @param mixed $value the value to validate
+		 * @param array  $field_id the field object to validate
+		 * @param mixed  $value    the value to validate
+		 *
 		 * @return array $result the result of the validation
 		 */
 		public function __construct( $field_id, $field, $value, $additional_args = array() ) {
 
 			// prepare object properties
-			$this->result = new stdClass;
-			$this->field = $field;
-			$this->field['id'] = $field_id;
-			$this->value = $value;
+			$this->result          = new stdClass;
+			$this->field           = $field;
+			$this->field['id']     = $field_id;
+			$this->value           = $value;
 			$this->additional_args = $additional_args;
 
 			// if the field is invalid or incomplete, fail validation
-			if ( !is_array( $this->field ) || ( !isset( $this->field['validation_type'] ) && !isset( $this->field['validation_callback'] ) ) ) {
+			if ( ! is_array( $this->field ) || ( ! isset( $this->field['validation_type'] ) && ! isset( $this->field['validation_callback'] ) ) ) {
 				$this->result->valid = false;
 				$this->result->error = __( 'Invalid or incomplete field passed', 'tribe-events-calendar' );
-				$this->result->error .= (isset($this->field['id'])) ? ' (' . __( 'Field ID:', 'tribe-events-calendar' ) . ' ' . $this->field['id']. ' )' : '';
+				$this->result->error .= ( isset( $this->field['id'] ) ) ? ' (' . __( 'Field ID:', 'tribe-events-calendar' ) . ' ' . $this->field['id'] . ' )' : '';
+
 				return $this->result;
 			}
 
 			// call validation callback if a validation callback function is set
-			if ( isset($this->field['validation_callback']) ) {
+			if ( isset( $this->field['validation_callback'] ) ) {
 				if ( function_exists( $this->field['validation_callback'] ) ) {
-					if ( (!isset( $_POST[$field_id] ) || !$_POST[$field_id] || $_POST[$field_id] == '' ) && isset( $this->field['can_be_empty'] ) && $this->field['can_be_empty'] ) {
+					if ( ( ! isset( $_POST[$field_id] ) || ! $_POST[$field_id] || $_POST[$field_id] == '' ) && isset( $this->field['can_be_empty'] ) && $this->field['can_be_empty'] ) {
 						$this->result->valid = true;
+
 						return $this->result;
 					} else {
 						return call_user_func( $validation_callback );
@@ -95,10 +96,11 @@ if ( !class_exists( 'TribeValidate' ) ) {
 			if ( isset( $this->field['validation_type'] ) ) {
 				if ( method_exists( $this, $this->field['validation_type'] ) ) {
 					// make sure there's a field validation type set for this validation and that such method exists
-					$this->type = $this->field['validation_type'];
-					$this->label = isset($this->field['label']) ? $this->field['label'] : $this->field['id'];
-					if ( ( !isset( $_POST[$field_id] ) || !$_POST[$field_id] || $_POST[$field_id] == '' ) && isset( $this->field['can_be_empty'] ) && $this->field['can_be_empty'] ) {
+					$this->type  = $this->field['validation_type'];
+					$this->label = isset( $this->field['label'] ) ? $this->field['label'] : $this->field['id'];
+					if ( ( ! isset( $_POST[$field_id] ) || ! $_POST[$field_id] || $_POST[$field_id] == '' ) && isset( $this->field['can_be_empty'] ) && $this->field['can_be_empty'] ) {
 						$this->result->valid = true;
+
 						return $this->result;
 					} else {
 						call_user_func( array( $this, $this->type ) ); // run the validation
@@ -107,7 +109,7 @@ if ( !class_exists( 'TribeValidate' ) ) {
 					// invalid validation type set, validation fails
 					$this->result->valid = false;
 					$this->result->error = __( 'Non-existant field validation function passed', 'tribe-events-calendar' );
-					$this->result->error .= ( isset( $this->field['id'] ) ) ? ' (' . __( 'Field ID:', 'tribe-events-calendar' ) . ' ' . $this->field['id'].' '._x( 'with function name:', 'non-existant function name passed for field validation', 'tribe-events-calendar' ).' '.$this->field['validation_type'].' )' : '';
+					$this->result->error .= ( isset( $this->field['id'] ) ) ? ' (' . __( 'Field ID:', 'tribe-events-calendar' ) . ' ' . $this->field['id'] . ' ' . _x( 'with function name:', 'non-existant function name passed for field validation', 'tribe-events-calendar' ) . ' ' . $this->field['validation_type'] . ' )' : '';
 				}
 			} else {
 				// no validation type set, validation fails
@@ -123,8 +125,6 @@ if ( !class_exists( 'TribeValidate' ) ) {
 		/**
 		 * validates a field as a string containing only letters and numbers
 		 *
-		 * @since 2.0.7
-		 * @author jkudish
 		 * @return stdClass validation result object
 		 */
 		public function alpha_numeric() {
@@ -140,14 +140,12 @@ if ( !class_exists( 'TribeValidate' ) ) {
 		 * validates a field as a string containing only letters,
 		 * numbers and carriage returns
 		 *
-		 * @since 2.0.7
-		 * @author jkudish
 		 * @return stdClass validation result object
 		 */
 		public function alpha_numeric_multi_line() {
 			if ( preg_match( '/^[a-zA-Z0-9\s]+$/', $this->value ) ) {
 				$this->result->valid = true;
-				$this->value = tribe_multi_line_remove_empty_lines( $this->value );
+				$this->value         = tribe_multi_line_remove_empty_lines( $this->value );
 			} else {
 				$this->result->valid = false;
 				$this->result->error = sprintf( __( '%s must contain numbers and letters only', 'tribe-events-calendar' ), $this->label );
@@ -158,14 +156,12 @@ if ( !class_exists( 'TribeValidate' ) ) {
 		 * validates a field as a string containing only letters,
 		 * numbers, dots and carriage returns
 		 *
-		 * @since 2.0.7
-		 * @author jkudish
 		 * @return stdClass validation result object
 		 */
 		public function alpha_numeric_multi_line_with_dots_and_dashes() {
 			if ( preg_match( '/^[a-zA-Z0-9\s.-]+$/', $this->value ) ) {
 				$this->result->valid = true;
-				$this->value = tribe_multi_line_remove_empty_lines( $this->value );
+				$this->value         = tribe_multi_line_remove_empty_lines( $this->value );
 			} else {
 				$this->result->valid = false;
 				$this->result->error = sprintf( __( '%s must contain numbers, letters and dots only', 'tribe-events-calendar' ), $this->label );
@@ -175,8 +171,6 @@ if ( !class_exists( 'TribeValidate' ) ) {
 		/**
 		 * validates a field as being positive integers
 		 *
-		 * @since 2.0.5
-		 * @author jkudish
 		 * @return stdClass validation result object
 		 */
 		public function positive_int() {
@@ -191,14 +185,12 @@ if ( !class_exists( 'TribeValidate' ) ) {
 		/**
 		 * validates & sanitizes fields as URL slugs
 		 *
-		 * @since 2.0.5
-		 * @author jkudish
 		 * @return stdClass validation result object
 		 */
 		public function slug() {
 			if ( preg_match( '/^[a-zA-Z0-9-_]+$/', $this->value ) ) {
 				$this->result->valid = true;
-				$this->value = sanitize_title( $this->value );
+				$this->value         = sanitize_title( $this->value );
 			} else {
 				$this->result->valid = false;
 				$this->result->error = sprintf( __( '%s must be a valid slug (numbers, letters, dashes, and underscores).', 'tribe-events-calendar' ), $this->label );
@@ -208,8 +200,6 @@ if ( !class_exists( 'TribeValidate' ) ) {
 		/**
 		 * validates & sanitizes fields as URLs
 		 *
-		 * @since 2.0.5
-		 * @author jkudish, nciske
 		 * @return stdClass validation result object
 		 */
 		public function url() {
@@ -226,13 +216,11 @@ if ( !class_exists( 'TribeValidate' ) ) {
 		 * validates fields that have options (radios, dropdowns, etc.)
 		 * by making sure the value is part of the options array
 		 *
-		 * @since 2.0.5
-		 * @author jkudish
 		 * @return stdClass validation result object
 		 */
 		public function options() {
 			if ( array_key_exists( $this->value, $this->field['options'] ) ) {
-				$this->value = ($this->value === 0) ? false : $this->value;
+				$this->value         = ( $this->value === 0 ) ? false : $this->value;
 				$this->result->valid = true;
 			} else {
 				$this->result->valid = false;
@@ -244,14 +232,12 @@ if ( !class_exists( 'TribeValidate' ) ) {
 		 * validates fields that have multiple options (checkbox list, etc.)
 		 * by making sure the value is part of the options array
 		 *
-		 * @since 2.0.5
-		 * @author jkudish, nciske
 		 * @return stdClass validation result object
 		 */
 		public function options_multi() {
 			foreach ( $this->value as $val ) {
 				if ( array_key_exists( $val, $this->field['options'] ) ) {
-					$this->value = ($this->value === 0) ? false : $this->value;
+					$this->value         = ( $this->value === 0 ) ? false : $this->value;
 					$this->result->valid = true;
 				} else {
 					$this->result->valid = false;
@@ -266,13 +252,14 @@ if ( !class_exists( 'TribeValidate' ) ) {
 		 * then combines the value into an array containg the value
 		 * and name from the option
 		 *
-		 * @since 2.0.5
-		 * @author jkudish
 		 * @return stdClass validation result object
 		 */
 		public function options_with_label() {
 			if ( array_key_exists( $this->value, $this->field['options'] ) ) {
-				$this->value = ( $this->value === 0 ) ? false : array( $this->value, $this->field['options'][$this->value] );
+				$this->value         = ( $this->value === 0 ) ? false : array(
+					$this->value,
+					$this->field['options'][$this->value]
+				);
 				$this->result->valid = true;
 			} else {
 				$this->result->valid = false;
@@ -285,12 +272,10 @@ if ( !class_exists( 'TribeValidate' ) ) {
 		 * as the specified value as specified in
 		 * $this->additional_args['compare_name']
 		 *
-		 * @since 2.0.5
-		 * @author jkudish
 		 * @return stdClass validation result object
 		 */
 		public function cannot_be_the_same_as() {
-			if ( !isset($this->additional_args['compare']) ) {
+			if ( ! isset( $this->additional_args['compare'] ) ) {
 				$this->result->valid = false;
 				$this->result->error = sprintf( __( 'Comparison validation failed because no comparison value was provided, for field %s', 'tribe-events-calendar' ), $this->field['id'] );
 			} else {
@@ -310,8 +295,6 @@ if ( !class_exists( 'TribeValidate' ) ) {
 		/**
 		 * validates a field as being a number or a percentage
 		 *
-		 * @since 2.0.5
-		 * @author jkudish
 		 * @return stdClass validation result object
 		 */
 		public function number_or_percent() {
@@ -326,56 +309,46 @@ if ( !class_exists( 'TribeValidate' ) ) {
 		/**
 		 * sanitizes an html field
 		 *
-		 * @since 2.0.5
-		 * @author jkudish
 		 * @return stdClass validation result object
 		 */
 		public function html() {
-			$this->value = balanceTags( $this->value );
+			$this->value         = balanceTags( $this->value );
 			$this->result->valid = true;
 		}
 
 		/**
 		 * sanitizes a license key
 		 *
-		 * @since 2.0.5
-		 * @author jkudish
 		 * @return stdClass validation result object
 		 */
 		public function license_key() {
-			$this->value = trim( $this->value );
+			$this->value         = trim( $this->value );
 			$this->result->valid = true;
 		}
 
 		/**
 		 * sanitizes a textarea field
 		 *
-		 * @since 2.0.5
-		 * @author jkudish
 		 * @return stdClass validation result object
 		 */
 		public function textarea() {
-			$this->value = wp_kses( $this->value, array() );
+			$this->value         = wp_kses( $this->value, array() );
 			$this->result->valid = true;
 		}
 
 		/**
 		 * sanitizes a field as beeing a boolean
 		 *
-		 * @since 2.0.5
-		 * @author jkudish
 		 * @return stdClass validation result object
 		 */
 		public function boolean() {
-			$this->value = (bool) $this->value;
+			$this->value         = (bool) $this->value;
 			$this->result->valid = true;
 		}
 
 		/**
 		 * validates a Google Maps Zoom field
 		 *
-		 * @since 2.0.5
-		 * @author jkudish
 		 * @return stdClass validation result object
 		 */
 		public function google_maps_zoom() {
@@ -391,8 +364,6 @@ if ( !class_exists( 'TribeValidate' ) ) {
 		 * validates a field as being part of an address
 		 * allows for letters, numbers, dashses and spaces only
 		 *
-		 * @since 2.0.5
-		 * @author jkudish
 		 * @return stdClass validation result object
 		 */
 		public function address() {
@@ -409,12 +380,10 @@ if ( !class_exists( 'TribeValidate' ) ) {
 		 * validates a field as being a city or province
 		 * allows for letters, dashses and spaces only
 		 *
-		 * @since 2.0.5
-		 * @author jkudish
 		 * @return stdClass validation result object
 		 */
 		public function city_or_province() {
-				$this->value = stripslashes( $this->value );
+			$this->value = stripslashes( $this->value );
 			if ( preg_match( "/^[\D '\-]+$/", $this->value ) ) {
 				$this->result->valid = true;
 			} else {
@@ -426,12 +395,10 @@ if ( !class_exists( 'TribeValidate' ) ) {
 		/**
 		 * validates a field as being a zip code
 		 *
-		 * @since 2.0.5
-		 * @author jkudish
 		 * @return stdClass validation result object
 		 */
 		public function zip() {
-		if ( preg_match( '/^[0-9]{5}$/', $this->value ) ) {
+			if ( preg_match( '/^[0-9]{5}$/', $this->value ) ) {
 				$this->result->valid = true;
 			} else {
 				$this->result->valid = false;
@@ -442,12 +409,10 @@ if ( !class_exists( 'TribeValidate' ) ) {
 		/**
 		 * validates a field as being a phone number
 		 *
-		 * @since 2.0.5
-		 * @author jkudish
 		 * @return stdClass validation result object
 		 */
 		public function phone() {
-		if ( preg_match( '/^[0-9\(\)\+ -]+$/', $this->value ) ) {
+			if ( preg_match( '/^[0-9\(\)\+ -]+$/', $this->value ) ) {
 				$this->result->valid = true;
 			} else {
 				$this->result->valid = false;
@@ -458,8 +423,6 @@ if ( !class_exists( 'TribeValidate' ) ) {
 		/**
 		 * validates & sanitizes a field as being a country list
 		 *
-		 * @since 2.0.5
-		 * @author jkudish
 		 * @return stdClass validation result object
 		 */
 		public function country_list() {
@@ -467,10 +430,11 @@ if ( !class_exists( 'TribeValidate' ) ) {
 			if ( is_array( $country_rows ) ) {
 				foreach ( $country_rows as $crow ) {
 					$country = explode( ',', $crow );
-					if ( !isset( $country[0] ) || !isset( $country[1] ) ) {
+					if ( ! isset( $country[0] ) || ! isset( $country[1] ) ) {
 						$this->result->valid = false;
 						$this->result->error = sprintf( __( 'Country List must be formatted as one country per line in the following format: <br>US, United States <br> UK, United Kingdom.', 'tribe-events-calendar' ), $this->label );
-						$this->value = wp_kses( $this->value, array() );
+						$this->value         = wp_kses( $this->value, array() );
+
 						return;
 					}
 				}
@@ -482,8 +446,6 @@ if ( !class_exists( 'TribeValidate' ) ) {
 		 * automatically validate a field regardless of the value
 		 * Don't use this unless you know what you are doing
 		 *
-		 * @since 2.0.5
-		 * @author jkudish
 		 * @return stdClass validation result object
 		 */
 		public function none() {

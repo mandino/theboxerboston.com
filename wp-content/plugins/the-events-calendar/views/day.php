@@ -6,12 +6,12 @@
  * Override this template in your own theme by creating a file at [your-theme]/tribe-events/day.php
  *
  * @package TribeEventsCalendar
- * @since  3.0
- * @author Modern Tribe Inc.
  *
  */
 
-if ( !defined('ABSPATH') ) { die('-1'); } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	die( '-1' );
+} ?>
 
 <?php do_action( 'tribe_events_before_template' ); ?>
 

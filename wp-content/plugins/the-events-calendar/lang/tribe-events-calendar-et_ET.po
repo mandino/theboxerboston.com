@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: The Events Calendar 3.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-23 16:59-0800\n"
-"PO-Revision-Date: 2014-05-21 15:27-0800\n"
+"POT-Creation-Date: 2014-07-17 16:44-0800\n"
+"PO-Revision-Date: 2014-09-11 13:00-0800\n"
 "Last-Translator: \n"
 "Language-Team: Modern Tribe, Inc. <pro@tri.be>\n"
 "Language: et_EE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.5\n"
+"X-Generator: Poedit 1.6.9\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:1,2,4c;_n_noop:1,2;"
 "_nx_noop:1,2,3c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;"
 "esc_html_x:1,2c\n"
@@ -39,15 +39,15 @@ msgstr "Peida sündmuste loendis"
 msgid "Sticky in Calendar View"
 msgstr "Kinnita kalendri vaates"
 
-#: ../admin-views/events-audit-trail.php:41
+#: ../admin-views/events-audit-trail.php:39
 msgid "Auditing Information"
 msgstr "Info kontrollimine"
 
-#: ../admin-views/events-audit-trail.php:47
+#: ../admin-views/events-audit-trail.php:45
 msgid "Created by:"
 msgstr "Loodud:"
 
-#: ../admin-views/events-audit-trail.php:51
+#: ../admin-views/events-audit-trail.php:49
 msgid "Audit Trail:"
 msgstr "Audit Trail:"
 
@@ -81,75 +81,82 @@ msgstr "AAAA-KK-PP"
 msgid "End Date &amp; Time:"
 msgstr "Lõpukuupäev &amp; aeg:"
 
-#: ../admin-views/events-meta-box.php:85
+#: ../admin-views/events-meta-box.php:87
 msgid "Event Location Details"
 msgstr "Sündmuse toimumiskoha info"
 
-#: ../admin-views/events-meta-box.php:93
+#: ../admin-views/events-meta-box.php:95
 msgid "Event Organizer Details"
 msgstr "Sündmuse korraldaja info"
 
-#: ../admin-views/events-meta-box.php:101
+#: ../admin-views/events-meta-box.php:103
 msgid "Event Website"
 msgstr "Sündmuse koduleht"
 
-#: ../admin-views/events-meta-box.php:104
+#: ../admin-views/events-meta-box.php:106
 msgid "URL:"
 msgstr "URL:"
 
-#: ../admin-views/events-meta-box.php:115
+#: ../admin-views/events-meta-box.php:117
 #: ../lib/io/csv/classes/TribeEventsImporter_ColumnMapper.php:61
 msgid "Event Cost"
 msgstr "Sündmuse hind"
 
-#: ../admin-views/events-meta-box.php:118
+#: ../admin-views/events-meta-box.php:120
 msgid "Currency Symbol:"
 msgstr "Valuuta:"
 
-#: ../admin-views/events-meta-box.php:128
+#: ../admin-views/events-meta-box.php:130
 msgctxt "Currency symbol position"
 msgid "Before cost"
 msgstr "Enne hinda"
 
-#: ../admin-views/events-meta-box.php:129
+#: ../admin-views/events-meta-box.php:131
 msgctxt "Currency symbol position"
 msgid "After cost"
 msgstr "Pärast hinda"
 
-#: ../admin-views/events-meta-box.php:134
-#: ../public/advanced-functions/meta.php:319
+#: ../admin-views/events-meta-box.php:136
+#: ../public/advanced-functions/meta.php:320
+#: ../views/modules/meta/details.php:80
 msgid "Cost:"
 msgstr "Hind: "
 
-#: ../admin-views/events-meta-box.php:139
+#: ../admin-views/events-meta-box.php:141
 msgid "Enter a 0 for events that are free or leave blank to hide the field."
 msgstr ""
 "Tasuta sündmuse puhul sisesta 0 või jäta tühjaks kui soovid hinnainfot mitte "
 "lisada"
 
 #: ../admin-views/organizer-meta-box.php:12
-msgid "Organizer Name:"
-msgstr "Korraldaja nimi:"
+#: ../admin-views/venue-meta-box.php:20
+#, fuzzy, php-format
+msgid "%s Name:"
+msgstr "Toimumiskoha nimi:"
 
 #: ../admin-views/organizer-meta-box.php:19
-#: ../admin-views/tickets/attendees.php:39
+#: ../admin-views/tickets/attendees.php:41
 #: ../admin-views/venue-meta-box.php:93
-#: ../public/advanced-functions/meta.php:407
-#: ../public/advanced-functions/meta.php:469
+#: ../public/advanced-functions/meta.php:408
+#: ../public/advanced-functions/meta.php:470
+#: ../views/modules/meta/organizer.php:24 ../views/modules/meta/venue.php:36
 msgid "Phone:"
 msgstr "Telefon:"
 
 #: ../admin-views/organizer-meta-box.php:23
-#: ../admin-views/tickets/attendees.php:45
+#: ../admin-views/tickets/attendees.php:47
 #: ../admin-views/venue-meta-box.php:97
-#: ../public/advanced-functions/meta.php:358
-#: ../public/advanced-functions/meta.php:433
-#: ../public/advanced-functions/meta.php:495
+#: ../public/advanced-functions/meta.php:359
+#: ../public/advanced-functions/meta.php:434
+#: ../public/advanced-functions/meta.php:496
+#: ../views/modules/meta/details.php:103
+#: ../views/modules/meta/organizer.php:34 ../views/modules/meta/venue.php:41
 msgid "Website:"
 msgstr "Koduleht:"
 
 #: ../admin-views/organizer-meta-box.php:27
-#: ../public/advanced-functions/meta.php:482
+#: ../public/advanced-functions/meta.php:483
+#: ../views/modules/meta/organizer.php:29
 msgid "Email:"
 msgstr "E-mail:"
 
@@ -163,70 +170,66 @@ msgstr ""
 "\">e-maili kaitsmine</a>kuidas avaldatud e-mail aaddressi kaitsta spämmijate "
 "eest."
 
-#: ../admin-views/tickets/attendees.php:9 ../admin-views/tickets/list.php:41
+#: ../admin-views/tickets/attendees.php:11 ../admin-views/tickets/list.php:41
 #: ../lib/tickets/tribe-tickets-pro.php:73
 msgid "Attendees"
 msgstr "Osalejad"
 
-#: ../admin-views/tickets/attendees.php:14
+#: ../admin-views/tickets/attendees.php:16
 msgid "Event Summary"
 msgstr "Sündmuse kokkuvõte"
 
-#: ../admin-views/tickets/attendees.php:22
+#: ../admin-views/tickets/attendees.php:24
 msgid "Event Details"
 msgstr "Sündmuse detailid"
 
-#: ../admin-views/tickets/attendees.php:24
+#: ../admin-views/tickets/attendees.php:26
 msgid "Start Date / Time:"
 msgstr "Alguskuupäev/aeg:"
 
-#: ../admin-views/tickets/attendees.php:26
+#: ../admin-views/tickets/attendees.php:28
 msgid "End Date / Time:"
 msgstr "Lõpukuupäev/ aeg:"
 
-#: ../admin-views/tickets/attendees.php:34
-msgid "Venue:"
-msgstr "Toimumiskoht:"
-
-#: ../admin-views/tickets/attendees.php:52
+#: ../admin-views/tickets/attendees.php:54
 msgid "Ticket Sales"
 msgstr "Piletite müük"
 
-#: ../admin-views/tickets/attendees.php:64 ../admin-views/tickets/list.php:67
+#: ../admin-views/tickets/attendees.php:66 ../admin-views/tickets/list.php:67
 #, php-format
 msgid "Sold %d"
 msgstr "Müüdud %d"
 
-#: ../admin-views/tickets/attendees.php:66 ../admin-views/tickets/list.php:69
+#: ../admin-views/tickets/attendees.php:68 ../admin-views/tickets/list.php:69
 #, php-format
 msgid "Sold %d of %d"
 msgstr "%d %d-st müüdud"
 
-#: ../admin-views/tickets/attendees.php:81
+#: ../admin-views/tickets/attendees.php:83
 msgid "Tickets sold:"
 msgstr "Pileteid müüdud:"
 
-#: ../admin-views/tickets/attendees.php:85
+#: ../admin-views/tickets/attendees.php:87
 msgid "Checked in:"
 msgstr "Check in tehtud: "
 
-#: ../admin-views/tickets/attendees.php:105
+#: ../admin-views/tickets/attendees.php:104
 msgid "Send the attendee list by email"
 msgstr "Saada osalejate list e-mailile"
 
-#: ../admin-views/tickets/attendees.php:109
+#: ../admin-views/tickets/attendees.php:108
 msgid "Select a User:"
 msgstr "Vali kasutaja:"
 
-#: ../admin-views/tickets/attendees.php:110
+#: ../admin-views/tickets/attendees.php:109
 msgid "Select..."
 msgstr "Vali..."
 
-#: ../admin-views/tickets/attendees.php:112
+#: ../admin-views/tickets/attendees.php:111
 msgid "or"
 msgstr "või"
 
-#: ../admin-views/tickets/attendees.php:114
+#: ../admin-views/tickets/attendees.php:113
 msgid "Email Address:"
 msgstr "E-maili aadress:"
 
@@ -235,6 +238,7 @@ msgid "Edit"
 msgstr "Muuda"
 
 #: ../admin-views/tickets/list.php:22
+#: ../lib/tickets/tribe-tickets-attendees.php:215
 msgid "Delete"
 msgstr "Kustuta"
 
@@ -338,11 +342,11 @@ msgstr "Vaikimisi sündmuse mall"
 msgid "Default Page Template"
 msgstr "Vaikimisi lehe mall"
 
-#: ../admin-views/tribe-options-display.php:29
+#: ../admin-views/tribe-options-display.php:31
 msgid "Display Settings"
 msgstr "Kuva seadeid"
 
-#: ../admin-views/tribe-options-display.php:34
+#: ../admin-views/tribe-options-display.php:36
 #, php-format
 msgid ""
 "<p>The settings below control the display of your calendar. If things don't "
@@ -359,88 +363,170 @@ msgstr ""
 "href=\"%s\">teema giidiga</a> juhiste saamiseks. Soovid teha täiesti uue "
 "kujunduse? Lae näidis <a href=\"%s\">näidis ja Githubi plugin</a></p>"
 
-#: ../admin-views/tribe-options-display.php:49
+#: ../admin-views/tribe-options-display.php:51
 msgid "Basic Template Settings"
 msgstr "Peamised malli seaded"
 
-#: ../admin-views/tribe-options-display.php:53
+#: ../admin-views/tribe-options-display.php:55
 msgid "Default stylesheet used for events templates"
 msgstr "Vaikimisi stiil sündmuste mallideks"
 
-#: ../admin-views/tribe-options-display.php:56
+#: ../admin-views/tribe-options-display.php:58
 msgid "Skeleton Styles"
 msgstr "Skeleton stiil"
 
-#: ../admin-views/tribe-options-display.php:58
+#: ../admin-views/tribe-options-display.php:60
 msgid ""
 "Only includes enough css to achieve complex layouts like calendar and week "
 "view."
 msgstr ""
 "Sisaldab ainult css, et teha kujundusi nagu näiteks kalendri ja nädala vaade."
 
-#: ../admin-views/tribe-options-display.php:60
+#: ../admin-views/tribe-options-display.php:62
 msgid "Full Styles"
 msgstr "Kogu stiil"
 
-#: ../admin-views/tribe-options-display.php:62
+#: ../admin-views/tribe-options-display.php:64
 msgid "More detailed styling, tries to grab styles from your theme."
 msgstr "Rohkem stiili, võtab stiilielemente sinu teemast"
 
-#: ../admin-views/tribe-options-display.php:64
+#: ../admin-views/tribe-options-display.php:66
 msgid "Tribe Events Styles"
 msgstr "Tribe Events stiilid"
 
-#: ../admin-views/tribe-options-display.php:66
+#: ../admin-views/tribe-options-display.php:68
 msgid "A fully designed and styled theme for your events pages."
 msgstr "Täielikult disainitud teema sinu sündmuste jaoks"
 
-#: ../admin-views/tribe-options-display.php:73
+#: ../admin-views/tribe-options-display.php:75
 msgid "Events template"
 msgstr "Sündmuste mall"
 
-#: ../admin-views/tribe-options-display.php:74
+#: ../admin-views/tribe-options-display.php:76
 msgid ""
 "Choose a page template to control the appearance of your calendar and event "
 "content."
 msgstr "Vali lehe mall, kuidas kuvada sinu kalendrit ja sündmuste sisu."
 
-#: ../admin-views/tribe-options-display.php:82
+#: ../admin-views/tribe-options-display.php:84
 msgid "Enable event views"
 msgstr "Võimalda sündmuste vaade"
 
-#: ../admin-views/tribe-options-display.php:83
+#: ../admin-views/tribe-options-display.php:85
 msgid "You must select at least one view."
 msgstr "Pead valima vähemalt ühe vaate."
 
-#: ../admin-views/tribe-options-display.php:90
+#: ../admin-views/tribe-options-display.php:92
 msgid "Default view"
 msgstr "Vaikimisi vaade"
 
-#: ../admin-views/tribe-options-display.php:98
+#: ../admin-views/tribe-options-display.php:100
 msgid "Disable the Event Search Bar"
 msgstr "Keela sündmuste otsing"
 
-#: ../admin-views/tribe-options-display.php:99
+#: ../admin-views/tribe-options-display.php:101
 msgid "Check this to use the classic header."
 msgstr "Vali see, et kasutada klassikalist päist."
 
-#: ../admin-views/tribe-options-display.php:105
+#: ../admin-views/tribe-options-display.php:107
 msgid "Month view events per day"
 msgstr "Kuuvaade päevade kaupa"
 
-#: ../admin-views/tribe-options-display.php:106
+#: ../admin-views/tribe-options-display.php:108
 msgid "Allow more than the default 3 events per day in month view."
 msgstr "Luba kuuvaates kuvada rohkem kui 3 sündmust päevas ."
 
-#: ../admin-views/tribe-options-display.php:113
+#: ../admin-views/tribe-options-display.php:115
+#, fuzzy
+msgid "Date Format Settings"
+msgstr "Peamised seaded"
+
+#: ../admin-views/tribe-options-display.php:119
+msgid ""
+"<p>The following three fields accept the date format options available to "
+"the php date() function. <a href=\"http://codex.wordpress.org/"
+"Formatting_Date_and_Time\" target=\"_blank\">Learn how to make your own date "
+"format here</a>.</p>"
+msgstr ""
+"<p>Järgnevad väljadele saab sisestada ainult () php kuupäevaformaati. <a "
+"href=\"http://codex.wordpress.org/Formatting_Date_and_Time\" target=\"_blank"
+"\">Vaata, kuidas luua omale kuupäeva formaat </a>.</p>"
+
+#: ../admin-views/tribe-options-display.php:123
+msgid "Date with year"
+msgstr "Kuupäev koos aastaga"
+
+#: ../admin-views/tribe-options-display.php:124
+msgid ""
+"Enter the format to use for displaying dates with the year. Used when "
+"showing an event from a past or future year, also used for dates in view "
+"headers."
+msgstr ""
+"Sisesta formaat, mida kuvatakse koos aastaga. Kasutatakse eelmistel või "
+"tulevastel aastatel toimunud (või toimuvate) sündmuste puhul."
+
+#: ../admin-views/tribe-options-display.php:131
+msgid "Date without year"
+msgstr "Kuupäev ilma aastata"
+
+#: ../admin-views/tribe-options-display.php:132
+msgid ""
+"Enter the format to use for displaying dates without a year. Used when "
+"showing an event from the current year."
+msgstr ""
+"Sisesta formaat, mida kuvatakse ilma aastata. Kasutatakse käesoleva aasta "
+"sündmuse puhul."
+
+#: ../admin-views/tribe-options-display.php:139
+msgid "Month and year format"
+msgstr "Kuu ja aasta formaat"
+
+#: ../admin-views/tribe-options-display.php:140
+msgid ""
+"Enter the format to use for dates that show a month and year only. Used on "
+"month view."
+msgstr ""
+"Sisesta formaat, kus kuvatakse ainult kuu ja aasta. Kasutatakse kuu vaates."
+
+#: ../admin-views/tribe-options-display.php:147
+msgid "Date time separator"
+msgstr "Kuupäeva aja eraldaja"
+
+#: ../admin-views/tribe-options-display.php:148
+msgid ""
+"Enter the separator that will be placed between the date and time, when both "
+"are shown."
+msgstr ""
+"Sisesta eraldustähis, mida kuvatakse kuupäeva ja aja vahel, juhul kui "
+"mõlemaid kuvatakse"
+
+#: ../admin-views/tribe-options-display.php:155
+msgid "Time range separator"
+msgstr "Aja eraldaja"
+
+#: ../admin-views/tribe-options-display.php:156
+msgid ""
+"Enter the separator that will be used between the start and end time of an "
+"event."
+msgstr "Sisesta eraldustähis, mida kasutatakse algus-ja lõpuaja vahel."
+
+#: ../admin-views/tribe-options-display.php:163
+msgid "Datepicker Date Format"
+msgstr "Kuupäeva valiku formaat"
+
+#: ../admin-views/tribe-options-display.php:164
+msgid "Select the date format to use in datepickers"
+msgstr "Vali kuupäeva formaat, mida kasutada kuupäevavalikus"
+
+#: ../admin-views/tribe-options-display.php:181
 msgid "Advanced Template Settings"
 msgstr "Täielikud malli seaded"
 
-#: ../admin-views/tribe-options-display.php:117
+#: ../admin-views/tribe-options-display.php:185
 msgid "Add HTML before event content"
 msgstr "Lisa HTML enne sündmuse infot"
 
-#: ../admin-views/tribe-options-display.php:118
+#: ../admin-views/tribe-options-display.php:186
 msgid ""
 "If you are familiar with HTML, you can add additional code before the event "
 "template. Some themes may require this to help with styling or layout."
@@ -448,11 +534,11 @@ msgstr ""
 "Kui valdad HTMLi, saad lisada koodi enne sündmuse malli. Osade teemade puhul "
 "on see parema kujunduse saamiseks vajalik."
 
-#: ../admin-views/tribe-options-display.php:123
+#: ../admin-views/tribe-options-display.php:191
 msgid "Add HTML after event content"
 msgstr "Lisa HTML peale sündmuse sisu"
 
-#: ../admin-views/tribe-options-display.php:124
+#: ../admin-views/tribe-options-display.php:192
 msgid ""
 "If you are familiar with HTML, you can add additional code after the event "
 "template. Some themes may require this to help with styling or layout."
@@ -586,7 +672,7 @@ msgstr ""
 "here, <a href=\"%soptions-permalink.php\">enable pretty permalinks</a>."
 
 #: ../admin-views/tribe-options-general.php:108
-#: ../public/template-tags/options.php:20
+#: ../public/template-tags/options.php:18
 msgid "The slug used for building the events URL."
 msgstr "Slug mida kasutatakse sündmuste URLi loomisel."
 
@@ -596,7 +682,7 @@ msgid "Your current events URL is: %s"
 msgstr "Praegune sündmuse URL on: %s"
 
 #: ../admin-views/tribe-options-general.php:113
-#: ../public/template-tags/options.php:43
+#: ../public/template-tags/options.php:37
 msgid "Here is the iCal feed URL for your events:"
 msgstr "Siin on iCal feedi URL sinu sündmustele:"
 
@@ -761,6 +847,15 @@ msgstr "The Events Calendar: Shopp Tickets"
 #: ../admin-views/tribe-options-help.php:78
 msgid "The Events Calendar: Filter Bar"
 msgstr "The Events Calendar: Filter Bar"
+
+#: ../admin-views/tribe-options-help.php:84
+msgid ""
+"If you're looking for help with The Events Calendar, you've come to the "
+"right place. We are committed to helping make your calendar kick ass...and "
+"hope the resources provided below will help get you there."
+msgstr ""
+"Kui otsid abi The Events Calendar´i osas, oled õiges kohas. Aitame sul hea "
+"meelega kalendri käima saada, loodetavasti leiad siit abi, mida otsid!"
 
 #: ../admin-views/tribe-options-help.php:87
 msgid ""
@@ -975,8 +1070,8 @@ msgid "Not getting help?"
 msgstr "Ei leidnud abi?"
 
 #: ../admin-views/tribe-options-help.php:159
-#: ../lib/the-events-calendar.class.php:505
-#: ../lib/tribe-settings.class.php:135
+#: ../lib/the-events-calendar.class.php:576
+#: ../lib/tribe-settings.class.php:129
 msgid "The Events Calendar"
 msgstr "The Events Calendar"
 
@@ -1045,12 +1140,8 @@ msgstr "Siin saab kõiki Modern Tribe The Event Calendar seadeid muuta."
 msgid "Hide the following settings tabs on every site:"
 msgstr "Peida järgmised seadete nupud igal lehel:"
 
-#: ../admin-views/venue-meta-box.php:20
-msgid "Venue Name:"
-msgstr "Toimumiskoha nimi:"
-
 #: ../admin-views/venue-meta-box.php:27
-#: ../public/advanced-functions/meta.php:421
+#: ../public/advanced-functions/meta.php:422
 msgid "Address:"
 msgstr "Aadress:"
 
@@ -1186,20 +1277,20 @@ msgid "Import Type:"
 msgstr "Impordi tüüp:"
 
 #: ../lib/io/csv/admin-views/import.php:45
-#: ../lib/the-events-calendar.class.php:1325
-#: ../lib/the-events-calendar.class.php:1437
+#: ../lib/the-events-calendar.class.php:502
+#: ../public/template-tags/venue.php:49
 msgid "Venues"
 msgstr "Toimumiskohad"
 
 #: ../lib/io/csv/admin-views/import.php:46
-#: ../lib/the-events-calendar.class.php:1338
-#: ../lib/the-events-calendar.class.php:1438
+#: ../lib/the-events-calendar.class.php:518
+#: ../public/template-tags/organizer.php:55
 msgid "Organizers"
 msgstr "Korraldajad"
 
 #: ../lib/io/csv/admin-views/import.php:47
-#: ../lib/the-events-calendar.class.php:1312
-#: ../lib/the-events-calendar.class.php:3794
+#: ../lib/the-events-calendar.class.php:1362
+#: ../lib/the-events-calendar.class.php:3893
 msgid "Events"
 msgstr "Sündmused"
 
@@ -1344,56 +1435,56 @@ msgid "Event Phone"
 msgstr "Sündmuse telefon"
 
 #: ../lib/io/csv/classes/TribeEventsImporter_ColumnMapper.php:63
-#: ../lib/the-events-calendar.class.php:1352
-#: ../public/template-tags/general.php:281
+#: ../lib/the-events-calendar.class.php:1402
+#: ../public/template-tags/general.php:268
 msgid "Event Category"
 msgstr "Sündmuse kategooria"
 
-#: ../lib/io/csv/classes/TribeEventsImporter_ColumnMapper.php:70
+#: ../lib/io/csv/classes/TribeEventsImporter_ColumnMapper.php:69
 msgid "Venue Name"
 msgstr "Toimumiskoha nimi"
 
-#: ../lib/io/csv/classes/TribeEventsImporter_ColumnMapper.php:71
+#: ../lib/io/csv/classes/TribeEventsImporter_ColumnMapper.php:70
 msgid "Venue Country"
 msgstr "Toimumiskoha riik"
 
-#: ../lib/io/csv/classes/TribeEventsImporter_ColumnMapper.php:72
+#: ../lib/io/csv/classes/TribeEventsImporter_ColumnMapper.php:71
 msgid "Venue Address"
 msgstr "Toimumiskoha aadress"
 
-#: ../lib/io/csv/classes/TribeEventsImporter_ColumnMapper.php:73
+#: ../lib/io/csv/classes/TribeEventsImporter_ColumnMapper.php:72
 msgid "Venue Addres 2"
 msgstr "Toimumiskoha aadress 2"
 
-#: ../lib/io/csv/classes/TribeEventsImporter_ColumnMapper.php:74
+#: ../lib/io/csv/classes/TribeEventsImporter_ColumnMapper.php:73
 msgid "Venue City"
 msgstr "Toimumiskoha linn"
 
-#: ../lib/io/csv/classes/TribeEventsImporter_ColumnMapper.php:75
+#: ../lib/io/csv/classes/TribeEventsImporter_ColumnMapper.php:74
 msgid "Venue State/Province"
 msgstr "Toimumiskoha piirkond/provints"
 
-#: ../lib/io/csv/classes/TribeEventsImporter_ColumnMapper.php:76
+#: ../lib/io/csv/classes/TribeEventsImporter_ColumnMapper.php:75
 msgid "Venue Zip"
 msgstr "Sündmuse postiindeks"
 
-#: ../lib/io/csv/classes/TribeEventsImporter_ColumnMapper.php:77
+#: ../lib/io/csv/classes/TribeEventsImporter_ColumnMapper.php:76
 msgid "Venue Phone"
 msgstr "Toimumiskoha telefon"
 
-#: ../lib/io/csv/classes/TribeEventsImporter_ColumnMapper.php:83
+#: ../lib/io/csv/classes/TribeEventsImporter_ColumnMapper.php:82
 msgid "Organizer Name"
 msgstr "Korraldaja nimi"
 
-#: ../lib/io/csv/classes/TribeEventsImporter_ColumnMapper.php:84
+#: ../lib/io/csv/classes/TribeEventsImporter_ColumnMapper.php:83
 msgid "Organizer Email"
 msgstr "Korraldaja e-mail"
 
-#: ../lib/io/csv/classes/TribeEventsImporter_ColumnMapper.php:85
+#: ../lib/io/csv/classes/TribeEventsImporter_ColumnMapper.php:84
 msgid "Organizer Website"
 msgstr "Korraldaja koduleht"
 
-#: ../lib/io/csv/classes/TribeEventsImporter_ColumnMapper.php:86
+#: ../lib/io/csv/classes/TribeEventsImporter_ColumnMapper.php:85
 msgid "Organizer Phone"
 msgstr "Korraldaja telefon"
 
@@ -1432,53 +1523,57 @@ msgstr "Fail pole leitav. Ei saa salvestada %s."
 msgid "Could not save %s."
 msgstr "Ei saa salvestada %s."
 
-#: ../lib/pue/admin-views/license-key.view.php:9
-#: ../lib/pue/admin-views/license-key.view.php:13
-#: ../lib/pue/lib/pue_plugin_update_engine.class.php:292
+#: ../lib/pue/admin-views/license-key.view.php:10
+#: ../lib/pue/admin-views/license-key.view.php:14
+#: ../lib/pue/lib/pue_plugin_update_engine.class.php:288
 msgid "License Key"
 msgstr "Litsentsi kood"
 
-#: ../lib/pue/admin-views/license-key.view.php:10
+#: ../lib/pue/admin-views/license-key.view.php:11
 msgid "A valid license key is required for support and updates."
 msgstr ""
 "Kehtiv litsentsi kood on vajalik ligipääsuks uuendustele ja abikeskusele"
 
-#: ../lib/pue/admin-views/license-key.view.php:16
+#: ../lib/pue/admin-views/license-key.view.php:17
 msgid "Replace empty fields"
 msgstr "Asenda tühjad väljad"
 
-#: ../lib/pue/admin-views/license-key.view.php:25
-#: ../lib/pue/lib/pue_plugin_update_engine.class.php:293
+#: ../lib/pue/admin-views/license-key.view.php:26
+#: ../lib/pue/lib/pue_plugin_update_engine.class.php:289
 msgid "A valid license key is required for support and updates"
 msgstr ""
 "Kehtiv litsentsi kood on vajalik ligipääsuks uuendustele ja abikeskusele"
 
-#: ../lib/pue/lib/pue_plugin_update_engine.class.php:361
+#: ../lib/pue/lib/pue_plugin_update_engine.class.php:353
 msgid "License key(s) updated."
 msgstr "Litsents(id) uuendatud"
 
-#: ../lib/pue/lib/pue_plugin_update_engine.class.php:401
+#: ../lib/pue/lib/pue_plugin_update_engine.class.php:393
 msgid "Sorry, key validation server is not available."
 msgstr "Vabandame, koodi valideerimise server pole saadaval"
 
-#: ../lib/pue/lib/pue_plugin_update_engine.class.php:403
+#: ../lib/pue/lib/pue_plugin_update_engine.class.php:396
 msgid "Sorry, this key is expired."
 msgstr "Vabandame, see kood on aegunud."
 
-#: ../lib/pue/lib/pue_plugin_update_engine.class.php:405
+#: ../lib/pue/lib/pue_plugin_update_engine.class.php:399
 msgid "Sorry, this key is out of installs."
 msgstr "Vabandame, see kood ei sobi enam installeerimiseks."
 
-#: ../lib/pue/lib/pue_plugin_update_engine.class.php:407
+#: ../lib/pue/lib/pue_plugin_update_engine.class.php:400
+msgid "Why am I seeing this message?"
+msgstr "Miks ma näen seda sõnumit?"
+
+#: ../lib/pue/lib/pue_plugin_update_engine.class.php:404
 msgid "Sorry, this key is not valid."
 msgstr "Vabandame, see kood ei kehti."
 
-#: ../lib/pue/lib/pue_plugin_update_engine.class.php:410
+#: ../lib/pue/lib/pue_plugin_update_engine.class.php:408
 #, php-format
 msgid "Valid Key! Expires on %s"
 msgstr "Kehtiv kood! Aegub %s"
 
-#: ../lib/pue/lib/pue_plugin_update_engine.class.php:414
+#: ../lib/pue/lib/pue_plugin_update_engine.class.php:412
 #, php-format
 msgid ""
 "Hmmm... something's wrong with this validator. Please contact <a href=\"%s"
@@ -1487,7 +1582,31 @@ msgstr ""
 "Hmm.. midagi on valesti validaatoriga, palun kontakteeru <a href=\"%s"
 "\">abikeskusega</a>"
 
-#: ../lib/template-classes/month.php:119
+#: ../lib/template-classes/day.php:70 ../lib/template-classes/day.php:84
+#, fuzzy
+msgid "All Day"
+msgstr "Kogupäeva sündmus"
+
+#: ../lib/template-classes/day.php:72 ../lib/template-classes/day.php:86
+msgid "Ongoing"
+msgstr "Jätkub.."
+
+#: ../lib/template-classes/day.php:130
+#, php-format
+msgid ""
+"No matching events listed under %s scheduled for <strong>%s</strong>. Please "
+"try another day."
+msgstr ""
+"<strong>%s</strong> ajaks %s sündmusi ei leitud. Proovi mõnda muud päeva."
+
+#: ../lib/template-classes/day.php:133
+#, fuzzy, php-format
+msgid "No events scheduled for <strong>%s</strong>. Please try another day."
+msgstr ""
+"Sündmus planeeritud: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s"
+"\">Vaata sündmust</a>"
+
+#: ../lib/template-classes/month.php:112
 #, php-format
 msgid ""
 "There were no results found for <strong>\"%s\"</strong> this month. Try "
@@ -1495,44 +1614,83 @@ msgid ""
 msgstr ""
 "Otsing ei andnud tulemusi <strong>\"%s\"</strong> kuus. Otsi järgmist kuud"
 
-#: ../lib/template-classes/month.php:123
-#: ../lib/tribe-template-factory.class.php:241
-#: ../lib/tribe-template-factory.class.php:248
-#, php-format
-msgid "No matching events listed under %s. Go view the full calendar."
+#: ../lib/template-classes/month.php:116
+#: ../lib/tribe-template-factory.class.php:230
+#: ../lib/tribe-template-factory.class.php:237
+#, fuzzy, php-format
+msgid ""
+"No matching events listed under %s. Please try viewing the full calendar for "
+"a complete list of events."
 msgstr "Sobivaid sündmusi ei leitud %s. Vaata kogu kalendrit."
 
-#: ../lib/template-classes/month.php:126
-#: ../lib/tribe-template-factory.class.php:251
+#: ../lib/template-classes/month.php:119
+#: ../lib/tribe-template-factory.class.php:240
 msgid "There were no results found."
 msgstr "Otsing ei andnud tulemusi."
 
-#: ../lib/template-classes/single-event.php:101
+#: ../lib/template-classes/single-event.php:97
 msgid "This event has passed."
 msgstr "See sündmus on möödas."
 
+#: ../lib/the-events-calendar.class.php:482
+#, php-format
+msgid ""
+"Rate <strong>The Events Calendar</strong> <a href=\"%1$s\" target=\"_blank"
+"\">&#9733;&#9733;&#9733;&#9733;&#9733;</a> on <a href=\"%1$s\" target="
+"\"_blank\">WordPress.org</a> to keep this plugin free.  Thanks from the "
+"friendly folks at Modern Tribe."
+msgstr ""
+"Hinda <strong>The Events Calendar</strong> <a href=\"%1$s\" target=\"_blank"
+"\">&#9733;&#9733;&#9733;&#9733;&#9733;</a>  <a href=\"%1$s\" target=\"_blank"
+"\">WordPress.org</a>´s, et saaksime seda pluginat sulle jätkuvalt tasuta "
+"pakkuda. Tänud sõbraliku Modern Tribe rahva poolt!"
+
+#: ../lib/the-events-calendar.class.php:482
+msgid ""
+"http://wordpress.org/support/view/plugin-reviews/the-events-calendar?filter=5"
+msgstr ""
+"http://wordpress.org/support/view/plugin-reviews/the-events-calendar?filter=5"
+
 #: ../lib/the-events-calendar.class.php:510
+#: ../public/advanced-functions/meta.php:382
+#: ../public/template-tags/venue.php:38
+msgid "Venue"
+msgstr "Toimumiskoht"
+
+#: ../lib/the-events-calendar.class.php:526
+#: ../public/advanced-functions/meta.php:444
+#: ../public/template-tags/organizer.php:44
+msgid "Organizer"
+msgstr "Korraldaja"
+
+#: ../lib/the-events-calendar.class.php:581
 msgid "month"
 msgstr "kuu"
 
-#: ../lib/the-events-calendar.class.php:511
+#: ../lib/the-events-calendar.class.php:582
 msgid "upcoming"
 msgstr "tulev"
 
-#: ../lib/the-events-calendar.class.php:512
+#: ../lib/the-events-calendar.class.php:583
 msgid "past"
 msgstr "möödunud"
 
-#: ../lib/the-events-calendar.class.php:514
-msgid "venue"
-msgstr "toimumiskoht"
+#: ../lib/the-events-calendar.class.php:584
+#, fuzzy
+msgid "day"
+msgstr "Täna"
 
-#: ../lib/the-events-calendar.class.php:524
+#: ../lib/the-events-calendar.class.php:585
+#, fuzzy
+msgid "today"
+msgstr "Täna"
+
+#: ../lib/the-events-calendar.class.php:603
 #, php-format
 msgid "Initializing Tribe Events on %s"
 msgstr "Käivitan Tribe Events %s"
 
-#: ../lib/the-events-calendar.class.php:637
+#: ../lib/the-events-calendar.class.php:711
 #, php-format
 msgid ""
 "Your version of The Events Calendar is not up-to-date with one of your The "
@@ -1541,7 +1699,7 @@ msgstr ""
 "Sinu The Events Calendar`i versioon ei ole enam sobiv ühe add-ons´iga. Palun "
 "%suuenda kohe.%s"
 
-#: ../lib/the-events-calendar.class.php:654
+#: ../lib/the-events-calendar.class.php:728
 #, php-format
 msgid ""
 "The following plugins are out of date: <b>%s</b>. All add-ons contain "
@@ -1551,13 +1709,13 @@ msgstr ""
 "Järgmised pluginad on aegunud: <b>%s</b>. Kõik add-ons-id ei toimi aegunud "
 "The Events Calendari versiooniga. %s Tahad kasutada vana versiooni?%s?"
 
-#: ../lib/the-events-calendar.class.php:718
-#: ../lib/the-events-calendar.class.php:753
-#: ../lib/the-events-calendar.class.php:755
+#: ../lib/the-events-calendar.class.php:788
+#: ../lib/the-events-calendar.class.php:823
+#: ../lib/the-events-calendar.class.php:825
 msgid "Licenses"
 msgstr "Litsentsid"
 
-#: ../lib/the-events-calendar.class.php:722
+#: ../lib/the-events-calendar.class.php:792
 #, php-format
 msgid ""
 "<p>The license key you received when completing your purchase from %s will "
@@ -1586,21 +1744,21 @@ msgstr ""
 "p><p>Uuendust ei näe aga peaks? Mine Wordpressis: <a href=\"%s\">Dashboard > "
 "Uuendused</a> ja kliki \"Check Again\".</p>"
 
-#: ../lib/the-events-calendar.class.php:745
+#: ../lib/the-events-calendar.class.php:815
 msgid "General"
 msgstr "Üldine"
 
-#: ../lib/the-events-calendar.class.php:746
+#: ../lib/the-events-calendar.class.php:816
 msgid "Display"
 msgstr "Kuva"
 
-#: ../lib/the-events-calendar.class.php:758
-#: ../lib/the-events-calendar.class.php:3878
-#: ../lib/the-events-calendar.class.php:3975
+#: ../lib/the-events-calendar.class.php:828
+#: ../lib/the-events-calendar.class.php:3977
+#: ../lib/the-events-calendar.class.php:4075
 msgid "Help"
 msgstr "Abi"
 
-#: ../lib/the-events-calendar.class.php:797
+#: ../lib/the-events-calendar.class.php:867
 #, php-format
 msgid ""
 "Sorry, The Events Calendar requires WordPress %s or higher. Please upgrade "
@@ -1609,7 +1767,7 @@ msgstr ""
 "Vabandame, The Event Calendar nõuab Wordpressi versiooni %s või hilisemat. "
 "Palun uuenda oma Wordpressi versiooni"
 
-#: ../lib/the-events-calendar.class.php:800
+#: ../lib/the-events-calendar.class.php:870
 #, php-format
 msgid ""
 "Sorry, The Events Calendar requires PHP %s or higher. Talk to your Web host "
@@ -1618,223 +1776,193 @@ msgstr ""
 "Vabandame, The Event Calendar nõuab PHP versiooni %s või hilisemat. Räägi "
 "oma veebimajutusega, et minna üle PHP uuemale versioonile."
 
-#: ../lib/the-events-calendar.class.php:979 ../lib/widget-list.class.php:187
-#: ../public/template-tags/loop.php:138
+#: ../lib/the-events-calendar.class.php:1047 ../lib/widget-list.class.php:148
+#: ../public/template-tags/loop.php:117
 msgid "Upcoming Events"
 msgstr "Tulevased sündmused"
 
-#: ../lib/the-events-calendar.class.php:982
-#: ../public/template-tags/loop.php:168
+#: ../lib/the-events-calendar.class.php:1050
+#: ../public/template-tags/loop.php:121
 msgid "Past Events"
 msgstr "Möödunud sündmused"
 
-#: ../lib/the-events-calendar.class.php:987
-#: ../lib/the-events-calendar.class.php:994
-#: ../public/template-tags/loop.php:173
+#: ../lib/the-events-calendar.class.php:1055
+#: ../lib/the-events-calendar.class.php:1062
+#: ../public/template-tags/loop.php:126
 #, php-format
 msgid "Events for %s"
 msgstr "Sündmused %s"
 
-#: ../lib/the-events-calendar.class.php:989
+#: ../lib/the-events-calendar.class.php:1057
 msgid "Events this month"
 msgstr "Selle kuu sündmused"
 
-#: ../lib/the-events-calendar.class.php:1013
-msgid "No description has been entered for this event."
-msgstr "Sündmusele pole lisatud kirjeldust"
-
-#: ../lib/the-events-calendar.class.php:1275
+#: ../lib/the-events-calendar.class.php:1325
 msgid "category"
 msgstr "kategooria"
 
-#: ../lib/the-events-calendar.class.php:1285
+#: ../lib/the-events-calendar.class.php:1335
 msgid "tag"
 msgstr "silt"
 
-#: ../lib/the-events-calendar.class.php:1313
+#: ../lib/the-events-calendar.class.php:1363
 msgid "Event"
 msgstr "Sündmus"
 
-#: ../lib/the-events-calendar.class.php:1314
-#: ../lib/the-events-calendar.class.php:1327
-#: ../lib/the-events-calendar.class.php:1340
+#: ../lib/the-events-calendar.class.php:1364
+#: ../lib/the-events-calendar.class.php:1377
+#: ../lib/the-events-calendar.class.php:1390
 msgid "Add New"
 msgstr "Lisa uus"
 
-#: ../lib/the-events-calendar.class.php:1315
+#: ../lib/the-events-calendar.class.php:1365
 msgid "Add New Event"
 msgstr "Lisa uus sündmus"
 
-#: ../lib/the-events-calendar.class.php:1316
+#: ../lib/the-events-calendar.class.php:1366
 msgid "Edit Event"
 msgstr "Muuda sündmust"
 
-#: ../lib/the-events-calendar.class.php:1317
+#: ../lib/the-events-calendar.class.php:1367
 msgid "New Event"
 msgstr "Uus sündmus"
 
-#: ../lib/the-events-calendar.class.php:1318
+#: ../lib/the-events-calendar.class.php:1368
 msgid "View Event"
 msgstr "Vaata sündmust"
 
-#: ../lib/the-events-calendar.class.php:1319
+#: ../lib/the-events-calendar.class.php:1369
 msgid "Search Events"
 msgstr "Otsi sündmust"
 
-#: ../lib/the-events-calendar.class.php:1320
+#: ../lib/the-events-calendar.class.php:1370
 msgid "No events found"
 msgstr "Sündmust ei leitud"
 
-#: ../lib/the-events-calendar.class.php:1321
+#: ../lib/the-events-calendar.class.php:1371
 msgid "No events found in Trash"
 msgstr "Sündmust ei leitud prügikastist"
 
-#: ../lib/the-events-calendar.class.php:1326
-#: ../public/advanced-functions/meta.php:381 ../views/tickets/email.php:343
-msgid "Venue"
-msgstr "Toimumiskoht"
+#: ../lib/the-events-calendar.class.php:1378
+#: ../lib/the-events-calendar.class.php:1391
+#, fuzzy, php-format
+msgid "Add New %s"
+msgstr "Lisa uus"
 
-#: ../lib/the-events-calendar.class.php:1328
-#: ../lib/the-events-calendar.class.php:1439
-msgid "Add New Venue"
-msgstr "Lisa uus toimumiskoht"
+#: ../lib/the-events-calendar.class.php:1379
+#: ../lib/the-events-calendar.class.php:1392
+#, fuzzy, php-format
+msgid "Edit %s"
+msgstr "Muuda %s -s"
 
-#: ../lib/the-events-calendar.class.php:1329
-msgid "Edit Venue"
-msgstr "Muuda toimumiskohta"
+#: ../lib/the-events-calendar.class.php:1380
+#: ../lib/the-events-calendar.class.php:1393
+#, php-format
+msgid "New %s"
+msgstr "Uued %s"
 
-#: ../lib/the-events-calendar.class.php:1330
-msgid "New Venue"
-msgstr "Uus toimumiskoht"
+#: ../lib/the-events-calendar.class.php:1381
+#: ../lib/the-events-calendar.class.php:1394
+#, fuzzy, php-format
+msgid "View %s"
+msgstr "Vaata kui"
 
-#: ../lib/the-events-calendar.class.php:1331
-msgid "View Venue"
-msgstr "Vaata toimumiskohta"
+#: ../lib/the-events-calendar.class.php:1382
+#: ../lib/the-events-calendar.class.php:1395
+#, fuzzy, php-format
+msgid "Search %s"
+msgstr "Otsi"
 
-#: ../lib/the-events-calendar.class.php:1332
-msgid "Search Venues"
-msgstr "Otsi toimumiskohti"
+#: ../lib/the-events-calendar.class.php:1383
+#: ../lib/the-events-calendar.class.php:1396
+#, fuzzy, php-format
+msgid "No %s found"
+msgstr "Sündmust ei leitud"
 
-#: ../lib/the-events-calendar.class.php:1333
-msgid "No venue found"
-msgstr "Toimumiskohta ei leitud"
+#: ../lib/the-events-calendar.class.php:1384
+#: ../lib/the-events-calendar.class.php:1397
+#, fuzzy, php-format
+msgid "No %s found in Trash"
+msgstr "Sündmust ei leitud prügikastist"
 
-#: ../lib/the-events-calendar.class.php:1334
-msgid "No venues found in Trash"
-msgstr "Toimumiskohta ei leitud prügikastist"
-
-#: ../lib/the-events-calendar.class.php:1339
-#: ../public/advanced-functions/meta.php:443 ../views/tickets/email.php:362
-msgid "Organizer"
-msgstr "Korraldaja"
-
-#: ../lib/the-events-calendar.class.php:1341
-#: ../lib/the-events-calendar.class.php:1440
-msgid "Add New Organizer"
-msgstr "Lisa uus korraldaja"
-
-#: ../lib/the-events-calendar.class.php:1342
-msgid "Edit Organizer"
-msgstr "Muuda korraldajat"
-
-#: ../lib/the-events-calendar.class.php:1343
-msgid "New Organizer"
-msgstr "Uus korraldaja"
-
-#: ../lib/the-events-calendar.class.php:1344
-msgid "View Organizer"
-msgstr "Vaata korraldajat"
-
-#: ../lib/the-events-calendar.class.php:1345
-msgid "Search Organizers"
-msgstr "Otsi korraldajaid"
-
-#: ../lib/the-events-calendar.class.php:1346
-msgid "No organizer found"
-msgstr "Korraldajaid ei leitud"
-
-#: ../lib/the-events-calendar.class.php:1347
-msgid "No organizers found in Trash"
-msgstr "Korraldajaid ei leitud prügikastist"
-
-#: ../lib/the-events-calendar.class.php:1351
-#: ../lib/tribe-admin-events-list.class.php:177
+#: ../lib/the-events-calendar.class.php:1401
+#: ../lib/tribe-admin-events-list.class.php:174
 msgid "Event Categories"
 msgstr "Sündmuse kategooriad"
 
-#: ../lib/the-events-calendar.class.php:1353
+#: ../lib/the-events-calendar.class.php:1403
 msgid "Search Event Categories"
 msgstr "Otsi sündmuse kategooriaid"
 
-#: ../lib/the-events-calendar.class.php:1354
+#: ../lib/the-events-calendar.class.php:1404
 msgid "All Event Categories"
 msgstr "Kõik sündmuste kategooriad"
 
-#: ../lib/the-events-calendar.class.php:1355
+#: ../lib/the-events-calendar.class.php:1405
 msgid "Parent Event Category"
 msgstr "Peakategooria"
 
-#: ../lib/the-events-calendar.class.php:1356
+#: ../lib/the-events-calendar.class.php:1406
 msgid "Parent Event Category:"
 msgstr "Peakategooria:"
 
-#: ../lib/the-events-calendar.class.php:1357
+#: ../lib/the-events-calendar.class.php:1407
 msgid "Edit Event Category"
 msgstr "Muuda sündmuse kategooriat"
 
-#: ../lib/the-events-calendar.class.php:1358
+#: ../lib/the-events-calendar.class.php:1408
 msgid "Update Event Category"
 msgstr "Uuenda sündmuse kategooriat"
 
-#: ../lib/the-events-calendar.class.php:1359
+#: ../lib/the-events-calendar.class.php:1409
 msgid "Add New Event Category"
 msgstr "Lisa uus sündmuse kategooria"
 
-#: ../lib/the-events-calendar.class.php:1360
+#: ../lib/the-events-calendar.class.php:1410
 msgid "New Event Category Name"
 msgstr "Uus sündmuse kategooria nimi"
 
-#: ../lib/the-events-calendar.class.php:1376
+#: ../lib/the-events-calendar.class.php:1426
 #, php-format
 msgid "Event updated. <a href=\"%s\">View event</a>"
 msgstr "Sündmus uuendatud . <a href=\"%s\">Vaata sündmust</a>"
 
-#: ../lib/the-events-calendar.class.php:1377
-#: ../lib/the-events-calendar.class.php:1394
-#: ../lib/the-events-calendar.class.php:1411
+#: ../lib/the-events-calendar.class.php:1427
+#: ../lib/the-events-calendar.class.php:1444
+#: ../lib/the-events-calendar.class.php:1461
 msgid "Custom field updated."
 msgstr "Kohandatud väli on uuendatud."
 
-#: ../lib/the-events-calendar.class.php:1378
-#: ../lib/the-events-calendar.class.php:1395
-#: ../lib/the-events-calendar.class.php:1412
+#: ../lib/the-events-calendar.class.php:1428
+#: ../lib/the-events-calendar.class.php:1445
+#: ../lib/the-events-calendar.class.php:1462
 msgid "Custom field deleted."
 msgstr "Kohandatud väli on kustutatud."
 
-#: ../lib/the-events-calendar.class.php:1379
+#: ../lib/the-events-calendar.class.php:1429
 msgid "Event updated."
 msgstr "Sündmus uuendatud"
 
-#: ../lib/the-events-calendar.class.php:1381
+#: ../lib/the-events-calendar.class.php:1431
 #, php-format
 msgid "Event restored to revision from %s"
 msgstr "Sündmus taastatud  %s"
 
-#: ../lib/the-events-calendar.class.php:1382
+#: ../lib/the-events-calendar.class.php:1432
 #, php-format
 msgid "Event published. <a href=\"%s\">View event</a>"
 msgstr "Sündmus avalikustatud. <a href=\"%s\">Vaata sündmust</a>"
 
-#: ../lib/the-events-calendar.class.php:1383
+#: ../lib/the-events-calendar.class.php:1433
 msgid "Event saved."
 msgstr "Sündmus salvestatud."
 
-#: ../lib/the-events-calendar.class.php:1384
+#: ../lib/the-events-calendar.class.php:1434
 #, php-format
 msgid "Event submitted. <a target=\"_blank\" href=\"%s\">Preview event</a>"
 msgstr "Sündmus lisatud. <a target=\"_blank\" href=\"%s\">Vaata sündmust</a>"
 
-#: ../lib/the-events-calendar.class.php:1385
+#: ../lib/the-events-calendar.class.php:1435
 #, php-format
 msgid ""
 "Event scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s"
@@ -1843,207 +1971,161 @@ msgstr ""
 "Sündmus planeeritud: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s"
 "\">Vaata sündmust</a>"
 
-#: ../lib/the-events-calendar.class.php:1387
-#: ../lib/the-events-calendar.class.php:1404
-#: ../lib/the-events-calendar.class.php:1421
+#: ../lib/the-events-calendar.class.php:1437
+#: ../lib/the-events-calendar.class.php:1454
+#: ../lib/the-events-calendar.class.php:1471
 msgid "M j, Y @ G:i"
 msgstr "M j, Y @ G:i"
 
-#: ../lib/the-events-calendar.class.php:1388
+#: ../lib/the-events-calendar.class.php:1438
 #, php-format
 msgid "Event draft updated. <a target=\"_blank\" href=\"%s\">Preview event</a>"
 msgstr ""
 "Sündmuse mustand uuendatud <a target=\"_blank\" href=\"%s\">Vaata sündmust</"
 "a>"
 
-#: ../lib/the-events-calendar.class.php:1393
+#: ../lib/the-events-calendar.class.php:1443
+#: ../lib/the-events-calendar.class.php:1446
+#: ../lib/the-events-calendar.class.php:1460
+#: ../lib/the-events-calendar.class.php:1463
+#, fuzzy, php-format
+msgid "%s updated."
+msgstr "Sündmus uuendatud"
+
+#: ../lib/the-events-calendar.class.php:1448
+#: ../lib/the-events-calendar.class.php:1465
+#, fuzzy, php-format
+msgid "%s restored to revision from %s"
+msgstr "Sündmus taastatud  %s"
+
+#: ../lib/the-events-calendar.class.php:1449
+#: ../lib/the-events-calendar.class.php:1466
 #, php-format
-msgid "Venue updated. <a href=\"%s\">View venue</a>"
-msgstr " Toimumiskoht uuendatud <a href=\"%s\">Vaata toimumiskohta</a>"
+msgid "%s published."
+msgstr "%s avalikustatud"
 
-#: ../lib/the-events-calendar.class.php:1396
-msgid "Venue updated."
-msgstr "Toimumiskoht uuendatud."
+#: ../lib/the-events-calendar.class.php:1450
+#: ../lib/the-events-calendar.class.php:1467
+#, fuzzy, php-format
+msgid "%s saved."
+msgstr "Seaded salvestatud"
 
-#: ../lib/the-events-calendar.class.php:1398
+#: ../lib/the-events-calendar.class.php:1451
+#: ../lib/the-events-calendar.class.php:1468
 #, php-format
-msgid "Venue restored to revision from %s"
-msgstr "Toimumiskoht taastatud %s-st"
+msgid "%s submitted."
+msgstr "%s  lisatud"
 
-#: ../lib/the-events-calendar.class.php:1399
-#, php-format
-msgid "Venue published. <a href=\"%s\">View venue</a>"
-msgstr "Toimumiskoht lisatud <a href=\"%s\">Vaata toimumiskohta</a>"
+#: ../lib/the-events-calendar.class.php:1452
+#: ../lib/the-events-calendar.class.php:1469
+#, fuzzy, php-format
+msgid "%s scheduled for: <strong>%2$s</strong>."
+msgstr " <strong>\"%s\"</strong> kohta infot ei leitud."
 
-#: ../lib/the-events-calendar.class.php:1400
-msgid "Venue saved."
-msgstr "Toimumiskoht salvestatud"
+#: ../lib/the-events-calendar.class.php:1455
+#: ../lib/the-events-calendar.class.php:1472
+#, fuzzy, php-format
+msgid "%s draft updated."
+msgstr "Sündmus uuendatud"
 
-#: ../lib/the-events-calendar.class.php:1401
-#, php-format
-msgid "Venue submitted. <a target=\"_blank\" href=\"%s\">Preview venue</a>"
-msgstr ""
-"Toimumiskoht lisatud. <a target=\"_blank\" href=\"%s\">Vaata toimumiskohta</"
-"a>"
+#: ../lib/the-events-calendar.class.php:1488
+#: ../lib/the-events-calendar.class.php:1489
+#, fuzzy
+msgid "Add New "
+msgstr "Lisa uus"
 
-#: ../lib/the-events-calendar.class.php:1402
-#, php-format
-msgid ""
-"Venue scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s"
-"\">Preview venue</a>"
-msgstr ""
-"Toimumiskoht kavandatud: <strong>%1$s</strong>. <a target=\"_blank\" href="
-"\"%2$s\">Vaata toimumiskohta</a>"
-
-#: ../lib/the-events-calendar.class.php:1405
-#, php-format
-msgid "Venue draft updated. <a target=\"_blank\" href=\"%s\">Preview venue</a>"
-msgstr ""
-"Toimumiskoha mustand uuendatud <a target=\"_blank\" href=\"%s\">Vaata "
-"toimumiskohta</a>"
-
-#: ../lib/the-events-calendar.class.php:1410
-#, php-format
-msgid "Organizer updated. <a href=\"%s\">View organizer</a>"
-msgstr " Korraldaja uuendatud. <a href=\"%s\">Vaata korraldajat</a>"
-
-#: ../lib/the-events-calendar.class.php:1413
-msgid "Organizer updated."
-msgstr "Korraldaja uuendatud."
-
-#: ../lib/the-events-calendar.class.php:1415
-#, php-format
-msgid "Organizer restored to revision from %s"
-msgstr "Korraldaja taastatud %s-st."
-
-#: ../lib/the-events-calendar.class.php:1416
-#, php-format
-msgid "Organizer published. <a href=\"%s\">View organizer</a>"
-msgstr "Korraldaja lisatud. <a href=\"%s\">Vaata korraldajat</a>"
-
-#: ../lib/the-events-calendar.class.php:1417
-msgid "Organizer saved."
-msgstr "Korraldaja salvestatud."
-
-#: ../lib/the-events-calendar.class.php:1418
-#, php-format
-msgid ""
-"Organizer submitted. <a target=\"_blank\" href=\"%s\">Preview organizer</a>"
-msgstr ""
-"Korraldaja lisatud.  <a target=\"_blank\" href=\"%s\">Vaata korraldajat</a>"
-
-#: ../lib/the-events-calendar.class.php:1419
-#, php-format
-msgid ""
-"Organizer scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href="
-"\"%2$s\">Preview organizer</a>"
-msgstr ""
-"Korraldaja kavandatud: <strong>%1$s</strong>. <a target=\"_blank\" href="
-"\"%2$s\">Vaata korraldajat</a>"
-
-#: ../lib/the-events-calendar.class.php:1422
-#, php-format
-msgid ""
-"Organizer draft updated. <a target=\"_blank\" href=\"%s\">Preview organizer</"
-"a>"
-msgstr ""
-"Korraldaja mustand on uuendatud. <a target=\"_blank\" href=\"%s\">Vaata "
-"korraldajat</a>"
-
-#: ../lib/the-events-calendar.class.php:1459
-msgid "Use Saved Venue:"
+#: ../lib/the-events-calendar.class.php:1508
+#, fuzzy
+msgid "Use Saved "
 msgstr "Kasuta salvestatud toimumiskohta"
 
-#: ../lib/the-events-calendar.class.php:1482
-msgid "Use Saved Organizer:"
-msgstr "Kasuta salvestatud korraldajat:"
+#: ../lib/the-events-calendar.class.php:1531
+#, fuzzy, php-format
+msgid "Use Saved %s:"
+msgstr "Kasuta salvestatud toimumiskohta"
 
-#: ../lib/the-events-calendar.class.php:1522
-msgid "Use New Venue"
+#: ../lib/the-events-calendar.class.php:1570
+#, fuzzy
+msgid "Use New "
 msgstr "Kasuta uut toimumiskohta"
 
-#: ../lib/the-events-calendar.class.php:1524
-msgid "My Venues"
-msgstr "Minu toimumiskohad"
+#: ../lib/the-events-calendar.class.php:1572
+#: ../lib/the-events-calendar.class.php:1628
+#, php-format
+msgid "My %s"
+msgstr "Minu %s"
 
-#: ../lib/the-events-calendar.class.php:1529
-msgid "Available Venues"
+#: ../lib/the-events-calendar.class.php:1577
+#: ../lib/the-events-calendar.class.php:1633
+#, fuzzy, php-format
+msgid "Available %s"
 msgstr "Saadaolevad toimumiskohad"
 
-#: ../lib/the-events-calendar.class.php:1540
-msgid "No saved venue exists."
+#: ../lib/the-events-calendar.class.php:1588
+#: ../lib/the-events-calendar.class.php:1644
+#, fuzzy, php-format
+msgid "No saved %s exists."
 msgstr "Salvestatud toimumiskohti ei ole."
 
-#: ../lib/the-events-calendar.class.php:1579
-msgid "Use New Organizer"
-msgstr "Kasuta uut korraldajat"
+#: ../lib/the-events-calendar.class.php:1626
+#, fuzzy, php-format
+msgid "Use New %s"
+msgstr "Kasuta uut toimumiskohta"
 
-#: ../lib/the-events-calendar.class.php:1581
-msgid "My Organizers"
-msgstr "Minu korraldajad"
-
-#: ../lib/the-events-calendar.class.php:1586
-msgid "Available Organizers"
-msgstr "Saadaolevad korraldajad"
-
-#: ../lib/the-events-calendar.class.php:1597
-msgid "No saved organizer exists."
-msgstr "Salvestatud korraldajaid ei ole."
-
-#: ../lib/the-events-calendar.class.php:1743
+#: ../lib/the-events-calendar.class.php:1785
 msgid "Next"
 msgstr "Järgmine"
 
-#: ../lib/the-events-calendar.class.php:1744
+#: ../lib/the-events-calendar.class.php:1786
 msgid "Prev"
 msgstr "Eelmine"
 
-#: ../lib/the-events-calendar.class.php:1745
+#: ../lib/the-events-calendar.class.php:1787
+#: ../public/template-tags/day.php:92
 msgid "Today"
 msgstr "Täna"
 
-#: ../lib/the-events-calendar.class.php:1746
+#: ../lib/the-events-calendar.class.php:1788
 msgid "Done"
 msgstr "Valmis"
 
-#: ../lib/the-events-calendar.class.php:1975
+#: ../lib/the-events-calendar.class.php:1999
 msgid "Network"
 msgstr "Võrgustik"
 
-#: ../lib/the-events-calendar.class.php:3387
-#: ../lib/the-events-calendar.class.php:3415
+#: ../lib/the-events-calendar.class.php:3520
+#: ../lib/the-events-calendar.class.php:3548
+#: ../public/template-tags/day.php:140 ../public/template-tags/day.php:159
 msgid "Date out of range."
 msgstr "Kuupäev vale"
 
-#: ../lib/the-events-calendar.class.php:3439
+#: ../lib/the-events-calendar.class.php:3572
 msgid "Event Options"
 msgstr "Sündmuse valikud"
 
-#: ../lib/the-events-calendar.class.php:3441
-msgid "Venue Information"
+#: ../lib/the-events-calendar.class.php:3574
+#: ../lib/the-events-calendar.class.php:3579
+#, fuzzy
+msgid " Information"
 msgstr "Toimumiskoha info"
 
-#: ../lib/the-events-calendar.class.php:3446
-msgid "Organizer Information"
-msgstr "Korraldaja info"
-
-#: ../lib/the-events-calendar.class.php:3643
+#: ../lib/the-events-calendar.class.php:3743
 msgid "Support"
 msgstr "Abi"
 
-#: ../lib/the-events-calendar.class.php:3646
+#: ../lib/the-events-calendar.class.php:3746
 msgid "View All Add-Ons"
 msgstr "Kuva kõik Add-ons-id"
 
-#: ../lib/the-events-calendar.class.php:3663
+#: ../lib/the-events-calendar.class.php:3763
 msgid "News from Modern Tribe"
 msgstr "Modern Tribe uudised"
 
-#: ../lib/the-events-calendar.class.php:3744
+#: ../lib/the-events-calendar.class.php:3844
 msgid "Additional Functionality"
 msgstr "Lisafunktsionaalsus"
 
-#: ../lib/the-events-calendar.class.php:3749
+#: ../lib/the-events-calendar.class.php:3849
 msgid ""
 "Looking for additional functionality including recurring events, ticket "
 "sales, publicly submitted events, new views and more?"
@@ -2051,39 +2133,39 @@ msgstr ""
 "Otsid lisafunktsionaalsust nagu korduvad sündmused, piletimüük, uued "
 "kujundused jms.?"
 
-#: ../lib/the-events-calendar.class.php:3749
+#: ../lib/the-events-calendar.class.php:3849
 #, php-format
 msgid "Check out the <a href=\"%s\">available add-ons</a>."
 msgstr "Vaata  <a href=\"%s\">saadaolevad add-ons</a>."
 
-#: ../lib/the-events-calendar.class.php:3821
-#: ../lib/the-events-calendar.class.php:3928
+#: ../lib/the-events-calendar.class.php:3920
+#: ../lib/the-events-calendar.class.php:4021
 msgid "View Calendar"
 msgstr "Vaata kalendrit"
 
-#: ../lib/the-events-calendar.class.php:3829
+#: ../lib/the-events-calendar.class.php:3928
 msgid "Add Event"
 msgstr "Lisa sündmus"
 
-#: ../lib/the-events-calendar.class.php:3838
+#: ../lib/the-events-calendar.class.php:3937
 msgid "Edit Events"
 msgstr "Muuda sündmust"
 
-#: ../lib/the-events-calendar.class.php:3849
+#: ../lib/the-events-calendar.class.php:3948
 msgid "Import"
 msgstr "Impordi"
 
-#: ../lib/the-events-calendar.class.php:3855
+#: ../lib/the-events-calendar.class.php:3954
 msgid "CSV"
 msgstr "CSV"
 
-#: ../lib/the-events-calendar.class.php:3867
-#: ../lib/the-events-calendar.class.php:3964
-#: ../lib/tribe-settings.class.php:164
+#: ../lib/the-events-calendar.class.php:3966
+#: ../lib/the-events-calendar.class.php:4060
+#: ../lib/tribe-settings.class.php:155
 msgid "Settings"
 msgstr "Seaded"
 
-#: ../lib/the-events-calendar.class.php:3898
+#: ../lib/the-events-calendar.class.php:3995
 #, php-format
 msgid ""
 "Welcome to The Events Calendar! Your events calendar can be found at %s. To "
@@ -2092,98 +2174,100 @@ msgstr ""
 "Teretulemast The Event Calendari kasutajaks! Sinu kalender on %s. Sündmuse "
 "slugi muutmiseks mine  %sEvents -> Settings%s."
 
-#: ../lib/the-events-calendar.class.php:3965
+#: ../lib/the-events-calendar.class.php:4061
 msgid "Calendar"
 msgstr "Kalender"
 
-#: ../lib/the-events-calendar.class.php:4018
+#: ../lib/the-events-calendar.class.php:4136
 msgid "List"
 msgstr "List"
 
-#: ../lib/the-events-calendar.class.php:4029
+#: ../lib/the-events-calendar.class.php:4147
 msgid "Month"
 msgstr "Kuu"
 
-#: ../lib/the-events-calendar.class.php:4048
-#: ../lib/the-events-calendar.class.php:4050
+#: ../lib/the-events-calendar.class.php:4159
+#, fuzzy
+msgid "Day"
+msgstr "Kuva"
+
+#: ../lib/the-events-calendar.class.php:4180
+#: ../lib/the-events-calendar.class.php:4182
 msgid "Search"
 msgstr "Otsi"
 
-#: ../lib/the-events-calendar.class.php:4070
-#: ../lib/the-events-calendar.class.php:4082
+#: ../lib/the-events-calendar.class.php:4204
+#: ../lib/the-events-calendar.class.php:4219
 msgid "Date"
 msgstr "Kuupäev"
 
-#: ../lib/the-events-calendar.class.php:4073
+#: ../lib/the-events-calendar.class.php:4207
 msgid "Events In"
 msgstr "Sündmused "
 
-#: ../lib/the-events-calendar.class.php:4075
+#: ../lib/the-events-calendar.class.php:4209
 msgid "Events From"
 msgstr "Sündmused alates"
 
-#: ../lib/the-events-calendar.class.php:4306
-msgid "&laquo; Previous Events"
-msgstr "&laquo; Eelmised sündmused"
+#: ../lib/the-events-calendar.class.php:4211
+msgid "Day Of"
+msgstr "Päev"
 
-#: ../lib/the-events-calendar.class.php:4307
-msgid "Next Events &raquo;"
-msgstr "Järgmised sündmused &raquo;"
-
-#: ../lib/tickets/tribe-tickets-attendees.php:67
+#: ../lib/tickets/tribe-tickets-attendees.php:64
 msgid "Order #"
 msgstr "Telli #"
 
-#: ../lib/tickets/tribe-tickets-attendees.php:68
+#: ../lib/tickets/tribe-tickets-attendees.php:65
 msgid "Order Status"
 msgstr "Tellimuse staatus"
 
-#: ../lib/tickets/tribe-tickets-attendees.php:69
+#: ../lib/tickets/tribe-tickets-attendees.php:66
 msgid "Purchaser name"
 msgstr "Ostja nimi"
 
-#: ../lib/tickets/tribe-tickets-attendees.php:70
+#: ../lib/tickets/tribe-tickets-attendees.php:67
 msgid "Purchaser email"
 msgstr "Ostja e-mail"
 
-#: ../lib/tickets/tribe-tickets-attendees.php:71
+#: ../lib/tickets/tribe-tickets-attendees.php:68
 msgid "Ticket type"
 msgstr "Pileti tüüp"
 
-#: ../lib/tickets/tribe-tickets-attendees.php:72
-#: ../views/tickets/email.php:316
+#: ../lib/tickets/tribe-tickets-attendees.php:69
+#: ../views/tickets/email.php:314
 msgid "Ticket #"
 msgstr "Pilet #"
 
-#: ../lib/tickets/tribe-tickets-attendees.php:73
-#: ../views/tickets/email.php:328
+#: ../lib/tickets/tribe-tickets-attendees.php:70
+#: ../views/tickets/email.php:326
 msgid "Security Code"
 msgstr "Turvakood"
 
-#: ../lib/tickets/tribe-tickets-attendees.php:74
-#: ../lib/tickets/tribe-tickets-attendees.php:161
-#: ../lib/tickets/tribe-tickets-attendees.php:217
+#: ../lib/tickets/tribe-tickets-attendees.php:71
+#: ../lib/tickets/tribe-tickets-attendees.php:156
+#: ../lib/tickets/tribe-tickets-attendees.php:213
 msgid "Check in"
 msgstr "Check in"
 
-#: ../lib/tickets/tribe-tickets-attendees.php:162
-#: ../lib/tickets/tribe-tickets-attendees.php:217
+#: ../lib/tickets/tribe-tickets-attendees.php:157
+#: ../lib/tickets/tribe-tickets-attendees.php:214
 msgid "Undo Check in"
 msgstr "Võta tagasi check in"
 
-#: ../lib/tickets/tribe-tickets-attendees.php:196
+#: ../lib/tickets/tribe-tickets-attendees.php:191
 msgid "Print"
 msgstr "Prindi"
 
-#: ../lib/tickets/tribe-tickets-attendees.php:197
+#: ../lib/tickets/tribe-tickets-attendees.php:192
 msgid "Email"
 msgstr "E-mail"
 
-#: ../lib/tickets/tribe-tickets-attendees.php:198
+#: ../lib/tickets/tribe-tickets-attendees.php:193
+#: ../lib/tribe-ical.class.php:111
 msgid "Export"
 msgstr "Ekspordi"
 
-#: ../lib/tickets/tribe-tickets-attendees.php:204
+#: ../lib/tickets/tribe-tickets-attendees.php:199
 msgid "Filter by ticket #, order # or security code"
 msgstr "Filtreeri pileti #, tellimuse # või turvakoodi järgi"
 
@@ -2241,15 +2325,15 @@ msgstr "Sinu pilet salvestati."
 msgid "Your ticket has been deleted."
 msgstr "Sinu pilet kustutati."
 
-#: ../lib/tribe-admin-events-list.class.php:182
+#: ../lib/tribe-admin-events-list.class.php:179
 msgid "Start Date"
 msgstr "Alguskuupäev"
 
-#: ../lib/tribe-admin-events-list.class.php:183
+#: ../lib/tribe-admin-events-list.class.php:180
 msgid "End Date"
 msgstr "Lõpukuupäev"
 
-#: ../lib/tribe-admin-events-list.class.php:253
+#: ../lib/tribe-admin-events-list.class.php:250
 #, php-format
 msgid "All %s"
 msgstr "Kõik %s"
@@ -2259,7 +2343,7 @@ msgstr "Kõik %s"
 msgid "Event Add-Ons"
 msgstr "Sündmuse Add-Onsid."
 
-#: ../lib/tribe-debug-bar.class.php:29
+#: ../lib/tribe-debug-bar.class.php:28
 msgid "Tribe"
 msgstr "Tribe"
 
@@ -2268,7 +2352,7 @@ msgid "Unnamed Venue"
 msgstr "Nimetu toimumiskoht"
 
 #: ../lib/tribe-event-api.class.php:375 ../lib/tribe-view-helpers.class.php:44
-#: ../public/template-tags/venue.php:240
+#: ../public/template-tags/venue.php:249
 msgid "United States"
 msgstr "Ameerika Ühendriigid"
 
@@ -2277,68 +2361,123 @@ msgstr "Ameerika Ühendriigid"
 msgid "Error"
 msgstr "Viga"
 
-#: ../lib/tribe-field.class.php:182
+#: ../lib/tribe-field.class.php:176
 msgid "Invalid field type specified"
 msgstr "Väär välja tüüp "
 
-#: ../lib/tribe-field.class.php:452
+#: ../lib/tribe-field.class.php:414
 msgid "No radio options specified"
 msgstr "Raadio võimalused on täpsustamata"
 
-#: ../lib/tribe-field.class.php:489
+#: ../lib/tribe-field.class.php:449
 msgid "No checkbox options specified"
 msgstr "Checkboxi võimalused on täpsustamata"
 
-#: ../lib/tribe-field.class.php:544
+#: ../lib/tribe-field.class.php:500
 msgid "No select options specified"
 msgstr "Valik on tegemata"
 
-#: ../lib/tribe-settings-tab.class.php:219
+#: ../lib/tribe-ical.class.php:27
+msgctxt "feed link"
+msgid "&raquo;"
+msgstr "&raquo;"
+
+#: ../lib/tribe-ical.class.php:28
+#, php-format
+msgid "%1$s %2$s iCal Feed"
+msgstr "%1$s %2$s iCal feed"
+
+#: ../lib/tribe-ical.class.php:74
+msgid "Add to Google Calendar"
+msgstr "Lisa Google Kalender"
+
+#: ../lib/tribe-ical.class.php:74
+#, fuzzy
+msgid "Google Calendar"
+msgstr "Vaata kalendrit"
+
+#: ../lib/tribe-ical.class.php:75
+msgid "Download .ics file"
+msgstr "Lae .ics fail"
+
+#: ../lib/tribe-ical.class.php:75
+#, fuzzy
+msgid "iCal Export"
+msgstr "Ekspordi"
+
+#: ../lib/tribe-ical.class.php:98
+#, fuzzy
+msgid "Month's Events"
+msgstr "laen sündmuseid"
+
+#: ../lib/tribe-ical.class.php:101
+#, fuzzy
+msgid "Week's Events"
+msgstr "Möödunud sündmused"
+
+#: ../lib/tribe-ical.class.php:104
+#, fuzzy
+msgid "Day's Events"
+msgstr "Möödunud sündmused"
+
+#: ../lib/tribe-ical.class.php:107
+msgid "Listed Events"
+msgstr "sündmused"
+
+#: ../lib/tribe-ical.class.php:112
+msgid ""
+"Use this to share calendar data with Google Calendar, Apple iCal and other "
+"compatible apps"
+msgstr ""
+"Kasuta seda, et jagada infot Google Kalendriga, Apple iCal ja teiste "
+"sobivate äppidega"
+
+#: ../lib/tribe-settings-tab.class.php:204
 msgid "There are no fields setup for this tab yet."
 msgstr "Selle nupu jaoks pole välju määratud veel."
 
-#: ../lib/tribe-settings.class.php:164 ../lib/tribe-settings.class.php:176
+#: ../lib/tribe-settings.class.php:155 ../lib/tribe-settings.class.php:165
 msgid "The Events Calendar Settings"
 msgstr "The Events Calendar seaded"
 
-#: ../lib/tribe-settings.class.php:176
+#: ../lib/tribe-settings.class.php:165
 msgid "Events Settings"
 msgstr "Sündmuse seaded"
 
-#: ../lib/tribe-settings.class.php:225
+#: ../lib/tribe-settings.class.php:210
 #, php-format
 msgid "%s Settings"
 msgstr "%s seaded"
 
-#: ../lib/tribe-settings.class.php:239
+#: ../lib/tribe-settings.class.php:224
 msgid "You've requested a non-existent tab."
 msgstr "Taotlesid nuppu, mida pole olemas."
 
-#: ../lib/tribe-settings.class.php:247
+#: ../lib/tribe-settings.class.php:232
 msgid " Save Changes"
 msgstr "Salvesta muudatused"
 
-#: ../lib/tribe-settings.class.php:299
+#: ../lib/tribe-settings.class.php:280
 msgid "You don't have permission to do that."
 msgstr "Sul pole õigust seda teha."
 
-#: ../lib/tribe-settings.class.php:305
+#: ../lib/tribe-settings.class.php:286
 msgid "The request was sent insecurely."
 msgstr "Päring ei saadetud turvaliselt"
 
-#: ../lib/tribe-settings.class.php:311
+#: ../lib/tribe-settings.class.php:292
 msgid "The request wasn't sent from this tab."
 msgstr "Päring ei saadetud sellelt tab-ilt."
 
-#: ../lib/tribe-settings.class.php:476
+#: ../lib/tribe-settings.class.php:453
 msgid "Your form had the following errors:"
 msgstr "Vormil olid järgmised vead:"
 
-#: ../lib/tribe-settings.class.php:485
+#: ../lib/tribe-settings.class.php:462
 msgid "None of your settings were saved. Please try again."
 msgstr "Ühtegi seadet ei salvestatud. Proovi uuesti."
 
-#: ../lib/tribe-settings.class.php:485
+#: ../lib/tribe-settings.class.php:462
 msgid ""
 "The above setting was not saved. Other settings were successfully saved."
 msgid_plural ""
@@ -2348,7 +2487,7 @@ msgstr[0] ""
 msgstr[1] ""
 "Ülevalolevat seadeid ei salvestatud. Teised seaded slvestati edukalt."
 
-#: ../lib/tribe-settings.class.php:509
+#: ../lib/tribe-settings.class.php:484
 msgid "Settings saved."
 msgstr "Seaded salvestatud"
 
@@ -2374,17 +2513,21 @@ msgstr ""
 msgid "System Information"
 msgstr "Süsteemi info"
 
-#: ../lib/tribe-template-factory.class.php:232
+#: ../lib/tribe-support.class.php:107
+msgid "Unknown or not set"
+msgstr "Tundmatu või määramata"
+
+#: ../lib/tribe-template-factory.class.php:221
 #, php-format
 msgid "There were no results found for <strong>\"%s\"</strong>."
 msgstr " <strong>\"%s\"</strong> kohta infot ei leitud."
 
-#: ../lib/tribe-template-factory.class.php:235
+#: ../lib/tribe-template-factory.class.php:224
 #, php-format
 msgid "No results were found for events in or near <strong>\"%s\"</strong>."
 msgstr "Tulemusi ei leitud  <strong>\"%s\"</strong> lähedal."
 
-#: ../lib/tribe-template-factory.class.php:238
+#: ../lib/tribe-template-factory.class.php:227
 #, php-format
 msgid ""
 "No upcoming events listed under %s. Check out upcoming events for this "
@@ -2393,16 +2536,16 @@ msgstr ""
 "Tulevasi sündmuseid ei ole %s. Vaata tulevasi sündmuseid selles kategoorias "
 "või vaata kogu kalendrit."
 
-#: ../lib/tribe-template-factory.class.php:244
+#: ../lib/tribe-template-factory.class.php:233
 msgid "No previous events "
 msgstr "Möödunud sündmusi ei ole"
 
-#: ../lib/tribe-templates.class.php:543
+#: ../lib/tribe-templates.class.php:568
 #, php-format
 msgid "Template overrides should be moved to the correct subdirectory: %s"
 msgstr "Template overrides should be moved to the correct subdirectory: %s"
 
-#: ../lib/tribe-templates.class.php:584
+#: ../lib/tribe-templates.class.php:609
 #, php-format
 msgid ""
 "Template overrides should be moved to the correct subdirectory: "
@@ -2465,104 +2608,104 @@ msgstr "Migreerisid edukalt (%d) sündmust."
 msgid "Install has 1 or more legacy event!"
 msgstr "Install has 1 or more legacy event!"
 
-#: ../lib/tribe-validate.class.php:77 ../lib/tribe-validate.class.php:115
+#: ../lib/tribe-validate.class.php:73 ../lib/tribe-validate.class.php:111
 msgid "Invalid or incomplete field passed"
 msgstr "Vale ja lõpetamata väli sisestati"
 
-#: ../lib/tribe-validate.class.php:78 ../lib/tribe-validate.class.php:110
-#: ../lib/tribe-validate.class.php:116
+#: ../lib/tribe-validate.class.php:74 ../lib/tribe-validate.class.php:106
+#: ../lib/tribe-validate.class.php:112
 msgid "Field ID:"
 msgstr "Välja ID"
 
-#: ../lib/tribe-validate.class.php:109
+#: ../lib/tribe-validate.class.php:105
 msgid "Non-existant field validation function passed"
 msgstr "Mitte -eksisteeriva välja funktsioon sisestati"
 
-#: ../lib/tribe-validate.class.php:110
+#: ../lib/tribe-validate.class.php:106
 msgctxt "non-existant function name passed for field validation"
 msgid "with function name:"
 msgstr "funktsiooni nimega"
 
-#: ../lib/tribe-validate.class.php:135 ../lib/tribe-validate.class.php:153
+#: ../lib/tribe-validate.class.php:129 ../lib/tribe-validate.class.php:145
 #, php-format
 msgid "%s must contain numbers and letters only"
 msgstr "%s peab sisaldama ainult numbreid ja tähti"
 
-#: ../lib/tribe-validate.class.php:171
+#: ../lib/tribe-validate.class.php:161
 #, php-format
 msgid "%s must contain numbers, letters and dots only"
 msgstr "%s peab sisaldama ainult numbreid, tähti ja punkte"
 
-#: ../lib/tribe-validate.class.php:187
+#: ../lib/tribe-validate.class.php:175
 #, php-format
 msgid "%s must be a positive number."
 msgstr "%s peab olema positiivne number."
 
-#: ../lib/tribe-validate.class.php:204
+#: ../lib/tribe-validate.class.php:190
 #, php-format
 msgid "%s must be a valid slug (numbers, letters, dashes, and underscores)."
 msgstr "%s peab olema kehtiv slug (numbrid, tähed, alakriipsud)"
 
-#: ../lib/tribe-validate.class.php:221
+#: ../lib/tribe-validate.class.php:205
 #, php-format
 msgid "%s must be a valid absolute URL."
 msgstr "%s peab olema kehtiv absoluutne URL"
 
-#: ../lib/tribe-validate.class.php:239 ../lib/tribe-validate.class.php:258
-#: ../lib/tribe-validate.class.php:279
+#: ../lib/tribe-validate.class.php:221 ../lib/tribe-validate.class.php:238
+#: ../lib/tribe-validate.class.php:257
 #, php-format
 msgid "%s must have a value that's part of its options."
 msgstr "%s peab sisaldama väärtust sellest valikust"
 
-#: ../lib/tribe-validate.class.php:295
+#: ../lib/tribe-validate.class.php:271
 #, php-format
 msgid ""
 "Comparison validation failed because no comparison value was provided, for "
 "field %s"
 msgstr "Võrdlus ebaõnnestus kuna väärtust ei edastatud väljale %s."
 
-#: ../lib/tribe-validate.class.php:302
+#: ../lib/tribe-validate.class.php:278
 #, php-format
 msgid "%s cannot be the same as %s."
 msgstr "%s ei saa olla sama kui %s."
 
-#: ../lib/tribe-validate.class.php:304
+#: ../lib/tribe-validate.class.php:280
 #, php-format
 msgid "%s cannot be a duplicate"
 msgstr "%s ei saa olla dublikaat"
 
-#: ../lib/tribe-validate.class.php:322
+#: ../lib/tribe-validate.class.php:296
 #, php-format
 msgid "%s must be a number or percentage."
 msgstr "%s peab olema number protsentides"
 
-#: ../lib/tribe-validate.class.php:386
+#: ../lib/tribe-validate.class.php:350
 #, php-format
 msgid "%s must be a number between 0 and 21."
 msgstr "%s peab olema number 0 ja 21 vahel"
 
-#: ../lib/tribe-validate.class.php:404
+#: ../lib/tribe-validate.class.php:366
 #, php-format
 msgid ""
 "%s must consist of letters, numbers, dashes, apostrophes, and spaces only."
 msgstr "%s võib sisaldada vaid tähti, numbreid, ülakoma ja tühikuid"
 
-#: ../lib/tribe-validate.class.php:422
+#: ../lib/tribe-validate.class.php:382
 #, php-format
 msgid "%s must consist of letters, spaces, apostrophes, and dashes."
 msgstr "%s võib sisaldada vaid tähti, tühikuid, ülakoma ja mõttekriipsu"
 
-#: ../lib/tribe-validate.class.php:438
+#: ../lib/tribe-validate.class.php:396
 #, php-format
 msgid "%s must consist of 5 numbers."
 msgstr "%s peab sisaldama 5 numbrit"
 
-#: ../lib/tribe-validate.class.php:454
+#: ../lib/tribe-validate.class.php:410
 #, php-format
 msgid "%s must be a phone number."
 msgstr "%s peab olema telefoninumber"
 
-#: ../lib/tribe-validate.class.php:472
+#: ../lib/tribe-validate.class.php:426
 msgid ""
 "Country List must be formatted as one country per line in the following "
 "format: <br>US, United States <br> UK, United Kingdom."
@@ -3534,83 +3677,83 @@ msgstr "Zimbabwe"
 
 #: ../lib/tribe-view-helpers.class.php:308
 msgid "Alabama"
-msgstr ""
+msgstr "Alabama"
 
 #: ../lib/tribe-view-helpers.class.php:309
 msgid "Alaska"
-msgstr ""
+msgstr "Alaska"
 
 #: ../lib/tribe-view-helpers.class.php:310
 msgid "Arizona"
-msgstr ""
+msgstr "Arizona"
 
 #: ../lib/tribe-view-helpers.class.php:311
 msgid "Arkansas"
-msgstr ""
+msgstr "Arkansas"
 
 #: ../lib/tribe-view-helpers.class.php:312
 msgid "California"
-msgstr ""
+msgstr "Kalifornia"
 
 #: ../lib/tribe-view-helpers.class.php:313
 msgid "Colorado"
-msgstr ""
+msgstr "Colorado"
 
 #: ../lib/tribe-view-helpers.class.php:314
 msgid "Connecticut"
-msgstr ""
+msgstr "Connecticut"
 
 #: ../lib/tribe-view-helpers.class.php:315
 msgid "Delaware"
-msgstr ""
+msgstr "Delaware"
 
 #: ../lib/tribe-view-helpers.class.php:316
 msgid "District of Columbia"
-msgstr ""
+msgstr "District of Columbia"
 
 #: ../lib/tribe-view-helpers.class.php:317
 msgid "Florida"
-msgstr ""
+msgstr "Florida"
 
 #: ../lib/tribe-view-helpers.class.php:319
 msgid "Hawaii"
-msgstr ""
+msgstr "Hawaii"
 
 #: ../lib/tribe-view-helpers.class.php:320
 msgid "Idaho"
-msgstr ""
+msgstr "Idaho"
 
 #: ../lib/tribe-view-helpers.class.php:321
 msgid "Illinois"
-msgstr ""
+msgstr "Illinois"
 
 #: ../lib/tribe-view-helpers.class.php:322
 msgid "Indiana"
-msgstr ""
+msgstr "Indiana"
 
 #: ../lib/tribe-view-helpers.class.php:323
 msgid "Iowa"
-msgstr ""
+msgstr "Iowa"
 
 #: ../lib/tribe-view-helpers.class.php:324
 msgid "Kansas"
-msgstr ""
+msgstr "Kansas"
 
 #: ../lib/tribe-view-helpers.class.php:325
 msgid "Kentucky"
-msgstr ""
+msgstr "Kentucky"
 
 #: ../lib/tribe-view-helpers.class.php:326
 msgid "Louisiana"
-msgstr ""
+msgstr "Louisiana"
 
 #: ../lib/tribe-view-helpers.class.php:327
 msgid "Maine"
-msgstr ""
+msgstr "Maine"
 
 #: ../lib/tribe-view-helpers.class.php:328
 msgid "Maryland"
-msgstr ""
+msgstr "Maryland"
 
 #: ../lib/tribe-view-helpers.class.php:329
 msgid "Massachusetts"
@@ -3732,97 +3875,117 @@ msgstr ""
 msgid "Wyoming"
 msgstr ""
 
-#: ../lib/widget-list.class.php:21
+#: ../lib/widget-list.class.php:25
 msgid "A widget that displays upcoming events."
 msgstr "Widget, mis kuvab tulevasi sündmusi"
 
-#: ../lib/widget-list.class.php:27
+#: ../lib/widget-list.class.php:32
 msgid "Events List"
 msgstr "Sündmuste loend"
 
-#: ../lib/widget-list.class.php:136
-msgid "View All Events"
-msgstr "Vaata kõiki sündmusi"
-
-#: ../lib/widget-list.class.php:138
-msgid "View All Events in Category"
-msgstr "Vaata kõiki sündmusi kategoorias"
-
-#: ../lib/widget-list.class.php:143
-msgid "There are no upcoming events at this time."
-msgstr "Tulevasi sündmuseid selleks ajaks ei ole"
-
 #: ../public/advanced-functions/meta.php:39
 #: ../public/advanced-functions/meta.php:65
+#: ../views/modules/meta/details.php:36 ../views/modules/meta/details.php:55
 msgid "Start:"
 msgstr "Algus:"
 
 #: ../public/advanced-functions/meta.php:46
 #: ../public/advanced-functions/meta.php:72
+#: ../views/modules/meta/details.php:39 ../views/modules/meta/details.php:58
 msgid "End:"
 msgstr "Lõpp:"
 
 #: ../public/advanced-functions/meta.php:55
 #: ../public/advanced-functions/meta.php:81
+#: ../views/modules/meta/details.php:47 ../views/modules/meta/details.php:66
 msgid "Date:"
 msgstr "Kuupäev:"
 
 #: ../public/advanced-functions/meta.php:90
 #: ../public/advanced-functions/meta.php:99
+#: ../views/modules/meta/details.php:69
 msgid "Time:"
 msgstr "Aeg:"
 
-#: ../public/advanced-functions/meta.php:282
+#: ../public/advanced-functions/meta.php:283
+#: ../public/template-tags/google-map.php:38
 msgid "Click to view a Google Map"
 msgstr "Kliki, et näha Google Map´i"
 
-#: ../public/advanced-functions/meta.php:283
+#: ../public/advanced-functions/meta.php:284
+#: ../public/template-tags/google-map.php:39
 msgid "+ Google Map"
 msgstr "+ Google Map"
 
-#: ../public/advanced-functions/meta.php:294
+#: ../public/advanced-functions/meta.php:295
+#: ../views/modules/meta/details.php:13
 msgid "Details"
 msgstr "Detailid"
 
-#: ../public/advanced-functions/meta.php:345
+#: ../public/advanced-functions/meta.php:346
+#: ../views/modules/meta/details.php:97
 msgid "Event Tags:"
 msgstr "Sündmuse sildid:"
 
-#: ../public/advanced-functions/meta.php:371
+#: ../public/advanced-functions/meta.php:372
 msgid "Origin:"
 msgstr "Pärit:"
 
-#: ../public/advanced-functions/meta.php:508
+#: ../public/advanced-functions/meta.php:509
 msgid "Event:"
 msgstr "Sündmus:"
+
+#: ../public/template-tags/day.php:94
+#, fuzzy
+msgid "<span>&laquo;</span> Previous Day"
+msgstr "<span>&laquo;</span> Möödunud sündmused"
+
+#: ../public/template-tags/day.php:96
+#, fuzzy
+msgid "Next Day <span>&raquo;</span>"
+msgstr "Uued sündmused <span>&raquo;</span>"
+
+#: ../public/template-tags/day.php:98
+msgid "Yesterday"
+msgstr "Eile"
+
+#: ../public/template-tags/day.php:100
+#, fuzzy
+msgid "Tomorrow"
+msgstr "Comoros"
 
 #: ../public/template-tags/deprecated.php:1156
 msgid "Category"
 msgstr "Kategooria"
 
-#: ../public/template-tags/general.php:311
+#: ../public/template-tags/general.php:297
 msgid "Tags:"
 msgstr "Sildid:"
 
-#: ../public/template-tags/general.php:412
+#: ../public/template-tags/general.php:393
 msgid "Loading Events"
 msgstr "laen sündmuseid"
 
-#: ../public/template-tags/general.php:600
+#: ../public/template-tags/general.php:573
 msgid "Free"
 msgstr "Tasuta"
 
-#: ../public/template-tags/general.php:1209
+#: ../public/template-tags/general.php:1161
 #, php-format
 msgid "Calendar powered by %sThe Events Calendar%s"
 msgstr "Kalendri lõid %sThe Events Calendar%s"
 
-#: ../public/template-tags/options.php:20
+#: ../public/template-tags/loop.php:133
+#, fuzzy
+msgid "Events for"
+msgstr "Sündmused %s"
+
+#: ../public/template-tags/options.php:18
 #, php-format
 msgid "Your current Events URL is %s"
 msgstr "Sinu praegune sündmuste URL on %s"
 
-#: ../public/template-tags/options.php:31
+#: ../public/template-tags/options.php:27
 #, php-format
 msgid ""
 "You <strong>cannot</strong> use the same slug as above. The above should "
@@ -3832,66 +3995,232 @@ msgstr ""
 "olema mitmuses ja see siin ainsuses.<br />Sinu üksiku sündmuse URL on nagu "
 "see: %s"
 
-#: ../views/list/nav.php:17
-msgid "Events List Navigation"
-msgstr "Sündmuste loendis navigeerimine"
+#: ../views/day/nav.php:14
+#, fuzzy
+msgid "Day Navigation"
+msgstr "Sündmuse navigatsioon"
 
-#: ../views/list/nav.php:23 ../views/list/nav.php:29 ../views/list/nav.php:32
-msgid "<span>&laquo;</span> Previous Events"
-msgstr "<span>&laquo;</span> Möödunud sündmused"
-
-#: ../views/list/nav.php:41 ../views/list/nav.php:44 ../views/list/nav.php:50
-msgid "Next Events <span>&raquo;</span>"
-msgstr "Uued sündmused <span>&raquo;</span>"
-
-#: ../views/list/single-event.php:75
+#: ../views/day/single-event.php:72 ../views/list/single-event.php:76
 msgid "Find out more"
 msgstr "Vaata edasi"
 
-#: ../views/modules/bar.php:34 ../views/modules/bar.php:64
+#: ../views/list/nav.php:15
+msgid "Events List Navigation"
+msgstr "Sündmuste loendis navigeerimine"
+
+#: ../views/list/nav.php:21
+msgid "<span>&laquo;</span> Previous Events"
+msgstr "<span>&laquo;</span> Möödunud sündmused"
+
+#: ../views/list/nav.php:27
+msgid "Next Events <span>&raquo;</span>"
+msgstr "Uued sündmused <span>&raquo;</span>"
+
+#: ../views/modules/bar.php:32 ../views/modules/bar.php:62
 msgid "Find Events"
 msgstr "Leia sündmuseid"
 
-#: ../views/modules/bar.php:41
+#: ../views/modules/bar.php:39
 msgid "Event Views Navigation"
 msgstr "Sündmuste vaates navigeerimine"
 
-#: ../views/modules/bar.php:42
+#: ../views/modules/bar.php:40
 msgid "View As"
 msgstr "Vaata kui"
 
-#: ../views/month/nav.php:18
+#: ../views/month/nav.php:16
 msgid "Calendar Month Navigation"
 msgstr "Kalendrikuu vaates navigeerimine"
 
-#: ../views/month/single-day.php:43
+#: ../views/month/single-day.php:41
 msgid "Events "
 msgstr "Sündmused"
 
-#: ../views/month/single-day.php:45
+#: ../views/month/single-day.php:43
 msgid "Event "
 msgstr "Sündmus"
 
-#: ../views/single-event.php:23
+#: ../views/single-event.php:21
 msgid "&laquo; All Events"
 msgstr "&laquo; Kõik sündmused"
 
-#: ../views/single-event.php:41 ../views/single-event.php:72
+#: ../views/single-event.php:39 ../views/single-event.php:80
 msgid "Event Navigation"
 msgstr "Sündmuse navigatsioon"
 
-#: ../views/tickets/attendees-email.php:25
+#: ../views/tickets/attendees-email.php:23
 msgid "Attendee List"
 msgstr "Osalejate list"
 
-#: ../views/tickets/email.php:39
+#: ../views/tickets/email.php:37
 msgid "Your tickets"
 msgstr "Sinu piletid"
 
-#: ../views/tickets/email.php:320
+#: ../views/tickets/email.php:318
 msgid "Ticket Type"
 msgstr "Pileti tüüp"
 
-#: ../views/tickets/email.php:324
+#: ../views/tickets/email.php:322
 msgid "Purchaser"
 msgstr "Ostja"
+
+#: ../views/widgets/list-widget.php:60
+msgid "View All Events"
+msgstr "Vaata kõiki sündmusi"
+
+#: ../views/widgets/list-widget.php:66
+msgid "There are no upcoming events at this time."
+msgstr "Tulevasi sündmuseid selleks ajaks ei ole"
+
+#~ msgid "Organizer Name:"
+#~ msgstr "Korraldaja nimi:"
+
+#~ msgid "Venue:"
+#~ msgstr "Toimumiskoht:"
+
+#~ msgid "venue"
+#~ msgstr "toimumiskoht"
+
+#~ msgid "No description has been entered for this event."
+#~ msgstr "Sündmusele pole lisatud kirjeldust"
+
+#~ msgid "Add New Venue"
+#~ msgstr "Lisa uus toimumiskoht"
+
+#~ msgid "Edit Venue"
+#~ msgstr "Muuda toimumiskohta"
+
+#~ msgid "New Venue"
+#~ msgstr "Uus toimumiskoht"
+
+#~ msgid "View Venue"
+#~ msgstr "Vaata toimumiskohta"
+
+#~ msgid "Search Venues"
+#~ msgstr "Otsi toimumiskohti"
+
+#~ msgid "No venue found"
+#~ msgstr "Toimumiskohta ei leitud"
+
+#~ msgid "No venues found in Trash"
+#~ msgstr "Toimumiskohta ei leitud prügikastist"
+
+#~ msgid "Add New Organizer"
+#~ msgstr "Lisa uus korraldaja"
+
+#~ msgid "Edit Organizer"
+#~ msgstr "Muuda korraldajat"
+
+#~ msgid "New Organizer"
+#~ msgstr "Uus korraldaja"
+
+#~ msgid "View Organizer"
+#~ msgstr "Vaata korraldajat"
+
+#~ msgid "Search Organizers"
+#~ msgstr "Otsi korraldajaid"
+
+#~ msgid "No organizer found"
+#~ msgstr "Korraldajaid ei leitud"
+
+#~ msgid "No organizers found in Trash"
+#~ msgstr "Korraldajaid ei leitud prügikastist"
+
+#~ msgid "Venue updated. <a href=\"%s\">View venue</a>"
+#~ msgstr " Toimumiskoht uuendatud <a href=\"%s\">Vaata toimumiskohta</a>"
+
+#~ msgid "Venue updated."
+#~ msgstr "Toimumiskoht uuendatud."
+
+#~ msgid "Venue restored to revision from %s"
+#~ msgstr "Toimumiskoht taastatud %s-st"
+
+#~ msgid "Venue published. <a href=\"%s\">View venue</a>"
+#~ msgstr "Toimumiskoht lisatud <a href=\"%s\">Vaata toimumiskohta</a>"
+
+#~ msgid "Venue saved."
+#~ msgstr "Toimumiskoht salvestatud"
+
+#~ msgid "Venue submitted. <a target=\"_blank\" href=\"%s\">Preview venue</a>"
+#~ msgstr ""
+#~ "Toimumiskoht lisatud. <a target=\"_blank\" href=\"%s\">Vaata "
+#~ "toimumiskohta</a>"
+
+#~ msgid ""
+#~ "Venue scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href="
+#~ "\"%2$s\">Preview venue</a>"
+#~ msgstr ""
+#~ "Toimumiskoht kavandatud: <strong>%1$s</strong>. <a target=\"_blank\" href="
+#~ "\"%2$s\">Vaata toimumiskohta</a>"
+
+#~ msgid ""
+#~ "Venue draft updated. <a target=\"_blank\" href=\"%s\">Preview venue</a>"
+#~ msgstr ""
+#~ "Toimumiskoha mustand uuendatud <a target=\"_blank\" href=\"%s\">Vaata "
+#~ "toimumiskohta</a>"
+
+#~ msgid "Organizer updated. <a href=\"%s\">View organizer</a>"
+#~ msgstr " Korraldaja uuendatud. <a href=\"%s\">Vaata korraldajat</a>"
+
+#~ msgid "Organizer updated."
+#~ msgstr "Korraldaja uuendatud."
+
+#~ msgid "Organizer restored to revision from %s"
+#~ msgstr "Korraldaja taastatud %s-st."
+
+#~ msgid "Organizer published. <a href=\"%s\">View organizer</a>"
+#~ msgstr "Korraldaja lisatud. <a href=\"%s\">Vaata korraldajat</a>"
+
+#~ msgid "Organizer saved."
+#~ msgstr "Korraldaja salvestatud."
+
+#~ msgid ""
+#~ "Organizer submitted. <a target=\"_blank\" href=\"%s\">Preview organizer</"
+#~ "a>"
+#~ msgstr ""
+#~ "Korraldaja lisatud.  <a target=\"_blank\" href=\"%s\">Vaata korraldajat</"
+#~ "a>"
+
+#~ msgid ""
+#~ "Organizer scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href="
+#~ "\"%2$s\">Preview organizer</a>"
+#~ msgstr ""
+#~ "Korraldaja kavandatud: <strong>%1$s</strong>. <a target=\"_blank\" href="
+#~ "\"%2$s\">Vaata korraldajat</a>"
+
+#~ msgid ""
+#~ "Organizer draft updated. <a target=\"_blank\" href=\"%s\">Preview "
+#~ "organizer</a>"
+#~ msgstr ""
+#~ "Korraldaja mustand on uuendatud. <a target=\"_blank\" href=\"%s\">Vaata "
+#~ "korraldajat</a>"
+
+#~ msgid "Use Saved Organizer:"
+#~ msgstr "Kasuta salvestatud korraldajat:"
+
+#~ msgid "My Venues"
+#~ msgstr "Minu toimumiskohad"
+
+#~ msgid "Use New Organizer"
+#~ msgstr "Kasuta uut korraldajat"
+
+#~ msgid "My Organizers"
+#~ msgstr "Minu korraldajad"
+
+#~ msgid "Available Organizers"
+#~ msgstr "Saadaolevad korraldajad"
+
+#~ msgid "No saved organizer exists."
+#~ msgstr "Salvestatud korraldajaid ei ole."
+
+#~ msgid "Organizer Information"
+#~ msgstr "Korraldaja info"
+
+#~ msgid "&laquo; Previous Events"
+#~ msgstr "&laquo; Eelmised sündmused"
+
+#~ msgid "Next Events &raquo;"
+#~ msgstr "Järgmised sündmused &raquo;"
+
+#~ msgid "View All Events in Category"
+#~ msgstr "Vaata kõiki sündmusi kategoorias"

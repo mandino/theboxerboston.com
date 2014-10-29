@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * List View Loop
  * This file sets up the structure for the list loop
@@ -6,14 +6,14 @@
  * Override this template in your own theme by creating a file at [your-theme]/tribe-events/list/loop.php
  *
  * @package TribeEventsCalendar
- * @since  3.0
- * @author Modern Tribe Inc.
  *
  */
 
-if ( !defined('ABSPATH') ) { die('-1'); } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	die( '-1' );
+} ?>
 
-<?php 
+<?php
 global $more;
 $more = false;
 ?>

@@ -14,7 +14,7 @@ class TribeEventsImporter_AdminPage {
 			'edit.php?post_type='.TribeEvents::POSTTYPE,
 			__('Import: CSV','tribe-events-calendar'),
 			__('Import: CSV','tribe-events-calendar'),
-			'administrator',
+			'import',
 			'events-importer',
 			array( $this, 'render_admin_page_contents' )
 		);
@@ -197,6 +197,8 @@ class TribeEventsImporter_AdminPage {
 
 		$new_offset = $importer->import_complete() ? -1 : $importer->get_last_completed_row();
 		update_option('tribe_events_importer_offset', $new_offset);
+
+        if ( -1 === $new_offset ) do_action( 'tribe_events_csv_import_complete' );
 	}
 
 	private function get_importer() {

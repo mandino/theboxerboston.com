@@ -6,12 +6,12 @@
  * Override this template in your own theme by creating a file at [your-theme]/tribe-events/month/single-day.php
  *
  * @package TribeEventsCalendar
- * @since  3.0
- * @author Modern Tribe Inc.
  *
  */
 
-if ( !defined('ABSPATH') ) { die('-1'); } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	die( '-1' );
+} ?>
 
 <?php
 $day = tribe_events_get_current_month_day();
@@ -31,21 +31,19 @@ $day = tribe_events_get_current_month_day();
 	</div>
 
 	<!-- Events List -->
-	<?php while ($day['events']->have_posts()) : $day['events']->the_post() ?>
-		<?php tribe_get_template_part('month/single', 'event') ?>
+	<?php while ( $day['events']->have_posts() ) : $day['events']->the_post(); ?>
+		<?php tribe_get_template_part( 'month/single', 'event' ) ?>
 	<?php endwhile; ?>
 
 	<!-- View More -->
 	<?php if ( $day['view_more'] && tribe_events_is_view_enabled( 'day' ) ) : ?>
 		<div class="tribe-events-viewmore">
 			<?php
-				if($day['total_events'] > 1 || $day['total_events'] == 0) {
-					$events_label = __( 'Events ', 'tribe-events-calendar' );
-				} else {
-					$events_label = __( 'Event ', 'tribe-events-calendar' );
-				}
+
+			$view_all_label = sprintf( _n( 'View 1 Event', 'View All %s Events', $day['total_events'], 'tribe-events-calendar' ), $day['total_events'] );
+
 			?>
-			<a href="<?php echo $day['view_more'] ?>">View All <?php echo $day['total_events'] . " " . $events_label ?> &raquo;</a>
+			<a href="<?php echo $day['view_more'] ?>"><?php echo $view_all_label ?> &raquo;</a>
 		</div>
 	<?php endif ?>
 

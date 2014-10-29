@@ -6,16 +6,17 @@
  * [your-theme]/tribe-events/modules/meta/venue.php
  *
  * @package TribeEventsCalendar
- * @since 3.6
  */
 
-if ( ! tribe_address_exists() ) return;
+if ( ! tribe_get_venue_id() ) {
+	return;
+}
 $phone = tribe_get_phone();
-$website = tribe_get_venue_website_link()
+$website = tribe_get_venue_website_link();
 ?>
 
 <div class="tribe-events-meta-group tribe-events-meta-group-venue">
-	<h3 class="tribe-events-single-section-title"> <?php _e('Venue', 'tribe-events-calendar' ) ?> </h3>
+	<h3 class="tribe-events-single-section-title"> <?php _e( tribe_get_venue_label_singular(), 'tribe-events-calendar' ) ?> </h3>
 	<dl>
 		<?php do_action( 'tribe_events_single_meta_venue_section_start' ) ?>
 
@@ -30,7 +31,9 @@ $website = tribe_get_venue_website_link()
 		$gmap_link = apply_filters( 'tribe_event_meta_venue_address_gmap', $gmap_link );
 
 		// Display if appropriate
-		if ( ! empty( $address ) ) echo '<dd class="location">' . "$address $gmap_link </dd>";
+		if ( ! empty( $address ) ) {
+			echo '<dd class="location">' . "$address $gmap_link </dd>";
+		}
 		?>
 
 		<?php if ( ! empty( $phone ) ): ?>

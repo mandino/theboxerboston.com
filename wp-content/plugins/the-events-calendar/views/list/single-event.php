@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * List View Single Event
  * This file contains one event in the list view
@@ -6,27 +6,27 @@
  * Override this template in your own theme by creating a file at [your-theme]/tribe-events/list/single-event.php
  *
  * @package TribeEventsCalendar
- * @since  3.0
- * @author Modern Tribe Inc.
  *
  */
 
-if ( !defined('ABSPATH') ) { die('-1'); } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	die( '-1' );
+} ?>
 
-<?php 
+<?php
 
 // Setup an array of venue details for use later in the template
 $venue_details = array();
 
-if ($venue_name = tribe_get_meta( 'tribe_event_venue_name' ) ) {
-	$venue_details[] = $venue_name;	
+if ( $venue_name = tribe_get_meta( 'tribe_event_venue_name' ) ) {
+	$venue_details[] = $venue_name;
 }
 
-if ($venue_address = tribe_get_meta( 'tribe_event_venue_address' ) ) {
-	$venue_details[] = $venue_address;	
+if ( $venue_address = tribe_get_meta( 'tribe_event_venue_address' ) ) {
+	$venue_details[] = $venue_address;
 }
 // Venue microformats
-$has_venue_address = ( $venue_address ) ? ' location': '';
+$has_venue_address = ( $venue_address ) ? ' location' : '';
 
 // Organizer
 $organizer = tribe_get_organizer();
@@ -34,7 +34,7 @@ $organizer = tribe_get_organizer();
 ?>
 
 <!-- Event Cost -->
-<?php if ( tribe_get_cost() ) : ?> 
+<?php if ( tribe_get_cost() ) : ?>
 	<div class="tribe-events-event-cost">
 		<span><?php echo tribe_get_cost( null, true ); ?></span>
 	</div>
@@ -51,21 +51,23 @@ $organizer = tribe_get_organizer();
 
 <!-- Event Meta -->
 <?php do_action( 'tribe_events_before_the_meta' ) ?>
-<div class="tribe-events-event-meta vcard"> <div class="author <?php echo $has_venue_address; ?>">
+<div class="tribe-events-event-meta vcard">
+	<div class="author <?php echo $has_venue_address; ?>">
 
-	<!-- Schedule & Recurrence Details -->
-	<div class="updated published time-details">
-		<?php echo tribe_events_event_schedule_details() ?>
+		<!-- Schedule & Recurrence Details -->
+		<div class="updated published time-details">
+			<?php echo tribe_events_event_schedule_details() ?>
+		</div>
+
+		<?php if ( $venue_details ) : ?>
+			<!-- Venue Display Info -->
+			<div class="tribe-events-venue-details">
+				<?php echo implode( ', ', $venue_details ); ?>
+			</div> <!-- .tribe-events-venue-details -->
+		<?php endif; ?>
+
 	</div>
-
-	<?php if ( $venue_details ) : ?>
-		<!-- Venue Display Info -->
-		<div class="tribe-events-venue-details">
-			<?php echo implode( ', ', $venue_details) ; ?>
-		</div> <!-- .tribe-events-venue-details -->
-	<?php endif; ?>
-
-</div> </div><!-- .tribe-events-event-meta -->
+</div><!-- .tribe-events-event-meta -->
 <?php do_action( 'tribe_events_after_the_meta' ) ?>
 
 <!-- Event Image -->
