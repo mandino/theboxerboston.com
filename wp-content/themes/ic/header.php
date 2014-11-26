@@ -1,3 +1,14 @@
+<?php 
+
+	if ( file_exists( TEMPLATEPATH.'/library/mobile-detect.php' ) ) {
+
+		require_once TEMPLATEPATH.'/library/mobile-detect.php';
+		$detect = new Mobile_Detect;
+		$check = $detect->isMobile();
+
+	}
+
+?>
 <!DOCTYPE HTML>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">

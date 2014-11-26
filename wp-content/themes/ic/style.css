@@ -1761,7 +1761,7 @@ h1, h2, h3, h4, h5, h6, h7 {
     width: 80%;
 }
 
-.hover-effect i {
+.hover-effect a.special-external {
     transition: all 0.5s;
     -moz-transition: all 0.5s;
     -webkit-transition: all 0.5s;
@@ -1776,10 +1776,11 @@ h1, h2, h3, h4, h5, h6, h7 {
     opacity: 0.5;
     padding: 15px;
     position: absolute;
-    right: 30px;
+    right: 20px;
     cursor: pointer;
+    z-index: 99999;
 }
-    .hover-effect i:hover {
+    .hover-effect a.special-external:hover {
         opacity: 1;
     }
 

@@ -288,6 +288,24 @@
 
 		$('.thumbgal li').bind("vmousedown", function(){});
 
+		<?php if( $check ) { ?>
+			
+			$('.section-photos li, .imagegal li').toggle( function(){
+
+				$(this).children('.hover-effect').addClass('mobile-hovered');
+
+			}, function(){
+
+				$(this).children('.hover-effect').removeClass('mobile-hovered');
+
+			});
+
+			$('.special-external').click(function(){
+				window.location.href = $(this).attr('href');
+			});
+
+		<?php  } ?>
+
 	});
 
 

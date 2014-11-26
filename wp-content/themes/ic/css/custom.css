@@ -981,28 +981,6 @@ color: #333;
     width: 80%;
 }
 
-.hover-effect i {
-    transition: all 0.5s;
-    -moz-transition: all 0.5s;
-    -webkit-transition: all 0.5s;
-    -o-transition: all 0.5s;
-    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
-    border: 2px solid #FFFFFF;
-    border-radius: 30px;
-    bottom: 20px;
-    color: #FFFFFF;
-    font-size: 15px;
-    margin: 20px auto 0;
-    opacity: 0.5;
-    padding: 15px;
-    position: absolute;
-    right: 30px;
-    cursor: pointer;
-}
-    .hover-effect i:hover {
-        opacity: 1;
-    }
-
 .section-photos li div h3, .thumbgal li div h3 {
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
     font-size: 40px;
