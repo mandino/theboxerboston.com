@@ -1761,6 +1761,10 @@ h1, h2, h3, h4, h5, h6, h7 {
     width: 80%;
 }
 
+.hover-effect.mobile-hovered {
+  opacity: 1;
+}
+
 .hover-effect a.special-external {
     transition: all 0.5s;
     -moz-transition: all 0.5s;
