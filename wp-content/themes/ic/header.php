@@ -238,7 +238,7 @@ pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName
 						
 						<span class="dropsec">
 							<select name="children[]" id="children" class="halfsies">
-								<option value=""><?php _e('0 Kids','cebolang'); ?></option>
+								<option value="0"><?php _e('0 Kids','cebolang'); ?></option>
 								<option value="1"><?php _e('1 Kid','cebolang'); ?></option>
 								<option value="2"><?php _e('2 Kids','cebolang'); ?></option>
 								<option value="3"><?php _e('3 Kids','cebolang'); ?></option>
