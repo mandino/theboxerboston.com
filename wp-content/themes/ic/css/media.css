@@ -392,6 +392,10 @@ and (max-width : 1099px) {
 	.slicer {
 		width: 370px !important;
 	}
+
+	.slide-header {
+		top: 15%;
+	}
 }
 
 
@@ -431,6 +435,7 @@ and (max-width : 1023px) {
 @media only screen 
 and (max-width : 940px) 
 {
+
 
 
 
@@ -680,11 +685,6 @@ and (max-width : 940px)
 
 	.pp_social .facebook {
 		display: none;
-	}
-
-
-	.slicer {
-		width: 270px !important;
 	}
 
 }
@@ -947,6 +947,14 @@ and (max-width : 640px)
 	}
 
 
+	.slide-header {
+		top: 7%;
+	}
+
+	.slicer {
+    width: 300px !important;
+	}
+
 
 	/* Navigation */
 
@@ -982,7 +990,7 @@ and (max-width : 640px)
 	}
 	
 	.slide-header {
-   	 top: 15%;
+   	 top: 10%;
 	}
 
 	#home-slider h2 {
@@ -1299,9 +1307,13 @@ padding: 8px 12px;
 and (max-width : 480px) 
 {	
 
-	#home-slider {
-height: 200px;
-}
+		#home-slider {
+	height: 200px;
+	}
+
+	.slicer {
+    width: 275px !important;
+	}
 
 
 		.specialsbox {
