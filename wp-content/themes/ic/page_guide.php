@@ -80,18 +80,19 @@
 		
 		</div>
 			
-		<div class="tabs-wrapper">
+		<div id="tabs-wrapper" class="tabs-wrapper">
 		
 			<ul class="tabs">
-				<li><a href="#tab1">Eat</a></li>
-				<li><a href="#tab2">Shop</a></li>
-				<li><a href="#tab3">Culture</a></li>
-				<li><a href="#tab4">Landmarks</a></li>
+				<li class="eat"><a href="<?php echo get_permalink( $post->post_parent ); ?>/eat">Eat</a></li>
+				<li class="shop"><a href="<?php echo get_permalink( $post->post_parent ); ?>/shop">Shop</a></li>
+				<li class="culture"><a href="<?php echo get_permalink( $post->post_parent ); ?>/culture">Culture</a></li>
+				<li class="landmarks"><a href="<?php echo get_permalink( $post->post_parent ); ?>/landmarks">Landmarks</a></li>
 			</ul>	
+
 			<div class="tabs-container">
 				
 				
-				<div id="tab1" class="tab-content">
+				<div id="eat" class="tab-content">
 					
 					<div class="container">
 						
@@ -225,7 +226,7 @@
 				
 				
 			
-				<div id="tab2" class="tab-content">
+				<div id="shop" class="tab-content">
 					
 					<div class="container">
 						
@@ -356,7 +357,7 @@
 				
 				
 			
-				<div id="tab3" class="tab-content">
+				<div id="culture" class="tab-content">
 					
 					<div class="container">
 						
@@ -486,7 +487,7 @@
 				
 				
 			
-				<div id="tab4" class="tab-content">
+				<div id="landmarks" class="tab-content">
 					
 					<div class="container">
 						
