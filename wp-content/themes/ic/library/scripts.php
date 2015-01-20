@@ -383,16 +383,16 @@
 
 	 $(function() {
 
+	 	var $html 	= $('html'),
+			$menu	= $('nav#menu'),
+			$both	= $html.add( $menu );
+
+		$menu.mmenu();
+			
 	 	if ($(window).width() < 940) {
 			   
 		   var pos 	= 'mm-top mm-right mm-bottom',
 				zpos	= 'mm-front mm-next';
-
-			var $html 	= $('html'),
-				$menu	= $('nav#menu'),
-				$both	= $html.add( $menu );
-
-			$menu.mmenu();
 
 			//	Add the position-classnames onChange
 			$('input[name="pos"]').change(function() {
