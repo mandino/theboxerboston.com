@@ -321,18 +321,24 @@
 		$('.thumbgal li').bind("vmousedown", function(){});
 
 		<?php if( $check ) { ?>
+
+			$('.hover-effect').hide();
 			
 			$('.section-photos li, .imagegal li').toggle( function(){
 
-				$(this).children('.hover-effect').addClass('mobile-hovered');
+				// $(this).children('.hover-effect').addClass('mobile-hovered');
+
+				$(this).children('.hover-effect').fadeIn(500);
 
 			}, function(){
 
-				$(this).children('.hover-effect').removeClass('mobile-hovered');
+				// $(this).children('.hover-effect').removeClass('mobile-hovered');
+
+				$(this).children('.hover-effect').fadeOut(500).hide();
 
 			});
 
-			$('.special-external').click(function(){
+			$('.special-external, .special-copy-link').click(function(){
 				window.location.href = $(this).attr('href');
 			});
 
