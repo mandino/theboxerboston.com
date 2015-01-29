@@ -20,7 +20,7 @@
 <!-- JS -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 <!--<script src="http://code.jquery.com/mobile/1.4.1/jquery.mobile-1.4.1.min.js"></script>-->
-<script async type="text/javascript" src="<?php bloginfo ('template_url'); ?>/js/jquery.prettyPhoto.js"></script>
+<script type="text/javascript" src="<?php bloginfo ('template_url'); ?>/js/jquery.prettyPhoto.js"></script>
 
 <!-- ClickNav -->
 <script type="text/javascript" src="<?php bloginfo ('template_url'); ?>/js/jquery-clicknav.js"></script>
@@ -29,16 +29,16 @@
 <link rel="stylesheet" href="<?php bloginfo ('template_url'); ?>/css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet"/>	
 
 <!-- Pinterest -->
-<script async type="text/javascript" src="http://assets.pinterest.com/js/pinit.js"></script>
+<script type="text/javascript" src="http://assets.pinterest.com/js/pinit.js"></script>
 
 <!-- Custom Modernizr for Quotes Rotator -->
 <script src="<?php bloginfo ('template_url'); ?>/js/quotes-rotator/modernizr.custom.js"></script>
 
 <!-- Quotes Rotator -->
-<script async src="<?php bloginfo ('template_url'); ?>/js/quotes-rotator/jquery.cbpQTRotator.js"></script>
+<script src="<?php bloginfo ('template_url'); ?>/js/quotes-rotator/jquery.cbpQTRotator.js"></script>
 
 <!-- SlideJS -->
-<script async src="<?php bloginfo ('template_url'); ?>/js/jquery.slides.min.js"></script>
+<script src="<?php bloginfo ('template_url'); ?>/js/jquery.slides.min.js"></script>
 
 <!-- Flex Slider -->
 <script src="<?php bloginfo ('template_url'); ?>/js/flexslider/jquery.flexslider.js"></script>
@@ -55,8 +55,8 @@
 <?php } ?>
 
 <!-- jquery mmenu -->
-<script async src="<?php bloginfo ('template_url'); ?>/js/jquery.mmenu.min.js"></script>
+<script src="<?php bloginfo ('template_url'); ?>/js/jquery.mmenu.min.js"></script>
 
 <!-- Optional FlexSlider Additions -->
 <!-- <script src="<?php bloginfo ('template_url'); ?>/js/jquery.easing.js"></script> -->
-<script async src="<?php bloginfo ('template_url'); ?>/js/jquery.mousewheel.js"></script>
+<script src="<?php bloginfo ('template_url'); ?>/js/jquery.mousewheel.js"></script>
