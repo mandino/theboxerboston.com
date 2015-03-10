@@ -104,8 +104,8 @@ get_header(); ?>
 				
 				
                     <div class="navigation">
-                        <div class="alignleft"><?php next_posts_link('&laquo;' .   __(' Older Entries' , 'cebolang')) ?></div>
-                        <div class="alignright"><?php previous_posts_link( __('Newer Entries ', 'cebolang') .  '&raquo;') ?></div>
+                        <div class="alignleft"><?php next_posts_link( __(' Older Entries' , 'cebolang') ) ?></div>
+                        <div class="alignright"><?php previous_posts_link( __('Newer Entries', 'cebolang') ) ?></div>
                         <div class="clear"></div>
                     </div>
 					<?php else : ?>

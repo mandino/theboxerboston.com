@@ -2894,6 +2894,23 @@ h4.strawberry {
 .blognav a:hover {
 	margin-top: -2px;
 }
+
+.navigation a.gohead {
+width: auto;
+height: 31px;
+line-height: 31px;
+}
+
+.navigation .alignleft a.gohead {
+background: url(../images/arrow_left_gray.png) left center transparent no-repeat;
+padding-left: 20px;
+}
+
+.navigation .alignright a.gohead {
+background: url(../images/arrow_right_gray.png) right center transparent no-repeat;
+padding-right: 20px;
+}
+
 /* ---------------------------- VIDEO SECTION -------------------------*/
 
 .video-container {
