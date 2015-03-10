@@ -75,14 +75,13 @@ get_header(); ?>
 		        ?>
 					
 					<li class="room-box">
-						<div class="fl" style="background-image: url(<?php if(get_post_meta($post->ID, 'cebo_homethumb', true)) { ?><?php echo get_post_meta($post->ID, 'cebo_homethumb', true); ?><?php } else { ?><?php echo $imgsrc[0]; ?><?php } ?>);">
-								
-							</div>
+						<a href="<?php the_permalink(); ?>"><div class="fl" style="background-image: url(<?php if(get_post_meta($post->ID, 'cebo_homethumb', true)) { ?><?php echo get_post_meta($post->ID, 'cebo_homethumb', true); ?><?php } else { ?><?php echo $imgsrc[0]; ?><?php } ?>);"></div></a>
 
 						<div class="fr">
 							
-							<h3><?php the_title(); ?></h3>
-								<span><?php the_time('F jS, Y') ?>&nbsp;&nbsp;&bull;&nbsp;&nbsp;<?php $project_terms = wp_get_object_terms($post->ID, 'category'); if(!empty($project_terms)) { if(!is_wp_error( $project_terms )) { echo ''; $count = 0; foreach($project_terms as $term){ if($count > 0) { echo ', '; } echo '<a href="'.get_term_link($term->slug, 'category'). '">'.$term->name. '</a>';  $count++; }  } } ?></span>
+							<a href="<?php the_permalink(); ?>"><h3><?php the_title(); ?></h3></a>
+								
+							<span><?php the_time('F jS, Y') ?>&nbsp;&nbsp;&bull;&nbsp;&nbsp;<?php $project_terms = wp_get_object_terms($post->ID, 'category'); if(!empty($project_terms)) { if(!is_wp_error( $project_terms )) { echo ''; $count = 0; foreach($project_terms as $term){ if($count > 0) { echo ', '; } echo '<a href="'.get_term_link($term->slug, 'category'). '">'.$term->name. '</a>';  $count++; }  } } ?></span>
 
 							<p><?php echo excerpt(13); ?></p>
 
