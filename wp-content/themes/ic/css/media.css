@@ -1255,6 +1255,25 @@ and (max-width : 640px)
 	    padding: 20px 0 0;
 	    width: 260px;
 	}
+	
+	/* Blog Sidebar */
+	.fl.room-list.catlist {
+		border-right: 0 none;
+		float: none;
+		margin: 0 auto;
+		padding: 50px 20px !important;
+		width: 89.8%;
+	}
+	.sidebar.fr {
+		border-top: 1px solid #CCCCCC;
+		clear: both;
+		float: none;
+		margin-bottom: 0;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 20px 0 0;
+		width: 260px;
+	}
 
 	
 
