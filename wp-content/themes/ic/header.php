@@ -173,7 +173,7 @@ pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName
 							<i class="fa fa-calendar"></i>
 						</span>
 						<span class="dropsec" style="margin-right: 6px">
-							<select name="adults" id="adults" class="halfsies">
+							<select name="adults[]" id="adults" class="halfsies">
 								<option value="1"><?php _e('1 Adult','cebolang'); ?></option>
 								<option value="2"><?php _e('2 Adults','cebolang'); ?></option>
 								<option value="3"><?php _e('3 Adults','cebolang'); ?></option>
