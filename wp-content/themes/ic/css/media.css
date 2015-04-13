@@ -396,6 +396,17 @@ and (max-width : 1099px) {
 	.slide-header {
 		top: 15%;
 	}
+
+	/* light it up blue */
+
+	li.blue-btn {
+		left: 0px;
+	}
+
+
+
+
+
 }
 
 
@@ -728,7 +739,7 @@ and (max-width : 939px) {
 		height: 38px;
 		left: 40px;
 		margin-left: 13px;
-		top: 29px;
+		top: 5px;
 		background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
 		border: none;
 	}
@@ -738,7 +749,9 @@ and (max-width : 939px) {
 	}
 
 	#primary-nav {
-	min-height: 50px;
+	  min-height: 68px;
+	  position: relative;
+	  top: 19px;
 	}
 	.logo.mobile > img {
 	    height: 97%;
@@ -751,7 +764,7 @@ and (max-width : 939px) {
 	#property-nav nav ul li a.clicknav-clicker, #navigation-sticky-wrapper.sticky #property-nav nav ul li a.clicknav-clicker {
 	    font-size: 11px;
 	    letter-spacing: 3px;
-	    padding: 11px 6px;
+	    padding: 20px;
 	    
 	}
 
@@ -1523,6 +1536,16 @@ padding: 8px 12px;
     display: none;
 }
 
+/* light it up blue */
+
+.blue-mobile {
+	display: none;
+}
+
+li.blue-btn {
+	width: 35px;
+}
+
 }
 
 
@@ -1567,6 +1590,8 @@ and (max-height : 480px)
 	.slide-header .button {
     display: none;
 }
+
+
 
 }
 

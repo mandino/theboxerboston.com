@@ -345,7 +345,7 @@ color: #333;
 
 #navigation-sticky-wrapper.sticky #property-nav nav ul li a.clicknav-clicker {
     font-size: 13px;
-    padding: 12px 6px;
+    padding: 20px 11px;
     font-weight: bold;
 }
 
@@ -410,7 +410,7 @@ color: #333;
 
 
 #property-nav nav {
-    background: none repeat scroll 0 0 #fff;
+    background: none repeat scroll 0 0 #00adef;
     height: auto;
     border-bottom: 2px solid #333333;
     transition: all 0.5s;
@@ -421,7 +421,7 @@ color: #333;
 }
 
 #property-nav nav:hover {
-    background: none repeat scroll 0 0 #333;
+    background: none repeat scroll 0 0 #03b7fb;
 }
 
 
@@ -458,7 +458,7 @@ color: #333;
     -o-transition: all 0.5s;
 	max-width: 100%;
 	font-weight: bold;
-	background: url(../images/ic_dark.png) center no-repeat;
+	background: url(../images/ic_white.png) center no-repeat;
 }
 
 #property-nav nav:hover ul li a.clicknav-clicker {
@@ -3969,4 +3969,75 @@ strong {
 	margin: 15px 0 15px 0;
 	padding: 0 0px 10px 0;
 }
+
+/* --------------- Light it up BLUE ------------ */
+
+li.blue-btn {
+  position: absolute !important;
+  bottom: 6px;
+  background-color: #fff;
+  width: 110px;
+  right: 265px;
+}
+
+li.blue-btn i {
+ padding-right: 5px;
+}
+
+.blue-btn a {
+  padding: 7px 0px;
+  color: #00adef;
+}
+
+.logo {
+  top: 42px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
