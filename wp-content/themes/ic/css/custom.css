@@ -554,13 +554,13 @@ color: #333;
     font-weight: bold;
     height: auto;
     margin: 22px 0;
-    width: 100%;
+    width: 88%;
 }
 
 
 #primary-nav nav ul li {
 	color: #868282;
-	margin-right: 20px;
+	margin-right: 15px;
 	display: inline-block;
 	*display: inline;
 	zoom: 1;
