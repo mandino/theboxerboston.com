@@ -3996,6 +3996,46 @@ li.blue-btn i {
   top: 42px;
 }
 
+/* ==================== Flex dates ============================ */
+
+#primary-nav.button .flexdate a {
+	visibility: hidden;
+    overflow: hidden;	
+}
+
+#primary-nav.button:hover .flexdate a {
+	opacity: 1 !important;
+	visibility: visible  !important;
+}
+
+.flexdate a {
+	text-decoration: underline;
+}
+
+.flexdate a:hover {
+	text-decoration: none;
+}
+
+.ressys.flexdate a {
+	visibility: hidden;
+    overflow: hidden;
+}
+
+.ressys:hover .flexdate a {
+	opacity: 1 !important;
+	visibility: visible  !important;
+}
+
+
+.flexdate p a {
+	-webkit-transition: none;
+	transition: none;
+}
+
+.reservationform.flexdate {
+  height: 40px;
+}
+
 
 
 
