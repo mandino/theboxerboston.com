@@ -193,11 +193,19 @@ pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName
 						<button type="submit" class="button">Search Now</button>
 						
 					
-					</form>
+						</form>
 				
-				</div>
+					</div>
 
+				<!-- flex dates -->
 
+					<div class="reservationform flexdate">
+					
+						<p><a href="https://theboxerboston.reztrip.com">Flexible dates?</a> Search for our best available rate</p>				
+						
+					</div>
+
+				<!-- end flex dates -->
 
 				</div>
 				
