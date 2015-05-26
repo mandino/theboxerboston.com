@@ -4038,51 +4038,36 @@ li.blue-btn i {
   height: 40px;
 }
 
+.section-title.fr {
+    float: left;
+    padding-right: 80px !important;
+}
 
+.wanderful-box {
+    float: left;
+}
 
+/** iPad view **/
+@media only screen and (max-width: 1099px) { 
 
+	.section-title.fr {
+   		padding-right: 0 !important;
+	}
+}
 
+/** iPhone view **/
+@media only screen and (min-device-width : 320px) and (max-device-width : 568px) and (orientation : portrait) { 
+	.wanderful-box {
+		float: left;
+		margin-left: 3%;
+		padding-bottom: 10%;
+	} 
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@media only screen and (min-device-width : 320px) and (max-device-width : 568px) and (orientation : landscape) { 
+	.wanderful-box {
+		float: left;
+		margin-left: 25%;
+		padding-bottom: 2%;
+	} 
+}
