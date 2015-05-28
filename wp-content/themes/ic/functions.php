@@ -44,7 +44,7 @@ include(TEMPLATEPATH . '/library/videobox.php');
  /* ................. SOME OPTIONS FOR PROJECTS .................... */
 /* Below is an include to a few options for your projects.*/
 include(TEMPLATEPATH . '/options/project-options.php'); 
-
+include(TEMPLATEPATH . '/options/neighborhood-options.php'); 
 
 
  /* ................. SOME OPTIONS FOR PROJECTS .................... */
