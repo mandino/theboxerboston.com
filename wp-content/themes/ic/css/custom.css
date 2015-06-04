@@ -3830,7 +3830,7 @@ position: relative !important;
  
  
  
- #navigation-sticky-wrapper #primary-nav .nothingness {
+ #navigation-sticky-wrapper #primary-nav {
 	background: #eee;
         color: #444;
 }
