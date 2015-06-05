@@ -107,7 +107,7 @@
 							
 							<?php } ?>
 							<br>
-							<p><?php the_title(); ?></p>
+							<p><?php wp_title(); ?></p>
 							
 							<a class="special-external" href="<?php the_permalink(); ?>"><i class="fa fa-chevron-right fa-lg"></i></a>
 						</div>
@@ -197,7 +197,7 @@
 							
 							<?php } ?>
 							<br>
-							<p><?php the_title(); ?></p>
+							<p><?php wp_title(); ?></p>
 							
 							<a class="special-external" href="/?page_id=47"><i class="fa fa-chevron-right fa-lg"></i></a>
 						</div>
@@ -218,7 +218,7 @@
 			
 				<?php query_posts('post_type=page&p=80'); if(have_posts()) : while(have_posts()) : the_post(); 	?>
 				
-				<h1><?php the_title(); ?></h1>
+				<h1><?php wp_title(); ?></h1>
 				
 				<?php the_content(); ?>
 				
@@ -248,7 +248,7 @@
 							<div class="cbp-qtcontent">
 								<blockquote>
 								  <p><?php echo excerpt(40); ?></p>
-								  <footer><?php the_title(); ?></footer>
+								  <footer><?php wp_title(); ?></footer>
 								</blockquote>
 							</div>
 						
@@ -358,7 +358,7 @@
 
 							<a href="<?php the_permalink(); ?>"><img src="<?php echo $imgsrc[0]; ?>"></a>
 							<div class="ptit"> 
-								<a href="<?php the_permalink(); ?>"><span><?php the_title(); ?></span></a>
+								<a href="<?php the_permalink(); ?>"><span><?php wp_title(); ?></span></a>
 							</div>
 
 						</div>
@@ -388,7 +388,7 @@
 						<div>
 							<a href="<?php the_permalink(); ?>"><img src="<?php echo $imgsrc[0]; ?>"></a>
 							<div class="ptits"> 
-								<a href="<?php the_permalink(); ?>"><span><?php the_title(); ?></span></a>
+								<a href="<?php the_permalink(); ?>"><span><?php wp_title(); ?></span></a>
 							</div>
 						</div>
 						

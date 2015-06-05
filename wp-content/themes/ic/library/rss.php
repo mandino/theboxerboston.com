@@ -56,7 +56,7 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>'; ?>
 		<slash:comments><?php echo get_comments_number(); ?></slash:comments>
 		<media:group xmlns:media="http://search.yahoo.com/mrss">
 		<media:content xmlns:media="http://search.yahoo.com/mrss" url="<?php echo sp_get_image(); ?>" medium="image" fileSize="" isDefault="true" type="image/jpeg" width="960" height="720"/>
-		<media:title xmlns:media="http://search.yahoo.com/mrss"><?php the_title(); ?></media:title>
+		<media:title xmlns:media="http://search.yahoo.com/mrss"><?php wp_title(); ?></media:title>
 		</media:group>
 <?php rss_enclosure(); ?>
 	<?php do_action('rss2_item'); ?>

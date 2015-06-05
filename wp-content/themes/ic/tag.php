@@ -61,7 +61,7 @@ get_header(); ?>
 									            	<?php if(sp_get_image($i)) : ?>   
 													
 					            		
-					            					<a href="<?php the_permalink(); ?>" class="featured"><img src="<?php bloginfo('template_directory'); ?>/tools/timthumb.php?src=<?php echo sp_get_image($i); ?>&amp;h=400&amp;w=745&amp;zc=1" alt="<?php the_title(); ?>" /></a>
+					            					<a href="<?php the_permalink(); ?>" class="featured"><img src="<?php bloginfo('template_directory'); ?>/tools/timthumb.php?src=<?php echo sp_get_image($i); ?>&amp;h=400&amp;w=745&amp;zc=1" alt="<?php wp_title(); ?>" /></a>
 					            					
 					            					
 					            						<?php else : break; endif; ?>
@@ -80,7 +80,7 @@ get_header(); ?>
 												<?php endwhile; ?>
 								                <?php } else { ?>
 													
-													<a href="<?php the_permalink(); ?>" class="featured"><img src="<?php echo sp_get_image(); ?>" width="746" alt="<?php the_title(); ?>" /></a>
+													<a href="<?php the_permalink(); ?>" class="featured"><img src="<?php echo sp_get_image(); ?>" width="746" alt="<?php wp_title(); ?>" /></a>
 													
 												<? } ?>
 										                		
@@ -91,7 +91,7 @@ get_header(); ?>
 						            		
 						        			<div class="type"><?php the_time('M d') ?></div>
 						        			
-						        			<a href="<?php the_permalink(); ?>"><h2><?php the_title(); ?></h2></a>
+						        			<a href="<?php the_permalink(); ?>"><h2><?php wp_title(); ?></h2></a>
 						        			<small><?php _e('Written by', 'cebolang'); ?> <?php the_author(); ?></small>
 						        			<p><?php echo excerpt(70); ?></p>
 											
@@ -103,7 +103,7 @@ get_header(); ?>
 												   class="likeling"
 												   data-url="<?php the_permalink(); ?>"
 												   data-via="<?php echo get_option('cebo_twitter'); ?>"
-												   data-text="<?php the_title(); ?>"
+												   data-text="<?php wp_title(); ?>"
 												   data-related="<?php echo get_option('cebo_twitter'); ?>"      
 									   			   data-hashtags="">       
 												    

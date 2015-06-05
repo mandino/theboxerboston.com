@@ -51,13 +51,13 @@
 				
 				<div class="he-wrap tpl2">
 					<?php $imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full"); ?>
-					<img src="<?php bloginfo('template_directory'); ?>/tools/timthumb.php?src=<?php echo $imgsrc[0]; ?>&amp;h=245&amp;w=220&amp;zc=1" alt="<?php the_title(); ?>" />
+					<img src="<?php bloginfo('template_directory'); ?>/tools/timthumb.php?src=<?php echo $imgsrc[0]; ?>&amp;h=245&amp;w=220&amp;zc=1" alt="<?php wp_title(); ?>" />
 						
 					<div class="he-view">
 							
 							<div class="bg a0" data-animate="fadeIn">
 							
-								<h2 class="a0" data-animate="fadeInDown"><?php the_title(); ?><?php if(get_post_meta($post->ID, 'bigtitle', $single = true )) { ?><span><?php echo get_post_meta($post->ID, 'bigtitle', $single = true ); ?></span><? } ?></h2>
+								<h2 class="a0" data-animate="fadeInDown"><?php wp_title(); ?><?php if(get_post_meta($post->ID, 'bigtitle', $single = true )) { ?><span><?php echo get_post_meta($post->ID, 'bigtitle', $single = true ); ?></span><? } ?></h2>
 							
 							
 								<div class="center-bar">

@@ -85,7 +85,7 @@ get_header(); ?>
 							
 								<?php if(get_post_meta($post->ID, 'cebo_attachonly', $single = true) == 'on') { ?>
 					
-									<a href="<?php the_permalink(); ?>"><img class="lazy" src="<?php bloginfo('template_url'); ?>/images/loading.gif" data-original="<?php bloginfo('template_directory'); ?>/tools/timthumb.php?src=<?php echo $imgsrc[0]; ?>&amp;h=394&amp;w=720&amp;zc=1" alt="<?php the_title(); ?>"></a>
+									<a href="<?php the_permalink(); ?>"><img class="lazy" src="<?php bloginfo('template_url'); ?>/images/loading.gif" data-original="<?php bloginfo('template_directory'); ?>/tools/timthumb.php?src=<?php echo $imgsrc[0]; ?>&amp;h=394&amp;w=720&amp;zc=1" alt="<?php wp_title(); ?>"></a>
 								
 								<?php } elseif(get_post_meta($post->ID, 'cebo_youtube', $single = true)) { ?>
 								
@@ -114,7 +114,7 @@ get_header(); ?>
 										<?php $i = 0; while($i <= 4) : ?>
 									    <?php if(sp_get_image($i)) : ?>  
 									    	
-												<li> <img src="<?php bloginfo('template_directory'); ?>/tools/timthumb.php?src=<?php echo sp_get_image($i) ?>&amp;h=394&amp;w=720&amp;zc=1" alt="<?php the_title(); ?>"/></li>
+												<li> <img src="<?php bloginfo('template_directory'); ?>/tools/timthumb.php?src=<?php echo sp_get_image($i) ?>&amp;h=394&amp;w=720&amp;zc=1" alt="<?php wp_title(); ?>"/></li>
 										
 										<?php else : break; endif; ?>
 							            <?php $i++; ?>
@@ -128,7 +128,7 @@ get_header(); ?>
 								
 								<? } else { ?>
 								
-									<a href="<?php the_permalink(); ?>"><img class="lazy" src="<?php bloginfo('template_url'); ?>/images/loading.gif" data-original="<?php bloginfo('template_directory'); ?>/tools/timthumb.php?src=<?php echo $imgsrc[0]; ?>&amp;h=394&amp;w=720&amp;zc=1" alt="<?php the_title(); ?>"></a>
+									<a href="<?php the_permalink(); ?>"><img class="lazy" src="<?php bloginfo('template_url'); ?>/images/loading.gif" data-original="<?php bloginfo('template_directory'); ?>/tools/timthumb.php?src=<?php echo $imgsrc[0]; ?>&amp;h=394&amp;w=720&amp;zc=1" alt="<?php wp_title(); ?>"></a>
 									
 								<? } ?>
 								
@@ -146,7 +146,7 @@ get_header(); ?>
 									
 									
 									
-										<h3><?php the_title(); ?></h3>
+										<h3><?php wp_title(); ?></h3>
 									
 										<?php if(count($attachments) == 0 && !get_post_meta($post->ID, 'cebo_youtube', $single = true) && !get_post_meta($post->ID, 'cebo_vimeo', $single = true) && !$imgsrc ) { ?>
 										
@@ -165,8 +165,8 @@ get_header(); ?>
 			
 												<div class="center-bar">
 													<a href="<?php the_permalink(); ?>" aria-hidden="true" class="icon-link a0" data-animate="fadeInUp"></a>
-												<a href="https://twitter.com/share?url=<?php the_permalink(); ?>&text=<?php the_title(); ?>&via=<?php get_option('cebo_twitter'); ?>" target="_blank" aria-hidden="true" class="icon-twitter a0" data-animate="fadeInUp"></a>
-												<a href="http://www.facebook.com/sharer.php?s= 100&amp;p[title]=<?php the_title(); ?>&amp;p[url]=<?php the_permalink(); ?>&amp;p[images][0]=<?php echo $imgsrc[0]; ?>&amp;p[summary]=<?php echo excerpt(30); ?>" target="_blank" aria-hidden="true" class="icon-facebook a0" data-animate="fadeInUp"></a>
+												<a href="https://twitter.com/share?url=<?php the_permalink(); ?>&text=<?php wp_title(); ?>&via=<?php get_option('cebo_twitter'); ?>" target="_blank" aria-hidden="true" class="icon-twitter a0" data-animate="fadeInUp"></a>
+												<a href="http://www.facebook.com/sharer.php?s= 100&amp;p[title]=<?php wp_title(); ?>&amp;p[url]=<?php the_permalink(); ?>&amp;p[images][0]=<?php echo $imgsrc[0]; ?>&amp;p[summary]=<?php echo excerpt(30); ?>" target="_blank" aria-hidden="true" class="icon-facebook a0" data-animate="fadeInUp"></a>
 													
 												</div>
 											</div>
