@@ -10,29 +10,31 @@
 			
 			
 			<li>
-				<div class="slide-header">
-					
-					<?php if(get_post_meta($post->ID, 'logopic', true)) { ?>
-					
-					<div class="slicer" style="background-image: url(<?php echo get_post_meta($post->ID, 'logopic', true); ?>);"></div>
-										
-					<?php } ?>
-					
-					
-					<?php if(get_post_meta($post->ID, 'bigtitle', true)) { ?>
-					
-					<h2><?php echo get_post_meta($post->ID, 'bigtitle', true); ?></h2>
-					
-					<?php } ?>
-					
-					<?php if(get_post_meta($post->ID, 'littletitle', true)) { ?>
-					
-					<h3><?php echo get_post_meta($post->ID, 'littletitle', true); ?></h3>
-					
-					<?php } ?>
-					
-				</div>
+				<a target="_blank" href="<?php echo get_post_meta($post->ID, 'sliderurl', true); ?>">
+					<div class="slide-header">
+						
+						<?php if(get_post_meta($post->ID, 'logopic', true)) { ?>
+						
+						<div class="slicer" style="background-image: url(<?php echo get_post_meta($post->ID, 'logopic', true); ?>);"></div>
+											
+						<?php } ?>
+						
+						
+						<?php if(get_post_meta($post->ID, 'bigtitle', true)) { ?>
+						
+						<h2><?php echo get_post_meta($post->ID, 'bigtitle', true); ?></h2>
+						
+						<?php } ?>
+						
+						<?php if(get_post_meta($post->ID, 'littletitle', true)) { ?>
+						
+						<h3><?php echo get_post_meta($post->ID, 'littletitle', true); ?></h3>
+						
+						<?php } ?>
+						
+					</div>
 				<img src="<?php echo $imgsrc[0]; ?>" alt="<?php get_post_meta($post->ID, 'bigtitle', true); ?>" />
+			</a>
 			</li>
 			
 			

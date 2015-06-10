@@ -10,6 +10,7 @@ $videobox = array (
 			array( 'bigtitle', 'If you would like to add a  slide main heading, put it here. .. but keep it short' , 'textfield'),
 			array( 'littletitle', 'If you would like to add a slide small heading, put it here. .. but keep it short" ' , 'textfield'),
 			array( 'logopic', 'If you would like to add an image or logo, upload it, copy and paste the link here." ' , 'textfield'),
+			array( 'sliderurl', 'If you would like to add a slider URL, copy and paste the link here." ' , 'textfield'),
 				),
 		
 );
