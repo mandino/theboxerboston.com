@@ -48,7 +48,7 @@
 		$popout_query = new WP_Query(
 			array(
 				'post_type' => 'popout-box', 
-				'posts_per_page' => 1,
+				'posts_per_page' => 2,
 			)
 		);
 
@@ -56,34 +56,35 @@
 	
 	?>
 
-		<div class="specialsbox">
-				
-			<div class="closebox"><a href="#">X</a></div>
+			<?php 
+			$specialsboxID = 1;
+			while($popout_query->have_posts()) : $popout_query->the_post(); ?>
 
-			<?php while($popout_query->have_posts()) : $popout_query->the_post(); ?>
-
-				<?php if(get_post_meta($post->ID, 'cebo_popout_welcome', true)) { ?>
-					<span style="background-color: #ab0303;" class="welcome-text"><?php echo get_post_meta($post->ID, 'cebo_popout_welcome', true); ?></span>
-				<?php } ?>
+			<div class="specialsbox ID<?php echo $specialsboxID; ?>">
 				
-				<div class="specialtab">
-					
-					<?php if(get_post_meta($post->ID, 'cebo_popout_url', true)) { ?>
-						<a href="<?php echo get_post_meta($post->ID, 'cebo_popout_url', true); ?>">
+				<div class="closebox"><a href="#">X</a></div>
+
+					<?php if(get_post_meta($post->ID, 'cebo_popout_welcome', true)) { ?>
+						<span style="background-color: #ab0303;" class="welcome-text"><?php echo get_post_meta($post->ID, 'cebo_popout_welcome', true); ?></span>
 					<?php } ?>
-
-						<h3 style="font-size: 25px;">
-						<span><?php echo get_post_meta($post->ID, 'cebo_popout_subtitle', true); ?></span>
-						<?php echo get_post_meta($post->ID, 'cebo_popout_title', true); ?><br>
-						<span><?php echo get_post_meta($post->ID, 'cebo_popout_tagline', true); ?></span></h3>
-
-					<?php if(get_post_meta($post->ID, 'cebo_popout_url', true)) { ?></a><?php } ?>
+					
+					<div class="specialtab">
 						
-				</div>
+						<?php if(get_post_meta($post->ID, 'cebo_popout_url', true)) { ?>
+							<a href="<?php echo get_post_meta($post->ID, 'cebo_popout_url', true); ?>">
+						<?php } ?>
 
+							<h3 style="font-size: 25px;">
+							<span><?php echo get_post_meta($post->ID, 'cebo_popout_subtitle', true); ?></span>
+							<?php echo get_post_meta($post->ID, 'cebo_popout_title', true); ?><br>
+							<span><?php echo get_post_meta($post->ID, 'cebo_popout_tagline', true); ?></span></h3>
+
+						<?php if(get_post_meta($post->ID, 'cebo_popout_url', true)) { ?></a><?php } ?>
+							
+					</div>
+				</div>
+					<?php $specialsboxID ++; ?>
 			<?php endwhile; ?>
-	
-		</div>
 
 	<?php endif; ?>
 
