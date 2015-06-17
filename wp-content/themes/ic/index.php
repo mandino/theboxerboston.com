@@ -350,7 +350,7 @@
 
 							<?php } ?>							
 
-							<a href="<?php the_permalink(); ?>"><img src="<?php echo $imgsrc[0]; ?>"></a>
+							<a href="<?php the_permalink(); ?>"><img src="<?php echo tt($imgsrc[0], 540, 292);; ?>"></a>
 							<div class="ptit"> 
 								<a href="<?php the_permalink(); ?>"><span><?php wp_title(); ?></span></a>
 							</div>
@@ -380,7 +380,7 @@
 						
 						
 						<div>
-							<a href="<?php the_permalink(); ?>"><img src="<?php echo $imgsrc[0]; ?>"></a>
+							<a href="<?php the_permalink(); ?>"><img src="<?php echo tt($imgsrc[0], 540, 292); ?>"></a>
 							<div class="ptits"> 
 								<a href="<?php the_permalink(); ?>"><span><?php wp_title(); ?></span></a>
 							</div>
