@@ -3428,6 +3428,7 @@ ul.tabs li:last-child {
 
 .post-content img {
 	height: auto;
+	max-height: 450px;
 	max-width: 100%;
 	width: 100%;
 }
