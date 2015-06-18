@@ -153,6 +153,16 @@ function content($limit) {
   return $content;
 }
 
+function the_title_char_limit($limit) {
+    $the_title_char_limit = get_the_title();
+    if ( strlen($the_title_char_limit) > $limit ) {
+    $the_title_char_limit = substr($the_title_char_limit,0,$limit);
+    echo $the_title_char_limit . '...';
+    } else {
+    echo $the_title_char_limit;
+    }
+}
+
 /* ==================================== */
 
 if ( function_exists( 'add_theme_support' ) ) { // WP 2.9 Post Thumbnail Feature
