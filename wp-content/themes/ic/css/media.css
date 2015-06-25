@@ -417,9 +417,14 @@ and (max-width : 1099px) {
 and (max-width : 1024px) {
 
 
-	
+	/* Double Flyout */
 
+	.ID1 { top: 15px; }
+	.ID2 { bottom: 28px; }
 
+	#home-slider .specialsbox h3 {
+		font-size: 22px !important
+	}
 
 }
 
@@ -807,6 +812,24 @@ line-height: 16px;
 
 
 
+	/* Double Flyout */
+
+	.welcome-text { font-size: 13px; }
+
+	.ID1 { top: 15px; }
+	.ID2 { bottom: 28px; }
+
+	#home-slider .specialsbox {
+		padding: 10px 15px;
+		width: 285px;
+		height: 55px;
+	}
+
+	#home-slider .specialsbox h3 {
+		font-size: 13px !important
+	}
+
+
 	/* Home - Specials */
 
 	#intro .section-photos li, #intro .section-photos li:first-child {
@@ -908,10 +931,30 @@ line-height: 16px;
 
 }
 
+/* ================================================  MAX WIDTH 768 ======================================= */
 
 
+@media only screen 
+and (max-width : 768px) {
 
+	/* Double Flyout */
 
+	.welcome-text { font-size: 13px; }
+
+	.ID1 { top: 15px; }
+	.ID2 { bottom: 28px; }
+
+	#home-slider .specialsbox {
+		padding: 10px 15px;
+		width: 285px;
+		height: 55px;
+	}
+
+	#home-slider .specialsbox h3 {
+		font-size: 13px !important
+	}
+
+}
 
 
 
