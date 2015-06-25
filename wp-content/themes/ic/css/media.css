@@ -964,13 +964,30 @@ and (max-width : 720px)
 {	
 
 
-		#home-slider {
-height: 350px;
-}
-
-.home .flexslider .slides img {
-	width: 150%;
+	#home-slider {
+		height: 350px;
 	}
+
+	.home .flexslider .slides img {
+		width: 150%;
+	}
+
+	/* Double Flyout */
+
+	.welcome-text { font-size: 13px; }
+
+	.ID1 { top: 15px; }
+	.ID2 { bottom: 50px; }
+
+	#home-slider .specialsbox {
+		padding: 10px 15px;
+		width: 285px;
+		height: 80px;
+	}
+
+	#home-slider .specialsbox h3 {
+		font-size: 18px !important
+	}	
 
 }
 /* ================================================  MAX WIDTH 640 ======================================= */
@@ -980,7 +997,7 @@ height: 350px;
 and (max-width : 640px) 
 {	
 
-		.specialsbox {
+	.specialsbox {
 		display: none;
 	}
 	
@@ -1008,7 +1025,7 @@ and (max-width : 640px)
 	}
 
 	.slicer {
-    width: 300px !important;
+    	width: 300px !important;
 	}
 
 
