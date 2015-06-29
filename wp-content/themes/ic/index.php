@@ -101,7 +101,7 @@
 							
 							<?php } ?>
 							<br>
-							<p><?php the_title(); ?></p>
+							<p>Rooms & Suites</p>
 							
 							<a class="special-external" href="<?php the_permalink(); ?>"><i class="fa fa-chevron-right fa-lg"></i></a>
 						</div>
