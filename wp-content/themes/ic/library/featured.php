@@ -50,7 +50,7 @@
 		$popout_query = new WP_Query(
 			array(
 				'post_type' => 'popout-box', 
-				'posts_per_page' => 3,
+				'posts_per_page' => 2,
 			)
 		);
 
