@@ -101,7 +101,7 @@
 							
 							<?php } ?>
 							<br>
-							<p><?php wp_title(); ?></p>
+							<p><?php the_title(); ?></p>
 							
 							<a class="special-external" href="<?php the_permalink(); ?>"><i class="fa fa-chevron-right fa-lg"></i></a>
 						</div>
@@ -191,7 +191,7 @@
 							
 							<?php } ?>
 							<br>
-							<p><?php wp_title(); ?></p>
+							<p><?php the_title(); ?></p>
 							
 							<a class="special-external" href="/?page_id=47"><i class="fa fa-chevron-right fa-lg"></i></a>
 						</div>
