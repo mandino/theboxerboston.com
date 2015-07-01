@@ -61,7 +61,7 @@
 			<?php 
 			$specialsboxID = 1;
 			while($popout_query->have_posts()) : $popout_query->the_post(); ?>
-
+			<a class="stay-wanderful-button" href="https://staywanderful.com/widgets/#/8">Stay Wanderful</a> <script> window.stayWanderful=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.stayWanderful||{};if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src="https://staywanderful.com/widgets/widget.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","stay-wanderful-script")); </script>
 			<div class="specialsbox ID<?php echo $specialsboxID; ?>">
 				
 				<div class="closebox"><a href="#">X</a></div>
