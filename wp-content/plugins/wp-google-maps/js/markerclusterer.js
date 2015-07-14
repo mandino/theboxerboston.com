@@ -60,6 +60,7 @@
  * @extends google.maps.OverlayView
  */
 function MarkerClusterer(map, opt_markers, opt_options) {
+
   // MarkerClusterer implements google.maps.OverlayView interface. We use the
   // extend function to extend MarkerClusterer with google.maps.OverlayView
   // because it might not always be available when the code is defined so we
@@ -78,6 +79,7 @@ function MarkerClusterer(map, opt_markers, opt_options) {
    *  @type {Array.<Cluster>}
    */
   this.clusters_ = [];
+
 
   this.sizes = [53, 56, 66, 78, 90];
 
@@ -151,6 +153,7 @@ function MarkerClusterer(map, opt_markers, opt_options) {
   this.setupStyles_();
 
   this.setMap(map);
+
 
   /**
    * @type {number}

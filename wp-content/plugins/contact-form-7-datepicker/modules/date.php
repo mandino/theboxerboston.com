@@ -19,6 +19,7 @@ class ContactForm7Datepicker_Date {
 
 
 		// Tag generator
+		add_action('load-contact_page_wpcf7-new', array(__CLASS__, 'tag_generator'));
 		add_action('load-toplevel_page_wpcf7', array(__CLASS__, 'tag_generator'));
 
 		// Messages
@@ -129,6 +130,9 @@ class ContactForm7Datepicker_Date {
 	}
 
 	public static function tag_generator() {
+        if (! function_exists( 'wpcf7_add_tag_generator'))
+            return;
+
 		wpcf7_add_tag_generator('date',
 			__('Date field', 'wpcf7'),
 			'wpcf7-tg-pane-date',
@@ -186,11 +190,11 @@ class ContactForm7Datepicker_Date {
 
 		if (! $valid) {
 			// Validate dd/mm/yy
-			$value = str_replace('/', '-', $value);
-			$valid = strtotime($value) ? true : false;
+			$new_value = str_replace('/', '-', $value);
+			$valid = strtotime($new_value) ? true : false;
 		}
 
-		return $valid;
+		return apply_filters( 'cf7dp_is_valid_date', $valid, $value );
 	}
 }
 
