@@ -41,7 +41,7 @@
 					<?php } ?>
 
 		
-					<h2 class="section-title fr"><?php wp_title(); ?></h2>
+					<h2 class="section-title fr"><?php the_title(); ?></h2>
 	
 				</div>
 	
