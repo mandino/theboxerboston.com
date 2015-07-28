@@ -650,7 +650,7 @@
 						<li<?php if($count == 2 || $count == 4) { ?> class="even"<?php } ?>>
 							
 							
-							<a href="<?php the_permalink(); ?>"><img src="<?php echo $imgsrc[0]; ?>"  alt="<?php the_title();?>"/>
+							<a href="<?php the_permalink(); ?>"><img src="<?php echo tt($imgsrc[0], 275, 188); ?>"  alt="<?php the_title();?>"/>
 							
 							
 							<?php $shortdater = tribe_get_start_date($post->ID, true, 'M'); $shortdaterz = substr($shortdater, 0, 3);  ?>
@@ -692,7 +692,7 @@
 							<?php query_posts('post_type=post&posts_per_page=2&offset=1&cat=-10'); if(have_posts()) : while(have_posts()) : the_post(); $imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full"); ?>
 							
 							<li>
-								<a href="<?php the_permalink(); ?>"><img src='<?php echo $imgsrc[0]; ?>' alt='<?php wp_title(); ?>' /></a>
+								<a href="<?php the_permalink(); ?>"><img src='<?php echo tt($imgsrc[0], 240, 180); ?>' alt='<?php wp_title(); ?>' /></a>
 								<a href="<?php the_permalink(); ?>"><h3 style="margin-top: 15px;"><?php wp_title(); ?></h3></a>
 								<p><?php echo excerpt(10); ?></p>
 							</li>
@@ -704,7 +704,7 @@
 						
 						<?php query_posts('post_type=post&posts_per_page=1&cat=-10'); if(have_posts()) : while(have_posts()) : the_post(); $imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full"); ?>
 							<li>
-								<a href="<?php the_permalink(); ?>"><img src='<?php echo $imgsrc[0]; ?>' alt='<?php wp_title(); ?>' /></a>
+								<a href="<?php the_permalink(); ?>"><img src='<?php echo tt($imgsrc[0], 540, 290); ?>' alt='<?php wp_title(); ?>' /></a>
 								<a href="<?php the_permalink(); ?>"><h3 style="margin-top: 15px;"><?php wp_title(); ?></h3></a>
 								<p><?php echo excerpt(80); ?></p>
 							</li>
@@ -718,7 +718,7 @@
 							<?php query_posts('post_type=post&posts_per_page=2&offset=3&cat=-10'); if(have_posts()) : while(have_posts()) : the_post(); $imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full"); ?>
 							
 							<li>
-								<a href="<?php the_permalink(); ?>"><img src='<?php echo $imgsrc[0]; ?>' alt='<?php wp_title(); ?>' /></a>
+								<a href="<?php the_permalink(); ?>"><img src='<?php echo tt($imgsrc[0], 240, 180); ?>' alt='<?php wp_title(); ?>' /></a>
 								<a href="<?php the_permalink(); ?>"><h3 style="margin-top: 15px;"><?php wp_title(); ?></h3></a>
 								<p><?php echo excerpt(10); ?></p>
 							</li>
