@@ -119,11 +119,11 @@
 								
 								<?php if(get_post_meta($post->ID, 'cebo_homethumb', true)) { ?>
 								
-								<a href="<?php the_permalink(); ?>"><img src="<?php echo get_post_meta($post->ID, 'cebo_homethumb', true); ?>"></a>
+								<a href="<?php the_permalink(); ?>"><img src="<?php echo tt(get_post_meta($post->ID, 'cebo_homethumb', true), 260, 292); ?>"></a>
 								
 								<?php } else { ?>
 								
-								<a href="<?php the_permalink(); ?>"><img src="<?php echo $imgsrc[0]; ?>"></a>
+								<a href="<?php the_permalink(); ?>"><img src="<?php echo tt($imgsrc[0], 260, 292); ?>"></a>
 								
 								<?php } ?>
 								
