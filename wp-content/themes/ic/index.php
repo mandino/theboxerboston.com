@@ -242,7 +242,7 @@
 							<div class="cbp-qtcontent">
 								<blockquote>
 								  <p><?php echo excerpt(40); ?></p>
-								  <footer><?php wp_title(); ?></footer>
+								  <footer><?php the_title(); ?></footer>
 								</blockquote>
 							</div>
 						

@@ -53,7 +53,7 @@
 					<?php } ?>
 
 		
-					<h2 class="section-title fr"><?php wp_title(); ?></h2>
+					<h2 class="section-title fr"><?php the_title(); ?></h2>
 	
 				</div>
 	
@@ -260,7 +260,7 @@
 				<div class='item item1 current'>
 					<a href="<?php the_permalink(); ?>"><img src = '<?php echo get_post_meta($post->ID, 'cebo_homethumb', true); ?>' /></a>
 					
-					<h3><?php wp_title(); ?></h3>
+					<h3><?php the_title(); ?></h3>
 				</div>
 				
 				<?php endwhile; endif; wp_reset_query(); ?>	

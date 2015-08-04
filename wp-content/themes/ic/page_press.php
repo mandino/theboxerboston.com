@@ -45,7 +45,7 @@
 					<?php } ?>
 
 		
-					<h2 class="section-title fr"><?php wp_title(); ?></h2>
+					<h2 class="section-title fr"><?php the_title(); ?></h2>
 	
 				</div>
 	
@@ -95,7 +95,7 @@
 					// 'post__not_in' => array($currency)
 					
 					)); if(have_posts()) : while(have_posts()) : the_post(); ?>
-				<li <?php if( $this_post == $post->ID ) { echo ' class="current"'; } ?>><a href="<?php the_permalink(); ?>"><?php wp_title(); ?></a></li>
+				<li <?php if( $this_post == $post->ID ) { echo ' class="current"'; } ?>><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
 				<?php endwhile; endif; wp_reset_query(); ?>	
 			</ul>
 			</div>
@@ -115,7 +115,7 @@
 					'posts_per_page'=> 8
 					
 					)); if(have_posts()) : while(have_posts()) : the_post(); ?>
-				<li <?php if( $this_post == $post->ID ) { echo ' class="current"'; } ?>><a href="<?php the_permalink(); ?>"><?php wp_title(); ?></a></li>
+				<li <?php if( $this_post == $post->ID ) { echo ' class="current"'; } ?>><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
 				<?php endwhile; endif; wp_reset_query(); ?>	
 			</ul>
 			</div>
@@ -137,8 +137,8 @@
 				<?php query_posts('cat=10&posts_per_page=-1'); if(have_posts()) : while(have_posts()) : the_post(); $imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full"); ?>
 				
 					<li>
-						<a href="<?php the_permalink(); ?>"><img src="<?php echo $imgsrc[0]; ?>" alt="<?php wp_title(); ?>" /></a>
-						<h2><?php wp_title(); ?></h2>
+						<a href="<?php the_permalink(); ?>"><img src="<?php echo $imgsrc[0]; ?>" alt="<?php the_title(); ?>" /></a>
+						<h2><?php the_title(); ?></h2>
 					</li>
 				
 				
