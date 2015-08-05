@@ -13,7 +13,7 @@
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<!--<title>
-		<?php /**global $page, $paged; wp_title( '|', true, 'right' ); bloginfo( 'name' );
+		<?php /**global $page, $paged; the_title( '|', true, 'right' ); bloginfo( 'name' );
 	
 		// Add the blog description for the home/front page.
 		$site_description = get_bloginfo( 'description', 'display' );
@@ -25,7 +25,7 @@
 			echo ' | ' . sprintf( __( 'Page %s', 'cebolang' ), max( $paged, $page ) );**/
 		?>
 	</title>-->
-	<title><?php wp_title(); ?></title>
+	<title><?php the_title(); ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
 	
@@ -249,9 +249,9 @@ pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName
 	
 		<div id="primary-nav">
 		
-			<a href="<?php bloginfo('url'); ?>" class="logo<?php if(is_home()) { ?> droplogo<?php } ?>"><img src="<?php echo get_option('cebo_logo'); ?>" alt="<?php echo wp_title(); ?>" /></a>
+			<a href="<?php bloginfo('url'); ?>" class="logo<?php if(is_home()) { ?> droplogo<?php } ?>"><img src="<?php echo get_option('cebo_logo'); ?>" alt="<?php echo the_title(); ?>" /></a>
 
-			<a href="<?php bloginfo('url'); ?>" class="logo mobile"><img src="<?php echo get_option('cebo_logo'); ?>" alt="<?php echo wp_title(); ?>" /></a>
+			<a href="<?php bloginfo('url'); ?>" class="logo mobile"><img src="<?php echo get_option('cebo_logo'); ?>" alt="<?php echo the_title(); ?>" /></a>
 			
 			<a href="https://theboxerboston.reztrip.com" class="reserve fixeer button fr input-append date" id="idp3" data-date="12-02-2012" data-date-format="mm-dd-yyyy">RESERVE</a>
 

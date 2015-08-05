@@ -9,7 +9,7 @@
 		
 			<?php query_posts('post_type=post&showposts=15'); if(have_posts()) : while(have_posts()) : the_post(); ?>
 			
-			<li><a href="<?php the_permalink(); ?>"><p><?php wp_title(); ?></p></a><span class="hitbottom"><small>Written by <?php the_author(); ?> on <?php the_time('F jS') ?></small></span></li>
+			<li><a href="<?php the_permalink(); ?>"><p><?php the_title(); ?></p></a><span class="hitbottom"><small>Written by <?php the_author(); ?> on <?php the_time('F jS') ?></small></span></li>
 			
 			<?php endwhile; endif; wp_reset_query(); ?>	
 		

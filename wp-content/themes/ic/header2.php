@@ -2,7 +2,7 @@
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<title>
-		<?php global $page, $paged; wp_title( '|', true, 'right' ); bloginfo( 'name' );
+		<?php global $page, $paged; the_title( '|', true, 'right' ); bloginfo( 'name' );
 	
 		// Add the blog description for the home/front page.
 		$site_description = get_bloginfo( 'description', 'display' );
@@ -264,9 +264,9 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
 	
 		<div id="primary-nav">
 		
-			<a href="<?php bloginfo('url'); ?>" class="logo<?php if(is_home()) { ?> droplogo<?php } ?>"><img src="<?php echo get_option('cebo_logo'); ?>" alt="<?php echo wp_title(); ?>" /></a>
+			<a href="<?php bloginfo('url'); ?>" class="logo<?php if(is_home()) { ?> droplogo<?php } ?>"><img src="<?php echo get_option('cebo_logo'); ?>" alt="<?php echo the_title(); ?>" /></a>
 
-			<a href="<?php bloginfo('url'); ?>" class="logo mobile"><img src="<?php echo get_option('cebo_logo'); ?>" alt="<?php echo wp_title(); ?>" /></a>
+			<a href="<?php bloginfo('url'); ?>" class="logo mobile"><img src="<?php echo get_option('cebo_logo'); ?>" alt="<?php echo the_title(); ?>" /></a>
 			
 			<a class="reserve fixeer button fr input-append date" id="idp3" data-date="12-02-2012" data-date-format="mm-dd-yyyy">RESERVE</a>
 
