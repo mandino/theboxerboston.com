@@ -12,8 +12,8 @@
 <!DOCTYPE HTML>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<!--<title>
-		<?php /**global $page, $paged; the_title( '|', true, 'right' ); bloginfo( 'name' );
+	<title>
+		<?php global $page, $paged; wp_title( '|', true, 'right' ); bloginfo( 'name' );
 	
 		// Add the blog description for the home/front page.
 		$site_description = get_bloginfo( 'description', 'display' );
@@ -22,10 +22,9 @@
 	
 		// Add a page number if necessary:
 		if ( $paged >= 2 || $page >= 2 )
-			echo ' | ' . sprintf( __( 'Page %s', 'cebolang' ), max( $paged, $page ) );**/
+			echo ' | ' . sprintf( __( 'Page %s', 'cebolang' ), max( $paged, $page ) );
 		?>
-	</title>-->
-	<title><?php the_title(); ?></title>
+	</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
 	
