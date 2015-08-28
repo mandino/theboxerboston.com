@@ -185,4 +185,22 @@ function create_loctype_taxonomies()
 
 }
 
+// CREATE POST TYPE : EMAIL SIGNUP FORM
+
+add_action( 'init', 'email_signup_form' );
+function email_signup_form() {
+  register_post_type( 'email-signup-form',
+    array(
+      'labels' => array(
+        'name' => __( 'Email Signup Form' ),
+        'singular_name' => __( 'Email Signup Form' )
+      ),
+      'public' => true,
+      'rewrite' => array('slug' => 'email-signup-form'),
+      'menu_icon' => 'dashicons-welcome-write-blog',
+      'supports' => array('title','custom-fields', 'author', 'revision', 'editor')
+    )
+  );
+}
+
 ?>
