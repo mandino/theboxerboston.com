@@ -46,7 +46,7 @@
 		</ul>
 	</div>
 		
-	<?php 
+	<?php /*
 
 		$popout_query = new WP_Query(
 			array(
@@ -85,6 +85,6 @@
 					<?php $specialsboxID ++; ?>
 			<?php endwhile; ?>
 
-	<?php endif; ?>
+	<?php endif;*/ ?>
 
 </div>
