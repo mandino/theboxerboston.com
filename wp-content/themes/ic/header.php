@@ -1,5 +1,4 @@
 <?php 
-<?php 
 
 	if ( file_exists( TEMPLATEPATH.'/library/mobile-detect.php' ) ) {
 
