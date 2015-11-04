@@ -112,6 +112,58 @@
 	</footer>
 
 <?php wp_footer(); ?>
+
+<!-- Scripts -->
+<?php include(TEMPLATEPATH. "/library/scripts.php"); ?>
+
+<!-- Google Code for Remarketing Tag -->
+
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 969927793;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/969927793/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+<!-- zdirect script -->
+<script type="text/javascript" src="https://www.zdirect.com/scripts/newApp.js"></script>
+
+<!-- Sojern Body -->
+<script>
+(function () {
+var pl = document.createElement('script');
+pl.type = 'text/javascript';
+pl.async = true;
+pl.src = 'https://beacon.sojern.com/pixel/p/3677?cid=[destination_searched]&ha1=[destination_searched]&et=hs';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(pl);
+})();
+</script>
+<!-- End Sojern script -->
+
+<script>
+
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-37161096-1', 'auto', {
+		'allowLinker': true
+	});
+	ga('send', 'pageview');
+	ga('require', 'linker');
+	ga('linker:autoLink', ['reztrip.com'], false, true);
+
+</script>
+
+
 	
 <!-- <div id="fb-root"></div> -->
 <script>(function(d, s, id) {

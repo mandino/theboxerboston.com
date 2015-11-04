@@ -55,57 +55,38 @@
 	<!-- Fonts -->
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 	<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700' rel='stylesheet' type='text/css'>
+	
+	<!-- Plugins CSS -->
+	<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/quotes-rotator/component.css" />
+	<link rel="stylesheet" href="<?php bloginfo ('template_url'); ?>/css/slidejs.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="<?php bloginfo ('template_url'); ?>/js/flexslider/flexslider.css" type="text/css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/jquery.mmenu.css">
+
+	<?php if ( 'rooms' == get_post_type() ) 	{ ?>
+		<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/iosslider.css">
+	<?php } ?>
+
+	<!-- Custom Plugin Settings -->
+	<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/custom-plugins.css">
+
+	<!-- responsive style -->
+	<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/media.css">
+
+	<!-- Color Override CSS -->
+	<!-- <link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/oceana-hotel.css"> -->
+	
+	<style>
+	<?php include(TEMPLATEPATH. "/library/inset.php"); ?>	
+	</style>
 
 	<!-- Jquery -->
-	<?php include(TEMPLATEPATH. "/library/jquery.php"); ?>	
+	<?php //include(TEMPLATEPATH. "/library/jquery.php"); ?>	
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<script type='text/javascript' src='<?php bloginfo ('url'); ?>/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+	
 
 	<!-- pinterest -->
 	<meta name="p:domain_verify" content="fdcd1755542385831e526a2a712cc134"/>
-
-	<!-- Scripts -->
-	<?php include(TEMPLATEPATH. "/library/scripts.php"); ?>	
-
-
-	<style>
-		<?php
-
-			include(TEMPLATEPATH. "/library/inset.php");
-		?>	
-	</style>
-
-
-<!-- Google Code for Remarketing Tag -->
-
-<script type="text/javascript">
-/* <![CDATA[ */
-var google_conversion_id = 969927793;
-var google_custom_params = window.google_tag_params;
-var google_remarketing_only = true;
-/* ]]> */
-</script>
-<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-</script>
-<noscript>
-<div style="display:inline;">
-<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/969927793/?value=0&amp;guid=ON&amp;script=0"/>
-</div>
-</noscript>
-
-<!-- zdirect script -->
-
-<script type="text/javascript" src="https://www.zdirect.com/scripts/newApp.js"></script>
-
-<!-- Sojern script  -->
-<script>
-(function () {
-var pl = document.createElement('script');
-pl.type = 'text/javascript';
-pl.async = true;
-pl.src = 'https://beacon.sojern.com/pixel/p/3677?cid=[destination_searched]&ha1=[destination_searched]&et=hs';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(pl);
-})();
-</script>
-<!-- End Sojern script -->
-
 
 	<?php
 		/****************** DO NOT REMOVE **********************
@@ -116,8 +97,8 @@ pl.src = 'https://beacon.sojern.com/pixel/p/3677?cid=[destination_searched]&ha1=
 			wp_enqueue_script( 'comment-reply' );
 		wp_head();
 	?>
-
-<!-- Sojern -->
+	
+<!-- Sojern Head -->
 <script>
 (function () {
 var pl = document.createElement('script');
@@ -128,31 +109,13 @@ pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName
 </script>
 <!-- End Sojern -->
 
-<script>
-
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-	ga('create', 'UA-37161096-1', 'auto', {
-		'allowLinker': true
-	});
-	ga('send', 'pageview');
-	ga('require', 'linker');
-	ga('linker:autoLink', ['reztrip.com'], false, true);
-
-</script>
-
 </head> 
 	
 <body id="oceana" <?php body_class($class); ?>>
 
 	<div id="navigation">
 			
-			
 			<div class="ressys">
-				
 				
 				<div class="whippapeal">
 				<div class="formfields">

@@ -1,3 +1,45 @@
+<!--<script src="http://code.jquery.com/mobile/1.4.1/jquery.mobile-1.4.1.min.js"></script>-->
+	<script type="text/javascript" src="<?php bloginfo ('template_url'); ?>/js/jquery.prettyPhoto.js"></script>
+
+	<!-- ClickNav -->
+	<script type="text/javascript" src="<?php bloginfo ('template_url'); ?>/js/jquery-clicknav.js"></script>
+
+	<!-- Lightbox - Prettyphoto -->	
+	<link rel="stylesheet" href="<?php bloginfo ('template_url'); ?>/css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet"/>	
+
+	<!-- Pinterest -->
+	<script type="text/javascript" src="http://assets.pinterest.com/js/pinit.js"></script>
+
+	<!-- Custom Modernizr for Quotes Rotator -->
+	<script src="<?php bloginfo ('template_url'); ?>/js/quotes-rotator/modernizr.custom.js"></script>
+
+	<!-- Quotes Rotator -->
+	<script src="<?php bloginfo ('template_url'); ?>/js/quotes-rotator/jquery.cbpQTRotator.js"></script>
+
+	<!-- SlideJS -->
+	<script src="<?php bloginfo ('template_url'); ?>/js/jquery.slides.min.js"></script>
+
+	<!-- Flex Slider -->
+	<script src="<?php bloginfo ('template_url'); ?>/js/flexslider/jquery.flexslider.js"></script>
+
+	<!-- Jquery Sticky -->
+	<script type="text/javascript" src="<?php bloginfo ('template_url'); ?>/js/jquery.sticky.js"></script>
+
+	<!-- Jquery UI -->
+	<!-- <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js?ver=3.5.2'></script> -->
+
+	<!-- Iosslider -->
+	<?php if ( 'rooms' == get_post_type() ) 	{ ?>
+		<script src="<?php bloginfo ('template_url'); ?>/js/jquery.iosslider.min.js"></script>
+	<?php } ?>
+
+	<!-- jquery mmenu -->
+	<script src="<?php bloginfo ('template_url'); ?>/js/jquery.mmenu.min.js"></script>
+
+	<!-- Optional FlexSlider Additions -->
+	<!-- <script src="<?php bloginfo ('template_url'); ?>/js/jquery.easing.js"></script> -->
+	<script src="<?php bloginfo ('template_url'); ?>/js/jquery.mousewheel.js"></script>
+
 <script type="text/javascript">
 
 	$(document).ready(function(){
