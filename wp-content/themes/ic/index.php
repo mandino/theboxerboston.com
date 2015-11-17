@@ -182,7 +182,7 @@
 
 						<?php } ?>
 
-						<h3><?php _e('Hotel Overview', 'cebolang'); ?></h3>
+						<h3><?php _e('IC Local', 'cebolang'); ?></h3>
 
 						<div class="hover-effect">
 							<?php if(get_post_meta($post->ID, 'cebo_tagline', true)) { ?>
