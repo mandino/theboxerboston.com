@@ -4172,3 +4172,7 @@ span.ns-close {
   .signup-form > form input:hover[type="submit"] {
     background: none repeat scroll 0 0 #000;
   }
+
+  .post-content img{
+  max-height: 100% !important;
+}
