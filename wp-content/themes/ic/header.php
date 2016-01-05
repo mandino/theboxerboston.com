@@ -109,6 +109,23 @@ pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName
 </script>
 <!-- End Sojern -->
 
+	<script type="application/ld+json">
+		{
+		"@context": "http://schema.org",
+		"@type": "NewsArticle",
+		"headline": "Article headline",
+		"alternativeHeadline": "The headline of the Article",
+		"image": [
+		"thumbnail1.jpg",
+		"thumbnail2.jpg"
+		],
+		"datePublished": "2015-02-05T08:00:00+08:00",
+		"description": "A most wonderful article",
+		"articleBody": "The full body of the article"
+		}
+	</script> 
+	
+
 </head> 
 	
 <body id="oceana" <?php body_class($class); ?>>
