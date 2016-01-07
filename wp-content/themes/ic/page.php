@@ -145,7 +145,7 @@
 
 					if($sidebarformid == 206){ ?>
 				<p><strong>Get on the List. </br>The Finch Restaurant's VIP Email Signup.</br></strong></p>
-				<p style="line-height:20px;margin-top: -5%;">Be the first to know of all the exclusive events happening at the Boxer Boston's Finch Restaurant</span></p>
+				<p style="line-height:20px;margin-top: -5%;">Be the first to know about of all the exclusive events and happening at the Boxer's modern American restaurant, Finch.</span></p>
 
 				<div class="signup-form">
 					
