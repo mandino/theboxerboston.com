@@ -140,7 +140,29 @@
 				
 				<a class="button" onclick="_gaq.push(['_trackEvent', 'Reserve', 'Reservation-button-sidebar', 'Reserve Now']);" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>"><?php _e('RESERVE NOW', 'cebolang'); ?></a>
 				
-				
+				<?php
+					$sidebarformid = get_the_ID();
+
+					if($sidebarformid == 206){ ?>
+				<p><strong>Get on the List. </br>The Observatory's VIP Email Signup.</br></strong></p>
+				<p style="line-height:20px;margin-top: -5%;">Be the first to know of all the exclusive events happening at the Graham Georgetown's rooftop bar, The Observatory</span></p>
+
+				<div class="signup-form">
+					
+					<form name="surveys" action="http://zmaildirect.com/app/new/MjA0MjA0MTM2" method="get">  
+
+						<input type="hidden" name="formId" value="MjA0MjA0MTM2">
+						    <div>
+						<input type="text" name="email" placeholder="Get on the List">
+							</div>
+						  <div>	
+						<input type="submit" value="Sign Up">
+							</div>
+					</form>
+	
+				</div> 
+				<?php } ?> 
+
 				<ul class="thumbgal">
 						
 						<?php query_posts('post_type=specials&posts_per_page=4'); if(have_posts()) : while(have_posts()) : the_post(); 
