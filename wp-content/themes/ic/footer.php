@@ -313,6 +313,9 @@ fjs.parentNode.insertBefore(js, fjs);
 <?php } ?>
 	
 <!-- End Email signup popup -->
-		
+
+<!-- VOYAT CODE -->
+<script> (function(){ var v = document.createElement('script'); var s = document.getElementsByTagName('script')[0]; v.src = '//io.voyat.com/v.js'; v.async = true; s.parentNode.insertBefore(v, s); })(); </script>
+<!-- VOYAT CODE -->	
 </body>
 </html>
