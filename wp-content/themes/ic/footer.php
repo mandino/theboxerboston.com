@@ -58,7 +58,7 @@
 
 		</div>
 
-		<a href="http://independentcollection.com/" target="_blank"><div id="property-name"></div></a>
+		<a href="http://www.independentcollection.com/ic-local/" target="_blank"><div id="property-name"></div></a>
 
 		<div class="footer-nav container">
 
