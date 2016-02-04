@@ -60,8 +60,8 @@
 
 
 		<div id="property-name">
-			<a href="http://www.independentcollection.com/ic-local/"><i class="sprite sprite-ic_01"></i></a>
-			<a href="http://www.independentcollection.com/"><i class="sprite sprite-ic_02"></i></a>
+			<a href="http://www.independentcollection.com/ic-local/" target="_blank"><i class="sprite sprite-ic_01"></i></a>
+			<a href="http://www.independentcollection.com/" target="_blank"><i class="sprite sprite-ic_02"></i></a>
 		</div>
 
 		<div class="footer-nav container">
