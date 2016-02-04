@@ -1227,7 +1227,7 @@ color: #333;
     -moz-transition: all 0.4s;
     -webkit-transition: all 0.4s;
     -o-transition: all 0.4s;
-    background: url("../images/independent-collection-footer.png") no-repeat scroll center center rgba(0, 0, 0, 0);
+   /* background: url("../images/independent-collection-footer.png") no-repeat scroll center center rgba(0, 0, 0, 0);*/
     border-bottom: 1px solid #CBCBCB;
     height: 80px;
 }

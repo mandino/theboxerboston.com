@@ -58,7 +58,11 @@
 
 		</div>
 
-		<a href="http://www.independentcollection.com/ic-local/" target="_blank"><div id="property-name"></div></a>
+
+		<div id="property-name">
+			<a href="http://www.independentcollection.com/ic-local/"><i class="sprite sprite-ic_01"></i></a>
+			<a href="http://www.independentcollection.com/"><i class="sprite sprite-ic_02"></i></a>
+		</div>
 
 		<div class="footer-nav container">
 

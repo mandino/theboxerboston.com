@@ -1998,9 +1998,11 @@ h1, h2, h3, h4, h5, h6, h7 {
 
 
 #property-name {
-    background: url("../images/independent-collection-footer.png") no-repeat scroll center center rgba(0, 0, 0, 0);
+   /* background: url("../images/independent-collection-footer.png") no-repeat scroll center center rgba(0, 0, 0, 0);*/
     border-bottom: 1px solid #CBCBCB;
     height: 80px;
+    text-align: center;
+    margin-top:20px;    
 }
 
 
@@ -4175,4 +4177,27 @@ span.ns-close {
 
   .post-content img{
   max-height: 100% !important;
+}
+
+/*********************** SPRITE IMAGES FOR IC LOGO FOOTER ********************************/
+
+.sprite {
+    background: url("images/independent-collection-footer.png") no-repeat scroll center center rgba(0, 0, 0, 0);
+    background-repeat: no-repeat;
+    display: inline-block;
+
+}
+
+.sprite-ic_01 {
+    width: 69px;
+    height: 60px;
+    background-position: 0 0;
+    
+}
+
+.sprite-ic_02 {
+    width: 203px;
+    height: 60px;
+    background-position: -69px 0;
+
 }
