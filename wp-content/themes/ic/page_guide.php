@@ -6,64 +6,30 @@
  get_header(); ?>
 
 
+ 	<?php if (is_page(62)) { ?>
 
-<?php if (is_page('62')) { /** ALL PAGE **/?>
-  <ul class="right-links right" id="toggles">										
-		<li class="dine"><a data-id="eatl" class="linkerd active" href="/?page_id=74" title="Dining">Eat</a></li>
-		<li class="shop"><a data-id="shopl" class="linkerd active" href="/?page_id=76" title="Dining">Shop</a></li>
-		<li class="arts"><a data-id="cult" class="linkerd active" href="/?page_id=72" title="Dining">Culture</a></li>
-		<li class="sights"><a data-id="landl" class="linkerd active" href="/?page_id=78" title="Dining">Landmarks</a></li>
-				
-	</ul>
-<?php } ?>
+	  	<ul class="right-links right" id="toggles">		
+			<li class="dine"><a onClick="location.href='<?php echo get_permalink( $post->post_parent ); ?>/eat'" class="linkerd2 active" href="<?php bloginfo('url'); ?>/?page_id=74" title="Dining">Eat</a></li>
+			<li class="shop"><a onClick="location.href='<?php echo get_permalink( $post->post_parent ); ?>/shop'" class="linkerd2 active" href="<?php bloginfo('url'); ?>/?page_id=76" title="Dining">Shop</a></li>
+			<li class="arts"><a onClick="location.href='<?php echo get_permalink( $post->post_parent ); ?>/culture'" class="linkerd2 active" href="<?php bloginfo('url'); ?>/?page_id=72" title="Dining">Culture</a></li>
+			<li class="sights"><a onClick="location.href='<?php echo get_permalink( $post->post_parent ); ?>/landmarks'" class="linkerd2 active" href="<?php bloginfo('url'); ?>/?page_id=78" title="Dining">Landmarks</a></li>
+		</ul>
 
-<?php if (is_page('768')) { /** EAT PAGE **/?>
-  <ul class="right-links right" id="toggles">										
-		<li class="dine"><a data-id="eatl" class="linkerd active" href="/?page_id=74" title="Dining">Eat</a></li>
-		<li class="shop"><a data-id="shopl" class="linkerd" href="/?page_id=76" title="Dining">Shop</a></li>
-		<li class="arts"><a data-id="cult" class="linkerd" href="/?page_id=72" title="Dining">Culture</a></li>
-		<li class="sights"><a data-id="landl" class="linkerd" href="/?page_id=78" title="Dining">Landmarks</a></li>
-				
-	</ul>
-<?php } ?>
+	<?php } else { 
 
-
-<?php if (is_page('767')) { /** SHOP PAGE **/?>
-  <ul class="right-links right" id="toggles">										
-		<li class="dine"><a data-id="eatl" class="linkerd" href="/?page_id=74" title="Dining">Eat</a></li>
-		<li class="shop"><a data-id="shopl" class="linkerd active" href="/?page_id=76" title="Dining">Shop</a></li>
-		<li class="arts"><a data-id="cult" class="linkerd" href="/?page_id=72" title="Dining">Culture</a></li>
-		<li class="sights"><a data-id="landl" class="linkerd" href="/?page_id=78" title="Dining">Landmarks</a></li>
-				
-	</ul>
-<?php } ?>
-
-
-<?php if (is_page('766')) { /** CULTURE PAGE **/?>
-  <ul class="right-links right" id="toggles">										
-		<li class="dine"><a data-id="eatl" class="linkerd" href="/?page_id=74" title="Dining">Eat</a></li>
-		<li class="shop"><a data-id="shopl" class="linkerd" href="/?page_id=76" title="Dining">Shop</a></li>
-		<li class="arts"><a data-id="cult" class="linkerd active" href="/?page_id=72" title="Dining">Culture</a></li>
-		<li class="sights"><a data-id="landl" class="linkerd" href="/?page_id=78" title="Dining">Landmarks</a></li>
-				
-	</ul>
-<?php } ?>
-
-<?php if (is_page('765')) { /** LANDMARKS PAGE **/?>
-  <ul class="right-links right" id="toggles">										
-		<li class="dine"><a data-id="eatl" class="linkerd" href="/?page_id=74" title="Dining">Eat</a></li>
-		<li class="shop"><a data-id="shopl" class="linkerd" href="/?page_id=76" title="Dining">Shop</a></li>
-		<li class="arts"><a data-id="cult" class="linkerd" href="/?page_id=72" title="Dining">Culture</a></li>
-		<li class="sights"><a data-id="landl" class="linkerd active" href="/?page_id=78" title="Dining">Landmarks</a></li>
-				
-	</ul>
-<?php } ?>
-
-
-
+		$com_link = basename(get_permalink());
+		echo $com_link;
+	?>
 						
-						
-	<a href="#features-1" id="link" class="navigateTo page-down"></a>
+		<ul class="right-links right" id="toggles">						
+			<li class="dine"><a data-id="eatl" class="linkerd <?php if ($com_link == 'eat') { ?>active<?php } ?>" href="/?page_id=74" title="Dining">Eat</a></li>
+			<li class="shop"><a data-id="shopl" class="linkerd <?php if ($com_link == 'shop') { ?>active<?php } ?>" href="/?page_id=76" title="Dining">Shop</a></li>
+			<li class="arts"><a data-id="cult" class="linkerd <?php if ($com_link == 'culture') { ?>active<?php } ?>" href="/?page_id=72" title="Dining">Culture</a></li>
+			<li class="sights"><a data-id="landl" class="linkerd <?php if ($com_link == 'landmarks') { ?>active<?php } ?>" href="/?page_id=78" title="Dining">Landmarks</a></li>
+		</ul>
+
+	<?php } ?>					
+						<a href="#features-1" id="link" class="navigateTo page-down"></a>
 						
 						
     <!-- begins map area -->
@@ -109,7 +75,6 @@
 						<li class="twitter"><a href="http://twitter.com/<?php echo get_option('cebo_twitter'); ?>" target="_blank"><i class="fa fa-twitter fa-2x"></i><span>twitter</span></a></li>
 						
 					<?php } ?>
-
 					<?php if(get_option('cebo_instagram')) { ?>
 					
 						<li class="instagram"><a href="http://instagram.com/<?php echo get_option('cebo_instagram'); ?>" target="_blank"><i class="fa fa-instagram fa-2x"></i><span>twitter</span></a></li>
@@ -124,540 +89,343 @@
 		</div>
 			
 		<div id="tabs-wrapper" class="tabs-wrapper">
-		
-			<ul class="tabs">
-				<li class="eat"><a id="eatl" href="<?php echo get_permalink( $post->post_parent ); ?>/eat">Eat</a></li>
-				<li class="shop"><a id="shopl" href="<?php echo get_permalink( $post->post_parent ); ?>/shop">Shop</a></li>
-				<li class="culture"><a id="cult" href="<?php echo get_permalink( $post->post_parent ); ?>/culture">Culture</a></li>
-				<li class="landmarks"><a id="landl" href="<?php echo get_permalink( $post->post_parent ); ?>/landmarks">Landmarks</a></li>
-			</ul>
+			
+			<?php if (is_page(62)) { ?>
+
+			<div class="container">
+				<div class="category-neighbor">
+			
+					<!-- ECHO EAT -->
+					<?php
+						$query_eat = new WP_Query('post_type=page&p=74');
+						if ($query_eat->have_posts()) : while ($query_eat->have_posts()) : $query_eat->the_post();
+						$imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full");
+					?>
+
+							<div id="mneighbor" style="background-image: url(<?php echo $imgsrc[0]; ?>); margin-top: 10px; margin-right: 10px;">
+								<a data-id="eatl" href="<?php echo get_permalink( $post->post_parent ); ?>/eat">
+									<span class="def-title"><?php echo get_post_meta($post->ID, 'cebo_popout_title', true); ?></span>
+									<span class="hover-title"><?php echo get_post_meta($post->ID, 'cebo_popout_welcome', true); ?></span>
+								</a>		
+							</div>
+
+					<?php endwhile; endif; wp_reset_postdata(); ?>
+
+
+					<!-- ECHO SHOP -->
+					<?php
+						$query_eat = new WP_Query('post_type=page&p=76');
+						if ($query_eat->have_posts()) : while ($query_eat->have_posts()) : $query_eat->the_post();
+						$imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full");
+					?>
+						<div id="mneighbor" style="background-image: url(<?php echo $imgsrc[0]; ?>); margin-top: 10px;">
+							<a data-id="shopl" href="<?php echo get_permalink( $post->post_parent ); ?>/shop">
+								<span class="def-title"><?php echo get_post_meta($post->ID, 'cebo_popout_title', true); ?></span>
+								<span class="hover-title"><?php echo get_post_meta($post->ID, 'cebo_popout_welcome', true); ?></span>
+							</a>
+						</div>
+					<?php endwhile; endif; wp_reset_postdata(); ?>
+
+
+					<!-- ECHO CULTURE -->
+					<?php
+						$query_eat = new WP_Query('post_type=page&p=72');
+						if ($query_eat->have_posts()) : while ($query_eat->have_posts()) : $query_eat->the_post();
+						$imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full");
+					?>
+						<div id="mneighbor" style="background-image: url(<?php echo $imgsrc[0]; ?>); margin-right: 10px; margin-top: 10px;">
+							<a data-id="cult" href="<?php echo get_permalink( $post->post_parent ); ?>/culture">
+								<span class="def-title"><?php echo get_post_meta($post->ID, 'cebo_popout_title', true); ?></span>
+								<span class="hover-title"><?php echo get_post_meta($post->ID, 'cebo_popout_welcome', true); ?></span>
+							</a>	
+						</div>
+					<?php endwhile; endif; wp_reset_postdata(); ?>
+
+
+					<!-- ECHO LANDMARK -->
+					<?php
+						$query_eat = new WP_Query('post_type=page&p=78');
+						if ($query_eat->have_posts()) : while ($query_eat->have_posts()) : $query_eat->the_post();
+						$imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full");
+					?>
+						<div id="mneighbor" style="background-image: url(<?php echo $imgsrc[0]; ?>); margin-top: 10px;">
+							<a data-id="landl" href="<?php echo get_permalink( $post->post_parent ); ?>/landmarks">
+								<span class="def-title"><?php echo get_post_meta($post->ID, 'cebo_popout_title', true); ?></span>
+								<span class="hover-title"><?php echo get_post_meta($post->ID, 'cebo_popout_welcome', true); ?></span>
+							</a>
+						</div>
+					<?php endwhile; endif; wp_reset_postdata(); ?>
+
+				</div> 
+			</div>
 
 			<div class="tabs-container">
 				
-				
-				<div id="eat" class="tab-content">
-					
-					<div class="container">
-						
-						
-						<?php query_posts('post_type=page&p=74'); if(have_posts()) : while(have_posts()) : the_post(); ?>
-						
+				<div class="container">
+					<div class="neighbor-content">
 						<?php the_content(); ?>
-						
-						<?php endwhile; endif; wp_reset_query(); ?>	
-						
-						
-						<!--
-						<div class="tab-featured">
-							
-							<?php query_posts(
-							array(
-								'loctype' => 'dining',
-								'post_type' => 'locations',
-					  			'posts_per_page' => 1,
-					  			'order' => 'ASC'
-								)
-							);
-							
-							
-							
-							if(have_posts()) : while(have_posts()) : the_post(); 
-							$imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full"); ?>
-						
-							<div class="featured-tab-photo" style="background-image: url(<?php if(get_post_meta($post->ID, 'cebo_homethumb', true)) { echo get_post_meta($post->ID, 'cebo_homethumb', true); } else { echo $imgsrc[0]; }  ?>);">
-							
-							<a href="<?php the_permalink(); ?>"></a>		
-								
-							</div>
-							<div class="binder">
-								<h3 class="fl"><?php the_title(); ?></h3>
-								<h3 class="fr"><?php echo get_post_meta($post->ID, 'cebo_category', true); ?></h3>
-								<div class="clear"></div>
-							</div>	
-							<div class="clear"></div>
-							<?php endwhile; endif; wp_reset_query(); ?>	
-						</div>
-						
-						
-
-						<div class="tab-featured" style="margin-right: 0; float-right;">
-							
-							<?php query_posts(
-							array(
-								'loctype' => 'dining',
-								'post_type' => 'locations',
-					  			'posts_per_page' => 1,
-					  			'order' => 'ASC',
-					  			'offset' => 1
-								)
-							);
-							
-							
-							
-							if(have_posts()) : while(have_posts()) : the_post(); 
-							$imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full"); ?>
-							
-								
-							
-							<div class="featured-tab-photo" style="background-image: url(<?php if(get_post_meta($post->ID, 'cebo_homethumb', true)) { echo get_post_meta($post->ID, 'cebo_homethumb', true); } else { echo $imgsrc[0]; }  ?>);">
-							
-							<a href="<?php the_permalink(); ?>"></a>	
-								
-							</div>
-							<div class="binder">
-								<h3 class="fl"><?php the_title(); ?></h3>
-								<h3 class="fr"><?php echo get_post_meta($post->ID, 'cebo_category', true); ?></h3>
-								<div class="clear"></div>
-							</div>	
-							<div class="clear"></div>
-							<?php endwhile; endif; wp_reset_query(); ?>	
-							
-						</div>
-
-					-->
-						
-						<div class="clear"></div>
-						
-						
-						<div class="widebox">
-						
-							<h2>Dining Around Town</h2>
-							
-							<div class="townbox">
-							
-								<?php query_posts('post_type=page&p=74'); if(have_posts()) : while(have_posts()) : the_post(); ?>
-								
-								
-								<ul>
-							
-									 <?php
-									              
-										    $gallery = get_post_gallery_images();
-										
-										
-										                        
-										    foreach( $gallery as $image ) {// Loop through each image in each gallery
-										        $image_list .= '<li><a rel="prettyPhoto[gal]" href=" ' . str_replace('-150x150','',$image) . ' "><img src="' . str_replace('-150x150','',$image) . '"  /></li></a>';
-										    }                  
-										    echo $image_list;                     
-										                     
-										?>
-										
-										<div class="clear"></div>
-								</ul>
-								
-								<?php endwhile; endif; wp_reset_query(); ?>	
-								
-							</div>
-							
-						</div>
-						
 					</div>
-
 				</div>
-				
-				
-				
-				
-				
-				
-				
-				
-				<!-- begin shopping tab -->
-				
-				
-				
-				
-			
-				<div id="shop" class="tab-content">
-					
-					<div class="container">
-						
-							
-						<?php query_posts('post_type=page&p=76'); if(have_posts()) : while(have_posts()) : the_post(); ?>
-						
-						<?php the_content(); ?>
-						
-						<?php endwhile; endif; wp_reset_query(); ?>	
-						
-						
-						<!--
-						<div class="tab-featured">
-							
-							<?php query_posts(
-							array(
-								'loctype' => 'shopping',
-								'post_type' => 'locations',
-					  			'posts_per_page' => 1,
-					  			'order' => 'ASC'
-								)
-							);
-							
-							
-							
-							if(have_posts()) : while(have_posts()) : the_post(); 
-							$imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full"); ?>
-						
-							<div class="featured-tab-photo" style="background-image: url(<?php if(get_post_meta($post->ID, 'cebo_homethumb', true)) { echo get_post_meta($post->ID, 'cebo_homethumb', true); } else { echo $imgsrc[0]; }  ?>);">
-							
-							<a href="<?php the_permalink(); ?>"></a>		
-								
-							</div>
-							<div class="binder">
-								<h3 class="fl"><?php the_title(); ?></h3>
-								<h3 class="fr"><?php echo get_post_meta($post->ID, 'cebo_category', true); ?></h3>
-								<div class="clear"></div>
-							</div>	
-							<div class="clear"></div>
-							<?php endwhile; endif; wp_reset_query(); ?>	
-						</div>
-						
-						
-
-						<div class="tab-featured" style="margin-right: 0; float-right;">
-							
-							<?php query_posts(
-							array(
-								'loctype' => 'shopping',
-								'post_type' => 'locations',
-					  			'posts_per_page' => 1,
-					  			'order' => 'ASC',
-					  			'offset' => 1
-								)
-							);
-							
-							
-							
-							if(have_posts()) : while(have_posts()) : the_post(); 
-							$imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full"); ?>
-							
-								
-							
-							<div class="featured-tab-photo" style="background-image: url(<?php if(get_post_meta($post->ID, 'cebo_homethumb', true)) { echo get_post_meta($post->ID, 'cebo_homethumb', true); } else { echo $imgsrc[0]; }  ?>);">
-							
-							<a href="<?php the_permalink(); ?>"></a>	
-								
-							</div>
-							<div class="binder">
-								<h3 class="fl"><?php the_title(); ?></h3>
-								<h3 class="fr"><?php echo get_post_meta($post->ID, 'cebo_category', true); ?></h3>
-								<div class="clear"></div>
-							</div>	
-							<div class="clear"></div>
-							<?php endwhile; endif; wp_reset_query(); ?>	
-							
-						</div>
-						-->
-
-						<div class="clear"></div>
-						
-						
-						<div class="widebox">
-						
-							<h2>Shopping Around Town</h2>
-							
-							<div class="townbox">
-							
-								<?php query_posts('post_type=page&p=76'); if(have_posts()) : while(have_posts()) : the_post(); ?>
-								
-								
-								<ul>
-							
-									 <?php
-									              
-										    $gallery = get_post_gallery_images('76');
-										
-										
-										                        
-										    foreach( $gallery as $image ) {// Loop through each image in each gallery
-										        $image_list .= '<li><a rel="prettyPhoto[gal]" href=" ' . str_replace('-150x150','',$image) . ' "><img src="' . str_replace('-150x150','',$image) . '"  /></li></a>';
-										    }                  
-										    echo $image_list;                     
-										                     
-										?>
-										
-										<div class="clear"></div>
-								</ul>
-								
-								<?php endwhile; endif; wp_reset_query(); ?>	
-								
-								</div>
-							
-							</div>
-						
-						</div>
-
-				</div>
-				
-				
-				
-				
-				
-				
-				<!-- begin sight seeing tab -->
-				
-				
-				
-				
-			
-				<div id="culture" class="tab-content">
-					
-					<div class="container">
-						
-							
-						<?php query_posts('post_type=page&p=72'); if(have_posts()) : while(have_posts()) : the_post(); ?>
-						
-						<?php the_content(); ?>
-						
-						<?php endwhile; endif; wp_reset_query(); ?>	
-						
-						
-						<!--
-						<div class="tab-featured">
-							
-							<?php query_posts(
-							array(
-								'loctype' => 'sights',
-								'post_type' => 'locations',
-					  			'posts_per_page' => 1,
-					  			'order' => 'ASC'
-								)
-							);
-							
-							
-							
-							if(have_posts()) : while(have_posts()) : the_post(); 
-							$imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full"); ?>
-						
-							<div class="featured-tab-photo" style="background-image: url(<?php if(get_post_meta($post->ID, 'cebo_homethumb', true)) { echo get_post_meta($post->ID, 'cebo_homethumb', true); } else { echo $imgsrc[0]; }  ?>);">
-							
-							<a href="<?php the_permalink(); ?>"></a>		
-								
-							</div>
-							<div class="binder">
-								<h3 class="fl"><?php the_title(); ?></h3>
-								<h3 class="fr"><?php echo get_post_meta($post->ID, 'cebo_category', true); ?></h3>
-								<div class="clear"></div>
-							</div>	
-							<div class="clear"></div>
-							<?php endwhile; endif; wp_reset_query(); ?>	
-						</div>
-						
-						
-					
-						<div class="tab-featured" style="margin-right: 0; float-right;">
-							
-							<?php query_posts(
-							array(
-								'loctype' => 'sights',
-								'post_type' => 'locations',
-					  			'posts_per_page' => 1,
-					  			'order' => 'ASC',
-					  			'offset' => 1
-								)
-							);
-							
-							
-							
-							if(have_posts()) : while(have_posts()) : the_post(); 
-							$imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full"); ?>
-							
-								
-							
-							<div class="featured-tab-photo" style="background-image: url(<?php if(get_post_meta($post->ID, 'cebo_homethumb', true)) { echo get_post_meta($post->ID, 'cebo_homethumb', true); } else { echo $imgsrc[0]; }  ?>);">
-							
-							<a href="<?php the_permalink(); ?>"></a>	
-								
-							</div>
-							<div class="binder">
-								<h3 class="fl"><?php the_title(); ?></h3>
-								<h3 class="fr"><?php echo get_post_meta($post->ID, 'cebo_category', true); ?></h3>
-								<div class="clear"></div>
-							</div>	
-							<div class="clear"></div>
-							<?php endwhile; endif; wp_reset_query(); ?>	
-							
-						</div>
-						-->
-
-						<div class="clear"></div>
-						
-						
-						<div class="widebox">
-						
-							<h2>Arts & Culture Around Town</h2>
-							
-							<div class="townbox">
-							
-								<?php query_posts('post_type=page&p=72'); if(have_posts()) : while(have_posts()) : the_post(); ?>
-								
-								
-								<ul>
-							
-									 <?php
-									              
-										    $gallery = get_post_gallery_images( 72 );
-										
-										
-										                        
-										    foreach( $gallery as $imager ) {// Loop through each image in each gallery
-										        $image_listr .= '<li><a rel="prettyPhoto[gal]" href=" ' . str_replace('-150x150','',$imager) . ' "><img src=" ' . str_replace('-150x150','',$imager) . ' "  /></li></a>';
-										    }                  
-										    echo $image_listr;                       
-										                     
-										?>
-										
-										<div class="clear"></div>
-								</ul>
-								
-								<?php endwhile; endif; wp_reset_query(); ?>	
-								
-								</div>
-							
-							</div>
-						
-						</div>
-
-				</div>
-				
-				
-				
-				
-				
-				<!-- begin arts tab -->
-				
-				
-				
-				
-			
-				<div id="landmarks" class="tab-content">
-					
-					<div class="container">
-						
-							
-						<?php query_posts('post_type=page&p=78'); if(have_posts()) : while(have_posts()) : the_post(); ?>
-						
-						<?php the_content(); ?>
-						
-						<?php endwhile; endif; wp_reset_query(); ?>	
-						
-						
-					<!--	
-						<div class="tab-featured">
-							
-							<?php query_posts(
-							array(
-								'loctype' => 'arts',
-								'post_type' => 'locations',
-					  			'posts_per_page' => 1,
-					  			'order' => 'ASC'
-								)
-							);
-							
-							
-							
-							if(have_posts()) : while(have_posts()) : the_post(); 
-							$imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full"); ?>
-						
-							<div class="featured-tab-photo" style="background-image: url(<?php if(get_post_meta($post->ID, 'cebo_homethumb', true)) { echo get_post_meta($post->ID, 'cebo_homethumb', true); } else { echo $imgsrc[0]; }  ?>);">
-							
-							<a href="<?php the_permalink(); ?>"></a>		
-								
-							</div>
-							<div class="binder">
-								<h3 class="fl"><?php the_title(); ?></h3>
-								<h3 class="fr"><?php echo get_post_meta($post->ID, 'cebo_category', true); ?></h3>
-								<div class="clear"></div>
-							</div>	
-							<div class="clear"></div>
-							<?php endwhile; endif; wp_reset_query(); ?>	
-						</div>
-						
-						
-
-						<div class="tab-featured" style="margin-right: 0; float-right;">
-							
-							<?php query_posts(
-							array(
-								'loctype' => 'arts',
-								'post_type' => 'locations',
-					  			'posts_per_page' => 1,
-					  			'order' => 'ASC',
-					  			'offset' => 1
-								)
-							);
-							
-							
-							
-							if(have_posts()) : while(have_posts()) : the_post(); 
-							$imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full"); ?>
-							
-								
-							
-							<div class="featured-tab-photo" style="background-image: url(<?php if(get_post_meta($post->ID, 'cebo_homethumb', true)) { echo get_post_meta($post->ID, 'cebo_homethumb', true); } else { echo $imgsrc[0]; }  ?>);">
-							
-							<a href="<?php the_permalink(); ?>"></a>	
-								
-							</div>
-							<div class="binder">
-								<h3 class="fl"><?php the_title(); ?></h3>
-								<h3 class="fr"><?php echo get_post_meta($post->ID, 'cebo_category', true); ?></h3>
-								<div class="clear"></div>
-							</div>	
-							<div class="clear"></div>
-							<?php endwhile; endif; wp_reset_query(); ?>	
-							
-						</div>
-					-->	
-
-						<div class="clear"></div>
-						
-						
-						<div class="widebox">
-						
-							<h2>Things to See Around town</h2>
-							
-							<div class="townbox">
-							
-								<?php query_posts('post_type=page&p=78'); if(have_posts()) : while(have_posts()) : the_post(); ?>
-								
-								
-								<ul>
-							
-									 <?php
-									              
-										    $gallery = get_post_gallery_images(78);
-										
-										
-										                        
-										    foreach( $gallery as $imaged ) {// Loop through each image in each gallery
-										        $image_listd .= '<li><a rel="prettyPhoto[gal]" href=" ' . str_replace('-150x150','',$imaged) . ' "><img src=" ' . str_replace('-150x150','',$imaged) . ' "  /></li></a>';
-										    }                  
-										    echo $image_listd;                       
-										                     
-										?>
-										
-										<div class="clear"></div>
-								</ul>
-								
-								<?php endwhile; endif; wp_reset_query(); ?>	
-								
-								</div>
-							
-							</div>
-						
-						</div>
-
-				</div>
-
-
-
-
-				
-				
-				
 				
 			</div>
+
+			<?php } else { ?>
+			
+			<div id="tabs-wrapper" class="tabs-wrapper">
+		
+			<ul class="tabs">
+				<li class="eat"><a id="eatl" href="<?php echo get_permalink( $post->post_parent ); ?>eat">Eat</a></li>
+				<li class="shop"><a id="shopl" href="<?php echo get_permalink( $post->post_parent ); ?>shop">Shop</a></li>
+				<li class="culture"><a id="cult" href="<?php echo get_permalink( $post->post_parent ); ?>culture">Culture</a></li>
+				<li class="landmarks"><a id="landl" href="<?php echo get_permalink( $post->post_parent ); ?>landmarks">Landmarks</a></li>
+			</ul>
+				
+				<div class="tabs-container">
+					
+					
+					<div id="eat" class="tab-content">
+						
+						<div class="container">
+							
+							
+							<?php query_posts('post_type=page&p=74'); if(have_posts()) : while(have_posts()) : the_post(); ?>
+							
+							<?php the_content(); ?>
+							
+							<?php endwhile; endif; wp_reset_query(); ?>	
+							
+							<div class="clear"></div>
+							
+							
+							<div class="widebox">
+							
+								<h2>Dining Around Town</h2>
+								
+								<div class="townbox">
+								
+									<?php query_posts('post_type=page&p=74'); if(have_posts()) : while(have_posts()) : the_post(); ?>
+									
+									
+									<ul>
+								
+										 <?php
+										              
+											    $gallery = get_post_gallery_images();
+											
+											
+											                        
+											    foreach( $gallery as $image ) {// Loop through each image in each gallery
+											        $image_list .= '<li><a rel="prettyPhoto[gal]" href=" ' . str_replace('-150x150','',$image) . ' "><img src="' . str_replace('-150x150','',$image) . '"  /></li></a>';
+											    }                  
+											    echo $image_list;
+											                     
+											?>
+											
+											<div class="clear"></div>
+									</ul>
+									
+									<?php endwhile; endif; wp_reset_query(); ?>	
+									
+								</div>
+								
+							</div>
+							
+						</div>
+
+					</div>
+					
+					
+					
+					
+					
+					
+					
+					
+					<!-- begin shopping tab -->
+					
+					
+					
+					
+				
+					<div id="shop" class="tab-content">
+						
+						<div class="container">
+							
+								
+							<?php query_posts('post_type=page&p=76'); if(have_posts()) : while(have_posts()) : the_post(); ?>
+							
+							<?php the_content(); ?>
+							
+							<?php endwhile; endif; wp_reset_query(); ?>	
+
+							<div class="clear"></div>
+							
+							
+							<div class="widebox">
+							
+								<h2>Shopping Around Town</h2>
+								
+								<div class="townbox">
+								
+									<?php query_posts('post_type=page&p=76'); if(have_posts()) : while(have_posts()) : the_post(); ?>
+									
+									
+									<ul>
+								
+										 <?php
+										              
+											    $gallery = get_post_gallery_images();
+											
+											
+											                        
+											    foreach( $gallery as $image ) {// Loop through each image in each gallery
+											        $image_list .= '<li><a rel="prettyPhoto[gal]" href=" ' . str_replace('-150x150','',$image) . ' "><img src="' . str_replace('-150x150','',$image) . '"  /></li></a>';
+											    }                  
+											    echo $image_list;
+											                     
+											?>
+											
+											<div class="clear"></div>
+									</ul>
+									
+									<?php endwhile; endif; wp_reset_query(); ?>	
+									
+									</div>
+								
+								</div>
+							
+							</div>
+
+					</div>
+					
+					
+					
+					
+					
+					
+					<!-- begin sight seeing tab -->
+					
+					
+					
+					
+				
+					<div id="culture" class="tab-content">
+						
+						<div class="container">
+							
+								
+							<?php query_posts('post_type=page&p=178'); if(have_posts()) : while(have_posts()) : the_post(); ?>
+							
+							<?php the_content(); ?>
+							
+							<?php endwhile; endif; wp_reset_query(); ?>	
+
+							<div class="clear"></div>
+							
+							
+							<div class="widebox">
+							
+								<h2>Arts & Culture Around Town</h2>
+								
+								<div class="townbox">
+								
+									<?php query_posts('post_type=page&p=178'); if(have_posts()) : while(have_posts()) : the_post(); ?>
+									
+									
+									<ul>
+								
+										 <?php
+										              
+											    $gallery = get_post_gallery_images();
+											
+											
+											                        
+											    foreach( $gallery as $imager ) {// Loop through each image in each gallery
+											        $image_listr .= '<li><a rel="prettyPhoto[gal]" href=" ' . str_replace('-150x150','',$imager) . ' "><img src=" ' . str_replace('-150x150','',$imager) . ' "  /></li></a>';
+											    }                  
+											    echo $image_listr;                       
+											                     
+											?>
+											
+											<div class="clear"></div>
+									</ul>
+									
+									<?php endwhile; endif; wp_reset_query(); ?>	
+									
+									</div>
+								
+								</div>
+							
+							</div>
+
+					</div>
+					
+					
+					
+					
+					
+					<!-- begin arts tab -->
+					
+					
+					
+					
+				
+					<div id="landmarks" class="tab-content">
+						
+						<div class="container">
+							
+								
+							<?php query_posts('post_type=page&p=78'); if(have_posts()) : while(have_posts()) : the_post(); ?>
+							
+							<?php the_content(); ?>
+							
+							<?php endwhile; endif; wp_reset_query(); ?>	
+
+							<div class="clear"></div>
+							
+							
+							<div class="widebox">
+							
+								<h2>Things to See Around town</h2>
+								
+								<div class="townbox">
+								
+									<?php query_posts('post_type=page&p=78'); if(have_posts()) : while(have_posts()) : the_post(); ?>
+									
+									
+									<ul>
+								
+										 <?php
+										              
+											    $gallery = get_post_gallery_images();
+											
+											
+											                        
+											    foreach( $gallery as $imaged ) {// Loop through each image in each gallery
+											        $image_listd .= '<li><a rel="prettyPhoto[gal]" href=" ' . str_replace('-150x150','',$imaged) . ' "><img src=" ' . str_replace('-150x150','',$imaged) . ' "  /></li></a>';
+											    }                  
+											    echo $image_listd;                       
+											                     
+											?>
+											
+											<div class="clear"></div>
+									</ul>
+									
+									<?php endwhile; endif; wp_reset_query(); ?>	
+									
+									</div>
+								
+								</div>
+							
+							</div>
+					</div>	
+
+				</div>
+			</div>
+
+			<?php } ?>
+
+			
 			<div class="clear"></div>
 			
 			
@@ -678,8 +446,8 @@
 
 					<a href="<?php bloginfo('url'); ?>/events" style="text-align: center; margin-top: 10px; display: inline-block;">See all events</a>
 		
-			     	<!-- widgetized  -->						
-				
+			     	<!-- widgetized  -->		
+								
 				</div>
 
 				<div class="fr">
@@ -693,7 +461,7 @@
 						<li<?php if($count == 2 || $count == 4) { ?> class="even"<?php } ?>>
 							
 							
-							<a href="<?php the_permalink(); ?>"><img src="<?php echo tt($imgsrc[0], 275, 188); ?>"  alt="<?php the_title();?>"/>
+							<a href="<?php the_permalink(); ?>"><img src="<?php echo tt($imgsrc[0], 275, 178); ?>"  alt="<?php the_title();?>"/>
 							
 							
 							<?php $shortdater = tribe_get_start_date($post->ID, true, 'M'); $shortdaterz = substr($shortdater, 0, 3);  ?>
@@ -735,7 +503,7 @@
 							<?php query_posts('post_type=post&posts_per_page=2&offset=1&cat=-10'); if(have_posts()) : while(have_posts()) : the_post(); $imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full"); ?>
 							
 							<li>
-								<a href="<?php the_permalink(); ?>"><img src='<?php echo tt($imgsrc[0], 240, 180); ?>' alt='<?php the_title(); ?>' /></a>
+								<a href="<?php the_permalink(); ?>"><img src='<?php echo tt($imgsrc[0], 278, 161); ?>' alt='<?php the_title(); ?>' /></a>
 								<a href="<?php the_permalink(); ?>"><h3 style="margin-top: 15px;"><?php the_title(); ?></h3></a>
 								<p><?php echo excerpt(10); ?></p>
 							</li>
@@ -747,7 +515,7 @@
 						
 						<?php query_posts('post_type=post&posts_per_page=1&cat=-10'); if(have_posts()) : while(have_posts()) : the_post(); $imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full"); ?>
 							<li>
-								<a href="<?php the_permalink(); ?>"><img src='<?php echo tt($imgsrc[0], 540, 290); ?>' alt='<?php the_title(); ?>' /></a>
+								<a href="<?php the_permalink(); ?>"><img src='<?php echo tt($imgsrc[0], 578, 741); ?>' alt='<?php the_title(); ?>' /></a>
 								<a href="<?php the_permalink(); ?>"><h3 style="margin-top: 15px;"><?php the_title(); ?></h3></a>
 								<p><?php echo excerpt(80); ?></p>
 							</li>
@@ -756,12 +524,12 @@
 						
 						
 						
-						<ul style="margin-right: 0;">
+						<ul>
 						
 							<?php query_posts('post_type=post&posts_per_page=2&offset=3&cat=-10'); if(have_posts()) : while(have_posts()) : the_post(); $imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full"); ?>
 							
 							<li>
-								<a href="<?php the_permalink(); ?>"><img src='<?php echo tt($imgsrc[0], 240, 180); ?>' alt='<?php the_title(); ?>' /></a>
+								<a href="<?php the_permalink(); ?>"><img src='<?php echo tt($imgsrc[0], 278, 161); ?>' alt='<?php the_title(); ?>' /></a>
 								<a href="<?php the_permalink(); ?>"><h3 style="margin-top: 15px;"><?php the_title(); ?></h3></a>
 								<p><?php echo excerpt(10); ?></p>
 							</li>
@@ -770,13 +538,12 @@
 						
 						<div class="clear"></div>
 
-						<?php 
-							$projects = get_page_with_template('page_blog');
-				  			$projecturl= get_permalink($projects);	
-						?>
+						<?php $projects = get_page_with_template('page_blog');
+				  				$projecturl= get_permalink($projects);	
+									?>
 
 						<a href="<?php echo $projecturl; ?>" style="width: 99%; display: block; padding: 20px 0; font-family: didot, serif; font-size: 20px;" class="button">View All Posts</a>
-
+						
 					</div>
 	
 				</div>

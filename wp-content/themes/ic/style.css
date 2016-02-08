@@ -4201,3 +4201,65 @@ span.ns-close {
     background-position: -69px 0;
 
 }
+
+.category-neighbor div {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: table;
+    height: 350px;
+    width: 49.3%;
+    float: left;
+    position: relative;
+}
+
+.category-neighbor div span {
+    position: absolute;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    display: block;
+    text-align: center;
+}
+
+.category-neighbor div .def-title {
+    font-family: didot, georgia;
+    font-size: 60px;
+    top: 40%;
+}
+
+.category-neighbor div .hover-title {
+    font-family: didot, georgia;
+    font-size: 24px;
+    display: none;
+    bottom: 30px;
+}
+
+.category-neighbor div a {
+    background-color: rgba(0,0,0,0.5);
+    color: #fff;
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: relative;
+
+
+
+    transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+}
+  
+    .category-neighbor div:hover a {
+        background-color: rgba(0,0,0,0.1);
+    }
+
+    .category-neighbor div:hover .def-title {
+        display: none;
+    }
+
+    .category-neighbor div:hover .hover-title {
+        display: block;
+    }

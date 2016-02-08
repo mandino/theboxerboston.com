@@ -703,7 +703,31 @@ and (max-width : 940px)
 		display: none;
 	}
 
+	/* NEIGHBORHOOD GUIDE PAGE */
+
+	#mneighbor
+	{
+		width:100%;
+	}
+
+	.upcoming-calendar 
+	{
+		width:100%;
+	}
+
+	.upcoming-events .fr {
+    width: 100%;
+    margin-top: 50px;
+	}
+	.upcoming-events .fr li{
+		width:95%;
+	}
+	.upcoming-events .event-description {
+    padding: 5px 36px 5px 19px !important;
+	}
+
 }
+
 
 
 /* ================================================  MAX WIDTH 939 ======================================= */
