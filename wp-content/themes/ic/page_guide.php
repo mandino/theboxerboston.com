@@ -22,10 +22,10 @@
 	?>
 						
 		<ul class="right-links right" id="toggles">						
-			<li class="dine"><a data-id="eatl" class="linkerd <?php if ($com_link == 'eat') { ?>active<?php } ?>" href="/?page_id=74" title="Dining">Eat</a></li>
-			<li class="shop"><a data-id="shopl" class="linkerd <?php if ($com_link == 'shop') { ?>active<?php } ?>" href="/?page_id=76" title="Dining">Shop</a></li>
-			<li class="arts"><a data-id="cult" class="linkerd <?php if ($com_link == 'culture') { ?>active<?php } ?>" href="/?page_id=72" title="Dining">Culture</a></li>
-			<li class="sights"><a data-id="landl" class="linkerd <?php if ($com_link == 'landmarks') { ?>active<?php } ?>" href="/?page_id=78" title="Dining">Landmarks</a></li>
+			<li class="dine"><a onClick="location.href='<?php echo get_permalink( $post->post_parent ); ?>/eat'" data-id="eatl" class="linkerd <?php if ($com_link == 'eat') { ?>active<?php } ?>" href="/?page_id=74" title="Dining">Eat</a></li>
+			<li class="shop"><a onClick="location.href='<?php echo get_permalink( $post->post_parent ); ?>/shop'" data-id="shopl" class="linkerd <?php if ($com_link == 'shop') { ?>active<?php } ?>" href="/?page_id=76" title="Dining">Shop</a></li>
+			<li class="arts"><a onClick="location.href='<?php echo get_permalink( $post->post_parent ); ?>/culture'" data-id="cult" class="linkerd <?php if ($com_link == 'culture') { ?>active<?php } ?>" href="/?page_id=72" title="Dining">Culture</a></li>
+			<li class="sights"><a onClick="location.href='<?php echo get_permalink( $post->post_parent ); ?>/landmarks'" data-id="landl" class="linkerd <?php if ($com_link == 'landmarks') { ?>active<?php } ?>" href="/?page_id=78" title="Dining">Landmarks</a></li>
 		</ul>
 
 	<?php } ?>					
