@@ -182,7 +182,7 @@ pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName
 
 					<div class="reservationform flexdate">
 					
-						<p><a href="https://theboxerboston.reztrip.com">Flexible dates?</a> Search for our best available rate</p>				
+						<p><a href="https://theboxerboston.reztrip.com" onclick="ga('send', 'event', 'Booking-widget', 'click', 'Flexible Dates');">Flexible dates?</a> Search for our best available rate</p>
 						
 					</div>
 
