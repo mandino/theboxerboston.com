@@ -744,7 +744,7 @@ a.detailsAnchor {
    }
    .infobox:after {
    	content: '';
-   	background: url(images/arrow.png) no-repeat;
+  /* 	background: url(images/arrow.png) no-repeat;*/
    	width: 10px;
    	height: 10px;
    	position: absolute;
@@ -881,7 +881,7 @@ a.detailsAnchor {
    }
   #infoBox,
   .placeData {
-    background: url("images/blue_bg.png") repeat scroll 0 0 transparent;
+   /* background: url("images/blue_bg.png") repeat scroll 0 0 transparent;*/
     display: none !important;
     right: 30px;
     padding: 0px;
@@ -3189,7 +3189,7 @@ body .ui-tooltip {
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
 	border: none;
-	background: #f6f6f6 url(images/ui-bg_highlight-hard_100_f6f6f6_1x100.png) 50% 50% repeat-x;
+	/*background: #f6f6f6 url(images/ui-bg_highlight-hard_100_f6f6f6_1x100.png) 50% 50% repeat-x;*/
 	font-weight: bold;
 	color: #111111;
 }
@@ -3204,7 +3204,7 @@ body .ui-tooltip {
 .ui-widget-content .ui-state-active,
 .ui-widget-header .ui-state-active {
 	border: none;
-	background: #ffffff url(images/ui-bg_flat_65_ffffff_40x100.png) 50% 50% repeat-x;
+	/*background: #ffffff url(images/ui-bg_flat_65_ffffff_40x100.png) 50% 50% repeat-x;*/
 	font-weight: bold;
 	color: #cc0000;
 }
@@ -3221,7 +3221,7 @@ body .ui-tooltip {
 .ui-widget-content .ui-state-highlight,
 .ui-widget-header .ui-state-highlight {
 	border: 1px solid #fcd3a1;
-	background: #fbf8ee url(images/ui-bg_glass_55_fbf8ee_1x400.png) 50% 50% repeat-x;
+	/*background: #fbf8ee url(images/ui-bg_glass_55_fbf8ee_1x400.png) 50% 50% repeat-x;*/
 	color: #444444;
 }
 .ui-state-highlight a,
@@ -3277,7 +3277,7 @@ body .ui-tooltip {
 	width: 16px;
 	height: 16px;
 }
-.ui-icon,
+/*.ui-icon,
 .ui-widget-content .ui-icon {
 	background-image: url(images/ui-icons_cc0000_256x240.png);
 }
@@ -3293,14 +3293,14 @@ body .ui-tooltip {
 }
 .ui-state-active .ui-icon {
 	background-image: url(images/ui-icons_cc0000_256x240.png);
-}
+}*/
 .ui-state-highlight .ui-icon {
 	background-image: url(images/ui-icons_004276_256x240.png);
 }
-.ui-state-error .ui-icon,
+/*.ui-state-error .ui-icon,
 .ui-state-error-text .ui-icon {
 	background-image: url(images/ui-icons_cc0000_256x240.png);
-}
+}*/
 
 /* positioning */
 .ui-icon-blank { background-position: 16px 16px; }
