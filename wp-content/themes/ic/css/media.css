@@ -2,7 +2,7 @@
 /* ================================================  MAX WIDTH 1280 ======================================= */
 
 
-@media only screen 
+@media only screen
 and (max-width : 1280px) {
 
 
@@ -21,8 +21,8 @@ and (max-width : 1280px) {
 /* ================================================  MAX WIDTH 1439 ======================================= */
 
 
-@media only screen 
-and (max-width : 1439px) {	
+@media only screen
+and (max-width : 1439px) {
 
 
 
@@ -50,7 +50,7 @@ and (max-width : 1439px) {
 /* ================================================  MAX WIDTH 1240 ======================================= */
 
 
-@media only screen 
+@media only screen
 and (max-width : 1240px) {
 
 
@@ -75,8 +75,8 @@ and (max-width : 1240px) {
 /* ================================================  MAX WIDTH 1099 ======================================= */
 
 
-@media only screen 
-and (max-width : 1099px) {	
+@media only screen
+and (max-width : 1099px) {
 
 
 
@@ -99,7 +99,7 @@ and (max-width : 1099px) {
 	    padding: 0;
 	    margin: -13px 0 20px -10px;
 	}
-	
+
 	#primary-nav span.navdrop, #primary-nav span.navdrop ul {
 		display: block;
 	}
@@ -116,7 +116,7 @@ and (max-width : 1099px) {
 
 
 
-	/* Navigation */	
+	/* Navigation */
 
 	#primary-nav .container {
 	    width: 82%;
@@ -150,12 +150,12 @@ and (max-width : 1099px) {
 	    top: 82px;
 	}
 
-	
+
 	/* Welcome */
-	
+
 	.quote-right {
 		bottom: 95px;
-	}	
+	}
 
 	/* Map */
 
@@ -317,13 +317,13 @@ and (max-width : 1099px) {
 
 
 	/* Rooms - single */
-	
-	#room-featured-slider, 
-	#room-featured-slider .flexslider, 
+
+	#room-featured-slider,
+	#room-featured-slider .flexslider,
 	#room-featured-slider .flexslider .slides img {
 		height: 350px;
 	}
-	
+
 	.room-details-gallery.fr {
 	    width: 260px;
 	}
@@ -356,7 +356,7 @@ and (max-width : 1099px) {
 	    overflow: hidden;
 	    width: 49%;
 	}
-	
+
 	.upcoming-events .event-description {
 		padding: 5px 18px 5px 19px;
 	}
@@ -413,7 +413,7 @@ and (max-width : 1099px) {
 
 /* ================================================  MAX WIDTH 1024 ======================================= */
 
-@media only screen 
+@media only screen
 and (max-width : 1024px) {
 
 
@@ -432,7 +432,7 @@ and (max-width : 1024px) {
 
 /* ================================================  MAX WIDTH 1023 ======================================= */
 
-@media only screen 
+@media only screen
 and (max-width : 1023px) {
 
 	#maparea, #toggles {
@@ -448,8 +448,8 @@ and (max-width : 1023px) {
 /* ================================================  MAX WIDTH 940 ======================================= */
 
 
-@media only screen 
-and (max-width : 940px) 
+@media only screen
+and (max-width : 940px)
 {
 
 
@@ -710,7 +710,7 @@ and (max-width : 940px)
 		width:100%;
 	}
 
-	.upcoming-calendar 
+	.upcoming-calendar
 	{
 		width:100%;
 	}
@@ -732,19 +732,19 @@ and (max-width : 940px)
 
 /* ================================================  MAX WIDTH 939 ======================================= */
 
-@media only screen 
+@media only screen
 and (max-width : 939px) {
-	
-	
-	
-	
-	
+
+
+
+
+
 		#footer-newsletter {
 		display: none;
 	}
-	
 
-	
+
+
 	.mmenu-icon {
 		display: block;
 	}
@@ -754,7 +754,7 @@ and (max-width : 939px) {
 	}
 
 	/* Navigation */
-	
+
 	#property-nav {
 		height: 26px;
 	}
@@ -794,7 +794,7 @@ and (max-width : 939px) {
 	    font-size: 11px;
 	    letter-spacing: 3px;
 	    padding: 20px;
-	    
+
 	}
 
 	#primary-nav .button, #navigation-sticky-wrapper.sticky #primary-nav .button {
@@ -937,12 +937,12 @@ line-height: 16px;
 	    text-align: center;
 	    width: 100%;
 	}
-	
+
 	footer .social-buttons li {
 	    display: inline-block;
 	    float: none;
 	}
-	
+
 	.social-buttons li:last-child {
 		margin-right: 0;
 	}
@@ -951,14 +951,32 @@ line-height: 16px;
 	    font-size: 14px;
 	}
 
-	
+#lnkP2Talk
+{
+	display:none;
+}
+li.blue-btn
+{
+	bottom: 1px;
+	width: 25px !important;
+    height: 25px !important;
+}
+
+li.blue-btn i {
+ padding-right: 0px !important;
+}
+
+#property-nav nav ul li a.clicknav-clicker, #navigation-sticky-wrapper.sticky #property-nav nav ul li a.clicknav-clicker
+{
+	background-size:70% !important;
+}	
 
 }
 
 /* ================================================  MAX WIDTH 768 ======================================= */
 
 
-@media only screen 
+@media only screen
 and (max-width : 768px) {
 
 	/* Double Flyout */
@@ -982,10 +1000,10 @@ and (max-width : 768px) {
 
 
 
-@media only screen 
-and (min-width : 640px) 
-and (max-width : 720px) 
-{	
+@media only screen
+and (min-width : 640px)
+and (max-width : 720px)
+{
 
 
 	#home-slider {
@@ -1011,25 +1029,25 @@ and (max-width : 720px)
 
 	#home-slider .specialsbox h3 {
 		font-size: 18px !important
-	}	
+	}
 
 }
 /* ================================================  MAX WIDTH 640 ======================================= */
 
 
-@media only screen 
-and (max-width : 640px) 
-{	
+@media only screen
+and (max-width : 640px)
+{
 
 	.specialsbox {
 		display: none;
 	}
-	
+
 		#footer-newsletter {
 		display: none;
 	}
-	
-	
+
+
 
 	/* Featured slider */
 
@@ -1085,7 +1103,7 @@ and (max-width : 640px)
 	.home .flexslider .slides img {
 		width: 150%;
 	}
-	
+
 	.slide-header {
    	 top: 10%;
 	}
@@ -1324,7 +1342,7 @@ and (max-width : 640px)
 
 	#oceana #footer-newsletter, #ocean-view-king #footer-newsletter {
 		padding-bottom: 20px;
-	}	
+	}
 
 
 
@@ -1352,7 +1370,7 @@ and (max-width : 640px)
 	    padding: 20px 0 0;
 	    width: 260px;
 	}
-	
+
 	/* Blog Sidebar */
 	.fl.room-list.catlist {
 		border-right: 0 none;
@@ -1372,7 +1390,7 @@ and (max-width : 640px)
 		width: 260px;
 	}
 
-	
+
 
 }
 
@@ -1380,8 +1398,8 @@ and (max-width : 640px)
 
 /* ================================================  MOBILES BELOW 639 ======================================= */
 
-@media only screen 
-and (max-width : 639px) 
+@media only screen
+and (max-width : 639px)
 {
 
 `	.specialsbox {
@@ -1397,12 +1415,12 @@ padding: 8px 12px;
 	#primary-nav .button.mobile {
 		display: inline;
 	}
-	
-	
+
+
 		#footer-newsletter {
 		display: none;
 	}
-	
+
 	.slide-header .button {
     display: none;
 }
@@ -1419,9 +1437,9 @@ padding: 8px 12px;
 /* ================================================  MOBILES BELOW 480 ======================================= */
 
 
-@media only screen 
-and (max-width : 480px) 
-{	
+@media only screen
+and (max-width : 480px)
+{
 
 		#home-slider {
 	height: 200px;
@@ -1435,8 +1453,8 @@ and (max-width : 480px)
 		.specialsbox {
 		display: none;
 	}
-	
-	
+
+
 	ul.tabs li a {
 padding: 8px 12px;
 }
@@ -1447,7 +1465,7 @@ padding: 8px 12px;
 	#intro .container {
 	    width: 70%;
 	}
-	
+
 	/* Post tags */
 
 	.post-tags > ul {
@@ -1498,11 +1516,11 @@ padding: 8px 12px;
 
 
 	/* Room - Single */
-	
+
 	.single-rooms .section-header h2.section-title {
 		display: block;
 	}
-	
+
 	#room-featured-slider .flexslider, #room-featured-slider, #room-featured-slider .flexslider .slides img {
 	    height: 240px;
 	    width: 100%;
@@ -1520,11 +1538,11 @@ padding: 8px 12px;
 	    top: 50%;
 	    width: 100%;
 	}
-	
+
 	.post-content .imagegal.photos ul li {
 		margin-bottom: 4px;
 	}
-	
+
 	.slideSelectors {
 	    bottom: 13px;
 	    height: 11px;
@@ -1543,17 +1561,17 @@ padding: 8px 12px;
 	    top: 0;
 	    width: 100%;
 	}
-	
+
 	#room-details-slider {
 		margin-top: -45px !important;
 	}
 
 	/* Page - Specials */
-	
+
 	.post-content .imagegal ul li {
 		width: 31.33%;
 	}
-	
+
 	/* Page - Guide */
 
 	.whats-hot ul, .whats-hot li {
@@ -1574,17 +1592,17 @@ padding: 8px 12px;
 	    clear: both;
 	    float: left;
 	}
-	
+
 	ul.tabs li a {
 		padding: 8px 12px;
 	}
-	
+
 	/* footer */
-	
+
 	#footer-newsletter h2 {
 		font-size: 39px;
 	}
-	
+
 	/* Footer - Nav */
 
 	footer nav .fr {
@@ -1636,8 +1654,8 @@ li.blue-btn {
 /* ================================================  MAX HEIGHT 480 ======================================= */
 
 
-@media only screen 
-and (max-height : 480px) 
+@media only screen
+and (max-height : 480px)
 {
 
 
@@ -1660,7 +1678,7 @@ and (max-height : 480px)
 		width: inherit;
 		float: none;
 		height: inherit;
-		
+
 	}
 
 	ul.tabs li {
@@ -1685,11 +1703,11 @@ and (max-height : 480px)
 /* ================================================  MOBILES BELOW 399 ======================================= */
 
 
-@media only screen 
-and (max-width : 399px) 
-{	
-	
-	
+@media only screen
+and (max-width : 399px)
+{
+
+
 		.specialsbox {
 		display: none;
 	}
@@ -1704,15 +1722,15 @@ padding: 11px 5px;
 		width: inherit;
 		float: none;
 		height: inherit;
-		
+
 	}
 
 	ul.tabs li {
 		float: none;
 		display: block;
 	}
-	
-	
+
+
 	.section {
 	    padding: 30px 0;
 	}
@@ -1809,47 +1827,47 @@ padding: 11px 5px;
 	    width: 100%;
 	}
 
-	
+
 	/* Guide */
-	
+
 	.upcoming-calendar.fl,
 	.upcoming-events .fr {
 		float: none;
 		width: auto;
 	}
-	
+
 	.upcoming-calendar .tribe-mini-calendar-wrapper {
 		width: auto;
 	}
-	
+
 	.upcoming-events .fr ul {
 		margin-top: 10px;
 		overflow: hidden;
 	}
-	
+
 	.upcoming-events .fr li {
 		float: none;
 		display: inline;
 	}
-	
+
 	.upcoming-events li img {
 		margin-top: 50px;
 	}
-	
+
 	.upcoming-events .event-date {
 		right: 10px;
 		top: -175px;
 	}
-	
+
 	.upcoming-events .event-description {
 		padding: 5px 22px 5px 21px;
 	}
-	
+
 	.whats-hot .hot-featured li, .whats-hot .hot-featured {
 		width: 90%;
 		margin: 0 auto;
 	}
-	
+
 	/* Gallery */
 
 	.imagegal.thumbgal > ul {
@@ -1912,10 +1930,10 @@ padding: 11px 5px;
 /* ================================================  MOBILES BELOW 320 ======================================= */
 
 
-@media only screen 
-and (max-width : 320px) 
-{	
-	
+@media only screen
+and (max-width : 320px)
+{
+
 	.specialsbox {
 		display: none;
 	}
@@ -1923,7 +1941,7 @@ and (max-width : 320px)
 		width: inherit;
 		float: none;
 		height: inherit;
-		
+
 	}
 
 	ul.tabs li {
@@ -1938,7 +1956,7 @@ and (max-width : 320px)
 	    width: 22%;
 	}
 
-	
+
 	#footer-newsletter {
 		display: none;
 	}
@@ -1962,10 +1980,10 @@ and (max-width : 320px)
 /* ================================================  MOBILES BELOW 480 to 400 ======================================= */
 
 
-@media only screen 
-and (min-width : 400px) 
-and (max-width : 479px) 
-{	
+@media only screen
+and (min-width : 400px)
+and (max-width : 479px)
+{
 
 
 	/* reserve button on banner */
@@ -1988,10 +2006,10 @@ and (max-width : 479px)
 /* ================================================  MOBILES BELOW 480 to 640 ======================================= */
 
 
-@media only screen 
-and (min-width : 480px) 
-and (max-width : 639px) 
-{	
+@media only screen
+and (min-width : 480px)
+and (max-width : 639px)
+{
 
 
 	/* reserve button on banner */
@@ -2007,7 +2025,7 @@ and (max-width : 639px)
 
 
 
-				
+
 }
 
 
@@ -2015,11 +2033,11 @@ and (max-width : 639px)
 /* ================================================  LARGE MOBILE DEVICES AND SMALL TABLETS BELOW 799  ======================================= */
 
 
-@media only screen 
-and (min-width : 640px) 
-and (max-width : 799px) 
-{	
-	
+@media only screen
+and (min-width : 640px)
+and (max-width : 799px)
+{
+
 
 
 
@@ -2027,11 +2045,11 @@ and (max-width : 799px)
 /* ================================================  SLIGHTLY SMALLER RESOLUTIONS, BUT NOT QUITE IPHONE ======================================= */
 
 
-@media only screen 
-and (min-width : 800px) 
-and (max-width : 854px) 
-{	
-	
+@media only screen
+and (min-width : 800px)
+and (max-width : 854px)
+{
+
 
 }
 
@@ -2042,12 +2060,12 @@ and (max-width : 854px)
 /* ================================================  LARGE PHONE SCREENS SMALLER RESOLUTIONS  ======================================= */
 
 
-@media only screen 
-and (min-width : 855px) 
-and (max-width : 960px) 
-{	
+@media only screen
+and (min-width : 855px)
+and (max-width : 960px)
+{
 
-	
+
 
 
 
@@ -2059,17 +2077,17 @@ and (max-width : 960px)
 /* ================================================  IPADS AT LANDSCAPE WIDTH 1024  ======================================= */
 
 
-@media only screen 
-and (min-width : 961px) 
-and (max-width : 1099px) 
-{	
-
-
-	
+@media only screen
+and (min-width : 961px)
+and (max-width : 1099px)
+{
 
 
 
-		
+
+
+
+
 }
 
 
@@ -2077,18 +2095,18 @@ and (max-width : 1099px)
 
 
 
-@media only screen 
-and (min-width : 1100px) 
-and (max-width : 1223px) 
-{		
-		
-	
+@media only screen
+and (min-width : 1100px)
+and (max-width : 1223px)
+{
 
 
-	
-	
-	
-	
+
+
+
+
+
+
 }
 
 
@@ -2100,9 +2118,9 @@ and (max-width : 1223px)
 
 
 
-@media only screen 
-and (min-width : 1224px) 
-and (max-width : 1300px) 
+@media only screen
+and (min-width : 1224px)
+and (max-width : 1300px)
 {
 
 
@@ -2112,30 +2130,30 @@ and (max-width : 1300px)
 
 
 }
-	
 
-@media only screen 
-and (min-width : 1224px) 
-and (max-width : 1399px) 
+
+@media only screen
+and (min-width : 1224px)
+and (max-width : 1399px)
 {
 
-	
-	
 
 
-	
-	
-	
-                
+
+
+
+
+
+
 }
-	
-	
-	
+
+
+
 
 
 @media only screen and (min-width: 1400px) and (max-width: 1450px) {
-		
-		
+
+
 
 
 
@@ -2146,21 +2164,19 @@ and (max-width : 1399px)
 
 
 @media only screen and (min-width: 1451px) {
- 
- 
- 
- 
- 
-                
 
 
 
-} 
+
+
+
+
+
+
+}
 
 @media all and (max-width: 2400px) and (min-width: 800px) {
   .mobile-number {
   	display: none;
   }
 }
-
-
