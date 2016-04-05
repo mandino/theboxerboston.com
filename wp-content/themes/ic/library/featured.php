@@ -10,7 +10,7 @@
 			
 			
 			<li>
-				<a target="_blank" href="<?php echo get_post_meta($post->ID, 'sliderurl', true); ?>">
+				<!--<a target="_blank" href="<?php echo get_post_meta($post->ID, 'sliderurl', true); ?>">-->
 					<div class="slide-header">
 						
 						<?php if(get_post_meta($post->ID, 'logopic', true)) { ?>
@@ -35,7 +35,7 @@
 					</div>
 				<!--<img src="<?php //echo tt($imgsrc[0], 1400, 472); ?>" alt="<?php get_post_meta($post->ID, 'bigtitle', true); ?>" />-->
 				<img src="<?php echo $imgsrc[0]; ?>" alt="<?php get_post_meta($post->ID, 'bigtitle', true); ?>" />
-			</a>
+			<!--</a>-->
 			</li>
 			
 			
