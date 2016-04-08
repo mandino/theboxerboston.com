@@ -174,10 +174,10 @@
 			<div id="tabs-wrapper" class="tabs-wrapper">
 		
 			<ul class="tabs">
-				<li class="eat"><a id="eatl" href="<?php echo get_permalink( $post->post_parent ); ?>eat">Eat</a></li>
-				<li class="shop"><a id="shopl" href="<?php echo get_permalink( $post->post_parent ); ?>shop">Shop</a></li>
-				<li class="culture"><a id="cult" href="<?php echo get_permalink( $post->post_parent ); ?>culture">Culture</a></li>
-				<li class="landmarks"><a id="landl" href="<?php echo get_permalink( $post->post_parent ); ?>landmarks">Landmarks</a></li>
+				<li class="eat"><a id="eatl" href="<?php echo get_permalink( $post->post_parent ); ?>/eat">Eat</a></li>
+				<li class="shop"><a id="shopl" href="<?php echo get_permalink( $post->post_parent ); ?>/shop">Shop</a></li>
+				<li class="culture"><a id="cult" href="<?php echo get_permalink( $post->post_parent ); ?>/culture">Culture</a></li>
+				<li class="landmarks"><a id="landl" href="<?php echo get_permalink( $post->post_parent ); ?>/landmarks">Landmarks</a></li>
 			</ul>
 				
 				<div class="tabs-container">
