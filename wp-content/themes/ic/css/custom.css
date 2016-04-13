@@ -611,9 +611,9 @@ color: #333;
 	#primary-nav nav:hover ul li a.clicknav-clicker {
 		background: url(../images/ic_white.png) center no-repeat;
 	}
-	
-	
-	
+
+
+
 #primary-nav .button {
 	transition: all 0.5s;
     -moz-transition: all 0.5s;
@@ -629,8 +629,8 @@ color: #333;
 .sticky #primary-nav .button {
  	margin: 0 0 0 20px;
     padding: 20px 70px;
-}    
-    
+}
+
 #primary-nav .button.mobile {
     display: none;
 }
@@ -647,7 +647,7 @@ color: #333;
 	background: #fff;
 	width: 600px;
 	min-height: 335px;
-	right: 0; 
+	right: 0;
 	top: 92px;
 	border-left: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
@@ -774,6 +774,24 @@ color: #333;
 	text-transform: none;
 }
 
+.section-header h1.section-pre-title {
+    font-size: 24px;
+    color: #6e6e6e;
+    font-family: didot, georgia;
+    font-style: italic;
+    padding: 30px 0;
+    text-transform: none;
+}
+
+div.section-pre-title{
+    font-size: 24px;
+    color: #6e6e6e;
+    font-family: didot, georgia;
+    font-style: italic;
+    padding: 30px 0;
+    text-transform: none;
+}
+
 .section-header-divider {
     border-left: 1px solid #DEDEDE;
     height: 86px;
@@ -787,6 +805,22 @@ color: #333;
 	text-decoration: uppercase;
 	color: #3d3d3d;
 	padding: 23px 0;
+}
+
+.section-header div.section-title {
+    font-family: didot, georgia;
+    font-size: 36px;
+    text-decoration: uppercase;
+    color: #3d3d3d;
+    padding: 23px 0;
+}
+
+.section-header h1.section-title {
+    font-family: didot, georgia;
+    font-size: 36px;
+    text-decoration: uppercase;
+    color: #3d3d3d;
+    padding: 23px 0;
 }
 .welcometext {
 	padding: 0 0 15px 0;
@@ -851,7 +885,7 @@ color: #333;
 .post-content .imagegal ul li {
 		display: inline-block; /* Display inline-block, and absolutely NO FLOATS! */
         margin-bottom: 10px;
-        width: 23.8%; 
+        width: 23.8%;
         position: relative;
 }
 
@@ -894,7 +928,7 @@ color: #333;
     #intro .section-photos li:hover .hover-effect, .thumbgal li:hover .hover-effect {
         opacity: 1;
     }
-    #intro .section-photos li:hover h3, #intro .section-photos li:hover .from-price, 
+    #intro .section-photos li:hover h3, #intro .section-photos li:hover .from-price,
     .thumbgal li:hover h3, .thumbgal li:hover .from-price {
         opacity: 0;
     }
@@ -958,12 +992,12 @@ color: #333;
 	cursor: pointer;
 }
 
-.quote-prev {    
-    left: 0;    
+.quote-prev {
+    left: 0;
 }
 
-.quote-next {    
-    right: 0;    
+.quote-next {
+    right: 0;
 }
 
 .ico-quote {
@@ -1363,8 +1397,8 @@ footer nav ul.footling li a {
         /*background: none repeat scroll 0 0 #38BABF !important;*/
         color: #fff;
     }
-    
-    
+
+
 
 .featured-point {
     border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #FFFFFF;
@@ -1380,7 +1414,7 @@ footer nav ul.footling li a {
     z-index: 99;
 }
 
-.narrow .featured-point { 
+.narrow .featured-point {
 	bottom: -25px;
 
 }
@@ -1583,7 +1617,7 @@ h3.featured-gallery-thumb-title {
 	border-radius: 0 0 0 0;
     padding: 10px;
     z-index: 2147483647 !important;
-  
+
 }
 
 #ui-datepicker-div {
@@ -2434,7 +2468,7 @@ button.ui-button::-moz-focus-inner {
 	max-width: 300px;
 	-webkit-box-shadow: 0 0 5px #aaa;
 	box-shadow: 0 0 5px #aaa;
-	
+
 }
 body .ui-tooltip {
 	border-width: 2px;
@@ -2900,25 +2934,25 @@ body .ui-tooltip {
 .ui-corner-top,
 .ui-corner-left,
 .ui-corner-tl {
-	
+
 }
 .ui-corner-all,
 .ui-corner-top,
 .ui-corner-right,
 .ui-corner-tr {
-	
+
 }
 .ui-corner-all,
 .ui-corner-bottom,
 .ui-corner-left,
 .ui-corner-bl {
-	
+
 }
 .ui-corner-all,
 .ui-corner-bottom,
 .ui-corner-right,
 .ui-corner-br {
-	
+
 }
 
 
@@ -3199,13 +3233,13 @@ body .ui-tooltip {
 	.tribe-mini-calendar-nav span:hover {
 		color: #333 !important;
 	}
-	
+
 
 
 /* Around The Neighborhood */
 
 
-.tabs-wrapper { 
+.tabs-wrapper {
 	width: 100%;
 	margin: 15px 0;
 }
@@ -3222,13 +3256,13 @@ body .ui-tooltip {
 	position:relative;
 	display:block;
 	width:100%;
-	
+
 }
 
-.tabs-wrapper .tab-content { 
-	background:#fff; 
+.tabs-wrapper .tab-content {
+	background:#fff;
 	padding: 50px 0 80px;
-	overflow:hidden; 
+	overflow:hidden;
 	border: 1px solid #CBCBCB;
 	border-radius: 0px 3px 3px 3px;
 }
@@ -3284,7 +3318,7 @@ ul.tabs li a {
 }
 
 ul.tabs li:last-child {
-	
+
 }
 
 
@@ -3411,7 +3445,7 @@ ul.tabs li:last-child {
 
 .post-content h2 {
     color: #686666;
-    font-size: 25px;
+    font-size: 35px;
     margin: 20px 0;
 }
 
@@ -3419,7 +3453,7 @@ ul.tabs li:last-child {
     color: #38BABF;
     font-family: scala-sans,sans-serif;
     font-size: 22px;
-    font-weight: bold; 
+    font-weight: bold;
     margin: 0 0 20px;
     text-transform: uppercase;
 }
@@ -3692,7 +3726,7 @@ ul.tabs li:last-child {
 .townbox ul li {
 		display: inline-block; /* Display inline-block, and absolutely NO FLOATS! */
         margin-bottom: 20px;
-        width: 100%; 
+        width: 100%;
 }
 
 .townbox ul li img {
@@ -3819,7 +3853,7 @@ div.pp_default .pp_nav {
 border: 1px solid #ddd !important;
 }
 .upcoming-calendar .tribe-mini-calendar-no-event {
-       background: #fff;       
+       background: #fff;
        padding: 25px 0;
        font-size: 18px;
        color: #403E3F;
@@ -3851,21 +3885,21 @@ position: relative !important;
 .whats-hot li img {
    width: 100%;
  }
- 
- 
- 
- 
- 
+
+
+
+
+
  #navigation-sticky-wrapper #primary-nav {
 	background: #eee;
         color: #444;
 }
- 
+
   #navigation-sticky-wrapper #primary-nav .fixeer {
 	/*background: #1c93d1;*/
         color: #fff;
 }
- 
+
 /*==== ========================= PRESS PAGE LINKS ===================== */
 
 
@@ -4028,7 +4062,7 @@ li.blue-btn i {
 
 #primary-nav.button .flexdate a {
 	visibility: hidden;
-    overflow: hidden;	
+    overflow: hidden;
 }
 
 #primary-nav.button:hover .flexdate a {
