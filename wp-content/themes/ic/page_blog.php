@@ -63,8 +63,7 @@ get_header(); ?>
 						query_posts(
 						array(
 								'post_type' => 'post',
-								'paged' => $paged,
-								'cat' => -10,
+								'paged' => $paged
 								
 							));
 						if(have_posts()) :
@@ -99,12 +98,11 @@ get_header(); ?>
 
 				
 
-				</ul>
-				
-				
+				</ul>						
+
                     <div class="navigation">
-                        <div class="alignleft"><?php next_posts_link( __(' Older Entries' , 'cebolang') ) ?></div>
-                        <div class="alignright"><?php previous_posts_link( __('Newer Entries', 'cebolang') ) ?></div>
+                        <div rel="prev" class="alignleft"><?php next_posts_link( __(' Older Entries' , 'cebolang') ) ?></div>
+                        <div rel="next" class="alignright"><?php previous_posts_link( __('Newer Entries', 'cebolang') ) ?></div>
                         <div class="clear"></div>
                     </div>
 					<?php else : ?>
