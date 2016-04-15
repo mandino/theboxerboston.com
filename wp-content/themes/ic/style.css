@@ -307,8 +307,6 @@ img.right, img.alignright {float: right;margin: 0 0 7px 15px;}
 	text-align: center;
 }
 
-
-
 #maparea {
 	min-height: 200px;
 	min-width: 200px;
@@ -4281,4 +4279,44 @@ span.ns-close {
 
 .usercomments h2 i a {
   color: #38BABF;
+}
+
+.mapheight
+{
+  width: 100%; height: 500px;
+}
+
+.nguide
+{
+  padding: 20px 0 30px; border-bottom: 1px solid #D1D1D1;
+}
+.pagepress
+{
+  width: 100%; border-right: none; padding-top: 20px; padding-right: 0; padding-left: 0;
+}
+.postwidth
+{
+  width: 100%;
+}
+.roomfeaturs-h3{
+text-align: center;
+}
+
+.singroom-sechead
+{
+  border-top: 1px solid #ddd; margin-top: 60px; margin-bottom: 0; float: none; text-align: center;
+}
+
+.fnone
+{
+  float: none; text-align: center; padding: 20px 0
+}
+.stfr
+{
+  text-align: center; float: none; text-transform: uppercase;
+}
+
+.rd-slider
+{
+  margin-top: -69px;
 }

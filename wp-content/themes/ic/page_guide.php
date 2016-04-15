@@ -33,7 +33,7 @@
 						
 						
     <!-- begins map area -->
-	<div id="maparea" style="width: 100%; height: 500px;">
+	<div id="maparea" class="mapheight">
 	
 	
 	
@@ -41,7 +41,7 @@
     <!-- begins map area -->
 
 
-<div id="neighborhood-guide" class="section" style="padding: 20px 0 30px; border-bottom: 1px solid #D1D1D1;">
+<div id="neighborhood-guide" class="section nguide">
 		
 		<div class="container">
 

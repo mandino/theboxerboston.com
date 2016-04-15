@@ -123,7 +123,7 @@
 			<?php } } ?>
 								
 			<div class="wonderline"></div>
-			<div class="post-content fl" style="width: 100%; border-right: none; padding-top: 20px; padding-right: 0; padding-left: 0;">
+			<div class="post-content fl pagepress">
 				
 				
 				<?php if(have_posts()) : while(have_posts()) : the_post(); ?>

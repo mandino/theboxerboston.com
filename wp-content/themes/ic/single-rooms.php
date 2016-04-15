@@ -105,7 +105,7 @@
 					
 					
 					<div id="inline-1" class="hide">
-						<h3 style="text-align: center;">Room Features</h3>
+						<h3 class="roomfeaturs-h3">Room Features</h3>
 						<ul class="amenities">
 							<?php $details = get_post_meta ($post->ID, 'cebo_details', true);
 			             		$detailer = explode(',', $details);
@@ -217,11 +217,11 @@
 			</div>
 			
 			
-			<div class="section-header" style="border-top: 1px solid #ddd; margin-top: 60px; margin-bottom: 0; float: none; text-align: center;">
+			<div class="section-header singroom-sechead">
 					
-				<div class="fl" style="float: none; text-align: center; padding: 20px 0;">
+				<div class="fl fnone">
 	
-					<h2 class="section-title fr" style="text-align: center; float: none; text-transform: uppercase;"><?php _e('More Rooms & Suites', 'cebolang'); ?></h2>
+					<h2 class="section-title fr stfr"><?php _e('More Rooms & Suites', 'cebolang'); ?></h2>
 	
 				</div>
 	
@@ -236,7 +236,7 @@
 	
 	<div class="clear"></div>
 
-	<div id="room-details-slider" style="margin-top: -69px;">
+	<div id="room-details-slider rd-slider">
 
 		<div class='slideSelectors'>
 			
