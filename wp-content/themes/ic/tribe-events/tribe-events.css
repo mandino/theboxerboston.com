@@ -85,7 +85,7 @@
   border-radius: 0 0 0 0;
     padding: 10px;
     z-index: 2147483647 !important;
-  
+
 }
 
 /* Layout helpers
@@ -905,7 +905,7 @@ button.ui-button::-moz-focus-inner {
   max-width: 300px;
   -webkit-box-shadow: 0 0 5px #aaa;
   box-shadow: 0 0 5px #aaa;
-  
+
 }
 body .ui-tooltip {
   border-width: 2px;
@@ -1266,25 +1266,25 @@ body .ui-tooltip {
 .ui-corner-top,
 .ui-corner-left,
 .ui-corner-tl {
-  
+
 }
 .ui-corner-all,
 .ui-corner-top,
 .ui-corner-right,
 .ui-corner-tr {
-  
+
 }
 .ui-corner-all,
 .ui-corner-bottom,
 .ui-corner-left,
 .ui-corner-bl {
-  
+
 }
 .ui-corner-all,
 .ui-corner-bottom,
 .ui-corner-right,
 .ui-corner-br {
-  
+
 }
 
 
@@ -1398,7 +1398,7 @@ div.pp_default .pp_nav {
 border: 1px solid #ddd !important;
 }
 .upcoming-calendar .tribe-mini-calendar-no-event {
-       background: #fff;       
+       background: #fff;
        padding: 25px 0;
        font-size: 18px;
        color: #403E3F;
@@ -1430,12 +1430,12 @@ position: relative !important;
 .whats-hot li img {
    width: 100%;
  }
-  
+
 #navigation-sticky-wrapper #primary-nav .nothingness {
 	background: #eee;
         color: #444;
 }
- 
+
   #navigation-sticky-wrapper #primary-nav .fixeer {
 	background: #1c93d1;
         color: #fff;
@@ -1469,7 +1469,7 @@ position: relative !important;
   border-radius: 0 0 0 0;
     padding: 10px;
     z-index: 2147483647 !important;
-  
+
 }
 
 #ui-datepicker-div {
@@ -2320,7 +2320,7 @@ button.ui-button::-moz-focus-inner {
   max-width: 300px;
   -webkit-box-shadow: 0 0 5px #aaa;
   box-shadow: 0 0 5px #aaa;
-  
+
 }
 body .ui-tooltip {
   border-width: 2px;
@@ -2786,28 +2786,30 @@ body .ui-tooltip {
 .ui-corner-top,
 .ui-corner-left,
 .ui-corner-tl {
-  
+
 }
 .ui-corner-all,
 .ui-corner-top,
 .ui-corner-right,
 .ui-corner-tr {
-  
+
 }
 .ui-corner-all,
 .ui-corner-bottom,
 .ui-corner-left,
 .ui-corner-bl {
-  
+
 }
 .ui-corner-all,
 .ui-corner-bottom,
 .ui-corner-right,
 .ui-corner-br {
-  
+
 }
 
-
+.single-tribe_events h1.tribe-events-single-event-title {
+    font-size: 33px !important;
+}
 
 
 
