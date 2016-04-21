@@ -3763,3 +3763,8 @@ text-align: center;
 {
   margin-top: -69px;
 }
+
+h1.tribe-events-page-title{
+  font-size:30px !important;
+  text-align: center !important;
+}
