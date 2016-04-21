@@ -2793,7 +2793,7 @@ body .ui-tooltip {
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
   border: none;
-  background: #f6f6f6 url(images/ui-bg_highlight-hard_100_f6f6f6_1x100.png) 50% 50% repeat-x;
+  /*background: #f6f6f6 url(images/ui-bg_highlight-hard_100_f6f6f6_1x100.png) 50% 50% repeat-x;*/
   font-weight: bold;
   color: #111111;
 }
@@ -2808,7 +2808,7 @@ body .ui-tooltip {
 .ui-widget-content .ui-state-active,
 .ui-widget-header .ui-state-active {
   border: none;
-  background: #ffffff url(images/ui-bg_flat_65_ffffff_40x100.png) 50% 50% repeat-x;
+  /*background: #ffffff url(images/ui-bg_flat_65_ffffff_40x100.png) 50% 50% repeat-x;*/
   font-weight: bold;
   color: #cc0000;
 }
@@ -2878,13 +2878,13 @@ body .ui-tooltip {
   width: 16px;
   height: 16px;
 }
-.ui-icon,
+/*.ui-icon,
 .ui-widget-content .ui-icon {
   background-image: url(images/ui-icons_cc0000_256x240.png);
 }
-/*.ui-widget-header .ui-icon {
+.ui-widget-header .ui-icon {
   background-image: url(images/ui-icons_ffffff_256x240.png);
-}*/
+}
 .ui-state-default .ui-icon {
   background-image: url(images/ui-icons_cc0000_256x240.png);
 }
@@ -2894,14 +2894,14 @@ body .ui-tooltip {
 }
 .ui-state-active .ui-icon {
   background-image: url(images/ui-icons_cc0000_256x240.png);
-}
+}*/
 .ui-state-highlight .ui-icon {
   background-image: url(images/ui-icons_004276_256x240.png);
 }
-.ui-state-error .ui-icon,
+/*.ui-state-error .ui-icon,
 .ui-state-error-text .ui-icon {
   background-image: url(images/ui-icons_cc0000_256x240.png);
-}
+}*/
 /* positioning */
 .ui-icon-blank { background-position: 16px 16px; }
 .ui-icon-carat-1-n { background-position: 0 0; }

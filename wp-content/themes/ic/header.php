@@ -1,13 +1,9 @@
 <?php 
-
 	if ( file_exists( TEMPLATEPATH.'/library/mobile-detect.php' ) ) {
-
 		require_once TEMPLATEPATH.'/library/mobile-detect.php';
 		$detect = new Mobile_Detect;
 		$check = $detect->isMobile();
-
 	}
-
 ?>
 <!DOCTYPE HTML>
 <head>
@@ -26,13 +22,10 @@
 		?>
 	</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link rel="profile" href="http://gmpg.org/xfn/11" />
-	
+	<link rel="profile" href="http://gmpg.org/xfn/11" />	
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-	<?php if (get_option('cebo_custom_favicon') == '') { ?>
-	
-	<link rel="icon" href="<?php bloginfo ('template_url'); ?>/cebo_options/<?php bloginfo ('template_url'); ?>/images/admin_sidebar_icon.png" type="image/x-ico"/>
-	
+	<?php if (get_option('cebo_custom_favicon') == '') { ?>	
+	<link rel="icon" href="<?php bloginfo ('template_url'); ?>/cebo_options/<?php bloginfo ('template_url'); ?>/images/admin_sidebar_icon.png" type="image/x-ico"/>	
 	<?php } else { ?>
 	
 	<link rel="icon" href="<?php echo get_option('cebo_custom_favicon'); ?>" type="image/x-ico"/>
