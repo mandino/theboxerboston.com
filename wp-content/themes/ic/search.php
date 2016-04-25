@@ -1,6 +1,6 @@
 <?php 
 
-/* Template Name: Blog
+/* SEARCH
 
 */
 get_header(); ?>   
@@ -23,13 +23,13 @@ get_header(); ?>
 					if ( $the_query->have_posts() ) { 
 
 			?>
-					<h2 class="section-pre-title fl">Search Result</h2>
+					<div class="section-pre-title fl">Search Result</div>
 
 					<div class="section-header-divider fl"></div>
 				
 
 		
-					<h2 class="section-title fr"><?php echo get_search_query(); ?></h2>
+					<h1 class="section-title fr"><?php echo get_search_query(); ?></h1>
 	
 				</div>
 

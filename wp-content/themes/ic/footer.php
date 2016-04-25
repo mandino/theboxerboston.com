@@ -163,6 +163,8 @@ ga('send', 'pageview');
 
 </script>
 
+
+
 	
 <!-- <div id="fb-root"></div> -->
 <script>(function(d, s, id) {
@@ -317,7 +319,7 @@ fjs.parentNode.insertBefore(js, fjs);
 <script> (function(){ var v = document.createElement('script'); var s = document.getElementsByTagName('script')[0]; v.src = '//io.voyat.com/v.js'; v.async = true; s.parentNode.insertBefore(v, s); })(); </script>
 <!-- VOYAT CODE -->	
 
-<!-- LINKERED LINKS
+<!-- LINKERED LINKS-->
 <script>
 	jQuery(function ($) {
 	// Load dialog on page load

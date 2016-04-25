@@ -258,7 +258,7 @@
       $.getJSON(
         "<?php bloginfo('template_directory'); ?>/svc/cache.php?lat=" + lat + "&long=" + lon,
         function(data) {
-         // list = $.parseJSON(data);
+          list = $.parseJSON(data);
           $("#maparea").gmap3("");
           $.each(data["tweets"], function(key, val){
             var latlon = [val["lat"], val["lon"]];
@@ -298,10 +298,10 @@
       
       $("#maparea").mouseover(function(e) {
 
-	$("a[rel='example1']").colorbox();
+/*	$("a[rel='example1']").colorbox();
         $(".placeData .closeData").click(function() {
           $(".placeData").hide();  
-        });
+        });*/
 
 	$("#infoBox .closeData").click(function() {
           $("#infoBox").hide();  
