@@ -435,7 +435,7 @@ color: #333;
 
 #property-nav nav {
      background: none repeat scroll 0 0 #00adef;
-   /* background: none repeat scroll 0 0 #fff; */
+   /* background: none repeat scroll 0 0 #fff;*/
     height: auto;
     border-bottom: 2px solid #333333;
     transition: all 0.5s;
@@ -447,7 +447,7 @@ color: #333;
 
 #property-nav nav:hover {
     background: none repeat scroll 0 0 #03b7fb;
-   /*  background: none repeat scroll 0 0 #333;*/
+  /*   background: none repeat scroll 0 0 #333; */
 }
 
 
