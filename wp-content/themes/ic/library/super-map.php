@@ -298,10 +298,10 @@
       
       $("#maparea").mouseover(function(e) {
 
-	$("a[rel='example1']").colorbox();
+/*	$("a[rel='example1']").colorbox();
         $(".placeData .closeData").click(function() {
           $(".placeData").hide();  
-        });
+        });*/
 
 	$("#infoBox .closeData").click(function() {
           $("#infoBox").hide();  

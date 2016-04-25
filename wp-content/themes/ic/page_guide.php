@@ -329,7 +329,7 @@
 								
 								<div class="townbox">
 								
-									<?php query_posts('post_type=page&p=178'); if(have_posts()) : while(have_posts()) : the_post(); ?>
+									<?php query_posts('post_type=page&p=78'); if(have_posts()) : while(have_posts()) : the_post(); ?>
 									
 									
 									<ul>
