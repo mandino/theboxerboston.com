@@ -298,10 +298,10 @@
       
       $("#maparea").mouseover(function(e) {
 
-/*	$("a[rel='example1']").colorbox();
+	$("a[rel='example1']").colorbox();
         $(".placeData .closeData").click(function() {
           $(".placeData").hide();  
-        });*/
+        });
 
 	$("#infoBox .closeData").click(function() {
           $("#infoBox").hide();  
@@ -369,7 +369,7 @@
          function(data) {
            list = $.parseJSON(data);
            $.each(data["places"], function(key, val){
-             var docRoot = '<?php bloginfo ('template_url'); ?>';
+             var docRoot = '<?php echo bloginfo ('template_url'); ?>';
              var coords = val["coords"].split(",", 2);
              var latlon = [coords[0], coords[1]];
              var goid = val["cater"];
@@ -384,7 +384,7 @@
 				    id: goid,
 				    options:{
 						draggable: false,
-						icon : new google.maps.MarkerImage('')
+						icon : new google.maps.MarkerImage('yourImage.png')
 					}
 				  },
 				  overlay:{
