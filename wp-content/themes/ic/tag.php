@@ -1,9 +1,7 @@
 <?php
 /**
  * The template for displaying Tag Archive pages.
-
  */
-
 get_header(); ?>
 
 					

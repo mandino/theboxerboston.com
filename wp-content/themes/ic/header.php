@@ -1,13 +1,9 @@
 <?php 
-
 	if ( file_exists( TEMPLATEPATH.'/library/mobile-detect.php' ) ) {
-
 		require_once TEMPLATEPATH.'/library/mobile-detect.php';
 		$detect = new Mobile_Detect;
 		$check = $detect->isMobile();
-
 	}
-
 ?>
 <!DOCTYPE HTML>
 <head>
@@ -26,13 +22,10 @@
 		?>
 	</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link rel="profile" href="http://gmpg.org/xfn/11" />
-	
+	<link rel="profile" href="http://gmpg.org/xfn/11" />	
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-	<?php if (get_option('cebo_custom_favicon') == '') { ?>
-	
-	<link rel="icon" href="<?php bloginfo ('template_url'); ?>/cebo_options/<?php bloginfo ('template_url'); ?>/images/admin_sidebar_icon.png" type="image/x-ico"/>
-	
+	<?php if (get_option('cebo_custom_favicon') == '') { ?>	
+	<link rel="icon" href="<?php bloginfo ('template_url'); ?>/cebo_options/<?php bloginfo ('template_url'); ?>/images/admin_sidebar_icon.png" type="image/x-ico"/>	
 	<?php } else { ?>
 	
 	<link rel="icon" href="<?php echo get_option('cebo_custom_favicon'); ?>" type="image/x-ico"/>
@@ -98,16 +91,16 @@
 		wp_head();
 	?>
 	
-	<!-- Sojern Head -->
-	<script>
-	(function () {
-	var pl = document.createElement('script');
-	pl.type = 'text/javascript';
-	pl.async = true;
-	pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(pl);
-	})();
-	</script>
-	<!-- End Sojern -->
+<!-- Sojern Head -->
+<script>
+(function () {
+var pl = document.createElement('script');
+pl.type = 'text/javascript';
+pl.async = true;
+pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(pl);
+})();
+</script>
+<!-- End Sojern -->
 
 	<script type="application/ld+json">
 		{
@@ -123,22 +116,7 @@
 		"description": "A most wonderful article",
 		"articleBody": "The full body of the article"
 		}
-	</script>
-
-	<!-- Facebook Pixel Code -->
-	<script>
-	!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-	n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-	n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-	t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-	document,'script','//connect.facebook.net/en_US/fbevents.js');
-
-	fbq('init', '164851350567642');
-	fbq('track', "PageView");</script>
-	<noscript><img height="1" width="1" style="display:none"
-	src="https://www.facebook.com/tr?id=164851350567642&ev=PageView&noscript=1"
-	/></noscript>
-	<!-- End Facebook Pixel Code -->
+	</script> 
 	
 
 </head> 
@@ -233,7 +211,7 @@
 						</ul> -->
 	
 					</li>
-					<li class="blue-btn"><a href="http://theboxerboston.com/blue"><i class="fa fa-info-circle"></i><span class="blue-mobile">why blue?</span></a></li>
+					<!-- <li class="blue-btn"><a href="http://theboxerboston.com/blue"><i class="fa fa-info-circle"></i><span class="blue-mobile">why blue?</span></a></li> -->
 				</ul>
 			</nav>
 			

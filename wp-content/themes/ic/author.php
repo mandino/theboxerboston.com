@@ -143,7 +143,7 @@ get_header(); ?>
 									
 									
 									
-										<h3><?php the_title(); ?></h3>
+										<h2><?php the_title(); ?></h2>
 									
 										<?php if(count($attachments) == 0 && !get_post_meta($post->ID, 'cebo_youtube', $single = true) && !get_post_meta($post->ID, 'cebo_vimeo', $single = true) && !$imgsrc ) { ?>
 										

@@ -17,7 +17,7 @@
 				<div class="fl">
 					<?php if(get_option('cebo_shorttitle')) { ?>
 
-					<h2 class="section-pre-title fl"><?php echo get_option('cebo_shorttitle'); ?></h2>
+					<h1 class="section-pre-title fl"><?php echo get_option('cebo_shorttitle'); ?></h1>
 
 					<div class="section-header-divider fl"></div>
 
