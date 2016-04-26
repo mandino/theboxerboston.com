@@ -162,7 +162,7 @@
 	
 				</div> 
 				<?php } ?> 
-
+				<p>&nbsp;</p><p>&nbsp;</p>
 				<ul class="thumbgal">
 						
 						<?php query_posts('post_type=specials&posts_per_page=4'); if(have_posts()) : while(have_posts()) : the_post(); 
