@@ -163,7 +163,7 @@
 				</div> 
 				<?php } ?> 
 
-				<ul class="thumbgal">
+				<!--<ul class="thumbgal">
 						
 						<?php query_posts('post_type=specials&posts_per_page=4'); if(have_posts()) : while(have_posts()) : the_post(); 
 						$imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full"); ?>
@@ -208,7 +208,7 @@
 										
 										
 										<!-- , and Hotel Oceana Tote Bag., and breakfast at the Hotel. -->
-										<a class="special-external" href="<?php the_permalink(); ?>"><i class="fa fa-chevron-right fa-lg"></i></a>
+										<!--<a class="special-external" href="<?php the_permalink(); ?>"><i class="fa fa-chevron-right fa-lg"></i></a>
 									</div>
 									
 								</li>
@@ -219,7 +219,7 @@
 							
 						
 							
-						</ul>
+						</ul>-->
 		
 				</div>
 			
