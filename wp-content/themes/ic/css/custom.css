@@ -434,7 +434,7 @@ color: #333;
 
 
 #property-nav nav {
-     background: none repeat scroll 0 0 #00adef; 
+     background: none repeat scroll 0 0 #00adef;
   /*  background: none repeat scroll 0 0 #fff;*/
     height: auto;
     border-bottom: 2px solid #333333;
@@ -446,7 +446,7 @@ color: #333;
 }
 
 #property-nav nav:hover {
-   background: none repeat scroll 0 0 #03b7fb; 
+   background: none repeat scroll 0 0 #03b7fb;
    /*   background: none repeat scroll 0 0 #333;*/
 }
 
@@ -484,7 +484,7 @@ color: #333;
     -o-transition: all 0.5s;
     max-width: 100%;
     font-weight: bold;
-    background: url(../images/ic_white.png) center no-repeat; 
+    background: url(../images/ic_white.png) center no-repeat;
    /*  background: url(../images/ic_dark.png) center no-repeat;*/
 }
 
@@ -955,6 +955,21 @@ div.section-pre-title{
     width: 100%;
 }
 
+.section-photos li h2, .thumbgal li h2 {
+    transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    background: url("../images/fading-dots-horizontal.png") repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+    bottom: 0px;
+    color: #FFFFFF;
+    line-height: 2;
+    padding-top: 40px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+
 .from-price {
     transition: all 0.5s;
     -moz-transition: all 0.5s;
@@ -1052,6 +1067,17 @@ div.section-pre-title{
     width: 80%;
     opacity: 1 !important;
 }
+
+.section-photos li div h2, .thumbgal li div h2 {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    font-size: 40px;
+    line-height: 1;
+    margin: 0 auto;
+    position: relative;
+    width: 80%;
+    opacity: 1 !important;
+}
+
 
 
 
