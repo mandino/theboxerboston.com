@@ -58,7 +58,11 @@
 
 		</div>
 
-		<a href="http://independentcollection.com/" target="_blank"><div id="property-name"></div></a>
+
+		<div id="property-name">
+			<a href="http://www.independentcollection.com/ic-local/" target="_blank"><i class="sprite sprite-ic_01"></i></a>
+			<a href="http://www.independentcollection.com/" target="_blank"><i class="sprite sprite-ic_02"></i></a>
+		</div>
 
 		<div class="footer-nav container">
 
@@ -147,21 +151,18 @@ pl.src = 'https://beacon.sojern.com/pixel/p/3677?cid=[destination_searched]&ha1=
 </script>
 <!-- End Sojern script -->
 
-<script>
+<script> (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new
 
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-	ga('create', 'UA-37161096-1', 'auto', {
-		'allowLinker': true
-	});
-	ga('send', 'pageview');
-	ga('require', 'linker');
-	ga('linker:autoLink', ['reztrip.com'], false, true);
+ga('create', 'UA-37161096-1', 'auto',{'allowLinker': true });
+
+ga('require', 'linker'); ga('linker:autoLink', ['theboxerboston.reztrip.com','theboxerboston.reztripmobile.com']);
+
+ga('send', 'pageview');
 
 </script>
+
 
 
 	
@@ -313,6 +314,27 @@ fjs.parentNode.insertBefore(js, fjs);
 <?php } ?>
 	
 <!-- End Email signup popup -->
-		
+
+<!-- VOYAT CODE -->
+<script> (function(){ var v = document.createElement('script'); var s = document.getElementsByTagName('script')[0]; v.src = '//io.voyat.com/v.js'; v.async = true; s.parentNode.insertBefore(v, s); })(); </script>
+<!-- VOYAT CODE -->	
+
+<!-- LINKERED LINKS-->
+<script>
+	jQuery(function ($) {
+	// Load dialog on page load
+	//$('#basic-modal-content').modal();
+ $(".linkerd").click(function(){
+
+ 	var id=$(this).attr("data-id");
+ 	
+ 	var hr=$("#"+id).attr("href");
+ 	window.parent.location=hr;
+ })
+ 
+});
+</script>
+<!-- LINKERED LINKS -->
+
 </body>
 </html>

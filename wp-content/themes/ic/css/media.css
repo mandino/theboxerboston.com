@@ -1,199 +1,118 @@
-
 /* ================================================  MAX WIDTH 1280 ======================================= */
-
-
-@media only screen 
+@media only screen
 and (max-width : 1280px) {
-
-
-
 	/* Navigation */
-
 	#primary-nav .container {
 	    width: 1040px;
 	}
-
-
 }
-
-
-
 /* ================================================  MAX WIDTH 1439 ======================================= */
-
-
-@media only screen 
-and (max-width : 1439px) {	
-
-
-
+@media only screen
+and (max-width : 1439px) {
 	/* Navigation */
-
 	#primary-nav .container {
 	    width: 840px;
 	}
-
 	#primary-nav nav {
 	    margin: 25px 0px 22px 0;
 	}
-
 	#primary-nav nav ul li a {
 	    font-size: 12px;
 	}
-
-
-
-
 }
-
-
-
 /* ================================================  MAX WIDTH 1240 ======================================= */
-
-
-@media only screen 
+@media only screen
 and (max-width : 1240px) {
-
-
-
 	/* Navigation */
-
 	/*#primary-nav .container {
 	    width: 680px;
 	}*/
-
 	#primary-nav nav ul li a {
 	    font-size: 12px;
 	}
-
-
-
-
-
 }
-
-
 /* ================================================  MAX WIDTH 1099 ======================================= */
-
-
-@media only screen 
-and (max-width : 1099px) {	
-
-
-
+@media only screen
+and (max-width : 1099px) {
 	/* General settings */
-
 	.container, #tribe-events-pg-template {
 		width: 95%;
 	}
-
-
-
 	/* Navigation */
-
 	.sticky .logo {
 	    padding: 20px 10px;
 	}
-
 	.logo img {
 	    max-width: 150px;
 	    padding: 0;
 	    margin: -13px 0 20px -10px;
 	}
-	
 	#primary-nav span.navdrop, #primary-nav span.navdrop ul {
 		display: block;
 	}
-
 	#primary-nav nav ul {
 	    margin-left: 170px;
 	}
-
 	/* Main slider */
-
 	#home-slider h2 {
 	    font-size: 53px;
 	}
-
-
-
-	/* Navigation */	
-
+	/* Navigation */
 	#primary-nav .container {
 	    width: 82%;
 	}
-
 	#primary-nav nav {
 	    margin: 13px 0;
 	    width: 100%;
 	}
-
 	#primary-nav .button, #navigation-sticky-wrapper.sticky #primary-nav .button {
 	    font-size: 17px;
 	    font-weight: bold;
 	    margin: 0 0 0 20px;
 	    padding: 11px 40px;
 	}
-
 	#primary-nav nav ul li {
 	    margin-right: 12px;
 	}
-
 	#primary-nav nav ul li a {
 	    font-size: 10px;
 	}
-
 	.ressys {
 		top: 72px;
 	}
-
 	.dropit, .ressys:hover {
 	    top: 82px;
 	}
-
-	
 	/* Welcome */
-	
 	.quote-right {
 		bottom: 95px;
-	}	
-
+	}
 	/* Map */
-
 	.page-template-page_guide-php #toggles {
 	    top: 545px;
 	}
-
 	.home #toggles {
 	    top: 475px;
 	}
-
-
-
 	/* Thumbgal & Imagegal */
-
 	#intro .section-photos li {
 	    float: left;
 	    margin-right: 13px;
 	    position: relative;
 	    width: 23.4%;
 	}
-
 	.section-photos li:first-child {
 	    width: 48.3% !important;
 	}
-
 	.section-photos li h3, .thumbgal li h3 {
 	    bottom: 2px;
 	}
-
 	.section-photos li div.hover-effect, .thumbgal li div.hover-effect {
 	    height: 98.7%;
 	}
-
 	.section-photos li div h3, .thumbgal li div h3 {
 	    font-size: 30px;
 	}
-
 	.from-price {
 	    font-size: 22px;
 	    height: 59px;
@@ -202,303 +121,186 @@ and (max-width : 1099px) {
 	    padding: 10px;
 	    width: 70px;
 	}
-
-
-
 	/* Welcome H1 */
-
 	.welcometext h1 {
 		font-size: 33px;
 	}
-
-
-
 	/* Section Header */
-
 	.section-header h2.section-pre-title {
 	    font-size: 21px;
 	    padding: 25px 0;
 	}
-
 	.section-header-divider {
 	    height: 71px;
 	    margin: 0 25px;
 	}
-
 	.section-header h2.section-title {
 	    font-size: 31px;
 	    padding: 18px 0;
 	    width: 450px;
 	}
-
 	.section-header .fr {
 	    padding: 26px 0;
 	}
-
-
 	.section-header .fl {
 	    max-width: 90%;
 	}
-
-
-
 	/* Quote Rotator */
-
 	.ico-quote {
 		    background-size: contain;
 		    height: 37px;
 		    width: 65px;
 	}
-
 	.cbp-qtrotator {
 	    width: 63%;
 	}
-
 	.cbp-qtrotator blockquote footer {
 		font-size: 19px;
 	}
-
-
-
 	/* Post slider */
-
 	.neighborhood-sliders .fl, .neighborhood-sliders .fr {
 	    width: 49%;
 	}
-
 	.fl .slidesjs-slide .ptit {
 	    bottom: 9px;
 	}
-
 	.neighborhood-sliders .slidesjs-slide img {
 	    width: 100%;
 	}
-
 	.fl .slidesjs-slide .post-date {
 	    height: 61px;
 	}
-
 	.slidesjs-slide .post-date span.date-month {
 	    font-size: 23px;
 	}
-
 	.slidesjs-slide .post-date span {
 	    font-size: 50px;
 	}
-
 	.slidesjs-pagination {
 	    margin: 17px 0 0;
 	}
-
-
-
 	/* Post */
-
 	.post-content.fl {
 	    width: 64%
 	}
-
-
-
 	/* Footer Signup */
-
 	.newsletter-form input[type="text"] {
 	    width: 59%;
 	}
-
-
-
 	/* Room list */
-
 	.room-box .fr {
 	    padding: 3% 3.7% 0;
 	}
-
-
-
 	/* Rooms - single */
-	
-	#room-featured-slider, 
-	#room-featured-slider .flexslider, 
+	#room-featured-slider,
+	#room-featured-slider .flexslider,
 	#room-featured-slider .flexslider .slides img {
 		height: 350px;
 	}
-	
 	.room-details-gallery.fr {
 	    width: 260px;
 	}
-
 	.room-details-content p {
 	    font-size: 20px;
 	}
-
 	.single-rooms .section-photos.fl {
 	    width: 70%;
 	}
-
 	.iosSlider {
 		height: 368px !important;
 	}
-
 	.single-rooms .section-header .fl {
 	    max-width: 100%;
 	}
-
 	.single-rooms .section-header h2.section-title {
 		display: inline;
 	}
-
-
-
 	/* Page - Guide */
-
 	.tab-featured {
 	    overflow: hidden;
 	    width: 49%;
 	}
-	
 	.upcoming-events .event-description {
 		padding: 5px 18px 5px 19px;
 	}
-
 	.whats-hot .hot-featured li, .whats-hot .hot-featured {
 	    overflow: hidden;
 	    width: 426px;
 	}
-
 	.whats-hot ul:last-child {
 	    margin-right: 0;
 	}
-
 	.heater {
 		padding-bottom: 0;
 	}
-
-
-
 	/* Gallery */
-
 	.post-content .imagegal ul li {
 	    margin-bottom: 20px;
 	    width: 23.6%;
 	}
-
 	/* logo */
-
 	.logo {
 	padding: 14px 15px 17px;
 	}
-
 	.slicer {
 		width: 370px !important;
 	}
-
 	.slide-header {
 		top: 15%;
 	}
-
 	/* light it up blue */
-
 	li.blue-btn {
 		left: 0px;
 	}
-
-
-
-
-
 }
-
-
-
 /* ================================================  MAX WIDTH 1024 ======================================= */
-
-@media only screen 
+@media only screen
 and (max-width : 1024px) {
-
-
 	/* Double Flyout */
-
 	.ID1 { top: 15px; }
 	.ID2 { bottom: 28px; }
-
 	#home-slider .specialsbox h3 {
 		font-size: 22px !important
 	}
-
 }
-
-
-
 /* ================================================  MAX WIDTH 1023 ======================================= */
-
-@media only screen 
+@media only screen
 and (max-width : 1023px) {
-
 	#maparea, #toggles {
 		display: none !important;
 	}
-
-
-
 }
-
-
-
 /* ================================================  MAX WIDTH 940 ======================================= */
-
-
-@media only screen 
-and (max-width : 940px) 
+@media only screen
+and (max-width : 940px)
 {
-
-
-
-
 	/* Navigation */
-
 	.ressys {
 		top: 52px;
 	}
-
 	.sticky #navigation .dropit, #navigation .dropit {
 	    top: 63px;
 	}
-
 	.container #menu {
 		display: none;
 	}
-
-
-
 	/* Section header */
-
 	.section-header .social-buttons li:last-child {
 	    margin-right: 0;
 	}
-
-
-
 	/* Section photos */
-
 	#intro .section-photos {
 	    margin: 0 auto;
 	    width: 260px;
 	}
-
 	.from-price {
         margin-left: 50%;
 	    margin-top: 10%;
 	}
-
-
-
 	/* Post slider */
-
 	.neighborhood-sliders {
 	    overflow: hidden;
 	}
-
 	.neighborhood-sliders .fl, .neighborhood-sliders .fr {
 	    clear: both;
 	    float: none;
@@ -506,23 +308,14 @@ and (max-width : 940px)
 	    width: 80%;
 	    height: auto;
 	}
-
 	.fl .slidesjs-slide .ptit, .fr .slidesjs-slide .ptits {
 	    bottom: -104px;
 	}
-
-
-
 	/* Post */
-
 	.post-content.fl {
 	    width: 55%;
 	}
-
-
-
 	/* Room list */
-
 	.room-list li {
 	    border: 1px solid #CBCBCB;
 	    height: auto;
@@ -531,16 +324,13 @@ and (max-width : 940px)
 	    padding-bottom: 10px;
 	    width: 100%;
 	}
-
 	.room-box .fl {
 	    width: 100%;
 	}
-
 	.room-box .fl > img {
 	    height: auto;
 	    width: 100%;
 	}
-
 	.room-box .fr {
 	    float: left;
 	    height: auto;
@@ -548,24 +338,20 @@ and (max-width : 940px)
 	    position: relative;
 	    width: 90%;
 	}
-
 	.room-list h3 {
 	    color: #444444;
 	    font-size: 23px;
 	    margin-bottom: 15px;
 	}
-
 	.room-list p {
 	    color: #606060;
 	    font-size: 15px;
 	    line-height: 1.8;
 	}
-
 	.room-list-buttons {
 	    bottom: 0;
 	    position: relative;
 	}
-
 	.room-box .button {
 	    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
 	    border: 6px solid #808080;
@@ -578,19 +364,13 @@ and (max-width : 940px)
 	    margin-right: 5px;
 	    padding: 11px 15px;
 	}
-
-
-
 	/* Page - Specials */
-
 	.post-content .imagegal ul li:nth-child(3n) {
 	    margin-right: 0;
 	}
-
 	.post-content .imagegal ul li:nth-child(4n) {
 	    margin-right: 13px;
 	}
-
 	.post-content .imagegal ul li {
 	    margin-bottom: 20px;
 	    width: 32%;
@@ -610,74 +390,49 @@ and (max-width : 940px)
 	.post-content .imagegal.photos ul li:nth-child(4n) {
 	    margin-right: 7px;
 	}
-
-
-
 	/* Rooms - Single */
-
 	.iosSlider {
 	    height: 274px !important;
 	}
-
-
-
 	/* Page - Guide */
-
 	.whats-hot ul, .whats-hot li {
 	    float: none;
 	    margin: 0 auto;
 	    width: 80%;
 	}
-
 	.whats-hot img {
 	    width: 100%;
 	}
-
 	.whats-hot .hot-featured li, .whats-hot .hot-featured {
 	    overflow: hidden;
 	    width: 540px;
 	}
-
 	.tab-featured {
 	    clear: both;
 	    float: none !important;
 	    margin: 30px auto !important;
 	    width: 540px;
 	}
-
 	.whats-hot ul:last-child {
 	    margin-right: auto;
 	}
-
-
-
 	/* Page - Contact */
-
 	#wpcf7-f538-p91-o1 {
 	    width: 90%;
 	}
-
 	.name-wrapper .wpcf7-form-control-wrap.first-name {
 	    margin-right: 0;
 	}
-
 	.name-wrapper .wpcf7-form-control-wrap {
 	    width: 100%;
 	}
-
 	.wpcf7-form .submit-button {
 	    width: 110%;
 	}
-
-
-
 	/* Page - Press */
-
-
 	.post-content.fl > ul.presslinks {
 		width: 100%;
 	}
-
 	.presslinks {
 		-moz-column-count: 2;
 	    -moz-column-gap: 8px;
@@ -686,59 +441,53 @@ and (max-width : 940px)
 	    column-count: 2;
 	    column-gap: 8px;
 	}
-
-
-
 	/* Footer */
-
 	.mm-opened footer {
 		display: none;
 	}
-
-
-
 	/* Prettyphoto */
-
 	.pp_social .facebook {
 		display: none;
 	}
-
+	/* NEIGHBORHOOD GUIDE PAGE */
+	#mneighbor
+	{
+		width:100%;
+	}
+	.upcoming-calendar
+	{
+		width:100%;
+	}
+	.upcoming-events .fr {
+    width: 100%;
+    margin-top: 50px;
+	}
+	.upcoming-events .fr li{
+		width:95%;
+	}
+	.upcoming-events .event-description {
+    padding: 5px 36px 5px 19px !important;
+	}
 }
-
-
 /* ================================================  MAX WIDTH 939 ======================================= */
-
-@media only screen 
+@media only screen
 and (max-width : 939px) {
-	
-	
-	
-	
-	
 		#footer-newsletter {
 		display: none;
 	}
-	
-
-	
 	.mmenu-icon {
 		display: block;
 	}
-
 	#primary-nav .fl {
 		display: none;
 	}
-
 	/* Navigation */
-	
 	#property-nav {
 		height: 26px;
 	}
-
 	.logo {
 	    display: none;
 	}
-
 	.logo.mobile {
 		display: block;
 		height: 38px;
@@ -748,11 +497,9 @@ and (max-width : 939px) {
 		background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
 		border: none;
 	}
-
 	.sticky .logo {
 	    padding: 15px 10px;
 	}
-
 	#primary-nav {
 	  min-height: 68px;
 	  position: relative;
@@ -761,18 +508,14 @@ and (max-width : 939px) {
 	.logo.mobile > img {
 	    height: 97%;
 	}
-
 	#primary-nav .navdrop i {
 	    color: #333333;
 	}
-
 	#property-nav nav ul li a.clicknav-clicker, #navigation-sticky-wrapper.sticky #property-nav nav ul li a.clicknav-clicker {
 	    font-size: 11px;
 	    letter-spacing: 3px;
 	    padding: 20px;
-	    
 	}
-
 	#primary-nav .button, #navigation-sticky-wrapper.sticky #primary-nav .button {
 	    font-size: 16px;
 left: 0;
@@ -780,112 +523,77 @@ padding: 16px 40px;
 height: 15px;
 line-height: 16px;
 	}
-
 	#primary-nav span.navdrop, #primary-nav span.navdrop ul {
 	    font-size: 12px;
 	    padding: 10px 20px;
 	}
-
 	#primary-nav span.navdrop ul {
 		padding: 0;
 	}
-
 	.drops {
 		top: 35px;
 	}
-
-
-
 	/* MMENU */
-
 	#primary-nav .container {
 	    float: left !important;
 	    width: 30%;
 	}
-
 	.mmenu-icon .fa.fa-bars {
 	    background: none repeat scroll 0 0 #38BABF;
 	    color: #FFFFFF;
 	    padding: 6px;
 	    font-size: 34px;
 	}
-
-
-
 	/* Double Flyout */
-
 	.welcome-text { font-size: 13px; }
-
 	.ID1 { top: 15px; }
 	.ID2 { bottom: 28px; }
-
 	#home-slider .specialsbox {
 		padding: 10px 15px;
 		width: 285px;
 		height: 55px;
 	}
-
 	#home-slider .specialsbox h3 {
 		font-size: 13px !important
 	}
-
-
 	/* Home - Specials */
-
 	#intro .section-photos li, #intro .section-photos li:first-child {
 	    margin-bottom: 10px;
 	    margin-right: 0;
 	    overflow: hidden;
 	    width: 100% !important;
 	}
-
 	.section-photos img {
 	    height: 280px;
 	}
-
-
 	/* Post slider */
-
 	.neighborhood-sliders .fl, .neighborhood-sliders .fr {
 	    clear: both;
 	    width: 100%;
 	}
-
 	.neighborhood-sliders .fl {
 	    margin-bottom: 25px;
 	}
-
-
-
 	/* Footer - Newsletter */
-
 	#footer-newsletter .container > p {
 	    width: 100%;
 	}
-
 	.contact-details {
 		font-size: 18px;
 	}
-
 	.newsletter-form {
 		width: 100%;
 	}
-
 	.newsletter-form input[type="text"] {
 	    width: 54%;
 	}
-
-
-
 	/* Footer - Navigation */
-
 	footer nav .fl {
 	    float: none;
 	    margin: 4px 0;
 	    text-align: center;
 	    width: 100%;
 	}
-
 	footer nav ul li {
 	    color: #808080;
 	    display: inline-block;
@@ -893,7 +601,6 @@ line-height: 16px;
 	    margin-bottom: 10px;
 	    margin-right: 20px;
 	}
-
 	footer nav ul.footling li a {
 	    color: #808080;
 	    font-family: scala-sans,sans-serif;
@@ -906,154 +613,104 @@ line-height: 16px;
 	    -o-transition: color 0.4s ease 0s;
 	    -ms-transition: color 0.4s ease 0s;
 	}
-
 	footer nav .fr {
 	    float: none;
 	    margin: 0 auto;
 	    text-align: center;
 	    width: 100%;
 	}
-	
 	footer .social-buttons li {
 	    display: inline-block;
 	    float: none;
 	}
-	
 	.social-buttons li:last-child {
 		margin-right: 0;
 	}
-
 	footer #footer-details p {
 	    font-size: 14px;
 	}
-
-	
-
 }
-
 /* ================================================  MAX WIDTH 768 ======================================= */
-
-
-@media only screen 
+@media only screen
 and (max-width : 768px) {
-
 	/* Double Flyout */
-
 	.welcome-text { font-size: 13px; }
-
 	.ID1 { top: 15px; }
 	.ID2 { bottom: 28px; }
-
 	#home-slider .specialsbox {
 		padding: 10px 15px;
 		width: 285px;
 		height: 55px;
 	}
-
 	#home-slider .specialsbox h3 {
 		font-size: 13px !important
 	}
-
 }
-
-
-
-@media only screen 
-and (min-width : 640px) 
-and (max-width : 720px) 
-{	
-
-
+@media only screen
+and (min-width : 640px)
+and (max-width : 720px)
+{
 	#home-slider {
 		height: 350px;
 	}
-
 	.home .flexslider .slides img {
 		width: 150%;
 	}
-
 	/* Double Flyout */
-
 	.welcome-text { font-size: 13px; }
-
 	.ID1 { top: 40px; }
 	.ID2 { bottom: 50px; }
-
 	#home-slider .specialsbox {
 		padding: 10px 15px;
 		width: 285px;
 		height: 80px;
 	}
-
 	#home-slider .specialsbox h3 {
 		font-size: 18px !important
-	}	
-
+	}
 }
 /* ================================================  MAX WIDTH 640 ======================================= */
-
-
-@media only screen 
-and (max-width : 640px) 
-{	
-
+@media only screen
+and (max-width : 640px)
+{
 	.specialsbox {
 		display: none;
 	}
-	
 		#footer-newsletter {
 		display: none;
 	}
-	
-	
-
 	/* Featured slider */
-
 	.fullpic .button {
 	    font-size: 15px;
 	    padding: 10px 15px;
 	}
-
 	.fullpic img {
 	    /*min-height: 250px;*/
 	    width: 100%;
 	}
-
-
 	.slide-header {
 		top: 7%;
 	}
-
 	.slicer {
     	width: 300px !important;
 	}
-
-
 	/* Navigation */
-
 	.dropit, .ressys:hover {
 	    top: 62px;
 	}
-
 	.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
 	    padding: 3px 12.1px;
 	}
-
-
-
 	/* Home Slider */
-
 	#home-slider {
 		height: 300px;
 		overflow: hidden;
 	}
-
 	.flex-control-nav {
 	    bottom: 360px;
 	    display: block;
 	    z-index: 99;
 	}
-
 	.flexslider .slides img {
 		width: auto;
 		height: 100%;
@@ -1061,213 +718,156 @@ and (max-width : 640px)
 	.home .flexslider .slides img {
 		width: 150%;
 	}
-	
 	.slide-header {
    	 top: 10%;
 	}
-
 	#home-slider h2 {
 	    font-size: 33px;
 	}
-
 	#home-slider h3 {
 	    font-size: 22px;
 	}
-
-
-
 	/* Intro */
-
 	#intro {
 		clear: both;
 	}
-
 	.section {
 	    padding: 30px 0 50px;
 	}
-
 	.section-header .fl {
 	    text-align: center;
 	    width: 100%;
 	    max-width: 100%;
 	}
-
 	.section-header h2.section-pre-title {
 	    border-bottom: 1px solid #DEDEDE;
 	    font-size: 18px;
 	    padding: 16px 0;
 	    width: 100%;
 	}
-
 	.section-header-divider.fl {
 	    display: none;
 	}
-
 	.section-header h2.section-title {
 	    font-size: 26px;
 	    padding: 18px 0;
 	    width: 100%;
 	}
-
 	.section-header {
 	    margin-bottom: 10px;
 	}
-
 	.section-header .fr {
 	    clear: both;
 	    float: none;
 	    padding: 0 0 20px;
 	    position: relative;
 	}
-
 	.social-buttons {
 	    text-align: center;
 	}
-
 	.social-buttons li {
 	    display: inline-block;
 	    float: none;
 	}
-
 	.social-buttons li:last-child {
 	    margin-right: 0;
 	}
-
-
-
 	/* Section photos */
-
 	#intro .section-photos {
 	    height: auto;
 	    margin-bottom: 43px;
 	    overflow: hidden;
 	}
-
 	#intro .section-photos li {
 	    width: 100%;
 	    overflow: hidden;
 	}
-
 	#intro .container .section-photos {
 	    margin: 0 auto;
 	    width: 60%;
 	}
-
 	.section-photos img {
 	    width: 100%;
 	    height: 200px;
 	}
-
 	.section-photos li div h3 {
 		font-size: 30px;
 	}
-
 	.hover-effect > p {
 		font-size: 15px;
 	}
-
 	.hover-effect i {
 		font-size: 12px;
 		padding: 10px;
 	}
-
 	.from-price {
 		font-size: 22px;
 		padding: 11px;
 		right: 10px;
 		top: 0;
 	}
-
 	.welcometext h1 {
 	    font-size: 25px;
 	}
-
-
-
 	/* Post slider */
-
 	.neighborhood-sliders {
 	    margin: 0 auto;
 	    width: 70%;
 	}
-
 	.slidesjs-slide div span {
 	    font-size: 19px;
 	}
-
-
-
 	/* Quote */
-
 	.cbp-qtrotator {
 	    width: 80%;
 	}
-
 	.ico-quote {
 	    background-repeat: no-repeat;
 	    background-size: contain;
 	    height: 27px;
 	    width: 25px;
 	}
-
 	.quote-left {
 	    margin-left: 0;
 	    margin-top: 10px;
 	}
-
 	.quote-right {
 	    bottom: 65px;
 	    margin-right: 0;
 	}
-
 	.cbp-qtrotator blockquote p {
 	    font-size: 18px;
 	}
-
 	.cbp-qtrotator blockquote footer {
 		font-size: 15px;
 	}
-
 	.cbp-qtrotator .cbp-qtcontent {
 		min-height: 0;
 	}
-
-
-
 	/* Post */
-
 	.post-content.fl > p {
 	    margin-bottom: 25px;
 	}
-
-
-
 	/* Room - single */
-
 	#room-featured-slider .flexslider, #room-featured-slider, #room-featured-slider .flexslider .slides img {
 	    height: 240px;
 	    width: 100%;
 	}
-
 	#room-featured-slider .button {
 	    font-size: 15px;
 	    padding: 12px 20px;
 	}
-
 	#intro .container .section-photos {
 	    width: 260px;
 	}
-
 	#intro .section-photos img {
 	    height: auto;
 	    width: 100%;
 	}
-
 	.room-details-content p {
 	    font-size: 18px;
 	    line-height: 1.7;
 	}
-
 	.room-details-gallery.fr {
 	    border-top: 1px solid #CCCCCC;
 	    clear: both;
@@ -1278,7 +878,6 @@ and (max-width : 640px)
 	    padding-top: 30px;
 	    width: 260px;
 	}
-
 	.iosSlider {
 	    height: 230px !important;
 	    left: 0;
@@ -1287,25 +886,16 @@ and (max-width : 640px)
 	    top: 0;
 	    width: 100%;
 	}
-
-
-
 	/* Footer - Nav */
-
 	footer nav .fr {
 	    float: none;
 	    margin: 0 auto;
 	    width: 10%;
 	}
-
 	#oceana #footer-newsletter, #ocean-view-king #footer-newsletter {
 		padding-bottom: 20px;
-	}	
-
-
-
+	}
 	/* Page with sidebar */
-
 	.post-content.fl {
 	    border-right: 0 none;
 	    float: none;
@@ -1313,11 +903,7 @@ and (max-width : 640px)
 	    padding: 50px 20px;
 	    width: 89.8%;
 	}
-
-
-
 	/* Sidebar */
-
 	#page-content .sidebar.fr {
 		border-top: 1px solid #CCCCCC;
 	    clear: both;
@@ -1328,7 +914,6 @@ and (max-width : 640px)
 	    padding: 20px 0 0;
 	    width: 260px;
 	}
-	
 	/* Blog Sidebar */
 	.fl.room-list.catlist {
 		border-right: 0 none;
@@ -1347,19 +932,11 @@ and (max-width : 640px)
 		padding: 20px 0 0;
 		width: 260px;
 	}
-
-	
-
 }
-
-
-
 /* ================================================  MOBILES BELOW 639 ======================================= */
-
-@media only screen 
-and (max-width : 639px) 
+@media only screen
+and (max-width : 639px)
 {
-
 `	.specialsbox {
 		display: none;
 	}
@@ -1369,68 +946,46 @@ padding: 8px 12px;
 	#primary-nav .button {
 		display: none;
 	}
-
 	#primary-nav .button.mobile {
 		display: inline;
 	}
-	
-	
 		#footer-newsletter {
 		display: none;
 	}
-	
 	.slide-header .button {
     display: none;
 }
-
 .home .flexslider .slides img {
 		width: 180%;
 	}
-
-
 }
-
-
-
 /* ================================================  MOBILES BELOW 480 ======================================= */
-
-
-@media only screen 
-and (max-width : 480px) 
-{	
-
+@media only screen
+and (max-width : 480px)
+{
 		#home-slider {
 	height: 200px;
 	}
-
 	.slicer {
     width: 275px !important;
 	}
-
-
 		.specialsbox {
 		display: none;
 	}
-	
-	
 	ul.tabs li a {
 padding: 8px 12px;
 }
 		#footer-newsletter {
 		display: none;
 	}
-
 	#intro .container {
 	    width: 70%;
 	}
-	
 	/* Post tags */
-
 	.post-tags > ul {
 	    padding: 15px 20px 10px;
 	    text-align: center;
 	}
-
 	.post-tags li {
 	    display: inline-block;
 	    font-size: 15px;
@@ -1438,69 +993,48 @@ padding: 8px 12px;
 	    float: none;
 	    margin-right: 14px;
 	}
-
-
-
 	/* Post */
-
 	.post-content.fl {
 	    padding: 20px 20px 30px;
 	}
-
 	.post-content blockquote:before {
 		bottom: 0;
 	}
-
 	.post-content blockquote:before, .post-content blockquote:after {
 		font-size: 25px;
 	}
-
 	.post-content blockquote p {
 	    font-size: 23px;
 	}
-
 	.post-content.fl > p {
 	    margin-bottom: 20px;
 	}
-
-
-
 	/* Room list */
-
 	.room-list li {
 	    padding-bottom: 20px;
 	}
-
-
-
 	/* Room - Single */
-	
 	.single-rooms .section-header h2.section-title {
 		display: block;
 	}
-	
 	#room-featured-slider .flexslider, #room-featured-slider, #room-featured-slider .flexslider .slides img {
 	    height: 240px;
 	    width: 100%;
 	}
-
 	#room-featured-slider .iosslider-next, #room-featured-slider .iosslider-prev, #room-details-slider .iosslider-next, #room-details-slider .iosslider-prev {
 	    height: 100%;
 	    top: 0;
 	    width: 40px;
 	    z-index: 99;
 	}
-
 	#room-featured-slider i, #room-details-slider i {
 	    font-size: 20px;
 	    top: 50%;
 	    width: 100%;
 	}
-	
 	.post-content .imagegal.photos ul li {
 		margin-bottom: 4px;
 	}
-	
 	.slideSelectors {
 	    bottom: 13px;
 	    height: 11px;
@@ -1510,7 +1044,6 @@ padding: 8px 12px;
 	    width: 79px;
 	    z-index: 1;
 	}
-
 	.iosSlider {
 	    height: 173px !important;
 	    left: 0;
@@ -1519,25 +1052,19 @@ padding: 8px 12px;
 	    top: 0;
 	    width: 100%;
 	}
-	
 	#room-details-slider {
 		margin-top: -45px !important;
 	}
-
 	/* Page - Specials */
-	
 	.post-content .imagegal ul li {
 		width: 31.33%;
 	}
-	
 	/* Page - Guide */
-
 	.whats-hot ul, .whats-hot li {
 	    float: none;
 	    margin: 0 auto;
 	    width: 90%;
 	}
-
 	.tab-featured {
 	    clear: both;
 	    float: none !important;
@@ -1545,42 +1072,28 @@ padding: 8px 12px;
 	    width: 90%;
 	    overflow: hidden;
 	}
-
 	.binder h3.fr {
 	    clear: both;
 	    float: left;
 	}
-	
 	ul.tabs li a {
 		padding: 8px 12px;
 	}
-	
 	/* footer */
-	
 	#footer-newsletter h2 {
 		font-size: 39px;
 	}
-	
 	/* Footer - Nav */
-
 	footer nav .fr {
 	    float: none;
 	    margin: 0 auto;
 	}
-
-
-
 	/* Prettyphoto */
-
 	div.pp_default .pp_social {
 	    margin-left: 20px;
 	    margin-top: 7px;
 	}
-
-
-
 	/* Page - Press */
-
 	.presslinks {
 		-moz-column-count: 1;
 	    -moz-column-gap: 8px;
@@ -1589,37 +1102,23 @@ padding: 8px 12px;
 	    column-count: 1;
 	    column-gap: 8px;
 	}
-
 	/* reserve button on banner */
-
 	.slide-header .button {
     display: none;
 }
-
 /* light it up blue */
-
 .blue-mobile {
 	display: none;
 }
-
 li.blue-btn {
 	width: 35px;
 }
-
 }
-
-
 /* ================================================  MAX HEIGHT 480 ======================================= */
-
-
-@media only screen 
-and (max-height : 480px) 
+@media only screen
+and (max-height : 480px)
 {
-
-
-
 	/* Page - Guide */
-
 	.heater {
 	    border-bottom: 0 none;
 	    border-top: 0 none;
@@ -1627,50 +1126,31 @@ and (max-height : 480px)
 	    overflow: visible;
 	    padding: 15px 0 0;
 	}
-
 	.tabs-wrapper .tab-content {
 	    padding: 50px 0 20px;
 	}
-
 	ul.tabs {
 		width: inherit;
 		float: none;
 		height: inherit;
-		
 	}
-
 	ul.tabs li {
 		float: none;
 		display: block;
 	}
-
 	/* reserve button on banner */
-
-
 	.slide-header .button {
     display: none;
 }
-
-
-
 }
-
-
-
-
 /* ================================================  MOBILES BELOW 399 ======================================= */
-
-
-@media only screen 
-and (max-width : 399px) 
-{	
-	
-	
+@media only screen
+and (max-width : 399px)
+{
 		.specialsbox {
 		display: none;
 	}
 	#property-nav nav ul li a.clicknav-clicker, #navigation-sticky-wrapper.sticky #property-nav nav ul li a.clicknav-clicker {
-
 	    background-size: 70%;
 font-size: 11px;
 letter-spacing: 3px;
@@ -1680,92 +1160,62 @@ padding: 11px 5px;
 		width: inherit;
 		float: none;
 		height: inherit;
-		
 	}
-
 	ul.tabs li {
 		float: none;
 		display: block;
 	}
-	
-	
 	.section {
 	    padding: 30px 0;
 	}
-
-
-
 	/* Featured slider */
-
 	.fullpic img {
 	    /*min-height: 250px;*/
 	    width: 100%;
 	}
-
-
 	/* Section photos */
-
 	#intro .container {
 	    width: 90%;
 	}
-
 	.home #intro .container .section-photos {
 	    width: 80%;
 	}
-
-
-
 	/* Post slider */
-
 	.neighborhood-sliders .fl, .neighborhood-sliders .fr {
 		width: 100%;
 		margin: 16px auto 30px;
 	}
-
 	.neighborhood-sliders {
 	    margin: 0 auto;
 	    width: 100%;
 	}
-
-
-
 	/* Room list */
-
 	.room-list li {
 	    padding-bottom: 20px;
 	}
-
-
-
 	/* Room - Single */
-
 	#room-featured-slider .flexslider, #room-featured-slider, #room-featured-slider .flexslider .slides img {
 	    height: 240px;
 	    width: 100%;
 	}
-
 	.single-rooms .section-header h2.section-title {
 	    font-size: 23px;
 	    padding: 18px 0;
 	}
-
 	.single-rooms #room-details-slider {
 	    margin-top: 0 !important;
 	}
-
 	#room-featured-slider .iosslider-next, #room-featured-slider .iosslider-prev, #room-details-slider .iosslider-next, #room-details-slider .iosslider-prev {
 	    height: 100%;
 	    top: 0;
 	    width: 40px;
 	    z-index: 99;
 	}
-
 	#room-featured-slider i, #room-details-slider i {
 	    font-size: 20px;
 	    top: 50%;
 	    width: 100%;
 	}
-
 	.slideSelectors {
 	    bottom: 13px;
 	    height: 11px;
@@ -1775,7 +1225,6 @@ padding: 11px 5px;
 	    width: 60px;
 	    z-index: 1;
 	}
-
 	.iosSlider {
 	    height: 115px !important;
 	    left: 0;
@@ -1784,61 +1233,47 @@ padding: 11px 5px;
 	    top: 0;
 	    width: 100%;
 	}
-
-	
 	/* Guide */
-	
 	.upcoming-calendar.fl,
 	.upcoming-events .fr {
 		float: none;
 		width: auto;
 	}
-	
 	.upcoming-calendar .tribe-mini-calendar-wrapper {
 		width: auto;
 	}
-	
 	.upcoming-events .fr ul {
 		margin-top: 10px;
 		overflow: hidden;
 	}
-	
 	.upcoming-events .fr li {
 		float: none;
 		display: inline;
 	}
-	
 	.upcoming-events li img {
 		margin-top: 50px;
 	}
-	
 	.upcoming-events .event-date {
 		right: 10px;
 		top: -175px;
 	}
-	
 	.upcoming-events .event-description {
 		padding: 5px 22px 5px 21px;
 	}
-	
 	.whats-hot .hot-featured li, .whats-hot .hot-featured {
 		width: 90%;
 		margin: 0 auto;
 	}
-	
 	/* Gallery */
-
 	.imagegal.thumbgal > ul {
 	    text-align: center;
 	}
-
 	.post-content .imagegal ul li {
 	    display: inline-block;
 	    float: none;
 	    margin: 0 auto 20px;
 	    width: 80%;
 	}
-
 	.post-content .imagegal.photos ul li {
 	    display: inline-block;
 	    float: none;
@@ -1851,21 +1286,14 @@ padding: 11px 5px;
 	.post-content .imagegal.photos ul li:nth-child(3n), .post-content .imagegal.photos ul li:nth-child(4n) {
 		margin-right: 1.5%;
 	}
-
 	.fullpic {
 		overflow: hidden;
 	}
-
 	/* Footer - Nav */
-
 	footer nav .fr {
 	    width: 19%;
 	}
-
-
-
 	/* Footer - contact details */
-
 	.contact-details li i {
 	    margin-left: -27px;
 	    margin-right: 10px;
@@ -1873,25 +1301,15 @@ padding: 11px 5px;
 		#footer-newsletter {
 		display: none;
 	}
-
 	/* reserve button on banner */
-
-
 	.slide-header .button {
     display: none;
 }
-
 }
-
-
-
 /* ================================================  MOBILES BELOW 320 ======================================= */
-
-
-@media only screen 
-and (max-width : 320px) 
-{	
-	
+@media only screen
+and (max-width : 320px)
+{
 	.specialsbox {
 		display: none;
 	}
@@ -1899,244 +1317,103 @@ and (max-width : 320px)
 		width: inherit;
 		float: none;
 		height: inherit;
-		
 	}
-
 	ul.tabs li {
 		float: none;
 		display: block;
 	}
 	/* Footer - Nav */
-
 	footer nav .fr {
 	    float: none;
 	    margin: 0 auto;
 	    width: 22%;
 	}
-
-	
 	#footer-newsletter {
 		display: none;
 	}
-
 	.upcoming-calendar .tribe-mini-calendar-no-event {
 	 padding: 11px 0;
 }
-
 	/* reserve button on banner */
-
-
 	.slide-header .button {
     display: none;
 }
-
 }
-
-
-
-
 /* ================================================  MOBILES BELOW 480 to 400 ======================================= */
-
-
-@media only screen 
-and (min-width : 400px) 
-and (max-width : 479px) 
-{	
-
-
+@media only screen
+and (min-width : 400px)
+and (max-width : 479px)
+{
 	/* reserve button on banner */
-
-
 	.slide-header .button {
     display: none;
 }
-
 .upcoming-calendar .tribe-mini-calendar-no-event {
 	 padding: 13px 0;
 }
-
-
-
 }
-
-
-
 /* ================================================  MOBILES BELOW 480 to 640 ======================================= */
-
-
-@media only screen 
-and (min-width : 480px) 
-and (max-width : 639px) 
-{	
-
-
+@media only screen
+and (min-width : 480px)
+and (max-width : 639px)
+{
 	/* reserve button on banner */
-
-
 	.slide-header .button {
     display: none;
 }
-
 .upcoming-calendar .tribe-mini-calendar-no-event {
 	 padding: 13px 0;
 }
-
-
-
-				
 }
-
-
-
 /* ================================================  LARGE MOBILE DEVICES AND SMALL TABLETS BELOW 799  ======================================= */
-
-
-@media only screen 
-and (min-width : 640px) 
-and (max-width : 799px) 
-{	
-	
-
-
-
+@media only screen
+and (min-width : 640px)
+and (max-width : 799px)
+{
 }
 /* ================================================  SLIGHTLY SMALLER RESOLUTIONS, BUT NOT QUITE IPHONE ======================================= */
-
-
-@media only screen 
-and (min-width : 800px) 
-and (max-width : 854px) 
-{	
-	
-
+@media only screen
+and (min-width : 800px)
+and (max-width : 854px)
+{
 }
-
-
-
-
-
 /* ================================================  LARGE PHONE SCREENS SMALLER RESOLUTIONS  ======================================= */
-
-
-@media only screen 
-and (min-width : 855px) 
-and (max-width : 960px) 
-{	
-
-	
-
-
-
-
+@media only screen
+and (min-width : 855px)
+and (max-width : 960px)
+{
 }
-
-
-
 /* ================================================  IPADS AT LANDSCAPE WIDTH 1024  ======================================= */
-
-
-@media only screen 
-and (min-width : 961px) 
-and (max-width : 1099px) 
-{	
-
-
-	
-
-
-
-		
+@media only screen
+and (min-width : 961px)
+and (max-width : 1099px)
+{
 }
-
-
 /* ================================================  FIRST STAGE LARGER THAN 1024PX UP TO LARGER BROWSERS  ======================================= */
-
-
-
-@media only screen 
-and (min-width : 1100px) 
-and (max-width : 1223px) 
-{		
-		
-	
-
-
-	
-	
-	
-	
+@media only screen
+and (min-width : 1100px)
+and (max-width : 1223px)
+{
 }
-
-
-
 /* #Narrow Screen, Below 1400px (Portrait)
 ================================================== */
-
     /* Note: Design for a width of 768px */
-
-
-
-@media only screen 
-and (min-width : 1224px) 
-and (max-width : 1300px) 
+@media only screen
+and (min-width : 1224px)
+and (max-width : 1300px)
 {
-
-
-
-
-
-
-
 }
-	
-
-@media only screen 
-and (min-width : 1224px) 
-and (max-width : 1399px) 
+@media only screen
+and (min-width : 1224px)
+and (max-width : 1399px)
 {
-
-	
-	
-
-
-	
-	
-	
-                
 }
-	
-	
-	
-
-
 @media only screen and (min-width: 1400px) and (max-width: 1450px) {
-		
-		
-
-
-
-
-
-
 }
-
-
 @media only screen and (min-width: 1451px) {
- 
- 
- 
- 
- 
-                
-
-
-
-} 
-
+}
 @media all and (max-width: 2400px) and (min-width: 800px) {
   .mobile-number {
   	display: none;
   }
 }
-
-

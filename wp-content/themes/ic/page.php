@@ -38,14 +38,14 @@
 	
 					<?php if(get_option('cebo_shorttitle')) { ?>
 					
-					<h2 class="section-pre-title fl"><?php echo get_option('cebo_shorttitle'); ?></h2>
+					<div class="section-pre-title fl"><?php echo get_option('cebo_shorttitle'); ?></div>
 
 					<div class="section-header-divider fl"></div>
 					
 					<?php } ?>
 
 		
-					<h2 class="section-title fr"><?php the_title(); ?></h2>
+					<h1 class="section-title fr"><?php the_title(); ?></h1>
 	
 				</div>
 	
@@ -140,7 +140,29 @@
 				
 				<a class="button" onclick="_gaq.push(['_trackEvent', 'Reserve', 'Reservation-button-sidebar', 'Reserve Now']);" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>"><?php _e('RESERVE NOW', 'cebolang'); ?></a>
 				
-				
+				<?php
+					$sidebarformid = get_the_ID();
+
+					if($sidebarformid == 206){ ?>
+				<p><strong>Get on the List. </br>The Finch Restaurant's VIP Email Signup.</br></strong></p>
+				<p style="line-height:20px;margin-top: -5%;">Be the first to know about of all the exclusive events and happening at the Boxer's modern American restaurant, Finch.</span></p>
+
+				<div class="signup-form">
+					
+					<form name="surveys" action="http://zmaildirect.com/app/new/MjA0MjA0MTM2" method="get">  
+
+						<input type="hidden" name="formId" value="MjA0MjA0MTM2">
+						    <div>
+						<input type="text" name="email" placeholder="Get on the List">
+							</div>
+						  <div>	
+						<input type="submit" value="Sign Up">
+							</div>
+					</form>
+	
+				</div> 
+				<?php } ?> 
+				<p>&nbsp;</p><p>&nbsp;</p>
 				<ul class="thumbgal">
 						
 						<?php query_posts('post_type=specials&posts_per_page=4'); if(have_posts()) : while(have_posts()) : the_post(); 
@@ -180,7 +202,7 @@
 										
 										<?php if(get_post_meta($post->ID, 'cebo_tagline', true)) { ?>
 										
-										<h3><?php echo get_post_meta($post->ID, 'cebo_tagline', true); ?></h3>
+										<h2><?php echo get_post_meta($post->ID, 'cebo_tagline', true); ?></h2>
 										
 										<?php } ?>
 										

@@ -38,14 +38,14 @@
 	
 					<?php if(get_option('cebo_shorttitle')) { ?>
 					
-					<h2 class="section-pre-title fl"><?php echo get_option('cebo_shorttitle'); ?></h2>
+					<div class="section-pre-title fl"><?php echo get_option('cebo_shorttitle'); ?></div>
 
 					<div class="section-header-divider fl"></div>
 					
 					<?php } ?>
 
 		
-					<h2 class="section-title fr"><?php the_title(); ?></h2>
+					<h1 class="section-title fr"><?php the_title(); ?></h1>
 	
 				</div>
 	
@@ -123,7 +123,7 @@
 			<?php } } ?>
 								
 			<div class="wonderline"></div>
-			<div class="post-content fl" style="width: 100%; border-right: none; padding-top: 20px; padding-right: 0; padding-left: 0;">
+			<div class="post-content fl pagepress">
 				
 				
 				<?php if(have_posts()) : while(have_posts()) : the_post(); ?>

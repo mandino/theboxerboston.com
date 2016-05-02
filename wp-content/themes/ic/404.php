@@ -38,14 +38,14 @@
 	
 					<?php if(get_option('cebo_shorttitle')) { ?>
 					
-					<h2 class="section-pre-title fl">404</h2>
+					<div class="section-pre-title fl">404</div>
 
 					<div class="section-header-divider fl"></div>
 					
 					<?php } ?>
 
 		
-					<h2 class="section-title fr">Apologies, you've found an error</h2>
+					<h1 class="section-title fr">Apologies, you've found an error</h1>
 	
 				</div>
 	

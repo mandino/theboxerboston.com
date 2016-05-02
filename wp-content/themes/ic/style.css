@@ -744,7 +744,7 @@ a.detailsAnchor {
    }
    .infobox:after {
    	content: '';
-   	background: url(images/arrow.png) no-repeat;
+  /* 	background: url(images/arrow.png) no-repeat;*/
    	width: 10px;
    	height: 10px;
    	position: absolute;
@@ -881,7 +881,7 @@ a.detailsAnchor {
    }
   #infoBox,
   .placeData {
-    background: url("images/blue_bg.png") repeat scroll 0 0 transparent;
+   /* background: url("images/blue_bg.png") repeat scroll 0 0 transparent;*/
     display: none !important;
     right: 30px;
     padding: 0px;
@@ -1998,9 +1998,11 @@ h1, h2, h3, h4, h5, h6, h7 {
 
 
 #property-name {
-    background: url("../images/independent-collection-footer.png") no-repeat scroll center center rgba(0, 0, 0, 0);
+   /* background: url("../images/independent-collection-footer.png") no-repeat scroll center center rgba(0, 0, 0, 0);*/
     border-bottom: 1px solid #CBCBCB;
     height: 80px;
+    text-align: center;
+    margin-top:20px;    
 }
 
 
@@ -3187,7 +3189,7 @@ body .ui-tooltip {
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
 	border: none;
-	background: #f6f6f6 url(images/ui-bg_highlight-hard_100_f6f6f6_1x100.png) 50% 50% repeat-x;
+	/*background: #f6f6f6 url(images/ui-bg_highlight-hard_100_f6f6f6_1x100.png) 50% 50% repeat-x;*/
 	font-weight: bold;
 	color: #111111;
 }
@@ -3202,7 +3204,7 @@ body .ui-tooltip {
 .ui-widget-content .ui-state-active,
 .ui-widget-header .ui-state-active {
 	border: none;
-	background: #ffffff url(images/ui-bg_flat_65_ffffff_40x100.png) 50% 50% repeat-x;
+	/*background: #ffffff url(images/ui-bg_flat_65_ffffff_40x100.png) 50% 50% repeat-x;*/
 	font-weight: bold;
 	color: #cc0000;
 }
@@ -3219,7 +3221,7 @@ body .ui-tooltip {
 .ui-widget-content .ui-state-highlight,
 .ui-widget-header .ui-state-highlight {
 	border: 1px solid #fcd3a1;
-	background: #fbf8ee url(images/ui-bg_glass_55_fbf8ee_1x400.png) 50% 50% repeat-x;
+	/*background: #fbf8ee url(images/ui-bg_glass_55_fbf8ee_1x400.png) 50% 50% repeat-x;*/
 	color: #444444;
 }
 .ui-state-highlight a,
@@ -3275,7 +3277,7 @@ body .ui-tooltip {
 	width: 16px;
 	height: 16px;
 }
-.ui-icon,
+/*.ui-icon,
 .ui-widget-content .ui-icon {
 	background-image: url(images/ui-icons_cc0000_256x240.png);
 }
@@ -3291,14 +3293,14 @@ body .ui-tooltip {
 }
 .ui-state-active .ui-icon {
 	background-image: url(images/ui-icons_cc0000_256x240.png);
-}
+}*/
 .ui-state-highlight .ui-icon {
 	background-image: url(images/ui-icons_004276_256x240.png);
 }
-.ui-state-error .ui-icon,
+/*.ui-state-error .ui-icon,
 .ui-state-error-text .ui-icon {
 	background-image: url(images/ui-icons_cc0000_256x240.png);
-}
+}*/
 
 /* positioning */
 .ui-icon-blank { background-position: 16px 16px; }
@@ -4172,3 +4174,143 @@ span.ns-close {
   .signup-form > form input:hover[type="submit"] {
     background: none repeat scroll 0 0 #000;
   }
+
+  .post-content img{
+  max-height: 100% !important;
+}
+
+/*********************** SPRITE IMAGES FOR IC LOGO FOOTER ********************************/
+
+.sprite {
+    background: url("images/independent-collection-footer.png") no-repeat scroll center center rgba(0, 0, 0, 0);
+    background-repeat: no-repeat;
+    display: inline-block;
+
+}
+
+.sprite-ic_01 {
+    width: 69px;
+    height: 60px;
+    background-position: 0 0;
+    
+}
+
+.sprite-ic_02 {
+    width: 203px;
+    height: 60px;
+    background-position: -69px 0;
+
+}
+
+.category-neighbor div {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: table;
+    height: 350px;
+    width: 49.3%;
+    float: left;
+    position: relative;
+}
+
+.category-neighbor div span {
+    position: absolute;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    display: block;
+    text-align: center;
+}
+
+.category-neighbor div .def-title {
+    font-family: didot, georgia;
+    font-size: 60px;
+    top: 40%;
+}
+
+.category-neighbor div .hover-title {
+    font-family: didot, georgia;
+    font-size: 24px;
+    display: none;
+    bottom: 30px;
+}
+
+.category-neighbor div a {
+    background-color: rgba(0,0,0,0.5);
+    color: #fff;
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: relative;
+
+
+
+    transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+}
+  
+    .category-neighbor div:hover a {
+        background-color: rgba(0,0,0,0.1);
+    }
+
+    .category-neighbor div:hover .def-title {
+        display: none;
+    }
+
+    .category-neighbor div:hover .hover-title {
+        display: block;
+    }
+    .usercomments h2 {
+  position: relative;
+}
+.usercomments h2 i {
+  font-size: 16px;
+  position: absolute;
+  right: 15px;
+  bottom: 0;
+}
+.usercomments h2 i a {
+  color: #38BABF;
+}
+.mapheight
+{
+  width: 100%; height: 500px;
+}
+.nguide
+{
+  padding: 20px 0 30px; border-bottom: 1px solid #D1D1D1;
+}
+.pagepress
+{
+  width: 100%; border-right: none; padding-top: 20px; padding-right: 0; padding-left: 0;
+}
+.postwidth
+{
+  width: 100%;
+}
+.roomfeaturs-h3{
+text-align: center;
+}
+.singroom-sechead
+{
+  border-top: 1px solid #ddd; margin-top: 60px; margin-bottom: 0; float: none; text-align: center;
+}
+.fnone
+{
+  float: none; text-align: center; padding: 20px 0
+}
+.stfr
+{
+  text-align: center; float: none; text-transform: uppercase;
+}
+.rd-slider
+{
+  margin-top: -69px;
+}
+h1.tribe-events-page-title{
+  font-size:30px !important;
+  text-align: center !important;
+}

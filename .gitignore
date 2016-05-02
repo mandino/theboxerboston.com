@@ -33,3 +33,4 @@ blogs/
 .DS_Store
 test/
 *timthumb.txt
+svc/

@@ -2417,3 +2417,20 @@
 [27-Jan-2014 11:17:40 America/Detroit] PHP Warning:  Invalid argument supplied for foreach() in /home/admin/public_html/milo/wp-content/themes/ic/svc/cache.php on line 27
 [21-Mar-2014 08:10:00 America/Detroit] PHP Warning:  Invalid argument supplied for foreach() in /home/admin/public_html/boxer/wp-content/themes/ic/svc/cache.php on line 27
 [23-Mar-2014 06:00:03 America/Detroit] PHP Warning:  Invalid argument supplied for foreach() in /home/admin/public_html/boxer/wp-content/themes/ic/svc/cache.php on line 27
+[24-Nov-2015 09:38:19 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/hersha/public_html/www.theboxerboston.com/wp-content/themes/ic/svc/cache.php on line 27
+[27-Nov-2015 07:57:01 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/hersha/public_html/www.theboxerboston.com/wp-content/themes/ic/svc/cache.php on line 27
+[14-Dec-2015 06:13:31 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/hersha/public_html/www.theboxerboston.com/wp-content/themes/ic/svc/cache.php on line 27
+[24-Dec-2015 14:39:31 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/hersha/public_html/www.theboxerboston.com/wp-content/themes/ic/svc/cache.php on line 27
+[03-Jan-2016 11:10:17 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/hersha/public_html/www.theboxerboston.com/wp-content/themes/ic/svc/cache.php on line 27
+[10-Jan-2016 00:08:09 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/hersha/public_html/www.theboxerboston.com/wp-content/themes/ic/svc/cache.php on line 27
+[12-Jan-2016 23:42:19 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/hersha/public_html/www.theboxerboston.com/wp-content/themes/ic/svc/cache.php on line 27
+[19-Jan-2016 06:49:29 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/hersha/public_html/www.theboxerboston.com/wp-content/themes/ic/svc/cache.php on line 27
+[26-Jan-2016 21:17:08 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/hersha/public_html/www.theboxerboston.com/wp-content/themes/ic/svc/cache.php on line 27
+[28-Jan-2016 04:13:22 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/hersha/public_html/www.theboxerboston.com/wp-content/themes/ic/svc/cache.php on line 27
+[08-Feb-2016 12:02:46 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/hersha/public_html/www.theboxerboston.com/wp-content/themes/ic/svc/cache.php on line 27
+[19-Feb-2016 22:29:28 America/Chicago] PHP Warning:  mkdir(): No space left on device in /home/hersha/public_html/www.theboxerboston.com/wp-content/themes/ic/svc/cache.php on line 21
+[19-Feb-2016 22:29:28 America/Chicago] PHP Warning:  fopen(/home/hersha/public_html/www.theboxerboston.com/wp-content/themes/ic/svc/cache/201602192229/-cache.txt): failed to open stream: No such file or directory in /home/hersha/public_html/www.theboxerboston.com/wp-content/themes/ic/svc/cache.php on line 22
+[19-Feb-2016 22:29:28 America/Chicago] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/hersha/public_html/www.theboxerboston.com/wp-content/themes/ic/svc/cache.php on line 23
+[19-Feb-2016 22:29:28 America/Chicago] PHP Warning:  fclose() expects parameter 1 to be resource, boolean given in /home/hersha/public_html/www.theboxerboston.com/wp-content/themes/ic/svc/cache.php on line 24
+[19-Feb-2016 22:29:28 America/Chicago] PHP Warning:  Invalid argument supplied for foreach([22-Feb-2016 21:39:23 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/hersha/public_html/www.theboxerboston.com/wp-content/themes/ic/svc/cache.php on line 27
+[05-Mar-2016 06:00:49 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/hersha/public_html/www.theboxerboston.com/wp-content/themes/ic/svc/cache.php on line 27

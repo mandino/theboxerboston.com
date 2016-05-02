@@ -79,6 +79,7 @@ html.mm-blocking #mm-blocker {
 .mm-menu.mm-current {
   display: block;
   position: fixed;
+  z-index: 1;
 }
 
 .mm-menu {

@@ -1,13 +1,9 @@
 <?php 
-
 	if ( file_exists( TEMPLATEPATH.'/library/mobile-detect.php' ) ) {
-
 		require_once TEMPLATEPATH.'/library/mobile-detect.php';
 		$detect = new Mobile_Detect;
 		$check = $detect->isMobile();
-
 	}
-
 ?>
 <!DOCTYPE HTML>
 <head>
@@ -26,18 +22,15 @@
 		?>
 	</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link rel="profile" href="http://gmpg.org/xfn/11" />
-	
+	<link rel="profile" href="http://gmpg.org/xfn/11" />	
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-	<?php if (get_option('cebo_custom_favicon') == '') { ?>
-	
-	<link rel="icon" href="<?php bloginfo ('template_url'); ?>/cebo_options/<?php bloginfo ('template_url'); ?>/images/admin_sidebar_icon.png" type="image/x-ico"/>
-	
-	<? } else { ?>
+	<?php if (get_option('cebo_custom_favicon') == '') { ?>	
+	<link rel="icon" href="<?php bloginfo ('template_url'); ?>/cebo_options/<?php bloginfo ('template_url'); ?>/images/admin_sidebar_icon.png" type="image/x-ico"/>	
+	<?php } else { ?>
 	
 	<link rel="icon" href="<?php echo get_option('cebo_custom_favicon'); ?>" type="image/x-ico"/>
 	
-	<? } ?>
+	<?php } ?>
 	
 	
 	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="<?php if ( get_option('cebo_feedburner_url') <> "" ) { echo get_option('cebo_feedburner_url'); } else { echo get_bloginfo_rss('rss2_url'); } ?>" />
@@ -109,6 +102,23 @@ pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName
 </script>
 <!-- End Sojern -->
 
+	<script type="application/ld+json">
+		{
+		"@context": "http://schema.org",
+		"@type": "NewsArticle",
+		"headline": "Article headline",
+		"alternativeHeadline": "The headline of the Article",
+		"image": [
+		"thumbnail1.jpg",
+		"thumbnail2.jpg"
+		],
+		"datePublished": "2015-02-05T08:00:00+08:00",
+		"description": "A most wonderful article",
+		"articleBody": "The full body of the article"
+		}
+	</script> 
+	
+
 </head> 
 	
 <body id="oceana" <?php body_class($class); ?>>
@@ -167,7 +177,7 @@ pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName
 
 					<div class="reservationform flexdate">
 					
-						<p><a href="https://theboxerboston.reztrip.com">Flexible dates?</a> Search for our best available rate</p>				
+						<p><a href="https://theboxerboston.reztrip.com" onclick="ga('send', 'event', 'Flexible Dates', 'click', 'Booking-widget');">Flexible dates?</a> Search for our best available rate</p>
 						
 					</div>
 
@@ -203,7 +213,7 @@ pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName
 						</ul> -->
 	
 					</li>
-					<!-- <li class="blue-btn"><a href="http://theboxerboston.com/blue"><i class="fa fa-info-circle"></i><span class="blue-mobile">why blue?</span></a></li> -->
+					<li class="blue-btn"><a href="http://theboxerboston.com/blue"><i class="fa fa-info-circle"></i><span class="blue-mobile">why blue?</span></a></li>
 				</ul>
 			</nav>
 			
@@ -218,7 +228,7 @@ pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName
 
 			<a href="<?php bloginfo('url'); ?>" class="logo mobile"><img src="<?php echo get_option('cebo_logo'); ?>" alt="<?php echo the_title(); ?>" /></a>
 			
-			<a href="https://theboxerboston.reztrip.com" class="reserve fixeer button fr input-append date" id="idp3" data-date="12-02-2012" data-date-format="mm-dd-yyyy">RESERVE</a>
+			<a href="https://theboxerboston.reztrip.com" class="reserve fixeer button fr input-append date" rooms ="1" id="idp3" data-date="12-02-2012" data-date-format="mm-dd-yyyy">RESERVE</a>
 
 			<a class="reserve fixeer mobile button fr" id="idp4"  onclick="_gaq.push(['_link', this.href]);return false;" href="<?php echo get_option('cebo_genbooklink'); ?>" target="_blank">RESERVE</a>
 			
@@ -226,7 +236,7 @@ pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName
 
 				<a class="mmenu-icon" href="#menu"><i class="fa fa-bars"></i></a>
 	
-				<nav id="menu" class="fl">
+				<nav id="menu" class="fl" style="z-index:1">
 					<ul>
 						 <?php wp_nav_menu( array( 'theme_location' => 'primary' ,  'items_wrap' => '%3$s', 'container' => '', 'menu_class' => 'navitem' ) ); ?>
 					</ul>

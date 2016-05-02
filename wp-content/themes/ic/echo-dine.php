@@ -39,8 +39,8 @@
   	  $results["places"][$key]["coords"] = get_post_meta ($post->ID, 'cebo_coordinates', $single = true);
   	  $results["places"][$key]["permalink"] = get_post_meta ($post->ID, 'cebo_outbound', $single = true);
   	  $results["places"][$key]["address"] =  get_post_meta ($post->ID, 'cebo_address', $single = true);
-  	   $results["places"][$key]["phone"] =  get_post_meta ($post->ID, 'cebo_phone', $single = true);
-  	    $results["places"][$key]["distance"] =  get_post_meta ($post->ID, 'cebo_distance', $single = true);
+  	  $results["places"][$key]["phone"] =  get_post_meta ($post->ID, 'cebo_phone', $single = true);
+  	  $results["places"][$key]["distance"] =  get_post_meta ($post->ID, 'cebo_distance', $single = true);
   	  $results["places"][$key]["video"] = ($url != null) ? '<object style="height: 390px; width: 640px"><param name="movie" value="' . $url . '"><param name="allowFullScreen" value="true"><param name="allowScriptAccess" value="always"><embed src="' . $url . '" type="application/x-shockwave-flash" allowfullscreen="true" allowScriptAccess="always" width="640" height="360"></object>' : null;
   	  $results["places"][$key]["deal"] =  get_post_meta ($post->ID, 'furu_hotdeal', $single = true);
   
