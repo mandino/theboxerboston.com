@@ -4314,6 +4314,13 @@ h1.tribe-events-page-title{
   font-size:30px !important;
   text-align: center !important;
 }
-  li.blue-btn {
+li.blue-btn {
     display: none;
+}
+
+.post-content em {
+    font-style: italic;
+}
+.post-content strong {
+    font-weight: bold;
 }
