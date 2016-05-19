@@ -133,7 +133,7 @@ pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName
 					<div class="reservationform">
 					
 					
-						<form method="get" action="https://theboxerboston.reztrip.com/search?">
+						<form method="get" action="https://theboxerboston.reztrip.com/search?" target="_blank">
 
 						<input type="hidden" value="1" name="rooms">
 						
