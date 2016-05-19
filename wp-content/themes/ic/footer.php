@@ -324,13 +324,13 @@ fjs.parentNode.insertBefore(js, fjs);
 	jQuery(function ($) {
 	// Load dialog on page load
 	//$('#basic-modal-content').modal();
- $(".linkerd").click(function(){
-
- 	var id=$(this).attr("data-id");
+ //$(".linkerd").click(function(){
+//
+ 	//var id=$(this).attr("data-id");
  	
- 	var hr=$("#"+id).attr("href");
- 	window.parent.location=hr;
- })
+ //	var hr=$("#"+id).attr("href");
+ //	window.parent.location=hr;
+// })
  
 });
 </script>
