@@ -16,7 +16,7 @@ FEATURED                                       Line 1390
 --------------------------------------------------------
 ABOUT US                                       Line 2119
 --------------------------------------------------------
-BLOG                                           Line 2851 
+BLOG                                           Line 2851
 --------------------------------------------------------
 PORTFOLIO                                      Line 2521
 --------------------------------------------------------
@@ -520,7 +520,7 @@ img.scaleimg {
 		width: auto;
 		background: #38BABF;
 		color: white;
-		cursor: pointer; 
+		cursor: pointer;
 		display: inline-block;
 		font-size: 12px;
 		font-family: sans-serif;
@@ -537,30 +537,30 @@ img.scaleimg {
 		-o-transition: background-color 0.15s ease-in-out;
 		transition: background-color 0.15s ease-in-out;
 	}
-	
+
 	.button:hover {
 		background-color: #333 !important;
 		color: #fff;
 	}
-	
+
 	.button:active {
 		background-color: #444;
 	}
-	
+
 	.button:focus {
 		background-color: #ff0000;
 	}
-	
+
 	.button.large {
 		font-size: 16px;
 		padding: 14px 30px 14px;
 	}
-	
+
 	.button.small {
 		font-size: 10px;
 		padding: 6px 10px 6px;
 	}
-	
+
 	.buttonYellow {
 	    background: none repeat scroll 0 0 #FCDC01 !important;
 	    color: #FFFFFF !important;
@@ -624,11 +624,11 @@ img.scaleimg {
 	form {
 		margin-bottom: 20px;
 	}
-	
+
 	fieldset {
 		margin-bottom: 20px;
 	}
-	
+
 	input, textarea {
 		border: 1px solid #ccc;
 		padding: 10px 10px;
@@ -644,35 +644,35 @@ img.scaleimg {
 		font-family: 'Open Sans', sans-serif;
 		font-weight: 400;
 	}
-	
+
 	textarea {
 		min-height: 100px;
 	}
-	
+
 	input[type="text"]:focus,
 	input[type="password"]:focus,
 	input[type="email"]:focus,
 	textarea:focus {
 		border-bottom: 1px solid #a8a8a8;
 	}
-	
+
 	input.error {
 		border: 1px solid #c60f13;
 		background: #f9e7e8;
 	}
-	
+
 	input.error[type="text"]:focus,
 	input.error[type="password"]:focus,
 	input.error[type="email"]:focus {
  		border: 1px solid #c60f13;
 	}
-	
+
 	legend {
 		display: block;
 		font-weight: 600;
 		font-size: 14px;
 	}
-	
+
 
 
 /*--------------------------------------------------------
@@ -699,7 +699,7 @@ h1.white {
 h2 {
 	font-family:  sans-serif;
 	font-weight: 100;
-	font-size: 45px;
+	font-size: 28px;
 	color: #333;
 }
 
@@ -938,7 +938,7 @@ p a:hover {
 .pricing_table.pricing_table_five_cols .pricing_table_col {
     width: 19.89%;
 }
-@-moz-document url-prefix() { 
+@-moz-document url-prefix() {
   .pricing_table.pricing_table_five_cols .pricing_table_col {
      width: 20%;
   }
@@ -1131,7 +1131,7 @@ p a:hover {
 .dash .clicker {
 	width: 65px;
 	margin-left: -15px;
-}	
+}
 
 
 
@@ -1180,8 +1180,8 @@ nav .container .columns {
 
 }
 .personal {
-	
-}	
+
+}
 .navitem li {
  	background-color: transparent;
     border-right: 1px solid #3F3F3F;
@@ -1247,7 +1247,7 @@ nav .container .columns {
 }
 
 .navitem li ul li:hover ul {
-	
+
 }
 .sticky .navitem li:hover ul {
 	opacity: 1;
@@ -1286,7 +1286,7 @@ nav .container .columns {
 }
 .navitem li ul li:hover {
 	border-bottom: 1px solid #fff;
-	
+
 }
 
 .navitem li ul li:hover > ul {
@@ -1325,7 +1325,7 @@ nav .container .columns {
 }
 
 .navitem img:hover {
-	opacity:1; 
+	opacity:1;
 }
 
 .social-icons {
@@ -1405,7 +1405,7 @@ nav .container .columns {
 /* ======================================================== FEATURED AREA =====================================================  */
 
 
-	
+
 	#homepage {
 		background: url(../images/pattern.png);
 		position: relative;
@@ -1413,16 +1413,16 @@ nav .container .columns {
 		height: 100%;
 		margin-bottom: -70px;
 	}
-	
+
 	#homepage .container {
 		height: 100%;
 		width: 96% !important;
 		max-width: 96% !important;
 	}
-	
 
-	
-	
+
+
+
 	.slide-major {
 		position: relative;
 		top: 20%;
@@ -1431,8 +1431,8 @@ nav .container .columns {
 		max-width: 1350px;
 		text-align: center;
 	}
-	
-	#slidecaption .major { 
+
+	#slidecaption .major {
 		color: white;
 		font-family:  sans-serif;
 		font-weight: 300;
@@ -1453,7 +1453,7 @@ nav .container .columns {
 		line-height: 38px;
 		padding: 60px 0 0 0;
 	}
-	
+
 	#slidecaption .footprints {
 		width: 60%;
 		margin: 50px auto auto;
@@ -1467,7 +1467,7 @@ nav .container .columns {
 		display: inline-block;
 		-webkit-transition: all .3s ease-in-out; -moz-transition: all .3s ease-in-out; -o-transition: all .3s ease-in-out; -ms-transition: all .3s ease-in-out; transition: all .3s ease-in-out;
 		top: 0;
-			
+
 	}
 	#slidecaption .footprints li:hover {
 		top: -10px;
@@ -1481,8 +1481,8 @@ nav .container .columns {
 		font-size: 20px;
 		margin: 0;
 		text-decoration: none;
-	
-	}	
+
+	}
 	#slidecaption .footprints li:hover a {
 		color: #fff;
 	}
@@ -1524,7 +1524,7 @@ nav .container .columns {
 	border-top: 1px solid #E6E6E6;
 	border-bottom: 1px solid #E6E6E6;
 	padding: 50px 60px;
-	font-size: 30px; 
+	font-size: 30px;
 	font-family: sans-serif;
     color: #949393;
     font-weight: 100;
@@ -1533,7 +1533,7 @@ nav .container .columns {
     text-align: left;
 }
 .boxer blockquote p {
-	font-size: 30px; 
+	font-size: 30px;
 	font-family: sans-serif;
     color: #949393;
     font-weight: 100; text-align: left;
@@ -1696,7 +1696,7 @@ nav .container .columns {
 
 /*-------------------------------- >> Tabs << -------------------------------------*/
 
-.tabs-wrapper { 
+.tabs-wrapper {
 	width: 100%;
 	margin: 15px 0;
 }
@@ -1713,22 +1713,22 @@ nav .container .columns {
 	position:relative;
 	display:block;
 	width:100%;
-	
+
 }
 
-.tabs-wrapper .tab-content { 
-	background:#fff; 
+.tabs-wrapper .tab-content {
+	background:#fff;
 	padding:20px;
-	overflow:hidden; 
+	overflow:hidden;
 	border: 1px solid #EFEFEF;
 	border-radius: 0px 3px 3px 3px;
 }
 
 ul.tabs {
-	float: left; 
-	height: 44px; 
-	width: 100%; 
-	padding-left: 0 !important; 
+	float: left;
+	height: 44px;
+	width: 100%;
+	padding-left: 0 !important;
 	margin-bottom: 0 !important;
 }
 
@@ -1736,24 +1736,24 @@ ul.tabs {
 	margin-bottom:0;
 }
 
-ul.tabs li { 
-	float: left; 
-	padding-left: 0 !important; 
-	overflow: hidden; 
-	padding-bottom: 0; 
-	position: relative; 
+ul.tabs li {
+	float: left;
+	padding-left: 0 !important;
+	overflow: hidden;
+	padding-bottom: 0;
+	position: relative;
 	text-align:center;
 	outline:none;
 	padding-top: 5px;
 }
 
-ul.tabs li a { 
-	height: 34px; 
-	line-height: 34px; 
-	text-decoration:none; 
-	font-size:12px; 
-	display: block; 
-	padding: 8px 25px 0 25px; 
+ul.tabs li a {
+	height: 34px;
+	line-height: 34px;
+	text-decoration:none;
+	font-size:12px;
+	display: block;
+	padding: 8px 25px 0 25px;
 	outline:none;
 	border:1px solid #fff;
 	color: #949393;
@@ -1765,10 +1765,10 @@ ul.tabs li a {
 }
 
 ul.tabs li:last-child {
-	
+
 }
 
-ul.tabs li a:hover { 
+ul.tabs li a:hover {
 	color:#323232;
 }
 
@@ -1777,9 +1777,9 @@ ul.tabs li.active {
 }
 
 ul.tabs li.active a {
-	border-left: 1px solid #EFEFEF;	
-	border-right: 1px solid #EFEFEF;	
-	border-bottom: 1px solid #fff;	
+	border-left: 1px solid #EFEFEF;
+	border-right: 1px solid #EFEFEF;
+	border-bottom: 1px solid #fff;
 	border-top: 1px solid #EFEFEF;
 	color: #38BABF;
 }
@@ -1788,7 +1788,7 @@ ul.tabs li.active {
 	z-index: 1;
 }
 
-ul.tabs li.active, ul.tabs li.active a:hover  { 
+ul.tabs li.active, ul.tabs li.active a:hover  {
     background:#fff;
 	color:#323232;
 }
@@ -1797,7 +1797,7 @@ ul.tabs li.active, ul.tabs li.active a:hover  {
 /*-------------------------------- >> Accordion << -------------------------------------*/
 
 #toggle-view {
-    list-style:none;    
+    list-style:none;
     font-size:12px;
     margin:0;
     padding:0;
@@ -1828,7 +1828,7 @@ ul.tabs li.active, ul.tabs li.active a:hover  {
 	content: '-';
 	background: #38BABF;
 	color: #fff;
-	
+
 }
 #toggle-view h3 {
 	margin:0;
@@ -1844,7 +1844,7 @@ ul.tabs li.active, ul.tabs li.active a:hover  {
     letter-spacing: -0.2px;
     line-height: 20px;
     text-transform: none;
-    
+
 }
 
 #toggle-view h3:hover, #toggle-view h3:active {
@@ -1861,7 +1861,7 @@ ul.tabs li.active, ul.tabs li.active a:hover  {
 	background:#fff;
 	overflow:hidden;
 	padding:10px 0 20px 0;
-}   
+}
 
 #toggle-view .panel p:last-child {
 	margin-bottom:0;
@@ -1874,7 +1874,7 @@ ul.tabs li.active, ul.tabs li.active a:hover  {
 	-webkit-transition: all 0.2s linear;
     -moz-transition:all 0.2s linear;
     -o-transition:all 0.2s linear;
-    transition:all 0.2s linear;	
+    transition:all 0.2s linear;
 }
 .boxer aside li:hover {
 	padding-left: 15px;
@@ -1887,7 +1887,7 @@ ul.tabs li.active, ul.tabs li.active a:hover  {
 }
 .wp-tag-cloud li {
 	float:left;
-	margin:0 4px 4px 0;	
+	margin:0 4px 4px 0;
 	padding:0;
 }
 .wp-tag-cloud li a {
@@ -1897,7 +1897,7 @@ ul.tabs li.active, ul.tabs li.active a:hover  {
 	-webkit-transition:background 0.2s linear;
     -moz-transition:background 0.2s linear;
     -o-transition:background 0.2s linear;
-    transition:background 0.2s linear;	
+    transition:background 0.2s linear;
      color: #949393;
     font-family: sans-serif;
     font-size: 16px !important;
@@ -1937,7 +1937,7 @@ ul.tabs li.active, ul.tabs li.active a:hover  {
 
 .nextposters .flexslider {
 	margin: 0;
-	
+
 }
 .nextposters ul {
 	margin: 0;
@@ -2095,7 +2095,7 @@ ul.tabs li.active, ul.tabs li.active a:hover  {
 }
 .says {
 	display: none;
-	
+
 }
 .fn {
 	position: absolute;
@@ -2200,7 +2200,7 @@ ul.tabs li.active, ul.tabs li.active a:hover  {
 	padding-bottom: 120px;
     padding-top: 64px;
     position: relative;
-}	
+}
 #aboutme .container h1.heading {
 	font-family:  sans-serif;
 	font-weight: 100;
@@ -2297,7 +2297,7 @@ ul.tabs li.active, ul.tabs li.active a:hover  {
     text-align: left;
     line-height: 165px;
     margin-bottom: 50px;
-}	
+}
 
 .halfsies .surfer {
     font-family: sans-serif;
@@ -2330,7 +2330,7 @@ ul.tabs li.active, ul.tabs li.active a:hover  {
 	-webkit-transition: all .3s ease-in-out; -moz-transition: all .3s ease-in-out; -o-transition: all .3s ease-in-out; -ms-transition: all .3s ease-in-out; transition: all .3s ease-in-out;
 	top: 0;
 	position: relative;
-			
+
 	}
 	.servicecard:hover {
 		background: #ff0000;
@@ -2339,13 +2339,13 @@ ul.tabs li.active, ul.tabs li.active a:hover  {
 .servicecard span {
 	font-size: 90px;
     text-align: center;
-	color: #fff;	
+	color: #fff;
 }
 
 .servicecard .icon-user-2 {
 	font-size: 90px;
     text-align: center;
-	color: #fff;	
+	color: #fff;
 }
 
 
@@ -2499,7 +2499,7 @@ ul.tabs li.active, ul.tabs li.active a:hover  {
 	width: 100%;
 	height: 100%;
 	opacity: 0;
-	z-index: 9;	
+	z-index: 9;
 	-webkit-transition: all 0.5s ease;
      -moz-transition: all 0.5s ease;
        -o-transition: all 0.5s ease;
@@ -2609,7 +2609,7 @@ ul.tabs li.active, ul.tabs li.active a:hover  {
 	max-width: 100%;
 	display: block;
 	margin: 10px 0;
-	
+
 	-webkit-transition: all 0.5s ease;
      -moz-transition: all 0.5s ease;
        -o-transition: all 0.5s ease;
@@ -2626,7 +2626,7 @@ ul.tabs li.active, ul.tabs li.active a:hover  {
 .wonder .container {
 	margin-top: -80px;
 }
-	
+
 #carousel-gallery .touchcarousel-item span:after {
 	background: url("../images/pattern.png") repeat scroll 0 0 transparent;
     height: 100% !important;
@@ -2812,12 +2812,12 @@ ul.tabs li.active, ul.tabs li.active a:hover  {
 .blogolo .bg {
 	height: 394px !important;
     width: 460px !important;
-   
+
 }
 .fuller .bg {
 	height: 394px !important;
     width: 100% !important;
-   
+
 }
 
 
@@ -2826,7 +2826,7 @@ ul.tabs li.active, ul.tabs li.active a:hover  {
 	float: right;
 }
 .blogolo .tpl2 .center-bar {
-	width: inherit !important; 
+	width: inherit !important;
 	top: 40%;
 }
 .blogcontain {
@@ -2849,13 +2849,13 @@ ul.tabs li.active, ul.tabs li.active a:hover  {
 	z-index: 9;
 }
 .aligner {
-	
+
 }
 
 .blogpiccontainer img {
 	max-width: 100%;
 }
-	
+
 
 
 .blognav {
@@ -3018,9 +3018,9 @@ padding-right: 20px;
 /* ============================================= */
 /* ======================== FlexiSlider ===================== */
 /* ============================================= */
- 
+
 /* FlexSlider Necessary Styles
-*********************************/ 
+*********************************/
 .flexslider {margin: 0; padding: 0;}
 .flexslider .slides > li {display: none; -webkit-backface-visibility: hidden;  margin: 0; padding: 0; position: inherit;} /* Hide the slides before the JS is loaded. Avoids image jumping */
 .flexslider .slides > li:after { display: none;}
@@ -3028,8 +3028,8 @@ padding-right: 20px;
 .flex-pauseplay span {text-transform: capitalize;}
 
 /* Clearfix for the .slides element */
-.slides:after {content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0;} 
-html[xmlns] .slides {display: block;} 
+.slides:after {content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0;}
+html[xmlns] .slides {display: block;}
 * html .slides {height: 1%;}
 
 /* No JavaScript Fallback */
@@ -3123,13 +3123,13 @@ html[xmlns] .slides {display: block;}
 		background-size: 80%;
 		top: 0;
 	}
-	
-	
+
+
 	.contact-container {
 		padding-top: 450px;
 	}
-	
-	
+
+
 
 
 
@@ -3173,33 +3173,33 @@ html[xmlns] .slides {display: block;}
 		padding: 0;
 		overflow-y: hidden;
 	}
-	
+
 		.tweet_list li {
 			overflow-y: auto;
 			overflow-x: hidden;
 			list-style-type: none;
 			text-align: center;
 		}
-		
+
 			.tweet_list li a {
 				color: #38BABF;
 			}
-		
+
 		.tweet_list .tweet_even {
-			
+
 		}
-		
+
 		.tweet_list .tweet_avatar {
 			position: absolute;
 			left: 49%;
 			bottom: -65px;
 		}
-		
+
 			.tweet_list .tweet_avatar img {
 				vertical-align: middle;
 			}
-			
-	
+
+
 		.tweet_avatar {
 			text-decoration: none;
 		}
@@ -3207,14 +3207,14 @@ html[xmlns] .slides {display: block;}
 			content: "\e006";
 			color: #5dd7fc;
 			font-size: 25px;
-			
+
 		}
 		.tweet_avatar img {
 			display: none;
 		}
 
 		button.next {
-			background: url("../images/arrow_right_gray.png") no-repeat scroll 0 0 transparent; 
+			background: url("../images/arrow_right_gray.png") no-repeat scroll 0 0 transparent;
 			right: -15px;
 			position: absolute;
 			top: 40%;
@@ -3224,7 +3224,7 @@ html[xmlns] .slides {display: block;}
 		    padding: 0 15px;
 		    cursor: pointer;
 		}
-		
+
 		button.prev {
 			background: url("../images/arrow_left_gray.png") no-repeat scroll 0 0 transparent;
 		    border: medium none;
@@ -3278,7 +3278,7 @@ html[xmlns] .slides {display: block;}
 	height: 900px !important;
 }
 	/*Parallax1------------------------------------------*/
-	
+
 	.bg1 {
 		background: url(../images/parallax/teaser1.jpg) 50% 50% fixed repeat-y;
 		width: 100%;
@@ -3287,7 +3287,7 @@ html[xmlns] .slides {display: block;}
 		position: absolute;
 		background-size: 110%;
 	}
-	
+
 	p.prlx-quote {
 		font-family: 'BebasNeueRegular', sans-serif;
 		font-size: 48px;
@@ -3299,7 +3299,7 @@ html[xmlns] .slides {display: block;}
 		z-index: 200;
 		margin: 0 10% 0 10%;
 	}
-	
+
 	.prlx-author {
 		height: 24px;
 		background: url(../images/quote.png) left no-repeat;
@@ -3318,7 +3318,7 @@ html[xmlns] .slides {display: block;}
 
 
 	/*Parallax2------------------------------------------*/
-	
+
 	.bg2 {
 		width: 100%;
 		height: 100%;
@@ -3327,23 +3327,23 @@ html[xmlns] .slides {display: block;}
 		background-size: 110% !important;
 		-webkit-background-size: 110% !important;
 	}
-	
+
 	.twitter-author {
 		text-transform: uppercase;
 		font-family: 'BebasNeueRegular', sans-serif;
 		font-size: 24px;
-	
+
 	}
-	
+
 	.tweet {
 		font-family: 'Oswald', sans-serif;
 		font-size: 24px;
 		color: white;
 		line-height: 1.4;
 		margin: 7px 0 12px 0;
-	
+
 	}
-	
+
 	.twitter-date {
 		color: #868991;
 		font-size: 11px;
@@ -3358,11 +3358,11 @@ html[xmlns] .slides {display: block;}
 
 
 /* ======================================================== FOOTER AREA =====================================================  */
-	
-	
-	
 
-	
+
+
+
+
 	.third {
 		height: 430px;
 		overflow: hidden;
@@ -3378,7 +3378,7 @@ html[xmlns] .slides {display: block;}
 		margin: 0 0px 0 10px;
 		width: 460px;
 		position: relative;
-	}	
+	}
 	#footer .seconded .war div {
 		padding: 0 45px 25px 45px;
 	}
@@ -3391,7 +3391,7 @@ html[xmlns] .slides {display: block;}
 	    line-height: 26px;
 	    margin-top: 10px;
 	}
-	
+
 	.third h3, .seconded h3 {
 		border-bottom: 1px solid #e6e6e6;
 		padding-bottom: 20px;
@@ -3404,10 +3404,10 @@ html[xmlns] .slides {display: block;}
 	    font-weight: 100;
 	    letter-spacing: -0.2px;
 	}
-	
+
 	.databox {
 		padding: 0 45px;
-		
+
 	}
 	#footer .databox {
 		border-bottom: 1px solid #e6e6e6;
@@ -3423,7 +3423,7 @@ html[xmlns] .slides {display: block;}
 		float: right;
 		position: relative;
 	}
-	
+
 	.rightmin .map {
 		position: relative;
 		height: 185px;
@@ -3439,7 +3439,7 @@ html[xmlns] .slides {display: block;}
 	    position: absolute;
 	    right: 20px;
 	}
-	
+
 	.seconded {
 		overflow: hidden;
 	}
@@ -3458,7 +3458,7 @@ html[xmlns] .slides {display: block;}
 		padding: 15px;
 		height: 90%;
 	}
-	
+
 	.hang {
 		background: none repeat scroll 0 0 transparent;
 	    border: medium none;
@@ -3491,13 +3491,13 @@ html[xmlns] .slides {display: block;}
 	    position: absolute;
 	    right: 20px;
 	}
-	
+
 	.seconded:hover .icon-right-quote {
 	    color: #a8a8a8;
 	 }
-	 
-	 
-	 
+
+
+
 	#mapper {
 		position: relative;
 		border-top: 1px solid #ddd;
@@ -3505,7 +3505,7 @@ html[xmlns] .slides {display: block;}
 		position: relative;
 		z-index: 3;
 	}
-	
+
 	#mapper .container {
 		padding-top: 0;
 		position: absolute;
@@ -3524,7 +3524,7 @@ html[xmlns] .slides {display: block;}
 	    width: 100%;
 	    height: 100%;
 	}
-	
+
 	#mapper .third {
 		border: 1px solid #b7b7b7;
 		width: 698px;
@@ -3536,8 +3536,8 @@ html[xmlns] .slides {display: block;}
 
 
 
-	
-	
+
+
 	#instafeed img {
 		max-width: 25%;
 		vertical-align: bottom;
@@ -3551,11 +3551,11 @@ html[xmlns] .slides {display: block;}
 		position: relative;
 		z-index: 3;
 	}
-		
+
 		#footer .contact-container {
 			padding-top: 0;
 		}
-		
+
 		.pinkytoe {
 			border-right: 1px solid #e6e6e6;
 			width: 210px;
@@ -3625,11 +3625,11 @@ html[xmlns] .slides {display: block;}
 			position: absolute;
 			left: 15px;
 			font-size: 10px;
-			
+
 			top: 38%;
-				
+
 		}
-		
+
 		#footer ul li:last-child {
 			border-bottom: none;
 		}
@@ -3650,14 +3650,14 @@ html[xmlns] .slides {display: block;}
 		#footer .third {
 			height: inherit;
 		}
-				
+
 		#footer .seconded {
 			height: inherit;
 		}
-		
+
 		#footer .wp-tag-cloud li {
 			padding: 2px !important;
-			
+
 		}
 		#footer .wp-tag-cloud li:hover {
 			background: none;
@@ -3665,13 +3665,13 @@ html[xmlns] .slides {display: block;}
 		#footer .wp-tag-cloud li:before {
 			display: none;
 		}
-		
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
+
 		/* ------------------ PAGESLIDE ------------------ */
 
 #pageslide {
@@ -3728,7 +3728,7 @@ html[xmlns] .slides {display: block;}
         background: #333;
         padding: 5px 10px;
         text-shadow: none;
-    }    
+    }
 	#modal textarea {
 		min-height: 200px;
 		position: relative;
@@ -3754,7 +3754,7 @@ html[xmlns] .slides {display: block;}
 	}
 	#modal:hover .icon-right-quote {
 		color: #A8A8A8;
-	
+
 	}
     /* ----- FORM ----- */
 
@@ -3764,7 +3764,7 @@ html[xmlns] .slides {display: block;}
 		resize: none;
 	}
 
-	textarea:focus, input:focus, select:focus { 
+	textarea:focus, input:focus, select:focus {
 		color: #333;
 	}
 
@@ -3809,9 +3809,9 @@ html[xmlns] .slides {display: block;}
 		letter-spacing: -1px;
 		color: #59bb3b;
 	}
-	
+
 	#modal #contactform {
-		
+
 	}
 	#modal .error_message {
 		color: #fff;
@@ -3820,7 +3820,7 @@ html[xmlns] .slides {display: block;}
 	/*  Copyright section   ------------------------------------------*/
 
 
-	
+
 	.copyright {
 		background: #333;
 		width: 100%;
@@ -3830,7 +3830,7 @@ html[xmlns] .slides {display: block;}
 		position: relative;
 		z-index: 3;
 	}
-	
+
 	.copyright p {
 		text-transform: uppercase;
 		text-align: left;
@@ -3857,4 +3857,3 @@ html[xmlns] .slides {display: block;}
 	    text-decoration: none;
 	    top: -15px;
 	}
-	

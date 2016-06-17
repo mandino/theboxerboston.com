@@ -133,8 +133,10 @@ pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName
 					<div class="reservationform">
 					
 					
-						<form method="get" action="https://theboxerboston.reztrip.com/search?">
+						<form method="get" action="https://theboxerboston.reztrip.com/search?" target="_blank">
+
 						<input type="hidden" value="1" name="rooms">
+						
 						<span class="calsec">
 								<input type="text"  id="arrival_date" name="arrival_date" placeholder="<?php _e('Arrival','cebolang'); ?>" class="calendarsection" />
 							<input type="hidden"  id="arv">
@@ -211,7 +213,7 @@ pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName
 						</ul> -->
 	
 					</li>
-					<!-- <li class="blue-btn"><a href="http://theboxerboston.com/blue"><i class="fa fa-info-circle"></i><span class="blue-mobile">why blue?</span></a></li> -->
+					<li class="blue-btn"><a href="http://theboxerboston.com/blue"><i class="fa fa-info-circle"></i><span class="blue-mobile">why blue?</span></a></li>
 				</ul>
 			</nav>
 			

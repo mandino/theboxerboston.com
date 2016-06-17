@@ -272,12 +272,21 @@
 
 	<ul style="" class="right-links right" id="toggles">
 
+<<<<<<< HEAD
 		<li class="dine"><a class="linkerd active" href="/echo-dining" title="Dining">Eat</a></li>
 		<li class="shop"><a class="linkerd active" href="/echo-shop" title="Dining">Shop</a></li>
 		<li class="arts"><a class="linkerd active" href="/echo-culture" title="Dining">Culture</a></li>
 		<li class="sights"><a class="linkerd active" href="/echo-sights" title="Dining">Landmarks</a></li>
+=======
+		<li class="dine"><a class="linkerd active" href="<?php bloginfo('url'); ?>/?page_id=74" title="Dining">Eat</a></li>
+		<li class="shop"><a class="linkerd active" href="<?php bloginfo('url'); ?>/?page_id=76" title="Dining">Shop</a></li>
+		<li class="arts"><a class="linkerd active" href="<?php bloginfo('url'); ?>/?page_id=72" title="Dining">Culture</a></li>
+		<li class="sights"><a class="linkerd active" href="<?php bloginfo('url'); ?>/?page_id=78" title="Dining">Landmarks</a></li>
+>>>>>>> gil-ng-popup-color
 
 	</ul>
+
+
 
 		<a href="#features-1" id="link" class="navigateTo page-down"></a>
 
@@ -315,40 +324,41 @@
 						<div>
 
 
-							<?php
-								$shortdater = tribe_get_start_date($post->ID, true, 'M');
-								$shortdaterend = tribe_get_end_date($post->ID, true, 'M');
-							    $shortdaterz = substr($shortdater, 0, 3);
-							    $shortdaterendz = substr($shortdaterend, 0, 3);
+						
+					 <?php
+							$shortdater = tribe_get_start_date($post->ID, true, 'M');
+							$shortdaterend = tribe_get_end_date($post->ID, true, 'M');
+						    $shortdaterz = substr($shortdater, 0, 3);
+						    $shortdaterendz = substr($shortdaterend, 0, 3);
 
-							    $shortdate = tribe_get_start_date($post->ID, true, 'j');
-								$shortdateend = tribe_get_end_date($post->ID, true, 'j');
-							    $shortdatez = substr($shortdate, 0, 2);
-							    $shortdateendz = substr($shortdateend, 0, 2);
-							?>
+						    $shortdate = tribe_get_start_date($post->ID, true, 'j');
+							$shortdateend = tribe_get_end_date($post->ID, true, 'j');
+						    $shortdatez = substr($shortdate, 0, 2);
+						    $shortdateendz = substr($shortdateend, 0, 2);
+						?>
 
-							<?php if( tribe_event_is_all_day() == true ) { ?>
+					<?php if( ($shortdatez== $shortdateendz) && ($shortdaterz==$shortdaterendz) ) { ?>
 
-								<div class="post-date post-date-start" style="right: 20px;">
-									<span class="date-month"><?php echo $shortdaterz; ?></span>
-									<span class="date-number"><?php echo $shortdatez; ?></span>
-								</div>
+							<div class="post-date post-date-start" style="right: 20px;">
+								<span class="date-month"><?php echo $shortdaterz; ?></span>
+								<span class="date-number"><?php echo $shortdatez; ?></span>
+							</div>
 
-							<?php } else { ?>
+						<?php } else { ?>
 
-								<div class="post-date post-date-start">
-									<span class="date-month"><?php echo $shortdaterz; ?></span>
-									<span class="date-number"><?php echo $shortdatez; ?></span>
-								</div>
+							<div class="post-date post-date-start">
+								<span class="date-month"><?php echo $shortdaterz; ?></span>
+								<span class="date-number"><?php echo $shortdatez; ?></span>
+							</div>
 
-								<div style="right: 109px; padding: 10px 0;" class="post-date"><span style="font-size: 30px; line-height: 2.5;">-</span></div>
+							<div style="right: 109px; padding: 10px 0;" class="post-date"><span style="font-size: 30px; line-height: 2.5;">-</span></div>
 
-								<div class="post-date">
-									<span class="date-month"><?php echo $shortdaterendz; ?></span>
-									<span class="date-number date-number-end"><?php echo $shortdateendz; ?></span>
-								</div>
+							<div class="post-date">
+								<span class="date-month"><?php echo $shortdaterendz; ?></span>
+								<span class="date-number date-number-end"><?php echo $shortdateendz; ?></span>
+							</div>
 
-							<?php } ?>
+						<?php } ?>
 
 							<a href="<?php the_permalink(); ?>"><img src="<?php echo tt($imgsrc[0], 540, 292);; ?>"></a>
 							<div class="ptit">

@@ -51,6 +51,10 @@ html {
   width: 100%;
   height: 100%;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> gil-ng-popup-color
 .no-boxshadow input:invalid,
 .no-boxshadow textarea:invalid {  }
 /* By default the selection color is pink */
@@ -67,10 +71,17 @@ ul li {
   list-style: none;
 }
 p {
+<<<<<<< HEAD
   font-family: Arial;
   color: #2e2d2d;
   font-size: 13px;
   line-height: 22px;
+=======
+	font-family: Arial;
+	color: #2e2d2d;
+	font-size: 13px;
+	line-height: 22px;
+>>>>>>> gil-ng-popup-color
 }
 a {
   color: #8d3d00;
@@ -111,8 +122,16 @@ article ol li {
 img {border:0;}
 a img {border:0}
 /* Float Definitions -----------------------------------------------------------*/
+<<<<<<< HEAD
 .clear {clear:both;}
 .right {float: right;}
+=======
+
+.clear {clear:both;}
+
+.right {float: right;}
+
+>>>>>>> gil-ng-popup-color
 .left {float: left;}
 .alignright {float: right;margin: 0 0 2px 7px;}
 .alignleft {float: left;margin: 0 7px 2px 0;}
@@ -130,8 +149,15 @@ img.right, img.alignright {float: right;margin: 0 0 7px 15px;}
 }
 /* Base Styles -----------------------------------------------------------*/
 /*--------------------------------------------------------
+<<<<<<< HEAD
   v.--FLYOUT CALENDAR
 --------------------------------------------------------*/
+=======
+	v.--FLYOUT CALENDAR
+--------------------------------------------------------*/
+
+
+>>>>>>> gil-ng-popup-color
 .reservationform > form {
     margin-bottom: 12px;
 }
@@ -142,9 +168,15 @@ img.right, img.alignright {float: right;margin: 0 0 7px 15px;}
   margin: 5px 0 0 6px;
 }
 .calsec {
+<<<<<<< HEAD
   position: relative;
   width: 23%;
   float: left;
+=======
+	position: relative;
+	width: 23%;
+	float: left;
+>>>>>>> gil-ng-popup-color
 }
 .calsec input {
   width: 82%;
@@ -215,8 +247,16 @@ img.right, img.alignright {float: right;margin: 0 0 7px 15px;}
   font-weight: lighter;
 }
 /*--------------------------------------------------------
+<<<<<<< HEAD
   v.--MAP
 --------------------------------------------------------*/
+=======
+	v.--MAP
+--------------------------------------------------------*/
+
+
+
+>>>>>>> gil-ng-popup-color
 .post-content .gallery {
   display: none;
 }
@@ -282,6 +322,10 @@ img.right, img.alignright {float: right;margin: 0 0 7px 15px;}
   background: none repeat scroll 0 0 #048B8F;
     border-bottom: 1px solid #036B6D;
     border-top: 1px solid #03A8AA;
+<<<<<<< HEAD
+=======
+
+>>>>>>> gil-ng-popup-color
     margin-bottom: 30px;
     position: relative;
 }
@@ -453,6 +497,10 @@ a.detailsAnchor {
 }
 /* Tweet Markers */
   .marker {
+<<<<<<< HEAD
+=======
+
+>>>>>>> gil-ng-popup-color
     color: #ffffff;
     font-family: arial;
     font-size: 10px;
@@ -473,15 +521,29 @@ a.detailsAnchor {
    .marker:hover {
     z-index: 100000;
   }
+<<<<<<< HEAD
   .marker:hover img {
     margin: 0px 5px 5px 0px;
   }
+=======
+
+  .marker:hover img {
+    margin: 0px 5px 5px 0px;
+  }
+
+>>>>>>> gil-ng-popup-color
   .marker:hover .tweet {
     display: block;
   }
 /* place markers */
   .marker {
+<<<<<<< HEAD
   }
+=======
+
+  }
+
+>>>>>>> gil-ng-popup-color
   .location {
     background: #faffff;
     border: 2px solid #ffffff;
@@ -528,6 +590,11 @@ a.detailsAnchor {
   }
   .placeMark:hover {
   }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> gil-ng-popup-color
    #maparea .placeMark:before {
     position: absolute;
     z-index: 9;
@@ -583,6 +650,10 @@ a.detailsAnchor {
   opacity: 0;
   visibility: hidden;
    }
+<<<<<<< HEAD
+=======
+
+>>>>>>> gil-ng-popup-color
 .placeMark a:before {
   background: transparent;
   z-index: 9999;
@@ -628,6 +699,7 @@ a.detailsAnchor {
   padding: 0 0 10px 10px;
    }
    .placeMark a .infobox b.monumental {
+<<<<<<< HEAD
       line-height: 19px;
     font-weight: bold;
     background: none repeat scroll 0 0 #1C93D1;
@@ -639,6 +711,19 @@ a.detailsAnchor {
     text-transform: uppercase;
     width: 245px;
     font-size: 12px;
+=======
+   		line-height: 19px;
+		font-weight: bold;
+		background: none repeat scroll 0 0 #b04444;
+		color: #FFFFFF;
+		display: block;
+		height: 20px;
+		padding: 0px 10px 1px 0;
+		text-align: right;
+		text-transform: uppercase;
+		width: 245px;
+		font-size: 12px;
+>>>>>>> gil-ng-popup-color
    }
   /* .placeMark a .infobox b#Attractions {
       background: #50C541;
@@ -655,6 +740,7 @@ a.detailsAnchor {
    .placeMark a:hover .infobox {
    }
    .infobox:after {
+<<<<<<< HEAD
     content: '';
     /*background: url(images/arrow.png) no-repeat;*/
     width: 10px;
@@ -663,6 +749,16 @@ a.detailsAnchor {
     left: 50%;
     margin-left: -5px;
     bottom: -10px;
+=======
+   	content: '';
+  /* 	background: url(images/arrow.png) no-repeat;*/
+   	width: 10px;
+   	height: 10px;
+   	position: absolute;
+   	left: 50%;
+   	margin-left: -5px;
+   	bottom: -10px;
+>>>>>>> gil-ng-popup-color
    }
   #maparea .stay small {
     background: url(images/stay_marker2.png) no-repeat;
@@ -728,12 +824,20 @@ a.detailsAnchor {
      #maparea .shop small {
     }
   #maparea .shop:hover {
+<<<<<<< HEAD
+=======
+
+>>>>>>> gil-ng-popup-color
   }
   .placeMark a {
     display: block;
     width: 18px;
   height: 18px;
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> gil-ng-popup-color
   .placeMark:hover {
     z-index: 999999999;
     display: block;
@@ -741,7 +845,13 @@ a.detailsAnchor {
     box-shadow: 0 0 5px #333;
   }
   #toggles .shop {
+<<<<<<< HEAD
   }
+=======
+
+  }
+
+>>>>>>> gil-ng-popup-color
   #toggles li a  {
     background: #eeefff;
     height: 100%;
@@ -751,6 +861,7 @@ a.detailsAnchor {
     color: #856f6c;
   }
   #toggles li a.active {
+<<<<<<< HEAD
     background: transparent;
     height: 100%;
     display: block;
@@ -773,17 +884,47 @@ a.detailsAnchor {
   -webkit-transition: all 0.6s ease-in-out;
   -moz-transition: all 0.6s ease-in-out;
   transition: all 0.6s ease-in-out;
+=======
+  	background: transparent;
+  	height: 100%;
+  	display: block;
+  	width: 100%;
+  	color: #fff;
+  }
+
+  #toggles li {
+  	border: 3px solid #fff;
+	padding: 0px 0 0 0;
+	border-radius: 100px;
+	height: 70px;
+	width: 70px;
+	display: inline-block;
+	*display: inline;
+	zoom: 1;
+	background: #f07060;
+	overflow: hidden;
+	position: relative;
+	margin-top: 0;
+
+	-webkit-transition: all 0.6s ease-in-out;
+	-moz-transition: all 0.6s ease-in-out;
+	transition: all 0.6s ease-in-out;
+>>>>>>> gil-ng-popup-color
   }
   #toggles li:hover {
     top: -3px;
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> gil-ng-popup-color
    #toggles li a {
     font-size: 15px;
     font-family: scala-sans, sans-serif;
    }
   #infoBox,
   .placeData {
-    background: url("images/blue_bg.png") repeat scroll 0 0 transparent;
+   /* background: url("images/blue_bg.png") repeat scroll 0 0 transparent;*/
     display: none !important;
     right: 30px;
     padding: 0px;
@@ -814,6 +955,10 @@ a.detailsAnchor {
     top: -10px;
     width: 100%;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> gil-ng-popup-color
   .placeData a.closeData {
     background: url("images/closes.png") no-repeat scroll 0 0 transparent;
     display: block;
@@ -841,9 +986,15 @@ a.detailsAnchor {
     top: 0;
   }
   .placeData p.desc {
+<<<<<<< HEAD
     color: #666666;
     font-size: 12px;
     margin: 10px 0 0 0;
+=======
+  	color: #666666;
+  	font-size: 12px;
+  	margin: 10px 0 0 0;
+>>>>>>> gil-ng-popup-color
   }
   .placeData h4 {
     margin: 0 0 5px 0;
@@ -899,6 +1050,10 @@ a.detailsAnchor {
     right: 340px;
     z-index: 10000;
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> gil-ng-popup-color
   #warning {
     background: #000;
     color: #ffffff;
@@ -918,6 +1073,10 @@ a.detailsAnchor {
     width: 400px;;
     z-index: 100000;
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> gil-ng-popup-color
   #warning a.closeData {
     background: url(images/closes.png) no-repeat;
     position: absolute;
@@ -928,6 +1087,10 @@ a.detailsAnchor {
     width: 48px;
     text-indent: -9999px;
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> gil-ng-popup-color
   .largebox .linkersonclose {
     background: url("images/bg_dot.png") repeat scroll 0 0 transparent;
     background: #BABABA;
@@ -974,11 +1137,20 @@ a.detailsAnchor {
   left:0; top:19px;
 }
 #toggle-view .panel {
+<<<<<<< HEAD
   display:none;
   background: transparent;
   overflow:hidden;
   padding:10px 10px 20px 10px;
 }
+=======
+	display:none;
+	background: transparent;
+	overflow:hidden;
+	padding:10px 10px 20px 10px;
+}
+
+>>>>>>> gil-ng-popup-color
 #toggle-view .panel img {
   border: 3px solid #ddd;
   margin-bottom: 15px;
@@ -1189,7 +1361,12 @@ h1, h2, h3, h4, h5, h6, h7 {
   visibility: visible;
 }
 .logo img {
+<<<<<<< HEAD
   max-width: 150px;
+=======
+	max-width: 150px;
+
+>>>>>>> gil-ng-popup-color
 }
 /* ======================================================== TOP NAVIGATION =====================================================  */
 #property-nav nav {
@@ -1301,6 +1478,7 @@ h1, h2, h3, h4, h5, h6, h7 {
   position: relative;
 }
 .ressys {
+<<<<<<< HEAD
   position: absolute;
   z-index: 999;
   background: #fff;
@@ -1331,6 +1509,38 @@ h1, h2, h3, h4, h5, h6, h7 {
   -moz-animation-delay:0s;
   -ms-animation-delay:0s;
   -o-animation-delay:0s;
+=======
+	position: absolute;
+	z-index: 999;
+	background: #fff;
+	width: 600px;
+	min-height: 386px;
+	right: 0;
+	top: 92px;
+	border-left: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	transition: all 0.5s ease-in-out;
+	opacity: 0;
+	visibility: hidden;
+	-webkit-animation-fill-mode: both;
+	-moz-animation-fill-mode:both;
+	-ms-animation-fill-mode:both;
+	-o-animation-fill-mode:both;
+	animation-fill-mode:both;
+	-webkit-animation-duration:.5s;
+	-moz-animation-duration:.5s;
+	-ms-animation-duration:.5s;
+	-o-animation-duration:.5s;
+	animation-duration:.5s;
+	-webkit-animation-name:fadeInDown;
+	-moz-animation-name:fadeInDown;
+	-o-animation-name:fadeInDown;
+	animation-name:fadeInDown;
+	-webkit-animation-delay:0s;
+	-moz-animation-delay:0s;
+	-ms-animation-delay:0s;
+	-o-animation-delay:0s;
+>>>>>>> gil-ng-popup-color
 }
 .dropit {
   opacity: 1;
@@ -1624,6 +1834,10 @@ h1, h2, h3, h4, h5, h6, h7 {
     padding-top: 60px;
 }
 #footer-newsletter p {
+<<<<<<< HEAD
+=======
+
+>>>>>>> gil-ng-popup-color
 }
 #footer-newsletter .container p {
     color: #4E4E4E;
@@ -1947,6 +2161,10 @@ h3.featured-gallery-thumb-title, h2.featured-gallery-thumb-title {
   border-radius: 0 0 0 0;
     padding: 10px;
     z-index: 2147483647 !important;
+<<<<<<< HEAD
+=======
+
+>>>>>>> gil-ng-popup-color
 }
 /* Layout helpers
 ----------------------------------*/
@@ -2729,12 +2947,22 @@ button.ui-button::-moz-focus-inner {
   background: none;
 }
 .ui-tooltip {
+<<<<<<< HEAD
   padding: 8px;
   position: absolute;
   z-index: 9999;
   max-width: 300px;
   -webkit-box-shadow: 0 0 5px #aaa;
   box-shadow: 0 0 5px #aaa;
+=======
+	padding: 8px;
+	position: absolute;
+	z-index: 9999;
+	max-width: 300px;
+	-webkit-box-shadow: 0 0 5px #aaa;
+	box-shadow: 0 0 5px #aaa;
+
+>>>>>>> gil-ng-popup-color
 }
 body .ui-tooltip {
   border-width: 2px;
@@ -2792,10 +3020,17 @@ body .ui-tooltip {
 .ui-state-focus,
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
+<<<<<<< HEAD
   border: none;
   /*background: #f6f6f6 url(images/ui-bg_highlight-hard_100_f6f6f6_1x100.png) 50% 50% repeat-x;*/
   font-weight: bold;
   color: #111111;
+=======
+	border: none;
+	/*background: #f6f6f6 url(images/ui-bg_highlight-hard_100_f6f6f6_1x100.png) 50% 50% repeat-x;*/
+	font-weight: bold;
+	color: #111111;
+>>>>>>> gil-ng-popup-color
 }
 .ui-state-hover a,
 .ui-state-hover a:hover,
@@ -2807,10 +3042,17 @@ body .ui-tooltip {
 .ui-state-active,
 .ui-widget-content .ui-state-active,
 .ui-widget-header .ui-state-active {
+<<<<<<< HEAD
   border: none;
   /*background: #ffffff url(images/ui-bg_flat_65_ffffff_40x100.png) 50% 50% repeat-x;*/
   font-weight: bold;
   color: #cc0000;
+=======
+	border: none;
+	/*background: #ffffff url(images/ui-bg_flat_65_ffffff_40x100.png) 50% 50% repeat-x;*/
+	font-weight: bold;
+	color: #cc0000;
+>>>>>>> gil-ng-popup-color
 }
 .ui-state-active a,
 .ui-state-active a:link,
@@ -2823,9 +3065,15 @@ body .ui-tooltip {
 .ui-state-highlight,
 .ui-widget-content .ui-state-highlight,
 .ui-widget-header .ui-state-highlight {
+<<<<<<< HEAD
   border: 1px solid #fcd3a1;
 /*  background: #fbf8ee url(images/ui-bg_glass_55_fbf8ee_1x400.png) 50% 50% repeat-x;*/
   color: #444444;
+=======
+	border: 1px solid #fcd3a1;
+	/*background: #fbf8ee url(images/ui-bg_glass_55_fbf8ee_1x400.png) 50% 50% repeat-x;*/
+	color: #444444;
+>>>>>>> gil-ng-popup-color
 }
 .ui-state-highlight a,
 .ui-widget-content .ui-state-highlight a,
@@ -2893,15 +3141,25 @@ body .ui-tooltip {
   background-image: url(images/ui-icons_cc0000_256x240.png);
 }
 .ui-state-active .ui-icon {
+<<<<<<< HEAD
   background-image: url(images/ui-icons_cc0000_256x240.png);
+=======
+	background-image: url(images/ui-icons_cc0000_256x240.png);
+>>>>>>> gil-ng-popup-color
 }*/
 .ui-state-highlight .ui-icon {
   background-image: url(images/ui-icons_004276_256x240.png);
 }
 /*.ui-state-error .ui-icon,
 .ui-state-error-text .ui-icon {
+<<<<<<< HEAD
   background-image: url(images/ui-icons_cc0000_256x240.png);
 }*/
+=======
+	background-image: url(images/ui-icons_cc0000_256x240.png);
+}*/
+
+>>>>>>> gil-ng-popup-color
 /* positioning */
 .ui-icon-blank { background-position: 16px 16px; }
 .ui-icon-carat-1-n { background-position: 0 0; }
@@ -3086,21 +3344,37 @@ body .ui-tooltip {
 .ui-corner-top,
 .ui-corner-left,
 .ui-corner-tl {
+<<<<<<< HEAD
+=======
+
+>>>>>>> gil-ng-popup-color
 }
 .ui-corner-all,
 .ui-corner-top,
 .ui-corner-right,
 .ui-corner-tr {
+<<<<<<< HEAD
+=======
+
+>>>>>>> gil-ng-popup-color
 }
 .ui-corner-all,
 .ui-corner-bottom,
 .ui-corner-left,
 .ui-corner-bl {
+<<<<<<< HEAD
+=======
+
+>>>>>>> gil-ng-popup-color
 }
 .ui-corner-all,
 .ui-corner-bottom,
 .ui-corner-right,
 .ui-corner-br {
+<<<<<<< HEAD
+=======
+
+>>>>>>> gil-ng-popup-color
 }
 /* Overlays */
 .ui-widget-overlay {
@@ -3292,9 +3566,17 @@ body .ui-tooltip {
     text-transform: uppercase;
 }
 /* Around The Neighborhood */
+<<<<<<< HEAD
 .tabs-wrapper {
   width: 100%;
   margin: 15px 0;
+=======
+
+
+.tabs-wrapper {
+	width: 100%;
+	margin: 15px 0;
+>>>>>>> gil-ng-popup-color
 }
 .tab-item {
   clear:both;
@@ -3303,6 +3585,7 @@ body .ui-tooltip {
   border-bottom:1px solid #fff;
 }
 .tabs-container {
+<<<<<<< HEAD
   float:left;
   position:relative;
   display:block;
@@ -3314,6 +3597,21 @@ body .ui-tooltip {
   overflow:hidden;
   border: 1px solid #CBCBCB;
   border-radius: 0px 3px 3px 3px;
+=======
+	float:left;
+	position:relative;
+	display:block;
+	width:100%;
+
+}
+
+.tabs-wrapper .tab-content {
+	background:#fff;
+	padding: 50px 0 80px;
+	overflow:hidden;
+	border: 1px solid #CBCBCB;
+	border-radius: 0px 3px 3px 3px;
+>>>>>>> gil-ng-popup-color
 }
 ul.tabs {
     float: left;
@@ -3362,6 +3660,10 @@ ul.tabs li a {
     text-transform: uppercase;
 }
 ul.tabs li:last-child {
+<<<<<<< HEAD
+=======
+
+>>>>>>> gil-ng-popup-color
 }
 .around-neighborhood > h2 {
     color: #3F3D3E;
@@ -3596,6 +3898,10 @@ i.ns-close {
     i.ns-close:hover {
         opacity: .6;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> gil-ng-popup-color
 span.ns-close {
   background: url(images/ns-close.png) center no-repeat;
   width: 14px;
@@ -3659,6 +3965,10 @@ span.ns-close {
     width: 69px;
     height: 60px;
     background-position: 0 0;
+<<<<<<< HEAD
+=======
+
+>>>>>>> gil-ng-popup-color
 }
 .sprite-ic_02 {
     width: 203px;
@@ -3707,6 +4017,10 @@ span.ns-close {
     -moz-transition: all 0.4s ease-in-out;
     -webkit-transition: all 0.4s ease-in-out;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> gil-ng-popup-color
     .category-neighbor div:hover a {
         background-color: rgba(0,0,0,0.1);
     }
@@ -3716,7 +4030,11 @@ span.ns-close {
     .category-neighbor div:hover .hover-title {
         display: block;
     }
+<<<<<<< HEAD
 .usercomments h2 {
+=======
+    .usercomments h2 {
+>>>>>>> gil-ng-popup-color
   position: relative;
 }
 .usercomments h2 i {
@@ -3763,8 +4081,24 @@ text-align: center;
 {
   margin-top: -69px;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> gil-ng-popup-color
 h1.tribe-events-page-title{
   font-size:30px !important;
   text-align: center !important;
 }
+<<<<<<< HEAD
+=======
+li.blue-btn {
+    display: none;
+}
+
+.post-content em {
+    font-style: italic;
+}
+.post-content strong {
+    font-weight: bold;
+}
+>>>>>>> gil-ng-popup-color
