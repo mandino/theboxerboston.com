@@ -160,7 +160,10 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
 document,'script','//connect.facebook.net/en_US/fbevents.js');
 
 fbq('init', '164851350567642');
-fbq('track', "PageView");</script>
+fbq('track', "PageView");
+fbq('track', 'ViewContent');
+fbq('track', 'InitiateCheckout');
+fbq('track', 'Lead');</script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=164851350567642&ev=PageView&noscript=1"
 /></noscript>
