@@ -16,7 +16,7 @@
 <div class="fullpic">
 
 	<div class="slide-header">
-		<a class="button" onclick="_gaq.push(['_trackEvent', 'Reserve', 'Reservation-button-banner', 'Reserve Now']);" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>"><?php _e('RESERVE NOW', 'cebolang'); ?></a>
+		<a class="button" onclick="fbq('track', 'InitiateCheckout'); _gaq.push(['_trackEvent', 'Reserve', 'Reservation-button-banner', 'Reserve Now']);" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>"><?php _e('RESERVE NOW', 'cebolang'); ?></a>
 	</div>
 	<img src="<?php echo tt(get_post_meta($post->ID, 'cebo_fullpic', true), 1400, 350); ?>" />
 
