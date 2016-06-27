@@ -139,16 +139,19 @@ document,'script','//connect.facebook.net/en_US/fbevents.js');
 fbq('init', '164851350567642');
 fbq('track', "PageView");
 
-function viewContent(){
-
-fbq('track', "ViewContent");
-
-}
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=164851350567642&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Facebook Pixel Code -->
+
+<script type="text/javascript">
+function viewContent(){
+
+	fbq('track', "ViewContent");
+
+}
+</script>
 
 </head> 
 	
