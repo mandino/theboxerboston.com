@@ -167,7 +167,7 @@ function viewContent(){
 					<div class="reservationform">
 					
 					
-						<form method="get" action="https://theboxerboston.reztrip.com/search?" target="_blank">
+						<form method="get" action="https://theboxerboston.reztrip.com/search?">
 
 						<input type="hidden" value="1" name="rooms">
 						
