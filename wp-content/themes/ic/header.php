@@ -128,6 +128,31 @@ ga('send', 'pageview');
 
 </script>
 
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','//connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '164851350567642');
+fbq('track', "PageView");
+
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=164851350567642&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+<script type="text/javascript">
+function viewContent(){
+
+	fbq('track', "ViewContent");
+
+}
+</script>
+
 </head> 
 	
 <body id="oceana" <?php body_class($class); ?>>
@@ -142,7 +167,7 @@ ga('send', 'pageview');
 					<div class="reservationform">
 					
 					
-						<form method="get" action="https://theboxerboston.reztrip.com/search?" target="_blank">
+						<form method="get" action="https://theboxerboston.reztrip.com/search?">
 
 						<input type="hidden" value="1" name="rooms">
 						
@@ -175,7 +200,7 @@ ga('send', 'pageview');
 							</select>
 						</span>
 						
-						<button type="submit" class="button" onClick="ga('send', 'event', 'Booking-widget', 'Search-now', 'Search dates with booking widget');">Search Now</button>
+						<button type="submit" class="button" onClick="fbq('track', 'Lead'); ga('send', 'event', 'Booking-widget', 'Search-now', 'Search dates with booking widget');">Search Now</button>
 						
 					
 						</form>
@@ -186,7 +211,7 @@ ga('send', 'pageview');
 
 					<div class="reservationform flexdate">
 					
-						<p><a href="https://theboxerboston.reztrip.com" onclick="ga('send', 'event', 'Flexible Dates', 'click', 'Booking-widget');">Flexible dates?</a> Search for our best available rate</p>
+						<p><a href="https://theboxerboston.reztrip.com" onclick="fbq('track', 'Lead'); ga('send', 'event', 'Flexible Dates', 'click', 'Booking-widget');">Flexible dates?</a> Search for our best available rate</p>
 						
 					</div>
 
@@ -247,7 +272,7 @@ ga('send', 'pageview');
 	
 				<nav id="menu" class="fl" style="z-index:1">
 					<ul>
-						 <?php wp_nav_menu( array( 'theme_location' => 'primary' ,  'items_wrap' => '%3$s', 'container' => '', 'menu_class' => 'navitem' ) ); ?>
+						 <?php wp_nav_menu( array( 'walker' => new MV_Cleaner_Walker_Nav_Menu(), 'theme_location' => 'primary' ,  'items_wrap' => '%3$s', 'container' => '', 'menu_class' => 'navitem' ) ); ?>
 					</ul>
 				</nav>
 	
