@@ -64,8 +64,8 @@
 		var adults = jQuery("#adults").val();
 		var children = jQuery("#children").val();
 		
-		var bookinglink = "https://theboxerboston.reztrip.com/search?" + 
-										"&arrival_date=" + checkin + 
+		var bookinglink = "https://theboxerboston.reztrip.com" + 
+										"?arrival_date=" + checkin + 
 										"&departure_date=" + checkout + 
 										"&adults[]=" + adults + 
 										"&children[]=" + children;
