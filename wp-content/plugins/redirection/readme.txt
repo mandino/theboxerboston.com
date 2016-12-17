@@ -1,16 +1,19 @@
- === Plugin Name ===
+=== Plugin Name ===
 Contributors: johnny5
 Donate link: http://urbangiraffe.com/about/
 Tags: post, admin, seo, pages, manage, 301, 404, redirect, permalink
-Requires at least: 3.2
-Tested up to: 4.0
-Stable tag: 2.3.6
+Requires at least: 4.1
+Tested up to: 4.6
+Stable tag: 2.4.5
 
 Redirection is a WordPress plugin to manage 301 redirections and keep track of 404 errors without requiring knowledge of Apache .htaccess files.
 
 == Description ==
 
-Redirection is a WordPress plugin to manage 301 redirections, keep track of 404 errors, and generally tidy up any loose ends your site may have. This is particularly useful if you are migrating pages from an old website, or are changing the directory of your WordPress installation.
+Redirection is a WordPress plugin to manage 301 redirections, keep track of 404 errors, and generally tidy up any loose ends your site may have.
+This is particularly useful if you are migrating pages from an old website, or are changing the directory of your WordPress installation.
+
+And it's 100% free!
 
 New features include:
 
@@ -51,11 +54,14 @@ Redirection is available in:
 * Dutch by Marlon Navas, Pieter Carette, and Bart Kummel
 * Hungarian by daSSad and Szépe Viktor
 * Turkish by Fatih Cevik
-* Romanian translation, thanks to Alina
-* Greek, thanks to Stefanos Kofopoulos
-* Belarusian, thanks to Alexander Ovsov
-* Czech, thanks to Martin Jurica
-* Danish, thanks to Rasmus Himmelstrup
+* Romanian by InboxTranslations
+* Greek by Stefanos Kofopoulos
+* Belarusian by Alexander Ovsov
+* Czech by Martin Jurica
+* Danish by Rasmus Himmelstrup
+* Persian by Danial Hatami
+
+Please submit bugs and patches to https://github.com/johngodley/redirection
 
 == Installation ==
 
@@ -69,6 +75,8 @@ The plugin is simple to install:
 
 You can find full details of installing a plugin on the [plugin installation page](http://urbangiraffe.com/articles/how-to-install-a-wordpress-plugin/).
 
+Full documentation can be found on the [Redirection](http://urbangiraffe.com/plugins/redirection/) page.
+
 == Frequently Asked Questions ==
 
 = Why would I want to use this instead of .htaccess? =
@@ -79,21 +87,102 @@ Ease of use.  Redirections are automatically created when a post URL changes, an
 
 The plugin works in a similar manner to how WordPress handles permalinks and should not result in any noticeable slowdown to your site.
 
-== Screenshots ==
-
-1. Simple interface to add a redirection
-2. A graphical interface to manage all your redirections
-
-== Documentation ==
-
-Full documentation can be found on the [Redirection](http://urbangiraffe.com/plugins/redirection/) page.
-
 == Upgrade Notice ==
 
 = 2.3.3 =
-* Full WordPress 3.5+ compatability! Note that this contains database changes so please backup your data.
+* Full WordPress 3.5+ compatibility! Note that this contains database changes so please backup your data.
+
+= 2.4 =
+* Another database change. Please backup your data
 
 == Changelog ==
+
+= 2.4.5 =
+* Ensure cleanup code runs even if plugin was updated
+* Extra sanitization of Apache & Nginx files, props to Ed Shirey
+* Fix regex bug, props to romulodl
+* Fix bug in correct group not being shown in dropdown
+
+= 2.4.4 =
+* Fix large advanced settings icon
+* Add text domain to plugin file, props Bernhard Kau
+* Better PHP7 compatibility, props to Ohad Raz
+* Better Polylang compatibility, props to imrehg
+
+= 2.4.3 =
+* Bump minimum WP to 4.0.0
+* Updated German translation, props to Konrad Tadesse
+* Additional check when creating redirections in case of bad data
+
+= 2.4.2 =
+* Add Gulp task to generate POT file
+* Fix a problem with duplicate positions in the redirect table, props to Jon Jensen
+* Fix URL monitor not triggering
+* Fix CSV export
+
+= 2.4.1 =
+* Fix error for people with an unknown module in a group
+
+= 2.4 =
+* Reworked modules now no longer stored in database
+* Nginx module (experimental)
+* View .htaccess/Nginx inline
+* Beginnings of some unit tests!
+* Fix DB creation on activation, props syntax53
+* Updated Japanese locale, props to Naoko
+* Remove deprecated like escaping
+
+= 2.3.16 =
+* Fix export options not showing for some people
+
+= 2.3.15 =
+* Fix error on admin page for WP 4.2
+
+= 2.3.14 =
+* Remove error_log statements
+* Fix incorrect table name when exporting 404 errors, props to brazenest/synchronos-t
+
+= 2.3.13 =
+* Split admin and front-end code out to streamline the loading a bit
+* Fix bad groups link when viewing redirects in a group, props to Patrick Fabre
+* Improved plugin activation/deactivation and cleanup
+* Improved log clearing
+
+= 2.3.12 =
+* Persian translation by Danial Hatami
+* Fix saving a redirection with login status, referrer, and user agent
+* Fix problem where deleting your last group would cause Redirection to only show an error
+* Add limits to referrer and destination in the logs
+* Redirect title now shows in the main list again. The field is hidden when editing until toggled
+* Fix 'bad nonce' error, props to Jonathan Harrell
+* Remove old WP code
+
+= 2.3.11 =
+* Fix log cleanup options
+* More space when editing redirects
+* Better detection of regex when importing
+* Restore export options
+* Fix unnecessary protected
+
+= 2.3.10 =
+* Another compatibility fix for PHP < 5.3
+* Fix incorrect module ID used when creating a group
+* Fix .htaccess duplication, props to Jörg Liwa
+
+= 2.3.9 =
+* Compatibility fix for PHP < 5.3
+
+= 2.3.8 =
+* Fix plugin activation error
+* Fix fatal error in table nav, props to spacedmonkey
+
+= 2.3.7 =
+* New redirect page to match WP style
+* New module page to match WP style
+* Configurable permissions via redirection_role filter, props to RodGer-GR
+* Fix saving 2 month log period
+* Fix importer
+* Fix DB creation to check for existing tables
 
 = 2.3.6 =
 * Updated Italian translation, props to Raffaello Tesi
@@ -117,11 +206,11 @@ Full documentation can be found on the [Redirection](http://urbangiraffe.com/plu
 * Fix pagination
 
 = 2.3.2 =
-* WP 3.5 compat
+* WP 3.5 compatibility
 * Fix export
 
 = 2.3.0 =
-* Remove 404 module and move 404 logs into a seperate option
+* Remove 404 module and move 404 logs into a separate option
 * Add Danish translation, thanks to Rasmus Himmelstrup
 
 = 2.2.14 =
@@ -152,7 +241,7 @@ Full documentation can be found on the [Redirection](http://urbangiraffe.com/plu
 * Add Greek, thanks to Stefanos Kofopoulos
 
 = 2.2.7 =
-* Better database compat
+* Better database compatibility
 
 = 2.2.6 =
 * Remove warning from VaultPress

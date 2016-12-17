@@ -1,36 +1,16 @@
 <?php
-/**
- * Redirection
- *
- * @package Redirection
- * @author John Godley
- * @copyright Copyright (C) John Godley
- **/
-
-/*
-============================================================================================================
-This software is provided "as is" and any express or implied warranties, including, but not limited to, the
-implied warranties of merchantibility and fitness for a particular purpose are disclaimed. In no event shall
-the copyright owner or contributors be liable for any direct, indirect, incidental, special, exemplary, or
-consequential damages (including, but not limited to, procurement of substitute goods or services; loss of
-use, data, or profits; or business interruption) however caused and on any theory of liability, whether in
-contract, strict liability, or tort (including negligence or otherwise) arising in any way out of the use of
-this software, even if advised of the possibility of such damage.
-
-For full license details see license.txt
-============================================================================================================ */
 
 class RE_Log {
-	var $id;
-	var $created;
-	var $url;
-	var $agent;
-	var $referrer;
-	var $ip;
-	var $redirection_id;
+	public $id;
+	public $created;
+	public $url;
+	public $agent;
+	public $referrer;
+	public $ip;
+	public $redirection_id;
 
-	function RE_Log( $values ) {
-		foreach ( $values AS $key => $value ) {
+	function __construct( $values ) {
+		foreach ( $values as $key => $value ) {
 		 	$this->$key = $value;
 		}
 
@@ -56,15 +36,14 @@ class RE_Log {
 			'ip'      => $ip,
 		);
 
-		if ( !empty( $agent ) )
+		if ( ! empty( $agent ) )
 			$insert['agent'] = $agent;
 
-		if ( !empty( $referrer ) )
+		if ( ! empty( $referrer ) )
 			$insert['referrer'] = $referrer;
 
 		$insert['sent_to']        = $target;
 		$insert['redirection_id'] = isset( $extra['redirect_id'] ) ? $extra['redirect_id'] : 0;
-		$insert['module_id']      = isset( $extra['module_id'] ) ? $extra['module_id'] : 0;
 		$insert['group_id']       = isset( $extra['group_id'] ) ? $extra['group_id'] : 0;
 
 		$insert = apply_filters( 'redirection_log_data', $insert );
@@ -74,7 +53,7 @@ class RE_Log {
 	}
 
 	static function show_url( $url ) {
-		return implode('&#8203;/', explode( '/', substr( $url, 0, 80 ) ) ).( strlen( $url ) > 80 ? '...' : '' );
+		return implode( '&#8203;/', explode( '/', substr( $url, 0, 80 ) ) ).( strlen( $url ) > 80 ? '...' : '' );
 	}
 
 	static function delete( $id ) {
@@ -92,28 +71,23 @@ class RE_Log {
 		$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}redirection_logs WHERE group_id=%d", $id ) );
 	}
 
-	static function delete_for_module( $id ) {
-		global $wpdb;
-		$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}redirection_logs WHERE module_id=%d", $id ) );
-	}
-
 	static function delete_all( $type = 'all', $id = 0 ) {
 		global $wpdb;
 
 		$where = array();
-		if ( $type == 'module' )
+		if ( $type === 'module' )
 			$where[] = $wpdb->prepare( 'module_id=%d', $id );
-		elseif ( $type == 'group' )
+		elseif ( $type === 'group' )
 			$where[] = $wpdb->prepare( 'group_id=%d AND redirection_id IS NOT NULL', $id );
-		elseif ( $type == 'redirect' )
+		elseif ( $type === 'redirect' )
 			$where[] = $wpdb->prepare( 'redirection_id=%d', $id );
 
 		if ( isset( $_REQUEST['s'] ) )
-			$where[] = $wpdb->prepare( 'url LIKE %s', '%'.like_escape( $_REQUEST['s'] ).'%' );
+			$where[] = $wpdb->prepare( 'url LIKE %s', '%'.$wpdb->esc_like( $_REQUEST['s'] ).'%' );
 
-		$where_cond = "";
+		$where_cond = '';
 		if ( count( $where ) > 0 )
-			$where_cond = " WHERE ".implode( ' AND ', $where );
+			$where_cond = ' WHERE '.implode( ' AND ', $where );
 
 		$wpdb->query( "DELETE FROM {$wpdb->prefix}redirection_logs ".$where_cond );
 	}
@@ -135,7 +109,7 @@ class RE_Log {
 		$extra = '';
 		$sql = "SELECT COUNT(*) FROM {$wpdb->prefix}redirection_logs";
 		if ( isset( $_REQUEST['s'] ) )
-			$extra = $wpdb->prepare( " WHERE url LIKE %s", '%'.like_escape( $_REQUEST['s'] ).'%' );
+			$extra = $wpdb->prepare( ' WHERE url LIKE %s', '%'.$wpdb->esc_like( $_REQUEST['s'] ).'%' );
 
 		$total_items = $wpdb->get_var( $sql.$extra );
 		$exported = 0;
@@ -144,7 +118,7 @@ class RE_Log {
 			$rows = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}redirection_logs LIMIT %d,%d", $exported, 100 ) );
 			$exported += count( $rows );
 
-			foreach ( $rows AS $row ) {
+			foreach ( $rows as $row ) {
 				$csv = array(
 					$row->created,
 					$row->url,
@@ -164,19 +138,19 @@ class RE_Log {
 }
 
 class RE_404 {
-	var $id;
-	var $created;
-	var $url;
-	var $agent;
-	var $referrer;
-	var $ip;
+	public $id;
+	public $created;
+	public $url;
+	public $agent;
+	public $referrer;
+	public $ip;
 
-	function RE_404( $values ) {
-		foreach ( $values AS $key => $value ) {
+	function __construct( $values ) {
+		foreach ( $values as $key => $value ) {
 		 	$this->$key = $value;
-		 }
+		}
 
-		$this->created = mysql2date ('U', $this->created);
+		$this->created = mysql2date( 'U', $this->created );
 	}
 
 	static function get_by_id( $id ) {
@@ -197,10 +171,10 @@ class RE_404 {
 			'ip'      => ip2long( $ip ),
 		);
 
-		if ( !empty( $agent ) )
+		if ( ! empty( $agent ) )
 			$insert['agent'] = $agent;
 
-		if ( !empty( $referrer ) )
+		if ( ! empty( $referrer ) )
 			$insert['referrer'] = $referrer;
 
 		$wpdb->insert( $wpdb->prefix.'redirection_404', $insert );
@@ -217,11 +191,11 @@ class RE_404 {
 
 		$where = array();
 		if ( isset( $_REQUEST['s'] ) )
-			$where[] = $wpdb->prepare( 'url LIKE %s', '%'.like_escape( $_REQUEST['s'] ).'%' );
+			$where[] = $wpdb->prepare( 'url LIKE %s', '%'.$wpdb->esc_like( $_REQUEST['s'] ).'%' );
 
-		$where_cond = "";
+		$where_cond = '';
 		if ( count( $where ) > 0 )
-			$where_cond = " WHERE ".implode( ' AND ', $where );
+			$where_cond = ' WHERE '.implode( ' AND ', $where );
 
 		$wpdb->query( "DELETE FROM {$wpdb->prefix}redirection_404 ".$where_cond );
 	}
@@ -241,9 +215,9 @@ class RE_404 {
 		fputcsv( $stdout, array( 'date', 'source', 'ip', 'referrer' ) );
 
 		$extra = '';
-		$sql = "SELECT COUNT(*) FROM {$wpdb->prefix}redirection_logs";
+		$sql = "SELECT COUNT(*) FROM {$wpdb->prefix}redirection_404";
 		if ( isset( $_REQUEST['s'] ) )
-			$extra = $wpdb->prepare( " WHERE url LIKE %s", '%'.like_escape( $_REQUEST['s'] ).'%' );
+			$extra = $wpdb->prepare( ' WHERE url LIKE %s', '%'.$wpdb->esc_like( $_REQUEST['s'] ).'%' );
 
 		$total_items = $wpdb->get_var( $sql.$extra );
 		$exported = 0;
@@ -252,7 +226,7 @@ class RE_404 {
 			$rows = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}redirection_404 LIMIT %d,%d", $exported, 100 ) );
 			$exported += count( $rows );
 
-			foreach ( $rows AS $row ) {
+			foreach ( $rows as $row ) {
 				$csv = array(
 					$row->created,
 					$row->url,
@@ -268,4 +242,3 @@ class RE_404 {
 		}
 	}
 }
-
