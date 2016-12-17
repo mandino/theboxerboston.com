@@ -46,8 +46,6 @@ class Redirection_Admin {
 	public static function plugin_activated() {
 		Redirection_Admin::update();
 		Red_Flusher::schedule();
-
-		update_option( 'redirection_options', red_get_options() );
 	}
 
 	public static function plugin_deactivated() {
@@ -59,8 +57,6 @@ class Redirection_Admin {
 
 		$db = new RE_Database();
 		$db->remove( REDIRECTION_FILE );
-
-		delete_option( 'redirection_options' );
 	}
 
 	private function render( $template, $template_vars = array() ) {
