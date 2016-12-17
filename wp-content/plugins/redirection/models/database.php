@@ -1,35 +1,20 @@
 <?php
 
-class A_Redirector_URL {
-}
-
-class Redirector_Login {
-}
-
-class Redirector_LuckyDip {
-}
-
-class Redirector_Random {
-}
-
-class Redirector_Referrer {
-}
-
 class RE_Database {
-	function get_charset() {
+	private function get_charset() {
 		global $wpdb;
 
 		$charset_collate = '';
-		if ( ! empty($wpdb->charset) )
+		if ( ! empty( $wpdb->charset ) )
 			$charset_collate = "DEFAULT CHARACTER SET $wpdb->charset";
 
-		if ( ! empty($wpdb->collate) )
+		if ( ! empty( $wpdb->collate ) )
 			$charset_collate .= " COLLATE $wpdb->collate";
 
 		return $charset_collate;
 	}
 
-	function install() {
+	public function install() {
 		global $wpdb;
 
 		$charset_collate = $this->get_charset();
@@ -88,17 +73,7 @@ class RE_Database {
 			  KEY `module_id` (`module_id`)
 			) $charset_collate",
 
-		 	"CREATE TABLE `{$wpdb->prefix}redirection_modules`(
-			  `id` int(11) unsigned NOT NULL auto_increment,
-			  `type` varchar(20) NOT NULL default '',
-			  `name` varchar(50) NOT NULL default '',
-			  `options` mediumtext,
-		  	PRIMARY KEY ( `id`),
-			  KEY `name` (`name`),
-			  KEY `type` (`type`)
-			) $charset_collate",
-
-			"CREATE TABLE `{$wpdb->prefix}redirection_404` (
+			"CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}redirection_404` (
 			  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 			  `created` datetime NOT NULL,
 			  `url` varchar(255) NOT NULL DEFAULT '',
@@ -110,22 +85,16 @@ class RE_Database {
 			  KEY `url` (`url`),
 			  KEY `ip` (`ip`),
 			  KEY `referrer` (`referrer`)
-			) $charset_collate;"
+		  	) $charset_collate;",
 		);
 
-		foreach ( $create AS $sql ) {
+		foreach ( $create as $sql ) {
 			if ( $wpdb->query( $sql ) === false )
 				return false;
 		}
 
-		// Modules
-		if ( $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}redirection_modules" ) == 0 ) {
-			$wpdb->insert( $wpdb->prefix.'redirection_modules', array( 'type' => 'wp', 'name' => __( 'WordPress', 'redirection' ), 'options' => '' ) );
-			$wpdb->insert( $wpdb->prefix.'redirection_modules', array( 'type' => 'apache', 'name' => __( 'Apache', 'redirection' ), 'options' => '' ) );
-		}
-
 		// Groups
-		if ( $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}redirection_groups" ) == 0 ) {
+		if ( $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}redirection_groups" ) === 0 ) {
 			$wpdb->insert( $wpdb->prefix.'redirection_groups', array( 'name' => __( 'Redirections' ), 'module_id' => 1, 'position' => 0 ) );
 			$wpdb->insert( $wpdb->prefix.'redirection_groups', array( 'name' => __( 'Modified Posts' ), 'module_id' => 1, 'position' => 1 ) );
 
@@ -137,7 +106,7 @@ class RE_Database {
 		}
 	}
 
-	function upgrade( $current, $target ) {
+	public function upgrade( $current, $target ) {
 		global $wpdb;
 
 		$wpdb->show_errors();
@@ -147,21 +116,24 @@ class RE_Database {
 			$success = $this->install();
 		else {
 			// Try and upgrade from a previous version
-			if ( $current == '2.0' )
+			if ( $current === '2.0' )
 				$this->upgrade_from_20();
-			elseif ( $current == '2.0.1' )
+			elseif ( $current === '2.0.1' )
 				$this->upgrade_from_21();
-			elseif ( $current == '2.0.2' )
+			elseif ( $current === '2.0.2' )
 				$this->upgrade_from_22();
 
-			if ( version_compare( $current, '2.1.16' ) == -1 )
+			if ( version_compare( $current, '2.1.16' ) === -1 )
 				$this->upgrade_to_216();
 
-			if ( version_compare( $current, '2.2' ) == -1 )
+			if ( version_compare( $current, '2.2' ) === -1 )
 				$this->upgrade_to_220();
 
-			if ( version_compare( $current, '2.3.1' ) == -1 )
+			if ( version_compare( $current, '2.3.1' ) === -1 )
 				$this->upgrade_to_231();
+
+			if ( version_compare( $current, '2.3.2' ) === -1 )
+				$this->upgrade_to_232();
 
 			$success = true;
 		}
@@ -173,7 +145,7 @@ class RE_Database {
 		return $success;
 	}
 
-	function upgrade_to_231() {
+	private function upgrade_to_231() {
 		global $wpdb;
 
 		$charset_collate = $this->get_charset();
@@ -181,7 +153,7 @@ class RE_Database {
 		$wpdb->query( "DELETE FROM {$wpdb->prefix}redirection_modules WHERE type='404'" );
 		$wpdb->query( "UPDATE {$wpdb->prefix}redirection_groups SET module_id=1 WHERE module_id=3" );
 
-		$wpdb->query( "CREATE TABLE `{$wpdb->prefix}redirection_404` (
+		$wpdb->query( "CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}redirection_404` (
 			  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 			  `created` datetime NOT NULL,
 			  `url` varchar(255) NOT NULL DEFAULT '',
@@ -196,14 +168,20 @@ class RE_Database {
 			) $charset_collate;" );
 	}
 
-	function upgrade_from_20() {
+	private function upgrade_to_232() {
+		global $wpdb;
+
+		$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}redirection_modules;" );
+	}
+
+	private function upgrade_from_20() {
 		global $wpdb;
 
 		$this->upgrade_from_21();
 		$this->upgrade_from_22();
 	}
 
-	function upgrade_from_21() {
+	private function upgrade_from_21() {
 		global $wpdb;
 
 		$wpdb->query( "ALTER TABLE `{$wpdb->prefix}redirection_items` ADD `title` varchar(50) NULL" );
@@ -211,13 +189,13 @@ class RE_Database {
 		$this->upgrade_from_22();
 	}
 
-	function upgrade_from_22() {
+	private function upgrade_from_22() {
 		global $wpdb;
 
 		$wpdb->query( "ALTER TABLE `{$wpdb->prefix}redirection_items` CHANGE `title` `title` varchar(50) NULL" );
 	}
 
-	function upgrade_to_216() {
+	private function upgrade_to_216() {
 		global $wpdb;
 
 		$wpdb->query( "ALTER TABLE `{$wpdb->prefix}redirection_groups` ADD INDEX(module_id)" );
@@ -227,7 +205,7 @@ class RE_Database {
 		$wpdb->query( "ALTER TABLE `{$wpdb->prefix}redirection_items` ADD INDEX(regex)" );
 	}
 
-	function upgrade_to_220() {
+	private function upgrade_to_220() {
 		global $wpdb;
 
 		$wpdb->query( "ALTER TABLE `{$wpdb->prefix}redirection_items` ADD INDEX `group_idpos` (`group_id`,`position`)" );
@@ -244,7 +222,7 @@ class RE_Database {
 		$wpdb->query( "ALTER TABLE `{$wpdb->prefix}redirection_modules` ADD INDEX `type` (`type`)" );
 	}
 
-	function remove( $plugin ) {
+	public function remove( $plugin ) {
 		global $wpdb;
 
 		$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}redirection;" );
@@ -259,9 +237,5 @@ class RE_Database {
 		delete_option( 'redirection_root' );
 		delete_option( 'redirection_index' );
 		delete_option( 'redirection_version' );
-
-		$current = get_option( 'active_plugins' );
-		array_splice( $current, array_search( basename( dirname( $plugin ) ).'/'.basename( $plugin ), $current ), 1 );
-		update_option( 'active_plugins', $current );
 	}
 }
