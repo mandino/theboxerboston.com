@@ -236,7 +236,7 @@ function viewContent(){
 				<ul class="container no-js">
 					<li>
 	
-						<a href="http://independentcollection.com" target="_blank" class="clicknav-clicker"></a>
+						<a href="http://www.independentcollection.com/ic-local" target="_blank" class="clicknav-clicker">Join IC Local and Start Receiving Perks with Every Stay</a>
 	
 						<!-- <ul>
 							<li class="navitem"><a href="#">Independet Collection</a></li>
