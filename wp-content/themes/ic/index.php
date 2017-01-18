@@ -272,17 +272,10 @@
 
 	<ul style="" class="right-links right" id="toggles">
 
-<<<<<<< HEAD
-		<li class="dine"><a class="linkerd active" href="/echo-dining" title="Dining">Eat</a></li>
-		<li class="shop"><a class="linkerd active" href="/echo-shop" title="Dining">Shop</a></li>
-		<li class="arts"><a class="linkerd active" href="/echo-culture" title="Dining">Culture</a></li>
-		<li class="sights"><a class="linkerd active" href="/echo-sights" title="Dining">Landmarks</a></li>
-=======
 		<li class="dine"><a class="linkerd active" href="<?php bloginfo('url'); ?>/?page_id=74" title="Dining">Eat</a></li>
 		<li class="shop"><a class="linkerd active" href="<?php bloginfo('url'); ?>/?page_id=76" title="Dining">Shop</a></li>
 		<li class="arts"><a class="linkerd active" href="<?php bloginfo('url'); ?>/?page_id=72" title="Dining">Culture</a></li>
 		<li class="sights"><a class="linkerd active" href="<?php bloginfo('url'); ?>/?page_id=78" title="Dining">Landmarks</a></li>
->>>>>>> gil-ng-popup-color
 
 	</ul>
 
