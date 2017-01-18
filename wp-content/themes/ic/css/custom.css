@@ -1,3 +1,4 @@
+
 /* Custom Codes - All CSS outside from the defaults - Non media sensitive */
 
 
@@ -368,8 +369,8 @@ color: #333;
 }
 
 #navigation-sticky-wrapper.sticky #property-nav nav ul li a.clicknav-clicker {
-    font-size: 13px;
-    padding: 20px 11px;
+    font-size: 12px;
+    padding: 13px 11px;
     font-weight: bold;
 }
 
@@ -473,11 +474,11 @@ color: #333;
     -o-transition: all 0.5s;
     color: #000;
     font-family: didot, georgia;
-    font-size: 13px;
+    font-size: 12px;
     font-style: italic;
     font-weight: normal;
     letter-spacing: 5px;
-    padding:20px 11px;
+    padding: 13px 11px;
     transition: all 0.5s;
     -moz-transition: all 0.5s;
     -webkit-transition: all 0.5s;
@@ -485,11 +486,12 @@ color: #333;
     max-width: 100%;
     font-weight: bold;
   /*   background: url(../images/ic_white.png) center no-repeat;*/
-    background: url(../images/ic_dark.png) center no-repeat;
+    /*background: url(../images/ic_dark.png) center no-repeat;*/
 }
 
 #property-nav nav:hover ul li a.clicknav-clicker {
-        background: url(../images/ic_white.png) center no-repeat;
+    /*background: url(../images/ic_white.png) center no-repeat;*/
+    color: #fff;
 }
 #property-nav nav ul li a.clicknav-clicker span {
     font-style: normal;
@@ -608,15 +610,9 @@ color: #333;
     -moz-font-smoothing: antialiased;
     -o-font-smoothing: antialiased;
 }
-<<<<<<< HEAD
-	#primary-nav nav:hover ul li a.clicknav-clicker {
-		background: url(../images/ic_white.png) center no-repeat;
-	}
-=======
     #primary-nav nav:hover ul li a.clicknav-clicker {
         background: url(../images/ic_white.png) center no-repeat;
     }
->>>>>>> gil-ng-popup-color
 
 
 
@@ -648,20 +644,6 @@ color: #333;
 }
 
 .ressys {
-<<<<<<< HEAD
-	position: absolute;
-	z-index: 999;
-	background: #fff;
-	width: 600px;
-	min-height: 335px;
-	right: 0;
-	top: 92px;
-	border-left: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
-	transition: all 0.5s ease-in-out;
-	opacity: 0;
-	visibility: hidden;
-=======
     position: absolute;
     z-index: 999;
     background: #fff;
@@ -674,7 +656,6 @@ color: #333;
     transition: all 0.5s ease-in-out;
     opacity: 0;
     visibility: hidden;
->>>>>>> gil-ng-popup-color
     overflow: hidden;
     -webkit-animation-fill-mode: both;
     -moz-animation-fill-mode:both;
@@ -813,24 +794,6 @@ div.section-pre-title{
     text-transform: none;
 }
 
-.section-header h1.section-pre-title {
-    font-size: 24px;
-    color: #6e6e6e;
-    font-family: didot, georgia;
-    font-style: italic;
-    padding: 30px 0;
-    text-transform: none;
-}
-
-div.section-pre-title{
-    font-size: 24px;
-    color: #6e6e6e;
-    font-family: didot, georgia;
-    font-style: italic;
-    padding: 30px 0;
-    text-transform: none;
-}
-
 .section-header-divider {
     border-left: 1px solid #DEDEDE;
     height: 86px;
@@ -839,22 +802,6 @@ div.section-pre-title{
 }
 
 .section-header h2.section-title {
-    font-family: didot, georgia;
-    font-size: 36px;
-    text-decoration: uppercase;
-    color: #3d3d3d;
-    padding: 23px 0;
-}
-
-.section-header div.section-title {
-    font-family: didot, georgia;
-    font-size: 36px;
-    text-decoration: uppercase;
-    color: #3d3d3d;
-    padding: 23px 0;
-}
-
-.section-header h1.section-title {
     font-family: didot, georgia;
     font-size: 36px;
     text-decoration: uppercase;
@@ -1496,11 +1443,7 @@ footer nav ul.footling li a {
 }
 
 .narrow .featured-point {
-<<<<<<< HEAD
-	bottom: -25px;
-=======
     bottom: -25px;
->>>>>>> gil-ng-popup-color
 
 }
 
@@ -2547,21 +2490,12 @@ button.ui-button::-moz-focus-inner {
     background: none;
 }
 .ui-tooltip {
-<<<<<<< HEAD
-	padding: 8px;
-	position: absolute;
-	z-index: 9999;
-	max-width: 300px;
-	-webkit-box-shadow: 0 0 5px #aaa;
-	box-shadow: 0 0 5px #aaa;
-=======
     padding: 8px;
     position: absolute;
     z-index: 9999;
     max-width: 300px;
     -webkit-box-shadow: 0 0 5px #aaa;
     box-shadow: 0 0 5px #aaa;
->>>>>>> gil-ng-popup-color
 
 }
 body .ui-tooltip {
@@ -2622,17 +2556,10 @@ body .ui-tooltip {
 .ui-state-focus,
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
-<<<<<<< HEAD
-	border: none;
-/*	background: #A3A3A3 url(images/ui-bg_highlight-hard_100_f6f6f6_1x100.png) 50% 50% repeat-x;*/
-	font-weight: bold;
-	color: #fff;
-=======
     border: none;
 /*  background: #A3A3A3 url(images/ui-bg_highlight-hard_100_f6f6f6_1x100.png) 50% 50% repeat-x;*/
     font-weight: bold;
     color: #fff;
->>>>>>> gil-ng-popup-color
 }
 .ui-state-hover a,
 .ui-state-hover a:hover,
@@ -2644,17 +2571,10 @@ body .ui-tooltip {
 .ui-state-active,
 .ui-widget-content .ui-state-active,
 .ui-widget-header .ui-state-active {
-<<<<<<< HEAD
-	border: none;
-/*	background: #ffffff url(images/ui-bg_flat_65_ffffff_40x100.png) 50% 50% repeat-x;*/
-	font-weight: bold;
-	color: #cc0000;
-=======
     border: none;
 /*  background: #ffffff url(images/ui-bg_flat_65_ffffff_40x100.png) 50% 50% repeat-x;*/
     font-weight: bold;
     color: #cc0000;
->>>>>>> gil-ng-popup-color
 }
 .ui-state-active a,
 .ui-state-active a:link,
@@ -2773,15 +2693,9 @@ body .ui-tooltip {
 .ui-state-highlight,
 .ui-widget-content .ui-state-highlight,
 .ui-widget-header .ui-state-highlight {
-<<<<<<< HEAD
-	border: 1px solid #fcd3a1;
-	/*background: #fbf8ee url(images/ui-bg_glass_55_fbf8ee_1x400.png) 50% 50% repeat-x;*/
-	color: #444444;
-=======
     border: 1px solid #fcd3a1;
     /*background: #fbf8ee url(images/ui-bg_glass_55_fbf8ee_1x400.png) 50% 50% repeat-x;*/
     color: #444444;
->>>>>>> gil-ng-popup-color
 }
 .ui-state-highlight a,
 .ui-widget-content .ui-state-highlight a,
@@ -2851,22 +2765,14 @@ body .ui-tooltip {
     background-image: url(images/ui-icons_cc0000_256x240.png);
 }
 .ui-state-active .ui-icon {
-<<<<<<< HEAD
-	background-image: url(images/ui-icons_cc0000_256x240.png);
-=======
     background-image: url(images/ui-icons_cc0000_256x240.png);
->>>>>>> gil-ng-popup-color
 }*/
 .ui-state-highlight .ui-icon {
     background-image: url(images/ui-icons_004276_256x240.png);
 }
 /*.ui-state-error .ui-icon,
 .ui-state-error-text .ui-icon {
-<<<<<<< HEAD
-	background-image: url(images/ui-icons_cc0000_256x240.png);
-=======
     background-image: url(images/ui-icons_cc0000_256x240.png);
->>>>>>> gil-ng-popup-color
 }*/
 
 /* positioning */
@@ -3352,15 +3258,9 @@ body .ui-tooltip {
 .tribe-mini-calendar-nav span {
     color: #ccc !important;
 }
-<<<<<<< HEAD
-	.tribe-mini-calendar-nav span:hover {
-		color: #333 !important;
-	}
-=======
     .tribe-mini-calendar-nav span:hover {
         color: #333 !important;
     }
->>>>>>> gil-ng-popup-color
 
 
 
@@ -3368,13 +3268,8 @@ body .ui-tooltip {
 
 
 .tabs-wrapper {
-<<<<<<< HEAD
-	width: 100%;
-	margin: 15px 0;
-=======
     width: 100%;
     margin: 15px 0;
->>>>>>> gil-ng-popup-color
 }
 
 .tab-item {
@@ -3385,34 +3280,19 @@ body .ui-tooltip {
 }
 
 .tabs-container {
-<<<<<<< HEAD
-	float:left;
-	position:relative;
-	display:block;
-	width:100%;
-=======
     float:left;
     position:relative;
     display:block;
     width:100%;
->>>>>>> gil-ng-popup-color
 
 }
 
 .tabs-wrapper .tab-content {
-<<<<<<< HEAD
-	background:#fff;
-	padding: 50px 0 80px;
-	overflow:hidden;
-	border: 1px solid #CBCBCB;
-	border-radius: 0px 3px 3px 3px;
-=======
     background:#fff;
     padding: 50px 0 80px;
     overflow:hidden;
     border: 1px solid #CBCBCB;
     border-radius: 0px 3px 3px 3px;
->>>>>>> gil-ng-popup-color
 }
 
 ul.tabs {
@@ -4209,11 +4089,7 @@ li.blue-btn i {
 /* ==================== Flex dates ============================ */
 
 #primary-nav.button .flexdate a {
-<<<<<<< HEAD
-	visibility: hidden;
-=======
     visibility: hidden;
->>>>>>> gil-ng-popup-color
     overflow: hidden;
 }
 

@@ -167,7 +167,7 @@ function viewContent(){
 					<div class="reservationform">
 					
 					
-						<form method="get" action="https://theboxerboston.reztrip.com/search?">
+						<form method="get" action="https://theboxerboston.reztrip.com">
 
 						<input type="hidden" value="1" name="rooms">
 						
@@ -236,7 +236,7 @@ function viewContent(){
 				<ul class="container no-js">
 					<li>
 	
-						<a href="http://independentcollection.com" target="_blank" class="clicknav-clicker"></a>
+						<a href="http://www.independentcollection.com/ic-local" target="_blank" class="clicknav-clicker">Join IC Local and Start Receiving Perks with Every Stay</a>
 	
 						<!-- <ul>
 							<li class="navitem"><a href="#">Independet Collection</a></li>
@@ -247,7 +247,7 @@ function viewContent(){
 						</ul> -->
 	
 					</li>
-					<li class="blue-btn"><a href="http://theboxerboston.com/blue"><i class="fa fa-info-circle"></i><span class="blue-mobile">why blue?</span></a></li>
+					<!-- <li class="blue-btn"><a href="http://theboxerboston.com/blue"><i class="fa fa-info-circle"></i><span class="blue-mobile">why blue?</span></a></li> -->
 				</ul>
 			</nav>
 			

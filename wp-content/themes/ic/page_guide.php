@@ -93,6 +93,17 @@
 			<?php if (is_page(62)) { ?>
 
 			<div class="container">
+
+				<div class="tabs-container">
+
+					<div class="container">
+						<div class="neighbor-content">
+							<?php the_content(); ?>
+						</div>
+					</div>
+
+				</div>
+
 				<div class="category-neighbor">
 			
 					<!-- ECHO EAT -->
@@ -157,16 +168,6 @@
 					<?php endwhile; endif; wp_reset_postdata(); ?>
 
 				</div> 
-			</div>
-
-			<div class="tabs-container">
-				
-				<div class="container">
-					<div class="neighbor-content">
-						<?php the_content(); ?>
-					</div>
-				</div>
-				
 			</div>
 
 			<?php } else { ?>

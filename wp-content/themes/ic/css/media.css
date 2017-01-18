@@ -483,7 +483,7 @@ and (max-width : 939px) {
 	}
 	/* Navigation */
 	#property-nav {
-		height: 26px;
+		/*height: 26px;*/
 	}
 	.logo {
 	    display: none;
@@ -496,17 +496,17 @@ and (max-width : 939px) {
 		top: 5px;
 		background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
 		border: none;
-	}
-	.sticky .logo {
-	    padding: 15px 10px;
+		padding: 0;
 	}
 	#primary-nav {
-	  min-height: 68px;
+	  min-height: 50px;
 	  position: relative;
-	  top: 19px;
+	  top: 0;
 	}
 	.logo.mobile > img {
 	    height: 97%;
+	    margin: 0;
+	    padding: 0;
 	}
 	#primary-nav .navdrop i {
 	    color: #333333;
@@ -514,14 +514,18 @@ and (max-width : 939px) {
 	#property-nav nav ul li a.clicknav-clicker, #navigation-sticky-wrapper.sticky #property-nav nav ul li a.clicknav-clicker {
 	    font-size: 11px;
 	    letter-spacing: 3px;
-	    padding: 20px;
+	    padding: 15px;
+	    line-height: 18px;
+	}
+	#primary-nav .button {
+		margin: 10px;
 	}
 	#primary-nav .button, #navigation-sticky-wrapper.sticky #primary-nav .button {
 	    font-size: 16px;
-left: 0;
-padding: 16px 40px;
-height: 15px;
-line-height: 16px;
+		left: 0;
+		padding: 16px 40px;
+		height: 15px;
+		line-height: 16px;
 	}
 	#primary-nav span.navdrop, #primary-nav span.navdrop ul {
 	    font-size: 12px;
@@ -538,11 +542,19 @@ line-height: 16px;
 	    float: left !important;
 	    width: 30%;
 	}
+	.sticky .mmenu-icon .fa.fa-bars {
+		margin: 0;
+	}
 	.mmenu-icon .fa.fa-bars {
 	    background: none repeat scroll 0 0 #38BABF;
 	    color: #FFFFFF;
 	    padding: 6px;
 	    font-size: 34px;
+	    margin: 10px 0;
+	    transition: all 0.4s ease 0s;
+	    -moz-transition: all 0.4s ease 0s;
+	    -webkit-transition: all 0.4s ease 0s;
+	    -o-transition: all 0.4s ease 0s;
 	}
 	/* Double Flyout */
 	.welcome-text { font-size: 13px; }
@@ -958,6 +970,15 @@ padding: 8px 12px;
 .home .flexslider .slides img {
 		width: 180%;
 	}
+}
+/* ================================================  MOBILES BELOW 575 ======================================= */
+@media only screen
+and (max-width : 575px) {
+
+	#primary-nav {
+		top: 0;
+	}
+
 }
 /* ================================================  MOBILES BELOW 480 ======================================= */
 @media only screen
