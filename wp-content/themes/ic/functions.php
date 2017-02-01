@@ -133,9 +133,7 @@ function is_homeFrontpageNextPrev($string) {
 add_action( 'wp_head', 'blogPage_relNextPrev', 0 );
 function blogPage_relNextPrev() {
 
-	global $post;
-
-	if ( $post->ID == 501 ) { // IF BLOG PAGE
+	if ( is_page_template('page_blog.php') ) { // IF BLOG PAGE
 
 		$nextprev_query = new WP_Query(array(
 			'post_type' => 'post',
