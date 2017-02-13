@@ -119,3 +119,41 @@ add_action( 'wp_enqueue_scripts', 'remove_events_css', 20 );
 function tt($image,$width,$height){
     return bloginfo('template_url') . "/library/thumb.php?src=$image&w=$width&h=$height";
 }
+
+
+add_filter( 'wpseo_next_rel_link', 'is_homeFrontpageNextPrev' );
+function is_homeFrontpageNextPrev($string) {
+	if (is_home() || is_front_page() ) { // IF HOMEPAGE, remove <link rel="next" />
+		$string = '';
+	}
+	return $string;
+}
+
+
+add_action( 'wp_head', 'blogPage_relNextPrev', 0 );
+function blogPage_relNextPrev() {
+
+	if ( is_page_template('page_blog.php') ) { // IF BLOG PAGE
+
+		$nextprev_query = new WP_Query(array(
+			'post_type' => 'post',
+		));
+
+		global $paged;
+		$paged_max = intval($nextprev_query->max_num_pages);
+
+		if ( $paged == 0 ) { // IF IS THE BLOG PAGE
+			echo '<link rel="next" href="' . get_permalink() . 'page/' . ($paged + 2) . '/" />';
+		} elseif ( $paged == 2 ) { // ELSEIF $paged is equal to 2.. NOTE: $paged = 1, is the BLOG PAGE
+			echo '<link rel="prev" href="' . get_permalink() . '" />';
+			echo '<link rel="next" href="' . get_permalink() . 'page/' . ($paged + 1) . '/" />';
+		} elseif ( $paged > 2 && $paged < $paged_max ) { // ELSEIF $paged is more than 1 AND lesser than $paged_max
+			echo '<link rel="prev" href="' . get_permalink() . 'page/' . ($paged - 1) . '/" />';
+			echo '<link rel="next" href="' . get_permalink() . 'page/' . ($paged + 1) . '/" />';
+		} elseif ( $paged == $paged_max ) { // ELSEIF $paged is at the end of pagination page
+			echo '<link rel="prev" href="' . get_permalink() . 'page/' . ($paged - 1) . '/" />';
+		}
+
+		wp_reset_postdata();
+	}
+}
