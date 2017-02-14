@@ -22,7 +22,7 @@
 
 			<li>
 
-				<a target="_blank" href="<?php echo get_post_meta($post->ID, 'sliderurl', true); ?>">
+				<!-- <a target="_blank" href="<?php echo get_post_meta($post->ID, 'sliderurl', true); ?>"> -->
 
 					<div class="slide-header">
 
@@ -72,7 +72,7 @@
 
 				<img src="<?php echo $imgsrc[0]; ?>" alt="<?php get_post_meta($post->ID, 'bigtitle', true); ?>" />
 
-			</a>
+			<!-- </a> -->
 
 			</li>
 
