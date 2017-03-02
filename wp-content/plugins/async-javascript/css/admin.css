@@ -1,0 +1,15 @@
+/*
+Plugin Name: Async JavaScript
+Plugin URI: http://www.cloughit.com.au/wordpress/plugins/async-javascript-wordpress-plugin/
+Description: Async JavaScript adds a 'async' or 'defer' attribute to scripts loaded via wp_enqueue_script
+Version: 1.14.12.11
+Author: David Clough (cloughit)
+Author URI: http://www.cloughit.com.au/
+Text Domain: async-javascript
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+*/
+
+.aj_method {
+	display:none;
+}
