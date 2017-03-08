@@ -1317,7 +1317,7 @@ body .ui-tooltip {
 }
 
 .hasDatepicker{
-  width: 100% !important;
+  max-width: 600px !important;
 }
 
 .dp-highlight .ui-state-default {
@@ -1900,6 +1900,7 @@ button.ui-button::-moz-focus-inner {
 .ui-datepicker td {
   border: 1px solid #e2e2e2;
   padding: 0;
+  vertical-align: middle;;
 }
 .ui-datepicker td span,
 .ui-datepicker td a {
@@ -2823,7 +2824,8 @@ body .ui-tooltip {
 }
 
 .datepicker {
-  width: 225px;
+  width: 100%;
+  max-width: 225px;
   position: relative;
   z-index: 3;
   background: transparent;
