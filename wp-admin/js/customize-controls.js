@@ -4696,10 +4696,7 @@
 			editShortcutVisibility( 'visible' );
 
 			api.bind( 'change', function() {
-				if ( state( 'saved' ).get() ) {
-					state( 'saved' ).set( false );
-					populateChangesetUuidParam( true );
-				}
+				state('saved').set( false );
 			});
 
 			saving.bind( function( isSaving ) {
@@ -5303,7 +5300,7 @@
 				} );
 
 				$textarea.on( 'keydown', function onKeydown( event ) {
-					var selectionStart, selectionEnd, value, tabKeyCode = 9, escKeyCode = 27;
+					var selectionStart, selectionEnd, value, scroll, tabKeyCode = 9, escKeyCode = 27;
 
 					if ( escKeyCode === event.keyCode ) {
 						if ( ! $textarea.data( 'next-tab-blurs' ) ) {
@@ -5328,8 +5325,10 @@
 					value = textarea.value;
 
 					if ( selectionStart >= 0 ) {
+						scroll = $textarea.scrollTop;
 						textarea.value = value.substring( 0, selectionStart ).concat( '\t', value.substring( selectionEnd ) );
 						$textarea.selectionStart = textarea.selectionEnd = selectionStart + 1;
+						textarea.scrollTop = scroll;
 					}
 
 					event.stopPropagation();
@@ -5368,20 +5367,16 @@
 
 		// Focus on the control that is associated with the given setting.
 		api.previewer.bind( 'focus-control-for-setting', function( settingId ) {
-			var matchedControls = [];
+			var matchedControl;
 			api.control.each( function( control ) {
 				var settingIds = _.pluck( control.settings, 'id' );
 				if ( -1 !== _.indexOf( settingIds, settingId ) ) {
-					matchedControls.push( control );
+					matchedControl = control;
 				}
 			} );
 
-			// Focus on the matched control with the lowest priority (appearing higher).
-			if ( matchedControls.length ) {
-				matchedControls.sort( function( a, b ) {
-					return a.priority() - b.priority();
-				} );
-				matchedControls[0].focus();
+			if ( matchedControl ) {
+				matchedControl.focus();
 			}
 		} );
 

@@ -81,7 +81,7 @@ case 'add-tag':
 
 	$ret = wp_insert_term( $_POST['tag-name'], $taxonomy, $_POST );
 	if ( $ret && !is_wp_error( $ret ) )
-		$location = add_query_arg( 'message', 1, $referer );
+		$location = add_query_arg( 'message', 1, $location );
 	else
 		$location = add_query_arg( array( 'error' => true, 'message' => 4 ), $referer );
 

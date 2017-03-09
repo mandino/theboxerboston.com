@@ -46,13 +46,6 @@ function register_rest_route( $namespace, $route, $args = array(), $override = f
 		return false;
 	}
 
-	if ( isset( $args['args'] ) ) {
-		$common_args = $args['args'];
-		unset( $args['args'] );
-	} else {
-		$common_args = array();
-	}
-
 	if ( isset( $args['callback'] ) ) {
 		// Upgrade a single set to multiple.
 		$args = array( $args );
@@ -64,13 +57,12 @@ function register_rest_route( $namespace, $route, $args = array(), $override = f
 		'args'            => array(),
 	);
 	foreach ( $args as $key => &$arg_group ) {
-		if ( ! is_numeric( $key ) ) {
+		if ( ! is_numeric( $arg_group ) ) {
 			// Route option, skip here.
 			continue;
 		}
 
 		$arg_group = array_merge( $defaults, $arg_group );
-		$arg_group['args'] = array_merge( $common_args, $arg_group['args'] );
 	}
 
 	$full_route = '/' . trim( $namespace, '/' ) . '/' . trim( $route, '/' );
@@ -264,11 +256,7 @@ function rest_api_loaded() {
 	$server = rest_get_server();
 
 	// Fire off the request.
-	$route = untrailingslashit( $GLOBALS['wp']->query_vars['rest_route'] );
-	if ( empty( $route ) ) {
-		$route = '/';
-	}
-	$server->serve_request( $route );
+	$server->serve_request( untrailingslashit( $GLOBALS['wp']->query_vars['rest_route'] ) );
 
 	// We're done.
 	die();
@@ -780,40 +768,26 @@ function rest_parse_date( $date, $force_utc = false ) {
 }
 
 /**
- * Parses a date into both its local and UTC equivalent, in MySQL datetime format.
+ * Retrieves a local date with its GMT equivalent, in MySQL datetime format.
  *
  * @since 4.4.0
  *
  * @see rest_parse_date()
  *
- * @param string $date   RFC3339 timestamp.
- * @param bool   $is_utc Whether the provided date should be interpreted as UTC. Default false.
+ * @param string $date      RFC3339 timestamp.
+ * @param bool   $force_utc Whether a UTC timestamp should be forced. Default false.
  * @return array|null Local and UTC datetime strings, in MySQL datetime format (Y-m-d H:i:s),
  *                    null on failure.
  */
-function rest_get_date_with_gmt( $date, $is_utc = false ) {
-	// Whether or not the original date actually has a timezone string
-	// changes the way we need to do timezone conversion.  Store this info
-	// before parsing the date, and use it later.
-	$has_timezone = preg_match( '#(Z|[+-]\d{2}(:\d{2})?)$#', $date );
-
-	$date = rest_parse_date( $date );
+function rest_get_date_with_gmt( $date, $force_utc = false ) {
+	$date = rest_parse_date( $date, $force_utc );
 
 	if ( empty( $date ) ) {
 		return null;
 	}
 
-	// At this point $date could either be a local date (if we were passed a
-	// *local* date without a timezone offset) or a UTC date (otherwise).
-	// Timezone conversion needs to be handled differently between these two
-	// cases.
-	if ( ! $is_utc && ! $has_timezone ) {
-		$local = date( 'Y-m-d H:i:s', $date );
-		$utc = get_gmt_from_date( $local );
-	} else {
-		$utc = date( 'Y-m-d H:i:s', $date );
-		$local = get_date_from_gmt( $utc );
-	}
+	$utc = date( 'Y-m-d H:i:s', $date );
+	$local = get_date_from_gmt( $utc );
 
 	return array( $local, $utc );
 }
