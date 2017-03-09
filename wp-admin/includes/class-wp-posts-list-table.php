@@ -955,7 +955,7 @@ class WP_Posts_List_Table extends WP_List_Table {
 		echo "</strong>\n";
 
 		if ( ! is_post_type_hierarchical( $this->screen->post_type ) && 'excerpt' === $mode && current_user_can( 'read_post', $post->ID ) ) {
-			echo esc_html( get_the_excerpt() );
+			the_excerpt();
 		}
 
 		get_inline_data( $post );

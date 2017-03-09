@@ -146,10 +146,10 @@ class WP_Image_Editor_Imagick extends WP_Image_Editor {
 
 		try {
 			$this->image = new Imagick();
-			$file_extension = strtolower( pathinfo( $this->file, PATHINFO_EXTENSION ) );
+			$file_parts = pathinfo( $this->file );
 			$filename = $this->file;
 
-			if ( 'pdf' == $file_extension ) {
+			if ( 'pdf' == strtolower( $file_parts['extension'] ) ) {
 				$filename = $this->pdf_setup();
 			}
 
@@ -548,11 +548,6 @@ class WP_Image_Editor_Imagick extends WP_Image_Editor {
 		 */
 		try {
 			$this->image->rotateImage( new ImagickPixel('none'), 360-$angle );
-
-			// Normalise Exif orientation data so that display is consistent across devices.
-			if ( is_callable( array( $this->image, 'setImageOrientation' ) ) && defined( 'Imagick::ORIENTATION_TOPLEFT' ) ) {
-				$this->image->setImageOrientation( Imagick::ORIENTATION_TOPLEFT );
-			}
 
 			// Since this changes the dimensions of the image, update the size.
 			$result = $this->update_size();

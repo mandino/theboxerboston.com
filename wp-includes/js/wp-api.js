@@ -120,51 +120,20 @@
 	};
 
 	/**
-	 * Helper function that capitalizes the first word and camel cases any words starting
-	 * after dashes, removing the dashes.
-	 */
-	wp.api.utils.capitalizeAndCamelCaseDashes = function( str ) {
-		if ( _.isUndefined( str ) ) {
-			return str;
-		}
-		str = wp.api.utils.capitalize( str );
-
-		return wp.api.utils.camelCaseDashes( str );
-	};
-
-	/**
-	 * Helper function to camel case the letter after dashes, removing the dashes.
-	 */
-	wp.api.utils.camelCaseDashes = function( str ) {
-		return str.replace( /-([a-z])/g, function( g ) {
-			return g[ 1 ].toUpperCase();
-		} );
-	};
-
-	/**
 	 * Extract a route part based on negative index.
 	 *
-	 * @param {string}   route          The endpoint route.
-	 * @param {int}      part           The number of parts from the end of the route to retrieve. Default 1.
-	 *                                  Example route `/a/b/c`: part 1 is `c`, part 2 is `b`, part 3 is `a`.
-	 * @param {string}  [versionString] Version string, defaults to `wp.api.versionString`.
-	 * @param {boolean} [reverse]       Whether to reverse the order when extracting the route part. Optional, default false.
+	 * @param {string} route The endpoint route.
+	 * @param {int}    part  The number of parts from the end of the route to retrieve. Default 1.
+	 *                       Example route `/a/b/c`: part 1 is `c`, part 2 is `b`, part 3 is `a`.
 	 */
-	wp.api.utils.extractRoutePart = function( route, part, versionString, reverse ) {
+	wp.api.utils.extractRoutePart = function( route, part ) {
 		var routeParts;
 
-		part = part || 1;
-		versionString = versionString || wp.api.versionString;
+		part  = part || 1;
 
 		// Remove versions string from route to avoid returning it.
-		if ( 0 === route.indexOf( '/' + versionString ) ) {
-			route = route.substr( versionString.length + 1 );
-		}
-
-		routeParts = route.split( '/' );
-		if ( reverse ) {
-			routeParts = routeParts.reverse();
-		}
+		route = route.replace( wp.api.versionString, '' );
+		routeParts = route.split( '/' ).reverse();
 		if ( _.isUndefined( routeParts[ --part ] ) ) {
 			return '';
 		}
@@ -216,7 +185,7 @@
 					} else {
 
 						// We already have args, merge these new args in.
-						modelInstance.prototype.args = _.extend( modelInstance.prototype.args, routeEndpoint.args );
+						modelInstance.prototype.args = _.union( routeEndpoint.args, modelInstance.prototype.defaults );
 					}
 				}
 			} else {
@@ -233,7 +202,7 @@
 						} else {
 
 							// We already have options, merge these new args in.
-							modelInstance.prototype.options = _.extend( modelInstance.prototype.options, routeEndpoint.args );
+							modelInstance.prototype.options = _.union( routeEndpoint.args, modelInstance.prototype.options );
 						}
 					}
 
@@ -352,17 +321,12 @@
 				// Create the new getModel model.
 				getModel = new wp.api.models[ modelName ]( attributes );
 
+				// If we didn’t have an embedded getModel, fetch the getModel data.
 				if ( ! getModel.get( embedCheckField ) ) {
-					getModel.fetch( {
-						success: function( getModel ) {
-							deferred.resolve( getModel );
-						},
-						error: function( getModel, response ) {
-							deferred.reject( response );
-						}
-					} );
+					getModel.fetch( { success: function( getModel ) {
+						deferred.resolve( getModel );
+					} } );
 				} else {
-					// Resolve with the embedded model.
 					deferred.resolve( getModel );
 				}
 
@@ -428,17 +392,12 @@
 
 				// If we didn’t have embedded getObjects, fetch the getObjects data.
 				if ( _.isUndefined( getObjects.models[0] ) ) {
-					getObjects.fetch( {
-						success: function( getObjects ) {
+					getObjects.fetch( { success: function( getObjects ) {
 
-							// Add a helper 'parent_post' attribute onto the model.
-							setHelperParentPost( getObjects, postId );
-							deferred.resolve( getObjects );
-						},
-						error: function( getModel, response ) {
-							deferred.reject( response );
-						}
-					} );
+						// Add a helper 'parent_post' attribute onto the model.
+						setHelperParentPost( getObjects, postId );
+						deferred.resolve( getObjects );
+					} } );
 				} else {
 
 					// Add a helper 'parent_post' attribute onto the model.
@@ -1157,14 +1116,9 @@
 
 				// Extract the name and any parent from the route.
 				var modelClassName,
-					routeName  = wp.api.utils.extractRoutePart( modelRoute.index, 2, routeModel.get( 'versionString' ), true ),
-					parentName = wp.api.utils.extractRoutePart( modelRoute.index, 1, routeModel.get( 'versionString' ), false ),
-					routeEnd   = wp.api.utils.extractRoutePart( modelRoute.index, 1, routeModel.get( 'versionString' ), true );
-
-				// Clear the parent part of the rouite if its actually the version string.
-				if ( parentName === routeModel.get( 'versionString' ) ) {
-					parentName = '';
-				}
+						routeName  = wp.api.utils.extractRoutePart( modelRoute.index, 2 ),
+						parentName = wp.api.utils.extractRoutePart( modelRoute.index, 4 ),
+						routeEnd   = wp.api.utils.extractRoutePart( modelRoute.index, 1 );
 
 				// Handle the special case of the 'me' route.
 				if ( 'me' === routeEnd ) {
@@ -1173,21 +1127,18 @@
 
 				// If the model has a parent in its route, add that to its class name.
 				if ( '' !== parentName && parentName !== routeName ) {
-					modelClassName = wp.api.utils.capitalizeAndCamelCaseDashes( parentName ) + wp.api.utils.capitalizeAndCamelCaseDashes( routeName );
+					modelClassName = wp.api.utils.capitalize( parentName ) + wp.api.utils.capitalize( routeName );
 					modelClassName = mapping.models[ modelClassName ] || modelClassName;
 					loadingObjects.models[ modelClassName ] = wp.api.WPApiBaseModel.extend( {
 
 						// Return a constructed url based on the parent and id.
 						url: function() {
-							var url =
-								routeModel.get( 'apiRoot' ) +
-								routeModel.get( 'versionString' ) +
-								parentName +  '/' +
+							var url = routeModel.get( 'apiRoot' ) + routeModel.get( 'versionString' ) +
+									parentName +  '/' +
 									( ( _.isUndefined( this.get( 'parent' ) ) || 0 === this.get( 'parent' ) ) ?
-										( _.isUndefined( this.get( 'parent_post' ) ) ? '' : this.get( 'parent_post' ) + '/' ) :
-										this.get( 'parent' ) + '/' ) +
-								routeName;
-
+										this.get( 'parent_post' ) :
+										this.get( 'parent' ) ) + '/' +
+									routeName;
 							if ( ! _.isUndefined( this.get( 'id' ) ) ) {
 								url +=  '/' + this.get( 'id' );
 							}
@@ -1203,8 +1154,7 @@
 						// Include the array of route methods for easy reference.
 						methods: modelRoute.route.methods,
 
-						initialize: function( attributes, options ) {
-							wp.api.WPApiBaseModel.prototype.initialize.call( this, attributes, options );
+						initialize: function() {
 
 							/**
 							 * Posts and pages support trashing, other types don't support a trash
@@ -1224,7 +1174,7 @@
 				} else {
 
 					// This is a model without a parent in its route
-					modelClassName = wp.api.utils.capitalizeAndCamelCaseDashes( routeName );
+					modelClassName = wp.api.utils.capitalize( routeName );
 					modelClassName = mapping.models[ modelClassName ] || modelClassName;
 					loadingObjects.models[ modelClassName ] = wp.api.WPApiBaseModel.extend( {
 
@@ -1252,11 +1202,7 @@
 				}
 
 				// Add defaults to the new model, pulled form the endpoint.
-				wp.api.utils.decorateFromRoute(
-					modelRoute.route.endpoints,
-					loadingObjects.models[ modelClassName ],
-					routeModel.get( 'versionString' )
-				);
+				wp.api.utils.decorateFromRoute( modelRoute.route.endpoints, loadingObjects.models[ modelClassName ] );
 
 			} );
 
@@ -1270,12 +1216,12 @@
 				// Extract the name and any parent from the route.
 				var collectionClassName, modelClassName,
 						routeName  = collectionRoute.index.slice( collectionRoute.index.lastIndexOf( '/' ) + 1 ),
-						parentName = wp.api.utils.extractRoutePart( collectionRoute.index, 1, routeModel.get( 'versionString' ), false );
+						parentName = wp.api.utils.extractRoutePart( collectionRoute.index, 3 );
 
 				// If the collection has a parent in its route, add that to its class name.
-				if ( '' !== parentName && parentName !== routeName && routeModel.get( 'versionString' ) !== parentName ) {
+				if ( '' !== parentName && parentName !== routeName ) {
 
-					collectionClassName = wp.api.utils.capitalizeAndCamelCaseDashes( parentName ) + wp.api.utils.capitalizeAndCamelCaseDashes( routeName );
+					collectionClassName = wp.api.utils.capitalize( parentName ) + wp.api.utils.capitalize( routeName );
 					modelClassName      = mapping.models[ collectionClassName ] || collectionClassName;
 					collectionClassName = mapping.collections[ collectionClassName ] || collectionClassName;
 					loadingObjects.collections[ collectionClassName ] = wp.api.WPApiBaseCollection.extend( {
@@ -1288,9 +1234,7 @@
 						},
 
 						// Specify the model that this collection contains.
-						model: function( attrs, options ) {
-							return new loadingObjects.models[ modelClassName ]( attrs, options );
-						},
+						model: loadingObjects.models[ modelClassName ],
 
 						// Include a reference to the original class name.
 						name: collectionClassName,
@@ -1304,7 +1248,7 @@
 				} else {
 
 					// This is a collection without a parent in its route.
-					collectionClassName = wp.api.utils.capitalizeAndCamelCaseDashes( routeName );
+					collectionClassName = wp.api.utils.capitalize( routeName );
 					modelClassName      = mapping.models[ collectionClassName ] || collectionClassName;
 					collectionClassName = mapping.collections[ collectionClassName ] || collectionClassName;
 					loadingObjects.collections[ collectionClassName ] = wp.api.WPApiBaseCollection.extend( {
@@ -1313,9 +1257,7 @@
 						url: routeModel.get( 'apiRoot' ) + routeModel.get( 'versionString' ) + routeName,
 
 						// Specify the model that this collection contains.
-						model: function( attrs, options ) {
-							return new loadingObjects.models[ modelClassName ]( attrs, options );
-						},
+						model: loadingObjects.models[ modelClassName ],
 
 						// Include a reference to the original class name.
 						name: collectionClassName,
