@@ -3248,6 +3248,26 @@ body .ui-tooltip {
         color: #333 !important;
     }
 
+h1.tribe-events-page-title {
+    clear: none;
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: .5em;
+    position: relative;
+    text-align: center;
+    z-index: 0;
+}
+
+#tribe-geo-results h1.tribe-events-page-title, 
+h1.tribe-events-page-title {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.tribe-events-list h1.tribe-events-page-title {
+    margin-bottom: 15px;
+}
+
 
 
 /* Around The Neighborhood */
