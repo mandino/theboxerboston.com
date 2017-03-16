@@ -800,22 +800,8 @@ div.section-pre-title{
     width: 0;
 }
 
-.section-header h2.section-title {
-    font-family: didot, georgia;
-    font-size: 36px;
-    text-decoration: uppercase;
-    color: #3d3d3d;
-    padding: 23px 0;
-}
-
-.section-header div.section-title {
-    font-family: didot, georgia;
-    font-size: 36px;
-    text-decoration: uppercase;
-    color: #3d3d3d;
-    padding: 23px 0;
-}
-
+.section-header h2.section-title,
+.section-header div.section-title,
 .section-header h1.section-title {
     font-family: didot, georgia;
     font-size: 36px;
@@ -823,6 +809,7 @@ div.section-pre-title{
     color: #3d3d3d;
     padding: 23px 0;
 }
+
 .welcometext {
     padding: 0 0 15px 0;
 }
