@@ -1308,11 +1308,9 @@ body .ui-tooltip {
   border-radius: 8px;
 }
 
-#tribe-events-header .tribe-events-sub-nav .tribe-events-nav-previous {
-    display: block !important;
-}
-
-#tribe-events-header .tribe-events-sub-nav .tribe-events-nav-next a {
+#tribe-events-header .tribe-events-sub-nav .tribe-events-nav-previous, 
+#tribe-events-header .tribe-events-sub-nav .tribe-events-nav-next a,
+#tribe-events-header .tribe-events-sub-nav li a {
     display: block !important;
 }
 
