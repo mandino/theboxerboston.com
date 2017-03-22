@@ -8,10 +8,10 @@
 $fp_boxes = array (
 	'Team Member Information' => array (
 			array( 'bigtitle', 'Title ex Designer' , 'text'),
-			array( 'twitlink', 'Twitter Link ex: http://twitter.com/username' , 'text'),
-			array( 'faclink', 'Facebook Link  ex: http://facebook.com/username' , 'text'),
-			array( 'googlink', 'Google + Link  ex: http://google.com' , 'text'),
-			array( 'linlink', 'Linkedin Link  ex: http://linkedin.com' , 'text'),
+			array( 'twitlink', 'Twitter Link ex: //twitter.com/username' , 'text'),
+			array( 'faclink', 'Facebook Link  ex: //facebook.com/username' , 'text'),
+			array( 'googlink', 'Google + Link  ex: //google.com' , 'text'),
+			array( 'linlink', 'Linkedin Link  ex: //linkedin.com' , 'text'),
 		),
 );
 			// Do not edit past this point.

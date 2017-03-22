@@ -88,7 +88,7 @@ get_header(); ?>
 								
 									<div class="video-container">
 									
-										<iframe width="720" height="394" src="http://www.youtube.com/embed/<?php echo get_post_meta($post->ID, 'cebo_youtube', $single = true); ?>" allowfullscreen></iframe>
+										<iframe width="720" height="394" src="//www.youtube.com/embed/<?php echo get_post_meta($post->ID, 'cebo_youtube', $single = true); ?>" allowfullscreen></iframe>
 										
 									</div>
 									
@@ -97,7 +97,7 @@ get_header(); ?>
 									
 									<div class="video-container">
 								
-										<iframe src="http://player.vimeo.com/video/<?php echo get_post_meta($post->ID, 'cebo_vimeo', $single = true); ?>" width="720" height="394"></iframe>
+										<iframe src="//player.vimeo.com/video/<?php echo get_post_meta($post->ID, 'cebo_vimeo', $single = true); ?>" width="720" height="394"></iframe>
 									
 									</div>
 								
@@ -163,7 +163,7 @@ get_header(); ?>
 												<div class="center-bar">
 													<a href="<?php the_permalink(); ?>" aria-hidden="true" class="icon-link a0" data-animate="fadeInUp"></a>
 												<a href="https://twitter.com/share?url=<?php the_permalink(); ?>&text=<?php the_title(); ?>&via=<?php get_option('cebo_twitter'); ?>" target="_blank" aria-hidden="true" class="icon-twitter a0" data-animate="fadeInUp"></a>
-												<a href="http://www.facebook.com/sharer.php?s= 100&amp;p[title]=<?php the_title(); ?>&amp;p[url]=<?php the_permalink(); ?>&amp;p[images][0]=<?php echo $imgsrc[0]; ?>&amp;p[summary]=<?php echo excerpt(30); ?>" target="_blank" aria-hidden="true" class="icon-facebook a0" data-animate="fadeInUp"></a>
+												<a href="//www.facebook.com/sharer.php?s= 100&amp;p[title]=<?php the_title(); ?>&amp;p[url]=<?php the_permalink(); ?>&amp;p[images][0]=<?php echo $imgsrc[0]; ?>&amp;p[summary]=<?php echo excerpt(30); ?>" target="_blank" aria-hidden="true" class="icon-facebook a0" data-animate="fadeInUp"></a>
 													
 												</div>
 											</div>
