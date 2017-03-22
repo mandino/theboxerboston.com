@@ -373,10 +373,11 @@
              var coords = val["coords"].split(",", 2);
              var latlon = [coords[0], coords[1]];
              var goid = val["cater"];
-             //var imgs = (val["images"] !== "undefined") ? '' : buildPlaceCarousel(val["images"]);
              var imgs = (val["images"] !== undefined) ? buildPlaceCarousel(val["images"]) : '';
+
+             <?php $perm = get_permalink(); $img = sp_get_image(); $regex = '/(?<!href=["\'])http:\/\//'; $regio = '/(?<!href=["\'])http:\/\//'; $perm = preg_replace($regio, '', $perm); $img = preg_replace($regex, '', $img); ?>
             
-             placeContainer = '<div class="placeData" id="placeData' + i + '"><p class="streetview">See it up close. Drag your streeview!</p><a href="#" class="closeData">X</a><div class="qualinfo"><a href="' + val["permalink"] + '"><img src="' + val["photo"] + '"/></a><div class="marco"><h4><span>' + val["name"] + '</span></h4><p class="smaller" id="' + val["cater"] + '">' + val["cater"] + '</p><p class="desc">' + val["desc"] + '</p></div></div><div class="specialinfo"><a href="' + val["permalink"] + '">More Info</a><a class="fac" href="//www.facebook.com/sharer.php?s= 100&amp;p[title]=' + val["name"] + '&amp;p[url]=' + val["permalink"] + '&amp;p[images][0]=' + val["photo"] + '&amp;p[summary]=' + val["desc"] + '" target="_blank">Share It</a><a href="//twitter.com/share?text=' + val["name"] + '&url=' + val["permalink"] + '"target="_blank">Tweet It</a><?php $perm = get_permalink(); $img = sp_get_image(); $regex = '/(?<!href=["\'])http:\/\//'; $regio = '/(?<!href=["\'])http:\/\//'; $perm = preg_replace($regio, '', $perm); $img = preg_replace($regex, '', $img); ?><a class="pin" href="//pinterest.com/pin/create/button/?url=http%3A%2F%2F<?php echo $perm; ?>&media=http%3A%2F%2F<?php echo $img; ?>&description=' + val["desc"] + ' on <?php bloginfo ('url'); ?>" target="_blank">Pin It</a></div>';
+             placeContainer = '<div class="placeData" id="placeData' + i + '"><p class="streetview">See it up close. Drag your streeview!</p><a href="#" class="closeData">X</a><div class="qualinfo"><a href="' + val["permalink"] + '"><img src="' + val["photo"] + '"/></a><div class="marco"><h4><span>' + val["name"] + '</span></h4><p class="smaller" id="' + val["cater"] + '">' + val["cater"] + '</p><p class="desc">' + val["desc"] + '</p></div></div><div class="specialinfo"><a href="' + val["permalink"] + '">More Info</a><a class="fac" href="//www.facebook.com/sharer.php?s= 100&amp;p[title]=' + val["name"] + '&amp;p[url]=' + val["permalink"] + '&amp;p[images][0]=' + val["photo"] + '&amp;p[summary]=' + val["desc"] + '" target="_blank">Share It</a><a href="//twitter.com/share?text=' + val["name"] + '&url=' + val["permalink"] + '"target="_blank">Tweet It</a><a class="pin" href="//pinterest.com/pin/create/button/?url=http%3A%2F%2F<?php echo $perm; ?>&media=http%3A%2F%2F<?php echo $img; ?>&description=' + val["desc"] + ' on <?php bloginfo ('url'); ?>" target="_blank">Pin It</a></div>';
              
              $("#maparea").gmap3({ 
                  marker:{
@@ -384,7 +385,7 @@
 				    id: goid,
 				    options:{
 						draggable: false,
-						icon : new google.maps.MarkerImage('yourImage.png')
+						icon : new google.maps.MarkerImage("<?php bloginfo ('template_url'); ?>/images/gray.gif")
 					}
 				  },
 				  overlay:{
@@ -538,37 +539,7 @@
 
 		
 </script>
-<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/jquery.simplemodal.js"></script>
-<script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/basic.js"></script>
-<!--
-<script src="<?php bloginfo('template_url'); ?>/js/jquery.colorbox.js"></script>
-	<script>
-		$(document).ready(function(){
-			//Examples of how to assign the ColorBox event to elements
-			$("a[rel='example1']").colorbox();
-			$("a[rel='example2']").colorbox({transition:"fade"});
-			$("a[rel='example3']").colorbox({transition:"none", width:"75%", height:"75%"});
-			$("a[rel='example4']").colorbox({slideshow:true});
-			$(".example5").colorbox();
-			$(".example6").colorbox({iframe:true, innerWidth:425, innerHeight:344});
-			$(".example7").colorbox({width:"80%", height:"80%", iframe:true});
-			$(".example8").colorbox({width:"50%", inline:true, href:"#inline_example1"});
-			$(".example9").colorbox({
-				onOpen:function(){ alert('onOpen: colorbox is about to open'); },
-				onLoad:function(){ alert('onLoad: colorbox has started to load the targeted content'); },
-				onComplete:function(){ alert('onComplete: colorbox has displayed the loaded content'); },
-				onCleanup:function(){ alert('onCleanup: colorbox has begun the close process'); },
-				onClosed:function(){ alert('onClosed: colorbox has completely closed'); }
-			});
-			
-			//Example of preserving a JavaScript event for inline calls.
-			$("#click").click(function(){ 
-				$('#click').css({"background-color":"#f00", "color":"#fff", "cursor":"inherit"}).text("Open this window again and this message will still be here.");
-				return false;
-			});
-		});
-	</script>
--->
+
 	<!--[if lt IE 7 ]>
 	<script src="js/libs/dd_belatedpng.js"></script>
 	<script> DD_belatedPNG.fix('img, .png_bg');</script>
