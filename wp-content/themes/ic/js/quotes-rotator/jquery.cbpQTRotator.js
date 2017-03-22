@@ -57,7 +57,7 @@
 				if ( this.support ) {
 					this._resetProgress();
 				}
-				if ( !THIS.paused ) {
+				if ( !this.paused ) {
 					this._next();
 				}
 				this._startRotator();
