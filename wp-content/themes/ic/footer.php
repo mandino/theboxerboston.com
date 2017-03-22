@@ -137,9 +137,6 @@ var google_remarketing_only = true;
 </div>
 </noscript>
 
-<!-- zdirect script -->
-<script type="text/javascript" src="https://www.zdirect.com/scripts/newApp.js"></script>
-
 <!-- Sojern Body -->
 <script>
 (function () {
