@@ -41,7 +41,7 @@
 	
 				<div class="newsletter-form">
 					
-					<form method="get" action="http://zmaildirect.com/app/new/MTIzNDA5OTE3" name="surveys">  
+					<form method="get" action="//zmaildirect.com/app/new/MTIzNDA5OTE3" name="surveys">  
 
 					<input type="hidden" value="MTIzNDA5OTE3" name="formId">
 					    <div>
@@ -60,8 +60,8 @@
 
 
 		<div id="property-name">
-			<a href="http://www.independentcollection.com/ic-local/" target="_blank"><i class="sprite sprite-ic_01"></i></a>
-			<a href="http://www.independentcollection.com/" target="_blank"><i class="sprite sprite-ic_02"></i></a>
+			<a href="//www.independentcollection.com/ic-local/" target="_blank"><i class="sprite sprite-ic_01"></i></a>
+			<a href="//www.independentcollection.com/" target="_blank"><i class="sprite sprite-ic_02"></i></a>
 		</div>
 
 		<div class="footer-nav container">
@@ -76,25 +76,25 @@
 
 					<?php if(get_option('cebo_twitter')) { ?>
 					
-						<li class="twitter"><a href="http://twitter.com/<?php echo get_option('cebo_twitter'); ?>" target="_blank"><i class="fa fa-twitter fa-2x"></i><span>twitter</span></a></li>
+						<li class="twitter"><a href="//twitter.com/<?php echo get_option('cebo_twitter'); ?>" target="_blank"><i class="fa fa-twitter fa-2x"></i><span>twitter</span></a></li>
 						
 					<?php } ?>
 				
 					<?php if(get_option('cebo_facebook')) { ?>
 					
-						<li class="facebook"><a href="http://facebook.com/<?php echo get_option('cebo_facebook'); ?>" target="_blank"><i class="fa fa-facebook fa-2x"></i><span>facebook</span></a></li>
+						<li class="facebook"><a href="//facebook.com/<?php echo get_option('cebo_facebook'); ?>" target="_blank"><i class="fa fa-facebook fa-2x"></i><span>facebook</span></a></li>
 						
 					<?php } ?>
 					
 					<?php if(get_option('cebo_instagram')) { ?>
 
-						<li class="instagram"><a href="http://instagram.com/<?php echo get_option('cebo_instagram'); ?>" target="_blank"><i class="fa fa-instagram fa-2x"></i><span>instagram</span></a></li>
+						<li class="instagram"><a href="//instagram.com/<?php echo get_option('cebo_instagram'); ?>" target="_blank"><i class="fa fa-instagram fa-2x"></i><span>instagram</span></a></li>
 
 					<?php } ?>
 					
 					<?php if(get_option('cebo_youtube')) { ?>
 					
-						<li class="youtube"><a href="http://youtube.com/<?php echo get_option('cebo_youtube'); ?>" target="_blank"><i class="fa fa-youtube fa-2x"></i><span>youtube</span></a></li>
+						<li class="youtube"><a href="//youtube.com/<?php echo get_option('cebo_youtube'); ?>" target="_blank"><i class="fa fa-youtube fa-2x"></i><span>youtube</span></a></li>
 					
 					<?php } ?>
 				</ul>
@@ -136,9 +136,6 @@ var google_remarketing_only = true;
 <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/969927793/?value=0&amp;guid=ON&amp;script=0"/>
 </div>
 </noscript>
-
-<!-- zdirect script -->
-<script type="text/javascript" src="https://www.zdirect.com/scripts/newApp.js"></script>
 
 <!-- Sojern Body -->
 <script>
@@ -192,7 +189,7 @@ fjs.parentNode.insertBefore(js, fjs);
 							.hidden-from-view { left: -5000px; position: absolute; }
 						</style>
 
-						<form name="surveys" method="get" action="http://zmaildirect.com/app/new/MTIzNTQzMjYx" target="_blank">
+						<form name="surveys" method="get" action="//zmaildirect.com/app/new/MTIzNTQzMjYx" target="_blank">
 
 							<input type="hidden" name="formId" value="MTIzNTQzMjYx">
 							<input type="text" name="email" value="" size="25" placeholder="<?php echo get_post_meta($post->ID,'misfit_signup_placeholder', true); ?>">
@@ -303,23 +300,6 @@ fjs.parentNode.insertBefore(js, fjs);
 <!-- VOYAT CODE -->
 <script> (function(){ var v = document.createElement('script'); var s = document.getElementsByTagName('script')[0]; v.src = '//io.voyat.com/v.js'; v.async = true; s.parentNode.insertBefore(v, s); })(); </script>
 <!-- VOYAT CODE -->	
-
-<!-- LINKERED LINKS-->
-<script>
-	jQuery(function ($) {
-	// Load dialog on page load
-	//$('#basic-modal-content').modal();
- //$(".linkerd").click(function(){
-//
- 	//var id=$(this).attr("data-id");
- 	
- //	var hr=$("#"+id).attr("href");
- //	window.parent.location=hr;
-// })
- 
-});
-</script>
-<!-- LINKERED LINKS -->
 
 </body>
 </html>

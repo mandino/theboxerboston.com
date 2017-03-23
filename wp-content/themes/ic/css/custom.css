@@ -1,3 +1,7 @@
+/* ======================================================== GLOBAL STUFF =====================================================  */
+
+
+
 /* Custom Codes - All CSS outside from the defaults - Non media sensitive */
 
 
@@ -2537,7 +2541,7 @@ body .ui-tooltip {
     border: none;
 /*  background: #A3A3A3 url(images/ui-bg_highlight-hard_100_f6f6f6_1x100.png) 50% 50% repeat-x;*/
     font-weight: bold;
-    color: #fff;
+    color: #777;
 }
 .ui-state-hover a,
 .ui-state-hover a:hover,
@@ -4123,3 +4127,4 @@ li.blue-btn i {
 .reservationform.flexdate {
   height: 40px;
 }
+

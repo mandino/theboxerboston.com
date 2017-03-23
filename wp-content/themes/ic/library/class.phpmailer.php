@@ -4,8 +4,8 @@
 |  Software: PHPMailer - PHP email class                                    |
 |   Version: 5.1                                                            |
 |   Contact: via sourceforge.net support pages (also www.worxware.com)      |
-|      Info: http://phpmailer.sourceforge.net                               |
-|   Support: http://sourceforge.net/projects/phpmailer/                     |
+|      Info: //phpmailer.sourceforge.net                               |
+|   Support: //sourceforge.net/projects/phpmailer/                     |
 | ------------------------------------------------------------------------- |
 |     Admin: Andy Prevost (project admininistrator)                         |
 |   Authors: Andy Prevost (codeworxtech) codeworxtech@users.sourceforge.net |
@@ -15,7 +15,7 @@
 | Copyright (c) 2001-2003, Brent R. Matzelle                                |
 | ------------------------------------------------------------------------- |
 |   License: Distributed under the Lesser General Public License (LGPL)     |
-|            http://www.gnu.org/copyleft/lesser.html                        |
+|            //www.gnu.org/copyleft/lesser.html                        |
 | This program is distributed in the hope that it will be useful - WITHOUT  |
 | ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or     |
 | FITNESS FOR A PARTICULAR PURPOSE.                                         |
@@ -35,7 +35,7 @@
  * @author Marcus Bointon
  * @copyright 2004 - 2009 Andy Prevost
  * @version $Id: class.phpmailer.php 447 2009-05-25 01:36:38Z codeworxtech $
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
+ * @license //www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 
 if (version_compare(PHP_VERSION, '5.0.0', '<') ) exit("Sorry, this version of PHPMailer will only run on PHP version 5 or greater!\n");
@@ -514,7 +514,7 @@ class PHPMailer {
    * Static so it can be used without instantiation
    * Tries to use PHP built-in validator in the filter extension (from PHP 5.2), falls back to a reasonably competent regex validator
    * Conforms approximately to RFC2822
-   * @link http://www.hexillion.com/samples/#Regex Original pattern found here
+   * @link //www.hexillion.com/samples/#Regex Original pattern found here
    * @param string $address The email address to check
    * @return boolean
    * @static
@@ -1591,7 +1591,7 @@ class PHPMailer {
   /**
    * Correctly encodes and wraps long multibyte strings for mail headers
    * without breaking lines within a character.
-   * Adapted from a function by paravoid at http://uk.php.net/manual/en/function.mb-encode-mimeheader.php
+   * Adapted from a function by paravoid at //uk.php.net/manual/en/function.mb-encode-mimeheader.php
    * @access public
    * @param string $str multi-byte text to wrap encode
    * @return string
@@ -1712,7 +1712,7 @@ class PHPMailer {
 
   /**
    * Encode string to q encoding.
-   * @link http://tools.ietf.org/html/rfc2047
+   * @link //tools.ietf.org/html/rfc2047
    * @param string $str the text to encode
    * @param string $position Where the text is going to be used, see the RFC for what that means
    * @access public
