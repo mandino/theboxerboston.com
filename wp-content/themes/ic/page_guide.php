@@ -67,17 +67,17 @@
 					<ul class="social-buttons">
 					<?php if(get_option('cebo_facebook')) { ?>
 					
-						<li class="facebook"><a href="http://facebook.com/<?php echo get_option('cebo_facebook'); ?>" target="_blank"><i class="fa fa-facebook fa-2x"></i><span>facebook</span></a></li>
+						<li class="facebook"><a href="//facebook.com/<?php echo get_option('cebo_facebook'); ?>" target="_blank"><i class="fa fa-facebook fa-2x"></i><span>facebook</span></a></li>
 						
 					<?php } ?>
 					<?php if(get_option('cebo_twitter')) { ?>
 					
-						<li class="twitter"><a href="http://twitter.com/<?php echo get_option('cebo_twitter'); ?>" target="_blank"><i class="fa fa-twitter fa-2x"></i><span>twitter</span></a></li>
+						<li class="twitter"><a href="//twitter.com/<?php echo get_option('cebo_twitter'); ?>" target="_blank"><i class="fa fa-twitter fa-2x"></i><span>twitter</span></a></li>
 						
 					<?php } ?>
 					<?php if(get_option('cebo_instagram')) { ?>
 					
-						<li class="instagram"><a href="http://instagram.com/<?php echo get_option('cebo_instagram'); ?>" target="_blank"><i class="fa fa-instagram fa-2x"></i><span>twitter</span></a></li>
+						<li class="instagram"><a href="//instagram.com/<?php echo get_option('cebo_instagram'); ?>" target="_blank"><i class="fa fa-instagram fa-2x"></i><span>twitter</span></a></li>
 						
 					<?php } ?>
 					</ul>
@@ -210,17 +210,28 @@
 									<ul>
 								
 										 <?php
-										              
-											    $gallery = get_post_gallery_images();
-											
-											
-											                        
-											    foreach( $gallery as $image ) {// Loop through each image in each gallery
-											        $image_list .= '<li><a rel="prettyPhoto[gal]" href=" ' . str_replace('-150x150','',$image) . ' "><img src="' . str_replace('-150x150','',$image) . '"  /></li></a>';
-											    }                  
-											    echo $image_list;
-											                     
-											?>
+				                                $gallery = get_post_gallery(get_the_ID(), false);
+				                                $args = array( 
+				                                    'post_type'      => 'attachment', 
+				                                    'posts_per_page' => -1, 
+				                                    'post_status'    => 'any', 
+				                                    'post__in'       => explode(',', $gallery['ids']) 
+				                                ); 
+				                                $attachments = get_posts($args);
+				                                foreach ($attachments as $attachment) {
+				                                    $image_alt = get_post_meta($attachment->ID, '_wp_attachment_image_alt', true);
+				                                    if (empty($image_alt)) {
+				                                        $image_alt = $attachment->post_title;
+				                                    }
+				                                    if (empty($image_alt)) {
+				                                        $image_alt = $attachment->post_excerpt;
+				                                    }
+				                                    $image_title = $attachment->post_title;
+				                                    $image_url = wp_get_attachment_image_src( $attachment->ID, 'full' );
+				                                    $image_list .= '<li><a rel="prettyPhoto[gal]" href=" ' . str_replace('-150x150','',$image_url[0]) . ' "><img src="' . str_replace('-150x150','',$image_url[0]) . '"  alt="' . $image_alt . '"/></li></a>';
+				                                }
+				                                echo $image_list;
+				                            ?>
 											
 											<div class="clear"></div>
 									</ul>

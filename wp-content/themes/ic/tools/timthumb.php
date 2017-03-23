@@ -2,13 +2,13 @@
 /**
  * TimThumb by Ben Gillbanks and Mark Maunder
  * Based on work done by Tim McDaniels and Darren Hoyt
- * http://code.google.com/p/timthumb/
+ * //code.google.com/p/timthumb/
  * 
  * GNU General Public License, version 2
- * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * //www.gnu.org/licenses/old-licenses/gpl-2.0.html
  *
  * Examples and documentation available on the project homepage
- * http://www.binarymoon.co.uk/projects/timthumb/
+ * //www.binarymoon.co.uk/projects/timthumb/
  * 
  * $Rev$
  */
@@ -87,9 +87,9 @@ if(! defined('PNGCRUSH_PATH') ) 		define ('PNGCRUSH_PATH', '/usr/bin/pngcrush');
 	5. qmake
 	6. make
 	7. cp CutyCapt /usr/local/bin/
-	8. Test it by running: xvfb-run --server-args="-screen 0, 1024x768x24" CutyCapt --url="http://markmaunder.com/" --out=test.png
+	8. Test it by running: xvfb-run --server-args="-screen 0, 1024x768x24" CutyCapt --url="//markmaunder.com/" --out=test.png
 	9. If you get a file called test.png with something in it, it probably worked. Now test the script by accessing it as follows:
-	10. http://yoursite.com/path/to/timthumb.php?src=http://markmaunder.com/&webshot=1
+	10. //yoursite.com/path/to/timthumb.php?src=//markmaunder.com/&webshot=1
 
 	Notes on performance: 
 	The first time a webshot loads, it will take a few seconds.
@@ -922,7 +922,7 @@ class timthumb {
 	}
 	protected function serveWebshot(){
 		$this->debug(3, "Starting serveWebshot");
-		$instr = "Please follow the instructions at http://code.google.com/p/timthumb/ to set your server up for taking website screenshots.";
+		$instr = "Please follow the instructions at //code.google.com/p/timthumb/ to set your server up for taking website screenshots.";
 		if(! is_file(WEBSHOT_CUTYCAPT)){
 			return $this->error("CutyCapt is not installed. $instr");
 		}
@@ -1126,7 +1126,7 @@ class timthumb {
 		}
 	}
 	protected function sanityFail($msg){
-		return $this->error("There is a problem in the timthumb code. Message: Please report this error at <a href='http://code.google.com/p/timthumb/issues/list'>timthumb's bug tracking page</a>: $msg");
+		return $this->error("There is a problem in the timthumb code. Message: Please report this error at <a href='//code.google.com/p/timthumb/issues/list'>timthumb's bug tracking page</a>: $msg");
 	}
 	protected function getMimeType($file){
 		$info = getimagesize($file);

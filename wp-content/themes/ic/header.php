@@ -27,7 +27,7 @@
 		}
 	?>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link rel="profile" href="http://gmpg.org/xfn/11" />	
+	<link rel="profile" href="//gmpg.org/xfn/11" />	
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 	<?php if (get_option('cebo_custom_favicon') == '') { ?>	
 	<link rel="icon" href="<?php bloginfo ('template_url'); ?>/cebo_options/<?php bloginfo ('template_url'); ?>/images/admin_sidebar_icon.png" type="image/x-ico"/>	
@@ -52,7 +52,7 @@
 
 	<!-- Fonts -->
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-	<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700' rel='stylesheet' type='text/css'>
+	<link href='//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700' rel='stylesheet' type='text/css'>
 	
 	<!-- Plugins CSS -->
 	<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/quotes-rotator/component.css" />
@@ -79,7 +79,7 @@
 
 	<!-- Jquery -->
 	<?php //include(TEMPLATEPATH. "/library/jquery.php"); ?>	
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="//code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script type='text/javascript' src='<?php bloginfo ('url'); ?>/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
 	
 
@@ -119,7 +119,7 @@ pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName
 
 	<script type="application/ld+json">
 		{
-		"@context": "http://schema.org",
+		"@context": "//schema.org",
 		"@type": "NewsArticle",
 		"headline": "Article headline",
 		"alternativeHeadline": "The headline of the Article",
@@ -258,7 +258,7 @@ function viewContent(){
 				<ul class="container no-js">
 					<li>
 	
-						<a href="http://www.independentcollection.com/ic-local" target="_blank" class="clicknav-clicker">Join IC Local and Start Receiving Perks with Every Stay</a>
+						<a href="//www.independentcollection.com/ic-local" target="_blank" class="clicknav-clicker">Join IC Local and Start Receiving Perks with Every Stay</a>
 	
 						<!-- <ul>
 							<li class="navitem"><a href="#">Independet Collection</a></li>
@@ -269,7 +269,7 @@ function viewContent(){
 						</ul> -->
 	
 					</li>
-					<li class="blue-btn"><a href="http://theboxerboston.com/blue"><i class="fa fa-info-circle"></i><span class="blue-mobile">why blue?</span></a></li>
+					<li class="blue-btn"><a href="//theboxerboston.com/blue"><i class="fa fa-info-circle"></i><span class="blue-mobile">why blue?</span></a></li>
 				</ul>
 			</nav>
 			

@@ -18,7 +18,7 @@
 	<div class="slide-header">
 		<a class="button" onclick="fbq('track', 'InitiateCheckout'); _gaq.push(['_trackEvent', 'Reserve', 'Reservation-button-banner', 'Reserve Now']);" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>"><?php _e('RESERVE NOW', 'cebolang'); ?></a>
 	</div>
-	<img src="<?php echo tt(get_post_meta($post->ID, 'cebo_fullpic', true), 1400, 350); ?>" />
+	<img src="<?php echo tt(get_post_meta($post->ID, 'cebo_fullpic', true), 1400, 350); ?>" alt="<?php echo get_image_alt_text($post->ID) ?>" />
 
 
 </div>
@@ -54,18 +54,18 @@
 					<ul class="social-buttons">
 					<?php if(get_option('cebo_facebook')) { ?>
 					
-						<li class="facebook"><a href="http://facebook.com/<?php echo get_option('cebo_facebook'); ?>" target="_blank"><i class="fa fa-facebook fa-2x"></i><span>facebook</span></a></li>
+						<li class="facebook"><a href="//facebook.com/<?php echo get_option('cebo_facebook'); ?>" target="_blank"><i class="fa fa-facebook fa-2x"></i><span>facebook</span></a></li>
 						
 					<?php } ?>
 					<?php if(get_option('cebo_twitter')) { ?>
 					
-						<li class="twitter"><a href="http://twitter.com/<?php echo get_option('cebo_twitter'); ?>" target="_blank"><i class="fa fa-twitter fa-2x"></i><span>twitter</span></a></li>
+						<li class="twitter"><a href="//twitter.com/<?php echo get_option('cebo_twitter'); ?>" target="_blank"><i class="fa fa-twitter fa-2x"></i><span>twitter</span></a></li>
 						
 					<?php } ?>
 
 					<?php if(get_option('cebo_instagram')) { ?>
 					
-						<li class="instagram"><a href="http://instagram.com/<?php echo get_option('cebo_instagram'); ?>" target="_blank"><i class="fa fa-instagram fa-2x"></i><span>twitter</span></a></li>
+						<li class="instagram"><a href="//instagram.com/<?php echo get_option('cebo_instagram'); ?>" target="_blank"><i class="fa fa-instagram fa-2x"></i><span>twitter</span></a></li>
 						
 					<?php } ?>
 					</ul>
@@ -138,11 +138,11 @@
 				<div id="TA_ssnarrowcollectreview496" class="TA_ssnarrowcollectreview">
 				<ul id="FdovVYLnC8Z" class="TA_links S7RVj5omjC">
 				<li id="6Q9Lencl" class="2mdugPBCXGp">
-				<a target="_blank" href="http://www.tripadvisor.com/"><img src="https://www.tripadvisor.com/img/cdsi/img2/branding/150_logo-16124-2.png" alt="TripAdvisor"/></a>
+				<a target="_blank" href="//www.tripadvisor.com/"><img src="https://www.tripadvisor.com/img/cdsi/img2/branding/150_logo-16124-2.png" alt="TripAdvisor"/></a>
 				</li>
 				</ul>
 				</div>
-				<script src="http://www.jscache.com/wejs?wtype=ssnarrowcollectreview&amp;uniq=496&amp;locationId=499916&amp;lang=en_US&amp;border=true&amp;display_version=2"></script>
+				<script src="//www.jscache.com/wejs?wtype=ssnarrowcollectreview&amp;uniq=496&amp;locationId=499916&amp;lang=en_US&amp;border=true&amp;display_version=2"></script>
 				<!--TRIP ADVISOR WIDGET -->
 			</div>
 
@@ -159,7 +159,7 @@
 
 				<div class="signup-form">
 					
-					<form name="surveys" action="http://zmaildirect.com/app/new/MjA0MjA0MTM2" method="get">  
+					<form name="surveys" action="//zmaildirect.com/app/new/MjA0MjA0MTM2" method="get">  
 
 						<input type="hidden" name="formId" value="MjA0MjA0MTM2">
 						    <div>
@@ -193,11 +193,11 @@
 									
 									<?php if(get_post_meta($post->ID, 'cebo_homethumb', true)) { ?>
 									
-									<a href="<?php the_permalink(); ?>"><img src="<?php echo get_post_meta($post->ID, 'cebo_homethumb', true); ?>"></a>
+									<a href="<?php the_permalink(); ?>"><img src="<?php echo get_post_meta($post->ID, 'cebo_homethumb', true); ?>" alt="<?php echo get_image_alt_text($post->ID) ?>" ></a>
 									
 									<?php } else { ?>
 									
-									<a href="<?php the_permalink(); ?>"><img src="<?php echo $imgsrc[0]; ?>"></a>
+									<a href="<?php the_permalink(); ?>"><img src="<?php echo $imgsrc[0]; ?>" alt="<?php echo get_image_alt_text($post->ID) ?>" ></a>
 									
 									<?php } ?>
 									

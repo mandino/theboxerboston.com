@@ -18,7 +18,7 @@
 	<div class="slide-header">
 		<a class="button"  onclick="fbq('track', 'InitiateCheckout'); _gaq.push(['_link', this.href]);return false;" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>"><?php _e('RESERVE NOW', 'cebolang'); ?></a>
 	</div>
-	<img src="<?php echo get_post_meta($post->ID, 'cebo_fullpic', true); ?>" />
+	<img src="<?php echo get_post_meta($post->ID, 'cebo_fullpic', true); ?>" alt="<?php echo get_image_alt_text($post->ID) ?>" />
 
 
 </div>
@@ -55,12 +55,12 @@
 					<ul class="social-buttons">
 					<?php if(get_option('cebo_facebook')) { ?>
 					
-						<li class="facebook"><a href="http://facebook.com/<?php echo get_option('cebo_facebook'); ?>" target="_blank"><i class="fa fa-facebook fa-2x"></i><span>facebook</span></a></li>
+						<li class="facebook"><a href="//facebook.com/<?php echo get_option('cebo_facebook'); ?>" target="_blank"><i class="fa fa-facebook fa-2x"></i><span>facebook</span></a></li>
 						
 					<?php } ?>
 					<?php if(get_option('cebo_twitter')) { ?>
 					
-						<li class="twitter"><a href="http://twitter.com/<?php echo get_option('cebo_twitter'); ?>" target="_blank"><i class="fa fa-twitter fa-2x"></i><span>twitter</span></a></li>
+						<li class="twitter"><a href="//twitter.com/<?php echo get_option('cebo_twitter'); ?>" target="_blank"><i class="fa fa-twitter fa-2x"></i><span>twitter</span></a></li>
 						
 					<?php } ?>
 					</ul>
@@ -119,11 +119,11 @@
 								
 								<?php if(get_post_meta($post->ID, 'cebo_homethumb', true)) { ?>
 								
-								<a href="<?php the_permalink(); ?>"><img src="<?php echo tt(get_post_meta($post->ID, 'cebo_homethumb', true), 260, 292); ?>"></a>
+								<a href="<?php the_permalink(); ?>"><img src="<?php echo tt(get_post_meta($post->ID, 'cebo_homethumb', true), 260, 292); ?>" alt="<?php echo get_image_alt_text($post->ID) ?>" ></a>
 								
 								<?php } else { ?>
 								
-								<a href="<?php the_permalink(); ?>"><img src="<?php echo tt($imgsrc[0], 260, 292); ?>"></a>
+								<a href="<?php the_permalink(); ?>"><img src="<?php echo tt($imgsrc[0], 260, 292); ?>" alt="<?php echo get_image_alt_text($post->ID) ?>" ></a>
 								
 								<?php } ?>
 								

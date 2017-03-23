@@ -966,7 +966,7 @@ function cebo_machine($options) {
 <div id="blocker" onclick="selectText()">' . htmlentities($facebook_code)  . '</div>
 			 	
 
-			     <div class="fielddescription"><p class="wpbutton"><a href="' . $facebook_url . '" target="_blank">See Preview</a></p><p class="wpbutton"><a href="http://cebocampbell.com/facebook-landing-page-generator/" target="_blank">Learn More</a></p></div>';
+			     <div class="fielddescription"><p class="wpbutton"><a href="' . $facebook_url . '" target="_blank">See Preview</a></p><p class="wpbutton"><a href="//cebocampbell.com/facebook-landing-page-generator/" target="_blank">Learn More</a></p></div>';
 			 
 			 
 			break;
@@ -1028,7 +1028,7 @@ function cebo_machine($options) {
 <div id="blockers" onclick="selectTexts()">' . htmlentities($mailchimp_code)  . '</div>
 			 	
 
-			     <div class="fielddescription"><p class="wpbutton"><a href="' . $mailchimp_url . '" target="_blank">See Preview</a></p><p class="wpbutton"><a href="http://cebocampbell.com/facebook-landing-page-generator/" target="_blank">Learn More</a></p></div>';
+			     <div class="fielddescription"><p class="wpbutton"><a href="' . $mailchimp_url . '" target="_blank">See Preview</a></p><p class="wpbutton"><a href="//cebocampbell.com/facebook-landing-page-generator/" target="_blank">Learn More</a></p></div>';
 			 
 			 
 			break;
@@ -1090,7 +1090,7 @@ function cebo_machine($options) {
 <div id="blocker" onclick="selectText()">' . htmlentities($facebook_code)  . '</div>
 			 	
 
-			     <div class="fielddescription"><p class="wpbutton"><a href="' . $facebook_url . '" target="_blank">See Preview</a></p><p class="wpbutton"><a href="http://cebo.com/facebook-landing-page-generator/" target="_blank">Learn More</a></p></div>';
+			     <div class="fielddescription"><p class="wpbutton"><a href="' . $facebook_url . '" target="_blank">See Preview</a></p><p class="wpbutton"><a href="//cebo.com/facebook-landing-page-generator/" target="_blank">Learn More</a></p></div>';
 			 
 			 
 			break;
@@ -1557,40 +1557,40 @@ $options[] = array( "name" => __('Socialize','cebolang'),
 			"type" => "heading");	
 			
 										
-$options[] = array( "name" => __('Your Facebook Username ex: (http://facebook.com/) -> somethinghere','cebolang'),
-			"desc" => "DO NOT USE HTTP://FACEBOOK.COM, JUST THE HANDLE By entering your facebook link, you create the links to all facebook icons or else they will not appear",
+$options[] = array( "name" => __('Your Facebook Username ex: (//facebook.com/) -> somethinghere','cebolang'),
+			"desc" => "DO NOT USE //FACEBOOK.COM, JUST THE HANDLE By entering your facebook link, you create the links to all facebook icons or else they will not appear",
 			"id" => $shortname."_facebook",
 			"std" => "",
 			"type" => "text");
 
 $options[] = array( "name" => __('Twitter Username, @ ex: cebocampbell','cebolang'),
-			"desc" => "DO NOT USE HTTP://TWITTER.COM, JUST THE HANDLE By entering your twitter ID you activate the twitter updates on the sidebar and various links to twitter.",
+			"desc" => "DO NOT USE //TWITTER.COM, JUST THE HANDLE By entering your twitter ID you activate the twitter updates on the sidebar and various links to twitter.",
 			"id" => $shortname."_twitter",
 			"std" => "",
 			"type" => "text");
 
 
 $options[] = array( "name" => __('Twitter Consumer Key','cebolang'),
-			"desc" => "Twitter's recent API update requires new authentication. Therefore you will need your key, consumer secret, token and user secret to use the twitter feed. Learn how to get yours <a href=\"http://cebocampbell.com/how-to-get-your-twitter-consumer-key\" target=\"_blank\">here</a>",
+			"desc" => "Twitter's recent API update requires new authentication. Therefore you will need your key, consumer secret, token and user secret to use the twitter feed. Learn how to get yours <a href=\"//cebocampbell.com/how-to-get-your-twitter-consumer-key\" target=\"_blank\">here</a>",
 			"id" => $shortname."_consumer_key",
 			"std" => "",
 			"type" => "text");
 			
 
 $options[] = array( "name" => __('Twitter Consumer Secret','cebolang'),
-			"desc" => "Learn how to get yours <a href=\"http://cebocampbell.com/how-to-get-your-twitter-consumer-key\" target=\"_blank\">here</a>",
+			"desc" => "Learn how to get yours <a href=\"//cebocampbell.com/how-to-get-your-twitter-consumer-key\" target=\"_blank\">here</a>",
 			"id" => $shortname."_consumer_secret",
 			"std" => "",
 			"type" => "text");
 
 $options[] = array( "name" => __('Twitter User Token','cebolang'),
-			"desc" => "Learn how to get yours <a href=\"http://cebocampbell.com/how-to-get-your-twitter-consumer-key\" target=\"_blank\">here</a>",
+			"desc" => "Learn how to get yours <a href=\"//cebocampbell.com/how-to-get-your-twitter-consumer-key\" target=\"_blank\">here</a>",
 			"id" => $shortname."_access_token",
 			"std" => "",
 			"type" => "text");
 
 $options[] = array( "name" => __('Twitter User Secret','cebolang'),
-			"desc" => "Learn how to get yours <a href=\"http://cebocampbell.com/how-to-get-your-twitter-consumer-key\" target=\"_blank\">here</a>",
+			"desc" => "Learn how to get yours <a href=\"//cebocampbell.com/how-to-get-your-twitter-consumer-key\" target=\"_blank\">here</a>",
 			"id" => $shortname."_access_token_secret",
 			"std" => "",
 			"type" => "text");
@@ -1598,28 +1598,28 @@ $options[] = array( "name" => __('Twitter User Secret','cebolang'),
 
 
 $options[] = array( "name" => __('Instagram Username','cebolang'),
-			"desc" => "DO NOT USE HTTP://INSTAGRAM.COM, Create your instagram link with the ID: ex: cebocampbell.",
+			"desc" => "DO NOT USE //INSTAGRAM.COM, Create your instagram link with the ID: ex: cebocampbell.",
 			"id" => $shortname."_instagram",
 			"std" => "",
 			"type" => "text");
 			
 					
 $options[] = array( "name" => __('Instagram user ID. Ex: 5532366','cebolang'),
-			"desc" => "Activate Your Instagram Feed with your ID:  and a token (below). Click here to grab your userid and token: <a href=\"https://instagram.com/oauth/authorize/?client_id=467ede5a6b9b48ae8e03f4e2582aeeb3&redirect_uri=http://instafeedjs.com&response_type=token\" target=\"_blank\">here</a> or, Learn more about how to get one <a href=\"http://cebocampbell.com/instagram-feed\" target=\"_blank\">here</a>: ",
+			"desc" => "Activate Your Instagram Feed with your ID:  and a token (below). Click here to grab your userid and token: <a href=\"https://instagram.com/oauth/authorize/?client_id=467ede5a6b9b48ae8e03f4e2582aeeb3&redirect_uri=//instafeedjs.com&response_type=token\" target=\"_blank\">here</a> or, Learn more about how to get one <a href=\"//cebocampbell.com/instagram-feed\" target=\"_blank\">here</a>: ",
 			"id" => $shortname."_instagramid",
 			"std" => "",
 			"type" => "text");
 			
 			
 $options[] = array( "name" => __('Instagram Access Token','cebolang'),
-			"desc" => "Activate Your Instagram Feed with your token: ex: 5532366.99be448.fbef473efc0141dd99bdc4428a3a62ad. Click here to grab your userid and token: <a href=\"https://instagram.com/oauth/authorize/?client_id=467ede5a6b9b48ae8e03f4e2582aeeb3&redirect_uri=http://instafeedjs.com&response_type=token\" target=\"_blank\">here</a> or, Learn more about how to get one <a href=\"http://cebocampbell.com/instagram-feed\" target=\"_blank\">here</a>: ",
+			"desc" => "Activate Your Instagram Feed with your token: ex: 5532366.99be448.fbef473efc0141dd99bdc4428a3a62ad. Click here to grab your userid and token: <a href=\"https://instagram.com/oauth/authorize/?client_id=467ede5a6b9b48ae8e03f4e2582aeeb3&redirect_uri=//instafeedjs.com&response_type=token\" target=\"_blank\">here</a> or, Learn more about how to get one <a href=\"//cebocampbell.com/instagram-feed\" target=\"_blank\">here</a>: ",
 			"id" => $shortname."_instagramtok",
 			"std" => "",
 			"type" => "text");
 						
 					
 $options[] = array( "name" => __('Youtbe Username, @ ex: cebocampbell','cebolang'),
-			"desc" => "DO NOT USE HTTP://YOUTUBE.COM, JUST THE HANDLE.",
+			"desc" => "DO NOT USE //YOUTUBE.COM, JUST THE HANDLE.",
 			"id" => $shortname."_youtube",
 			"std" => "",
 			"type" => "text");					
@@ -1654,7 +1654,7 @@ $options[] = array( "name" => __('Email Newsletters','cebolang'),
 			"type" => "heading");			
 
 $options[] = array( "name" => __('Basic Email Newsletter Code','cebolang'),
-		"desc" => "This code will generate an Email Newsletter that you can edit, copy and paste into any mail service and start sending out emails to your peeps. Learn more about this newsletter feature, <a href=\"http://cebocampbell.com/wordpress-mailchimp-ready-newsletter\" target=\"_blank\">click here</a>",
+		"desc" => "This code will generate an Email Newsletter that you can edit, copy and paste into any mail service and start sending out emails to your peeps. Learn more about this newsletter feature, <a href=\"//cebocampbell.com/wordpress-mailchimp-ready-newsletter\" target=\"_blank\">click here</a>",
 		"id" => $shortname."_newsletter",
 		"std" => $newsletter_code,
 		"type" => "codeblockthree");
@@ -1685,7 +1685,7 @@ $options[] = array( "name" => __('Number of Blog Posts to Display','cebolang'),
 		"options" => array("1", "2", "3", "4", "5","6", "7", "8","9","10"));
 	
 $options[] = array( "name" => __('Mailchimp RSS Email Newsletter Code','cebolang'),
-		"desc" => "This code will generate an Email Newsletter that you can edit, copy and paste into Mailchimp and start sending out emails to your peeps. Learn more about this newsletter feature, <a href=\"http://cebocampbell.com/wordpress-mailchimp-ready-newsletter\" target=\"_blank\">click here</a>",
+		"desc" => "This code will generate an Email Newsletter that you can edit, copy and paste into Mailchimp and start sending out emails to your peeps. Learn more about this newsletter feature, <a href=\"//cebocampbell.com/wordpress-mailchimp-ready-newsletter\" target=\"_blank\">click here</a>",
 		"id" => $shortname."_mailchimp",
 		"std" => $mailchimp_code,
 		"type" => "codeblocktwo");
