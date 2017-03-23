@@ -11,13 +11,13 @@ $more = 1;
 echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>'; ?>
 
 <rss version="2.0"
-	xmlns:content="http://purl.org/rss/1.0/modules/content/"
-	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
-	xmlns:dc="http://purl.org/dc/elements/1.1/"
-	xmlns:atom="http://www.w3.org/2005/Atom"
-	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
-	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
-	xmlns:georss="http://www.georss.org/georss" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:media="http://search.yahoo.com/mrss"
+	xmlns:content="//purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="//wellformedweb.org/CommentAPI/"
+	xmlns:dc="//purl.org/dc/elements/1.1/"
+	xmlns:atom="//www.w3.org/2005/Atom"
+	xmlns:sy="//purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="//purl.org/rss/1.0/modules/slash/"
+	xmlns:georss="//www.georss.org/georss" xmlns:geo="//www.w3.org/2003/01/geo/wgs84_pos#" xmlns:media="//search.yahoo.com/mrss"
 	<?php do_action('rss2_ns'); ?>
 >
 
@@ -54,9 +54,9 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>'; ?>
 <?php endif; ?>
 		<wfw:commentRss><?php echo esc_url( get_post_comments_feed_link(null, 'rss2') ); ?></wfw:commentRss>
 		<slash:comments><?php echo get_comments_number(); ?></slash:comments>
-		<media:group xmlns:media="http://search.yahoo.com/mrss">
-		<media:content xmlns:media="http://search.yahoo.com/mrss" url="<?php echo sp_get_image(); ?>" medium="image" fileSize="" isDefault="true" type="image/jpeg" width="960" height="720"/>
-		<media:title xmlns:media="http://search.yahoo.com/mrss"><?php the_title(); ?></media:title>
+		<media:group xmlns:media="//search.yahoo.com/mrss">
+		<media:content xmlns:media="//search.yahoo.com/mrss" url="<?php echo sp_get_image(); ?>" medium="image" fileSize="" isDefault="true" type="image/jpeg" width="960" height="720"/>
+		<media:title xmlns:media="//search.yahoo.com/mrss"><?php the_title(); ?></media:title>
 		</media:group>
 <?php rss_enclosure(); ?>
 	<?php do_action('rss2_item'); ?>

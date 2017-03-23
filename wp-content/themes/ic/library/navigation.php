@@ -9,28 +9,28 @@
 	<ul class="social-icons">
 		<?php if(get_option('cebo_facebook')) { ?>
 		<li>
-			<a class="box1" href="http://facebook.com/<?php echo get_option('cebo_facebook'); ?>" target="_blank">
+			<a class="box1" href="//facebook.com/<?php echo get_option('cebo_facebook'); ?>" target="_blank">
 				<span aria-hidden="true" class="icon-facebook"></span>
 			</a>
 		</li>
 		<? } ?>
 		<?php if(get_option('cebo_instagram')) { ?>
 		<li>
-			<a class="box1" href="http://twitter.com/<?php echo get_option('cebo_twitter'); ?>" target="_blank">
+			<a class="box1" href="//twitter.com/<?php echo get_option('cebo_twitter'); ?>" target="_blank">
 				<span aria-hidden="true" class="icon-twitter"></span>
 			</a>
 		</li>
 		<? } ?>
 		<?php if(get_option('cebo_instagram')) { ?>
 		<li>
-			<a class="box1" href="http://instagram.com/<?php echo get_option('cebo_instagram'); ?>" target="_blank">
+			<a class="box1" href="//instagram.com/<?php echo get_option('cebo_instagram'); ?>" target="_blank">
 				<span aria-hidden="true" class="icon-instagram"></span>
 			</a>
 		</li>
 		<? } ?>
 		<?php if(get_option('cebo_dribbble')) { ?>
 		<li>
-			<a class="box1" href="http://dribbble.com/<?php echo get_option('cebo_dribbble'); ?>" target="_blank">
+			<a class="box1" href="//dribbble.com/<?php echo get_option('cebo_dribbble'); ?>" target="_blank">
 				<span aria-hidden="true" class="icon-dribbble-2"></span>
 			</a>
 		</li>
