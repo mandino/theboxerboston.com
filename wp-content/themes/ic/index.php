@@ -87,7 +87,7 @@ get_header();
 
 					<li>
 						<?php if(get_post_meta($post->ID, 'cebo_homethumb', true)) { ?>
-						
+
 						<img src="<?php echo tt(get_post_meta($post->ID, 'cebo_homethumb', true), 540, 290); ?>" alt="<?php echo get_image_alt_text($post->ID); ?>">
 
 						<?php } else { ?>
@@ -358,7 +358,7 @@ get_header();
 
 						<?php } ?>
 
-							<a href="<?php the_permalink(); ?>"><img src="<?php echo tt($imgsrc[0], 540, 292);; ?>"></a>
+							<a href="<?php the_permalink(); ?>"><img src="<?php echo tt($imgsrc[0], 540, 292);; ?>" alt="<?php echo get_image_alt_text($post->ID) ?>"></a>
 							<div class="ptit">
 								<a href="<?php the_permalink(); ?>"><span><?php the_title_char_limit(40); ?></span></a>
 							</div>
@@ -388,7 +388,7 @@ get_header();
 
 
 						<div>
-							<a href="<?php the_permalink(); ?>"><img src="<?php echo tt($imgsrc[0], 540, 292); ?>"></a>
+							<a href="<?php the_permalink(); ?>"><img src="<?php echo tt($imgsrc[0], 540, 292); ?>" alt="<?php echo get_image_alt_text($post->ID) ?>"></a>
 							<div class="ptits">
 								<a href="<?php the_permalink(); ?>"><span><?php the_title_char_limit(40); ?></span></a>
 							</div>
