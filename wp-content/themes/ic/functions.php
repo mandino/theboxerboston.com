@@ -157,3 +157,17 @@ function blogPage_relNextPrev() {
 		wp_reset_postdata();
 	}
 }
+
+function get_image_alt_text($post_id) {
+	$thumb_id = get_post_meta_value($post_id, '_thumbnail_id');
+	$alt_text = get_post_meta_value($thumb_id, '_wp_attachment_image_alt');
+	if (empty($alt_text)) return get_the_title();
+	else return $alt_text;
+}
+
+function get_post_meta_value( $post_id, $meta_key) {
+	global $wpdb;
+	$mid = $wpdb->get_var( $wpdb->prepare("SELECT meta_value FROM $wpdb->postmeta WHERE post_id = %d AND meta_key = %s", $post_id, $meta_key) );
+	if( $mid != '' ) return $mid;
+	return false;
+}
