@@ -18,7 +18,7 @@
 	<?php } else { 
 
 		$com_link = basename(get_permalink());
-		echo $com_link;
+		
 	?>
 						
 		<ul class="right-links right" id="toggles">						
