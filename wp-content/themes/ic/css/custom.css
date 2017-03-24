@@ -800,22 +800,8 @@ div.section-pre-title{
     width: 0;
 }
 
-.section-header h2.section-title {
-    font-family: didot, georgia;
-    font-size: 36px;
-    text-decoration: uppercase;
-    color: #3d3d3d;
-    padding: 23px 0;
-}
-
-.section-header div.section-title {
-    font-family: didot, georgia;
-    font-size: 36px;
-    text-decoration: uppercase;
-    color: #3d3d3d;
-    padding: 23px 0;
-}
-
+.section-header h2.section-title,
+.section-header div.section-title,
 .section-header h1.section-title {
     font-family: didot, georgia;
     font-size: 36px;
@@ -823,6 +809,7 @@ div.section-pre-title{
     color: #3d3d3d;
     padding: 23px 0;
 }
+
 .welcometext {
     padding: 0 0 15px 0;
 }
@@ -2558,7 +2545,7 @@ body .ui-tooltip {
     border: none;
 /*  background: #A3A3A3 url(images/ui-bg_highlight-hard_100_f6f6f6_1x100.png) 50% 50% repeat-x;*/
     font-weight: bold;
-    color: #fff;
+    color: #777;
 }
 .ui-state-hover a,
 .ui-state-hover a:hover,
@@ -3260,6 +3247,26 @@ body .ui-tooltip {
     .tribe-mini-calendar-nav span:hover {
         color: #333 !important;
     }
+
+h1.tribe-events-page-title {
+    clear: none;
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: .5em;
+    position: relative;
+    text-align: center;
+    z-index: 0;
+}
+
+#tribe-geo-results h1.tribe-events-page-title, 
+h1.tribe-events-page-title {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.tribe-events-list h1.tribe-events-page-title {
+    margin-bottom: 15px;
+}
 
 
 

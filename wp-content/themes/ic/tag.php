@@ -37,11 +37,11 @@ get_header(); ?>
 					            			
 					            			<?php } elseif(get_post_meta($post->ID, 'youtube', $single = true)) { ?>
 							
-												<iframe width="745" height="410" src="http://www.youtube.com/embed/<?php echo get_post_meta($post->ID, 'youtube', $single = true); ?>"></iframe>	
+												<iframe width="745" height="410" src="//www.youtube.com/embed/<?php echo get_post_meta($post->ID, 'youtube', $single = true); ?>"></iframe>	
 												
 												<? } elseif (get_post_meta($post->ID, 'vimeo', $single = true)) { ?>
 												
-												<iframe src="http://player.vimeo.com/video/<?php echo get_post_meta($post->ID, 'vimeo', $single = true); ?>" width="745" height="410"></iframe>
+												<iframe src="//player.vimeo.com/video/<?php echo get_post_meta($post->ID, 'vimeo', $single = true); ?>" width="745" height="410"></iframe>
 												
 												<?php } elseif(sp_get_image()) { ?>
 												
@@ -110,7 +110,7 @@ get_header(); ?>
 												       
 												</a>
 												<script type="text/javascript">
-													var API_URL = "http://cdn.api.twitter.com/1/urls/count.json",
+													var API_URL = "//cdn.api.twitter.com/1/urls/count.json",
 													TWEET_URL = "https://twitter.com/intent/tweet";
 													    
 													$(".likeling").each(function() {

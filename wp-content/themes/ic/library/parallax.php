@@ -11,7 +11,7 @@ $addressly = get_option('cebo_address');
 
 function getLatLonger($addressly){
     if (!is_string($addressly))die("All Addresses must be passed as a string");
-    $_urler = sprintf('http://maps.google.com/maps?output=js&q=%s',rawurlencode($addressly));
+    $_urler = sprintf('//maps.google.com/maps?output=js&q=%s',rawurlencode($addressly));
     $_resulter = false;
     if($_resulter = file_get_contents($_urler)) {
         if(strpos($_resulter,'errortips') > 1 || strpos($_resulter,'Did you mean:') !== false) return false;
