@@ -18,7 +18,7 @@
 	<div class="slide-header">
 		<a class="button" target="_blank" onclick="fbq('track', 'InitiateCheckout');" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>"><?php _e('RESERVE NOW', 'cebolang'); ?></a>
 	</div>
-	<img src="<?php echo get_post_meta($post->ID, 'cebo_fullpic', true); ?>" />
+	<img src="<?php echo get_post_meta($post->ID, 'cebo_fullpic', true); ?>" alt="<?php echo get_image_alt_text($post->ID) ?>" />
 
 
 </div>
@@ -131,11 +131,11 @@ if( count( $children ) != 0 ) { ?>
 									
 									<?php if(get_post_meta($post->ID, 'cebo_homethumb', true)) { ?>
 									
-									<a href="<?php the_permalink(); ?>"><img src="<?php echo get_post_meta($post->ID, 'cebo_homethumb', true); ?>"></a>
+									<a href="<?php the_permalink(); ?>"><img src="<?php echo get_post_meta($post->ID, 'cebo_homethumb', true); ?>" alt="<?php echo get_image_alt_text($post->ID) ?>" ></a>
 									
 									<?php } else { ?>
 									
-									<a href="<?php the_permalink(); ?>"><img src="<?php echo $imgsrc[0]; ?>"></a>
+									<a href="<?php the_permalink(); ?>"><img src="<?php echo $imgsrc[0]; ?>" alt="<?php echo get_image_alt_text($post->ID) ?>" ></a>
 									
 									<?php } ?>
 									

@@ -18,7 +18,7 @@
 	<div class="slide-header">
 		<a class="button" onclick="fbq('track', 'InitiateCheckout');" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>"><?php _e('RESERVE NOW', 'cebolang'); ?></a>
 	</div>
-	<img src="<?php echo tt(get_post_meta($post->ID, 'cebo_fullpic', true), 1400, 350); ?>" />
+	<img src="<?php echo tt(get_post_meta($post->ID, 'cebo_fullpic', true), 1400, 350); ?>" alt="<?php echo get_image_alt_text($post->ID) ?>" />
 
 
 </div>
@@ -131,18 +131,29 @@
 						
 						<ul>
 							
-							 <?php
-							              
-								    $gallery = get_post_gallery_images( $post->ID );
-								
-								
-								                        
-								    foreach( $gallery as $image ) {// Loop through each image in each gallery
-								        $image_list .= '<li><a rel="prettyPhoto[gal]" href=" ' . str_replace('-150x150','',$image) . ' "><img src="' . str_replace('-150x150','',$image) . '"  /></li></a>';
-								    }                  
-								    echo $image_list;
-								                     
-								?>
+							<?php
+                                $gallery = get_post_gallery(get_the_ID(), false);
+                                $args = array( 
+                                    'post_type'      => 'attachment', 
+                                    'posts_per_page' => -1, 
+                                    'post_status'    => 'any', 
+                                    'post__in'       => explode(',', $gallery['ids']) 
+                                ); 
+                                $attachments = get_posts($args);
+                                foreach ($attachments as $attachment) {
+                                    $image_alt = get_post_meta($attachment->ID, '_wp_attachment_image_alt', true);
+                                    if (empty($image_alt)) {
+                                        $image_alt = $attachment->post_title;
+                                    }
+                                    if (empty($image_alt)) {
+                                        $image_alt = $attachment->post_excerpt;
+                                    }
+                                    $image_title = $attachment->post_title;
+                                    $image_url = wp_get_attachment_image_src( $attachment->ID, 'full' );
+                                    $image_list .= '<li><a rel="prettyPhoto[gal]" href=" ' . str_replace('-150x150','',$image_url[0]) . ' "><img src="' . str_replace('-150x150','',$image_url[0]) . '"  alt="' . $image_alt . '"/></li></a>';
+                                }
+                                echo $image_list;
+                            ?>
 								
 								<div class="clear"></div>
 						</ul>
