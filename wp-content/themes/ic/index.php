@@ -88,11 +88,11 @@ get_header();
 					<li>
 						<?php if(get_post_meta($post->ID, 'cebo_homethumb', true)) { ?>
 
-						<img src="<?php echo tt(get_post_meta($post->ID, 'cebo_homethumb', true), 540, 290); ?>" alt="<?php echo get_image_alt_text($post->ID); ?>">
+						<img src="<?php echo tt(get_post_meta($post->ID, 'cebo_homethumb', true), 540, 290); ?>" alt="<?php echo get_custom_image_thumb_alt_text(get_post_meta($post->ID, 'cebo_homethumb', true), ''); ?>">
 
 						<?php } else { ?>
 
-						<img src="<?php echo tt($imgsrc[0], 540, 290); ?>" alt="<?php echo get_image_alt_text($post->ID); ?>">
+						<img src="<?php echo tt($imgsrc[0], 540, 290); ?>" alt="<?php echo get_custom_image_thumb_alt_text('', get_post_thumbnail_id( $post->ID ));?>">
 
 						<?php } ?>
 
@@ -135,11 +135,11 @@ get_header();
 
 						<?php if(get_post_meta($post->ID, 'cebo_homethumb', true)) { ?>
 
-						<img src="<?php echo tt(get_post_meta($post->ID, 'cebo_homethumb', true), 260, 292); ?>" alt="<?php echo get_image_alt_text($post->ID) ?>">
+						<img src="<?php echo tt(get_post_meta($post->ID, 'cebo_homethumb', true), 260, 292); ?>" alt="<?php echo get_custom_image_thumb_alt_text(get_post_meta($post->ID, 'cebo_homethumb', true), ''); ?>">
 
 						<?php } else { ?>
 
-						<img src="<?php echo tt($imgsrc[0], 260, 292); ?>" alt="<?php echo get_image_alt_text($post->ID) ?>">
+						<img src="<?php echo tt($imgsrc[0], 260, 292); ?>" alt="<?php echo get_custom_image_thumb_alt_text('', get_post_thumbnail_id( $post->ID ));?>">
 
 						<?php } ?>
 
@@ -179,11 +179,11 @@ get_header();
 					<li>
 						<?php if(get_post_meta($post->ID, 'cebo_homethumb', true)) { ?>
 
-						<img src="<?php echo tt(get_post_meta($post->ID, 'cebo_homethumb', true), 260, 290); ?>" alt="<?php echo get_image_alt_text($post->ID) ?>">
+						<img src="<?php echo tt(get_post_meta($post->ID, 'cebo_homethumb', true), 260, 290); ?>" alt="<?php echo get_custom_image_thumb_alt_text(get_post_meta($post->ID, 'cebo_homethumb', true), ''); ?>">
 
 						<?php } else { ?>
 
-						<img src="<?php echo tt($imgsrc[0], 260, 290); ?>" alt="<?php echo get_image_alt_text($post->ID) ?>">
+						<img src="<?php echo tt($imgsrc[0], 260, 290); ?>" alt="<?php echo get_custom_image_thumb_alt_text('', get_post_thumbnail_id( $post->ID ));?>">
 
 						<?php } ?>
 
@@ -358,7 +358,7 @@ get_header();
 
 						<?php } ?>
 
-							<a href="<?php the_permalink(); ?>"><img src="<?php echo tt($imgsrc[0], 540, 292);; ?>" alt="<?php echo get_image_alt_text($post->ID) ?>"></a>
+							<a href="<?php the_permalink(); ?>"><img src="<?php echo tt($imgsrc[0], 540, 292);; ?>" alt="<?php echo get_custom_image_thumb_alt_text('', get_post_thumbnail_id( $post->ID ));?>"></a>
 							<div class="ptit">
 								<a href="<?php the_permalink(); ?>"><span><?php the_title_char_limit(40); ?></span></a>
 							</div>
@@ -388,7 +388,7 @@ get_header();
 
 
 						<div>
-							<a href="<?php the_permalink(); ?>"><img src="<?php echo tt($imgsrc[0], 540, 292); ?>" alt="<?php echo get_image_alt_text($post->ID) ?>"></a>
+							<a href="<?php the_permalink(); ?>"><img src="<?php echo tt($imgsrc[0], 540, 292); ?>" alt="<?php echo get_custom_image_thumb_alt_text('', get_post_thumbnail_id( $post->ID ));?>"></a>
 							<div class="ptits">
 								<a href="<?php the_permalink(); ?>"><span><?php the_title_char_limit(40); ?></span></a>
 							</div>
