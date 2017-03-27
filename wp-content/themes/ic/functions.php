@@ -158,16 +158,27 @@ function blogPage_relNextPrev() {
 	}
 }
 
-function get_image_alt_text($post_id) {
-	$thumb_id = get_post_meta_value($post_id, '_thumbnail_id');
-	$alt_text = get_post_meta_value($thumb_id, '_wp_attachment_image_alt');
-	if (empty($alt_text)) return get_the_title();
-	else return $alt_text;
+function get_image_alt_text_by_post_id($post_id) {
+    if(has_post_thumbnail($post_id)) $post_meta = get_post_meta(get_post_thumbnail_id($post_id));
+    else $post_meta = get_post_meta($post_id);
+    if(is_array($post_meta)) {
+        if(array_key_exists('_wp_attachment_image_alt', $post_meta) && $post_meta['_wp_attachment_image_alt'][0]) {
+            return $post_meta['_wp_attachment_image_alt'][0];
+        }
+        else return get_the_title();
+    }
 }
 
-function get_post_meta_value( $post_id, $meta_key) {
-	global $wpdb;
-	$mid = $wpdb->get_var( $wpdb->prepare("SELECT meta_value FROM $wpdb->postmeta WHERE post_id = %d AND meta_key = %s", $post_id, $meta_key) );
-	if( $mid != '' ) return $mid;
-	return false;
+function get_post_meta_img_id($img_url) {
+    global $wpdb;
+    $uploads_img_path = implode('/', array_slice(explode('/', $img_url), -3));
+    $post_id = $wpdb->get_col($wpdb->prepare("SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '%1\$s' AND meta_value = '%2\$s';", "_wp_attached_file", $uploads_img_path));
+    return $post_id[0];
+}
+
+function get_custom_image_thumb_alt_text($img_url,$img_id) {
+    if($img_url) $post_id = get_post_meta_img_id($img_url);
+	else $post_id = $img_id;
+    $image_thumb_alt_text =get_image_alt_text_by_post_id($post_id);
+    return $image_thumb_alt_text;
 }
