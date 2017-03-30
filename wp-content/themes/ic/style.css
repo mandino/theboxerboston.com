@@ -4315,7 +4315,7 @@ h1.tribe-events-page-title{
   text-align: center !important;
 }
 li.blue-btn {
-    display: none;
+    display: absolute;
 }
 
 .post-content em {

@@ -641,6 +641,9 @@ and (max-width : 939px) {
 	footer #footer-details p {
 	    font-size: 14px;
 	}
+	li.blue-btn {
+		bottom: 13px;
+	}
 }
 /* ================================================  MAX WIDTH 768 ======================================= */
 @media only screen
@@ -656,6 +659,13 @@ and (max-width : 768px) {
 	}
 	#home-slider .specialsbox h3 {
 		font-size: 13px !important
+	}
+	li.blue-btn {
+		width: 20px;
+		padding-left: 10px;
+	}
+	li.blue-btn a span.blue-mobile {
+		display: none;
 	}
 }
 @media only screen
@@ -971,12 +981,36 @@ padding: 8px 12px;
 		width: 180%;
 	}
 }
+
+/* ================================================  MOBILES BELOW 620 ======================================= */
+@media only screen and (max-width: 620px) {
+	.click-nav ul li a.clicknav-clicker {
+		max-width: 90%;
+		left: 4%;
+	}
+}
+
+@media only screen and (max-width: 603px) {
+	li.blue-btn {
+		bottom: 13px;
+	}
+}
+
+@media only screen and (max-width: 589px) {
+	.click-nav ul li a.clicknav-clicker {
+		left: 4%;
+	}
+}
+
 /* ================================================  MOBILES BELOW 575 ======================================= */
 @media only screen
 and (max-width : 575px) {
 
 	#primary-nav {
 		top: 0;
+	}
+	li.blue-btn {
+		bottom: 22px;
 	}
 
 }
@@ -1132,7 +1166,7 @@ padding: 8px 12px;
 	display: none;
 }
 li.blue-btn {
-	width: 35px;
+	width: 20px;
 }
 }
 /* ================================================  MAX HEIGHT 480 ======================================= */
@@ -1326,7 +1360,24 @@ padding: 11px 5px;
 	.slide-header .button {
     display: none;
 }
+	.click-nav ul li a.clicknav-clicker {
+		left: 6%;
+	}
 }
+@media only screen and (max-width : 380px) {
+	.click-nav ul li a.clicknav-clicker {
+		left: 7%;
+	}
+}
+@media only screen and (max-width : 370px) {
+	#property-nav nav ul li a.clicknav-clicker {
+		max-width: 90%;
+	}
+	.click-nav ul li a.clicknav-clicker {
+		left: 8%;
+	}
+}
+
 /* ================================================  MOBILES BELOW 320 ======================================= */
 @media only screen
 and (max-width : 320px)
