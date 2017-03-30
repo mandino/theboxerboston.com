@@ -1370,6 +1370,9 @@ padding: 11px 5px;
 	}
 }
 @media only screen and (max-width : 370px) {
+	#property-nav nav ul li a.clicknav-clicker {
+		max-width: 90%;
+	}
 	.click-nav ul li a.clicknav-clicker {
 		left: 8%;
 	}
