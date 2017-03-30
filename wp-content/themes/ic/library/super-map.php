@@ -380,7 +380,9 @@
 				    id: goid,
 				    options:{
 						draggable: false,
+
 						icon : new google.maps.MarkerImage("<?php bloginfo ('template_url'); ?>/images/gray.gif")
+
 					}
 				  },
 				  overlay:{

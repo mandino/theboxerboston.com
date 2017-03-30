@@ -193,7 +193,7 @@
 									
 									<?php if(get_post_meta($post->ID, 'cebo_subtagline', true)) { ?>
 									
-									<h3><?php echo get_post_meta($post->ID, 'cebo_subtagline', true); ?></h3>
+									<h2><?php echo get_post_meta($post->ID, 'cebo_subtagline', true); ?></h2>
 									
 									
 									<?php } ?>

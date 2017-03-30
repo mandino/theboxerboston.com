@@ -22,7 +22,7 @@ get_header();
 				<div class="fl">
 					<?php if(get_option('cebo_shorttitle')) { ?>
 
-					<h2 class="section-pre-title fl"><?php echo get_option('cebo_shorttitle'); ?></h2>
+					<div class="section-pre-title fl"><?php echo get_option('cebo_shorttitle'); ?></div>
 
 					<div class="section-header-divider fl"></div>
 
