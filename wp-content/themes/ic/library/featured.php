@@ -70,7 +70,7 @@
 
 				<!--<img src="<?php //echo tt($imgsrc[0], 1400, 472); ?>" alt="<?php get_post_meta($post->ID, 'bigtitle', true); ?>" />-->
 
-				<img src="<?php echo $imgsrc[0]; ?>" alt="<?php get_post_meta($post->ID, 'bigtitle', true); ?>" />
+				<img src="<?php echo $imgsrc[0]; ?>" alt="<?php if( get_post_meta($post->ID, 'bigtitle', true) ) echo get_post_meta($post->ID, 'bigtitle', true); else echo get_custom_image_thumb_alt_text('', get_post_thumbnail_id( $post->ID )); ?>" />
 
 			<!-- </a> -->
 
