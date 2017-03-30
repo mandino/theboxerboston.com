@@ -984,7 +984,7 @@ padding: 8px 12px;
 
 /* ================================================  MOBILES BELOW 620 ======================================= */
 @media only screen and (max-width: 620px) {
-	.click-nav ul li a {
+	.click-nav ul li a.clicknav-clicker {
 		max-width: 90%;
 		left: 4%;
 	}
@@ -997,7 +997,7 @@ padding: 8px 12px;
 }
 
 @media only screen and (max-width: 589px) {
-	.click-nav ul li a {
+	.click-nav ul li a.clicknav-clicker {
 		left: 4%;
 	}
 }
@@ -1360,17 +1360,17 @@ padding: 11px 5px;
 	.slide-header .button {
     display: none;
 }
-	.click-nav ul li a {
+	.click-nav ul li a.clicknav-clicker {
 		left: 6%;
 	}
 }
 @media only screen and (max-width : 380px) {
-	.click-nav ul li a {
+	.click-nav ul li a.clicknav-clicker {
 		left: 7%;
 	}
 }
 @media only screen and (max-width : 370px) {
-	.click-nav ul li a {
+	.click-nav ul li a.clicknav-clicker {
 		left: 8%;
 	}
 }
