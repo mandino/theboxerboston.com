@@ -991,11 +991,8 @@ padding: 8px 12px;
 }
 
 @media only screen and (max-width: 603px) {
-	.click-nav ul li a {
-		left: 1%;
-	}
 	li.blue-btn {
-		bottom: 22px;
+		bottom: 13px;
 	}
 }
 
