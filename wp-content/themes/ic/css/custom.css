@@ -447,7 +447,7 @@ color: #333;
 
 #property-nav nav:hover {
  /*  background: none repeat scroll 0 0 #03b7fb;*/
-      background: none repeat scroll 0 0 #333;
+      background: none repeat scroll 0 0 #00adef;
 }
 
 
@@ -4072,20 +4072,24 @@ strong {
 /* --------------- Light it up BLUE ------------ */
 
 li.blue-btn {
-  position: absolute !important;
-  bottom: 6px;
-  background-color: #fff;
-  width: 110px;
-  right: 265px;
+	position: absolute !important;
+	bottom: 9px;
+	background-color: #fff;
+	width: 98px;
+	right: 110px;
+	padding: 2px 0;
 }
 
 li.blue-btn i {
- padding-right: 5px;
+	padding-right:10px;
+	font-size:12px;
 }
 
 .blue-btn a {
-  padding: 7px 0px;
-  color: #00adef;
+	padding:3px 0px;
+	color:#00adef;
+	font-size:9px;
+	letter-spacing: 1px;
 }
 
 .logo {
