@@ -6,14 +6,14 @@ get_header(); ?>
 		<div class="container">
 			<div class="section-header">
 				<div class="fl">
-					<h2 class="section-pre-title fl">Archives</h2>
-					<div class="section-header-divider fl"></div>
 					<h1 class="section-title fr">
 						<?php if ( is_day() ) : ?><?php printf( __('%s'), get_the_date() ); ?>
 						<?php elseif ( is_month() ) : ?><?php printf( __('%s'), get_the_date('F Y') ); ?>
 						<?php elseif ( is_year() ) : ?><?php printf( __('%s'), get_the_date('Y') ); ?>
 						<?php else : ?><?php _e( 'Blog Archives', 'cebolang' ); ?>
 						<?php endif; ?>
+					<h2 class="section-pre-title fl">Archives</h2>
+					<div class="section-header-divider fl"></div>
 					</h1>
 				</div>
 				<div class="fr">

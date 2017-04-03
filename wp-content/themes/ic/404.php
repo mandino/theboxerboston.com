@@ -35,25 +35,24 @@
 			<div class="post-title section-header">
 
 				<div class="fl">
-	
-					<?php if(get_option('cebo_shorttitle')) { ?>
-					
-					<div class="section-pre-title fl">404</div>
 
-					<div class="section-header-divider fl"></div>
-					
+					<h1 class="section-title fr">Apologies, you've found an error</h1>
+
+					<?php if(get_option('cebo_shorttitle')) { ?>
+
+						<h2 class="section-pre-title fl">404</h2>
+
+						<div class="section-header-divider fl"></div>
+
 					<?php } ?>
 
-		
-					<h1 class="section-title fr">Apologies, you've found an error</h1>
-	
 				</div>
-	
+
 				<div class="fr">
-					
+
 					<ul class="social-buttons">
 					<?php if(get_option('cebo_facebook')) { ?>
-					
+
 						<li class="facebook"><a href="//facebook.com/<?php echo get_option('cebo_facebook'); ?>" target="_blank"><i class="fa fa-facebook fa-2x"></i><span>facebook</span></a></li>
 						
 					<?php } ?>
@@ -129,7 +128,7 @@
 										
 										<?php if(get_post_meta($post->ID, 'cebo_tagline', true)) { ?>
 										
-										<h3><?php echo get_post_meta($post->ID, 'cebo_tagline', true); ?></h3>
+										<h4><?php echo get_post_meta($post->ID, 'cebo_tagline', true); ?></h4>
 										
 										<?php } ?>
 										
