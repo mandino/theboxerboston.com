@@ -29,26 +29,25 @@
 
 
 	<div id="page-content" class="section">
-		
+
 		<div class="container">
 
 			<div class="post-title section-header">
 
 				<div class="fl">
-	
-					<?php if(get_option('cebo_shorttitle')) { ?>
-					
-					<div class="section-pre-title fl"><?php echo get_option('cebo_shorttitle'); ?></div>
 
-					<div class="section-header-divider fl"></div>
-					
+					<h1 class="section-title fr"><?php the_title(); ?></h1>
+
+					<?php if(get_option('cebo_shorttitle')) { ?>
+
+						<h2 class="section-pre-title fl"><?php echo get_option('cebo_shorttitle'); ?></h2>
+
+						<div class="section-header-divider fl"></div>
+
 					<?php } ?>
 
-		
-					<h1 class="section-title fr"><?php the_title(); ?></h1>
-	
 				</div>
-	
+
 				<div class="fr">
 					
 					<ul class="social-buttons">
@@ -150,7 +149,7 @@
                                     }
                                     $image_title = $attachment->post_title;
                                     $image_url = wp_get_attachment_image_src( $attachment->ID, 'full' );
-                                    $image_list .= '<li><a rel="prettyPhoto[gal]" href=" ' . str_replace('-150x150','',$image_url[0]) . ' "><img src="' . str_replace('-150x150','',$image_url[0]) . '"  alt="' . $image_alt . '"/></li></a>';
+                                    $image_list .= '<li><a rel="prettyPhoto[gal]" href=" ' . str_replace('-150x150','',$image_url[0]) . ' "><img src="' . str_replace('-150x150','',$image_url[0]) . '"  alt="' . $image_alt . '"/></a></li>';
                                 }
                                 echo $image_list;
                             ?>

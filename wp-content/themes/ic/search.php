@@ -23,14 +23,12 @@ get_header(); ?>
 					if ( $the_query->have_posts() ) { 
 
 			?>
-					<div class="section-pre-title fl">Search Result</div>
+					<h1 class="section-title fr"><?php echo get_search_query(); ?></h1>
+
+					<h2 class="section-pre-title fl">Search Result</h2>
 
 					<div class="section-header-divider fl"></div>
-				
 
-		
-					<h1 class="section-title fr"><?php echo get_search_query(); ?></h1>
-	
 				</div>
 
 				<div class="fr">
