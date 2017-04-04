@@ -29,26 +29,25 @@
 
 
 	<div id="page-content" class="section">
-		
+
 		<div class="container">
 
 			<div class="post-title section-header">
 
 				<div class="fl">
-	
-					<?php if(get_option('cebo_shorttitle')) { ?>
-					
-					<div class="section-pre-title fl"><?php echo get_option('cebo_shorttitle'); ?></div>
 
-					<div class="section-header-divider fl"></div>
-					
+					<h1 class="section-title fr"><?php the_title(); ?></h1>
+
+					<?php if(get_option('cebo_shorttitle')) { ?>
+
+						<h2 class="section-pre-title fl"><?php echo get_option('cebo_shorttitle'); ?></h2>
+
+						<div class="section-header-divider fl"></div>
+
 					<?php } ?>
 
-		
-					<h1 class="section-title fr"><?php the_title(); ?></h1>
-	
 				</div>
-	
+
 				<div class="fr">
 					
 					<ul class="social-buttons">

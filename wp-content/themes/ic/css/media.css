@@ -110,7 +110,7 @@ and (max-width : 1099px) {
 	.section-photos li div.hover-effect, .thumbgal li div.hover-effect {
 	    height: 98.7%;
 	}
-	.section-photos li div h3, .thumbgal li div h3 {
+	.section-photos li div h3, .thumbgal li div h3, .thumbgal li div h4 {
 	    font-size: 30px;
 	}
 	.from-price {
@@ -126,7 +126,7 @@ and (max-width : 1099px) {
 		font-size: 33px;
 	}
 	/* Section Header */
-	.section-header h2.section-pre-title {
+	.section-header h2.section-pre-title, .section-header span.section-pre-title {
 	    font-size: 21px;
 	    padding: 25px 0;
 	}
@@ -134,7 +134,7 @@ and (max-width : 1099px) {
 	    height: 71px;
 	    margin: 0 25px;
 	}
-	.section-header h2.section-title {
+	.section-header h2.section-title, .section-header span.section-title {
 	    font-size: 31px;
 	    padding: 18px 0;
 	    width: 450px;
@@ -761,20 +761,52 @@ and (max-width : 640px)
 	    width: 100%;
 	    max-width: 100%;
 	}
-	.section-header h2.section-pre-title {
+	.section-header h2.section-pre-title{
 	    border-bottom: 1px solid #DEDEDE;
-	    font-size: 18px;
+	    font-size: 24px;
 	    padding: 16px 0;
 	    width: 100%;
 	}
+
+	.section-header span.section-pre-title {
+		border-bottom: 1px solid #DEDEDE;
+		font-size: 18px;
+		padding: 16px 0;
+		width: 100%;
+	}
+
 	.section-header-divider.fl {
 	    display: none;
 	}
-	.section-header h2.section-title {
+	.section-header h2.section-title, .section-header span.section-title {
 	    font-size: 26px;
 	    padding: 18px 0;
 	    width: 100%;
 	}
+
+	.section-header .fl span.section-title {
+		top: 18px;
+	}
+
+	.section-header div.fl:first-of-type {
+		position: relative;
+		margin-bottom: 55px;
+	}
+
+	.section-header h1.section-title {
+		position: relative;
+		top: 55px;
+	}
+
+	.section-header h2.section-pre-title {
+		position: absolute;
+		top: 0;
+	}
+
+	#neighborhood .section-header div.fl:first-of-type {
+		margin-bottom: 0;
+	}
+
 	.section-header {
 	    margin-bottom: 10px;
 	}
