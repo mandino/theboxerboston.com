@@ -92,6 +92,60 @@ define( 'SS_BASE_DIR', TEMPLATEPATH . '/' );
 define( 'SS_BASE_URL', get_template_directory_uri() . '/' );
 
 
+if (!is_admin()) add_action( 'wp_enqueue_scripts', 'enqueue_footer_scripts', 11 );
+function enqueue_footer_scripts() {
+
+	wp_enqueue_style('style', SS_BASE_URL . 'style.css');
+	wp_enqueue_style('style-css', SS_BASE_URL . 'css/style.css');
+	wp_enqueue_style('custom', SS_BASE_URL . 'css/custom.css');
+	wp_enqueue_style('font-awesome', '//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css');
+	wp_enqueue_style('googleapis-fonts', '//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700');
+	wp_enqueue_style('quotes-rotator', SS_BASE_URL . 'css/quotes-rotator/component.css');
+	wp_enqueue_style('slidejs', SS_BASE_URL . 'css/slidejs.css');
+	wp_enqueue_style('flexslider', SS_BASE_URL . 'js/flexslider/flexslider.css');
+	wp_enqueue_style('mmenu', SS_BASE_URL . 'css/jquery.mmenu.css');
+
+	if ( 'rooms' == get_post_type() ) {
+		wp_enqueue_style('iosslider', SS_BASE_URL . 'css/iosslider.css');
+	}
+	
+	wp_enqueue_style('custom-plugins', SS_BASE_URL . 'css/custom-plugins.css');
+	wp_enqueue_style('oceana-hotel', SS_BASE_URL . 'css/oceana-hotel.css');
+	wp_enqueue_style('prettyPhoto', SS_BASE_URL . 'css/prettyPhoto.css');
+	wp_enqueue_style('responsive-css', SS_BASE_URL . 'css/media.css');
+
+	// wp_deregister_script('jquery');
+	// wp_register_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js', '', '', true);
+	// wp_register_script('pinit', '//assets.pinterest.com/js/pinit.js', 'jquery', '', true);
+
+	// wp_enqueue_script('jquery');
+
+	// if(is_home() || is_front_page() || is_page_template('page_guide.php')) {
+	// 	wp_enqueue_script('google-maps', '//maps.google.com/maps/api/js?key=AIzaSyCN-FukkWho1yDgUAiO-gfTafDxn2yvPEc', '', '', true);
+	// 	wp_enqueue_script('map-js', SS_BASE_URL . 'js/map-js.js', 'jquery', '', true);
+	// 	wp_enqueue_script('gmap3new', SS_BASE_URL . 'js/gmap3new.js', 'jquery', '', true);
+	// }
+
+	// wp_enqueue_script('prettyPhoto', SS_BASE_URL . 'js/jquery.prettyPhoto.js', 'jquery', '', true);
+	// wp_enqueue_script('jquery-clicknav', SS_BASE_URL . 'js/jquery-clicknav.js', 'jquery', '', true);
+	// wp_enqueue_script('pinit');
+	// wp_enqueue_script('modernizr-custom', SS_BASE_URL . 'js/quotes-rotator/modernizr.custom.js', 'jquery', '', true);
+	// wp_enqueue_script('cbpQTRotator', SS_BASE_URL . 'js/quotes-rotator/jquery.cbpQTRotator.min.js', 'jquery', '', true);
+	// wp_enqueue_script('slides', SS_BASE_URL . 'js/jquery.slides.min.js', 'jquery', '', true);
+	// wp_enqueue_script('flexslider', SS_BASE_URL . 'js/flexslider/jquery.flexslider.js', 'jquery', '', true);
+	// wp_enqueue_script('sticky', SS_BASE_URL . 'js/jquery.sticky.js', 'jquery', '', true);
+	// wp_enqueue_script('lazyload', SS_BASE_URL . 'scripts/jquery.lazyload.js', 'jquery', '', true);
+	// wp_enqueue_script('mmenu', SS_BASE_URL . 'js/jquery.mmenu.min.js', 'jquery', '', true);
+	// wp_enqueue_script('mousewheel', SS_BASE_URL . 'js/jquery.mousewheel.js', 'jquery', '', true);
+	// wp_enqueue_script('scripts', SS_BASE_URL . 'js/scripts.js', 'jquery', '', true);
+	
+	// if ( 'rooms' == get_post_type() ) 	{
+	// 	wp_enqueue_script('', SS_BASE_URL . 'js/jquery.iosslider.min.js', 'jquery', '', true);
+	// }
+
+}
+
+
 if ( !function_exists('ss_framework_admin_scripts') ) {
 
 	// Backend Scripts

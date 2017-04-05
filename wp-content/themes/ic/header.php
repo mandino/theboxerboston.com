@@ -10,13 +10,7 @@
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<title>
-		<?php global $page, $paged; wp_title( '|', true, 'right' ); //bloginfo( 'name' );
-	
-		// Add the blog description for the home/front page.
-		// $site_description = get_bloginfo( 'description', 'display' );
-		// if ( $site_description && ( is_home() || is_front_page() ) )
-		// 	echo " | $site_description";
-	
+		<?php global $page, $paged; wp_title( '|', true, 'right' );
 		// Add a page number if necessary:
 		if ( $paged >= 2 || $page >= 2 )
 			echo ' | ' . sprintf( __( 'Page %s', 'cebolang' ), max( $paged, $page ) );
@@ -28,65 +22,28 @@
 		}
 	?>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="p:domain_verify" content="fdcd1755542385831e526a2a712cc134"/>
 	<link rel="profile" href="//gmpg.org/xfn/11" />	
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 	<?php if (get_option('cebo_custom_favicon') == '') { ?>	
 	<link rel="icon" href="<?php bloginfo ('template_url'); ?>/cebo_options/<?php bloginfo ('template_url'); ?>/images/admin_sidebar_icon.png" type="image/x-ico"/>	
 	<?php } else { ?>
-	
 	<link rel="icon" href="<?php echo get_option('cebo_custom_favicon'); ?>" type="image/x-ico"/>
-	
 	<?php } ?>
-	
-	
 	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="<?php if ( get_option('cebo_feedburner_url') <> "" ) { echo get_option('cebo_feedburner_url'); } else { echo get_bloginfo_rss('rss2_url'); } ?>" />
 	
 	<!-- favicon -->
-
 	<link rel="shortcut icon" href="<?php bloginfo ('template_url'); ?>/icfavicon.png" type="image/png">
 	<link rel="icon" href="icfavicon.png" type="image/png">
-	
-	<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
-	
-	<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/style.css">
-	<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/custom.css">
-
-	<!-- Fonts -->
-	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-	<link href='//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700' rel='stylesheet' type='text/css'>
-	
-	<!-- Plugins CSS -->
-	<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/quotes-rotator/component.css" />
-	<link rel="stylesheet" href="<?php bloginfo ('template_url'); ?>/css/slidejs.css" type="text/css" media="screen" />
-	<link rel="stylesheet" href="<?php bloginfo ('template_url'); ?>/js/flexslider/flexslider.css" type="text/css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/jquery.mmenu.css">
-
-	<?php if ( 'rooms' == get_post_type() ) 	{ ?>
-		<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/iosslider.css">
-	<?php } ?>
-
-	<!-- Custom Plugin Settings -->
-	<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/custom-plugins.css">
-
-	<!-- responsive style -->
-	<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/media.css">
-
-	<!-- Color Override CSS -->
-	<!-- <link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/oceana-hotel.css"> -->
 	
 	<style>
 	<?php include(TEMPLATEPATH. "/library/inset.php"); ?>	
 	</style>
 
 	<!-- Jquery -->
-	<?php //include(TEMPLATEPATH. "/library/jquery.php"); ?>	
 	<script type="text/javascript" src="//code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script type='text/javascript' src='<?php bloginfo ('url'); ?>/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
 	
-
-	<!-- pinterest -->
-	<meta name="p:domain_verify" content="fdcd1755542385831e526a2a712cc134"/>
-
 	<?php
 		/****************** DO NOT REMOVE **********************
 		/* We add some JavaScript to pages with the comment form
@@ -97,26 +54,24 @@
 		wp_head();
 	?>
 
-<!-- Google Tag Manager -->
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-W8NRVV2');</script>
+	<!-- End Google Tag Manager -->
 
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-W8NRVV2');</script>
-
-<!-- End Google Tag Manager -->
-
-<!-- Sojern Head -->
-<script>
-(function () {
-var pl = document.createElement('script');
-pl.type = 'text/javascript';
-pl.async = true;
-pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(pl);
-})();
-</script>
-<!-- End Sojern -->
+	<!-- Sojern Head -->
+	<script>
+	(function () {
+	var pl = document.createElement('script');
+	pl.type = 'text/javascript';
+	pl.async = true;
+	pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(pl);
+	})();
+	</script>
+	<!-- End Sojern -->
 
 	<script type="application/ld+json">
 		{
@@ -134,50 +89,40 @@ pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName
 		}
 	</script> 
 	
-<script> 
+	<script> 
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new
+	Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-37161096-1', 'auto',{'allowLinker': true });
+	ga('require', 'linker'); ga('linker:autoLink', ['theboxerboston.reztrip.com','theboxerboston.reztripmobile.com']);
+	ga('send', 'pageview');
+	</script>
 
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new
-Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-37161096-1', 'auto',{'allowLinker': true });
-ga('require', 'linker'); ga('linker:autoLink', ['theboxerboston.reztrip.com','theboxerboston.reztripmobile.com']);
-ga('send', 'pageview');
+	<!-- Facebook Pixel Code -->
+	<script>
+	!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+	n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+	n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+	t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+	document,'script','//connect.facebook.net/en_US/fbevents.js');
 
-</script>
+	fbq('init', '164851350567642');
+	fbq('track', "PageView");
 
-<!-- Facebook Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-document,'script','//connect.facebook.net/en_US/fbevents.js');
+	</script>
+	<noscript><img height="1" width="1" style="display:none"
+	src="https://www.facebook.com/tr?id=164851350567642&ev=PageView&noscript=1"
+	/></noscript>
+	<!-- End Facebook Pixel Code -->
 
-fbq('init', '164851350567642');
-fbq('track', "PageView");
-
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=164851350567642&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Facebook Pixel Code -->
-
-<script type="text/javascript">
-function viewContent(){
-
-	fbq('track', "ViewContent");
-
-}
-</script>
-
+	<script type="text/javascript">
+	function viewContent(){fbq('track', "ViewContent");}
+	</script>
 </head> 
-	
 <body id="oceana" <?php body_class($class); ?>>
 
 	<!-- Google Tag Manager (noscript) -->
-
 	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W8NRVV2"
 	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-
 	<!-- End Google Tag Manager (noscript) -->
 
 	<div id="navigation">
@@ -230,15 +175,13 @@ function viewContent(){
 				
 					</div>
 
-				<!-- flex dates -->
-
+					<!-- flex dates -->
 					<div class="reservationform flexdate">
 					
 						<p><a href="https://theboxerboston.reztrip.com" onclick="fbq('track', 'Lead'); ga('send', 'event', 'Flexible Dates', 'click', 'Booking-widget');">Flexible dates?</a> Search for our best available rate</p>
 						
 					</div>
-
-				<!-- end flex dates -->
+					<!-- end flex dates -->
 
 				</div>
 				
@@ -258,17 +201,7 @@ function viewContent(){
 			<nav class="click-nav">
 				<ul class="container no-js">
 					<li>
-	
 						<a href="//www.independentcollection.com/ic-local" target="_blank" class="clicknav-clicker">Join IC Local and Start Receiving Perks with Every Stay</a>
-	
-						<!-- <ul>
-							<li class="navitem"><a href="#">Independet Collection</a></li>
-							<li class="navitem"><a href="#">Independet Collection</a></li>
-							<li class="navitem"><a href="#">Independet Collection</a></li>
-							<li class="navitem"><a href="#">Independet Collection</a></li>
-							<li class="navitem"><a href="#">Independet Collection</a></li>
-						</ul> -->
-	
 					</li>
 					<li class="blue-btn"><a href="//theboxerboston.com/blue"><i class="fa fa-info-circle"></i><span class="blue-mobile">why blue?</span></a></li>
 				</ul>
@@ -310,4 +243,3 @@ function viewContent(){
 	</div>
 	
 	<div id="quiet"></div>
-   
