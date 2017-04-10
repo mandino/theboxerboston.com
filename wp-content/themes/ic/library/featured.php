@@ -148,7 +148,7 @@
 
 						
 
-						<a href="<?php if (get_post_meta($post->ID, 'cebo_popout_url', true)) { echo get_post_meta($post->ID, 'cebo_popout_url', true); } else { ?>#<?php } ?>">
+						<a onclick="ga('send', 'event', 'Booking', 'Reserve', '<?php echo get_the_title(); ?>');" href="<?php if (get_post_meta($post->ID, 'cebo_popout_url', true)) { echo get_post_meta($post->ID, 'cebo_popout_url', true); } else { ?>#<?php } ?>">
 
 							<h3 style="font-size: 25px;">
 
