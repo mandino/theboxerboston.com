@@ -489,7 +489,7 @@
 							|| !dynamic_sidebar('Footer Column 2') ) : ?>
 					<?php endif; ?>  
 
-					<a href="<?php bloginfo('url'); ?>/events" style="text-align: center; margin-top: 10px; display: inline-block;">See all events</a>
+					<a class="all-events" href="<?php bloginfo('url'); ?>/events" style="text-align: center; margin-top: 10px; display: inline-block;">See all events</a>
 		
 			     	<!-- widgetized  -->		
 								
