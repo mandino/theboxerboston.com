@@ -198,3 +198,23 @@ fbq('track', 'PageView');
 }
 
 add_action('wp_head', 'facebook_pixel_code_header');
+
+add_filter('amp_post_template_file', 'amp_set_custom_footer_template', 10, 2);
+
+function amp_set_custom_footer_template($file, $type) {
+	if ('footer' === $type) {
+		$file = TEMPLATEPATH . '/amp/templates/footer.php';
+	}
+
+	return $file;
+}
+
+add_filter('amp_post_template_file', 'amp_set_custom_style_css', 10, 3);
+
+function amp_set_custom_style_css($file, $type, $post) {
+	if ('style' === $type) {
+		$file = TEMPLATEPATH . '/amp/templates/style.php';
+	}
+
+	return $file;
+}

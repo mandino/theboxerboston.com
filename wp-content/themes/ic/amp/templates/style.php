@@ -10,6 +10,7 @@ $border_color            = $this->get_customizer_setting( 'border_color' );
 $link_color              = $this->get_customizer_setting( 'link_color' );
 $header_background_color = $this->get_customizer_setting( 'header_background_color' );
 $header_color            = $this->get_customizer_setting( 'header_color' );
+$accent_color 			 = get_option('cebo_accent_color');
 ?>
 /* Generic WP styling */
 
@@ -111,7 +112,7 @@ blockquote p:last-child {
 /* Header */
 
 .amp-wp-header {
-	background-color: <?php echo sanitize_hex_color( $header_background_color ); ?>;
+	background-color: <?php echo $accent_color; ?>;
 }
 
 .amp-wp-header div {
