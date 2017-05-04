@@ -192,13 +192,13 @@ get_header();
 						<div class="hover-effect">
 							<?php if(get_post_meta($post->ID, 'cebo_tagline', true)) { ?>
 
-							<a class="special-copy-link" href="//www.independentcollection.com/ic-local" target="_blank"><span><?php echo get_post_meta($post->ID, 'cebo_tagline', true); ?></span></a>
+							<a class="special-copy-link" href="<?php if (get_post_meta($post->ID, 'cebo_booklink', true)) { echo get_post_meta($post->ID, 'cebo_booklink', true); } else { the_permalink(); } ?>" target="_blank"><h3><?php echo get_post_meta($post->ID, 'cebo_tagline', true); ?></h3></a>
 
 							<?php } ?>
 							<br>
 							<p><?php the_title(); ?></p>
 
-							<a class="special-external" href="//www.independentcollection.com/ic-local" target="_blank"><i class="fa fa-chevron-right fa-lg"></i></a>
+							<a class="special-external" href="<?php if (get_post_meta($post->ID, 'cebo_booklink', true)) { echo get_post_meta($post->ID, 'cebo_booklink', true); } else { the_permalink(); } ?>" target="_blank"><i class="fa fa-chevron-right fa-lg"></i></a>
 						</div>
 					</li>
 
