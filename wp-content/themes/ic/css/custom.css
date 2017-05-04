@@ -1143,6 +1143,8 @@ div.section-pre-title{
     font-weight: bold;
     margin-top: -20px;
     text-transform: uppercase;
+    position: relative;
+    z-index: 2;
 }
 
 
