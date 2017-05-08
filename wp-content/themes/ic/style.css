@@ -4324,6 +4324,12 @@ li.blue-btn {
 .post-content strong {
     font-weight: bold;
 }
-.all-events {
-	font-size: 18px;
+.all-events.button {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 6px solid #808080;
+    font-weight: bold;
+    margin-right: 5px;
+    font-size: 14px;
+    color: #808080;
+    bottom: 0;
 }
