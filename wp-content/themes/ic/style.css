@@ -2150,6 +2150,7 @@ footer nav ul.footling li a {
 
 .room-details-content {
     overflow: hidden;
+    margin-top: 30px;
 }
 
 .room-details-content p {
@@ -4332,4 +4333,7 @@ li.blue-btn {
     font-size: 14px;
     color: #808080;
     bottom: 0;
+}
+.breadcrumbs {
+    margin: 10px 0;
 }
