@@ -2147,6 +2147,9 @@ footer nav ul.footling li a {
 /* ================================================== ROOMS - Details / Gallery ===============================================  */
 
 
+.single-rooms .section {
+    padding: 20px 0 0;
+}
 
 .room-details-content {
     overflow: hidden;
