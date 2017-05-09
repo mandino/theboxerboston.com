@@ -78,7 +78,7 @@
 
 			<div class="wonderline"></div>
 
-			<div class="breadcrumbs"><a href="<?php bloginfo('url'); ?>/accommodations">All Rooms</a> > <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></div>
+			<div class="breadcrumbs"><a href="<?php echo get_permalink(49); ?>">All Rooms</a> > <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></div>
 			
 			<div class="room-details-content">
 
