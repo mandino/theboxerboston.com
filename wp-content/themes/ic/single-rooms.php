@@ -75,10 +75,10 @@
 				</div>
 	
 			</div>
-			
-			
+
 			<div class="wonderline"></div>
-			
+
+			<div class="breadcrumbs"><a href="<?php bloginfo('url'); ?>/accommodations">All Rooms</a> > <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></div>
 			
 			<div class="room-details-content">
 
@@ -223,68 +223,15 @@
 
 				</div>
 
-
 			</div>
 			
+			<div class="section-header" style="border-top: 1px solid #ddd; margin-top: 60px; margin-bottom: 0; float: none; text-align: center;"></div>
 			
-			<div class="section-header singroom-sechead">
-					
-				<div class="fl fnone">
-	
-					<h2 class="section-title fr stfr"><?php _e('More Rooms & Suites', 'cebolang'); ?></h2>
-	
-				</div>
-	
-			
-	
-			</div>
-			
-
 		</div>
 
 	</div>
 	
 	<div class="clear"></div>
 
-	<div id="room-details-slider rd-slider">
-
-		<div class='slideSelectors'>
-			
-			<div class='item selected'></div>
-			<div class='item'></div>					
-			<div class='item'></div>
-			<div class='item'></div>
-			<div class='item'></div>
-		
-		</div>
-
-				
-		<div class='iosSlider'>
-		
-			<div class='slider'>
-				<?php $thisid = $post->ID; ?>
-				
-				
-				<?php query_posts(array('post_type' => 'rooms', 'posts_per_page' => -1,  'post__not_in' => array($post->ID))); if(have_posts()) : while(have_posts()) : the_post(); ?>
-				
-				<div class='item item1 current'>
-					<a href="<?php the_permalink(); ?>"><img src = '<?php echo get_post_meta($post->ID, 'cebo_homethumb', true); ?>' alt="<?php echo get_custom_image_thumb_alt_text(get_post_meta($post->ID, 'cebo_homethumb', true), ''); ?>"
- /></a>
-					
-					<h3><?php the_title(); ?></h3>
-				</div>
-				
-				<?php endwhile; endif; wp_reset_query(); ?>	
-				
-			</div>
-		
-		</div>
-
-		<div class="iosslider-prev"><i class="fa fa-chevron-left"></i></div>
-		<div class="iosslider-next"><i class="fa fa-chevron-right"></i></div>
-
-	</div>
-
-	
 					
 <?php get_footer(); ?>
