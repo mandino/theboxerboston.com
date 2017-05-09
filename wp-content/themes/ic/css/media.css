@@ -200,9 +200,6 @@ and (max-width : 1099px) {
 	.room-details-gallery.fr {
 	    width: 260px;
 	}
-	.room-details-content p {
-	    font-size: 20px;
-	}
 	.single-rooms .section-photos.fl {
 	    width: 70%;
 	}
@@ -363,6 +360,9 @@ and (max-width : 940px)
 	    font-weight: bold;
 	    margin-right: 5px;
 	    padding: 11px 15px;
+	}
+	.single-rooms #intro .section-photos.fl {
+		width: 70%;
 	}
 	/* Page - Specials */
 	.post-content .imagegal ul li:nth-child(3n) {
@@ -598,6 +598,9 @@ and (max-width : 939px) {
 	}
 	.newsletter-form input[type="text"] {
 	    width: 54%;
+	}
+	.room-details-gallery.fr {
+		width: 26%;
 	}
 	/* Footer - Navigation */
 	footer nav .fl {
@@ -907,6 +910,9 @@ and (max-width : 640px)
 	    position: relative;
 	    top: 0;
 	    width: 100%;
+	}
+	.single-rooms #intro .section-photos.fl {
+		width: 100%;
 	}
 	/* Footer - Nav */
 	footer nav .fr {
