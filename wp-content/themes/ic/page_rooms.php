@@ -118,7 +118,7 @@
 									}
 							?>
 								<a class="button" onclick="fbq('track', 'InitiateCheckout');_gaq.push(['_link', this.href]);return false;" href="<?php echo $href ?>"><?php echo get_post_meta( $post->ID, 'rooms_button_label', true) ?></a>
-
+								<a class="button" href="<?php the_permalink(); ?>"><?php _e('Read more', 'cebolang'); ?></a>
 							<?php } else { ?>
 								<a class="button" onclick="fbq('track', 'InitiateCheckout');  ga('send', 'event', 'Booking', 'Reserve', '<?php echo get_the_title(); ?>'); _gaq.push(['_link', this.href]);return false;" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>">Reserve Now</a>
 								<a class="button" href="<?php the_permalink(); ?>"><?php _e('Read more', 'cebolang'); ?></a>

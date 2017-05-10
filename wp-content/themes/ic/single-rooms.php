@@ -127,7 +127,21 @@
 					<?php if(have_posts()) : while(have_posts()) : the_post(); ?>
 					
 					
-					<a class="button"  onclick="fbq('track', 'InitiateCheckout'); ga('send', 'event', 'Booking', 'Reserve', '<?php echo get_the_title(); ?>'); _gaq.push(['_link', this.href]);return false;" target="_blank" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>">RESERVE NOW</a>
+					<?php
+						$btn_label = get_post_meta( $post->ID, 'rooms_button_label', true);
+						$btn_link = get_post_meta( $post->ID, 'rooms_button_link', true);
+
+						if(empty($btn_label) === false) { // has a value in rooms_button_label
+							if (empty($btn_link) === false){
+								$href = $btn_link;
+							} else {
+								$href = get_post_meta($post->ID, 'cebo_booklink', true) ? get_post_meta($post->ID, 'cebo_booklink', true) :  get_option('cebo_genbooklink');
+							}
+					?>
+						<a class="button" onclick="fbq('track', 'InitiateCheckout');_gaq.push(['_link', this.href]);return false;" href="<?php echo $href ?>"><?php echo get_post_meta( $post->ID, 'rooms_button_label', true) ?></a>
+					<?php } else { ?>
+						<a class="button" onclick="fbq('track', 'InitiateCheckout');  ga('send', 'event', 'Booking', 'Reserve', '<?php echo get_the_title(); ?>'); _gaq.push(['_link', this.href]);return false;" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>">Reserve Now</a>
+					<?php } ?>
 
 					<!-- <a class="button" href="#inline-1" title="" rel="prettyPhoto">SEE ROOM FEATURES</a> -->
 					
