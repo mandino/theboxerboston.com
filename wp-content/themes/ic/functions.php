@@ -276,7 +276,7 @@ if($query->have_posts()) : while ($query->have_posts()) : $query->the_post();
 </li>
 <?php
 
-$class_even = $is_even ? '' : 'class="even"';
+$class_even = $class_even ? '' : 'class="even"';
 
 endwhile; endif; wp_reset_postdata(); wp_die();
 }
