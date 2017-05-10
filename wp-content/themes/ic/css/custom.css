@@ -1107,13 +1107,8 @@ div.section-pre-title{
     overflow: auto;
 }
 
-.neighborhood-sliders .fl {
+.neighborhood-sliders .fr, .neighborhood-sliders .fl {
     height: auto;
-    width: 540px;
-}
-
-.neighborhood-sliders .fr {
-    height: 292px;
     width: 540px;
 }
 
@@ -1145,6 +1140,10 @@ div.section-pre-title{
     text-transform: uppercase;
     position: relative;
     z-index: 2;
+}
+
+.viewall {
+    text-align: center;
 }
 
 

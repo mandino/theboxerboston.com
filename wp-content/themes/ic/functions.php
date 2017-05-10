@@ -198,3 +198,85 @@ fbq('track', 'PageView');
 }
 
 add_action('wp_head', 'facebook_pixel_code_header');
+
+/*
+	widget-calendar.js in plugin transfer to ic theme tribe-events-widget-calendar.js
+	mini-calendar in neighborhood page
+*/
+add_action('wp_enqueue_scripts', 'enqueue_js');
+function enqueue_js() {
+	wp_register_script('tribe-mini-calendar', get_template_directory_uri().'/js/tribe-events-widget-calendar.js', array( 'jquery' ));
+	wp_localize_script( 'your_unique_js_name', 'youruniquejs_vars', 
+
+	array(
+		'ajaxurl' => admin_url( 'admin-ajax.php' ),
+		'current' => $current,
+		'next' => $next,
+		'prev' => $prev,
+
+		)
+	);
+}
+
+function upcoming_query($current_date, $next_date) {
+	$query = new WP_Query(array(
+		'post_type' => 'tribe_events',
+		'eventDisplay' => 'upcoming',
+		'posts_per_page' => 4,
+		'meta_query' => array(
+		'relation' => 'AND',
+			array(
+				'relation' => 'AND',
+					array(
+						'key' => '_EventStartDate',
+						'value' => date('Y-m-d H:i:s', strtotime($next_date)),
+						'compare' => '<='
+					),
+					array(
+						'key' => '_EventStartDate',
+						'value' => date('Y-m-d H:i:s', strtotime($current_date)),
+						'compare' => '>='
+					)
+			)
+		)
+	));
+
+	return $query;
+}
+
+/* ajax for upcoming events */
+add_action('wp_ajax_upcoming_event_tiles', 'upcoming_events_tiles');
+add_action('wp_ajax_nopriv_upcoming_event_tiles', 'upcoming_events_tiles');
+function upcoming_events_tiles() {
+
+$class_even = '';
+header('Content-Type: text/html');
+
+$query = upcoming_query($_GET['current'], $_GET['next']);
+
+if($query->have_posts()) : while ($query->have_posts()) : $query->the_post();
+	$imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full");
+	$shortdater = tribe_get_start_date($post->ID, true, 'M'); $shortdaterz = substr($shortdater, 0, 3);
+	$shortdate = tribe_get_start_date($post->ID, true, 'j'); $shortdatez = substr($shortdate, 0, 2);
+?>
+
+<li <?php echo $class_even ?>>
+	<a href="<?php the_permalink(); ?>">
+
+	<img src="<?php echo tt($imgsrc[0], 275, 178); ?>"  alt="<?php echo get_custom_image_thumb_alt_text('', $post->ID); ?>"/>
+	<div class="event-date">
+		<?php echo $shortdaterz . " <span>" . $shortdatez. "</span>"; ?>
+	</div>
+
+	<div class="event-description">
+		<p><?php the_title(); ?></p>
+	</div>
+
+	</a>
+</li>
+<?php
+
+$class_even = $class_even ? '' : 'class="even"';
+
+endwhile; endif; wp_reset_postdata(); wp_die();
+}
