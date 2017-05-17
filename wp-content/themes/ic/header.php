@@ -156,12 +156,14 @@ function viewContent(){
 	
 <body id="oceana" <?php body_class($class); ?>>
 
-	<!-- Google Tag Manager (noscript) -->
+<!-- Google Tag Manager (noscript) -->
 
-	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W8NRVV2"
-	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W8NRVV2"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-	<!-- End Google Tag Manager (noscript) -->
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="menu-wrap">
 
 	<div id="navigation">
 			
@@ -268,19 +270,29 @@ function viewContent(){
 	
 				<nav id="menu" class="fl" style="z-index:1">
 					<ul>
-						 <?php wp_nav_menu( array( 'walker' => new MV_Cleaner_Walker_Nav_Menu(), 'theme_location' => 'primary' ,  'items_wrap' => '%3$s', 'container' => '', 'menu_class' => 'navitem' ) ); ?>
+						<?php wp_nav_menu( array( 'theme_location' => 'primary' ,  'items_wrap' => '%3$s', 'container' => '', 'menu_class' => 'navitem' ) ); ?>
+						<li class="hamburgermenu">
+							<a class="cheese" href="#">
+								<div class="hamburger">
+									<span></span>
+									<span></span>
+									<span></span>
+								</div>
+								<span class="menutext">Menu</span>
+							</a>
+						</li>
+						<?php wp_nav_menu( array( 
+							'theme_location' => 'mobilenav',
+							'items_wrap' => '%3$s', 
+							'container' => ''
+						)); ?>
 					</ul>
 				</nav>
 	
 			</div>
-	
-				
-				
-				
-	
+
 		</div>
 
 	</div>
 	
 	<div id="quiet"></div>
-   
