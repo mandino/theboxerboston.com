@@ -479,6 +479,43 @@
 			}
 
 		});
+
+
+		$(".hamburgermenu a").click(function(e){
+			e.preventDefault();
+			$(".mm-page").addClass("opened");
+			$(".rightnav").addClass("rightready");
+			$("section.stophovering").css("display","block");
+		});
+
+		$('.royale,.stophovering').click(function(e){
+			e.preventDefault();
+			$(".mm-page").removeClass("opened");
+			$(".rightnav").removeClass("rightready");
+			$("section.stophovering").css("display","none");
+			$(".closer").removeClass("open-left");
+		});
+
+		$('#navmenumob li').each(function() {
+			if ($(this).hasClass('menu-item-has-children')) {
+				$(this).find('.tnbox').append('<i class="fa fa-plus"></i>');
+			}
+		});
+
+		$('.topnavigationmob li i.fa-plus').click(function() {
+			if ($(this).hasClass('fa-plus')) {
+				$(this).removeClass('fa-plus');
+				$(this).addClass('fa-minus');
+				$(this).addClass('active');
+				$(this).closest('li').find('.sub-menu').addClass('open');
+			} else {
+				$(this).addClass('fa-plus');
+				$(this).removeClass('fa-minus');
+				$(this).removeClass('active');
+				$(this).closest('li').find('.sub-menu').removeClass('open');
+			}
+			
+		});
 			
 	});
 

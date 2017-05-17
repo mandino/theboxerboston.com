@@ -1,7 +1,9 @@
 <?php
 
 register_nav_menus( array(
-	'primary' => __( 'Primary Navigation', 'cebo' ),
+    'primary' => __( 'Primary Navigation', 'cebo' ),
+    'mobilenav' => __( 'Mobile Navigation', 'cebo' ),
+    'slideoutnav' => __( 'Slide Out Navigation', 'cebo' ),
 ) );
 
 register_nav_menus( array(

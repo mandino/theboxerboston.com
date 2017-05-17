@@ -472,7 +472,7 @@ and (max-width : 940px)
 /* ================================================  MAX WIDTH 939 ======================================= */
 @media only screen
 and (max-width : 939px) {
-		#footer-newsletter {
+	#footer-newsletter {
 		display: none;
 	}
 	.mmenu-icon {
@@ -555,6 +555,9 @@ and (max-width : 939px) {
 	    -moz-transition: all 0.4s ease 0s;
 	    -webkit-transition: all 0.4s ease 0s;
 	    -o-transition: all 0.4s ease 0s;
+	}
+	.mm-list > li.display-none {
+		display: block !important;
 	}
 	/* Double Flyout */
 	.welcome-text { font-size: 13px; }

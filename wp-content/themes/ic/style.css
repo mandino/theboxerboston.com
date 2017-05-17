@@ -159,6 +159,9 @@ img.right, img.alignright {float: right;margin: 0 0 7px 15px;}
 .noborder {
 	border: none !important;
 }
+.display-none {
+    display: none !important;
+}
 
 
 
@@ -4340,3 +4343,391 @@ li.blue-btn {
 .breadcrumbs {
     margin: 10px 0;
 }
+
+
+/* Right Nav */
+
+html.mm-opened .mm-page, html.mm-opened #mm-blocker {
+    z-index: 999;
+}
+
+
+.fa-minus::before {
+    content: "-" !important;
+    line-height: 26px !important;
+    font-size: 26px !important;
+}
+
+.fa-plus::before {
+    content: "+" !important;
+    line-height: 30px !important;
+    font-size: 30px !important;
+}
+
+.mm-page {
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+    left: 0;
+    position: relative;
+}
+
+.opened {
+    left: -403px;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+    opacity: .4;
+    position: relative;
+}
+
+.cheese {
+    display: block;
+}
+
+.spacer {
+    padding: 80px 0 20px;
+    text-align: center;
+}
+
+.spacer img {
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+    opacity: 0;
+
+    transition: all 0.8s ease 0.2s;
+    -moz-transition: all 0.8s ease 0.2s;
+    -webkit-transition: all 0.8s ease 0.2s;
+    -o-transition: all 0.8s ease 0.4s;
+}
+
+.rightready .spacer img {
+    opacity: 1;
+}
+
+.opened .cheese {
+    display: none;
+}
+
+.opened  .royale {
+    display: block;
+}
+
+.mm-list .hamburgermenu {
+    display: none;
+}
+
+.hamburger {
+    position: absolute;
+    height: 21px;
+    width: 35px;
+    top: -5px;
+}
+
+.hamburger span {
+    background-color: #000;
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    left: 0;
+}
+
+.hamburger span:first-child {
+    top: 0;
+}
+
+.hamburger span:nth-child(2) {
+    top: 8px;
+}
+
+.hamburger span:last-child {
+    bottom: 3px;
+}
+
+.menutext {
+    position: relative;
+    font-size: 12px;
+    top: 15px;
+}
+
+.mm-page.opened #primary-nav .button {
+    margin-right: 0;
+    right: 5px;
+}
+
+section.stophovering {
+    display: none;
+    height: 100%;
+    margin: auto;
+    overflow: hidden;
+    position: fixed;
+    right: 403px;
+    width: 75%;
+    z-index: 11;
+}
+
+.rightnav {
+    position: fixed;
+    width: 80%;
+    margin: auto;
+    top: 76px;
+    z-index: 1;
+    height: 100%;
+    width:403px;
+    background: none repeat scroll 0 0 white;
+    right: -403px;
+    overflow-x: hidden;
+    top: 0;
+    border-left: 1px solid #dedede;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+}
+
+.rightready {
+    right: 0px;
+    opacity: 1;
+    visibility: visible;
+    z-index: 12;
+    top: 0;
+
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+}
+
+.topnavigationmob {
+    border-top: 1px dashed #fff;
+    padding: 0 20px;
+}
+
+.topnavigationmob ul {
+    padding: 0;
+    width: 100%;
+    margin: auto;
+}
+
+.topnavigationmob li, .royalewrap {
+    border-bottom: 1px solid #dedede;
+    position: relative;
+}
+
+.topnavigationmob li.locationa {
+    text-align: center;
+}
+
+.topnavigationmob li.locationa i {
+    position: relative;
+    display: inline;
+    left: 0;
+    margin-right: 10px;
+}
+
+.topnavigationmob li.locationa span {
+    display: inline;
+}
+
+.topnavigationmob .locationa a {
+    -webkit-transition: all .4s ease;
+    -moz-transition: all .4s ease;
+    -o-transition: all .4s ease;
+    transition: all .4s ease;
+}
+
+.topnavigationmob .locationa a:hover span {
+    color: #333;
+}
+
+.noborder {
+    border: none !important;
+}
+
+a.cheese img{
+    width: 35px;
+    height: 20px;
+}
+
+.topnavigationmob li span{
+    color: #7b7b7b;
+    display: block;
+    font-size: 15px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.topnavigationmob li a {
+    color: #7b7b7b;
+    display: block;
+    font-size: 16px;
+    padding: 25px 0px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+
+    transition: all 0.4s ease 0s;
+    -moz-transition: all 0.4s ease 0s;
+    -webkit-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    -ms-transition: all 0.4s ease 0s;
+}
+
+.topnavigationmob li a:hover {
+    background-color: #868282;
+    color:#fff;
+}
+
+.royalewrap {
+    max-width: 403px;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+}
+
+.royalewrap a {
+    color: #fff;
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 15px 0;
+    text-transform: uppercase;
+    text-align: center;
+    transition: all 0.4s ease 0s;
+    -moz-transition: all 0.4s ease 0s;
+    -webkit-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    -ms-transition: all 0.4s ease 0s;
+}
+
+.royalewrap a:hover {
+    background-color: #868991;
+    color:#fff;
+}
+
+.topnavigationmob li i.fa-plus:before,
+.topnavigationmob li i.fa-minus:before {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+}
+
+.topnavigationmob li i.fa-plus:before {
+    margin: -11px 0 0 -8px;
+}
+
+.topnavigationmob li i.fa-minus:before {
+    margin: -10px 0 0 -8px;
+}
+
+.topnavigationmob li i {
+    background-color: transparent;
+    height: calc(100% - 10px);
+    width: auto;
+    cursor: pointer;
+    font-size: 30px;
+    position: absolute;
+    left: 40px;
+    top: 2px;
+    display: inline-block;
+    transition: all 0.4s ease 0s;
+    -moz-transition: all 0.4s ease 0s;
+    -webkit-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    -ms-transition: all 0.4s ease 0s;
+}
+
+li.social_share_side {
+    text-align: center;
+}
+
+li.social_share_side a {
+    padding: 0;
+    display: inline-block;
+    margin: 30px 15px;
+}
+
+li.social_share_side a i {
+    position: relative;
+    left: 0;
+    width: auto;
+    height: auto;
+    font-size: 25px;
+}
+
+li.social_share_side a:hover{
+    background-color:transparent;
+    padding: 0;
+}
+
+li.social_share_side a i:hover{
+    color:#000;
+}
+
+.topnavigationmob li i:hover,
+.topnavigationmob li i.active {
+    background-color:transparent;
+    color: #868991;
+}
+
+.topnavigationmob ul.children {
+    display: none;
+    border-top: 1px solid #fff;
+    margin: -1px 0;
+    list-style-type: disc;
+}
+
+.topnavigationmob ul.children li a {
+    font-weight: normal;
+    padding: 15px 0 15px 40px;
+    text-transform: none;
+}
+
+.topnavigationmob li .tnbox i {
+    position: absolute;
+    top: 17px;
+    left: initial;
+    right: 12px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    color: #fff;
+    border-radius: 100%;
+}
+
+.topnavigationmob li .tnbox i:before {
+    margin: 0 auto !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    line-height: 32px;
+    font-size: 14px;
+}
+
+.topnavigationmob .sub-menu {
+    opacity: 0;
+    height: 0;
+    visibility: hidden;
+    z-index: 12;
+    background: #dedede;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+}
+
+.topnavigationmob .sub-menu.open {
+    opacity: 1;
+    height: auto;
+    visibility: visible;
+    width:100%;
+}
+
+.topnavigationmob .sub-menu li i {
+    display: none;
+}
+
+/* End of Right Nav */ 
