@@ -138,6 +138,7 @@
 <?php wp_footer(); ?>
 
 <!-- Scripts -->
+<script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=false"></script>
 <?php include(TEMPLATEPATH. "/library/scripts.php"); ?>
 
 <!-- Google Code for Remarketing Tag -->

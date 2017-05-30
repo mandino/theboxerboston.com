@@ -4,8 +4,6 @@
 
 <!-- Google Map API Files -->
 
-<script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=false"></script>
-
 <script type="text/javascript">
     $(document).ready(function() {
 
