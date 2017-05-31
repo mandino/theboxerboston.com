@@ -129,7 +129,7 @@
 					<?php wp_nav_menu( array( 'theme_location' => 'slideoutnav' ,  'items_wrap' => '%3$s', 'container' => '', 'menu_class' => 'navitem', 'before' => '<div class="tnbox">', 'after' => '</div>' ) ); ?>
 
 					<li class="social_share_side noborder"><a href="//twitter.com/<?php echo get_option('cebo_twitter'); ?>" target="_blank"><i class="fa fa-twitter"></i></a><a  href="//facebook.com/<?php echo get_option('cebo_facebook'); ?>" target="_blank"><i class="fa fa-facebook"></i></a><a href="//instagram.com/<?php echo get_option('cebo_instagram'); ?>" target="_blank"><i class="fa fa-instagram"></i></a></li>
-					<li class="locationa noborder"><a href="https://goo.gl/maps/5qPvMF26WTy" target="_blank"><i class="fa fa-map-marker fa-lg"></i><span>944 Collins Ave Miami Beach, FL 33139</span></a></li>
+					<li class="locationa noborder"><a href="https://goo.gl/maps/BVnu9AdwV3z" target="_blank"><i class="fa fa-map-marker fa-lg"></i><span><?php echo get_option('cebo_address'); ?></span></a></li>
 				</ul>
 			</div>
 		</div>
