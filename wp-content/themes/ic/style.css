@@ -4738,6 +4738,7 @@ li.social_share_side a i:hover{
 #property-nav {
     overflow:hidden;
     position: relative;
+    border-bottom: 2px solid #333333;
 }
 
 #property-nav .pride.pos-right {

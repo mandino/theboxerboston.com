@@ -436,7 +436,6 @@ color: #333;
 #property-nav nav {
   background: none repeat scroll 0 0 #fff;
     height: auto;
-    border-bottom: 2px solid #333333;
     transition: all 0.5s;
     -moz-transition: all 0.5s;
     -webkit-transition: all 0.5s;
