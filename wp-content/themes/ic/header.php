@@ -97,26 +97,26 @@
 		wp_head();
 	?>
 
-<!-- Google Tag Manager -->
+	<!-- Google Tag Manager -->
+	<script>
+		(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-W8NRVV2');
+	</script>
+	<!-- End Google Tag Manager -->
 
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-W8NRVV2');</script>
-
-<!-- End Google Tag Manager -->
-
-<!-- Sojern Head -->
-<script>
-(function () {
-var pl = document.createElement('script');
-pl.type = 'text/javascript';
-pl.async = true;
-pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(pl);
-})();
-</script>
-<!-- End Sojern -->
+	<!-- Sojern Head -->
+	<script>
+		(function () {
+		var pl = document.createElement('script');
+		pl.type = 'text/javascript';
+		pl.async = true;
+		pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(pl);
+		})();
+	</script>
+	<!-- End Sojern -->
 
 	<script type="application/ld+json">
 		{
@@ -134,23 +134,43 @@ pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName
 		}
 	</script> 
 	
-<script> 
+	<script> 
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new
+		Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-37161096-1', 'auto',{'allowLinker': true });
+		ga('require', 'linker'); ga('linker:autoLink', ['theboxerboston.reztrip.com','theboxerboston.reztripmobile.com']);
+		ga('send', 'pageview');
+	</script>
 
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new
-Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-37161096-1', 'auto',{'allowLinker': true });
-ga('require', 'linker'); ga('linker:autoLink', ['theboxerboston.reztrip.com','theboxerboston.reztripmobile.com']);
-ga('send', 'pageview');
+	<script type="text/javascript">
+		function viewContent(){
+			fbq('track', "ViewContent");
+		}
+	</script>
 
-</script>
+	<script>
+		!function(w,d,s,u) {
+		if(window.curacity) { return; }
+		window.curacity = function() { window.curacity.callMethod ?
+		window.curacity.callMethod.apply(window.curacity, arguments) :
+		window.curacity.queue.push(arguments); }
+		window.curacity.version = '1.0';
+		window.curacity.queue = [];
+		var scriptElement = document.createElement(s);
+		scriptElement.type = 'text/javascript';
+		scriptElement.async = true;
+		scriptElement.src = u;
+		var e = d.getElementsByTagName(s)[0];
+		e.parentNode.insertBefore(scriptElement,e);
+		}(window, document, 'script',
+		'https://booking.curacity.com/api/js/curacity_events.js');
+		curacity('init', 'merchant', '365'); // 365 = hotel id
+		curacity('track', 'view_checkout', null);
+	</script>
 
-<script type="text/javascript">
-function viewContent(){
-
-	fbq('track', "ViewContent");
-
-}
-</script>
+	<noscript>
+		<img height="1" width="1" style="display: none" src="https://booking.curacity.com/trackevent?merchant_id=365&ev=view_checkout&noscript=1" />
+	</noscript>
 
 </head> 
 	
