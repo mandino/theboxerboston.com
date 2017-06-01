@@ -4731,3 +4731,45 @@ li.social_share_side a i:hover{
 }
 
 /* End of Right Nav */ 
+
+
+/* Pride Banner in the heading */
+ 
+#property-nav {
+    overflow:hidden;
+    position: relative;
+    border-bottom: 2px solid #333333;
+}
+
+#property-nav .pride.pos-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1001;
+}
+
+#property-nav .pride.pos-left {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1001;
+    -ms-transform: rotate(180deg); /* IE 9 */
+    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+    transform: rotate(180deg);
+}
+
+#property-nav .pride.pos-right a {
+    position: absolute;
+    top: 4px;
+    right: 10px;
+    border: 1px solid #1c93d1;
+    background: #1c93d1;
+    color: #ffffff;
+    padding: 8px;
+}
+
+#property-nav .pride.pos-right a i {
+    margin-right: 8px;
+    margin-right: 8px;
+    font-size: 14px;
+}
