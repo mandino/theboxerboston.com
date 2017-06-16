@@ -44,6 +44,18 @@
 
 	$(document).ready(function(){
 
+		// ACCORDION BOX
+		$('.accbox-btn').click(function() {
+			var accBoxItem = $(this).parent().parent();
+			if ( accBoxItem.hasClass('active') ) {
+				accBoxItem.removeClass('active');
+				accBoxItem.find('.accbox-hidden').slideUp();
+			} else {
+				accBoxItem.addClass('active');
+				accBoxItem.find('.accbox-hidden').slideDown();
+			}
+		});
+
 		if ($(window).width() > 399) {
 			$("a[rel^='prettyPhoto']").prettyPhoto({
 		    	default_width: 800,
