@@ -213,6 +213,21 @@ footer nav ul.footling li a:hover {
 
   }
 
-.from-price { background: none repeat scroll 0 0 rgba(<?php echo print_r($rgb); ?>, 0.8);      } 
+.from-price { background: none repeat scroll 0 0 rgba(<?php echo print_r($rgb); ?>, 0.8); } 
+
+.royalewrap,
+.topnavigationmob li .tnbox i,
+.hamburger span { 
+  
+  background-color: <?php echo $accent; ?>;
+
+}
+
+li.social_share_side a i,
+.topnavigationmob li i {
+  
+  color: <?php echo $accent; ?>;
+
+}
 
 <?php } ?>

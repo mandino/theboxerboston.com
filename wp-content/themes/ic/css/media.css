@@ -200,9 +200,6 @@ and (max-width : 1099px) {
 	.room-details-gallery.fr {
 	    width: 260px;
 	}
-	.room-details-content p {
-	    font-size: 20px;
-	}
 	.single-rooms .section-photos.fl {
 	    width: 70%;
 	}
@@ -364,6 +361,9 @@ and (max-width : 940px)
 	    margin-right: 5px;
 	    padding: 11px 15px;
 	}
+	.single-rooms #intro .section-photos.fl {
+		width: 70%;
+	}
 	/* Page - Specials */
 	.post-content .imagegal ul li:nth-child(3n) {
 	    margin-right: 0;
@@ -472,7 +472,7 @@ and (max-width : 940px)
 /* ================================================  MAX WIDTH 939 ======================================= */
 @media only screen
 and (max-width : 939px) {
-		#footer-newsletter {
+	#footer-newsletter {
 		display: none;
 	}
 	.mmenu-icon {
@@ -556,6 +556,30 @@ and (max-width : 939px) {
 	    -webkit-transition: all 0.4s ease 0s;
 	    -o-transition: all 0.4s ease 0s;
 	}
+	.mm-list > li.display-none {
+		display: block !important;
+	}
+	/* Pride Banner*/
+	#property-nav nav ul li.blue-btn {
+		bottom: 13px;
+	}
+	#property-nav .pride.pos-right {
+		right: -105px;
+		top: -25px;
+	}
+	#property-nav .pride.pos-right img {
+		width: 50%;
+	}
+	#property-nav .pride.pos-left {
+		left: -103px;
+		bottom: -27px;
+	}
+	#property-nav .pride.pos-left img {
+		width: 50%;
+	}
+	#property-nav .pride.pos-right a {
+		display: none;
+	}
 	/* Double Flyout */
 	.welcome-text { font-size: 13px; }
 	.ID1 { top: 15px; }
@@ -598,6 +622,9 @@ and (max-width : 939px) {
 	}
 	.newsletter-form input[type="text"] {
 	    width: 54%;
+	}
+	.room-details-gallery.fr {
+		width: 26%;
 	}
 	/* Footer - Navigation */
 	footer nav .fl {
@@ -939,6 +966,9 @@ and (max-width : 640px)
 	    position: relative;
 	    top: 0;
 	    width: 100%;
+	}
+	.single-rooms #intro .section-photos.fl {
+		width: 100%;
 	}
 	/* Footer - Nav */
 	footer nav .fr {

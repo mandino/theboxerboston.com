@@ -488,25 +488,26 @@
 							|| !dynamic_sidebar('Footer Column 2') ) : ?>
 					<?php endif; ?>  
 
-					<a class="all-events" href="<?php bloginfo('url'); ?>/events" style="text-align: center; margin-top: 10px; display: inline-block;">See all events</a>
+					<a class="all-events button" href="<?php bloginfo('url'); ?>/events" style="text-align: center; margin-top: 10px; display: inline-block;">See all events</a>
 		
 			     	<!-- widgetized  -->		
 								
 				</div>
 
-				<div class="fr">
-					<ul>
-					
-						
-						
-		            	<?php $count = 1; $query = new WP_Query( array( 'post_type' => 'tribe_events','eventDisplay' => 'upcoming', 'posts_per_page' => 4
-							) ); if($query->have_posts()) : while($query->have_posts()) : $query->the_post(); $imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full"); ?>
+				<div class="fr viewall">
+					<img src="<?php bloginfo('template_url') ?>/images/loading-2.gif" class="upcoming-events-img hide">
+
+					<ul id="upcoming-events">
+				    	<?php
+								$count = 1;
+								$query = upcoming_query(date('Y-m-d'), date('M Y',strtotime('first day of +1 month')));
+
+								if($query->have_posts()) : while($query->have_posts()) : $query->the_post(); 
+								$imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full"); 
+							?>
 						
 						<li<?php if($count == 2 || $count == 4) { ?> class="even"<?php } ?>>
-							
-							
-							<a href="<?php the_permalink(); ?>"><img src="<?php echo tt($imgsrc[0], 275, 178); ?>"  alt="<?php echo get_custom_image_thumb_alt_text('', get_post_thumbnail_id( $post->ID ));?>"/>
-							
+							<a href="<?php the_permalink(); ?>"><img src="<?php echo tt($imgsrc[0], 275, 178); ?>"  alt='<?php echo get_custom_image_thumb_alt_text('', $post->ID); ?>'/>
 							
 							<?php $shortdater = tribe_get_start_date($post->ID, true, 'M'); $shortdaterz = substr($shortdater, 0, 3);  ?>
 							
@@ -520,10 +521,7 @@
 							</a>
 						</li>
 						
-						
-						<?php $count++;  endwhile; endif; wp_reset_query(); ?>	
-						
-
+						<?php $count++; endwhile; endif; wp_reset_query(); ?>	
 					</ul>
 				</div>
 

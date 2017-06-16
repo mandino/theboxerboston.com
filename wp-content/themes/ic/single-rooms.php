@@ -74,10 +74,10 @@
 				</div>
 	
 			</div>
-			
-			
+
 			<div class="wonderline"></div>
-			
+
+			<div class="breadcrumbs"><a href="<?php echo get_permalink(49); ?>">All Rooms</a> > <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></div>
 			
 			<div class="room-details-content">
 
@@ -126,7 +126,21 @@
 					<?php if(have_posts()) : while(have_posts()) : the_post(); ?>
 					
 					
-					<a class="button"  onclick="fbq('track', 'InitiateCheckout'); ga('send', 'event', 'Booking', 'Reserve', '<?php echo get_the_title(); ?>'); _gaq.push(['_link', this.href]);return false;" target="_blank" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>">RESERVE NOW</a>
+					<?php
+						$btn_label = get_post_meta( $post->ID, 'rooms_button_label', true);
+						$btn_link = get_post_meta( $post->ID, 'rooms_button_link', true);
+
+						if(empty($btn_label) === false) { // has a value in rooms_button_label
+							if (empty($btn_link) === false){
+								$href = $btn_link;
+							} else {
+								$href = get_post_meta($post->ID, 'cebo_booklink', true) ? get_post_meta($post->ID, 'cebo_booklink', true) :  get_option('cebo_genbooklink');
+							}
+					?>
+						<a class="button" onclick="fbq('track', 'InitiateCheckout');_gaq.push(['_link', this.href]);return false;" href="<?php echo $href ?>"><?php echo get_post_meta( $post->ID, 'rooms_button_label', true) ?></a>
+					<?php } else { ?>
+						<a class="button" onclick="fbq('track', 'InitiateCheckout');  ga('send', 'event', 'Booking', 'Reserve', '<?php echo get_the_title(); ?>'); _gaq.push(['_link', this.href]);return false;" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>">Reserve Now</a>
+					<?php } ?>
 
 					<!-- <a class="button" href="#inline-1" title="" rel="prettyPhoto">SEE ROOM FEATURES</a> -->
 					
@@ -222,68 +236,15 @@
 
 				</div>
 
-
 			</div>
 			
+			<div class="section-header" style="border-top: 1px solid #ddd; margin-top: 60px; margin-bottom: 0; float: none; text-align: center;"></div>
 			
-			<div class="section-header singroom-sechead">
-					
-				<div class="fl fnone">
-	
-					<h2 class="section-title fr stfr"><?php _e('More Rooms & Suites', 'cebolang'); ?></h2>
-	
-				</div>
-	
-			
-	
-			</div>
-			
-
 		</div>
 
 	</div>
 	
 	<div class="clear"></div>
 
-	<div id="room-details-slider rd-slider">
-
-		<div class='slideSelectors'>
-			
-			<div class='item selected'></div>
-			<div class='item'></div>					
-			<div class='item'></div>
-			<div class='item'></div>
-			<div class='item'></div>
-		
-		</div>
-
-				
-		<div class='iosSlider'>
-		
-			<div class='slider'>
-				<?php $thisid = $post->ID; ?>
-				
-				
-				<?php query_posts(array('post_type' => 'rooms', 'posts_per_page' => -1,  'post__not_in' => array($post->ID))); if(have_posts()) : while(have_posts()) : the_post(); ?>
-				
-				<div class='item item1 current'>
-					<a href="<?php the_permalink(); ?>"><img src = '<?php echo get_post_meta($post->ID, 'cebo_homethumb', true); ?>' alt="<?php echo get_custom_image_thumb_alt_text(get_post_meta($post->ID, 'cebo_homethumb', true), ''); ?>"
- /></a>
-					
-					<h3><?php the_title(); ?></h3>
-				</div>
-				
-				<?php endwhile; endif; wp_reset_query(); ?>	
-				
-			</div>
-		
-		</div>
-
-		<div class="iosslider-prev"><i class="fa fa-chevron-left"></i></div>
-		<div class="iosslider-next"><i class="fa fa-chevron-right"></i></div>
-
-	</div>
-
-	
 					
 <?php get_footer(); ?>
