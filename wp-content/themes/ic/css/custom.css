@@ -3792,18 +3792,26 @@ ul.tabs li:last-child {
     width: 60%;
 }
 
-.wpcf7 input, .wpcf7 textarea {
+.wpcf7 input, 
+.wpcf7 textarea,
+.page-template-default input {
     border: 3px solid #CCCCCC;
     padding: 11px 10px;
     font-size: 15px;
+    box-sizing: border-box;
 }
 
-.wpcf7 input[type="text"]:focus, .wpcf7 input[type="password"]:focus, .wpcf7 input[type="email"]:focus, .wpcf7 textarea:focus {
+.wpcf7 input[type="text"]:focus, 
+.wpcf7 input[type="password"]:focus, 
+.wpcf7 input[type="email"]:focus, 
+.wpcf7 textarea:focus,
+.page-template-default input:focus {
     padding: 11px 10px;
     border: 3px solid #CCCCCC;
 }
 
-.wpcf7 input[type="submit"] {
+.wpcf7 input[type="submit"],
+.page-template-default input[type="submit"] {
     transition: all 0.4s;
     -moz-transition: all 0.4s;
     -webkit-transition: all 0.4s;
@@ -3815,7 +3823,8 @@ ul.tabs li:last-child {
     text-transform: uppercase;
     width: 110px;
 }
-    .wpcf7 input[type="submit"]:hover {
+    .wpcf7 input[type="submit"]:hover,
+    .page-template-default input[type="submit"]:hover {
         background-color: #38BABF;
         color: #fff;
         cursor: pointer;
