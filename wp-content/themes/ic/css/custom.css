@@ -98,6 +98,27 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+	font-family: 'JosefinSans-Bold';
+	src:url('fonts/JosefinSans-Bold.eot');
+	src: url('fonts/JosefinSans-Bold.eot?#iefix') format('embedded-opentype'),
+		url('fonts/JosefinSans-Bold.woff') format('woff'),
+		url('fonts/JosefinSans-Bold.ttf') format('truetype'),
+		url('fonts/JosefinSans-Bold.svg#JosefinSans-Bold') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'JosefinSans';
+	src:url('fonts/JosefinSans.eot');
+	src: url('fonts/JosefinSans.eot?#iefix') format('embedded-opentype'),
+		url('fonts/JosefinSans.woff') format('woff'),
+		url('fonts/JosefinSans.ttf') format('truetype'),
+		url('fonts/JosefinSans.svg#JosefinSans') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
 
 html, body {
     font-family: 'scala-sans', sans-serif;
@@ -4140,4 +4161,77 @@ li.blue-btn i {
 
 .reservationform.flexdate {
   height: 40px;
+}
+
+.post-content ul.accbox-item {
+	border: 1px solid #CCC; position: relative;
+	padding-left: 20px;
+	margin-bottom: 0px
+}
+
+.post-content ul.accbox-item li {
+	list-style: none;
+	margin: 0
+}
+
+.post-content ul.accbox-item li:before {
+	content: none;
+}
+
+.accbox-item .accbox-title {
+	font-family: 'JosefinSans-Bold';
+	font-size: 17px;
+	letter-spacing: 5px;
+	color: #000000;
+	-webkit-transition: all 0.4s ease 0s;
+	-moz-transition: all 0.4s ease 0s;
+	-ms-transition: all 0.4s ease 0s;
+	-o-transition: all 0.4s ease 0s;
+	transition: all 0.4s ease 0s;
+	margin: 0;
+	padding: 0;
+	vertical-align: middle;
+	font-weight: normal;
+}
+
+.accbox-btn {
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	top: 5px;
+	right: 20px;
+	z-index: 1;
+}
+
+.accbox-btn:before, .accbox-btn:after {
+	background: #000;
+	display: block;
+	content: '';
+	width: 24px;
+	height: 1px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -1px 0 0 -12px;
+}
+
+.accbox-btn:after {
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+
+.accbox-item.active .accbox-btn:after {
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-ms-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	transform: rotate(0deg);
+}
+
+.accbox-hidden {
+	display: none;
+	padding-top: 15px;
 }

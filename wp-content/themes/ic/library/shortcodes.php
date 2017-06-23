@@ -243,7 +243,7 @@
 			'mode'       => ''
 		), $atts ) );
 
-		return '<ul id="toggle-view"><li><h3>' . esc_attr( $title ) . '</h3><div class="panel"><p>' . do_shortcode( $content ) . '<p></div></li></ul>';
+		return '<ul class="accbox-item"><li><h3 class="accbox-title">' . esc_attr( $title ) . '</h3><div class="accbox-btn"></div><div class="accbox-hidden"><p>' . do_shortcode( $content ) . '<p></div></li></ul>';
 	
 	}
 	add_shortcode('accordion_content', 'ss_framework_accordion_content_sc');
