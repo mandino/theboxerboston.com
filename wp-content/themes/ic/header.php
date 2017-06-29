@@ -247,13 +247,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			
 			
 		<div id="property-nav">
-			<div class="pride pos-right">
-				<img src="<?php bloginfo('template_directory'); ?>/images/pride.png">
-				<a href="//www.theboxerboston.com/blog/guide-pride-month-boston/"><i class="fa fa-info-circle" aria-hidden="true"></i>Celebrate Pride</a>
-			</div>
-			<div class="pride pos-left">
-				<img src="<?php bloginfo('template_directory'); ?>/images/pride-left.png">	
-			</div>
 			<nav class="click-nav" style="border: none;">
 			<nav class="click-nav">
 				<ul class="container no-js">
