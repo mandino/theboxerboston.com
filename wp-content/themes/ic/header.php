@@ -130,12 +130,6 @@
 		"description": "A most wonderful article",
 		"articleBody": "The full body of the article"
 		}
-	</script> 
-
-	<script type="text/javascript">
-		function viewContent(){
-			fbq('track', "ViewContent");
-		}
 	</script>
 
 	<script>
