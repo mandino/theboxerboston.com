@@ -130,12 +130,6 @@
 		"description": "A most wonderful article",
 		"articleBody": "The full body of the article"
 		}
-	</script> 
-
-	<script type="text/javascript">
-		function viewContent(){
-			fbq('track', "ViewContent");
-		}
 	</script>
 
 	<script>
@@ -216,7 +210,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 							</select>
 						</span>
 						
-						<button type="submit" class="button" onClick="fbq('track', 'Lead'); ga('send', 'event', 'Booking-widget', 'Search-now', 'Search dates with booking widget');">Search Now</button>
+						<button type="submit" class="button">Search Now</button>
 						
 					
 						</form>
@@ -227,7 +221,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 					<div class="reservationform flexdate">
 					
-						<p><a href="https://theboxerboston.reztrip.com" onclick="fbq('track', 'Lead'); ga('send', 'event', 'Flexible Dates', 'click', 'Booking-widget');">Flexible dates?</a> Search for our best available rate</p>
+						<p><a href="https://theboxerboston.reztrip.com">Flexible dates?</a> Search for our best available rate</p>
 						
 					</div>
 
@@ -277,7 +271,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			
 			<a href="https://theboxerboston.reztrip.com" class="reserve fixeer button fr input-append date" rooms ="1" id="idp3" data-date="12-02-2012" data-date-format="mm-dd-yyyy">RESERVE</a>
 
-			<a class="reserve fixeer mobile button fr" id="idp4"  onclick=" ga('send', 'event', 'Booking', 'Reserve'); _gaq.push(['_link', this.href]);return false;" href="<?php echo get_option('cebo_genbooklink'); ?>" target="_blank">RESERVE</a>
+			<a class="reserve fixeer mobile button fr" id="idp4"  onclick="_gaq.push(['_link', this.href]);return false;" href="<?php echo get_option('cebo_genbooklink'); ?>" target="_blank">RESERVE</a>
 			
 			<div class="container" style="float: right;">
 

@@ -183,21 +183,25 @@ function get_custom_image_thumb_alt_text($img_url,$img_id) {
     return $image_thumb_alt_text;
 }
 
-function facebook_pixel_code_header() {
-?>
-<!--Facebook Pixel Code -->
-<script> !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n; n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0; t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+add_filter('amp_post_template_file', 'amp_set_custom_footer_template', 10, 2);
 
-fbq('init', '1845802005668396'); // Insert your pixel ID here.
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1845802005668396&ev=PageView&noscript=1" /></noscript>
-<!-- DO NOT MODIFY -->
-<!-- End Facebook Pixel Code -->
-<?php 
+function amp_set_custom_footer_template($file, $type) {
+	if ('footer' === $type) {
+		$file = TEMPLATEPATH . '/amp/templates/footer.php';
+	}
+
+	return $file;
 }
 
-add_action('wp_head', 'facebook_pixel_code_header');
+add_filter('amp_post_template_file', 'amp_set_custom_style_css', 10, 3);
+
+function amp_set_custom_style_css($file, $type, $post) {
+	if ('style' === $type) {
+		$file = TEMPLATEPATH . '/amp/templates/style.php';
+	}
+
+	return $file;
+}
 
 /*
 	widget-calendar.js in plugin transfer to ic theme tribe-events-widget-calendar.js

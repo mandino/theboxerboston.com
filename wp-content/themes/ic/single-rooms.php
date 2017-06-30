@@ -19,7 +19,7 @@
 				<li>
 					<div class="room-slider-gradience"></div>
 					<div class="slide-header">
-						<a class="button"  onclick="fbq('track', 'InitiateCheckout'); ga('send', 'event', 'Reserve', 'Reservation-button-banner', 'Reserve Now'); _gaq.push(['_link', this.href]);return false;" target="_blank" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>"><?php _e('RESERVE NOW', 'cebolang'); ?></a>
+						<a class="button"  onclick="_gaq.push(['_link', this.href]);return false;" target="_blank" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>"><?php _e('RESERVE NOW', 'cebolang'); ?></a>
 					</div>
 					<img src="<?php echo get_post_meta($post->ID, 'cebo_fullpic', true); ?>" alt="<?php echo get_custom_image_thumb_alt_text(get_post_meta($post->ID, 'cebo_fullpic', true), ''); ?>" />
 				</li>
@@ -138,9 +138,9 @@
 								$href = get_post_meta($post->ID, 'cebo_booklink', true) ? get_post_meta($post->ID, 'cebo_booklink', true) :  get_option('cebo_genbooklink');
 							}
 					?>
-						<a class="button" onclick="fbq('track', 'InitiateCheckout');_gaq.push(['_link', this.href]);return false;" href="<?php echo $href ?>"><?php echo get_post_meta( $post->ID, 'rooms_button_label', true) ?></a>
+						<a class="button" onclick="_gaq.push(['_link', this.href]);return false;" href="<?php echo $href ?>"><?php echo get_post_meta( $post->ID, 'rooms_button_label', true) ?></a>
 					<?php } else { ?>
-						<a class="button" onclick="fbq('track', 'InitiateCheckout');  ga('send', 'event', 'Booking', 'Reserve', '<?php echo get_the_title(); ?>'); _gaq.push(['_link', this.href]);return false;" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>">Reserve Now</a>
+						<a class="button" onclick="_gaq.push(['_link', this.href]);return false;" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>">Reserve Now</a>
 					<?php } ?>
 
 					<!-- <a class="button" href="#inline-1" title="" rel="prettyPhoto">SEE ROOM FEATURES</a> -->
