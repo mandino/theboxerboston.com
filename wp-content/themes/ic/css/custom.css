@@ -4235,3 +4235,63 @@ li.blue-btn i {
 	display: none;
 	padding-top: 15px;
 }
+
+.hideMenu {
+    display: none;
+}
+
+.showMenu {
+    display: block;
+}
+.menu-list {
+    display: block; 
+    position: relative;
+}
+
+.menu-content-1 {
+    width: 50%;
+    float: left;
+}
+.menu-content-1 .menu-items-container {
+    position: relative;
+}
+
+.menu-content-1 .menu-items {
+    width: 50%;
+}
+
+.menu-content-1 .menu-items p {
+    width: 90%;
+    line-height: 1;
+    font-size: 12px;
+}
+.menu-content-1 .menu-price {
+    width: 20%;
+    float: right;
+    padding-right: 15px;
+    margin-top: -50px;
+}
+.menu-content-2 {
+    width: 50%;
+    float: left;
+}
+
+.menu-content-2 .menu-items-container {
+    position: relative;
+}
+
+.menu-content-2 .menu-items {
+    width: 50%;
+}
+
+.menu-content-2 .menu-items p {
+    width: 90%;
+    line-height: 1;
+    font-size: 12px;
+}
+.menu-content-2 .menu-price {
+    width: 20%;
+    float: right;
+    padding-right: 15px;
+    margin-top: -50px;
+}

@@ -43,7 +43,13 @@
 <script type="text/javascript">
 
 	$(document).ready(function(){
-
+		$(".tab_button").click(function() {
+			var id = "#"+$(this).data('class');
+			$('.menu-container').removeClass('showMenu');
+			$('.menu-container').addClass('hideMenu');
+			$(id).removeClass('hideMenu');
+			$(id).addClass('showMenu');
+		});
 		// ACCORDION BOX
 		$('.accbox-btn').click(function() {
 			var accBoxItem = $(this).parent().parent();
