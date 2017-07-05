@@ -4358,3 +4358,7 @@ li.blue-btn i {
 .drink-menu-container .menu-content-1 .bottle-price {
     margin-left: 390px;
 }
+
+.menu-table tr td {
+    width: 300px;
+}

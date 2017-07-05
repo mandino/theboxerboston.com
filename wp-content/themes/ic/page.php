@@ -161,7 +161,7 @@
 							<?php if ($count == 0): ?>
 								<div class="menu-list left-menu">
 									<div class="menu-content-<?php echo $count;?>">
-										<table>
+										<table class="menu-table">
 											<th><h3><?php the_sub_field('menu_type_name') ?></h3></th>
 											<?php if (have_rows('menu_items')) : while(have_rows('menu_items'))  : the_row();?>
 											<tr>
@@ -187,9 +187,8 @@
 													</div>
 												</td>
 											</tr>
-										</table>
-											
-										<?php endwhile; endif; ?>
+											<?php endwhile; endif; ?>
+										</table>					
 									</div>
 									<div class="clear"></div>
 								</div>
@@ -201,7 +200,7 @@
 									<?php if (have_rows('meal_type')) : while(have_rows('meal_type'))  : the_row();?>
 									<?php if ($count > 0): ?>
 									<div class="menu-content-<?php echo $count;?>" style="">
-										<table>
+										<table class="menu-table">
 											<tr><th><h3><?php the_sub_field('menu_type_name') ?></h3></th></tr>
 											<?php if (have_rows('menu_items')) : while(have_rows('menu_items'))  : the_row();?>
 											<tr>
@@ -223,9 +222,10 @@
 													</div>
 												</td>
 											</tr>
+											<?php endwhile; endif; ?>
 										</table>
 
-										<?php endwhile; endif; ?>
+										
 									</div>
 
 									<?php endif ?>
