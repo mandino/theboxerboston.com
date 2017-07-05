@@ -4320,6 +4320,9 @@ li.blue-btn i {
 
 .drink-menu-container .price-label {
     font-family: 'Arial Regular';
+    padding-bottom: 20px;
+    font-size: 14px;
+    font-weight: 700;
 }
 
 .drink-menu-container .menu-content-1 .menu-items-container {
@@ -4342,7 +4345,7 @@ li.blue-btn i {
     width: 20%;
     float: left;
     padding-right: 15px;
-    margin-top: -50px;
+    margin-top: -35px;
 }
 
 .drink-menu-container .menu-content-1 .glass-price {
