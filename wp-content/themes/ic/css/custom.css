@@ -4271,6 +4271,7 @@ li.blue-btn i {
 }
 .eat-menu-container h3 {
     color: #000 !important;
+    text-align: left;
 }
 .eat-menu-container [class*="menu-content"] {
     width: 100%;
@@ -4282,7 +4283,11 @@ li.blue-btn i {
 }
 
 .eat-menu-container [class*="menu-content"] .menu-items {
-    width: 70%;
+    width: 90%;
+}
+
+.eat-menu-container [class*="menu-content"] .menu-items span{
+    font-weight: 700;;
 }
 
 .eat-menu-container [class*="menu-content"] .menu-items p {
@@ -4295,8 +4300,6 @@ li.blue-btn i {
 .eat-menu-container [class*="menu-content"] .menu-price {
     width: 20%;
     float: right;
-    padding-right: 15px;
-    margin-top: -50px;
 }
 
 .drink-menu-container .menu-list {

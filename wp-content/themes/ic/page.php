@@ -161,17 +161,34 @@
 							<?php if ($count == 0): ?>
 								<div class="menu-list left-menu">
 									<div class="menu-content-<?php echo $count;?>">
-										<h3><?php the_sub_field('menu_type_name') ?></h3>
-										<?php if (have_rows('menu_items')) : while(have_rows('menu_items'))  : the_row();?>
-											<div class="menu-items-container">
-												<div class="menu-items">
-													<span><?php the_sub_field('items'); ?></span>
-													<?php the_sub_field('content') ?>
-												</div>
-											</div>
-											<div class="menu-price">
-												<span><?php the_sub_field('price') ?></span>	
-											</div>
+										<table>
+											<th><h3><?php the_sub_field('menu_type_name') ?></h3></th>
+											<?php if (have_rows('menu_items')) : while(have_rows('menu_items'))  : the_row();?>
+											<tr>
+												<td>
+													<div class="menu-items-container">
+														<div class="menu-items">
+															<span><?php the_sub_field('items'); ?></span>
+														</div>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<div class="menu-items-container">
+														<div class="menu-items">
+															<?php the_sub_field('content') ?>
+														</div>
+													</div>
+												</td>
+												<td>
+													<div class="menu-price">
+														<span><?php the_sub_field('price') ?></span>	
+													</div>
+												</td>
+											</tr>
+										</table>
+											
 										<?php endwhile; endif; ?>
 									</div>
 									<div class="clear"></div>
@@ -184,15 +201,29 @@
 									<?php if (have_rows('meal_type')) : while(have_rows('meal_type'))  : the_row();?>
 									<?php if ($count > 0): ?>
 									<div class="menu-content-<?php echo $count;?>" style="">
-										<h3><?php the_sub_field('menu_type_name') ?></h3>
-										<?php if (have_rows('menu_items')) : while(have_rows('menu_items'))  : the_row();?>
-											<div class="menu-items">
-												<span><?php the_sub_field('items'); ?></span>
-												<?php the_sub_field('content') ?>
-											</div>
-											<div class="menu-price">
-												<span><?php the_sub_field('price') ?></span>	
-											</div>
+										<table>
+											<tr><th><h3><?php the_sub_field('menu_type_name') ?></h3></th></tr>
+											<?php if (have_rows('menu_items')) : while(have_rows('menu_items'))  : the_row();?>
+											<tr>
+												<td>
+													<div class="menu-items">
+														<span><?php the_sub_field('items'); ?></span>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<div class="menu-items">	
+														<?php the_sub_field('content') ?>
+													</div>
+												</td>
+												<td>
+													<div class="menu-price">
+														<span><?php the_sub_field('price') ?></span>	
+													</div>
+												</td>
+											</tr>
+										</table>
 
 										<?php endwhile; endif; ?>
 									</div>
