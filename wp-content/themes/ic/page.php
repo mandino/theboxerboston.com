@@ -131,7 +131,7 @@
 
 				<!-- New Restaurant Menu Template -->
 
-				<?php $class = ""; $cnt = 0; $count = 0;?>
+				<?php $class = ""; $cnt = 0; ?>
 				<div class="eat-container">
 					<div>
 					<?php if (have_posts('eat_menu')) : while(have_rows('eat_menu')) : the_row();?>
@@ -148,6 +148,7 @@
 					<?php if ($cnt == 0) : $hideClass = "showMenu"; else : $hideClass = "hideMenu"; endif; ?>
 
 					<?php 
+						$count = 0;
 						$temp_class = strtolower(get_sub_field('menu_title'));
 						$_class = str_replace(" ", "_", $temp_class);
 					 ?>
