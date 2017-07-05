@@ -1424,6 +1424,22 @@ and (max-width : 320px)
 	.slide-header .button {
     display: none;
 }
+
+.eat-menu-container {
+    width: 100%;
+}
+.menu-list.right-menu {
+	float: none;
+}
+
+.drink-menu-container .menu-content-1 .glass-price{
+	margin-left: 135px;
+}
+
+.drink-menu-container .menu-content-1 .bottle-price{
+	margin-left: 210px;
+}
+
 }
 /* ================================================  MOBILES BELOW 480 to 400 ======================================= */
 @media only screen
