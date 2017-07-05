@@ -174,7 +174,7 @@
 								<?php if (have_rows('entrees')) : while(have_rows('entrees'))  : the_row();?>
 									<div class="menu-items">
 										<span><?php the_sub_field('items'); ?></span>
-										<p><?php the_sub_field('content') ?></p>
+										<?php the_sub_field('content') ?>
 									</div>
 									<div class="menu-price">
 										<span><?php the_sub_field('price') ?></span>	
@@ -187,7 +187,7 @@
 								<?php if (have_rows('salads_soups')) : while(have_rows('salads_soups'))  : the_row();?>
 									<div class="menu-items">
 										<span><?php the_sub_field('items'); ?></span>
-										<p><?php the_sub_field('content') ?></p>
+										<?php the_sub_field('content') ?>
 									</div>
 									<div class="menu-price">
 										<span><?php the_sub_field('price') ?></span>	
@@ -200,7 +200,7 @@
 								<?php if (have_rows('dessert')) : while(have_rows('dessert'))  : the_row();?>
 									<div class="menu-items">
 										<span><?php the_sub_field('items'); ?></span>
-										<p><?php the_sub_field('content') ?></p>
+										<?php the_sub_field('content') ?>
 									</div>
 									<div class="menu-price">
 										<span><?php the_sub_field('price') ?></span>	

@@ -4275,14 +4275,15 @@ li.blue-btn i {
 }
 
 .eat-menu-container .menu-content-1 .menu-items {
-    width: 50%;
+    width: 70%;
 }
 
 .eat-menu-container .menu-content-1 .menu-items p {
-    width: 90%;
+    width: 100%;
     line-height: 1;
     font-size: 12px;
     font-family: 'Arial Regular';
+    margin-top: 0;
 }
 .eat-menu-container .menu-content-1 .menu-price {
     width: 20%;
@@ -4300,14 +4301,15 @@ li.blue-btn i {
 }
 
 .eat-menu-container .menu-content-2 .menu-items {
-    width: 50%;
+    width: 70%;
 }
 
 .eat-menu-container .menu-content-2 .menu-items p {
-    width: 90%;
+    width: 100%;
     line-height: 1;
     font-size: 12px;
     font-family: 'Arial Regular';
+    margin-top: 0;
 }
 .eat-menu-container .menu-content-2 .menu-price {
     width: 20%;
@@ -4326,14 +4328,15 @@ li.blue-btn i {
 }
 
 .eat-menu-container .menu-content-3 .menu-items {
-    width: 50%;
+    width: 70%;
 }
 
 .eat-menu-container .menu-content-3 .menu-items p {
-    width: 90%;
+    width: 100%;
     line-height: 1;
     font-size: 12px;
     font-family: 'Arial Regular';
+    margin-top: 0;
 }
 .eat-menu-container .menu-content-3 .menu-price {
     width: 20%;
@@ -4352,14 +4355,15 @@ li.blue-btn i {
 }
 
 .eat-menu-container .menu-content-4 .menu-items {
-    width: 50%;
+    width: 70%;
 }
 
 .eat-menu-container .menu-content-4 .menu-items p {
-    width: 90%;
+    width: 100%;
     line-height: 1;
     font-size: 12px;
     font-family: 'Arial Regular';
+    margin-top: 0;
 }
 .eat-menu-container .menu-content-4 .menu-price {
     width: 20%;
@@ -4391,14 +4395,15 @@ li.blue-btn i {
 }
 
 .drink-menu-container .menu-content-1 .menu-items {
-    width: 50%;
+    width: 70%;
 }
 
 .drink-menu-container .menu-content-1 .menu-items p {
-    width: 90%;
+    width: 100%;
     line-height: 1;
     font-size: 12px;
     font-family: 'Arial Regular';
+    margin-top: 0;
 }
 .drink-menu-container .menu-content-1 .menu-price {
     width: 20%;
@@ -4417,14 +4422,15 @@ li.blue-btn i {
 }
 
 .drink-menu-container .menu-content-2 .menu-items {
-    width: 50%;
+    width: 70%;
 }
 
 .drink-menu-container .menu-content-2 .menu-items p {
-    width: 90%;
+    width: 100%;
     line-height: 1;
     font-size: 12px;
     font-family: 'Arial Regular';
+    margin-top: 0;
 }
 .drink-menu-container .menu-content-2 .menu-price {
     width: 20%;
