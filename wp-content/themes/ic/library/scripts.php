@@ -43,10 +43,19 @@
 <script type="text/javascript">
 
 	$(document).ready(function(){
-		$(".tab_button").click(function() {
+		$(".eat-tab-button").click(function() {
 			var id = "#"+$(this).data('class');
-			$('.menu-container').removeClass('showMenu');
-			$('.menu-container').addClass('hideMenu');
+			$('.eat-menu-container').removeClass('showMenu');
+			$('.eat-menu-container').addClass('hideMenu');
+			$(id).removeClass('hideMenu');
+			$(id).addClass('showMenu');
+		});
+
+		$(".drink-tab-button").click(function() {
+			var id = "#"+$(this).data('class');
+			console.log(id)
+			$('.drink-menu-container').removeClass('showMenu');
+			$('.drink-menu-container').addClass('hideMenu');
 			$(id).removeClass('hideMenu');
 			$(id).addClass('showMenu');
 		});

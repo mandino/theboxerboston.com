@@ -4243,53 +4243,190 @@ li.blue-btn i {
 .showMenu {
     display: block;
 }
-.menu-list {
+.menu-list.left-menu {
+    width: 50%;
+    float: left;
+}
+.menu-list.right-menu {
+    width: 50%;
+    float: right;
+}
+.eat-menu-container {
+    width: 790px
+}
+.eat-menu-container .menu-list {
     display: block; 
     position: relative;
 }
 
-.menu-content-1 {
-    width: 50%;
-    float: left;
+.eat-menu-container h2 {
+    color: #000;
 }
-.menu-content-1 .menu-items-container {
+.eat-menu-container h3 {
+    color: #000 !important;
+}
+.eat-menu-container .menu-content-1 {
+    width: 100%;
+    float: left;
+    font-family: 'Arial Regular';
+}
+.eat-menu-container .menu-content-1 .menu-items-container {
     position: relative;
 }
 
-.menu-content-1 .menu-items {
+.eat-menu-container .menu-content-1 .menu-items {
     width: 50%;
 }
 
-.menu-content-1 .menu-items p {
+.eat-menu-container .menu-content-1 .menu-items p {
     width: 90%;
     line-height: 1;
     font-size: 12px;
+    font-family: 'Arial Regular';
 }
-.menu-content-1 .menu-price {
+.eat-menu-container .menu-content-1 .menu-price {
     width: 20%;
     float: right;
     padding-right: 15px;
     margin-top: -50px;
 }
-.menu-content-2 {
-    width: 50%;
-    float: left;
+.eat-menu-container .menu-content-2 {
+    width: 100%;
+    font-family: 'Arial Regular';
 }
 
-.menu-content-2 .menu-items-container {
+.eat-menu-container .menu-content-2 .menu-items-container {
     position: relative;
 }
 
-.menu-content-2 .menu-items {
+.eat-menu-container .menu-content-2 .menu-items {
     width: 50%;
 }
 
-.menu-content-2 .menu-items p {
+.eat-menu-container .menu-content-2 .menu-items p {
     width: 90%;
     line-height: 1;
     font-size: 12px;
+    font-family: 'Arial Regular';
 }
-.menu-content-2 .menu-price {
+.eat-menu-container .menu-content-2 .menu-price {
+    width: 20%;
+    float: right;
+    padding-right: 15px;
+    margin-top: -50px;
+}
+
+.eat-menu-container .menu-content-3 {
+    width: 100%;
+    font-family: 'Arial Regular';
+}
+
+.eat-menu-container .menu-content-3 .menu-items-container {
+    position: relative;
+}
+
+.eat-menu-container .menu-content-3 .menu-items {
+    width: 50%;
+}
+
+.eat-menu-container .menu-content-3 .menu-items p {
+    width: 90%;
+    line-height: 1;
+    font-size: 12px;
+    font-family: 'Arial Regular';
+}
+.eat-menu-container .menu-content-3 .menu-price {
+    width: 20%;
+    float: right;
+    padding-right: 15px;
+    margin-top: -50px;
+}
+
+.eat-menu-container .menu-content-4 {
+    width: 100%;
+    font-family: 'Arial Regular';
+}
+
+.eat-menu-container .menu-content-4 .menu-items-container {
+    position: relative;
+}
+
+.eat-menu-container .menu-content-4 .menu-items {
+    width: 50%;
+}
+
+.eat-menu-container .menu-content-4 .menu-items p {
+    width: 90%;
+    line-height: 1;
+    font-size: 12px;
+    font-family: 'Arial Regular';
+}
+.eat-menu-container .menu-content-4 .menu-price {
+    width: 20%;
+    float: right;
+    padding-right: 15px;
+    margin-top: -50px;
+}
+
+.drink-menu-container .menu-list {
+    display: block; 
+    position: relative;
+}
+
+.drink-menu-container h2 {
+    color: #000;
+}
+
+.drink-menu-container h3 {
+    color: #000 !important;
+}
+
+.drink-menu-container .menu-content-1 {
+    width: 50%;
+    float: left;
+    font-family: 'Arial Regular';
+}
+.drink-menu-container .menu-content-1 .menu-items-container {
+    position: relative;
+}
+
+.drink-menu-container .menu-content-1 .menu-items {
+    width: 50%;
+}
+
+.drink-menu-container .menu-content-1 .menu-items p {
+    width: 90%;
+    line-height: 1;
+    font-size: 12px;
+    font-family: 'Arial Regular';
+}
+.drink-menu-container .menu-content-1 .menu-price {
+    width: 20%;
+    float: right;
+    padding-right: 15px;
+    margin-top: -50px;
+}
+.drink-menu-container .menu-content-2 {
+    width: 50%;
+    float: left;
+    font-family: 'Arial Regular';
+}
+
+.drink-menu-container .menu-content-2 .menu-items-container {
+    position: relative;
+}
+
+.drink-menu-container .menu-content-2 .menu-items {
+    width: 50%;
+}
+
+.drink-menu-container .menu-content-2 .menu-items p {
+    width: 90%;
+    line-height: 1;
+    font-size: 12px;
+    font-family: 'Arial Regular';
+}
+.drink-menu-container .menu-content-2 .menu-price {
     width: 20%;
     float: right;
     padding-right: 15px;

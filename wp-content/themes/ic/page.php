@@ -129,14 +129,15 @@
 				
 				<?php the_content(); ?>
 				<?php $class = ""; $cnt = 0; ?>
-				<div>
+				<div class="eat-container">
+					<div>
 					<?php if (have_posts('eat_menu')) : while(have_rows('eat_menu')) : the_row();?>
 					<?php 
 						$temp_class = strtolower(get_sub_field('menu_title'));
 						$class = str_replace(" ", "_", $temp_class);
 						
 					 ?>
-						<button class="button tab_button" data-class="<?php echo $class; ?>"><?php the_sub_field('menu_title') ?></button>
+						<button class="button eat-tab-button" data-class="<?php echo $class; ?>"><?php the_sub_field('menu_title') ?></button>
 					<?php endwhile; endif; ?>	
 				</div>
 
@@ -146,9 +147,9 @@
 						$temp_class = strtolower(get_sub_field('menu_title'));
 						$_class = str_replace(" ", "_", $temp_class);
 					 ?>
-					<section id="<?php echo $_class; ?>" class="menu-container <?php echo $hideClass; ?>">
+					<section id="<?php echo $_class; ?>" class="eat-menu-container <?php echo $hideClass; ?>">
 						<h2><?php the_sub_field('menu_title') ?></h2>
-						<div class="menu-list">
+						<div class="menu-list left-menu">
 							
 							<div class="menu-content-1">
 								<h3>Shares</h3>
@@ -158,15 +159,16 @@
 											<span><?php the_sub_field('items'); ?></span>
 											<?php the_sub_field('content') ?>
 										</div>
-										<div class="menu-price">
+									</div>
+									<div class="menu-price">
 											<span><?php the_sub_field('price') ?></span>
 											
 										</div>
-									</div>
-
 								<?php endwhile; endif; ?>
 							</div>
-
+							<div class="clear"></div>
+						</div>
+						<div class="menu-list right-menu">
 							<div class="menu-content-2" style="">
 								<h3>Entrees</h3>
 								<?php if (have_rows('entrees')) : while(have_rows('entrees'))  : the_row();?>
@@ -180,11 +182,98 @@
 
 								<?php endwhile; endif; ?>
 							</div>
+							<div class="menu-content-3" style="">
+								<h3>Salads/Soups</h3>
+								<?php if (have_rows('salads_soups')) : while(have_rows('salads_soups'))  : the_row();?>
+									<div class="menu-items">
+										<span><?php the_sub_field('items'); ?></span>
+										<p><?php the_sub_field('content') ?></p>
+									</div>
+									<div class="menu-price">
+										<span><?php the_sub_field('price') ?></span>	
+									</div>
+
+								<?php endwhile; endif; ?>
+							</div>
+							<div class="menu-content-4" style="">
+								<h3>Dessert</h3>
+								<?php if (have_rows('dessert')) : while(have_rows('dessert'))  : the_row();?>
+									<div class="menu-items">
+										<span><?php the_sub_field('items'); ?></span>
+										<p><?php the_sub_field('content') ?></p>
+									</div>
+									<div class="menu-price">
+										<span><?php the_sub_field('price') ?></span>	
+									</div>
+
+								<?php endwhile; endif; ?>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="clear"></div>
+					</section>
+					
+				<?php $cnt++; endwhile; endif; ?>
+				</div>
+				
+				<div class="drink-container">
+					<div>
+					<?php if (have_posts('drink_menu')) : while(have_rows('drink_menu')) : the_row();?>
+					<?php 
+						$temp_class = strtolower(get_sub_field('menu_title'));
+						$class = str_replace(" ", "_", $temp_class);
+						
+					 ?>
+						<button class="button drink-tab-button" data-class="<?php echo $class; ?>"><?php the_sub_field('menu_title') ?></button>
+					<?php endwhile; endif; ?>	
+				</div>
+				<?php $cnt2 = 0; ?>
+				<?php if (have_posts('drink_menu')) : while(have_rows('drink_menu')) : the_row();?>
+					<?php if ($cnt2 == 0) : $hideClass = "showMenu"; else : $hideClass = "hideMenu"; endif; ?>
+					<?php 
+						
+						$temp_class = strtolower(get_sub_field('menu_title'));
+						$_class = str_replace(" ", "_", $temp_class);
+					 ?>
+					<section id="<?php echo $_class; ?>" class="drink-menu-container <?php echo $hideClass; ?>">
+						<h2><?php the_sub_field('menu_title') ?></h2>
+						<div class="menu-list">
+							
+							<div class="menu-content-1">
+								<?php if (have_rows('items')) : while(have_rows('items'))  : the_row();?>
+									<div class="menu-items-container">
+										<div class="menu-items">
+											<span><?php the_sub_field('item_name'); ?></span>
+											<?php the_sub_field('content') ?>
+										</div>
+										<div class="menu-price">
+											<span><?php the_sub_field('price') ?></span>
+											
+										</div>
+									</div>
+
+								<?php endwhile; endif; ?>
+							</div>
+
+							<!-- <div class="menu-content-2" style="">
+								<h3>Entrees</h3>
+								<?php if (have_rows('entrees')) : while(have_rows('entrees'))  : the_row();?>
+									<div class="menu-items">
+										<span><?php the_sub_field('items'); ?></span>
+										<p><?php the_sub_field('content') ?></p>
+									</div>
+									<div class="menu-price">
+										<span><?php the_sub_field('price') ?></span>	
+									</div>
+
+								<?php endwhile; endif; ?>
+							</div> -->
 							<div class="clear"></div>
 						</div>
 					</section>
 					
-				<?php $cnt++; endwhile; endif; ?>
+				<?php $cnt2++; endwhile; endif; ?>
+				</div>
 
 			</div>
 
