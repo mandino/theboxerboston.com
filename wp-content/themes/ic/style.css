@@ -4776,7 +4776,7 @@ li.social_share_side a i:hover{
 }
 
 .white-shadow {
-  display: block;
+  display: none;
   height: 60px;
   width: 100%;
   bottom: 14px;
