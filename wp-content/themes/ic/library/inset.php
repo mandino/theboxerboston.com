@@ -230,4 +230,9 @@ li.social_share_side a i,
 
 }
 
+.read-more-button i {
+  color: <?php echo $accent; ?>;
+}
+
+
 <?php } ?>
