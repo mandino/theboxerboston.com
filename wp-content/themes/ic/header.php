@@ -221,7 +221,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 					<div class="reservationform flexdate">
 					
-						<p><a href="https://theboxerboston.reztrip.com">Flexible dates?</a> Search for our best available rate</p>
+						<p><a href="https://theboxerboston.reztrip.com/calendar">Flexible dates?</a> Search for our best available rate</p>
 						
 					</div>
 
@@ -245,7 +245,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			<nav class="click-nav">
 				<ul class="container no-js">
 					<li>
-						<a href="//www.iclocalrewards.com/" target="_blank" class="clicknav-clicker">Join IC Local and Start Receiving Perks with Every Stay</a>	
+						<a href="//www.iclocalrewards.com/" target="_blank" class="clicknav-clicker">Enter to Win a Two Night Stay at an Independent Collection Hotel</a>	
 					</li>
 					<li class="blue-btn"><a href="//theboxerboston.com/blue"><i class="fa fa-info-circle"></i><span class="blue-mobile">why blue?</span></a></li>
 				</ul>

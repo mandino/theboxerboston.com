@@ -160,14 +160,13 @@
 			alertBoxShortcode = true;
 
 		/* -------------------------------------------------- */
-		/*	Alert Boxes: Error
+		/*	Read More Dropdown
 		/* -------------------------------------------------- */
 
-		} else if( $currentShortcode === 'alert-error' ) {
+		} else if( $currentShortcode === 'read-more-dropdown' ) {
 
-			ss_framework_show_option('.alert-boxes');
-			shortcode = '[error] [/error]';
-			alertBoxShortcode = true;
+			ss_framework_show_option('.read-more-dropdown');
+			shortcode = '[read_more_dropdown] [/read_more_dropdown]';
 
 		/* -------------------------------------------------- */
 		/*	Layout: 1/2
@@ -678,6 +677,16 @@
 
 			if( $currentShortcode === 'alert-error' )
 				shortcode = '[error]' + alertBoxContent + '[/error]';
+
+		/* -------------------------------------------------- */
+		/*	Read More Dropdown
+		/* -------------------------------------------------- */
+
+		} else if( $currentShortcode === 'read-more-dropdown' ) {
+
+			var accordionContentContent   = $('#read-more-dropdown-content').val(),
+
+			shortcode = '[read_more_dropdown]' + accordionContentContent + '[/read_more_dropdown]';
 		
 		/* -------------------------------------------------- */
 		/*	Layout

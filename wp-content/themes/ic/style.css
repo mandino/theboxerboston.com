@@ -1720,6 +1720,7 @@ h1, h2, h3, h4, h5, h6, h7 {
 .quote {
 	border-top: 1px solid #CBCBCB;
 	padding-top: 40px;
+  margin-top: 50px;
 }
 .ico-quote {
 	width: 65px;
@@ -4772,4 +4773,48 @@ li.social_share_side a i:hover{
     margin-right: 8px;
     margin-right: 8px;
     font-size: 14px;
+}
+
+.white-shadow {
+  display: none;
+  height: 60px;
+  width: 100%;
+  bottom: 14px;
+  left: 0;
+  position: absolute;
+  background: linear-gradient(transparent , white 32%, white);
+}
+
+.read-more {
+  display: none;
+  overflow: hidden;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.relative {
+  position: relative;
+  transition: all 3s ease-in-out;
+}
+
+.height-auto {
+  height: auto;
+  transition: all 3s ease-in-out;
+}
+
+.read-more-button {
+  display: block;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  letter-spacing: 5px;
+  font-weight: 700;
+}
+
+.read-more-button i {
+  position: absolute;
+    top: 15px;
+    right: 49%;
+    font-size: 26px;
+    color: #CC9933;
 }
