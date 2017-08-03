@@ -4235,3 +4235,130 @@ li.blue-btn i {
 	display: none;
 	padding-top: 15px;
 }
+
+.hideMenu {
+    display: none;
+}
+
+.showMenu {
+    display: block;
+}
+.price-label {
+    margin-left: 37%;
+}
+
+.price-label span {
+    padding-right: 10px;
+}
+.menu-list.left-menu {
+    width: 50%;
+    float: left;
+}
+.menu-list.right-menu {
+    width: 50%;
+    float: right;
+}
+.eat-menu-container {
+    width: 790px
+}
+.eat-menu-container .menu-list {
+    display: block; 
+    position: relative;
+}
+
+.eat-menu-container h2 {
+    color: #000;
+}
+.eat-menu-container h3 {
+    color: #000 !important;
+    text-align: left;
+}
+.eat-menu-container [class*="menu-content"] {
+    width: 100%;
+    float: left;
+    font-family: 'Arial Regular';
+}
+.eat-menu-container [class*="menu-content"] .menu-items-container {
+    position: relative;
+}
+
+.eat-menu-container [class*="menu-content"] .menu-items {
+    width: 90%;
+}
+
+.eat-menu-container [class*="menu-content"] .menu-items span{
+    font-weight: 700;;
+}
+
+.eat-menu-container [class*="menu-content"] .menu-items p {
+    width: 100%;
+    line-height: 1;
+    font-size: 12px;
+    font-family: 'Arial Regular';
+    margin-top: 0;
+}
+.eat-menu-container [class*="menu-content"] .menu-price {
+    width: 20%;
+    float: right;
+}
+
+.drink-menu-container .menu-list {
+    display: block; 
+    position: relative;
+}
+
+.drink-menu-container h2 {
+    color: #000;
+}
+
+.drink-menu-container h3 {
+    color: #000 !important;
+}
+
+.drink-menu-container .menu-content-1 {
+    width: 50%;
+    float: left;
+    font-family: 'Arial Regular';
+}
+
+.drink-menu-container .price-label {
+    font-family: 'Arial Regular';
+    padding-bottom: 20px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.drink-menu-container .menu-content-1 .menu-items-container {
+    position: relative;
+}
+
+.drink-menu-container .menu-content-1 .menu-items {
+    width: 70%;
+}
+
+.drink-menu-container .menu-content-1 .menu-items p {
+    width: 100%;
+    line-height: 1;
+    font-size: 12px;
+    font-family: 'Arial Regular';
+    margin-top: 0;
+}
+.drink-menu-container .menu-content-1 .glass-price,
+.drink-menu-container .menu-content-1 .bottle-price{
+    width: 20%;
+    float: left;
+    padding-right: 15px;
+    margin-top: -35px;
+}
+
+.drink-menu-container .menu-content-1 .glass-price {
+    margin-left: 310px;
+}
+
+.drink-menu-container .menu-content-1 .bottle-price {
+    margin-left: 390px;
+}
+
+.menu-table tr td {
+    width: 300px;
+}
