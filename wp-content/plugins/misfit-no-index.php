@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: No Index on Events Calendar Past Events
-Plugin URI:  http://misfit-inc.com
+Plugin URI:  https://www.theindependenthotel.com/
 Description: Automatically add a "noindex" meta tag to past events on event calendar' detail pages to prevent them from appearing in search engines.
 Version:     1.0
 Author:      Misfit Inc
-Author URI:  http://misfit-inc.com
+Author URI:  http://misfit-inc.com/
 Text Domain: misfit
 License:     GPL2
 */
@@ -20,25 +20,37 @@ function misfit_noindex_past_events() {
 		if (!function_exists('tribe_get_end_date')) { return false; }          
                 if(tribe_is_day() === true) {
                     
-                    echo "\n<!-- noindex calendar Events -->\n<meta name=\"robots\" content=\"noindex, follow\" />\n\n";  
-                    
-                    $t_url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-                    $turl = explode('/',$t_url);
-                    $turl = array_filter($turl);                       
-                    $pdate = end($turl);
-    
-                    $prev_date = date('Y-m-d', strtotime($pdate.' -1 day'));
+                    echo "\n<!-- noindex calendar Events -->\n<meta name=\"robots\" content=\"noindex, follow\" />\n";  
+                    $t = tribe_get_events_title();
+                    $mtime = str_replace('Events for ','',$t);                     
+                    $pdate = date('Y-m-d',strtotime($mtime));
+                    $prev_date = date('Y-m-d', strtotime($pdate.' -1 day'));                    
                     $prev_link = $event.$prev_date.'/';
                     $next_date = date('Y-m-d', strtotime($pdate.' +1 day'));
                     $next_link = $event.$next_date.'/';
+                     echo "\n<link rel=\"prev\" href=\"".$prev_link."\" />\n";
                     echo "\n<link rel=\"next\" href=\"".$next_link."\" />\n";
-                    echo "\n<link rel=\"prev\" href=\"".$prev_link."\" />\n";
+                   
+
 
                   
             }
 	}
 }
 add_action('wp_head', 'misfit_noindex_past_events');
+
+//disable ajax on day view
+
+function events_calendar_remove_scripts() {
+if (!is_admin() && !in_array( $GLOBALS['pagenow'], array( 'wp-login.php', 'wp-register.php' ) ) ) {
+
+        //wp_dequeue_script( 'the-events-calendar');
+        //wp_dequeue_script( 'tribe-events-list');
+        wp_dequeue_script( 'tribe-events-ajax-day');
+
+}}
+add_action('wp_print_scripts', 'events_calendar_remove_scripts' , 10);
+add_action('wp_footer', 'events_calendar_remove_scripts' , 10);
 
 // Add admin page
 function misfit_admin() {
