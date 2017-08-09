@@ -258,13 +258,17 @@
 						
 						$temp_class = strtolower(get_sub_field('menu_title'));
 						$_class = str_replace(" ", "_", $temp_class);
+						$glass_bottle_price = get_sub_field('enable_glassbottle_price');
 					 ?>
 					<section id="<?php echo $_class; ?>" class="drink-menu-container <?php echo $hideClass; ?>">
 						<h2><?php the_sub_field('menu_title') ?></h2>
-						<div class="price-label">
-							<span>Glass Price</span>
-							<span>Bottle Price</span>
-						</div>
+						<?php if ($glass_bottle_price): ?>
+							<div class="price-label">
+								<span>Glass Price</span>
+								<span>Bottle Price</span>
+							</div>
+						<?php endif ?>
+						
 						
 						<div class="menu-list">
 							
@@ -276,12 +280,14 @@
 											<?php the_sub_field('content') ?>
 										</div>
 									</div>
-									<div class="glass-price">
-										<span><?php the_sub_field('glass_price') ?></span>
-									</div>
-									<div class="bottle-price">
-										<span><?php the_sub_field('bottle_price') ?></span>
-									</div>
+									<?php if ($glass_bottle_price): ?>
+										<div class="glass-price">
+											<span><?php the_sub_field('glass_price') ?></span>
+										</div>
+										<div class="bottle-price">
+											<span><?php the_sub_field('bottle_price') ?></span>
+										</div>
+									<?php endif ?>
 
 								<?php endwhile; endif; ?>
 							</div>
