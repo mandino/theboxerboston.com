@@ -3975,8 +3975,8 @@ i.ns-close,
 
 .lb-overlay .the-popup {
   background: none repeat scroll 0 0 #fff;
-  height: 275px;
-  width: 600px;
+  max-width: 600px;
+  width: 100%;
   position: absolute;
   right: 0;
   bottom: 0;

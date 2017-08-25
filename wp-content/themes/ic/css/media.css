@@ -1269,7 +1269,7 @@ padding: 11px 5px;
 	}
 	/* Room list */
 	.room-list li {
-	    padding-bottom: 20px;
+	    padding-bottom: 0;
 	}
 	/* Room - Single */
 	#room-featured-slider .flexslider, #room-featured-slider, #room-featured-slider .flexslider .slides img {
@@ -1381,8 +1381,12 @@ padding: 11px 5px;
 	}
 	/* reserve button on banner */
 	.slide-header .button {
-    display: none;
-}
+		display: none;
+	}
+
+	.popup-logo-area {
+		padding: 35px 45px;
+	}
 
 }
 
