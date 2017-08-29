@@ -273,9 +273,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				<a class="mmenu-icon" href="#menu"><i class="fa fa-bars"></i></a>
 	
 				<nav id="menu" class="fl" style="z-index:1">
+
+					<?php $getTel = str_replace('.', '', get_option('cebo_tele')); ?>
+
 					<ul>
 						<li class="navis-mobile">
-							<a id="lnkP2Talkmobile" href="//www.navistechnologies.info/p2talk/p2talk.aspx?Account=15407" target="new"><span class="ic-navis"><i class="fa fa-phone"></i> <span id="NavisTFNmobnav"><?php echo get_option('cebo_tele'); ?></span></span></a>
+							<a id="lnkP2Talkmobile" href="tel:+<?php echo $getTel; ?>"  target="new"><span class="ic-navis"><i class="fa fa-phone"></i> <span id="NavisTFNmobnav"><?php echo get_option('cebo_tele'); ?></span></span></a>
 						</li>
 						<?php wp_nav_menu( array( 'theme_location' => 'primary' ,  'items_wrap' => '%3$s', 'container' => '', 'menu_class' => 'navitem' ) ); ?>
 						<li class="hamburgermenu">
