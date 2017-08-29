@@ -274,11 +274,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	
 				<nav id="menu" class="fl" style="z-index:1">
 
-					<?php $getTel = str_replace('.', '', get_option('cebo_tele')); ?>
+					<?php
+
+						$getTel = get_option('cebo_tele');
+						$getTel = str_replace('(', '', $getTel);
+						$getTel = str_replace(')', '', $getTel);
+						$getTel = str_replace(' ', '-', $getTel);
+						$getTel = str_replace('.', '-', $getTel);
+
+					?>
 
 					<ul>
 						<li class="navis-mobile">
-							<a id="lnkP2Talkmobile" href="tel:+<?php echo $getTel; ?>"  target="new"><span class="ic-navis"><i class="fa fa-phone"></i> <span id="NavisTFNmobnav"><?php echo get_option('cebo_tele'); ?></span></span></a>
+							<a id="lnkP2Talkmobile" href="tel:+1-<?php echo $getTel; ?>"  target="new"><span class="ic-navis"><i class="fa fa-phone"></i> <span id="NavisTFNmobnav"><?php echo get_option('cebo_tele'); ?></span></span></a>
 						</li>
 						<?php wp_nav_menu( array( 'theme_location' => 'primary' ,  'items_wrap' => '%3$s', 'container' => '', 'menu_class' => 'navitem' ) ); ?>
 						<li class="hamburgermenu">
