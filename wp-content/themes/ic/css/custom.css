@@ -609,6 +609,10 @@ color: #333;
     zoom: 1;
 }
 
+#primary-nav nav ul li.navis-mobile {
+    display: none;
+}
+
 #primary-nav nav ul li a {
     transition: all 0.4s;
     -moz-transition: all 0.4s;
