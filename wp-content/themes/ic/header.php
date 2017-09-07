@@ -244,12 +244,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			<nav class="click-nav" style="border: none;">
 			<nav class="click-nav">
 				<ul class="container no-js">
-					<li>
-						<a href="//www.iclocalrewards.com/" target="_blank" class="clicknav-clicker">Enter to Win a Two Night Stay at an Independent Collection Hotel</a>	
-					</li>
-
+					<li><a href="//iclocalrewards.com/en-US/Login?ReturnUrl=%2F#signup" target="_blank" class="clicknav-clicker">Join The IC Local Perks Program & Get Rewarded With Every Stay</a></li>
 					<li class="blue-btn"><a href="//theboxerboston.com/blue"><i class="fa fa-info-circle"></i><span class="blue-mobile">why blue?</span></a></li>
-
 				</ul>
 			</nav>
 			
