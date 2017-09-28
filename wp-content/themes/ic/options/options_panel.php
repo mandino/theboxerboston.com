@@ -1223,7 +1223,8 @@ function cebo_machine($options) {
 			if($counter >= 2){
 			   $output .= '</div>'."\n";
 			}
-			$jquery_click_hook = ereg_replace("[^A-Za-z0-9]", "", strtolower($value['name']) );
+			$jquery_click_hook = preg_replace("[^A-Za-z0-9]", "", strtolower($value['name']) );
+			$jquery_click_hook = str_replace(' ', '-', $jquery_click_hook);
 			$jquery_click_hook = "of-option-" . $jquery_click_hook;
 			$menu .= '<li><a title="'.  $value['name'] .'" href="#'.  $jquery_click_hook  .'">'.  $value['name'] .'</a></li>';
 			$output .= '<div class="group" id="'. $jquery_click_hook  .'"><h2>'.$value['name'].'</h2>'."\n";
