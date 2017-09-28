@@ -16,7 +16,7 @@
 <div class="fullpic">
 
 	<div class="slide-header">
-		<a class="button" onclick="fbq('track', 'InitiateCheckout'); ga('send', 'event', 'Reserve', 'Reservation-button-banner', 'Reserve Now'); _gaq.push(['_trackEvent', 'Reserve', 'Reservation-button-banner', 'Reserve Now']);" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>"><?php _e('RESERVE NOW', 'cebolang'); ?></a>
+		<a class="button" onclick="_gaq.push(['_trackEvent', 'Reserve', 'Reservation-button-banner', 'Reserve Now']);" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>"><?php _e('RESERVE NOW', 'cebolang'); ?></a>
 	</div>
 	<img src="<?php echo tt(get_post_meta($post->ID, 'cebo_fullpic', true), 1400, 350); ?>" alt="<?php echo get_custom_image_thumb_alt_text(get_post_meta($post->ID, 'cebo_fullpic', true), ''); ?>" />
 
@@ -126,19 +126,186 @@
 					
 			<div class="wonderline"></div>
 			<div class="post-content fl">
-			
-				<?php if(have_posts()) : while(have_posts()) : the_post(); ?>
 				
-					<?php the_content(); ?>
+				<?php the_content(); ?>
+
+				<!-- New Restaurant Menu Template -->
+
+				<?php $class = ""; $cnt = 0; ?>
+				<div class="eat-container">
+					<div>
+					<?php if (have_posts('eat_menu')) : while(have_rows('eat_menu')) : the_row();?>
+					<?php 
+						$temp_class = strtolower(get_sub_field('menu_title'));
+						$class = str_replace(" ", "_", $temp_class);
+						
+					 ?>
+						<button class="button eat-tab-button" data-class="<?php echo $class; ?>"><?php the_sub_field('menu_title') ?></button>
+					<?php endwhile; endif; ?>	
+				</div>
+
+				<?php if (have_posts('eat_menu')) : while(have_rows('eat_menu')) : the_row();?>
+					<?php if ($cnt == 0) : $hideClass = "showMenu"; else : $hideClass = "hideMenu"; endif; ?>
+
+					<?php 
+						$count = 0;
+						$temp_class = strtolower(get_sub_field('menu_title'));
+						$_class = str_replace(" ", "_", $temp_class);
+					 ?>
+
+					<section id="<?php echo $_class; ?>" class="eat-menu-container <?php echo $hideClass; ?>">
+
+						<h2><?php the_sub_field('menu_title') ?></h2>
+
+						<?php if (have_rows('meal_type')) : while(have_rows('meal_type'))  : the_row();?>
+							<?php if ($count == 0): ?>
+								<div class="menu-list left-menu">
+									<div class="menu-content-<?php echo $count;?>">
+										<table class="menu-table">
+											<th><h3><?php the_sub_field('menu_type_name') ?></h3></th>
+											<?php if (have_rows('menu_items')) : while(have_rows('menu_items'))  : the_row();?>
+											<tr>
+												<td>
+													<div class="menu-items-container">
+														<div class="menu-items">
+															<span><?php the_sub_field('items'); ?></span>
+														</div>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<div class="menu-items-container">
+														<div class="menu-items">
+															<?php the_sub_field('content') ?>
+														</div>
+													</div>
+												</td>
+												<td>
+													<div class="menu-price">
+														<span><?php the_sub_field('price') ?></span>	
+													</div>
+												</td>
+											</tr>
+											<?php endwhile; endif; ?>
+										</table>					
+									</div>
+									<div class="clear"></div>
+								</div>
+
+							<?php endif ?>
+							<?php $count++; break; endwhile; endif; ?>
+							
+								<div class="menu-list right-menu">
+									<?php if (have_rows('meal_type')) : while(have_rows('meal_type'))  : the_row();?>
+									<?php if ($count > 0): ?>
+									<div class="menu-content-<?php echo $count;?>" style="">
+										<table class="menu-table">
+											<tr><th><h3><?php the_sub_field('menu_type_name') ?></h3></th></tr>
+											<?php if (have_rows('menu_items')) : while(have_rows('menu_items'))  : the_row();?>
+											<tr>
+												<td>
+													<div class="menu-items">
+														<span><?php the_sub_field('items'); ?></span>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<div class="menu-items">	
+														<?php the_sub_field('content') ?>
+													</div>
+												</td>
+												<td>
+													<div class="menu-price">
+														<span><?php the_sub_field('price') ?></span>	
+													</div>
+												</td>
+											</tr>
+											<?php endwhile; endif; ?>
+										</table>
+
+										
+									</div>
+
+									<?php endif ?>
+									<?php $count++; endwhile; endif; ?>
+									<div class="clear"></div>
+								</div>
+
+
+						<div class="clear"></div>
+					</section>
+					
+				<?php $cnt++; endwhile; endif; ?>
+				</div>
 				
-				
-				<?php endwhile; endif; wp_reset_query(); ?>	
+				<div class="drink-container">
+					<div>
+					<?php if (have_posts('drink_menu')) : while(have_rows('drink_menu')) : the_row();?>
+					<?php 
+						$temp_class = strtolower(get_sub_field('menu_title'));
+						$class = str_replace(" ", "_", $temp_class);
+						
+					 ?>
+						<button class="button drink-tab-button" data-class="<?php echo $class; ?>"><?php the_sub_field('menu_title') ?></button>
+					<?php endwhile; endif; ?>	
+				</div>
+				<?php $cnt2 = 0; ?>
+				<?php if (have_posts('drink_menu')) : while(have_rows('drink_menu')) : the_row();?>
+					<?php if ($cnt2 == 0) : $hideClass = "showMenu"; else : $hideClass = "hideMenu"; endif; ?>
+					<?php 
+						
+						$temp_class = strtolower(get_sub_field('menu_title'));
+						$_class = str_replace(" ", "_", $temp_class);
+						$glass_bottle_price = get_sub_field('enable_glassbottle_price');
+					 ?>
+					<section id="<?php echo $_class; ?>" class="drink-menu-container <?php echo $hideClass; ?>">
+						<h2><?php the_sub_field('menu_title') ?></h2>
+						<?php if ($glass_bottle_price): ?>
+							<div class="price-label">
+								<span>Glass Price</span>
+								<span>Bottle Price</span>
+							</div>
+						<?php endif ?>
+						
+						
+						<div class="menu-list">
+							
+							<div class="menu-content-1">
+								<?php if (have_rows('items')) : while(have_rows('items'))  : the_row();?>
+									<div class="menu-items-container">
+										<div class="menu-items">
+											<span><?php the_sub_field('item_name'); ?></span>
+											<?php the_sub_field('content') ?>
+										</div>
+									</div>
+									<?php if ($glass_bottle_price): ?>
+										<div class="glass-price">
+											<span><?php the_sub_field('glass_price') ?></span>
+										</div>
+										<div class="bottle-price">
+											<span><?php the_sub_field('bottle_price') ?></span>
+										</div>
+									<?php endif ?>
+
+								<?php endwhile; endif; ?>
+							</div>
+
+							<div class="clear"></div>
+						</div>
+					</section>
+					
+				<?php $cnt2++; endwhile; endif; ?>
+				</div>
+
+	<!-- Restaurant Menu New Template : END -->
 
 			</div>
 
 			<div class="sidebar fr">
 				
-				<a class="button" onclick="fbq('track', 'InitiateCheckout');  ga('send', 'event', 'Reserve', 'Reservation-button-sidebar', 'Reserve Now'); _gaq.push(['_trackEvent', 'Reserve', 'Reservation-button-sidebar', 'Reserve Now']);" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>"><?php _e('RESERVE NOW', 'cebolang'); ?></a>
+				<a class="button" onclick="_gaq.push(['_trackEvent', 'Reserve', 'Reservation-button-sidebar', 'Reserve Now']);" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>"><?php _e('RESERVE NOW', 'cebolang'); ?></a>
 				
 				<?php
 					$sidebarformid = get_the_ID();

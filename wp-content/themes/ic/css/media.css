@@ -559,6 +559,27 @@ and (max-width : 939px) {
 	.mm-list > li.display-none {
 		display: block !important;
 	}
+	/* Pride Banner*/
+	#property-nav nav ul li.blue-btn {
+		bottom: 13px;
+	}
+	#property-nav .pride.pos-right {
+		right: -105px;
+		top: -25px;
+	}
+	#property-nav .pride.pos-right img {
+		width: 50%;
+	}
+	#property-nav .pride.pos-left {
+		left: -103px;
+		bottom: -27px;
+	}
+	#property-nav .pride.pos-left img {
+		width: 50%;
+	}
+	#property-nav .pride.pos-right a {
+		display: none;
+	}
 	/* Double Flyout */
 	.welcome-text { font-size: 13px; }
 	.ID1 { top: 15px; }
@@ -1403,6 +1424,22 @@ and (max-width : 320px)
 	.slide-header .button {
     display: none;
 }
+
+.eat-menu-container {
+    width: 100%;
+}
+.menu-list.right-menu {
+	float: none;
+}
+
+.drink-menu-container .menu-content-1 .glass-price{
+	margin-left: 135px;
+}
+
+.drink-menu-container .menu-content-1 .bottle-price{
+	margin-left: 210px;
+}
+
 }
 /* ================================================  MOBILES BELOW 480 to 400 ======================================= */
 @media only screen

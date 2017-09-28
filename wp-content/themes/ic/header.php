@@ -97,26 +97,24 @@
 		wp_head();
 	?>
 
-<!-- Google Tag Manager -->
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-5XBBBWD');</script>
+	<!-- End Google Tag Manager -->
 
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-W8NRVV2');</script>
-
-<!-- End Google Tag Manager -->
-
-<!-- Sojern Head -->
-<script>
-(function () {
-var pl = document.createElement('script');
-pl.type = 'text/javascript';
-pl.async = true;
-pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(pl);
-})();
-</script>
-<!-- End Sojern -->
+	<!-- Sojern Head -->
+	<script>
+		(function () {
+		var pl = document.createElement('script');
+		pl.type = 'text/javascript';
+		pl.async = true;
+		pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(pl);
+		})();
+	</script>
+	<!-- End Sojern -->
 
 	<script type="application/ld+json">
 		{
@@ -132,35 +130,39 @@ pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName
 		"description": "A most wonderful article",
 		"articleBody": "The full body of the article"
 		}
-	</script> 
-	
-<script> 
+	</script>
 
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new
-Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-37161096-1', 'auto',{'allowLinker': true });
-ga('require', 'linker'); ga('linker:autoLink', ['theboxerboston.reztrip.com','theboxerboston.reztripmobile.com']);
-ga('send', 'pageview');
+	<script>
+		!function(w,d,s,u) {
+		if(window.curacity) { return; }
+		window.curacity = function() { window.curacity.callMethod ?
+		window.curacity.callMethod.apply(window.curacity, arguments) :
+		window.curacity.queue.push(arguments); }
+		window.curacity.version = '1.0';
+		window.curacity.queue = [];
+		var scriptElement = document.createElement(s);
+		scriptElement.type = 'text/javascript';
+		scriptElement.async = true;
+		scriptElement.src = u;
+		var e = d.getElementsByTagName(s)[0];
+		e.parentNode.insertBefore(scriptElement,e);
+		}(window, document, 'script',
+		'https://booking.curacity.com/api/js/curacity_events.js');
+		curacity('init', 'merchant', '365'); // 365 = hotel id
+		curacity('track', 'view_checkout', null);
+	</script>
 
-</script>
-
-<script type="text/javascript">
-function viewContent(){
-
-	fbq('track', "ViewContent");
-
-}
-</script>
+	<noscript>
+		<img height="1" width="1" style="display: none" src="https://booking.curacity.com/trackevent?merchant_id=365&ev=view_checkout&noscript=1" />
+	</noscript>
 
 </head> 
 	
 <body id="oceana" <?php body_class($class); ?>>
 
 <!-- Google Tag Manager (noscript) -->
-
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W8NRVV2"
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5XBBBWD"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-
 <!-- End Google Tag Manager (noscript) -->
 
 <div class="menu-wrap">
@@ -208,7 +210,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 							</select>
 						</span>
 						
-						<button type="submit" class="button" onClick="fbq('track', 'Lead'); ga('send', 'event', 'Booking-widget', 'Search-now', 'Search dates with booking widget');">Search Now</button>
+						<button type="submit" class="button">Search Now</button>
 						
 					
 						</form>
@@ -219,7 +221,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 					<div class="reservationform flexdate">
 					
-						<p><a href="https://theboxerboston.reztrip.com" onclick="fbq('track', 'Lead'); ga('send', 'event', 'Flexible Dates', 'click', 'Booking-widget');">Flexible dates?</a> Search for our best available rate</p>
+						<p><a href="https://theboxerboston.reztrip.com/calendar">Flexible dates?</a> Search for our best available rate</p>
 						
 					</div>
 
@@ -239,12 +241,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			
 			
 		<div id="property-nav">
-			
+			<nav class="click-nav" style="border: none;">
 			<nav class="click-nav">
 				<ul class="container no-js">
-					<li>
-						<a href="//www.iclocalrewards.com/" target="_blank" class="clicknav-clicker">Join IC Local and Start Receiving Perks with Every Stay</a>	
-					</li>
+					<li><a href="//iclocalrewards.com/en-US/Login?ReturnUrl=%2F#signup" target="_blank" class="clicknav-clicker">Join The IC Local Perks Program & Get Rewarded With Every Stay</a></li>
 					<li class="blue-btn"><a href="//theboxerboston.com/blue"><i class="fa fa-info-circle"></i><span class="blue-mobile">why blue?</span></a></li>
 				</ul>
 			</nav>
@@ -262,14 +262,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			
 			<a href="https://theboxerboston.reztrip.com" class="reserve fixeer button fr input-append date" rooms ="1" id="idp3" data-date="12-02-2012" data-date-format="mm-dd-yyyy">RESERVE</a>
 
-			<a class="reserve fixeer mobile button fr" id="idp4"  onclick=" ga('send', 'event', 'Booking', 'Reserve'); _gaq.push(['_link', this.href]);return false;" href="<?php echo get_option('cebo_genbooklink'); ?>" target="_blank">RESERVE</a>
+			<a class="reserve fixeer mobile button fr" id="idp4"  onclick="_gaq.push(['_link', this.href]);return false;" href="<?php echo get_option('cebo_genbooklink'); ?>" target="_blank">RESERVE</a>
 			
 			<div class="container" style="float: right;">
 
 				<a class="mmenu-icon" href="#menu"><i class="fa fa-bars"></i></a>
 	
 				<nav id="menu" class="fl" style="z-index:1">
+
+					<?php
+
+						$getTel = get_option('cebo_tele');
+						$getTel = str_replace('(', '', $getTel);
+						$getTel = str_replace(')', '', $getTel);
+						$getTel = str_replace(' ', '-', $getTel);
+						$getTel = str_replace('.', '-', $getTel);
+
+					?>
+
 					<ul>
+						<li class="navis-mobile">
+							<a id="lnkP2Talkmobile" href="tel:+1-<?php echo $getTel; ?>"  target="new"><span class="ic-navis"><i class="fa fa-phone"></i> <span id="NavisTFNmobnav"><?php echo get_option('cebo_tele'); ?></span></span></a>
+						</li>
 						<?php wp_nav_menu( array( 'theme_location' => 'primary' ,  'items_wrap' => '%3$s', 'container' => '', 'menu_class' => 'navitem' ) ); ?>
 						<li class="hamburgermenu">
 							<a class="cheese" href="#">
