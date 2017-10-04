@@ -106,8 +106,8 @@ class Tribe__Events__Pro__Integrations__WPML__Event_Listener {
 	 * @return Tribe__Events__Pro__Integrations__WPML__Handler_Interface
 	 */
 	protected function get_handler_for_event( $event ) {
-		if ( ! is_a( $this->handlers_map[ $event ], 'Tribe__Events__Pro__Integrations__WPML__Handler_Interface' ) ) {
-			$this->handlers_map[ $event ] = new $this->handlers_map[$event]( $this, $this->wpml );
+		if ( ! in_array( 'Tribe__Events__Pro__Integrations__WPML__Handler_Interface', class_parents( $this->handlers_map[ $event ] ) ) ) {
+			$this->handlers_map[ $event ] = new $this->handlers_map[ $event ]( $this, $this->wpml );
 		}
 
 		return $this->handlers_map[ $event ];

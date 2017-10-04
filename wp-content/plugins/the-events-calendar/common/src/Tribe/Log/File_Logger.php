@@ -64,6 +64,11 @@ class Tribe__Log__File_Logger implements Tribe__Log__Logger {
 			touch( $this->log_file );
 		}
 
+		// Bail if we're attempting to write but don't have permission.
+		if ( 'r' !== $this->context && ! is_writable( $this->log_file ) ) {
+			return;
+		}
+
 		if ( is_readable( $this->log_file ) ) {
 			$this->handle = fopen( $this->log_file, $this->context );
 		}
@@ -206,10 +211,20 @@ class Tribe__Log__File_Logger implements Tribe__Log__Logger {
 	 */
 	public function list_available_logs() {
 		$logs = array();
+
+		// This could be called when the log dir is not accessible.
+		if ( ! $this->is_available() ) {
+			return $logs;
+		}
+
 		$basename = $this->get_log_file_basename();
 
 		// Look through the log storage directory
 		foreach ( new DirectoryIterator( $this->log_dir ) as $node ) {
+			if ( ! $node->isReadable() ) {
+				continue;
+			}
+
 			$name = $node->getFilename();
 
 			// DirectoryIterator::getExtension() is only available on 5.3.6

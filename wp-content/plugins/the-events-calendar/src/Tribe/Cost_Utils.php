@@ -19,13 +19,8 @@ class Tribe__Events__Cost_Utils extends Tribe__Cost_Utils {
 	 * @return Tribe__Events__Cost_Utils
 	 */
 	public static function instance() {
-		static $instance;
-
-		if ( ! $instance ) {
-			$instance = new self;
-		}
-
-		return $instance;
+		_deprecated_function( 'Tribe__Events__Cost_Utils::instance()', '4.5', "tribe( 'tec.cost-utils' )" );
+		return tribe( 'tec.cost-utils' );
 	}
 
 	/**
@@ -106,7 +101,10 @@ class Tribe__Events__Cost_Utils extends Tribe__Cost_Utils {
 			$cost = $this->maybe_replace_cost_with_free( $cost );
 
 			if ( $with_currency_symbol ) {
-				$cost = $this->maybe_format_with_currency( $cost );
+				$event_id = Tribe__Main::post_id_helper( $event );
+				$currency_symbol = get_post_meta( $event_id, '_EventCurrencySymbol', true );
+				$currency_position = get_post_meta( $event_id, '_EventCurrencyPosition', true );
+				$cost = $this->maybe_format_with_currency( $cost, $event, $currency_symbol, $currency_position );
 			}
 
 			$cost = esc_html( $cost );

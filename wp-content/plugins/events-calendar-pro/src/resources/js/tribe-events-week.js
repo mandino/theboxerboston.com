@@ -423,6 +423,10 @@
 				params = params + '&tribe_event_category=' + ts.category;
 			}
 
+			if ( tf.is_featured() ) {
+				params = params + '&featured=1';
+			}
+
 			history.replaceState( {
 				"tribe_params"    : params,
 				"tribe_url_params": td.params
@@ -456,7 +460,10 @@
 				var $this = $( this ).find( 'a' );
 				ts.popping = false;
 				ts.date = $this.attr( "data-week" );
-				td.cur_url = $this.attr( "href" );
+				// Update the baseurl
+				tf.update_base_url( $this.attr( "href" ) );
+
+
 				if ( ts.datepicker_format !== '0' ) {
 					tf.update_picker( tribeDateFormat( ts.date, td.datepicker_formats.main[ts.datepicker_format] ) );
 				}
@@ -560,7 +567,8 @@
 
 				ts.params = {
 					action   : 'tribe_week',
-					eventDate: ts.date
+					eventDate: ts.date,
+					featured : tf.is_featured()
 				};
 
 				ts.url_params = {};
@@ -626,70 +634,71 @@
 						ts.initial_load = false;
 						tf.enable_inputs( '#tribe_events_filters_form', 'input, select' );
 
-						if ( response.success ) {
-
-							ts.ajax_running = false;
-
-							td.ajax_response = {
-								'total_count': '',
-								'view'       : response.view,
-								'max_pages'  : '',
-								'tribe_paged': '',
-								'timestamp'  : new Date().getTime()
-							};
-
-							var $the_content = $.parseHTML( response.html );
-
-							$( '#tribe-events-content.tribe-events-week-grid' ).replaceWith( $the_content );
-
-							tribe_week_view_init();
-
-							$( "div[id*='tribe-events-event-']" ).hide().fadeIn( 'fast' );
-
-							ts.page_title = $( '#tribe-events-header' ).data( 'title' );
-							document.title = ts.page_title;
-
-							// @TODO: We need to D.R.Y. this assignment and the following if statement about shortcodes/do_string
-							// Ensure that the base URL is, in fact, the URL we want
-							td.cur_url = tf.get_base_url();
-
-							// we only want to add query args for Shortcodes and ugly URL sites
-							if (
-									$( '#tribe-events.tribe-events-shortcode' ).length
-									|| ts.do_string
-							) {
-								if ( -1 !== td.cur_url.indexOf( '?' ) ) {
-									td.cur_url = td.cur_url.split( '?' )[0];
-								}
-
-								td.cur_url = td.cur_url + '?' + ts.url_params;
-							}
-
-							if ( ts.do_string ) {
-								history.pushState( {
-									"tribe_url_params": ts.url_params,
-									"tribe_params"    : ts.params
-								}, ts.page_title, td.cur_url + '?' + ts.url_params );
-							}
-
-							if ( ts.pushstate ) {
-								history.pushState( {
-									"tribe_url_params": ts.url_params,
-									"tribe_params"    : ts.params
-								}, ts.page_title, td.cur_url );
-							}
-
-							/**
-							 * DEPRECATED: tribe_ev_ajaxSuccess and tribe_ev_weekView_AjaxSuccess have been deprecated in 4.0. Use ajax-success.tribe and week-view-ajax-success.tribe instead
-							 */
-							$( te ).trigger( 'tribe_ev_ajaxSuccess' ).trigger( 'tribe_ev_weekView_AjaxSuccess' );
-							$( te ).trigger( 'ajax-success.tribe' ).trigger( 'week-view-ajax-success.tribe' );
-
-							// @ifdef DEBUG
-							dbug && debug.timeEnd( 'Week View Ajax Timer' );
-							// @endif
-
+						// Bail if it's not successful
+						if ( ! response.success ) {
+							return;
 						}
+
+						ts.ajax_running = false;
+
+						td.ajax_response = {
+							'total_count': '',
+							'view'       : response.view,
+							'max_pages'  : '',
+							'tribe_paged': '',
+							'timestamp'  : new Date().getTime()
+						};
+
+						// @TODO: We need to D.R.Y. this assignment and the following if statement about shortcodes/do_string
+						// Ensure that the base URL is, in fact, the URL we want
+						td.cur_url = tf.get_base_url();
+
+						var $the_content = $.parseHTML( response.html );
+
+						$( '#tribe-events-content.tribe-events-week-grid' ).replaceWith( $the_content );
+
+						tribe_week_view_init();
+
+						$( "div[id*='tribe-events-event-']" ).hide().fadeIn( 'fast' );
+
+						ts.page_title = $( '#tribe-events-header' ).data( 'title' );
+						document.title = ts.page_title;
+
+						// we only want to add query args for Shortcodes and ugly URL sites
+						if (
+								$( '#tribe-events.tribe-events-shortcode' ).length
+								|| ts.do_string
+						) {
+							if ( -1 !== td.cur_url.indexOf( '?' ) ) {
+								td.cur_url = td.cur_url.split( '?' )[0];
+							}
+
+							td.cur_url = td.cur_url + '?' + ts.url_params;
+						}
+
+						if ( ts.do_string ) {
+							history.pushState( {
+								"tribe_url_params": ts.url_params,
+								"tribe_params"    : ts.params
+							}, ts.page_title, td.cur_url + '?' + ts.url_params );
+						}
+
+						if ( ts.pushstate ) {
+							history.pushState( {
+								"tribe_url_params": ts.url_params,
+								"tribe_params"    : ts.params
+							}, ts.page_title, td.cur_url );
+						}
+
+						/**
+						 * DEPRECATED: tribe_ev_ajaxSuccess and tribe_ev_weekView_AjaxSuccess have been deprecated in 4.0. Use ajax-success.tribe and week-view-ajax-success.tribe instead
+						 */
+						$( te ).trigger( 'tribe_ev_ajaxSuccess' ).trigger( 'tribe_ev_weekView_AjaxSuccess' );
+						$( te ).trigger( 'ajax-success.tribe' ).trigger( 'week-view-ajax-success.tribe' );
+
+						// @ifdef DEBUG
+						dbug && debug.timeEnd( 'Week View Ajax Timer' );
+						// @endif
 					}
 				);
 

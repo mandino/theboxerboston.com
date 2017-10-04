@@ -72,6 +72,7 @@ if ( ! class_exists( 'Tribe__Events__Pro__Templates__Map' ) ) {
 				'post_status'    => $post_status,
 				'eventDisplay'   => 'map',
 				'tribe_geoloc'   => true,
+				'featured'       => tribe( 'tec.featured_events' )->featured_events_requested(),
 			);
 
 			$view_state = 'map';
@@ -92,6 +93,7 @@ if ( ! class_exists( 'Tribe__Events__Pro__Templates__Map' ) ) {
 			}
 
 			$query       = Tribe__Events__Query::getEvents( $defaults, true );
+
 			$have_events = ( 0 < $query->found_posts );
 
 			if ( $have_events && Tribe__Events__Pro__Geo_Loc::instance()->is_geoloc_query() ) {
