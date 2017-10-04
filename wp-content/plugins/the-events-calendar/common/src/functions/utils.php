@@ -205,3 +205,124 @@ if ( ! function_exists( 'tribe_is_truthy' ) ) {
 		return (bool) $var;
 	}
 }
+
+if ( ! function_exists( 'tribe_normalize_terms_list' ) ) {
+	/**
+	 * Normalizes a list of terms to a list of fields.
+	 *
+	 * @param $terms A term or array of terms to normalize.
+	 * @param string $taxonomy The terms taxonomy.
+	 * @param string $field Teh fields the terms should be normalized to.
+	 *
+	 * @since 4.5
+	 *
+	 * @return array An array of the valid normalized terms.
+	 */
+	function tribe_normalize_terms_list( $terms, $taxonomy, $field = 'term_id' ) {
+		if ( ! is_array( $terms ) ) {
+			$terms = array( $terms );
+		}
+
+		$normalized = array();
+		foreach ( $terms as $term ) {
+			if ( is_object( $term ) && ! empty( $term->{$field} ) ) {
+				$normalized[] = $term->{$field};
+			} elseif ( is_numeric( $term ) ) {
+				$term = get_term_by( 'id', $term, $taxonomy );
+				if ( $term instanceof WP_Term ) {
+					$normalized[] = $term->{$field};
+				}
+			} elseif ( is_string( $term ) ) {
+				$term = get_term_by( 'slug', $term, $taxonomy );
+				if ( $term instanceof WP_Term ) {
+					$normalized[] = $term->{$field};
+				}
+			} elseif ( is_array( $term ) && ! empty( $term[ $field ] ) ) {
+				$normalized[] = $term[ $field ];
+			}
+		}
+
+		return $normalized;
+	}
+
+	if ( ! function_exists( 'tribe_upload_image' ) ) {
+		/** * @param string|int $image The path to an image file, an image URL or an attachment post ID.
+		 *
+		 * @return int|bool The attachment post ID if the uploading and attachment is successful or the ID refers to an attachment;
+		 *                  `false` otherwise.
+		 *
+		 * @see Tribe__Image__Uploader::upload_and_get_attachment_id()
+		 */
+		function tribe_upload_image( $image ) {
+			$uploader = new Tribe__Image__Uploader( $image );
+
+			return $uploader->upload_and_get_attachment_id();
+		}
+	}
+}
+
+if ( ! function_exists( 'tribe_is_error' ) ) {
+	/**
+	 * Check whether variable is a WordPress or Tribe Error.
+	 *
+	 * Returns true if $thing is an object of the Tribe_Error or WP_Error class.
+	 *
+	 * @since 4.5.3
+	 *
+	 * @param mixed $thing Any old variable will do.
+	 *
+	 * @return bool Indicates if $thing was an error.
+	 */
+	function tribe_is_error( $thing ) {
+		return ( $thing instanceof Tribe__Error || is_wp_error( $thing ) );
+	}
+}
+
+if ( ! function_exists( 'tribe_retrieve_object_by_hook' ) ) {
+	/**
+	 * Attempts to find and return an object of the specified type that is associated
+	 * with a specific hook.
+	 *
+	 * This is useful when third party code registers callbacks that belong to anonymous
+	 * objects and it isn't possible to obtain the reference any other way.
+	 *
+	 * @since 4.5.8
+	 *
+	 * @param string   $class_name
+	 * @param string   $hook
+	 * @param int      $priority
+	 *
+	 * @return object|false
+	 */
+	function tribe_retrieve_object_by_hook( $class_name, $hook, $priority ) {
+		global $wp_filter;
+
+		// No callbacks registered for this hook and priority?
+		if (
+			! isset( $wp_filter[ $hook ] )
+			|| ! isset( $wp_filter[ $hook ][ $priority ] )
+		) {
+			return false;
+		}
+
+		// Otherwise iterate through the registered callbacks at the specified priority
+		foreach ( $wp_filter[ $hook ]->callbacks[ $priority ] as $callback ) {
+			// Skip if this callback isn't an object method
+			if (
+				! is_array( $callback['function'] )
+				|| ! is_object( $callback['function'][0] )
+			) {
+				continue;
+			}
+
+			// If this isn't the callback we're looking for let's skip ahead
+			if ( $class_name !== get_class( $callback['function'][0] ) ) {
+				continue;
+			}
+
+			return $callback['function'][0];
+		}
+
+		return false;
+	}
+}

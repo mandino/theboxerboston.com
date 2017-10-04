@@ -44,7 +44,7 @@ tribe_aggregator.fields = {
 	result_fetch_count: 0,
 
 	// the maximum number of result fetches that can be done per frequency before erroring out
-	max_result_fetch_count: 5,
+	max_result_fetch_count: 15,
 
 	// frequency at which we will poll for results
 	polling_frequency_index: 0,
@@ -134,6 +134,9 @@ tribe_aggregator.fields = {
 			} );
 
 		$( '.tribe-dependency' ).change();
+
+		// Configure TimePickers
+		tribe_timepickers.setup_timepickers( $( tribe_timepickers.selector.timepicker ) );
 
 		if ( 'edit' === obj.$.action.val() ) {
 			obj.$.form.addClass( 'edit-form' );
@@ -369,8 +372,18 @@ tribe_aggregator.fields = {
 			import_type = $( '#' + $import_type.first().attr( 'id' ).replace( 's2id_', '' ) ).val();
 		}
 
-		if ( 'manual' === import_type && ! data.items.length ) {
-			obj.display_fetch_error( ea.l10n.no_results );
+        if ( 'manual' === import_type && !data.items.length ) {
+			var origin = data.origin;
+			var origin_specific_no_results_msg = (
+				'undefined' !== typeof ea.l10n[ origin ]
+				&& 'undefined' !== typeof ea.l10n[ origin ].no_results
+			);
+
+			var message = origin_specific_no_results_msg ?
+				ea.l10n[ origin ].no_results
+				: ea.l10n.no_results;
+
+			obj.display_fetch_error(message);
 			return;
 		}
 
@@ -619,6 +632,8 @@ tribe_aggregator.fields = {
 				unique_id_field = 'meetup_id';
 			} else if ( 'ical' === origin || 'ics' === origin || 'gcal' === origin ) {
 				unique_id_field = 'uid';
+			} else if ( 'url' === origin ) {
+				unique_id_field = 'id';
 			}
 
 			if ( null !== unique_id_field ) {
@@ -702,10 +717,12 @@ tribe_aggregator.fields = {
 			}
 
 			args.upsellFormatter = function( option ) {
-				if ( 'redirect' == option.id ) {
-					var parts = option.text.split( '|' );
-					option.text = parts[0] + '<br><span class="tribe-upsell-subtitle">' + parts[1] + '</span>';
+				var $option = $( option.element );
+
+				if ( 'string' === typeof $option.data( 'subtitle' ) ) {
+					option.text = option.text + '<br><span class="tribe-dropdown-subtitle">' + $option.data( 'subtitle' ) + '</span>';
 				}
+
 				return option.text;
 			}
 

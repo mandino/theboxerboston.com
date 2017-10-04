@@ -267,7 +267,7 @@ class Tribe__Events__Aggregator__Tabs__Scheduled extends Tribe__Events__Aggregat
 		foreach ( $records as $record_id ) {
 			$record = Tribe__Events__Aggregator__Records::instance()->get_by_post_id( $record_id );
 
-			if ( is_wp_error( $record ) ) {
+			if ( tribe_is_error( $record ) ) {
 				$errors[ $record_id ] = $record;
 				continue;
 			}
@@ -300,7 +300,7 @@ class Tribe__Events__Aggregator__Tabs__Scheduled extends Tribe__Events__Aggregat
 		foreach ( $records as $record_id ) {
 			$record = Tribe__Events__Aggregator__Records::instance()->get_by_post_id( $record_id );
 
-			if ( is_wp_error( $record ) ) {
+			if ( tribe_is_error( $record ) ) {
 				$errors[ $record_id ] = $record;
 				continue;
 			}
@@ -311,7 +311,7 @@ class Tribe__Events__Aggregator__Tabs__Scheduled extends Tribe__Events__Aggregat
 					'error:usage-limit-exceeded',
 					$service->get_service_message(
 						'error:usage-limit-exceeded',
-						tribe( 'events-aggregator.main' )->get_daily_limit()
+						(array) tribe( 'events-aggregator.main' )->get_daily_limit()
 					)
 				);
 				$record->update_meta( 'last_import_status', 'error:usage-limit-exceeded' );
@@ -329,6 +329,7 @@ class Tribe__Events__Aggregator__Tabs__Scheduled extends Tribe__Events__Aggregat
 			}
 
 			$record->update_meta( 'last_import_status', 'success:queued' );
+			$child->update_meta( 'import_id', $status->data->import_id );
 
 			$child->finalize();
 			$child->process_posts();

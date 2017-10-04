@@ -66,6 +66,7 @@ class Tribe__Events__Aggregator__Record__Queue_Realtime {
 			return;
 		}
 
+		/** @var Tribe__Events__Aggregator__Record__Queue_Processor $processor */
 		$processor = tribe( 'events-aggregator.main' )->queue_processor;
 		if ( ! $this->record_id = $processor->next_waiting_record( true ) ) {
 			return false;
@@ -118,15 +119,20 @@ class Tribe__Events__Aggregator__Record__Queue_Realtime {
 		// Load the queue
 		$queue = $this->queue ? $this->queue : new Tribe__Events__Aggregator__Record__Queue( $this->record_id );
 
+		// We always need to setup the Current Queue
+		$this->queue_processor->set_current_queue( $queue );
+
+		// Only if it's not empty that we care about proccesing.
 		if ( ! $queue->is_empty() ) {
-			$this->queue_processor->set_current_queue( $queue );
 			$this->queue_processor->process_batch( $this->record_id );
 		}
 
-		$done       = $this->queue_processor->current_queue->is_empty();
-		$percentage = $this->queue_processor->current_queue->progress_percentage();
+		/** @var \Tribe__Events__Aggregator__Record__Queue $current_queue */
+		$current_queue = $this->queue_processor->current_queue;
+		$done          = $current_queue->is_empty();
+		$percentage    = $current_queue->progress_percentage();
 
-		$this->ajax_operations->exit_data( $this->get_progress_message_data( $this->queue_processor->current_queue, $percentage, $done ) );
+		$this->ajax_operations->exit_data( $this->get_progress_message_data( $current_queue, $percentage, $done ) );
 	}
 
 	/**
@@ -175,8 +181,11 @@ class Tribe__Events__Aggregator__Record__Queue_Realtime {
 	}
 
 	/**
-	 * @param $percentage
-	 * @param $done
+	 * Returns the progress message data.
+	 *
+	 * @param Tribe__Events__Aggregator__Record__Queue $queue
+	 * @param int $percentage
+	 * @param bool $done
 	 *
 	 * @return mixed|string|void
 	 */

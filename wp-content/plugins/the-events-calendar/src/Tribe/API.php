@@ -10,8 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'Tribe__Events__API' ) ) {
 	class Tribe__Events__API {
-		public static $modified_field_key = '_tribe_modified_fields';
-
 		public static $valid_venue_keys = array(
 			'Venue',
 			'Address',
@@ -95,16 +93,6 @@ if ( ! class_exists( 'Tribe__Events__API' ) ) {
 
 			$data = self::prepare_event_date_meta( $event_id, $data );
 
-			$now = current_time( 'timestamp' );
-
-			$post_meta = self::get_and_flatten_event_meta( $event_id );
-
-			if ( empty( $post_meta[ self::$modified_field_key ] ) ) {
-				$modified = array();
-			} else {
-				$modified = $post_meta[ self::$modified_field_key ];
-			}
-
 			if ( empty( $data['EventHideFromUpcoming'] ) ) {
 				delete_metadata( 'post', $event_id, '_EventHideFromUpcoming' );
 			}
@@ -122,9 +110,14 @@ if ( ! class_exists( 'Tribe__Events__API' ) ) {
 			Tribe__Events__Linked_Posts::instance()->handle_submission( $event_id, $data );
 
 			// Ordinarily there is a single cost value for each event, but addons (ie, ticketing plugins) may need
-			// to record a number of different pricepoints for the same event
+			// to record a number of different price points for the same event
 			$event_cost = isset( $data['EventCost'] ) ? (array) $data['EventCost'] : array();
 			$data['EventCost'] = (array) apply_filters( 'tribe_events_event_costs', $event_cost, $event_id );
+
+			// If we are saving just one meta, we reset to avoid deleting and re-adding cost every time
+			if ( is_array( $data['EventCost'] ) && 1 === count( $data['EventCost'] ) ) {
+				$data['EventCost'] = reset( $data['EventCost'] );
+			}
 
 			if ( isset( $data['FeaturedImage'] ) && ! empty( $data['FeaturedImage'] ) ) {
 				update_metadata( 'post', $event_id, '_thumbnail_id', $data['FeaturedImage'] );
@@ -135,7 +128,16 @@ if ( ! class_exists( 'Tribe__Events__API' ) ) {
 				$data['EventDuration'] = null;
 			}
 
-			do_action( 'tribe_events_event_save', $event_id );
+			/**
+			 * Allow hooking in prior to updating meta fields.
+			 *
+			 * @param int     $event_id The event ID we are modifying meta for.
+			 * @param array   $data     The meta fields we want saved.
+			 * @param WP_Post $event    The event itself.
+			 *
+			 * @since 4.6
+			 */
+			do_action( 'tribe_events_event_save', $event_id, $data, $event );
 
 			//update meta fields
 			foreach ( $tec->metaTags as $tag ) {
@@ -154,10 +156,6 @@ if ( ! class_exists( 'Tribe__Events__API' ) ) {
 					// Fields with a single value per key
 					else {
 						update_metadata( 'post', $event_id, $tag, $data[ $htmlElement ] );
-					}
-
-					if ( self::is_meta_value_changed( $tag, $data, $post_meta ) ) {
-						$modified[ $tag ] = $now;
 					}
 				}
 			}
@@ -184,24 +182,16 @@ if ( ! class_exists( 'Tribe__Events__API' ) ) {
 				? tribe( 'tec.featured_events' )->unfeature( $event_id )
 				: tribe( 'tec.featured_events' )->feature( $event_id );
 
-			$fields_to_check_for_changes = array(
-				'_EventShowInCalendar',
-				'_thumbnail_id',
-			);
-
-			foreach ( $fields_to_check_for_changes as $field ) {
-				if ( ! self::is_meta_value_changed( $field, $data, $post_meta ) ) {
-					continue;
-				}
-
-				$modified[ $field ] = $now;
-			}
-
-			if ( $modified ) {
-				update_post_meta( $event_id, self::$modified_field_key, $modified );
-			}
-
-			do_action( 'tribe_events_update_meta', $event_id, $data );
+			/**
+			 * Allow hooking in after all event meta has been saved.
+			 *
+			 * @param int     $event_id The event ID we are modifying meta for.
+			 * @param array   $data     The meta fields we want saved.
+			 * @param WP_Post $event    The event itself.
+			 *
+			 * @since 4.6
+			 */
+			do_action( 'tribe_events_update_meta', $event_id, $data, $event );
 		}
 
 		/**
@@ -299,10 +289,14 @@ if ( ! class_exists( 'Tribe__Events__API' ) ) {
 
 			if ( isset( $data['EventStartDate'] ) ) {
 				$data['EventStartDate'] = Tribe__Date_Utils::datetime_from_format( $datepicker_format, $data['EventStartDate'] );
+			} elseif ( $existing_start_date = get_post_meta( $event_id, '_EventStartDate', true ) ) {
+				$data['EventStartDate'] = $existing_start_date;
 			}
 
 			if ( isset( $data['EventEndDate'] ) ) {
 				$data['EventEndDate'] = Tribe__Date_Utils::datetime_from_format( $datepicker_format, $data['EventEndDate'] );
+			} elseif ( $existing_end_date = get_post_meta( $event_id, '_EventEndDate', true ) ) {
+				$data['EventEndDate'] = $existing_end_date;
 			}
 
 			if ( isset( $data['EventAllDay'] ) && 'yes' === $data['EventAllDay'] ) {
@@ -396,6 +390,26 @@ if ( ! class_exists( 'Tribe__Events__API' ) ) {
 			foreach ( $event_cost as $cost ) {
 				add_post_meta( $event_id, '_EventCost', $cost );
 			}
+		}
+
+		/**
+		 * @param int $event_id The event post ID
+		 * @param array $args An array of arguments supported by the `wp_get_object_terms` function.
+		 *
+		 * @since 4.5
+		 *
+		 * @see wp_get_object_terms()
+		 *
+		 * @return array An associative array of terms in the [ <taxonomy> => [ <term_1>, <term_2>, ...], ...] format.
+		 */
+		public static function get_event_terms( $event_id, array $args = array() ) {
+			$terms = array();
+			foreach ( get_post_taxonomies( $event_id ) as $taxonomy ) {
+				$tax_terms = wp_get_object_terms( $event_id, $taxonomy, $args );
+				$terms[ $taxonomy ] = $tax_terms;
+			}
+
+			return $terms;
 		}
 
 		/**
