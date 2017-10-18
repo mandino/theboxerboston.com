@@ -34,10 +34,6 @@ class Tribe__Events__Pro__This_Week_Widget extends WP_Widget {
 			return;
 		}
 
-		//JS for Taxonomy Filter Select
-		Tribe__Events__Template_Factory::asset_package( 'select2' );
-		wp_enqueue_script( 'calendar-widget-admin', tribe_events_pro_resource_url( 'calendar-widget-admin.js' ), array(), apply_filters( 'tribe_events_pro_js_version', Tribe__Events__Pro__Main::VERSION ) );
-
 		//Need for Customizer and to prevent errors in Widgets Section with Color Picker
 		wp_enqueue_script( 'underscore' );
 

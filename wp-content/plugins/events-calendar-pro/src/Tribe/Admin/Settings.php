@@ -14,13 +14,7 @@ class Tribe__Events__Pro__Admin__Settings {
 	 *
 	 */
 	public static function instance() {
-		static $instance;
-
-		if ( ! $instance instanceof self ) {
-			$instance = new self;
-		}
-
-		return $instance;
+		return tribe( 'events-pro.admin.settings' );
 	}
 
 	/**
@@ -28,12 +22,9 @@ class Tribe__Events__Pro__Admin__Settings {
 	 *
 	 * @return void
 	 */
-	public static function hook() {
-		$myself = self::instance();
-
-		add_filter( 'tribe_settings_tab_fields', array( $myself, 'inject_mobile_fields' ), 10, 2 );
-
-		add_filter( 'tribe_events_header_attributes', array( $myself, 'include_mobile_default_view' ) );
+	public function hook() {
+		add_filter( 'tribe_settings_tab_fields', array( $this, 'inject_mobile_fields' ), 10, 2 );
+		add_filter( 'tribe_events_header_attributes', array( $this, 'include_mobile_default_view' ) );
 	}
 
 	/**

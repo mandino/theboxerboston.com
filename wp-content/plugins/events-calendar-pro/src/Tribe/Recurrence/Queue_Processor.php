@@ -82,7 +82,7 @@ class Tribe__Events__Pro__Recurrence__Queue_Processor {
 	 *
 	 * @param int $event_id
 	 * @param int $batch_size
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function process_batch( $event_id, $batch_size = null ) {
@@ -96,7 +96,7 @@ class Tribe__Events__Pro__Recurrence__Queue_Processor {
 		$this->batch_size = ( null === $batch_size ) ? $default_batch_size : (int) $batch_size;
 
 		$this->current_event_id = (int) $event_id;
-		
+
 		return $this->do_processing();
 	}
 

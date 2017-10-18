@@ -39,7 +39,7 @@ class Tribe__Events__Pro__Recurrence__Instance {
 			$this->start_date = new DateTime( '@' . $date_duration );
 			$this->duration = $this->get_parent_duration();
 		}
-		
+
 		$this->sequence_number = $sequence_number;
 	}
 
@@ -136,7 +136,11 @@ class Tribe__Events__Pro__Recurrence__Instance {
 		) );
 
 		foreach ( $possible_matches as $existing_post ) {
-			if ( $this->duration == $existing_post->_EventDuration ) {
+			// We have to compare Duration and Start Date, because we can have events on the same day with different times
+			if (
+				$this->duration == $existing_post->_EventDuration &&
+				$this->start_date->format( Tribe__Date_Utils::DBDATETIMEFORMAT ) == $existing_post->_EventStartDate
+			) {
 				return true;
 			}
 		}

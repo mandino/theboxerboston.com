@@ -38,11 +38,19 @@
 		map_add_marker: function( lat, lng, title, address, link ) {
 			var myLatlng = new google.maps.LatLng( lat, lng );
 
-			var marker = new google.maps.Marker( {
-				position: myLatlng,
-				map     : tg.map,
-				title   : title
-			} );
+			var marker = {
+					position: myLatlng,
+					map     : tg.map,
+					title   : title
+				};
+
+			// If we have a Map Pin set, we use it
+			if ( 'undefined' !== GeoLoc.pin_url && GeoLoc.pin_url ) {
+				marker.icon = GeoLoc.pin_url;
+			}
+
+			// Overwrite with an actual object
+			marker = new google.maps.Marker( marker );
 
 			var infoWindow = new google.maps.InfoWindow();
 
@@ -260,7 +268,8 @@
 			ts.params = {
 				action             : 'tribe_geosearch',
 				tribe_paged        : ts.paged,
-				tribe_event_display: ts.view
+				tribe_event_display: ts.view,
+				featured           : tf.is_featured()
 			};
 
 			if ( ts.category ) {

@@ -48,6 +48,9 @@ class Tribe__Events__Aggregator__Record__Activity {
 		// Entry for Terms in Events Cat
 		$this->register( Tribe__Events__Main::TAXONOMY, array( 'category', 'categories', 'cat', 'cats' ) );
 
+		// Entry for Tags
+		$this->register( 'post_tag', array( 'tag', 'tags' ) );
+
 		// Entry for Attachment
 		$this->register( 'attachment', array( 'attachments', 'image', 'images' ) );
 
@@ -91,6 +94,8 @@ class Tribe__Events__Aggregator__Record__Activity {
 		foreach ( $map as $to ) {
 			$this->map[ $to ] = $slug;
 		}
+
+		$this->prevent_duplicates_between_item_actions( $slug );
 
 		return true;
 	}
@@ -269,5 +274,19 @@ class Tribe__Events__Aggregator__Record__Activity {
 
 		// Check if it actually exists
 		return ! empty( $this->items[ $slug ] ) ;
+	}
+
+	/**
+	 * Checks the activities for a slug to make sure there are no incoherent duplicate entries due to concurring processes.
+	 *
+	 * @since 4.5.12
+	 *
+	 * @param string $slug
+	 */
+	protected function prevent_duplicates_between_item_actions( $slug ) {
+		// sanity check the updated elements: elements cannot be created AND updated
+		if ( ! empty( $this->items[ $slug ]->updated ) && ! empty( $this->items[ $slug ]->created ) ) {
+			$this->items[ $slug ]->updated = array_diff( $this->items[ $slug ]->updated, $this->items[ $slug ]->created );
+		}
 	}
 }
