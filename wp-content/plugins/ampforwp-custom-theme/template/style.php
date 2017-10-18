@@ -105,7 +105,7 @@ function ampforwp_custom_style() {
         text-decoration: none;
     }
     .amp-wp-header .nav_container {
-        background:#e21f27;
+        background:#ab0303;
         padding: 20px;
     }
     /* Site Icon */
@@ -433,7 +433,7 @@ function ampforwp_custom_style() {
 	main .amp-wp-content.relatedpost {
 		background: none;
 		box-shadow: none;
-        color: #e21f27;
+        color: #ab0303;
 		max-width: 1030px;
 	}
 	.related_posts h3, .comments_list h3{
@@ -762,7 +762,7 @@ function ampforwp_custom_style() {
 		font-size: 16px;
 	}
     .amp-reserve-btn {
-        background: #e21f27;
+        background: #ab0303;
         color: #fff;
         display: inline;
         float:right;
@@ -943,7 +943,7 @@ function ampforwp_custom_style() {
 		line-height: 1.1;
 	}
 	.comment-button-wrapper a {
-		background: #e21f27;
+		background: #ab0303;
 		border:0;
         border-radius:0;
 		color: #fff;
@@ -980,7 +980,7 @@ function ampforwp_custom_style() {
         font-weight: 300;
     }
     .amp-wp-article-content h3 b {
-        color: #e21f27;
+        color: #ab0303;
         font-size:25px;
         font-weight: 600;
         text-transform: uppercase;

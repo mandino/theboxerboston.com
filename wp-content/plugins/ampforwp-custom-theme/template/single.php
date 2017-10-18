@@ -85,7 +85,7 @@
 <!-- Comment Button Start -->  
 				<?php if ( comments_open() ) { ?>
 					<div class="comment-button-wrapper">
-				    	<a href="https://capitolhillhotel-dc.reztrip.com/?_ga=2.163488764.194409529.1507537860-1363754031.1507537860" target="_blank"> Reserve Now</a>
+				    	<a href="https://theboxerboston.reztrip.com/?_ga=2.217688470.1267714930.1508315964-1155615109.1496912787" target="_blank"> Reserve Now</a>
 					</div>
 				<?php } ?>
 <!-- Comment Button End -->  
