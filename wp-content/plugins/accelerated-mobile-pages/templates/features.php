@@ -80,6 +80,12 @@
 	70. Hide AMP by specific Categories #872
 	71. Alt tag for thumbnails #1013 and For Post ID in Body tag #1006
 	72. Blacklist Sanitizer Added back #1024
+	73. View AMP Site below View Site In Dashboard #1076
+	74. Featured Image check from Custom Fields 
+	75. Dev Mode in AMP
+	76. Body Class for AMP pages
+	77. AMP Blog Details
+	78. Saved Custom Post Types for AMP in Options for Structured Data
 */
 // Adding AMP-related things to the main theme
 	global $redux_builder_amp;
@@ -93,7 +99,8 @@
  	require AMPFORWP_PLUGIN_DIR  .'templates/custom-sanitizer.php';
 	// Custom Frontpage items
  	require AMPFORWP_PLUGIN_DIR  .'templates/frontpage-elements.php';
- 	require AMPFORWP_PLUGIN_DIR . '/classes/class-ampforwp-youtube-embed.php' ; 
+ 	require AMPFORWP_PLUGIN_DIR . '/classes/class-ampforwp-youtube-embed.php' ;
+ 	require AMPFORWP_PLUGIN_DIR  .'templates/structured-data.php'; 
 
  	// TODO: Update this function 
  	function ampforwp_include_customizer_files(){
@@ -121,9 +128,13 @@ define('AMPFORWP_COMMENTS_PER_PAGE',  ampforwp_define_comments_number() );
 	// Define number of comments
 	function ampforwp_define_comments_number(){
 		global $redux_builder_amp;
-		return $redux_builder_amp['ampforwp-number-of-comments'];
+		$number_of_comments = '';
+		if(isset($redux_builder_amp['ampforwp-number-of-comments'])){
+			$number_of_comments = $redux_builder_amp['ampforwp-number-of-comments'];
+		}
+		return $number_of_comments;
 	}
-
+	
 	// 1. Add Home REL canonical
 	// Add AMP rel-canonical for home and archive pages
 
@@ -167,6 +178,7 @@ define('AMPFORWP_COMMENTS_PER_PAGE',  ampforwp_define_comments_number() );
 			}
 		// #872 no-amphtml if selected as hide from settings
 		if(is_archive() && $redux_builder_amp['ampforwp-archive-support']){
+			$selected_cats = array();
 			$categories = get_the_category();
 			$category_id = $categories[0]->cat_ID;
 			$get_categories_from_checkbox =  $redux_builder_amp['hide-amp-categories']; 
@@ -199,8 +211,7 @@ define('AMPFORWP_COMMENTS_PER_PAGE',  ampforwp_define_comments_number() );
 	    if ( is_home()  || is_front_page() || is_archive() ){
 	        global $wp;
 	        $current_archive_url = home_url( $wp->request );
-	        $amp_url = trailingslashit($current_archive_url).'amp';
-
+	        $amp_url = trailingslashit(trailingslashit($current_archive_url).'amp');
 	    } else {
 	      $amp_url = amp_get_permalink( get_queried_object_id() );
 	    }
@@ -212,34 +223,14 @@ define('AMPFORWP_COMMENTS_PER_PAGE',  ampforwp_define_comments_number() );
 	        } else {
 				$supported_types = array('post','page');
 
-				include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-				if( is_plugin_active( 'amp-custom-post-type/amp-custom-post-type.php' ) ) {
-					if ( $redux_builder_amp['ampforwp-custom-type'] ) {
-						foreach($redux_builder_amp['ampforwp-custom-type'] as $custom_post){
-							$supported_types[] = $custom_post;
-						}
-					}
-				}
-
-				include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-				if( is_plugin_active( 'amp-woocommerce/amp-woocommerce.php' ) ) {
-					if( !in_array("product", $supported_types) ){
-						$supported_types[]= 'product';
-					}
-				}
+				$supported_types = apply_filters('get_amp_supported_post_types',$supported_types);
 
 				$type = get_post_type();
 				$supported_amp_post_types = in_array( $type , $supported_types );
 
 				$query_arg_array = $wp->query_vars;
-
 				if( array_key_exists( 'paged' , $query_arg_array ) ) {
-					if ( ( is_home() ||  is_front_page() ) && $wp->query_vars['paged'] >= '2' ) {
-						$new_url =  home_url('/');
-						$new_url = $new_url . AMPFORWP_AMP_QUERY_VAR . '/' . $wp->request ;
-						$amp_url = $new_url ;
-					}
-					if ( is_archive() && $wp->query_vars['paged'] >= '2' ) {
+					if ( (is_home() || is_archive()) && $wp->query_vars['paged'] >= '2' ) {
 						$new_url 		=  home_url('/');
 						$category_path 	= $wp->request;
 						$explode_path  	= explode("/",$category_path);
@@ -258,11 +249,11 @@ define('AMPFORWP_COMMENTS_PER_PAGE',  ampforwp_define_comments_number() );
 					$current_search_url =trailingslashit(get_home_url())."?amp=1&s=".get_search_query();
 					$amp_url = untrailingslashit($current_search_url);
 				}
-
+		$amp_url = user_trailingslashit($amp_url);	
         $amp_url = apply_filters('ampforwp_modify_rel_canonical',$amp_url);
 
-				if( $supported_amp_post_types) {
-					printf( '<link rel="amphtml" href="%s" />', esc_url( $amp_url ) );
+				if( $supported_amp_post_types) {					
+					printf('<link rel="amphtml" href="%s" />', esc_url($amp_url));
 				}
 
 	        }
@@ -395,12 +386,12 @@ define('AMPFORWP_COMMENTS_PER_PAGE',  ampforwp_define_comments_number() );
 	function ampforwp_change_content_width( $content_max_width ) {
 		return 1000;
 	}
-
+ 
 	// 6. Add required Javascripts for extra AMP features
 	add_action('amp_post_template_head','ampforwp_register_additional_scripts', 20);
 	function ampforwp_register_additional_scripts() {
 		global $redux_builder_amp;
-		 if( $redux_builder_amp['enable-single-social-icons'] == true || AMPFORWP_DM_SOCIAL_CHECK === 'true' )  { ?>
+		 if( $redux_builder_amp['enable-single-social-icons'] == true || defined('AMPFORWP_DM_SOCIAL_CHECK') && AMPFORWP_DM_SOCIAL_CHECK === 'true' )  { ?>
 			<?php if( is_single() ) {
 							if( is_socialshare_or_socialsticky_enabled_in_ampforwp() ) { ?>
 				<script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
@@ -426,10 +417,11 @@ define('AMPFORWP_COMMENTS_PER_PAGE',  ampforwp_define_comments_number() );
 	function ampforwp_add_amp_related_scripts( $data ) {
 		global $redux_builder_amp;
 		// Adding Sidebar Script
-		if ( empty( $data['amp_component_scripts']['amp-sidebar'] ) ) {
-			$data['amp_component_scripts']['amp-sidebar'] = 'https://cdn.ampproject.org/v0/amp-sidebar-0.1.js';
+		if(isset($redux_builder_amp['ampforwp-amp-menu']) && $redux_builder_amp['ampforwp-amp-menu']){ 
+			if ( empty( $data['amp_component_scripts']['amp-sidebar'] ) ) {
+				$data['amp_component_scripts']['amp-sidebar'] = 'https://cdn.ampproject.org/v0/amp-sidebar-0.1.js';
+			}
 		}
-
 		return $data;
 	}
 
@@ -877,7 +869,7 @@ define('AMPFORWP_COMMENTS_PER_PAGE',  ampforwp_define_comments_number() );
 				 $content = preg_replace('/for=[^>]*/', '', $content);
 				 $content = preg_replace('/nowrap="nowrap"/', '', $content);
 				 $content = preg_replace('#<comments-count.*?>(.*?)</comments-count>#i', '', $content);
-				 $content = preg_replace('#<time.*?>(.*?)</time>#i', '', $content);
+				 /*$content = preg_replace('#<time.*?>(.*?)</time>#i', '', $content);*/
 				 $content = preg_replace('#<badge.*?>(.*?)</badge>#i', '', $content);
 				 $content = preg_replace('#<plusone.*?>(.*?)</plusone>#i', '', $content);
 				 $content = preg_replace('#<col.*?>#i', '', $content);
@@ -891,13 +883,13 @@ define('AMPFORWP_COMMENTS_PER_PAGE',  ampforwp_define_comments_number() );
 				 /* Removed So Inline style can work
 				 $content = preg_replace('/(<[^>]+) style=".*?"/', '$1', $content);
 				 */
-				 //$content = preg_replace('/(<[^>]+) rel=".*?"/', '$1', $content);
+				 $content = preg_replace('/(<[^>]+) rel="(.*?) noopener(.*?)"/', '$1 rel="$2$3"', $content);
 				 $content = preg_replace('/<div(.*?) rel=".*?"(.*?)/', '<div $1', $content);
 				 $content = preg_replace('/(<[^>]+) ref=".*?"/', '$1', $content);
-				 $content = preg_replace('/(<[^>]+) date=".*?"/', '$1', $content);
+				 /*$content = preg_replace('/(<[^>]+) date=".*?"/', '$1', $content);
 				 $content = preg_replace('/(<[^>]+) time=".*?"/', '$1', $content);
+				 $content = preg_replace('/(<[^>]+) date/', '$1', $content);*/
 				 $content = preg_replace('/(<[^>]+) imap=".*?"/', '$1', $content);
-				 $content = preg_replace('/(<[^>]+) date/', '$1', $content);
 				 $content = preg_replace('/(<[^>]+) spellcheck/', '$1', $content);
 				 $content = preg_replace('/<font(.*?)>(.*?)<\/font>/', '$2', $content);
 
@@ -907,7 +899,7 @@ define('AMPFORWP_COMMENTS_PER_PAGE',  ampforwp_define_comments_number() );
 				 $content = preg_replace('/<script[^>]*>.*?<\/script>/i', '', $content);
 				/// simpy add more elements to simply strip tag but not the content as so
 				/// Array ("p","font");
-				$tags_to_strip = Array("thrive_headline","type","date","time","place","state","city" );
+				$tags_to_strip = Array("thrive_headline","type","place","state","city" );
 				$tags_to_strip = apply_filters('ampforwp_strip_bad_tags', $tags_to_strip);
 				foreach ($tags_to_strip as $tag)
 				{
@@ -925,6 +917,8 @@ define('AMPFORWP_COMMENTS_PER_PAGE',  ampforwp_define_comments_number() );
 				//				 $content = preg_replace('/<img*/', '<amp-img', $content); // Fallback for plugins
 				// Removing the type attribute from the <ul>
 				 $content = preg_replace('/<ul(.*?)type=".*?"(.*?)/','<ul $1',$content);
+				 //Convert the Twitter embed into url for better sanitization #1010
+				  $content = preg_replace('/<blockquote.+?(?=class="twitter-tweet")class="twitter-tweet".+?(https:\/\/twitter\.com\/\w+\/\w+\/.*?)".+?(?=<\/blockquote>)<\/blockquote>/s', "$1", $content);
 				return $content;
 		}
 
@@ -1082,7 +1076,7 @@ function ampforwp_get_all_post_types(){
 	global $redux_builder_amp;
 
     $post_types = array('post' => 'post', 'page' => 'page');
-    if ( $redux_builder_amp['ampforwp-custom-type'] ) {
+    if ( isset($redux_builder_amp['ampforwp-custom-type']) && $redux_builder_amp['ampforwp-custom-type'] ) {
     	$post_types = array_merge($post_types, $redux_builder_amp['ampforwp-custom-type']);
     }
     return $post_types;
@@ -1126,7 +1120,7 @@ function ampforwp_title_callback( $post ) {
 
     	// TODO: Move the data storage code, to Save meta Box area as it is not a good idea to update an option everytime, try adding this code inside ampforwp_title_meta_save()
     	// This code needs a rewrite.
-		if ( $ampforwp_stored_meta['ampforwp-amp-on-off'][0] == 'hide-amp') {
+		if ( ! isset($ampforwp_stored_meta['ampforwp-amp-on-off'][0]) || $ampforwp_stored_meta['ampforwp-amp-on-off'][0] == 'hide-amp') {
 			$exclude_post_value = get_option('ampforwp_exclude_post');
 			if ( $exclude_post_value == null ) {
 				$exclude_post_value[] = 0;
@@ -1211,7 +1205,7 @@ function ampforwp_title_callback_redirection( $post ) {
 
     	// TODO: Move the data storage code, to Save meta Box area as it is not a good idea to update an option everytime, try adding this code inside ampforwp_title_meta_save()
     	// This code needs a rewrite.
-		if ( $ampforwp_redirection_stored_meta['ampforwp-redirection-on-off'][0] == 'disable') {
+		if ( !isset($ampforwp_redirection_stored_meta['ampforwp-redirection-on-off'][0]) || $ampforwp_redirection_stored_meta['ampforwp-redirection-on-off'][0] == 'disable') {
 			$exclude_post_value = get_option('ampforwp_exclude_post');
 			if ( $exclude_post_value == null ) {
 				$exclude_post_value[] = 0;
@@ -1256,7 +1250,9 @@ function ampforwp_meta_redirection_status(){
 	global $post;
 	$ampforwp_redirection_post_on_off_meta = '';
 
-	$ampforwp_redirection_post_on_off_meta = get_post_meta( $post->ID,'ampforwp-redirection-on-off',true);
+	if ( ! is_404() ) {
+		$ampforwp_redirection_post_on_off_meta = get_post_meta( $post->ID,'ampforwp-redirection-on-off',true);
+	}
 
 	if ( empty( $ampforwp_redirection_post_on_off_meta ) ) {
 		$ampforwp_redirection_post_on_off_meta = 'enable';
@@ -1438,11 +1434,18 @@ function ampforwp_remove_schema_data() {
 		ampforwp_remove_filters_for_class( 'the_content', 'ICWP_WPTB_CssProcessor_V1', 'run', 10 );
 		//Perfect SEO url + Yoast SEO Compatibility #982
 		ampforwp_remove_filters_for_class( 'wpseo_canonical', 'PSU', 'canonical', 10 );
+		//SiteOrigin Page builder compatibilty
+		//Neglect SOPB If Custom AMP Editor is checked
+	      if ( $amp_custom_content_enable === 'yes') {
+				ampforwp_remove_filters_for_class( 'the_content', 'SiteOrigin_Panels', 'generate_post_content', 10 );
+			}
 	}
 	//Removing the WPTouch Pro social share links from AMP
 		remove_filter( 'the_content', 'foundation_handle_share_links_bottom', 100 );
 	//Removing the space added by the Google adsense #967
 		remove_filter( 'the_content', 'ga_strikable_add_optimized_adsense_code');
+	//Removing Social Media Share Buttons & Social Sharing Icons #1135
+		remove_filter('the_content', 'sfsi_social_buttons_below');
 }
 
 // 22. Removing author links from comments Issue #180
@@ -1466,9 +1469,16 @@ remove_action( 'amp_post_template_head', 'quads_amp_add_amp_ad_js');
 add_action('amp_post_template_footer','ampforwp_sticky_social_icons');
 function ampforwp_sticky_social_icons(){
 	global $redux_builder_amp;
-	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-	if( !is_plugin_active( 'amp-cta/amp-cta.php' ) )  {
-		if($redux_builder_amp['enable-single-social-icons'] == true && is_single() )  { ?>
+/*	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+	if( !is_plugin_active( 'amp-cta/amp-cta.php' ) )  {*/
+		if($redux_builder_amp['enable-single-social-icons'] == true && is_single() )  { 
+			$permalink = '';
+			if(isset($redux_builder_amp['enable-single-twitter-share-link']) && $redux_builder_amp['enable-single-twitter-share-link']){
+				$permalink = get_the_permalink();
+			}
+			else
+				$permalink = wp_get_shortlink();
+			?>
 			<div class="sticky_social">
 				<?php if($redux_builder_amp['enable-single-facebook-share'] == true)  { ?>
 			    	<amp-social-share type="facebook"    data-param-app_id="<?php echo $redux_builder_amp['amp-facebook-app-id']; ?>" width="50" height="28"></amp-social-share>
@@ -1479,7 +1489,7 @@ function ampforwp_sticky_social_icons(){
 	                            width="50"
 	                            height="28"
 	                            data-param-url=""
-                        		data-param-text="TITLE <?php echo wp_get_shortlink().' '.ampforwp_translation( $redux_builder_amp['amp-translator-via-text'], 'via' ).' '.$data_param_data ?>"
+                        		data-param-text="TITLE <?php echo $permalink.' '.ampforwp_translation( $redux_builder_amp['amp-translator-via-text'], 'via' ).' '.$data_param_data ?>"
 	          ></amp-social-share>
 			  	<?php } ?>
 			  	<?php if($redux_builder_amp['enable-single-gplus-share'] == true)  { ?>
@@ -1510,7 +1520,7 @@ function ampforwp_sticky_social_icons(){
 		<?php } ?>
 			</div>
 	<?php }
-		}
+		//}
 }
 // if ( $ampforwp_social_icons_enabled == true ) {
 //
@@ -1538,9 +1548,13 @@ function ampforwp_custom_yoast_meta(){
 					do_action( 'wpseo_opengraph' );
 				}
 		}//execute only if Glue is deactive
-	echo strip_tags($redux_builder_amp['ampforwp-seo-custom-additional-meta'], '<link><meta>' );
+			if(isset($redux_builder_amp['ampforwp-seo-custom-additional-meta']) && $redux_builder_amp['ampforwp-seo-custom-additional-meta']){
+				echo strip_tags($redux_builder_amp['ampforwp-seo-custom-additional-meta'], '<link><meta>' );
+			}		
 	} else {
-		echo strip_tags($redux_builder_amp['ampforwp-seo-custom-additional-meta'], '<link><meta>' );
+		if(isset($redux_builder_amp['ampforwp-seo-custom-additional-meta']) && $redux_builder_amp['ampforwp-seo-custom-additional-meta']){
+			echo strip_tags($redux_builder_amp['ampforwp-seo-custom-additional-meta'], '<link><meta>' );
+		}
 	}
 }
 
@@ -1562,7 +1576,9 @@ function ampforwp_custom_yoast_meta_homepage(){
 				do_action( 'wpseo_opengraph' );
 
 		}//execute only if Glue is deactive
-	echo strip_tags($redux_builder_amp['ampforwp-seo-custom-additional-meta'], '<link><meta>' );
+		if(isset($redux_builder_amp['ampforwp-seo-custom-additional-meta']) && $redux_builder_amp['ampforwp-seo-custom-additional-meta']){
+			echo strip_tags($redux_builder_amp['ampforwp-seo-custom-additional-meta'], '<link><meta>' );
+		}
 	}
 }
 
@@ -1659,14 +1675,38 @@ function ampforwp_replace_title_tags() {
 			$site_title = get_bloginfo( 'name' ) . $sep . get_option( 'blogdescription' );
 
 			if( get_option( 'page_on_front' ) && $redux_builder_amp['amp-frontpage-select-option'] ){
+				//WPML Static Front Page Support for title and description with Yoast #1143
 
+				include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+				 if( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) && is_plugin_active('wordpress-seo/wp-seo.php')){
+
+				 	$ID = get_option( 'page_on_front' );
+				$fixed_title = WPSEO_Meta::get_value( 'title', $ID );
+
+				$site_title = apply_filters( 'wpseo_title', wpseo_replace_vars( $fixed_title, get_post( $ID, ARRAY_A ) )  );
+				 }
+
+
+
+				else{
 				$ID = $redux_builder_amp['amp-frontpage-select-option-pages'];
 				$site_title = get_the_title( $ID ) . $sep . get_option( 'blogname' );
+				}
 			}
 			// Blog page 
 			if ( get_option( 'page_for_posts' ) && get_queried_object_id() ) {
 				$ID = get_option( 'page_for_posts' );
 				$site_title = get_the_title( $ID ) . $sep . get_option( 'blogname' );
+			}
+
+			// Custom Front Page Title From Yoast SEO #1163
+			if (class_exists('WPSEO_Meta_Columns')) {
+				 	Global $redux_builder_amp;
+				 	$ID = $redux_builder_amp['amp-frontpage-select-option-pages'];
+				 	$fixed_title = WPSEO_Meta::get_value( 'title', $ID );
+				 	if($fixed_title){
+				 		$site_title = apply_filters( 'wpseo_title', wpseo_replace_vars( $fixed_title, get_post( $ID, ARRAY_A ) )  );
+				 	}
 			}
 		}
 
@@ -1706,7 +1746,6 @@ function ampforwp_replace_title_tags() {
 				$site_title = $genesis_title;
 			}
 		}
-
 		return esc_html( convert_chars( wptexturize( trim( $site_title ) ) ) );
 	}
 }
@@ -1732,10 +1771,8 @@ function ampforwp_aioseop_front_page_title() {
 
 function ampforwp_frontpage_title_markup () { 
 	$front_page_title = ampforwp_add_custom_title_tag();
-	$front_page_title = apply_filters('ampforwp_frontpage_title_filter', $front_page_title);  
-	?>
-
-	<title> <?php echo esc_html( $front_page_title ); ?> </title> <?php
+	$front_page_title = apply_filters('ampforwp_frontpage_title_filter', $front_page_title); 
+	?><title><?php echo esc_html( $front_page_title ); ?></title><?php
 }
 
 // 27. Clean the Defer issue
@@ -1758,6 +1795,10 @@ function ampforwp_frontpage_title_markup () {
                 $content_buffer = preg_replace("/<script data-cfasync[^>]*>.*?<\/script>/", "", $content_buffer);
                 $content_buffer = preg_replace('/<font(.*?)>(.*?)<\/font>/', '$2', $content_buffer);
 //$content_buffer = preg_replace('/<style type=(.*?)>|\[.*?\]\s\{(.*)\}|<\/style>(?!(<\/noscript>)|(\n<\/head>)|(<noscript>))/','',$content_buffer);
+
+                // xlink attribute causes Validatation Issues #1149
+				$content_buffer = preg_replace('/xlink="href"/','',$content_buffer);
+				$content_buffer = preg_replace('/!important/', '' , $content_buffer);
 
             }
             return $content_buffer;
@@ -1886,15 +1927,24 @@ add_action('wp','ampforwp_remove_crazy_lazy_support',9);
 add_action('init', 'amp_gtm_remove_analytics_code');
 function amp_gtm_remove_analytics_code() {
   global $redux_builder_amp;
-  if( $redux_builder_amp['amp-use-gtm-option'] ) {
+  if( isset($redux_builder_amp['amp-use-gtm-option']) && $redux_builder_amp['amp-use-gtm-option'] ) {
     remove_action('amp_post_template_footer','ampforwp_analytics',11);
   	remove_action('amp_post_template_head','ampforwp_register_analytics_script', 20);
+  	//Add GTM Analytics code right after the body tag
+  	add_action('ampforwp_body_beginning','amp_post_template_add_analytics_data',10);
   } else {
     remove_filter( 'amp_post_template_analytics', 'amp_gtm_add_gtm_support' );
 
   }
 }
-
+//Remove other analytics if GTM is enable
+add_action('amp_post_template_footer','ampforwp_gtm_support', 9);
+function ampforwp_gtm_support(){
+  global $redux_builder_amp;
+  	if( isset($redux_builder_amp['amp-use-gtm-option']) && $redux_builder_amp['amp-use-gtm-option'] ) {
+		remove_action( 'amp_post_template_footer', 'amp_post_template_add_analytics_data' );
+	}
+}
 // Create GTM support
 add_filter( 'amp_post_template_analytics', 'amp_gtm_add_gtm_support' );
 function amp_gtm_add_gtm_support( $analytics ) {
@@ -1936,9 +1986,9 @@ add_action('amp_init','social_sharing_removal_code', 9);
 add_action('ampforwp_post_after_design_elements','ampforwp_add_disqus_support');
 function ampforwp_add_disqus_support() {
 	global $redux_builder_amp;
-	if ( !comments_open() ){
-		return;
-	}//931
+	//if ( !comments_open() ){
+	//	return;
+	//}//931
 	if ( $redux_builder_amp['ampforwp-disqus-comments-support'] ) {
 		if( $redux_builder_amp['ampforwp-disqus-comments-name'] !== '' ) {
 			global $post; $post_slug=$post->post_name;
@@ -1992,9 +2042,9 @@ function ampforwp_facebook_comments_markup() {
 
 	global $redux_builder_amp;
 	$facebook_comments_markup = '';
-	if ( !comments_open() ){
-		return;
-	}
+	//if ( !comments_open() ){
+		//return;
+	//}
 	if ( $redux_builder_amp['ampforwp-facebook-comments-support'] ) { 
 
 		$facebook_comments_markup = '<section class="amp-wp-content post-comments amp-wp-article-content amp-facebook-comments" id="comments">';
@@ -2157,29 +2207,50 @@ function ampforwp_add_widget_support() {
 		global $redux_builder_amp;
 
 		register_sidebar(array(
-			'name' => 'AMP Above Loop',
+			'name' => 'AMP Above Loop [HomePage]',
 			'id'   => 'ampforwp-above-loop',
-			'description'   => 'Widget area for above the Loop Output',
-			'before_widget' => '',
-			'after_widget'  => '',
-			'before_title'  => '<h4>',
-			'after_title'   => '</h4>'
-		));
-		register_sidebar(array(
-			'name' => 'AMP Below Loop',
-			'id'   => 'ampforwp-below-loop',
-			'description'   => 'Widget area for below the Loop Output',
+			'description'   => 'This Widget will be display on AMP HomePage Above the loop ',
 			'before_widget' => '',
 			'after_widget'  => '',
 			'before_title'  => '<h4>',
 			'after_title'   => '</h4>'
 		));
 
-		if ( $redux_builder_amp['ampforwp-content-builder'] ) {
-    $desc = "Drag and Drop the AMP Modules in this Widget Area and then assign this widget area to a page <a href=http://ampforwp.com/tutorials/page-builder>(Need Help?)</a>";
+		register_sidebar(array(
+			'name' => 'AMP Below Loop [HomePage]',
+			'id'   => 'ampforwp-below-loop',
+			'description'   => 'This Widget will be display on AMP HomePage Below the loop',
+			'before_widget' => '',
+			'after_widget'  => '',
+			'before_title'  => '<h4>',
+			'after_title'   => '</h4>'
+		));
+
+		register_sidebar(array(
+			'name' 			=> 'AMP Below the Header [Site Wide]',
+			'id'   			=> 'ampforwp-below-header',
+			'description'   => 'This Widget will be display after the header bar',
+			'before_widget' => '',
+			'after_widget'  => '',
+			'before_title'  => '<h4>',
+			'after_title'   => '</h4>'
+		));
+
+		register_sidebar(array(
+			'name' 			=> 'AMP Above the Footer [Site Wide]',
+			'id'   			=> 'ampforwp-above-footer',
+			'description'   => 'This Widget display Above the Footer',
+			'before_widget' => '',
+			'after_widget'  => '',
+			'before_title'  => '<h4>',
+			'after_title'   => '</h4>'
+		));
+
+		if ( isset($redux_builder_amp['ampforwp-content-builder']) && $redux_builder_amp['ampforwp-content-builder'] ) {
+    $desc = "<b>Update: <a target='_blank' href='https://ampforwp.com/tutorials/article/amp-page-builder-installation/'>Introducing PageBuilder 2.0</a></b><br />Drag and Drop the AMP Modules in this Widget Area and then assign this widget area to a page <a href=http://ampforwp.com/tutorials/page-builder>(Need Help?)</a>";
     $placeholder = 'PLACEHOLDER';
 			register_sidebar(array(
-				'name' 			=> 'Page Builder (AMP)',
+				'name' 			=> 'Page Builder (AMP) [Legacy]',
 				'id'   			=> 'layout-builder',
                 'description' => $placeholder,
 				'before_widget' => '',
@@ -2281,6 +2352,88 @@ function ampforwp_output_widget_content_below_loop() {
    echo $sidebar_output;
 }
 
+add_action( 'ampforwp_after_header' , 'ampforwp_output_widget_content_below_the_header' );
+add_action('below_the_header_design_1','ampforwp_output_widget_content_below_the_header');
+function ampforwp_output_widget_content_below_the_header() {
+	 $sanitized_sidebar = "";
+	 $non_sanitized_sidebar = "";
+	 $sidebar_output = "";
+    
+    ob_start();
+	dynamic_sidebar( 'ampforwp-below-header' );
+	$non_sanitized_sidebar = ob_get_contents();
+	ob_end_clean();
+
+	$sanitized_sidebar = new AMPFORWP_Content( $non_sanitized_sidebar,
+		apply_filters( 'amp_content_embed_handlers', array(
+					'AMP_Twitter_Embed_Handler' => array(),
+					'AMP_YouTube_Embed_Handler' => array(),
+					'AMP_Instagram_Embed_Handler' => array(),
+					'AMP_Vine_Embed_Handler' => array(),
+					'AMP_Facebook_Embed_Handler' => array(),
+					'AMP_Gallery_Embed_Handler' => array(),
+		) ),
+		apply_filters(  'amp_content_sanitizers', array(
+					 'AMP_Style_Sanitizer' => array(),
+					 'AMP_Blacklist_Sanitizer' => array(),
+					 'AMP_Img_Sanitizer' => array(),
+					 'AMP_Video_Sanitizer' => array(),
+					 'AMP_Audio_Sanitizer' => array(),
+					 'AMP_Iframe_Sanitizer' => array(
+						 'add_placeholder' => true,
+					 ),
+		)  )
+	);
+
+   $sidebar_output = $sanitized_sidebar->get_amp_content(); ?>
+
+   	<div class="amp-wp-content widget-wrapper">
+	   	<div class="amp_widget_below_the_header">
+	  	<?php echo $sidebar_output; ?> </div>
+  	</div> 
+
+<?php }
+
+add_action( 'amp_post_template_above_footer' , 'ampforwp_output_widget_content_above_the_footer' );
+function ampforwp_output_widget_content_above_the_footer() {
+	 $sanitized_sidebar = "";
+	 $non_sanitized_sidebar = "";
+	 $sidebar_output = "";
+    
+    ob_start();
+	dynamic_sidebar( 'ampforwp-above-footer' );
+	$non_sanitized_sidebar = ob_get_contents();
+	ob_end_clean();
+
+	$sanitized_sidebar = new AMPFORWP_Content( $non_sanitized_sidebar,
+		apply_filters( 'amp_content_embed_handlers', array(
+					'AMP_Twitter_Embed_Handler' => array(),
+					'AMP_YouTube_Embed_Handler' => array(),
+					'AMP_Instagram_Embed_Handler' => array(),
+					'AMP_Vine_Embed_Handler' => array(),
+					'AMP_Facebook_Embed_Handler' => array(),
+					'AMP_Gallery_Embed_Handler' => array(),
+		) ),
+		apply_filters(  'amp_content_sanitizers', array(
+					 'AMP_Style_Sanitizer' => array(),
+					 'AMP_Blacklist_Sanitizer' => array(),
+					 'AMP_Img_Sanitizer' => array(),
+					 'AMP_Video_Sanitizer' => array(),
+					 'AMP_Audio_Sanitizer' => array(),
+					 'AMP_Iframe_Sanitizer' => array(
+						 'add_placeholder' => true,
+					 ),
+		)  )
+	);
+
+   $sidebar_output = $sanitized_sidebar->get_amp_content(); ?>
+   	<div class="amp-wp-content widget-wrapper">
+		<div class="amp_widget_above_the_footer">
+		<?php echo $sidebar_output; ?> </div>
+	</div>
+
+<?php }
+
 // 44. auto adding /amp for the menu
 add_action('amp_init','ampforwp_auto_add_amp_menu_link_insert');
 function ampforwp_auto_add_amp_menu_link_insert() {
@@ -2298,31 +2451,30 @@ function ampforwp_auto_add_amp_in_link_check() {
 
 function ampforwp_auto_add_amp_in_menu_link( $atts, $item, $args ) {
 
-    $atts['href'] = trailingslashit( $atts['href'] ) . AMPFORWP_AMP_QUERY_VAR;
+    $atts['href'] = user_trailingslashit(trailingslashit( $atts['href'] ) . AMPFORWP_AMP_QUERY_VAR);
     return $atts;
 }
-
 
 // 45. searchpage, frontpage, homepage structured data
 add_filter( 'amp_post_template_metadata', 'ampforwp_search_or_homepage_or_staticpage_metadata', 10, 2 );
 function ampforwp_search_or_homepage_or_staticpage_metadata( $metadata, $post ) {
-		global $redux_builder_amp;
-
-		if( is_search() || is_home() || ( is_front_page() && $redux_builder_amp['amp-frontpage-select-option'] )) {
+		global $redux_builder_amp,$wp;
+		$desc = '';
+		if( is_search() || is_home() || ( is_home() && $redux_builder_amp['amp-frontpage-select-option'] ) ) {
 
 			if( is_home() || is_front_page() ){
 				global $wp;
 				$current_url = home_url( $wp->request );
-				$current_url = dirname( $current_url );
+				//$current_url = dirname( $current_url );
 				$headline 	 =  get_bloginfo('name') . ' | ' . get_option( 'blogdescription' );
 			} else {
 				$current_url 	= trailingslashit(get_home_url())."?s=".get_search_query();
 				$current_url 	= untrailingslashit( $current_url );
 				$headline 		= ampforwp_translation($redux_builder_amp['amp-translator-search-text'], 'You searched for:') . '  ' . get_search_query();
 			}
-
 			// creating this to prevent errors
 			$structured_data_image_url = '';
+			$page = '';
 			// placeholder Image area
 			if (! empty( $redux_builder_amp['amp-structured-data-placeholder-image']['url'] ) ) {
 				$structured_data_image_url = $redux_builder_amp['amp-structured-data-placeholder-image']['url'];
@@ -2330,43 +2482,64 @@ function ampforwp_search_or_homepage_or_staticpage_metadata( $metadata, $post ) 
 			$structured_data_image =  $structured_data_image_url; //  Placeholder Image URL
 			$structured_data_height = intval($redux_builder_amp['amp-structured-data-placeholder-image-height']); //  Placeholder Image width
 			$structured_data_width = intval($redux_builder_amp['amp-structured-data-placeholder-image-width']); //  Placeholder Image height
-
-			if( is_front_page() ) {
-				$ID = $redux_builder_amp['amp-frontpage-select-option-pages']; // ID of slected front page
-				$headline =  get_the_title( $ID ) . ' | ' . get_option('blogname');
-				$static_page_data = get_post( $ID );
-
-				$datePublished = $static_page_data->post_date;
-				$dateModified = $static_page_data->post_modified;
-
-				$featured_image_array = wp_get_attachment_image_src( get_post_thumbnail_id( $ID ) ); // Featured Image structured Data
-				if( $featured_image_array ) {
-					$structured_data_image = $featured_image_array[0];
-					$structured_data_image = $featured_image_array[1];
-					$structured_data_image = $featured_image_array[2];
+			$current_url_in_pieces = explode( '/', $current_url );
+			if( is_home() && $redux_builder_amp['amp-frontpage-select-option'] && ampforwp_get_blog_details() == false ) {
+				 // ID of slected front page
+					$ID = $redux_builder_amp['amp-frontpage-select-option-pages'];
+					$headline =  get_the_title( $ID ) . ' | ' . get_option('blogname');
+					$static_page_data = get_post( $ID );
+					$datePublished = $static_page_data->post_date;
+					$dateModified = $static_page_data->post_modified;
+					$featured_image_array = wp_get_attachment_image_src( get_post_thumbnail_id($ID), 'full' ); 
+					// Featured Image structured Data
+					if( $featured_image_array ) {
+						$structured_data_image = $featured_image_array[0];
+						$structured_data_width  = $featured_image_array[1];
+						$structured_data_height  = $featured_image_array[2];
+					}
 				}
-			} else {
-			// To DO : check the entire else section .... time for search and homepage...wierd ???
-				$datePublished = date( 'Y-m-d H:i:s', current_time( 'timestamp', 0 ) - 2 );
-				// time difference is 2 minute between published and modified date
-				$dateModified = date( 'Y-m-d H:i:s', current_time( 'timestamp', 0 ) );
-			}
-			$metadata['datePublished'] = $datePublished; // proper published date added
-			$metadata['dateModified'] = $dateModified; // proper modified date
-
+				else{
+					if( ampforwp_get_blog_details() == true ) {
+						$headline = ampforwp_get_blog_details('title') . ' | ' . get_option('blogname');
+						$page_for_posts  =  get_option( 'page_for_posts' );
+						$blog_data = get_post($page_for_posts); 
+						if ( $post ) {
+							$datePublished = $blog_data->post_date;
+							$dateModified = $blog_data->post_modified;
+						}
+					}
+					else {
+						// To DO : check the entire else section .... time for search and homepage...wierd ???
+						$datePublished = date( 'Y-m-d H:i:s', current_time( 'timestamp', 0 ) - 2 );
+						// time difference is 2 minute between published and modified date
+						$dateModified = date( 'Y-m-d H:i:s', current_time( 'timestamp', 0 ) );
+					}
+				}
 			$metadata['image'] = array(
 				'@type' 	=> 'ImageObject',
 				'url' 		=> $structured_data_image ,
 				'height' 	=> $structured_data_height,
 				'width' 	=> $structured_data_width,
 			);
-
-			$metadata['mainEntityOfPage'] = $current_url; // proper URL added
+			$metadata['datePublished'] = $datePublished; // proper published date added
+			$metadata['dateModified'] = $dateModified; // proper modified date
+			$remove 	= '/'. AMPFORWP_AMP_QUERY_VAR;
+			$current_url 	= str_replace($remove, '', $current_url);
+		  	$query_arg_array = $wp->query_vars;
+		  	if( array_key_exists( "page" , $query_arg_array  ) ) {
+			   $page = $wp->query_vars['page'];
+		  	}
+		  	if ( $page >= '2') { 
+				$current_url = trailingslashit( $current_url  . '?page=' . $page);
+			}
+			$metadata['mainEntityOfPage'] = trailingslashit($current_url); // proper URL added
 			$metadata['headline'] = $headline; // proper headline added
 	}
+	// Description for Structured Data
+	$desc = esc_attr( convert_chars( wptexturize (  ampforwp_generate_meta_desc() ) ) );
+	$metadata['description'] = $desc;
 	return $metadata;
 }
-
 
 // 46. search search search everywhere #615
 require 'search-functions.php';
@@ -2438,7 +2611,7 @@ if( !function_exists('ampforwp_checking_any_social_profiles') ) {
 }
 
 // 50. Properly adding noditification Scritps the AMP way
-add_filter( 'amp_post_template_data', 'ampforwp_add_notification_scripts' );
+add_filter( 'amp_post_template_data', 'ampforwp_add_notification_scripts', 75 );
 function ampforwp_add_notification_scripts( $data ) {
 	global $redux_builder_amp;
 
@@ -2586,12 +2759,11 @@ function ampforwp_translation( $redux_style_translation , $pot_style_translation
 
 // 57. Adding Updated date at in the Content
 add_action('ampforwp_after_post_content','ampforwp_add_modified_date');
-function ampforwp_add_modified_date($post_id){
+function ampforwp_add_modified_date($post_object){
 	global $redux_builder_amp;
 	if ( is_single() && $redux_builder_amp['post-modified-date'] ) { ?>
 		<div class="ampforwp-last-modified-date">
 			<p> <?php
-				$post_object = new AMP_Post_Template($post_id);
 				if( $post_object->get( 'post_modified_timestamp' ) !== $post_object->get( 'post_publish_timestamp' ) ){
 					echo esc_html(
 						sprintf(
@@ -2617,13 +2789,15 @@ if ( ! function_exists( 'ampforwp_youtube_shortcode') ) {
 
 	function ampforwp_youtube_shortcode( $params, $old_format_support = false ) {
 		$str = '';
-
+		$parsed_url = array();
 		$youtube_url = 'https://www.youtube.com/watch?v=';
-		$parsed_url = parse_url( $params['id'] );
+		if(isset( $params['id']) ){
+			$parsed_url = parse_url( $params['id'] );
+		}
 		$server = 'www.youtube.com';
 
 		if ( in_array( $server, $parsed_url ) === false ) {
-			if($params['id']){
+			if(isset($params['id']) && $params['id']){
 			$new_url  = $youtube_url .  $params['id'] ;
 			$params['id'] = $new_url;
 			}
@@ -2637,7 +2811,6 @@ if ( ! function_exists( 'ampforwp_youtube_shortcode') ) {
 			  }
 			}
 		}
-
 	  return str_replace( array( '&amp;', '&#038;' ), '&', $str );
 	}
 }
@@ -2796,7 +2969,8 @@ function ampforwp_frontpage_comments() {
 				                          $emoji_content = get_comment_text();
 				                          // $emoji_free_comments = preg_replace($pattern,'',$emoji_content);
 				                          $emoji_content = wpautop( $emoji_content );
-					                      $sanitizer = new AMPFORWP_Content( $emoji_content, array(), apply_filters( 'ampforwp_content_sanitizers', array( 'AMP_Img_Sanitizer' => array() ) ) );
+					                      $sanitizer = new AMPFORWP_Content( $emoji_content, array(), apply_filters( 'ampforwp_content_sanitizers', array( 'AMP_Img_Sanitizer' => array(),
+					                      'AMP_Video_Sanitizer' => array() ) ) );
 					                      $sanitized_comment_content = $sanitizer->get_amp_content();
 					                      echo make_clickable( $sanitized_comment_content );
 				                           ?>
@@ -2822,18 +2996,13 @@ function ampforwp_frontpage_comments() {
 				    </ul>
 				</div>
 				<?php 
-				if ( comments_open($postID) ) {  ?>
+				
+			} 
+			if ( comments_open($postID) ) {  ?>
 				<div class="comment-button-wrapper">
 				    <a href="<?php echo esc_url( trailingslashit( $comment_button_url ) ) .'?nonamp=1'.'#commentform' ?>" rel="nofollow"><?php  echo ampforwp_translation( $redux_builder_amp['amp-translator-leave-a-comment-text'], 'Leave a Comment'  ); ?></a>
 				</div><?php
-				}
-			} else {
-			    if ( !comments_open() ) { ?>
-			    <div class="comment-button-wrapper">
-			       <a href="<?php echo esc_url( trailingslashit( $comment_button_url ) ) .'?nonamp=1'.'#commentform'  ?>" rel="nofollow"><?php echo  ampforwp_translation( $redux_builder_amp['amp-translator-leave-a-comment-text'], 'Leave a Comment' ); ?></a>
-			    </div>
-			<?php } 
-			}?>
+				}?>
 		</div> <?php
 	} 
 }
@@ -2998,6 +3167,26 @@ function ampforwp_remove_rel_on_bp(){
 
 }
 
+// Removing AMP from WPForo Forums Pages #592
+
+add_action('amp_init','remove_rel_amp_from_forum');
+function remove_rel_amp_from_forum(){
+	add_action('wp','ampforwp_remove_rel_on_forum');
+}
+
+function ampforwp_remove_rel_on_forum(){
+	if(class_exists('wpForo')){
+		Global $post, $wpdb,$wpforo;
+		$foid = $post->ID;
+		$fid = $wpforo->pageid;
+		if($foid==$fid){
+			remove_action( 'wp_head', 'amp_frontend_add_canonical');
+				remove_action( 'wp_head', 'ampforwp_home_archive_rel_canonical' );
+		}
+		
+	}
+}
+
 
 // 66. Make AMP compatible with Squirrly SEO
 add_action('pre_amp_render_post','ampforwp_remove_sq_seo');
@@ -3020,7 +3209,14 @@ function ampforwp_view_nonamp(){
 	global $redux_builder_amp;
 	 global $post;
   $ampforwp_backto_nonamp = '';
-  if ( is_home() ) {
+  if ( is_home() && get_option( 'page_for_posts' ) && get_queried_object_id() ) {
+  	$post_id = get_option('page_for_posts');
+		if($redux_builder_amp['amp-mobile-redirection']==1)
+        $ampforwp_backto_nonamp = trailingslashit(get_permalink( $post_id )).'?nonamp=1';
+    else
+      $ampforwp_backto_nonamp = trailingslashit(get_permalink( $post_id ));
+}
+  elseif ( is_home() ) {
     if($redux_builder_amp['amp-mobile-redirection']==1)
        $ampforwp_backto_nonamp = trailingslashit(home_url()).'?nonamp=1' ;
     else
@@ -3049,7 +3245,7 @@ function ampforwp_view_nonamp(){
         $ampforwp_backto_nonamp = preg_replace('/amp/','',$ampforwp_backto_nonamp);
       }
   } ?>
-<?php if ( $ampforwp_backto_nonamp ) { ?> <a href="<?php echo $ampforwp_backto_nonamp; ?>" rel="nofollow"><?php echo esc_html( $redux_builder_amp['amp-translator-non-amp-page-text'] ) ;?> </a> <?php  }
+<?php if ( $ampforwp_backto_nonamp ) { ?> <a class="view-non-amp" href="<?php echo $ampforwp_backto_nonamp; ?>" rel="nofollow"><?php echo esc_html( $redux_builder_amp['amp-translator-non-amp-page-text'] ) ;?> </a> <?php  }
  }
 
  //68. Facebook Instant Articles
@@ -3057,7 +3253,7 @@ add_action('init', 'fb_instant_article_feed_generator');
  
 function fb_instant_article_feed_generator() {
 	global $redux_builder_amp;
-	if( $redux_builder_amp['fb-instant-article-switch'] ) {	
+	if( isset($redux_builder_amp['fb-instant-article-switch']) && $redux_builder_amp['fb-instant-article-switch'] ) {	
 		add_feed('instant_articles', 'fb_instant_article_feed_function');
 	}
 }
@@ -3071,11 +3267,11 @@ function fb_instant_article_feed_function() {
 function ampforwp_post_pagination( $args = '' ) {
 
 	wp_reset_postdata();
-	global $page, $numpages, $multipage, $more;
+	global $page, $numpages, $multipage, $more, $redux_builder_amp;
 
 	$defaults = array(
-		'before'           => '<p>' . __( 'Page:' ),
-		'after'            => '</p>',
+		'before'           => '<div class="ampforwp_post_pagination" ><p>' . __( 'Page:' ),
+		'after'            => '</p></div>',
 		'link_before'      => '',
 		'link_after'       => '',
 		'next_or_number'   => 'number',
@@ -3140,10 +3336,12 @@ function ampforwp_post_pagination( $args = '' ) {
 	 * @param array  $args   An array of arguments.
 	 */
 	$html = apply_filters( 'ampforwp_post_pagination', $output, $args );
-	if ( $r['echo'] ) {
-		echo $html;
-	}
-	return $html;
+	if($redux_builder_amp['amp-pagination']) {
+		if ( $r['echo'] ) {
+			echo $html;
+		}
+		return $html;
+	}	
 
 }
 
@@ -3227,39 +3425,40 @@ add_action('ampforwp_after_post_content','ampforwp_post_pagination');
 
 function ampforwp_posts_to_remove () {
 	global $redux_builder_amp;
-	$args 							= array();
 	$get_categories_from_checkbox 	= '';
-	$get_selected_cats 				= '';
+	$get_selected_cats 				= array();
 	$selected_cats 					= array();
-	$posts 							= array();
 	$post_id_array 					= array();
-
-	$args = array(
-	  'post_type' => 'post',
-	);
-	$get_categories_from_checkbox =  $redux_builder_amp['hide-amp-categories'];  
+	if(isset($redux_builder_amp['hide-amp-categories'])){
+		$get_categories_from_checkbox =  $redux_builder_amp['hide-amp-categories'];  
+	}
 	if($get_categories_from_checkbox){
 		$get_selected_cats = array_filter($get_categories_from_checkbox);
 		foreach ($get_selected_cats as $key => $value) {
 			$selected_cats[] = $key;
 		}  
 	}
-	if ( ! empty($get_selected_cats)) {
-
-		$posts = get_posts( array(
-		    'category'          => $selected_cats,
-		    'numberposts'       => '-1',
-		    'post_type'         => $args,
-		    'post_status'       => 'publish',
-		    'suppress_filters'  => false
-		) );
+	$new_selected_cats = implode(',' , $selected_cats);
+	if(!empty($get_selected_cats)){
+		$the_query = new WP_Query( 
+			array( 
+				'ignore_sticky_posts' => 1,
+				'posts_per_page' 	  => -1,
+				'cat'				  => $new_selected_cats ,
+				'fields'			  => 'ids',
+				'post_type'           => 'post',
+				'post_status'         => 'publish', 
+			) 
+		);
+		// Get the IDs of posts
+		if ( $the_query->have_posts() ) {
+			while ( $the_query->have_posts() ) {
+				$the_query->the_post();
+				$post_id_array[] = get_the_ID(); 
+			} 			
+		} 
 	}
-
-	if ( $posts ) {
-		 foreach ($posts as $post) {
-		    $post_id_array[] =  $post->ID;
-		}
-	}
+ 	wp_reset_postdata();
 	return $post_id_array;
 }
 
@@ -3269,8 +3468,9 @@ function ampforwp_cat_specific_skip_amp_post( $skip, $post_id, $post ) {
 	$skip_this_post = '';
 
 	$list_of_posts = ampforwp_posts_to_remove();
-	$skip_this_post = in_array($post_id, $list_of_posts);
-
+	if ( $list_of_posts ) {
+		$skip_this_post = in_array($post_id, $list_of_posts);
+	}	
 	if( $skip_this_post ) {
 	  $skip = true;
 	  remove_action( 'wp_head', 'ampforwp_home_archive_rel_canonical' );
@@ -3288,65 +3488,52 @@ function ampforwp_rel_canonical_home_archive(){
 	$amp_url				= '';
 	$remove					= '';
 	$query_arg_array 		= '';
+	$page                   = '' ;
 
-	if ( is_home() && !$redux_builder_amp['amp-frontpage-select-option'] || ( is_archive() && $redux_builder_amp['ampforwp-archive-support'] ) ){
+
+	if ( is_home() || is_front_page() ||  is_archive() && $redux_builder_amp['ampforwp-archive-support'] )	{
 		$current_archive_url = home_url( $wp->request );
 		$amp_url 	= trailingslashit($current_archive_url);
 		$remove 	= '/'. AMPFORWP_AMP_QUERY_VAR;
-		$amp_url 	= str_replace($remove, '', $amp_url) ;?>
-	<link rel="canonical" href="<?php echo $amp_url ?>">
-	<?php }
-
-	if((is_front_page() || is_home() ) && $redux_builder_amp['amp-frontpage-select-option'] ){
+		$amp_url 	= str_replace($remove, '', $amp_url);
 	  	$query_arg_array = $wp->query_vars;
-	  	$page = '' ;
 	  	if( array_key_exists( "page" , $query_arg_array  ) ) {
 		   $page = $wp->query_vars['page'];
 	  	}
-	  	if ( $page >= '2') { ?>
-			<link rel="canonical" href="<?php
-			echo trailingslashit( home_url() ) . '?page=' . $page ?>"> <?php
-		} else { ?>
-			<link rel="canonical" href="<?php
-			echo  trailingslashit( home_url() ) ?>"> <?php
-		}
-	}			
+	  	if ( $page >= '2') { 
+			$amp_url = trailingslashit( $amp_url  . '?page=' . $page);
+		} ?>
+		<link rel="canonical" href="<?php echo user_trailingslashit($amp_url) ?>">
+	<?php }
+
+	if(is_search()){
+		$paged = get_query_var( 'paged' );
+		$current_search_url = trailingslashit(get_home_url())."?s=".get_search_query();
+		$amp_url = untrailingslashit($current_search_url);
+		if ($paged > 1 ) {
+			global $wp;
+			$current_archive_url 	= home_url( $wp->request );
+			$amp_url 				= trailingslashit($current_archive_url);
+			$remove 				= '/'. AMPFORWP_AMP_QUERY_VAR;
+			$amp_url				= str_replace($remove, '', $amp_url) ;
+			$amp_url 				= $amp_url ."?s=".get_search_query();
+		} 
+		?>
+		<link rel="canonical" href="<?php echo user_trailingslashit($amp_url) ?>">
+	<?php
+	}
+				
 }
 
-// 71. Alt tag for thumbnails #1013 and For Post ID in Body tag #1006
-//Alt tag for thumbnails #1013
+// 71. Alt tag for thumbnails #1013
 function ampforwp_thumbnail_alt(){
 	$thumb_id = '';
 	$thumb_alt = '';
 	$thumb_id = get_post_thumbnail_id();
-	$thumb_alt = get_post_meta( $thumb_id, '_wp_attachment_image_alt', true);
- 
-	if($thumb_alt){ 
-		echo "alt = '$thumb_alt'";
+	$thumb_alt = get_post_meta( $thumb_id, '_wp_attachment_image_alt', true) ;
+	if($thumb_alt){
+		echo 'alt="' . esc_attr($thumb_alt) . '"';
 	}
-}
-// For Post ID in Body tag #1006
-function ampforwp_get_body_class(){
-	global $post;
-	global $redux_builder_amp;
-	$post_id = '';
-
-	if ( is_singular() ) {
-		$post_id = $post->ID;
-	}
-	if ( $redux_builder_amp['amp-frontpage-select-option']) {
-	   	if ( is_home() &&  is_front_page() ) {
-	    	$post_id = $redux_builder_amp['amp-frontpage-select-option-pages'];
-	   	} elseif ( is_home() ){
-	    	$post_id = $redux_builder_amp['amp-frontpage-select-option-pages'];   
-	   }
-	}
-
-	return $post_id;
-}
-
-function ampforwp_the_body_class(){
-	echo 'post-id-' . ampforwp_get_body_class();
 }
 
 // 72. Blacklist Sanitizer Added back #1024
@@ -3373,12 +3560,21 @@ function ampforwp_generate_meta_desc(){
 
 			// Static front page
 			// Code for Custom Frontpage Yoast SEO Description
-			$post_id = $redux_builder_amp['amp-frontpage-select-option-pages'];
-			if ( class_exists('WPSEO_Meta') ) {
-				if ( is_home() && $redux_builder_amp['amp-frontpage-select-option'] ) {
-					$desc = addslashes( strip_tags( WPSEO_Meta::get_value('metadesc', $post_id ) ) );
+			//WPML Static Front Page Support for title and description with Yoast #1143 
+				 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+				 if( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) && is_plugin_active('wordpress-seo/wp-seo.php')){
+
+				 	$post_id = get_option( 'page_on_front' );
+				 }
+				 else {
+				$post_id = $redux_builder_amp['amp-frontpage-select-option-pages'];
 				}
-			}
+
+				if ( class_exists('WPSEO_Meta') ) {
+					if ( is_home() && $redux_builder_amp['amp-frontpage-select-option'] ) {
+						$desc = addslashes( strip_tags( WPSEO_Meta::get_value('metadesc', $post_id ) ) );
+					}
+				}
 		}
 		// for search
 		if( is_search() ) {
@@ -3411,7 +3607,7 @@ function ampforwp_generate_meta_desc(){
 			$desc = addslashes( ampforwp_translation($redux_builder_amp['amp-translator-search-text'], 'You searched for:') . ' ' . get_search_query() );
 		}
 
-		if( is_home() && $redux_builder_amp['amp-frontpage-select-option'] ) {
+		if( is_home() && $redux_builder_amp['amp-frontpage-select-option'] && ampforwp_get_blog_details() == false) {
 			$post_id = $redux_builder_amp['amp-frontpage-select-option-pages'] ;
 			$desc = addslashes( wp_trim_words(  strip_tags( get_post_field('post_content', $post_id) ) , '15' ) );
 		}
@@ -3449,4 +3645,295 @@ function ampforwp_generate_meta_desc(){
 			}
 	}
 	return $desc;	
+}
+
+//Compatibility with WP User Avatar #975
+function ampforwp_get_wp_user_avatar(){
+	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+		if(is_plugin_active( 'wp-user-avatar/wp-user-avatar.php' )){
+			if(class_exists('WP_User_Avatar_Functions')){
+				$user_avatar_url = '';
+				$user_avatar_url = get_wp_user_avatar_src();
+				return $user_avatar_url;
+			}
+		}
+}
+add_filter('get_amp_supported_post_types','ampforwp_supported_post_types');
+function ampforwp_supported_post_types($supported_types){
+global $redux_builder_amp;
+	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+				if( is_plugin_active( 'amp-custom-post-type/amp-custom-post-type.php' ) ) {					
+					if ( $redux_builder_amp['ampforwp-custom-type'] ) {
+						foreach($redux_builder_amp['ampforwp-custom-type'] as $custom_post){
+							$supported_types[] = $custom_post;
+						}
+					}
+				}	
+				if( is_plugin_active( 'amp-woocommerce/amp-woocommerce.php' ) ) {
+					if( !in_array("product", $supported_types) ){
+						$supported_types[]= 'product';
+					}
+				}
+	return $supported_types;
+}
+
+function is_category_amp_disabled(){
+	global $redux_builder_amp;
+
+if(is_archive() && $redux_builder_amp['ampforwp-archive-support']==1){
+	$categories = get_the_category();
+	$selected_cats = array();
+			$category_id = $categories[0]->cat_ID;
+			$get_categories_from_checkbox =  $redux_builder_amp['hide-amp-categories']; 
+			// Check if $get_categories_from_checkbox has some cats then only show
+			if ( $get_categories_from_checkbox ) {
+				$get_selected_cats = array_filter($get_categories_from_checkbox);
+				foreach ($get_selected_cats as $key => $value) {
+					$selected_cats[] = $key;
+				}  
+				if($selected_cats && $category_id){
+					if(in_array($category_id, $selected_cats)){
+						return true;
+					}
+					else
+						return false;
+				}
+			} 
+	}
+}
+
+// 73. View AMP Site below View Site In Dashboard #1076
+
+add_action( 'admin_bar_menu', 'ampforwp_visit_amp_in_admin_bar',999 );
+ 
+function ampforwp_visit_amp_in_admin_bar($admin_bar) {         
+          $args = array(
+                'parent' => 'site-name',
+                'id'     => 'view-amp',
+                'title'  => 'Visit AMP',
+                'href'   => user_trailingslashit(get_home_url().'/'.AMP_QUERY_VAR),
+                'meta'   => false
+            );
+            $admin_bar->add_node( $args );       
+}
+
+// Things to be added in the Body Tag #1064
+add_action('ampforwp_body_beginning','ampforwp_body_beginning_html_output',11);
+function ampforwp_body_beginning_html_output(){
+	global $redux_builder_amp;
+  	if( $redux_builder_amp['amp-body-text-area'] ) {
+    	echo $redux_builder_amp['amp-body-text-area'] ;
+  }
+}
+
+add_filter('get_amp_supported_post_types','is_amp_post_support_enabled');
+function is_amp_post_support_enabled($supportedTypes){
+	global $redux_builder_amp;
+	if( isset( $redux_builder_amp['amp-on-off-for-all-posts'] ) ) {
+		if($redux_builder_amp['amp-on-off-for-all-posts']!='1'){
+			$index = array_search('post',$supportedTypes);
+			unset($supportedTypes[$index]);
+		}elseif($redux_builder_amp['amp-on-off-for-all-posts']==1){
+			$supportedTypes[] = 'post';
+			$supportedTypes = array_unique($supportedTypes);
+		}
+	}
+	return $supportedTypes;
+}
+
+// 74. Featured Image check from Custom Fields
+function ampforwp_is_custom_field_featured_image(){
+	global $redux_builder_amp, $post;
+	if(isset($redux_builder_amp['ampforwp-custom-fields-featured-image-switch'], $redux_builder_amp['ampforwp-custom-fields-featured-image']) && $redux_builder_amp['ampforwp-custom-fields-featured-image-switch'] && $redux_builder_amp['ampforwp-custom-fields-featured-image']){
+		return true;
+		}
+	else
+		return false;
+}
+
+function ampforwp_cf_featured_image_src(){
+global $redux_builder_amp, $post;
+	if($redux_builder_amp['ampforwp-custom-fields-featured-image-switch']){
+		$post_id = '';
+		$custom_fields = '';
+		$featured_image_field = '';
+		$custom_fields_name = array();
+		$post_id = get_the_ID();
+		$custom_fields = get_post_custom($post_id);
+		foreach ($custom_fields as $key => $value) {
+			$custom_fields_name[] = $key;	 
+		}
+		$featured_image_field = $redux_builder_amp['ampforwp-custom-fields-featured-image'];
+		if(in_array($featured_image_field, $custom_fields_name)){
+			$amp_img_src = $custom_fields[$featured_image_field][0];
+			return $amp_img_src;
+		}
+	}
+}
+
+// 75. Dev Mode in AMP
+add_action('amp_init','ampforwp_dev_mode');
+function ampforwp_dev_mode(){
+	global $redux_builder_amp;
+	if(isset($redux_builder_amp['ampforwp-development-mode']) && $redux_builder_amp['ampforwp-development-mode']){
+		add_action( 'wp', 'ampforwp_dev_mode_remove_amphtml' );		
+	}
+}
+function ampforwp_dev_mode_remove_amphtml(){
+	remove_action( 'wp_head', 'ampforwp_home_archive_rel_canonical' );
+}
+// Notice for Dev Mode
+add_action('admin_notices', 'ampforwp_dev_mode_notice');
+function ampforwp_dev_mode_notice(){ 
+	global $redux_builder_amp;
+	$message = '';
+	if(isset($redux_builder_amp['ampforwp-development-mode']) && $redux_builder_amp['ampforwp-development-mode']) {
+			$message =  '<strong>AMP Dev mode is Enabled! </strong> Please turn off Development mode, when you are done.';?>		
+			<div class="notice notice-success is-dismissible amp-dev-notice" style="position:relative;
+		    height: 40px; overflow: hidden; ">
+				<div class="ampforwp-dev-mode-message" style="margin-top: 10px;">
+					<?php echo $message; ?>					
+				</div>	
+			</div>
+<?php }
+}
+ 
+// 76. Body Class for AMP pages
+if (! function_exists( 'ampforwp_body_class' ) ) {
+	function ampforwp_body_class( $class = '' ) {
+	    // Separates classes with a single space, collates classes for body element
+	    echo 'class="' . join( ' ', ampforwp_get_body_class( $class ) ) . '"';
+	}
+}
+
+if (! function_exists( 'ampforwp_get_body_class' ) ) {
+	function ampforwp_get_body_class( $class = '' ){
+		global $wp_query, $redux_builder_amp, $post;
+	 
+	    $classes = array();
+		$post_id = '';
+		$post_type = '';
+
+		$classes[] = 'body';
+
+		if ( is_singular() ) {
+			$post_id = $post->ID;
+			$classes[] = 'single-post';
+		}
+
+		if ( $redux_builder_amp['amp-frontpage-select-option']) {
+		   	if ( is_home() &&  is_front_page() ) {
+		    	$post_id = $redux_builder_amp['amp-frontpage-select-option-pages'];
+		   	} elseif ( is_home() ){
+		    	$post_id = $redux_builder_amp['amp-frontpage-select-option-pages'];   
+		   }
+		}
+
+	    $classes[] = $post_id;
+
+	    if ( $post_id ) {
+	    	$classes[] = 'post-id-' . $post_id;
+	    	$classes[] = 'singular-' . $post_id;
+	    }
+
+	    if ( is_page() ) {
+	    	$classes[] = 'amp-single-page';
+	    }
+	    
+ 
+		if ( is_post_type_archive() ) {
+			$post_type = get_queried_object();
+			$classes[] = 'type-'. $post_type->rewrite['slug'];
+		}
+ 
+		if ( is_archive() ) {
+			$page_id 	= get_queried_object_id();
+			$classes[] 	= 'archives_body archive-'. $page_id;
+		}
+
+		if ( ! empty( $class ) ) {
+		    if ( !is_array( $class ) )
+		        $class = preg_split( '#\s+#', $class );
+		    $classes = array_merge( $classes, $class );
+		} else {
+		    // Ensure that we always coerce class to being an array.
+		    $class = array();
+		}
+
+		$classes = array_map( 'esc_attr', $classes );
+	    $classes = apply_filters( 'ampforwp_body_class', $classes, $class );
+	 
+	    return array_unique( $classes );
+	}
+
+}
+
+// Fallback for ticket #1006
+function ampforwp_the_body_class(){ return ;}
+
+// 77. AMP Blog Details
+if( !function_exists('ampforwp_get_blog_details') ) {
+	function ampforwp_get_blog_details( $param = "" ) {
+		global $redux_builder_amp;
+		$current_url = '';
+		$output = '';
+		$current_url_in_pieces = array();
+		if(is_home() &&  $redux_builder_amp['amp-frontpage-select-option'] == 1 && get_option('show_on_front') == 'page'){
+			$current_url = home_url( $GLOBALS['wp']->request );
+			$current_url_in_pieces = explode( '/', $current_url );
+			$page_for_posts  =  get_option( 'page_for_posts' );
+			$post = get_post($page_for_posts);
+			if ( $post ) {
+				$slug = $post->post_name;
+				$title = $post->post_title;
+				$blog_id = $post->ID;
+			}
+			switch ($param) {
+				case 'title':
+					$output = $title;
+					break;
+				case 'name':
+					$output = $slug;
+					break;
+				case 'id':
+					$output = $blog_id;
+					break;
+				default:
+					if(in_array($slug, $current_url_in_pieces)){
+						$output = true;
+					}
+					else
+						$output = false;
+					break;
+			}
+		}
+		return $output;
+	}
+}
+// Saved Custom Post Types for AMP in Options for Structured Data
+add_action('init', 'ampforwp_get_custom_post_types_sd');
+if(! function_exists('ampforwp_get_custom_post_types_sd') ) {
+	function ampforwp_get_custom_post_types_sd(){
+		global $redux_builder_amp;
+		$post_types = array();
+		$saved_custom_posts = array();
+
+		$saved_custom_posts = get_option('ampforwp_custom_post_types');
+		$post_types = get_post_types( array( 'public' => true, '_builtin' => false));
+		
+		if (empty($post_types)) {
+			$post_types = array();
+		}
+
+		if (empty($saved_custom_posts)) {
+			update_option('ampforwp_custom_post_types',  $post_types);
+		}
+ 		if ( empty( $saved_custom_posts ) ) {
+			$saved_custom_posts = array();
+ 		}
+		if(array_diff($saved_custom_posts, $post_types) ){	
+			update_option('ampforwp_custom_post_types',  $post_types);
+		}
+
+	}
 }

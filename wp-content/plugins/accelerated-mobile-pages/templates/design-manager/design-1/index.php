@@ -6,14 +6,14 @@
     <link rel="dns-prefetch" href="https://cdn.ampproject.org">
 	<?php do_action( 'amp_post_template_head', $this ); ?>
 	<style amp-custom>
-		<?php $this->load_parts( array( 'style' ) ); ?>
 		<?php do_action( 'amp_post_template_css', $this ); ?>
 	</style>
 </head>
 
-<body class="<?php echo esc_attr( $this->get( 'body_class' ) ); ?> design_1_wrapper">
-
+<body <?php ampforwp_body_class('amp_home_body design_1_wrapper');?>>
+<?php do_action('ampforwp_body_beginning', $this); ?>
 <?php $this->load_parts( array( 'header-bar' ) ); ?>
+<?php do_action( 'below_the_header_design_1', $this ); ?>
 
 
 <?php do_action('ampforwp_home_above_loop') ?>
@@ -42,14 +42,17 @@
                 'post_status'=> 'publish'
 			);
 			$filtered_args = apply_filters('ampforwp_query_args', $args);
-			$q = new WP_Query( $filtered_args ); ?>
-
-			<?php if ( $q->have_posts() ) : while ( $q->have_posts() ) : $q->the_post(); ?>
+			$q = new WP_Query( $filtered_args ); 
+			$blog_title = ampforwp_get_blog_details('title');
+			if($blog_title){  ?>
+				<h1 class="page-title"><?php echo $blog_title ?> </h1>
+			<?php }	
+			 if ( $q->have_posts() ) : while ( $q->have_posts() ) : $q->the_post(); ?>
 		        <div class="amp-wp-content amp-wp-article-header amp-loop-list">
 
 			        <h1 class="amp-wp-title">
 			            <?php  $ampforwp_post_url = get_permalink(); ?>
-			            <a href="<?php  echo trailingslashit( trailingslashit( $ampforwp_post_url ) . AMPFORWP_AMP_QUERY_VAR );?>"><?php the_title() ?></a>
+			            <a href="<?php  echo user_trailingslashit( trailingslashit( $ampforwp_post_url ) . AMPFORWP_AMP_QUERY_VAR );?>"><?php the_title() ?></a>
 			        </h1>
 
 					<div class="amp-wp-content-loop">
@@ -63,14 +66,18 @@
 			  </div>
 
 
-						<?php if ( has_post_thumbnail() ) { ?>
-							<?php
-							$thumb_id = get_post_thumbnail_id();
-							$thumb_url_array = wp_get_attachment_image_src($thumb_id, 'thumbnail', true);
-							$thumb_url = $thumb_url_array[0];
+						<?php if ( has_post_thumbnail() || ( ampforwp_is_custom_field_featured_image() && ampforwp_cf_featured_image_src() ) ) { 
+							if ( has_post_thumbnail()) {
+								$thumb_id = get_post_thumbnail_id();
+								$thumb_url_array = wp_get_attachment_image_src($thumb_id, 'thumbnail', true);
+								$thumb_url = $thumb_url_array[0];
+							}
+							else{
+								$thumb_url = ampforwp_cf_featured_image_src();
+							}
 							?>
 							<div class="home-post-image">
-								<a href="<?php  echo trailingslashit( trailingslashit( $ampforwp_post_url ) . AMPFORWP_AMP_QUERY_VAR );?>">
+								<a href="<?php  echo user_trailingslashit( trailingslashit( $ampforwp_post_url ) . AMPFORWP_AMP_QUERY_VAR );?>">
 									<amp-img
 										src=<?php echo $thumb_url ?>
 										<?php ampforwp_thumbnail_alt(); ?>

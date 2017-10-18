@@ -1,6 +1,6 @@
 <?php
 global $redux_builder_amp;
-if (!comments_open() || $redux_builder_amp['ampforwp-disqus-comments-support'] || $redux_builder_amp['ampforwp-facebook-comments-support'] ) {
+if (!comments_open() || ( isset($redux_builder_amp['wordpress-comments-support']) && $redux_builder_amp['wordpress-comments-support']==false ) ) {
   return;
 }
 ?>
@@ -48,7 +48,8 @@ if (!comments_open() || $redux_builder_amp['ampforwp-disqus-comments-support'] |
 					                        	// Added <p> tag in comments #873
 					                        	$comment_content = wpautop( $comment_content );
 
-					                          $sanitizer = new AMPFORWP_Content( $comment_content, array(), apply_filters( 'ampforwp_content_sanitizers', array( 'AMP_Img_Sanitizer' => array() ) ) );
+					                          $sanitizer = new AMPFORWP_Content( $comment_content, array(), apply_filters( 'ampforwp_content_sanitizers', array( 'AMP_Img_Sanitizer' => array(),
+					                          'AMP_Video_Sanitizer' => array() ) ) );
 					                          $sanitized_comment_content = $sanitizer->get_amp_content();
 					                          echo make_clickable( $sanitized_comment_content ); ?>
                         

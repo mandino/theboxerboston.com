@@ -15,15 +15,14 @@
 		$amp_url				= str_replace($remove, '', $amp_url) ;
 		$amp_url 				= $amp_url ."?s=".get_search_query();
 	} ?>
-	<link rel="canonical" href="<?php echo $amp_url ?>">
 	<?php do_action( 'amp_post_template_head', $this ); ?>
 
 	<style amp-custom>
-	<?php $this->load_parts( array( 'style' ) ); ?>
 	<?php do_action( 'amp_post_template_css', $this ); ?>
 	</style>
 </head>
-<body class="amp_home_body archives_body design_3_wrapper">
+<body <?php ampforwp_body_class('amp_home_body archives_body design_3_wrapper');?>>
+<?php do_action('ampforwp_body_beginning', $this); ?>
 <?php $this->load_parts( array( 'header-bar' ) ); ?>
 
 <?php do_action( 'ampforwp_after_header', $this ); ?>
@@ -55,17 +54,21 @@
 
 
      <?php global $redux_builder_amp; ?>
- 		<h3 class="amp-wp-content page-title"><?php echo ampforwp_translation( $redux_builder_amp['amp-translator-search-text'], 'You searched for:') . '  ' . get_search_query();?>  </h3>
+ 		<h1 class="amp-wp-content page-title"><?php echo ampforwp_translation( $redux_builder_amp['amp-translator-search-text'], 'You searched for:') . '  ' . get_search_query();?>  </h1>
 
 	<?php if ( $q->have_posts() ) : while ( $q->have_posts() ) : $q->the_post();
 		$ampforwp_amp_post_url = trailingslashit( get_permalink() ) . AMPFORWP_AMP_QUERY_VAR ; ?>
 
 		<div class="amp-wp-content amp-loop-list">
-			<?php if ( has_post_thumbnail() ) { ?>
-				<?php
-				$thumb_id = get_post_thumbnail_id();
-				$thumb_url_array = wp_get_attachment_image_src($thumb_id, 'medium', true);
-				$thumb_url = $thumb_url_array[0];
+			<?php if ( has_post_thumbnail() || ( ampforwp_is_custom_field_featured_image() && ampforwp_cf_featured_image_src() ) ) { 
+				if ( has_post_thumbnail()) {    
+					$thumb_id = get_post_thumbnail_id();
+					$thumb_url_array = wp_get_attachment_image_src($thumb_id, 'medium', true);
+					$thumb_url = $thumb_url_array[0];
+					}
+				else{
+					$thumb_url = ampforwp_cf_featured_image_src();
+				}
 				?>
 				<div class="home-post_image"><a href="<?php echo esc_url( trailingslashit( $ampforwp_amp_post_url ) ); ?>"><amp-img layout="responsive" src=<?php echo $thumb_url ?> width=450 height=270 ></amp-img></a></div>
 			<?php } ?>

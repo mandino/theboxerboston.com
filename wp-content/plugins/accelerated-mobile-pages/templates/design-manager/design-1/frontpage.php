@@ -1,5 +1,12 @@
 <?php global $redux_builder_amp,$wp;
-$post_id = $redux_builder_amp['amp-frontpage-select-option-pages'];
+ include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+ if( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' )){
+ 	$post_id = get_option('page_on_front');
+ 	
+ }
+ else{
+ 	$post_id = $redux_builder_amp['amp-frontpage-select-option-pages'];
+ }
 $template = new AMP_Post_Template( $post_id );?>
 <!doctype html>
 <html amp <?php echo AMP_HTML_Utils::build_attributes_string( $this->get( 'html_tag_attributes' ) ); ?>>
@@ -19,12 +26,14 @@ $template = new AMP_Post_Template( $post_id );?>
 			}
 		} ?>
 	<style amp-custom>
-	<?php $this->load_parts( array( 'style' ) ); ?>
 	<?php do_action( 'amp_post_template_css', $template ); ?>
 	</style>
 </head>
-<body class="single-post <?php ampforwp_the_body_class(); ?> amp-wp-frontpage design_1_wrapper">
+
+<body <?php ampforwp_body_class('single-post amp-wp-frontpage design_1_wrapper');?>>
+	<?php do_action('ampforwp_body_beginning', $this); ?>
 	<?php $this->load_parts( array( 'header-bar' ) ); ?>
+	<?php do_action( 'below_the_header_design_1', $this ); ?>
 
 	<?php do_action('ampforwp_frontpage_above_loop',$template, $post_id) ?>
 	
