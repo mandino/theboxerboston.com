@@ -259,6 +259,14 @@ and (max-width : 1024px) {
 	#home-slider .specialsbox h3 {
 		font-size: 22px !important
 	}
+
+	.read-more {
+		display: none;
+	}
+
+	.read-more-button {
+		display: block;
+	}
 }
 /* ================================================  MAX WIDTH 1023 ======================================= */
 @media only screen

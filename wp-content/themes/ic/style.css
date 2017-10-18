@@ -4786,7 +4786,7 @@ li.social_share_side a i:hover{
 }
 
 .read-more {
-  display: none;
+  display: block;
   overflow: hidden;
   transition: opacity 0.4s ease-in-out;
 }
@@ -4802,7 +4802,7 @@ li.social_share_side a i:hover{
 }
 
 .read-more-button {
-  display: block;
+  display: none;
   position: relative;
   text-align: center;
   text-transform: uppercase;
