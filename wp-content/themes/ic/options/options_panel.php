@@ -1498,7 +1498,18 @@ $options[] = array( "name" => __('Footer Background Image','cebolang'),
 			"std" => "",
 			"type" => "upload");
 
-			
+$options[] = array( "name" => __('Video Thumbnail Homepage Hero Banner','cebolang'),
+			"desc" => __('Image before video will display for Homepage ','cebolang'),
+			"id" => $shortname."_video_thumbnail_homepage_hero_banner",
+			"std" => "",
+			"type" => "upload");
+
+$options[] = array( "name" => __('Video Homepage Hero Banner','cebolang'),
+			"desc" => "if you would like to replace the image header with a small, ambient video, upload video here. Best formatting is an MP4 and a filesize under 10MB. Upload via Media Uploader and paste link here",
+			"id" => $shortname."_video_homepage_hero_banner",
+			"std" => "",
+			"type" => "text");
+
 $options[] = array( "name" => __('Address','cebolang'),
 			"desc" => "This address will be converted into coordinates that will populate the contact maps.",
 			"id" => $shortname."_address",

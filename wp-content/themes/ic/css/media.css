@@ -19,6 +19,9 @@ and (max-width : 1439px) {
 	#primary-nav nav ul li a {
 	    font-size: 12px;
 	}
+	#home-slider .video-banner {
+		height: 514.33px;
+	}
 }
 /* ================================================  MAX WIDTH 1240 ======================================= */
 @media only screen
@@ -30,10 +33,18 @@ and (max-width : 1240px) {
 	#primary-nav nav ul li a {
 	    font-size: 12px;
 	}
+
+	#home-slider .video-banner {
+		height: 443.2px;
+	}
 }
 /* ================================================  MAX WIDTH 1099 ======================================= */
 @media only screen
 and (max-width : 1099px) {
+
+	#home-slider .video-banner {
+		height: 392.8px;
+	}
 	/* General settings */
 	.container, #tribe-events-pg-template {
 		width: 95%;
@@ -259,6 +270,9 @@ and (max-width : 1024px) {
 	#home-slider .specialsbox h3 {
 		font-size: 22px !important
 	}
+	#home-slider .video-banner {
+		height: 366px;
+	}
 }
 /* ================================================  MAX WIDTH 1023 ======================================= */
 @media only screen
@@ -267,10 +281,22 @@ and (max-width : 1023px) {
 		display: none !important;
 	}
 }
+
+/* ================================================  MAX WIDTH 999 ======================================= */
+@media only screen
+and (max-width : 1023px) {
+	#home-slider .video-banner {
+		height: 347px;
+	}
+}
+
 /* ================================================  MAX WIDTH 940 ======================================= */
 @media only screen
 and (max-width : 940px)
 {
+	#home-slider .video-banner {
+		height: 335.97px;
+	}
 	/* Navigation */
 	.ressys {
 		top: 52px;
@@ -672,9 +698,34 @@ and (max-width : 939px) {
 		bottom: 13px;
 	}
 }
+
+/* ================================================  MAX WIDTH 840 ======================================= */
+@media only screen
+and (max-width:840px){
+	#home-slider .video-banner {
+		height: 300.24px;
+	}
+
+	#home-slider .video-banner .video-header .slicer {
+		min-height: 200px;
+		background-position: center;
+	}
+}
+
+/* ================================================  MAX WIDTH 800 ======================================= */
+@media only screen
+and (max-width:800px){
+	#home-slider .video-banner {
+		height: 285.94px;
+	}
+}
+
 /* ================================================  MAX WIDTH 768 ======================================= */
 @media only screen
 and (max-width : 768px) {
+	#home-slider .video-banner {
+		height: 274.5px;
+	}
 	/* Double Flyout */
 	.welcome-text { font-size: 13px; }
 	.ID1 { top: 15px; }
@@ -699,6 +750,9 @@ and (max-width : 768px) {
 and (min-width : 640px)
 and (max-width : 720px)
 {
+	#home-slider .video-banner {
+		height: 350px;
+	}
 	#home-slider {
 		height: 350px;
 	}
@@ -722,6 +776,9 @@ and (max-width : 720px)
 @media only screen
 and (max-width : 640px)
 {
+	#home-slider .video-banner {
+		height: 300px;
+	}
 	.specialsbox {
 		display: none;
 	}
@@ -1043,6 +1100,9 @@ and (max-width : 480px)
 {
 		#home-slider {
 	height: 200px;
+	}
+	#home-slider .video-banner {
+		height: 200px;
 	}
 	.slicer {
     width: 275px !important;

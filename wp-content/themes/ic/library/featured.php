@@ -1,98 +1,136 @@
 <div id="home-slider">
 
-	
+	<?php if(get_option('cebo_video_homepage_hero_banner') && is_home()) : ?>
 
-	<div class="flexslider">
+		<div class="video-banner" data-vide-bg="<?php echo preg_replace('/\\.[^.\\s]{3,4}$/', '',get_option('cebo_video_homepage_hero_banner')) ?>" style="background-image: url('<?php echo get_option("cebo_video_thumbnail_homepage_hero_banner") ?>');">
 
-		<ul class="slides">
-
-		
-
-			<!-- loop for the slides -->
-
-		
-
-			<?php query_posts('post_type=slides&posts_per_page=5'); if(have_posts()) : while(have_posts()) : the_post(); 
-
-			$imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full");?>
-
-			
-
-			
-
-			<li>
-
-				<!-- <a target="_blank" href="<?php echo get_post_meta($post->ID, 'sliderurl', true); ?>"> -->
-
-					<div class="slide-header">
-
-						
+			<div class="logo-container">
+				<div class="video-header">
+					<?php query_posts('post_type=slides&posts_per_page=1'); if(have_posts()) : while(have_posts()) : the_post();  ?>
 
 						<?php if(get_post_meta($post->ID, 'logopic', true)) { ?>
 
-						
+							<div class="slicer" style="background-image: url(<?php echo get_post_meta($post->ID, 'logopic', true); ?>);"></div>
 
-						<div class="slicer" style="background-image: url(<?php echo get_post_meta($post->ID, 'logopic', true); ?>);"></div>
-
-											
+							<?php if(get_post_meta($post->ID, 'sliderurl', true)) { ?>
+								<a target="_blank" href="<?php echo get_post_meta($post->ID, 'sliderurl', true); ?>"><div class="slicer slicer2" style="background-image: url(<?php echo get_post_meta($post->ID, 'logopic', true); ?>);"></div></a>
+							<?php } ?>
 
 						<?php } ?>
 
-						
-
-						
 
 						<?php if(get_post_meta($post->ID, 'bigtitle', true)) { ?>
 
-						
-
 						<h2><?php echo get_post_meta($post->ID, 'bigtitle', true); ?></h2>
 
-						
-
 						<?php } ?>
-
-						
 
 						<?php if(get_post_meta($post->ID, 'littletitle', true)) { ?>
 
-						
-
 						<h3><?php echo get_post_meta($post->ID, 'littletitle', true); ?></h3>
-
-						
 
 						<?php } ?>
 
-						
+					<?php endwhile; endif; wp_reset_query(); ?>
+				</div>
+			</div>
 
-					</div>
 
-				<!--<img src="<?php //echo tt($imgsrc[0], 1400, 472); ?>" alt="<?php get_post_meta($post->ID, 'bigtitle', true); ?>" />-->
+		</div>
 
-				<img src="<?php echo $imgsrc[0]; ?>" alt="<?php if( get_post_meta($post->ID, 'bigtitle', true) ) echo get_post_meta($post->ID, 'bigtitle', true); else echo get_custom_image_thumb_alt_text('', get_post_thumbnail_id( $post->ID )); ?>" />
+	<?php else : ?>
 
-			<!-- </a> -->
+		<div class="flexslider">
 
-			</li>
-
-			
-
-			
-
-			<?php endwhile; endif; wp_reset_query(); ?>	
+			<ul class="slides">
 
 			
 
-			<!-- end loop for the slides -->
+				<!-- loop for the slides -->
 
 			
 
-		</ul>
+				<?php query_posts('post_type=slides&posts_per_page=5'); if(have_posts()) : while(have_posts()) : the_post(); 
 
-	</div>
+				$imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full");?>
 
-		
+				
+
+				
+
+				<li>
+
+					<!-- <a target="_blank" href="<?php echo get_post_meta($post->ID, 'sliderurl', true); ?>"> -->
+
+						<div class="slide-header">
+
+							
+
+							<?php if(get_post_meta($post->ID, 'logopic', true)) { ?>
+
+							
+
+							<div class="slicer" style="background-image: url(<?php echo get_post_meta($post->ID, 'logopic', true); ?>);"></div>
+
+												
+
+							<?php } ?>
+
+							
+
+							
+
+							<?php if(get_post_meta($post->ID, 'bigtitle', true)) { ?>
+
+							
+
+							<h2><?php echo get_post_meta($post->ID, 'bigtitle', true); ?></h2>
+
+							
+
+							<?php } ?>
+
+							
+
+							<?php if(get_post_meta($post->ID, 'littletitle', true)) { ?>
+
+							
+
+							<h3><?php echo get_post_meta($post->ID, 'littletitle', true); ?></h3>
+
+							
+
+							<?php } ?>
+
+							
+
+						</div>
+
+					<!--<img src="<?php //echo tt($imgsrc[0], 1400, 472); ?>" alt="<?php get_post_meta($post->ID, 'bigtitle', true); ?>" />-->
+
+					<img src="<?php echo $imgsrc[0]; ?>" alt="<?php if( get_post_meta($post->ID, 'bigtitle', true) ) echo get_post_meta($post->ID, 'bigtitle', true); else echo get_custom_image_thumb_alt_text('', get_post_thumbnail_id( $post->ID )); ?>" />
+
+				<!-- </a> -->
+
+				</li>
+
+				
+
+				
+
+				<?php endwhile; endif; wp_reset_query(); ?>	
+
+				
+
+				<!-- end loop for the slides -->
+
+				
+
+			</ul>
+
+		</div>
+
+	<?php endif; ?>
 
 	<?php 
 

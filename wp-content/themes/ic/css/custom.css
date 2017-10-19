@@ -734,6 +734,18 @@ color: #333;
     overflow: hidden;
 }
 
+#home-slider .video-banner {
+    transform: translate3d(0px, 0px, 0px);
+    height: 520px;
+    background-position: 100% 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+}
+.video-banner video {
+    max-width: initial;
+}
+
 .slide-header {
     margin: 0 auto;
     position: absolute;
@@ -4023,6 +4035,10 @@ min-height: 200px;
 background-size: 100%;
 max-width: 500px;
 margin: auto;
+}
+
+#home-slider .video-banner .video-header .slicer {
+    background-position: center;
 }
 
 #mc_embed_signup label {
