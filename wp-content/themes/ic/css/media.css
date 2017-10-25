@@ -705,11 +705,6 @@ and (max-width:840px){
 	#home-slider .video-banner {
 		height: 300.24px;
 	}
-
-	#home-slider .video-banner .video-header .slicer {
-		min-height: 200px;
-		background-position: center;
-	}
 }
 
 /* ================================================  MAX WIDTH 800 ======================================= */

@@ -4818,20 +4818,3 @@ li.social_share_side a i:hover{
     font-size: 26px;
     color: #CC9933;
 }
-
-.logo-container {
-  height: inherit;
-  width: 100%;
-  display: table;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.video-header {
-  position: relative;
-  height: auto;
-  display: table-cell;
-  width: 100%;
-  vertical-align: middle;
-}

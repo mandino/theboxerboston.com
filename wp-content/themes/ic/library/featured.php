@@ -4,38 +4,6 @@
 
 		<div class="video-banner" data-vide-bg="<?php echo preg_replace('/\\.[^.\\s]{3,4}$/', '',get_option('cebo_video_homepage_hero_banner')) ?>" style="background-image: url('<?php echo get_option("cebo_video_thumbnail_homepage_hero_banner") ?>');">
 
-			<div class="logo-container">
-				<div class="video-header">
-					<?php query_posts('post_type=slides&posts_per_page=1'); if(have_posts()) : while(have_posts()) : the_post();  ?>
-
-						<?php if(get_post_meta($post->ID, 'logopic', true)) { ?>
-
-							<div class="slicer" style="background-image: url(<?php echo get_post_meta($post->ID, 'logopic', true); ?>);"></div>
-
-							<?php if(get_post_meta($post->ID, 'sliderurl', true)) { ?>
-								<a target="_blank" href="<?php echo get_post_meta($post->ID, 'sliderurl', true); ?>"><div class="slicer slicer2" style="background-image: url(<?php echo get_post_meta($post->ID, 'logopic', true); ?>);"></div></a>
-							<?php } ?>
-
-						<?php } ?>
-
-
-						<?php if(get_post_meta($post->ID, 'bigtitle', true)) { ?>
-
-						<h2><?php echo get_post_meta($post->ID, 'bigtitle', true); ?></h2>
-
-						<?php } ?>
-
-						<?php if(get_post_meta($post->ID, 'littletitle', true)) { ?>
-
-						<h3><?php echo get_post_meta($post->ID, 'littletitle', true); ?></h3>
-
-						<?php } ?>
-
-					<?php endwhile; endif; wp_reset_query(); ?>
-				</div>
-			</div>
-
-
 		</div>
 
 	<?php else : ?>
