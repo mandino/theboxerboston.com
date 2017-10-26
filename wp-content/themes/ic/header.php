@@ -116,7 +116,7 @@
 	</script>
 	<!-- End Sojern -->
 
-	<script type="application/ld+json">
+	<!--<script type="application/ld+json">
 		{
 		"@context": "http://schema.org",
 		"@type": "NewsArticle",
@@ -130,7 +130,7 @@
 		"description": "A most wonderful article",
 		"articleBody": "The full body of the article"
 		}
-	</script>
+	</script> -->
 
 	<script>
 		!function(w,d,s,u) {
