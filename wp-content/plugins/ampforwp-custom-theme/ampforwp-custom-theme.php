@@ -99,3 +99,12 @@ if( has_nav_menu( 'amp-menu' ) ) {
         $data['amp_component_scripts']['amp-accordion'] = 'https://cdn.ampproject.org/v0/amp-accordion-0.1.js';
     }
 }
+
+add_filter('get_pagenum_link', function($url) {
+	$pos = strripos($url,'/amp/page/2/');
+	if ($pos){
+		$url = preg_replace('/amp\//','',$url);
+		$url = $url.'?amp';
+	}
+	return $url;
+});

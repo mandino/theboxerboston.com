@@ -99,7 +99,7 @@ if ( is_home() || is_front_page()  || ( is_archive() && $redux_builder_amp['ampf
 <!-- Pagination Starts -->  
 		    <div class="amp-wp-content pagination-holder">
 		        <div id="pagination">
-		            <div class="next"><?php next_posts_link( $redux_builder_amp['amp-translator-next-text']. ' &raquo;', 10 ); ?></div>
+		            <div class="next"><?php next_posts_link( $redux_builder_amp['amp-translator-next-text']. ' &raquo;', $q->max_num_pages ); ?></div>
 		            <div class="prev"><?php previous_posts_link( '&laquo; '. $redux_builder_amp['amp-translator-previous-text'] ); ?></div>
 		            <div class="clearfix"></div>
 		        </div>
