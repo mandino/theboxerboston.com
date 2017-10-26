@@ -118,7 +118,7 @@
 
 	<script type="application/ld+json">
 		{
-		"@context": "//schema.org",
+		"@context": "http://schema.org",
 		"@type": "NewsArticle",
 		"headline": "Article headline",
 		"alternativeHeadline": "The headline of the Article",
