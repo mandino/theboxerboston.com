@@ -108,6 +108,10 @@
 					<span class="mobile-number"><?php echo get_option('cebo_tele'); ?></span></p>
 					<?php } ?>
 			</div>
+            <?php if(get_option('cebo_locb-schema')) 
+                echo get_option('cebo_locb-schema');
+            ?>
+            
 		</div>
 
 	</footer>
