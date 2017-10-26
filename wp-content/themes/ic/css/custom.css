@@ -736,11 +736,15 @@ color: #333;
 
 #home-slider .video-banner {
     transform: translate3d(0px, 0px, 0px);
-    height: 520px;
+    height: 100%;
     background-position: 100% 100%;
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;
+}
+.video-banner div {
+    position: relative !important;
+    height: 100%;
 }
 .video-banner video {
     max-width: initial;

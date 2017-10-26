@@ -5,7 +5,9 @@
 	<script type="text/javascript" src="<?php bloginfo ('template_url'); ?>/js/jquery-clicknav.js"></script>
 
 	<!-- Lightbox - Prettyphoto -->	
-	<link rel="stylesheet" href="<?php bloginfo ('template_url'); ?>/css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet"/>	
+	<link rel="stylesheet" href="<?php bloginfo ('template_url'); ?>/css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet"/>
+
+	<script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/jquery.lazyloadxt.extra.js"></script>
 
 	<script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/jquery.vide.js"></script>
 
@@ -527,6 +529,12 @@
 
 			}
 
+			if ($(window).width() > 768 ) {
+				$('#home-slider.home-video').css('height', 'calc(' + $(window).height() + 'px - ' + ($('.section-header').height() + $('#primary-nav').height() + $('#property-nav').height() + 30) + 'px)');
+			} else {
+				$('#home-slider.home-video').css('height', '100%');
+			}
+
 		});
 
 
@@ -575,6 +583,12 @@
 				$('video').get(0).play();
 			}
 		});
+
+		if ($(window).width() > 768 ) {
+			$('#home-slider.home-video').css('height', 'calc(' + $(window).height() + 'px - ' + ($('.section-header').height() + $('#primary-nav').height() + $('#property-nav').height() + 30) + 'px)');
+		} else {
+			$('#home-slider.home-video').css('height', '100%');
+		}
 
 	});
 

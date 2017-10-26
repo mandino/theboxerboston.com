@@ -285,23 +285,23 @@
 
     if (typeof path === 'object') {
       if (path.mp4) {
-        sources += '<source src="' + path.mp4 + '.mp4" type="video/mp4">';
+        sources += '<source data-src="' + path.mp4 + '.mp4" src="' + path.mp4 + '.mp4" type="video/mp4">';
       }
 
       if (path.webm) {
-        sources += '<source src="' + path.webm + '.webm" type="video/webm">';
+        sources += '<source data-src="' + path.webm + '.webm" src="' + path.webm + '.webm" type="video/webm">';
       }
 
       if (path.ogv) {
-        sources += '<source src="' + path.ogv + '.ogv" type="video/ogg">';
+        sources += '<source data-src="' + path.ogv + '.ogv" src="' + path.ogv + '.ogv" type="video/ogg">';
       }
 
       $video = vide.$video = $('<video>' + sources + '</video>');
     } else {
       $video = vide.$video = $('<video>' +
-        '<source src="' + path + '.mp4" type="video/mp4">' +
-        '<source src="' + path + '.webm" type="video/webm">' +
-        '<source src="' + path + '.ogv" type="video/ogg">' +
+        '<source data-src="' + path + '.mp4" src="' + path + '.mp4" type="video/mp4">' +
+        '<source data-src="' + path + '.webm" src="' + path + '.webm" type="video/webm">' +
+        '<source data-src="' + path + '.ogv" src="' + path + '.ogv" type="video/ogg">' +
         '</video>');
     }
 
