@@ -717,7 +717,7 @@ and (max-width : 768px) {
 	li.blue-btn a span.blue-mobile {
 		display: none;
 	}
-	.video-banner video {
+	.video-banner video[style] {
 		width: 100% !important;
 		height: 100% !important;
 		position: relative !important;
