@@ -762,6 +762,13 @@ color: #333;
     width: 100%;
 }
 
+.slide-header.slide-header-mobileonly { display: none; }
+.slide-header.slide-header-video {
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+}
+
 .fullpic .slide-header {
     margin: 0 auto;
     position: absolute;
@@ -4385,4 +4392,8 @@ li.blue-btn i {
 
 .menu-table tr td {
     width: 300px;
+}
+
+#home-slider.home-video {
+    background-size: 100% 100%;
 }

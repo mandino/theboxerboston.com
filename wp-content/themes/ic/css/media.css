@@ -269,6 +269,18 @@ and (max-width : 1024px) {
 	.read-more-button {
 		display: block;
 	}
+
+	.slide-header.slide-header-mobileonly {
+		display: block;
+	}
+
+	.slide-header.slide-header-mobileonly .slicer {
+		min-height: 260px;
+	}
+
+	.video-banner {
+		display: none;
+	}
 }
 /* ================================================  MAX WIDTH 1023 ======================================= */
 @media only screen

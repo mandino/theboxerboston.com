@@ -1,13 +1,49 @@
-<?php if(get_option('cebo_video_homepage_hero_banner') && is_home()) : $video_class = ' class="home-video"'; else : $video_class = ''; endif; ?>
-<div id="home-slider" <?php echo $video_class; ?>>
+<?php
+	if(get_option('cebo_video_homepage_hero_banner') && is_home()) :
+		$video_class = ' class="home-video"';
+	else :
+		$video_class = '';
+	endif;
 
-	<?php if(get_option('cebo_video_homepage_hero_banner') && is_home()) : ?>
+	$post_slides_query = new WP_Query(array(
+		'post_type' => 'slides',
+		'posts_per_page' => 1,
+	));
+?>
+<div id="home-slider" <?php echo $video_class; ?> style="background-image: url('<?php echo get_option("cebo_video_thumbnail_homepage_hero_banner") ?>');">
 
-		<div class="video-banner" data-vide-bg="<?php echo preg_replace('/\\.[^.\\s]{3,4}$/', '',get_option('cebo_video_homepage_hero_banner')) ?>" style="background-image: url('<?php echo get_option("cebo_video_thumbnail_homepage_hero_banner") ?>');">
+	<?php
+		if(get_option('cebo_video_homepage_hero_banner') && is_home()) :
+
+			if ( $post_slides_query->have_posts() ) : while ( $post_slides_query->have_posts() ) : $post_slides_query->the_post();
+
+				$logopic = get_post_meta($post->ID, 'logopic', true);
+
+			endwhile; endif; wp_reset_postdata();
+
+	?>
+
+	<script>
+		var vide_video = '<?php echo preg_replace('/\\.[^.\\s]{3,4}$/', '', get_option('cebo_video_homepage_hero_banner')); ?>';
+	</script>
+
+		<div class="video-banner video-banner-onload" style="background-image: url('<?php echo get_option("cebo_video_thumbnail_homepage_hero_banner") ?>');"></div>
+
+		<div class="slide-header slide-header-video slide-header-mobileonly">
+
+			<?php if ($logopic) : ?>
+
+				<div class="slicer" style="background-image: url(<?php echo $logopic; ?>);"></div>
+
+			<?php endif; ?>
 
 		</div>
 
 	<?php else : ?>
+
+		<script>
+			var vide_video = false;
+		</script>
 
 		<div class="flexslider">
 
