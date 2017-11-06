@@ -272,6 +272,13 @@ and (max-width : 1024px) {
 
 	.slide-header.slide-header-mobileonly {
 		display: block;
+		top: 0;
+		left: 0;
+		right: 0;
+		-webkit-transform: translateY(50%);
+		-o-transform: translateY(50%);
+		-ms-transform: translateY(50%);
+		transform: translateY(50%);
 	}
 
 	.slide-header.slide-header-mobileonly .slicer {
