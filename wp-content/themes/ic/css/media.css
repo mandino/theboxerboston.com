@@ -270,19 +270,25 @@ and (max-width : 1024px) {
 		display: block;
 	}
 
+	#home-slider.home-video {
+		display: table;
+	}
+
 	.slide-header.slide-header-mobileonly {
-		display: block;
+		display: table-cell;
+		position: relative;
+		vertical-align: middle;
 		top: 0;
 		left: 0;
 		right: 0;
-		-webkit-transform: translateY(50%);
-		-o-transform: translateY(50%);
-		-ms-transform: translateY(50%);
-		transform: translateY(50%);
+		-webkit-transform: translateY(0%);
+		-o-transform: translateY(0%);
+		-ms-transform: translateY(0%);
+		transform: translateY(0%);
 	}
 
 	.slide-header.slide-header-mobileonly .slicer {
-		min-height: 260px;
+		min-height: 200px;
 	}
 
 	.video-banner {

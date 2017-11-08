@@ -734,6 +734,11 @@ color: #333;
     overflow: hidden;
 }
 
+#home-slider.home-video {
+    height: 100%;
+    background-size: 100% 100%;
+}
+
 #home-slider .video-banner {
     transform: translate3d(0px, 0px, 0px);
     -moz-transform: translate3d(0px, 0px, 0px);
