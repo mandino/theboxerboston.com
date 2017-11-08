@@ -289,6 +289,7 @@ and (max-width : 1024px) {
 
 	.slide-header.slide-header-mobileonly .slicer {
 		min-height: 200px;
+		background-position: center;
 	}
 
 	.video-banner {
