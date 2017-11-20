@@ -59,6 +59,7 @@ function creates_post_types() {
       ),
       'public' => true,
       'rewrite' => array('slug' => 'slides'),
+      'hierarchical' => false,
       'menu_icon' => get_bloginfo('template_url').'/options/images/icon_team.png',
       'supports' => array('title','custom-fields','editor','category','author','thumbnail')
     )
