@@ -767,7 +767,7 @@ color: #333;
     width: 100%;
 }
 
-.slide-header.slide-header-mobileonly { display: none; }
+.slide-header-mobileonly { display: none; }
 .slide-header.slide-header-video {
     transform: translate(-50%,-50%);
     top: 50%;
