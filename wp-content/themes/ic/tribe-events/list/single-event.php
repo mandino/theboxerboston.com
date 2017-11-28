@@ -69,7 +69,7 @@ $organizer = tribe_get_organizer();
 <?php do_action( 'tribe_events_after_the_meta' ) ?>
 
 <!-- Event Image -->
-<?php echo tribe_event_featured_image( null, 'full' ) ?>
+<?php echo custom_tribe_event_thumbnail_image( null, 'full' ) ?>
 
 <!-- Event Content -->
 <?php do_action( 'tribe_events_before_the_content' ) ?>

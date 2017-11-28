@@ -3533,10 +3533,8 @@ ul.tabs li:last-child {
 }
 
 .post-content img {
-    height: auto;
-    max-height: 450px;
+    height: auto !important;
     max-width: 100%;
-    width: 100%;
 }
 
 
