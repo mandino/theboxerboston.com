@@ -29,9 +29,9 @@
 
 		<div class="video-banner video-banner-onload" style="background-image: url('<?php echo get_option("cebo_video_thumbnail_homepage_hero_banner") ?>');"></div>
 
-		<div class="flexslider slider">
+		<div class="flexslider flexslider--mobileonly">
 
-			<ul class="slides slides--mobileonly">
+			<ul class="slides">
 
 			<!-- loop for the slides -->
 			<?php

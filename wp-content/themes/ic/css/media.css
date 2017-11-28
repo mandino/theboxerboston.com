@@ -277,7 +277,7 @@ and (max-width : 1024px) {
 		display: table;
 	}
 
-	.slides--mobileonly {
+	.flexslider--mobileonly {
 		display: block;
 	}
 
