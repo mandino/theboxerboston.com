@@ -296,7 +296,7 @@ and (max-width : 1024px) {
 	.flexslider--mobileonly .slide-header .slicer {
 		height: 100%;
 		background-position: center center;
-		min-height: unset;
+		min-height: 0;
 	}
 
 	.video-banner {
@@ -776,7 +776,7 @@ and (max-width : 768px) {
 		transform: none !important;
 	}
 	#home-slider.home-video {
-		min-height: unset;
+		min-height: 0;
 	}
 }
 @media only screen
