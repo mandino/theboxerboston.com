@@ -38,7 +38,7 @@
 				query_posts('post_type=slides&posts_per_page=5'); if(have_posts()) : while(have_posts()) : the_post(); 
 				$imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full");
 			?>
-				<li>
+				<li style="background-image: url(<?php echo tt($imgsrc[0], 1400, 498); ?>);">
 					<div class="slide-header">
 
 					<?php if(get_post_meta($post->ID, 'logopic', true)) { ?>
@@ -55,7 +55,6 @@
 
 					</div>
 
-					<img src="<?php echo $imgsrc[0]; ?>" alt="<?php if( get_post_meta($post->ID, 'bigtitle', true) ) echo get_post_meta($post->ID, 'bigtitle', true); else echo get_custom_image_thumb_alt_text('', get_post_thumbnail_id( $post->ID )); ?>" />
 				</li>
 
 			<?php endwhile; endif; wp_reset_query(); ?>	
