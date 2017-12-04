@@ -354,3 +354,57 @@ function custom_tribe_event_thumbnail_image( $post_id = null, $size = 'full', $l
 	 */
 	return apply_filters( 'tribe_event_featured_image', $featured_image, $post_id, $size );
 }
+
+function home_nav_wrap() {
+
+$mobilenav = wp_nav_menu( array(
+	'theme_location'=> 'mobilenav',
+	'fallback_cb'	=> false,
+	'container'		=> '',
+	'items_wrap' => '%3$s',
+	'echo' => false,
+	'walker' => new walker_menu
+) );
+
+$getTel = get_option('cebo_tele');
+$getTel = str_replace('(', '', $getTel);
+$getTel = str_replace(')', '', $getTel);
+$getTel = str_replace(' ', '-', $getTel);
+$getTel = str_replace('.', '-', $getTel);
+
+	$wrap  = '<ul>';
+
+	$wrap .= '<li class="navis-mobile">
+			<a id="lnkP2Talkmobile" href="tel:+1-'.$getTel.'" target="new"><span class="ic-navis"><i class="fa fa-phone"></i> <span id="NavisTFNmobnav">"'.get_option('cebo_tele').'"</span></span></a>
+								</li>';
+
+	$wrap = '%3$s';
+
+	$wrap .= '<li class="hamburgermenu">
+				<a class="cheese" href="#">
+					<div class="hamburger">
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+					<span class="menutext">Menu</span>
+				</a>
+			</li>';
+
+	$wrap .= $mobilenav;
+
+	$wrap .= '</ul>';
+
+	return $wrap;
+}
+
+if (!class_exists('walker_menu')) {
+	class walker_menu extends Walker_Nav_Menu {
+		function start_el( &$output, $item, $depth = 0, $args = array() ) {
+			$has_children = array_search ( 'menu-item-has-children' , $item->classes );
+			// if($has_children != false) :
+				$item_output .= '<div class="toggle-button"></div>';
+			// endif;
+		}
+	}
+}
