@@ -497,7 +497,7 @@
 
 	 $(function() {
 
-		if ($(window).width() > 1000) {
+		if ($(window).width() > 940) {
 			$('#menus').removeClass('mm-menu mm-horizontal mm-ismenu');
 			$('#menu').removeClass('mm-list mm-panel mm-opened mm-current');
 		} else {
