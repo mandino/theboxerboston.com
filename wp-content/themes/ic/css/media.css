@@ -855,6 +855,9 @@ and (max-width : 640px)
 	    display: block;
 	    z-index: 99;
 	}
+	.flexslider--mobileonly .flex-control-nav {
+		bottom: 0;
+	}
 	.flexslider .slides img {
 		width: auto;
 		height: 100%;
