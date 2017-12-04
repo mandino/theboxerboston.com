@@ -288,6 +288,12 @@ and (max-width : 1024px) {
 		height: 100%;
 	}
 
+	.flexslider--mobileonly .slides > li {
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center center;
+	}
+
 	.flexslider--mobileonly .slide-header {
 		height: 100%;
 		top: 0;
