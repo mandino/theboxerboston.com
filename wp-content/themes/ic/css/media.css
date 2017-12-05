@@ -792,8 +792,8 @@ and (max-width : 768px) {
 		display: none;
 	}
 
-	.post-tags li {
-		float: unset;
+	.single-specials .post-tags li {
+		float: none;
 		text-align: center;
 		display: block;
 	}
@@ -1252,6 +1252,11 @@ padding: 8px 12px;
 	    float: none;
 	    margin-right: 14px;
 	}
+
+	.single-specials .post-tags li {
+		display: block;
+	}
+
 	/* Post */
 	.post-content.fl {
 	    padding: 20px 20px 30px;
