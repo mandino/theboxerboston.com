@@ -288,6 +288,12 @@ and (max-width : 1024px) {
 		height: 100%;
 	}
 
+	.flexslider--mobileonly .slides > li {
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center center;
+	}
+
 	.flexslider--mobileonly .slide-header {
 		height: 100%;
 		top: 0;
@@ -921,6 +927,9 @@ and (max-width : 640px)
 	    bottom: 360px;
 	    display: block;
 	    z-index: 99;
+	}
+	.flexslider--mobileonly .flex-control-nav {
+		bottom: 0;
 	}
 	.flexslider .slides img {
 		width: auto;
