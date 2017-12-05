@@ -4400,3 +4400,8 @@ li.blue-btn i {
 #home-slider.home-video {
     background-size: 100% 100%;
 }
+.image-hidden {
+	width: 100%;
+	height: auto;
+	opacity: 0;
+}
