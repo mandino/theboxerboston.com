@@ -30,10 +30,12 @@ and (max-width : 1240px) {
 	#primary-nav nav ul li a {
 	    font-size: 12px;
 	}
+
 }
 /* ================================================  MAX WIDTH 1099 ======================================= */
 @media only screen
 and (max-width : 1099px) {
+
 	/* General settings */
 	.container, #tribe-events-pg-template {
 		width: 95%;
@@ -268,6 +270,44 @@ and (max-width : 1024px) {
 	.read-more-button {
 		display: block;
 	}
+
+	#home-slider {
+		background-image: none !important;
+	}
+	#home-slider.home-video {
+		display: table;
+	}
+
+	.flexslider--mobileonly {
+		display: block;
+		height: 100%;
+	}
+
+	.flexslider--mobileonly .slides,
+	.flexslider--mobileonly .slides > li {
+		height: 100%;
+	}
+
+	.flexslider--mobileonly .slides > li {
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center center;
+	}
+
+	.flexslider--mobileonly .slide-header {
+		height: 100%;
+		top: 0;
+	}
+
+	.flexslider--mobileonly .slide-header .slicer {
+		height: 100%;
+		background-position: center center;
+		min-height: 0;
+	}
+
+	.video-banner {
+		display: none;
+	}
 }
 /* ================================================  MAX WIDTH 1023 ======================================= */
 @media only screen
@@ -276,6 +316,13 @@ and (max-width : 1023px) {
 		/*display: none !important;*/
 	}
 }
+
+/* ================================================  MAX WIDTH 999 ======================================= */
+@media only screen
+and (max-width : 999px) {
+
+}
+
 /* ================================================  MAX WIDTH 940 ======================================= */
 @media only screen
 and (max-width : 940px)
@@ -708,9 +755,23 @@ and (max-width : 939px) {
 		bottom: 13px;
 	}
 }
+
+/* ================================================  MAX WIDTH 840 ======================================= */
+@media only screen
+and (max-width:840px){
+
+}
+
+/* ================================================  MAX WIDTH 800 ======================================= */
+@media only screen
+and (max-width:800px){
+
+}
+
 /* ================================================  MAX WIDTH 768 ======================================= */
 @media only screen
 and (max-width : 768px) {
+
 	/* Double Flyout */
 	.welcome-text { font-size: 13px; }
 	.ID1 { top: 15px; }
@@ -730,16 +791,35 @@ and (max-width : 768px) {
 	li.blue-btn a span.blue-mobile {
 		display: none;
 	}
+
 	.post-tags li {
 		float: unset;
 		text-align: center;
 		display: block;
+	}
+
+	.video-banner video[style] {
+		width: 100% !important;
+		height: 100% !important;
+		position: relative !important;
+		top: 0 !important;
+		left: 0 !important;
+		-moz-transform: none !important;
+		-webkit-transform: none !important;
+		-o-transform: none !important;
+		-ms-transform: none !important;
+		transform: none !important;
+	}
+
+	#home-slider.home-video {
+		min-height: 0;
 	}
 }
 @media only screen
 and (min-width : 640px)
 and (max-width : 720px)
 {
+
 	#home-slider {
 		height: 350px;
 	}
@@ -763,6 +843,7 @@ and (max-width : 720px)
 @media only screen
 and (max-width : 640px)
 {
+
 	.specialsbox {
 		display: none;
 	}
@@ -781,6 +862,9 @@ and (max-width : 640px)
 	.slide-header {
 		top: 7%;
 	}
+	.flexslider--mobileonly .slide-header {
+		top: 0;
+	}
 	.slicer {
     	width: 300px !important;
 	}
@@ -796,20 +880,33 @@ and (max-width : 640px)
 		height: 300px;
 		overflow: hidden;
 	}
+	#home-slider.home-video {
+		overflow: hidden;
+	}
 	.flex-control-nav {
 	    bottom: 360px;
 	    display: block;
 	    z-index: 99;
 	}
+	.flexslider--mobileonly .flex-control-nav {
+		bottom: 10px;
+	}
 	.flexslider .slides img {
 		width: auto;
 		height: 100%;
+	}
+	.flexslider.flexslider--mobileonly .slides img {
+		width: auto;
+		height: auto;
 	}
 	.home .flexslider .slides img {
 		width: 150%;
 	}
 	.slide-header {
    	 top: 10%;
+	}
+	.flexslider--mobileonly .slide-header {
+		top: 0;
 	}
 	#home-slider h2 {
 	    font-size: 33px;
@@ -1124,9 +1221,10 @@ and (max-width : 530px) {
 @media only screen
 and (max-width : 480px)
 {
-		#home-slider {
-	height: 200px;
+	#home-slider, #home-slider.home-video {
+		height: 200px;
 	}
+
 	.slicer {
     width: 275px !important;
 	}
