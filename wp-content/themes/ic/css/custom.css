@@ -664,6 +664,10 @@ color: #333;
     padding: 0 5px 10px 10px;
 }
 
+#primary-nav .sub-menu li a {
+    font-weight: normal;
+}
+
     #primary-nav nav:hover ul li a.clicknav-clicker {
         background: url(../images/ic_white.png) center no-repeat;
     }
