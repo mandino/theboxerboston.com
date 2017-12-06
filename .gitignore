@@ -35,6 +35,7 @@ test/
 *timthumb.txt
 /cache
 cache/
+robots.txt
 
 #####################################
 # Wordpress untracked plugins files #
