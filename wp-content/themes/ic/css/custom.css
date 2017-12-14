@@ -587,6 +587,12 @@ color: #333;
     /*margin: -1px !important;*/
 }
 
+#primary-nav .container {
+    width: 1000px;
+    position: relative;
+    z-index: 100;
+}
+
 #primary-nav nav {
     transition: all 0.5s;
     -moz-transition: all 0.5s;
@@ -603,10 +609,11 @@ color: #333;
 
 #primary-nav nav ul li {
     color: #868282;
-    margin-right: 15px;
+    margin: 0;
+    padding: 0 6px;
     display: inline-block;
-    *display: inline;
     zoom: 1;
+    position: relative;
 }
 
 #primary-nav nav ul li.navis-mobile {
@@ -628,6 +635,39 @@ color: #333;
     -moz-font-smoothing: antialiased;
     -o-font-smoothing: antialiased;
 }
+
+#primary-nav nav ul li .sub-menu {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    margin: auto;
+    background-color: #fff;
+    padding: 20px 0 0;
+    display: none;
+    border: 1px solid #CBCBCB;
+    border-top: none;
+    width: 180px;
+}
+
+.my-wrapper.sticky #primary-nav nav ul li .sub-menu {
+    padding-top: 10px;
+}
+
+#primary-nav nav ul li:hover .sub-menu {
+    display: block;
+}
+
+#primary-nav .sub-menu li {
+    margin-right: 0;
+    text-align: left;
+    display: block;
+    padding: 0 5px 10px 10px;
+}
+
+#primary-nav .sub-menu li a {
+    font-weight: normal;
+}
+
     #primary-nav nav:hover ul li a.clicknav-clicker {
         background: url(../images/ic_white.png) center no-repeat;
     }
@@ -732,6 +772,7 @@ color: #333;
     background: #eee;
     position: relative;
     overflow: hidden;
+    z-index: 0;
 }
 
 #home-slider.home-video {
@@ -4403,6 +4444,17 @@ li.blue-btn i {
 #home-slider.home-video {
     background-size: 100% 100%;
 }
+
+.menu-item-has-children .button {
+    position: absolute;
+    background-color: transparent;
+    top: 10px;
+    right: 20px;
+    height: 10px;
+    width: 0px;
+    display: none;
+}
+
 .image-hidden {
 	width: 100%;
 	height: auto;

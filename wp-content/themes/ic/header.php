@@ -254,7 +254,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	
 		</div>
 	
-		<div id="primary-nav">
+		<div id="primary-nav" style="overflow:visible;">
 		
 			<a href="<?php bloginfo('url'); ?>" class="logo<?php if(is_home()) { ?> droplogo<?php } ?>"><img src="<?php echo get_option('cebo_logo'); ?>" alt="<?php echo the_title(); ?>" /></a>
 
@@ -266,47 +266,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			
 			<div class="container" style="float: right;">
 
-				<a class="mmenu-icon" href="#menu"><i class="fa fa-bars"></i></a>
-	
-				<nav id="menu" class="fl" style="z-index:1">
+				<a class="mmenu-icon"><i class="fa fa-bars"></i></a>
 
-					<?php
-
-						$getTel = get_option('cebo_tele');
-						$getTel = str_replace('(', '', $getTel);
-						$getTel = str_replace(')', '', $getTel);
-						$getTel = str_replace(' ', '-', $getTel);
-						$getTel = str_replace('.', '-', $getTel);
-
-					?>
-
-					<ul>
-						<li class="navis-mobile">
-							<a id="lnkP2Talkmobile" href="tel:+1-<?php echo $getTel; ?>"  target="new"><span class="ic-navis"><i class="fa fa-phone"></i> <span id="NavisTFNmobnav"><?php echo get_option('cebo_tele'); ?></span></span></a>
-						</li>
-						<?php wp_nav_menu( array( 'theme_location' => 'primary' ,  'items_wrap' => '%3$s', 'container' => '', 'menu_class' => 'navitem' ) ); ?>
-						<li class="hamburgermenu">
-							<a class="cheese" href="#">
-								<div class="hamburger">
-									<span></span>
-									<span></span>
-									<span></span>
-								</div>
-								<span class="menutext">Menu</span>
-							</a>
-						</li>
-						<?php wp_nav_menu( array( 
-							'theme_location' => 'mobilenav',
-							'items_wrap' => '%3$s', 
-							'container' => ''
-						)); ?>
+				<nav id="menus" class="fl" style="z-index:1">
+					<ul id="menu">
+						<?php
+							wp_nav_menu( array(
+								'theme_location' => 'primary',
+								'menu' => 'Header',
+								'items_wrap' => home_nav_wrap(),
+								'container' => '',
+								'menu_class' => 'navitem'
+							) );
+						?>
 					</ul>
 				</nav>
 	
 			</div>
-
+			<div class="clear"></div>
 		</div>
-
 	</div>
 	
 	<div id="quiet"></div>
