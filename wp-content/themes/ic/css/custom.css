@@ -4451,3 +4451,9 @@ li.blue-btn i {
     width: 0px;
     display: none;
 }
+
+.image-hidden {
+	width: 100%;
+	height: auto;
+	opacity: 0;
+}
