@@ -19,7 +19,6 @@ function misfit_noindex_past_events() {
 	if (!is_admin() && $post->post_type == 'tribe_events') {
 		if (!function_exists('tribe_get_end_date')) { return false; }          
                 if(tribe_is_day() === true) {
-                    
                     echo "\n<!-- noindex calendar Events -->\n<meta name=\"robots\" content=\"noindex, follow\" />\n";  
                     $t = tribe_get_events_title();
                     $mtime = str_replace('Events for ','',$t);                     
@@ -30,12 +29,39 @@ function misfit_noindex_past_events() {
                     $next_link = $event.$next_date.'/';
                      echo "\n<link rel=\"prev\" href=\"".$prev_link."\" />\n";
                     echo "\n<link rel=\"next\" href=\"".$next_link."\" />\n";
-                   
-
-
+                }else if (tribe_is_week() ){          
+                   $prevwk = tribe_events_week_previous_link(); 
+                   preg_match_all('~<a(.*?)href="([^"]+)"(.*?)>~', $prevwk, $prev_wk); 
+                   $prev_link = $prev_wk[2][0];    
+                   $nxtwk = tribe_events_week_next_link(); 
+                   preg_match_all('~<a(.*?)href="([^"]+)"(.*?)>~', $nxtwk, $nxt_wk); 
+                   $next_link = $nxt_wk[2][0];    
+                   $Current = Date('N');
+                   $DaysFromMonday = $Current - 1;    
+                   $Monday = Date('Y-m-d', StrToTime("- {$DaysFromMonday} Days"));    
+                   $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";     
+                   $lnk = tribe_events_get_event();    
+                   $t = tribe_get_events_title();
+                   $mtime = str_replace('Events for week of ','',$t);  
+                   $pdate = date('Y-m-d',strtotime($mtime));   
+                   echo "\n<!-- noindex calendar Events -->\n<link rel=\"canonical\" href=\"$actual_link\" />";  
+                   echo "\n<link rel=\"prev\" href=\"".$prev_link."\" />";
+                   echo "\n<link rel=\"next\" href=\"".$next_link."\" />";    
+                   if ($pdate < $Monday){                      
+                       echo "\n<meta name=\"robots\" content=\"noindex, follow\" />\n"; 
+                   }
+               }else if(tribe_is_month() ) {
+//                   $prev_link = tribe_get_previous_month_link();
+//                   $next_link = tribe_get_next_month_link(); 
+//                   $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";        
+//                   echo "\n<!-- noindex calendar Events -->\n<link rel=\"canonical\" href=\"$actual_link\" />";  
+//                   echo "\n<link rel=\"prev\" href=\"".$prev_link."\" />";
+//                   echo "\n<link rel=\"next\" href=\"".$next_link."\" />";     
+               }   
+                             
                   
             }
-	}
+	
 }
 add_action('wp_head', 'misfit_noindex_past_events');
 
