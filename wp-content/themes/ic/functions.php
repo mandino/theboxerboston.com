@@ -357,28 +357,21 @@ function custom_tribe_event_thumbnail_image( $post_id = null, $size = 'full', $l
 
 function home_nav_wrap() {
 
-$mobilenav = wp_nav_menu( array(
-	'theme_location'=> 'mobilenav',
-	'fallback_cb'	=> false,
-	'container'		=> '',
-	'items_wrap' => '%3$s',
-	'echo' => false,
-	'walker' => new walker_menu
-) );
+	$mobilenav = wp_nav_menu( array(
+		'theme_location'=> 'mobilenav',
+		'fallback_cb'	=> false,
+		'container'		=> '',
+		'items_wrap' => '%3$s',
+		'echo' => false
+	) );
 
-$getTel = get_option('cebo_tele');
-$getTel = str_replace('(', '', $getTel);
-$getTel = str_replace(')', '', $getTel);
-$getTel = str_replace(' ', '-', $getTel);
-$getTel = str_replace('.', '-', $getTel);
-
-	$wrap  = '<ul>';
+	// $wrap  = '<ul>';
 
 	$wrap .= '<li class="navis-mobile">
-			<a id="lnkP2Talkmobile" href="tel:+1-'.$getTel.'" target="new"><span class="ic-navis"><i class="fa fa-phone"></i> <span id="NavisTFNmobnav">"'.get_option('cebo_tele').'"</span></span></a>
+			<a href="tel:'.get_option('cebo_tele').'" target="new"><span class="ic-navis"><i class="fa fa-phone"></i> <span>'.get_option('cebo_tele').'</span></span></a>
 								</li>';
 
-	$wrap = '%3$s';
+	$wrap .= '%3$s';
 
 	$wrap .= '<li class="hamburgermenu">
 				<a class="cheese" href="#">
@@ -393,7 +386,7 @@ $getTel = str_replace('.', '-', $getTel);
 
 	$wrap .= $mobilenav;
 
-	$wrap .= '</ul>';
+	// $wrap .= '</ul>';
 
 	return $wrap;
 }
