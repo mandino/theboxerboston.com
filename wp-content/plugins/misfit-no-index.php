@@ -58,7 +58,7 @@ function misfit_noindex_past_events() {
 //                   echo "\n<link rel=\"prev\" href=\"".$prev_link."\" />";
 //                   echo "\n<link rel=\"next\" href=\"".$next_link."\" />";     
                }else if ($wp_query->tribe_is_past ) {
-                     echo "\n<meta name=\"robots\" content=\"noindex, follow\" />\n"; 
+                     echo "\n<!-- noindex calendar Events -->\n<meta name=\"robots\" content=\"noindex, follow\" />\n";  
                 }   
                              
                   
