@@ -408,3 +408,41 @@ if (!class_exists('walker_menu')) {
 		}
 	}
 }
+
+
+// Get Attachment by ID
+
+function get_attachment_id_by_url($attachment_url = '') {
+ 
+	global $wpdb;
+	$attachment_id = false;
+
+	if ('' == $attachment_url)
+		return;
+ 
+	$upload_dir_paths = wp_upload_dir();
+ 
+	if (false !== strpos($attachment_url, $upload_dir_paths['baseurl'])) {
+		$attachment_url = preg_replace('/-\d+x\d+(?=\.(jpg|jpeg|png|gif)$)/i', '', $attachment_url);
+		$attachment_url = str_replace($upload_dir_paths['baseurl'] . '/', '', $attachment_url);
+		$attachment_id = $wpdb->get_var($wpdb->prepare("SELECT wposts.ID FROM $wpdb->posts wposts, $wpdb->postmeta wpostmeta WHERE wposts.ID = wpostmeta.post_id AND wpostmeta.meta_key = '_wp_attached_file' AND wpostmeta.meta_value = '%s' AND wposts.post_type = 'attachment'", $attachment_url));
+	}
+ 
+	return $attachment_id;
+}
+
+
+// ACF - Options
+
+if ( function_exists('acf_add_options_page') ) {
+	acf_add_options_page();	
+}
+
+
+// Custom Image Sizes
+
+add_image_size('Image 540x290', 540, 290, false);
+add_image_size('Image 540x290', 540, 290, false);
+add_image_size('Image 260x290', 260, 290, false);
+add_image_size('Image 531x290', 531, 290, false);
+add_image_size('Image 257x290', 257, 290, false);
