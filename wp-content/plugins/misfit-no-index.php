@@ -11,7 +11,6 @@ License:     GPL2
 */
 
 if (!defined('ABSPATH')) { exit; }
-
 // added no index when Yoast SEO disable
 function misfit_noindex_past_events() {
 	global $post,$wp_query;
@@ -58,6 +57,7 @@ function misfit_noindex_past_events() {
 //                   echo "\n<link rel=\"prev\" href=\"".$prev_link."\" />";
 //                   echo "\n<link rel=\"next\" href=\"".$next_link."\" />";     
                }else if ($wp_query->tribe_is_past ) {
+                     disable_wpseo_meta_robots();
                      echo "\n<!-- noindex calendar Events -->\n<meta name=\"robots\" content=\"noindex, follow\" />\n";  
                 }   
                              
@@ -66,6 +66,12 @@ function misfit_noindex_past_events() {
 	
 }
 add_action('wp_head', 'misfit_noindex_past_events');
+
+
+function disable_wpseo_meta_robots() {
+    return $robotsstr = '';
+}
+add_filter('wpseo_robots','disable_wpseo_meta_robots');
 
 //disable ajax on day view
 
