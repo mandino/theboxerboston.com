@@ -4818,3 +4818,105 @@ li.social_share_side a i:hover{
     font-size: 26px;
     color: #CC9933;
 }
+
+.ticker {
+    text-transform: uppercase;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    position: absolute;
+    text-align: center;
+    max-width: 207px;
+    background: #fff;
+    display: none;
+    z-index: 2000;
+    width: 100%;
+    opacity: 1;
+    left: 0;
+    top: 41px;
+}
+
+.show {
+  display: block;
+}
+
+.ticker-down {
+    top: 130px;
+}
+
+.ticker-content {
+    box-sizing: border-box;
+    margin: 24px 0 0;
+    padding: 10px;
+}
+
+.ticker span {
+    box-sizing: border-box;
+    text-transform: none;
+    position: absolute;
+    color: #fff;
+    width: 100%;
+    padding: 5px;
+    left: 0;
+    top: 0;
+}
+
+.ticker a.close {
+  width: 10px;
+  position: absolute;
+  padding-top: 5px;
+  margin-top: 0px;
+  z-index: 2;
+  right: 10px;
+  cursor: pointer;
+
+}
+
+.ticker h3 {
+    line-height: 24px;
+    color: #3d3d3d;
+}
+
+.ticker div#ticker {
+    font-family: 'scala-sans';
+    margin: 10px auto 5px;
+    font-weight: bold;
+    max-width: 190px;
+    font-size: 14px;
+    color: #3d3d3d;
+    width: 90%;
+}
+
+.ticker div#ticker {
+    display: none;
+}
+
+.ticker a {
+    box-sizing: border-box;
+    margin: 10px 0 0;
+    display: block;
+    padding: 5px 0;
+    width: 100%;
+    color: #fff;
+}
+
+.ticker a:hover {
+    color: #fff;
+}
+
+.tick-label {
+    text-transform: none;
+    text-align: center;
+    font-size: 10px;
+}
+
+.tick-days,
+.tick-hours {
+    float: left;
+    width: 20%;
+}
+
+.tick-minutes,
+.tick-seconds {
+    float: left;
+    width: 30%;
+}
