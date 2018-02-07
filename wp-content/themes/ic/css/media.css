@@ -344,13 +344,6 @@ and (max-width : 999px) {
 		padding: 0;
 	}
 
-	.ticker {
-		top: 68px;
-	}
-
-	.sticky .ticker {
-		top: 51px;
-	}
     .ticker-down {
         top :170px;
     }
@@ -656,6 +649,7 @@ and (max-width : 940px)
 	.page-template-page_gallery .post-content .imagegal.photos ul li:nth-child(4n) {
 		margin-right: 1.5%;
 	}
+    
 }
 /* ================================================  MAX WIDTH 939 ======================================= */
 @media only screen
