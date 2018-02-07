@@ -234,5 +234,10 @@ li.social_share_side a i,
   color: <?php echo $accent; ?>;
 }
 
+.ticker span,
+.ticker a {
+    background-color: <?php echo $accent; ?>; 
+}
+
 
 <?php } ?>

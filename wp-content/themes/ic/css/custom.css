@@ -410,7 +410,8 @@ color: #333;
     background: none repeat scroll 0 0 #FFFFFF;
     width: 100%;
     border-bottom: 1px solid #ddd;
-    z-index: 999;
+    z-index: 9999;
+    overflow: visible;
 }
 
 .navitem {

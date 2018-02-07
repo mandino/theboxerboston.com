@@ -320,7 +320,28 @@ and (max-width : 1023px) {
 /* ================================================  MAX WIDTH 999 ======================================= */
 @media only screen
 and (max-width : 999px) {
+	#primary-nav {
+		position: relative;
+		overflow: visible;
+	}
+    #primary-nav .fl {
+		display: none;
+	}
 
+	/* Navigation */
+
+	.logo.mobile > img {
+		height: 100%;
+		padding: 0;
+	}
+
+	.ticker {
+		top: 68px;
+	}
+
+	.sticky .ticker {
+		top: 51px;
+	}
 }
 
 /* ================================================  MAX WIDTH 940 ======================================= */
