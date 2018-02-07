@@ -5,6 +5,8 @@ and (max-width : 1280px) {
 	#primary-nav .container {
 	    width: 1040px;
 	}
+    
+    
 }
 /* ================================================  MAX WIDTH 1439 ======================================= */
 @media only screen
@@ -252,6 +254,10 @@ and (max-width : 1099px) {
 	li.blue-btn {
 		left: 0px;
 	}
+    
+    .ticker-down {
+        top: 170px;
+    }
 }
 /* ================================================  MAX WIDTH 1024 ======================================= */
 @media only screen
@@ -308,6 +314,9 @@ and (max-width : 1024px) {
 	.video-banner {
 		display: none;
 	}
+    .ticker-down {
+        top:
+    }
 }
 /* ================================================  MAX WIDTH 1023 ======================================= */
 @media only screen
@@ -342,6 +351,9 @@ and (max-width : 999px) {
 	.sticky .ticker {
 		top: 51px;
 	}
+    .ticker-down {
+        top :170px;
+    }
 }
 
 /* ================================================  MAX WIDTH 940 ======================================= */
@@ -847,6 +859,9 @@ and (max-width : 939px) {
 	li.blue-btn {
 		bottom: 13px;
 	}
+    .ticker-down {
+        top:51px;
+    }
 }
 
 /* ================================================  MAX WIDTH 840 ======================================= */
