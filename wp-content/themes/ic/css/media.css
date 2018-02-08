@@ -853,8 +853,13 @@ and (max-width : 939px) {
 	li.blue-btn {
 		bottom: 13px;
 	}
+    
+    .ticker {
+        top: 67px;
+    }
+    
     .ticker-down {
-        top:67px;
+        top:50px;
     }
 }
 
