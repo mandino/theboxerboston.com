@@ -44,6 +44,10 @@
 	<!-- <script src="<?php bloginfo ('template_url'); ?>/js/jquery.easing.js"></script> -->
 	<script src="<?php bloginfo ('template_url'); ?>/js/jquery.mousewheel.js"></script>
 
+<!--    countdown picker-->
+    <script type="text/javascript" src="<?php bloginfo ('template_url'); ?>/js/ticker.js"></script>
+
+
 <script type="text/javascript">
 
 	$(document).ready(function(){
@@ -489,6 +493,20 @@
         else if (verschil < 40)
             
            $('.droplogo').removeClass('jumpshot');
+    });
+    
+//    countdown picker
+    
+    $(window).scroll(function() {
+        var verschil = ($(window).scrollTop() / 5);
+
+        if (verschil > 40) {
+            $('.droplogo').addClass('jumpshot');
+            $('.ticker').addClass('ticker-down');
+        } else if (verschil < 40) {
+            $('.droplogo').removeClass('jumpshot');
+            $('.ticker').removeClass('ticker-down');
+        }
     });
 
 
