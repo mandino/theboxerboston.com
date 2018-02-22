@@ -111,10 +111,15 @@ get_header();
 							$subtitle = get_sub_field('subtitle');
 						}
 
-						if (get_sub_field('link'))
+                        if (get_sub_field('link')) {
 							$link = get_sub_field('link');
-						else
-							$link = get_page_link($page_info->ID);
+                        } else {
+							if (get_post_type($page_info->ID) == 'specials') {
+								$link = get_post_permalink($page_info->ID);
+							} else {
+								$link = get_page_link($page_info->ID);
+							}
+						}
 
 						if (get_sub_field('open_link_in_new_tab'))
 							$newtab = 'target="_blank"';
