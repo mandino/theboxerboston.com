@@ -122,7 +122,13 @@
 			<?php } } ?>
 			<div class="wonderline"></div>
 			<div class="post-content" style="width: 100%;">
-			
+                <?php
+                    if ( function_exists('yoast_breadcrumb') ) {
+                    yoast_breadcrumb('
+                    <p id="breadcrumbs">','</p>
+                    ');
+                    }
+                ?>
 				<?php if(have_posts()) : while(have_posts()) : the_post(); ?>
 				
 					<?php the_content(); ?>

@@ -187,7 +187,13 @@
 					<div id="eat" class="tab-content">
 						
 						<div class="container">
-							
+							<?php
+                                if ( function_exists('yoast_breadcrumb') ) {
+                                yoast_breadcrumb('
+                                <p id="breadcrumbs">','</p>
+                                ');
+                                }
+                            ?>
 							
 							<?php query_posts('post_type=page&p=74'); if(have_posts()) : while(have_posts()) : the_post(); ?>
 							
@@ -262,7 +268,13 @@
 					<div id="shop" class="tab-content">
 						
 						<div class="container">
-							
+							<?php
+                                if ( function_exists('yoast_breadcrumb') ) {
+                                yoast_breadcrumb('
+                                <p id="breadcrumbs">','</p>
+                                ');
+                                }
+                            ?>
 								
 							<?php query_posts('post_type=page&p=76'); if(have_posts()) : while(have_posts()) : the_post(); ?>
 							
@@ -335,7 +347,13 @@
 					<div id="culture" class="tab-content">
 						
 						<div class="container">
-							
+							<?php
+                                if ( function_exists('yoast_breadcrumb') ) {
+                                yoast_breadcrumb('
+                                <p id="breadcrumbs">','</p>
+                                ');
+                                }
+                            ?>
 								
 							<?php query_posts('post_type=page&p=72'); if(have_posts()) : while(have_posts()) : the_post(); ?>
 							
@@ -407,7 +425,13 @@
 					<div id="landmarks" class="tab-content">
 						
 						<div class="container">
-							
+							<?php
+                                if ( function_exists('yoast_breadcrumb') ) {
+                                yoast_breadcrumb('
+                                <p id="breadcrumbs">','</p>
+                                ');
+                                }
+                            ?>
 								
 							<?php query_posts('post_type=page&p=78'); if(have_posts()) : while(have_posts()) : the_post(); ?>
 							

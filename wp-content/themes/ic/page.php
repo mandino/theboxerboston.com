@@ -126,7 +126,13 @@
 					
 			<div class="wonderline"></div>
 			<div class="post-content fl">
-				
+				<?php
+                if ( function_exists('yoast_breadcrumb') ) {
+                    yoast_breadcrumb('
+                    <p id="breadcrumbs">','</p>
+                    ');
+                }
+                ?>
 				<?php the_content(); ?>
 
 				<!-- New Restaurant Menu Template -->
