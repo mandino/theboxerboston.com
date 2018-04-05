@@ -94,7 +94,13 @@ if( count( $children ) != 0 ) { ?>
 			
 			<div class="wonderline"></div>
 			<?php } ?>			
-			
+			<?php                        
+                if ( function_exists('yoast_breadcrumb') ) {
+                    yoast_breadcrumb('
+                    <p id="breadcrumbs">','</p>
+                    ');
+                }
+            ?>  
 			<div class="post-content fl">
 			
 				<?php if(have_posts()) : while(have_posts()) : the_post(); ?>
