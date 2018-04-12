@@ -3612,6 +3612,9 @@ ul.tabs li:last-child {
 .post-content img {
     height: auto !important;
     max-width: 100%;
+    display: block;
+    margin: auto;
+    width: auto;
 }
 
 
@@ -3862,6 +3865,33 @@ ul.tabs li:last-child {
     max-width: 100%;
     width: 100%;
 }
+
+/*fullwidth default page*/
+
+.post-content.fl.content-fullwidth {
+    border-right:0 solid #D9D9D9;
+    padding:20px 20px 20px 0;
+    width:100%
+}
+
+.post-content img {
+    height: auto;
+    max-width: 100%;
+    display: block;
+    margin: auto;
+    width: auto;
+}
+
+.page-template-default .fullpic .button {
+	display: none;
+}
+
+.page-template-default .sidebar.fr{
+    display:none;
+}
+
+
+/*end*/
 
 
 
