@@ -111,6 +111,14 @@ $meta_boxer = array(
 	          "type" => "checkbox",
 	          "std" => ""
         	  )
+        ,
+        array( 
+                "name" => "Full Width Page",
+				"desc" => "Check for full width page",
+				"id" => $prefix."_full_width",
+				"type" => "checkbox",
+				"std" => ""
+	    	  )
  		
        	)
 );

@@ -125,7 +125,8 @@
 			
 					
 			<div class="wonderline"></div>
-			<div class="post-content fl">
+			<div class="post-content fl <?php if(get_post_meta ($post->ID, 'cebo_full_width', true)) echo 'content-fullwidth';?>">
+
 				<?php
                 if ( function_exists('yoast_breadcrumb') ) {
                     yoast_breadcrumb('
@@ -308,10 +309,14 @@
 	<!-- Restaurant Menu New Template : END -->
 
 			</div>
-
+            <?php 
+                $fw = get_post_meta($post->ID, 'cebo_full_width', true);
+                if (!$fw){ 
+           ?>   
 			<div class="sidebar fr">
 				
-				<a class="button" onclick="_gaq.push(['_trackEvent', 'Reserve', 'Reservation-button-sidebar', 'Reserve Now']);" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>"><?php _e('RESERVE NOW', 'cebolang'); ?></a>
+				        <a class="button" target="_blank" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>" onclick="_gaq.push(['_link', this.href]);return false;"><?php _e('RESERVE NOW', 'cebolang'); ?></a>
+				 
 				
 				<?php
 					$sidebarformid = get_the_ID();
@@ -393,9 +398,9 @@
 						
 							
 						</ul>
-		
+		         
 				</div>
-			
+			 <?php } ?>
 			<div class="clear"></div>
 
 		</div>
