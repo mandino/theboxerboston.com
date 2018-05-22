@@ -58,6 +58,7 @@
 	
 	<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/style.css">
 	<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/custom.css">
+	<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/landingpage.css">
 
 	<!-- Fonts -->
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -78,6 +79,10 @@
 
 	<!-- responsive style -->
 	<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/media.css">
+	
+    <!--    slick css-->
+    <link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/js/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/js/slick/slick-theme.css">
 
 	<!-- Color Override CSS -->
 	<!-- <link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/oceana-hotel.css"> -->
@@ -176,7 +181,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="menu-wrap">
 
-	<div id="navigation">
+	<div id="navigation" class="lp-navigation">
 			
 			<div class="ressys">
 				
@@ -249,19 +254,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			</div>
 			
 				
-		<div id="primary-nav" style="overflow:visible;">
-		
-            <a href="<?php bloginfo('url'); ?>" class="logo droplogo"><img src="<?php echo get_option('cebo_logo'); ?>" alt="<?php echo the_title(); ?>" /></a>
-            
-			<a href="<?php bloginfo('url'); ?>" class="logo mobile"><img src="<?php echo get_option('cebo_logo'); ?>" alt="<?php echo the_title().'-mobile'; ?>" /></a>
-			
-	
-            <a href="https://theboxerboston.reztrip.com" class="reserve fixeer button fr input-append date" rooms ="1" id="idp3" data-date="12-02-2012" data-date-format="mm-dd-yyyy">RESERVE</a>
+		<div id="primary-nav" class="landing-page display-none" style="overflow:visible;position: absolute;top: 0px;z-index: 1;width: 100%;">
+          <?php if ( have_rows('landing_page') ) : while( have_rows('landing_page') ) : the_row(); ?>
+            <?php if(get_row_layout() == 'banner') :?>  
+              <div class="landing-page-logo-header">
+                <img src="<?php echo get_sub_field('landing_page_logo')['url']?>" alt=""/>
+              </div>
+             <?php endif; ?>
+        <?php endwhile; endif; ?>
 
-			<a class="reserve fixeer mobile button fr" id="idp4"  onclick="_gaq.push(['_link', this.href]);return false;" href="<?php echo get_option('cebo_genbooklink'); ?>">RESERVE</a>
+           <a href="https://theboxerboston.reztrip.com" class="reserve fixeer button fr input-append date lp-button " rooms ="1" id="idp3" data-date="12-02-2012" data-date-format="mm-dd-yyyy">RESERVE</a>
+
+			<a class="reserve fixeer mobile button fr lp-button" id="idp4"  onclick="_gaq.push(['_link', this.href]);return false;" href="<?php echo get_option('cebo_genbooklink'); ?>">RESERVE</a>
 			
 			
 		</div>
 	</div>
 	
-	<div id="quiet"></div>
+<!--	<div id="quiet"></div>-->

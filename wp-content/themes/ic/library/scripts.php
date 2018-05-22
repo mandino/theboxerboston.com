@@ -23,6 +23,9 @@
 
 	<!-- Flex Slider -->
 	<script src="<?php bloginfo ('template_url'); ?>/js/flexslider/jquery.flexslider.js"></script>
+	
+<!--    slick carousel-->
+    <script src="<?php bloginfo ('template_url'); ?>/js/slick/slick.min.js"></script>
 
 	<!-- Jquery Sticky -->
 	<script type="text/javascript" src="<?php bloginfo ('template_url'); ?>/js/jquery.sticky.js"></script>
@@ -489,6 +492,7 @@
       if (verschil > 40) 
             
            $('.droplogo').addClass('jumpshot');
+              
         
         else if (verschil < 40)
             
@@ -674,6 +678,10 @@
 		}
 
 	});
+    
+    
+
+    
 //mobile booking
     
     jQuery( document ).ready(function( $ ) {
@@ -682,5 +690,38 @@
        }
 
     });
+    
+// landing-page
+    
+  
+$(window).scroll(function () {
+	$trigger = $('.banner').height();
+
+	if ( $(window).scrollTop() >= ($trigger - 200) ) {
+		$('body').addClass('onscroll');
+		$('.landing-page').removeClass('display-none');
+	} else {
+		$('body').removeClass('onscroll');
+		$('.landing-page').addClass('display-none');
+	}
+
+});    
+    
+
+
+$(document).ready(function() {
+
+ $('.lp-slider').slick({
+      dots: false,
+      infinite: true,
+      speed: 300,
+      slidesToShow: 1,
+      adaptiveHeight: true,
+      arrows: true
+  });
+
+});
+
+    
     
 </script>

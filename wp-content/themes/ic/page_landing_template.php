@@ -1,48 +1,88 @@
 <?php 
 
-/* Template Name: Specials List Page
+/* Template Name:Landing Page
 
 */
+
+
  get_header('landing_page'); ?>
 
+  <?php if ( have_rows('landing_page') ) : while( have_rows('landing_page') ) : the_row(); ?>
+<!--banner-->
+        <?php if(get_row_layout() == 'banner') :?>   
+            <div class="landing-page-logo">
+                <img src="<?php echo get_sub_field('landing_page_logo')['url']?>" alt=""/>
+            </div>    
 
-<?php if(get_post_meta($post->ID, 'cebo_fullpic', true)) { ?>
+            <div class="fullpic banner">  
+                <img src="<?php echo get_sub_field('banner_image')['url']?>" alt=""/>
+            </div>
+        <?php endif; ?>
+<!--intro titles-->
+        <?php if(get_row_layout() == 'intro_with_titles') :?>   
+        <div id="rooms" class="section">
 
-<?php if(have_posts()) : while(have_posts()) : the_post(); ?>
-
-<div class="fullpic">
-
-	<div class="slide-header">
-		<a class="button" onclick="_gaq.push(['_link', this.href]);return false;" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>"><?php _e('RESERVE NOW', 'cebolang'); ?></a>
-	</div>
-	<img src="<?php echo tt(get_post_meta($post->ID, 'cebo_fullpic', true), 1400, 350); ?>" alt="<?php echo get_custom_image_thumb_alt_text(get_post_meta($post->ID, 'cebo_fullpic', true), ''); ?>"
- />
+            <div class="container">
 
 
-</div>
+                <div class="post-content postwidth">
 
-<?php endwhile; endif; wp_reset_query(); ?>	
+                     <?php
+    //                    if ( function_exists('yoast_breadcrumb') ) {
+    //                    yoast_breadcrumb('
+    //                    <p id="breadcrumbs">','</p>
+    //                    ');
+    //                    }
+                    ?>
 
-<?php } ?>
 
-	<div id="rooms" class="section">
-		
-		<div class="container">
-		
-			
-			<div class="post-content postwidth">
-			     <?php
-                    if ( function_exists('yoast_breadcrumb') ) {
-                    yoast_breadcrumb('
-                    <p id="breadcrumbs">','</p>
-                    ');
-                    }
-                ?>
-				<?php if(have_posts()) : while(have_posts()) : the_post(); ?>
-				
-					<?php the_content(); ?>
-				
-				<?php endwhile; endif; wp_reset_query(); ?>	
+                    <div class="intro text-center">
+                        <div> <h2 ><?php echo get_sub_field('main_title'); ?></h2> </div>
+                        <div> <h3 ><?php echo get_sub_field('sub_title'); ?></h3> </div>
+                        <div class="intro-content"><?php echo get_sub_field('intro_content'); ?> </div>
+                        <a class="reserve fixeer button intro-btn" id="idp4"  onclick="_gaq.push(['_link', this.href]);return false;" href="<?php echo get_option('cebo_genbooklink'); ?>"><?php echo get_sub_field('booking_btn'); ?></a>
+                    </div>
+        <?php endif; ?> 
+<!--content list                    -->
+        <?php if(get_row_layout() == 'content_list') :?> 
+                    <div class="content-list-title"> <h3 class="text-center"><?php echo get_sub_field('content_list_title'); ?></h3> </div>
+            <div class=" content-list">                
+                <?php $counter = 0; ?>
+                 <?php if ( have_rows('list_type') ) : while( have_rows('list_type') ) : the_row(); ?>
+                    <?php if (($counter%2) == 0) { ?>
+                        <div class="con-col1">    
+                            <p><i class="fas fa-arrow-right"></i>
+                            <?php echo get_sub_field('list_options'); ?></p>
+                        </div>
+                    <?php }else { ?>
+                        <div class="con-col2">
+                              <p><i class="fas fa-arrow-right"></i>
+                            <?php echo get_sub_field('list_options'); ?></p>                     
+                        </div>
+                    <?php } ?>
+                <?php $counter++; endwhile; endif; ?>
+            </div>                  
+        <?php endif; ?>
+<!--Photo Slider                    -->
+        <?php if(get_row_layout() == 'photo_slider') : ?>
+              <div class="lp-slider">
+                <?php if ( have_rows('slider') ) : while( have_rows('slider') ) : the_row(); ?>                 
+                    <div class="slider-container">
+                        <img src="<?php echo get_sub_field('slider_image')['url'] ?>" alt="<?php echo get_sub_field('slider_caption')?>">
+                        <div class="slider-caption"><p ><?php echo get_sub_field('slider_caption')?></p></div>
+                        <div class="icon-expand"><img src="<?php bloginfo ('template_url'); ?>/images/expandicon.png"></div>           <div class="lp-slider-next"></div>
+                        <div class="lp-slider-prev"></div>
+                  </div>
+
+                 <?php endwhile; endif; ?>
+             </div>    
+        <?php endif; ?>            
+                    
+    <?php endwhile; endif; ?>
+                    
+                    
+                    
+                    
 					<div class="imagegal thumbgal">
 						
 						<ul>

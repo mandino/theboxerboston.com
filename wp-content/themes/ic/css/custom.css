@@ -366,6 +366,7 @@ color: #333;
 #navigation-sticky-wrapper {
     height: auto !important;
     position: relative;
+
 }
 
 #navigation-sticky-wrapper.sticky #navigation {
@@ -396,6 +397,10 @@ color: #333;
 
 #primary-nav nav .container {
     max-width: 1000px;
+}
+
+.hidenav {
+    display:none;
 }
 
 /*#navigation-sticky-wrapper.sticky #primary-nav nav ul li a {
