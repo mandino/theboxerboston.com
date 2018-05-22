@@ -4922,3 +4922,26 @@ li.social_share_side a i:hover{
     float: left;
     width: 30%;
 }
+
+/*cookie consent*/
+.cookie-consent {
+  display: none;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  background: #fff;
+  border-top: 5px solid #ab0303;
+  z-index: 99999999;
+  text-align: center;
+  padding: 0; }
+  .cookie-consent__accept-btn {
+    padding: 7px;
+    text-transform: uppercase;
+    background-color: #ab0303;
+    color: #fff;
+    position: relative;
+    top: -15px;
+    cursor: pointer;
+    font-size: 13px;
+    letter-spacing: 1px; }
