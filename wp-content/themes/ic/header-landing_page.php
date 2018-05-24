@@ -83,7 +83,7 @@
     <!--    slick css-->
     <link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/js/slick/slick.css">
     <link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/js/slick/slick-theme.css">
-
+    <link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/magnific-popup.css">
 	<!-- Color Override CSS -->
 	<!-- <link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/oceana-hotel.css"> -->
 	
@@ -128,23 +128,6 @@
 		pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(pl);
 		})();
 	</script>
-	<!-- End Sojern -->
-
-	<!--<script type="application/ld+json">
-		{
-		"@context": "http://schema.org",
-		"@type": "NewsArticle",
-		"headline": "Article headline",
-		"alternativeHeadline": "The headline of the Article",
-		"image": [
-		"thumbnail1.jpg",
-		"thumbnail2.jpg"
-		],
-		"datePublished": "2015-02-05T08:00:00+08:00",
-		"description": "A most wonderful article",
-		"articleBody": "The full body of the article"
-		}
-	</script> -->
 
 	<script>
 		!function(w,d,s,u) {
@@ -258,7 +241,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <?php if ( have_rows('landing_page') ) : while( have_rows('landing_page') ) : the_row(); ?>
             <?php if(get_row_layout() == 'banner') :?>  
               <div class="landing-page-logo-header">
-                <img src="<?php echo get_sub_field('landing_page_logo')['url']?>" alt=""/>
+                  <a href="<?php bloginfo('url'); ?>"><img src="<?php echo get_sub_field('landing_page_logo')['url']?>" alt=""/></a>
               </div>
              <?php endif; ?>
         <?php endwhile; endif; ?>

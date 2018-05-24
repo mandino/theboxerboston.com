@@ -11,7 +11,7 @@
 <!--banner-->
         <?php if(get_row_layout() == 'banner') :?>   
             <div class="landing-page-logo">
-                <img src="<?php echo get_sub_field('landing_page_logo')['url']?>" alt=""/>
+                <a href="<?php bloginfo('url'); ?>"><img src="<?php echo get_sub_field('landing_page_logo')['url']?>" alt=""/></a>
             </div>    
 
             <div class="fullpic banner">  
@@ -51,12 +51,12 @@
                  <?php if ( have_rows('list_type') ) : while( have_rows('list_type') ) : the_row(); ?>
                     <?php if (($counter%2) == 0) { ?>
                         <div class="con-col1">    
-                            <p><i class="fas fa-arrow-right"></i>
+                            <p><i class="fa fa-arrow-right"></i>
                             <?php echo get_sub_field('list_options'); ?></p>
                         </div>
                     <?php }else { ?>
                         <div class="con-col2">
-                              <p><i class="fas fa-arrow-right"></i>
+                              <p><i class="fa fa-arrow-right"></i>
                             <?php echo get_sub_field('list_options'); ?></p>                     
                         </div>
                     <?php } ?>
@@ -68,94 +68,147 @@
               <div class="lp-slider">
                 <?php if ( have_rows('slider') ) : while( have_rows('slider') ) : the_row(); ?>                 
                     <div class="slider-container">
-                        <img src="<?php echo get_sub_field('slider_image')['url'] ?>" alt="<?php echo get_sub_field('slider_caption')?>">
+                        <img  class="items" src="<?php echo get_sub_field('slider_image')['url'] ?>" alt="<?php echo get_sub_field('slider_caption')?>">
                         <div class="slider-caption"><p ><?php echo get_sub_field('slider_caption')?></p></div>
-                        <div class="icon-expand"><img src="<?php bloginfo ('template_url'); ?>/images/expandicon.png"></div>           <div class="lp-slider-next"></div>
-                        <div class="lp-slider-prev"></div>
+                        <a href="<?php echo get_sub_field('slider_image')['url'] ?>" class="lp-icon-link"><div class="icon-expand"><img src="<?php bloginfo ('template_url'); ?>/images/expandicon.png"></div></a>           
+                        <div class="lp-slider-prev"><i class="fa fa-angle-left"></i></div>
+                        <div class="lp-slider-next"><i class="fa fa-angle-right"></i></div>
+                        
                   </div>
 
                  <?php endwhile; endif; ?>
              </div>    
+        <?php endif; ?>
+<!--accordion                    -->
+                        
+        <?php if(get_row_layout() == 'accordion_layout') : ?> 
+                    <div class="accordion-main-title"><h2><?php the_sub_field('accordion_title'); ?></h2></div>        
+            <div class="accordion-layout">        
+                <?php if ( have_rows('accordion_type') ) : while( have_rows('accordion_type') ) : the_row(); ?>
+
+                <div class="accordion-section">
+                    <?php if(get_sub_field('right_title')) : ?>
+                        <div class="accordion acc-right">
+                            <div class="accordion-item">
+                                <div class="accordion-titlebox">
+                                    <div class="accordion-title"><h3><?php the_sub_field('right_title'); ?></h3></div>
+                                    <div class="accordion-btn accordion-btn-plus"></div>
+                                </div>
+                                <div class="accordion-contentbox">
+                                    <?php the_sub_field('right_content'); ?>
+                                </div>
+                            </div>
+                         </div>
+                     <?php endif; ?>
+                    <?php if(get_sub_field('left_title')) : ?>
+                         <div class="accordion acc-left">
+                            <div class="accordion-item">
+                                <div class="accordion-titlebox">
+                                    <div class="accordion-title"><h3><?php the_sub_field('left_title'); ?></h3></div>
+                                    <div class="accordion-btn accordion-btn-plus"></div>
+                                </div>
+                                <div class="accordion-contentbox">
+                                    <?php the_sub_field('left_content'); ?>
+                                </div>
+                             </div>            
+                        </div>
+                    <?php endif; ?>
+                     <?php if(get_sub_field('title')) : ?>
+                         <div class="accordion acc-full">
+                            <div class="accordion-item">
+                                <div class="accordion-titlebox">
+                                    <div class="accordion-title"><h3><?php the_sub_field('title'); ?></h3></div>
+                                    <div class="accordion-btn accordion-btn-plus"></div>
+                                </div>
+                                <div class="accordion-contentbox">
+                                    <?php the_sub_field('content'); ?>
+                                </div>
+                             </div>            
+                        </div>
+                     <?php endif; ?>    
+                </div>      
+                 <?php endwhile; endif; ?> 
+        </div>        
         <?php endif; ?>            
                     
-    <?php endwhile; endif; ?>
-                    
-                    
-                    
-                    
+<!--    special offers                -->
+       <?php if(get_row_layout() == 'special_offers') : ?>              
+                    <div class="special-offers-title text-center"><h2><?php the_sub_field('special_offers_title'); ?></h2></div>
 					<div class="imagegal thumbgal">
 						
 						<ul>
 							
-							 <?php  query_posts(
-							array(
-							'post_type' => 'specials',
-							'posts_per_page'=> 4
-							
-							)); if(have_posts()) : while(have_posts()) : the_post(); 
-							$imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full"); ?>
+							 <?php  //query_posts(
+							//array(
+							//'post_type' => 'specials',
+							//'posts_per_page'=> 4
+                            if ( have_rows('special_offers_layout') ) : while( have_rows('special_offers_layout') ) : the_row();
+							//)); //if(have_posts()) : while(have_posts()) : the_post(); 
+                            $id = get_sub_field('special_offer_items');
+							$imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), "Full"); ?>
 							
 							<li>
 								
-								<a href="<?php the_permalink(); ?>" class="overlink"></a>
+								<a href="<?php echo get_permalink($id); ?>" class="overlink"></a>
 					
-								<?php if(get_post_meta($post->ID, 'cebo_pricepoint', true)) { ?>
+								<?php if(get_post_meta($id, 'cebo_pricepoint', true)) { ?>
 								
 								<div class="from-price">
-									<?php echo get_post_meta($post->ID, 'cebo_pricepoint', true); ?>
+									<?php echo get_post_meta($id, 'cebo_pricepoint', true); ?>
 								</div>
 								
 								<?php } ?>
 								
-								<?php if(get_post_meta($post->ID, 'cebo_homethumb', true)) { ?>
+								<?php if(get_post_meta($id, 'cebo_homethumb', true)) { ?>
 								
-								<a href="<?php the_permalink(); ?>"><img src="<?php echo tt(get_post_meta($post->ID, 'cebo_homethumb', true), 262, 290); ?>" alt="<?php echo get_custom_image_thumb_alt_text(get_post_meta($post->ID, 'cebo_homethumb', true), ''); ?>"
+								<a href="<?php echo get_permalink($id); ?>"><img src="<?php echo tt(get_post_meta($id, 'cebo_homethumb', true), 262, 290); ?>" alt="<?php echo get_custom_image_thumb_alt_text(get_post_meta($id, 'cebo_homethumb', true), ''); ?>"
  style="width: 100%"></a>
 								
 								<?php } else { ?>
 								
-								<a href="<?php the_permalink(); ?>"><img src="<?php echo tt($imgsrc[0], 262, 290); ?>" alt="<?php echo get_custom_image_thumb_alt_text('', get_post_thumbnail_id( $post->ID ));?>" style="width: 100%"></a>
+								<a href="<?php echo get_permalink($id); ?>"><img src="<?php echo tt($imgsrc[0], 262, 290); ?>" alt="<?php echo get_custom_image_thumb_alt_text('', get_post_thumbnail_id( $id ));?>" style="width: 100%"></a>
 								
 								<?php } ?>
 								
-								<?php if(get_post_meta($post->ID, 'cebo_subtagline', true)) { ?>
+								<?php if(get_post_meta($id, 'cebo_subtagline', true)) { ?>
 								
-								<h3><?php echo get_post_meta($post->ID, 'cebo_subtagline', true); ?></h3>
+								<h3><?php echo get_post_meta($id, 'cebo_subtagline', true); ?></h3>
 								
 								
 								<?php } ?>
 
 								<div class="hover-effect">
 									
-									<?php if(get_post_meta($post->ID, 'cebo_tagline', true)) { ?>
+									<?php if(get_post_meta($id, 'cebo_tagline', true)) { ?>
 									
-									<h3><a href="<?php the_permalink(); ?>"><?php echo get_post_meta($post->ID, 'cebo_tagline', true); ?></a></h3>
+									<h3><a href="<?php echo get_permalink($id); ?>"><?php echo get_post_meta($id, 'cebo_tagline', true); ?></a></h3>
 									
 									<?php } ?>
 									
 									
 									<!-- , and Hotel Oceana Tote Bag., and breakfast at the Hotel. -->
-									<a class="special-external" href="<?php the_permalink(); ?>"><i class="fa fa-chevron-right fa-lg"></i></a>
+									<a class="special-external" href="<?php echo get_permalink($id); ?>"><i class="fa fa-chevron-right fa-lg"></i></a>
 								</div>
 								
 							</li>
 						
 							
-							<?php endwhile; endif; wp_reset_query(); ?>	
+							<?php endwhile; endif; ?>	
 								
 								<div class="clear"></div>
 						</ul>
 						
 					<div class="clear"></div>
-					</div>
-
+                </div>
+    <?php endif; ?>
+    <?php endwhile; endif; ?>                
 			</div>
 
 		</div>
 
 	</div>
 
-<div id="neighborhood" class="section">
+<div id="neighborhood" class="section lp-neighborhood">
 
 		<!-- section containing the to do map -->
 
@@ -178,6 +231,38 @@
 	</div>
     <!-- begins map area -->
 </div>
-	
-					
+
+    <div class="qoute-container">
+          <?php if ( have_rows('testimonial_section') ) : while( have_rows('testimonial_section') ) : the_row();  ;?>  
+        <div class="testimonial-image"><img src="<?php echo get_sub_field('testimonial_image')['url']?>"> </div>
+        <div class="quote lp-qoute">
+
+            <a class="quote-nav quote-next"><i class="fa fa-angle-right"></i></a>
+            <a class="quote-nav quote-prev"><i class="fa fa-angle-left"></i></a>
+
+            <div class="ico-quote quote-left fl"></div>
+
+          
+                <div id="cbp-qtrotator" class="cbp-qtrotator">
+
+                   
+                        <?php //var_dump(get_sub_field('testimonial_post')); ?>
+                       
+                        <div class="cbp-qtcontent">
+                        <blockquote>
+                              <p><?php echo get_sub_field('testimonial_post')->post_content ; ?></p>
+                              <footer><?php echo get_sub_field('testimonial_post')->post_title; ?></footer>
+                            </blockquote>
+                        </div>
+
+                     
+
+                </div>
+
+          
+            </div>
+           <div class="ico-quote quote-right fr"></div>
+         <?php endwhile; endif; ?>  
+
+    </div>			
 <?php get_footer(); ?>
