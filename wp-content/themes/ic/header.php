@@ -367,5 +367,5 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	 	<p>
 	 		The Boxer Boston site uses cookies. By using this site, you are agreeing to our <a href="<?php bloginfo('url'); ?>/privacy-policy/" target="_blank" target="_blank">Privacy Policy</a>.
 	 	</p>
-	 	<a class="cookie-consent__accept-btn">accept</a>
+	 	<a class="cookie-consent__accept-btn button">accept</a>
 	 </div>
