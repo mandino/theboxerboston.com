@@ -68,7 +68,13 @@
 	<link rel="stylesheet" href="<?php bloginfo ('template_url'); ?>/css/slidejs.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="<?php bloginfo ('template_url'); ?>/js/flexslider/flexslider.css" type="text/css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/jquery.mmenu.css">
-
+    <link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/js/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/js/slick/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/magnific-popup.css">
+    <?php if (is_page_template('page_landing_template_without_map.php')) : ?>
+        <link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/landingpage.css">
+    
+    <?php endif; ?>
 	<?php if ( 'rooms' == get_post_type() ) 	{ ?>
 		<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/iosslider.css">
 	<?php } ?>

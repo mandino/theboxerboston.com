@@ -318,3 +318,62 @@ h2 {
     width: 300px;
     margin: 0 auto;
 }
+
+/*template two*/
+
+.lp-banner-slide .button {
+    display: inline-block !important;
+}
+
+.exc-container {
+    width: 100%;
+    position: relative;
+}
+
+.exc-icons-container {
+    display: inline-block;
+    width: 50%;
+    box-sizing: border-box;
+    position:relative;
+}
+
+.exc-icons-container ul {
+    float:none;
+    width: auto;
+    overflow: hidden;
+}
+
+.exc-icons-container ul li.exc-icon-items:before {
+    display:none;
+}
+
+.exc-icons-container ul li .exc-icons {
+   display: inline-block;
+    top: 15px;
+    position: relative;
+    
+
+}
+
+.exc-icons-container ul li .exc-icons img {
+    width: 32px;
+}
+
+.exc-icons-container ul li .label {
+    display: inline-block;
+    position: relative;
+    left: 10px;
+}
+
+
+.exc-button {
+    width: 50%;
+    display:inline-block;
+    box-sizing: border-box;
+    float: right;
+    margin: 50px auto;
+}
+
+.exc-btn {
+    padding: 20px 80px;
+}

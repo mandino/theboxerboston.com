@@ -724,16 +724,16 @@ $(window).scroll(function () {
 		$('body').removeClass('onscroll');
         $(".landing-page").fadeOut(300);
        // $('landing-page-logo img').fadeIn(500);
-		//$('.landing-page').addClass('display-none');
+		$('.landing-page').addClass('display-none');
 	}
 
 });    
 
-
+//slick
 $(document).ready(function() {
     
 
- $('.lp-slider').slick({
+ $('.lp-slider, .lp-slider-no-map').slick({
       dots: false,
       infinite: true,
       speed: 300,

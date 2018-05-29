@@ -101,9 +101,12 @@ add_action('admin_menu', 'mytheme_add_box');
 // Add meta box
 function mytheme_add_box() {
 	global $meta_box;
-	foreach ( array( 'specials', 'dolo' ) as $page )
-	add_meta_box($meta_box['id'], $meta_box['title'], 'mytheme_show_box', $page, $meta_box['context'], 			$meta_box['priority']);
+
+	foreach ( array( 'specials', 'dolo','pages' ) as $page )
+    
+	add_meta_box($meta_box['id'], $meta_box['title'], 'mytheme_show_box', $page, $meta_box['context'], $meta_box['priority']);
 }
+
 // Callback function to show fields in meta box
 function mytheme_show_box() {
 	global $meta_box, $post;

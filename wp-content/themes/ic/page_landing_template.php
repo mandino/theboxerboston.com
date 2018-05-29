@@ -11,7 +11,7 @@
 <!--banner-->
         <?php if(get_row_layout() == 'banner') :?>   
             <div class="landing-page-logo">
-                <a href="<?php bloginfo('url'); ?>"><img src="<?php echo get_sub_field('landing_page_logo')['url']?>" alt=""/></a>
+                <a href="<?php bloginfo('url'); ?>"><img src="<?php echo get_sub_field('landing_page_logo')['url']?>" alt="<?php echo get_sub_field('landing_page_logo')['title']?>"/></a>
             </div>    
 
             <div class="fullpic banner">  
