@@ -386,3 +386,11 @@ h2 {
 .exc-btn {
     padding: 20px 80px;
 }
+
+.bottom-content {
+    margin-top: 40px;
+}
+
+.bottom-content p {
+    margin-bottom: 0;
+}

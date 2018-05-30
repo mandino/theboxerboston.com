@@ -115,6 +115,10 @@
                          <?php endwhile; endif; ?>
                      </div> 
                 </div>
+<!-- bottom content-->
+                <div class="bottom-content">
+                    <?php echo the_field('bottom_content'); ?>
+                </div>
 			</div> 
             
 
