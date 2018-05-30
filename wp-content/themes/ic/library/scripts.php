@@ -26,7 +26,7 @@
 	
 <!--    slick carousel-->
     <script src="<?php bloginfo ('template_url'); ?>/js/slick/slick.min.js"></script>
-    <script src="<?php bloginfo ('template_url'); ?>/js/jquery.magnific-popup.min"></script>
+    <script src="<?php bloginfo ('template_url'); ?>/js/jquery.magnific-popup.min.js"></script>
 
 	<!-- Jquery Sticky -->
 	<script type="text/javascript" src="<?php bloginfo ('template_url'); ?>/js/jquery.sticky.js"></script>
