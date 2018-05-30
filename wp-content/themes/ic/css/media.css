@@ -1274,6 +1274,15 @@ and (max-width : 640px)
 	.page-template-page_gallery .post-content .imagegal ul li:nth-child(even) {
 		margin-right: 1.5%;
 	}
+    
+    /*landing page    */
+    .page-template-page_landing_template_without_map .section-header div.fl:first-of-type {
+        margin-bottom: 0;
+    }   
+    
+    .page-template-page_landing_template_without_map .section-header h1.section-title {
+        top: 0;
+    }
 }
 /* ================================================  MOBILES BELOW 639 ======================================= */
 @media only screen
