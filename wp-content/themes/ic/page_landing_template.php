@@ -61,6 +61,7 @@
                         </div>
                     <?php } ?>
                 <?php $counter++; endwhile; endif; ?>
+                <div class="clear"></div>
             </div>                  
         <?php endif; ?>
 <!--Photo Slider                    -->
@@ -233,36 +234,34 @@
 </div>
 
     <div class="qoute-container">
-          <?php if ( have_rows('testimonial_section') ) : while( have_rows('testimonial_section') ) : the_row();  ;?>  
-        <div class="testimonial-image"><img src="<?php echo get_sub_field('testimonial_image')['url']?>"> </div>
-        <div class="quote lp-qoute">
+         
+        
+            <div class="quote lp-qoute">
 
-            <a class="quote-nav quote-next"><i class="fa fa-angle-right"></i></a>
-            <a class="quote-nav quote-prev"><i class="fa fa-angle-left"></i></a>
+                <a class="quote-nav quote-next"><i class="fa fa-angle-right"></i></a>
+                <a class="quote-nav quote-prev"><i class="fa fa-angle-left"></i></a>
 
-            <div class="ico-quote quote-left fl"></div>
+                <div class="ico-quote quote-left fl"></div>
+                 <?php if ( have_rows('testimonial_section') ) : ?>  
+                    <div id="cbp-qtrotator" class="cbp-qtrotator">
+                        <?php  while( have_rows('testimonial_section') ) : the_row();?>
+                            <div class="cbp-qtcontent">
+                             <div class="testimonial-image"><img src="<?php echo get_sub_field('testimonial_image')['url']?>"> </div>  
+                            <blockquote>
+                                  <p><?php echo get_sub_field('testimonial_post')->post_content ; ?></p>
+                                  <footer><?php echo get_sub_field('testimonial_post')->post_title; ?></footer>
+                                </blockquote>
+                            </div>
+                        <?php endwhile; ?>
 
-          
-                <div id="cbp-qtrotator" class="cbp-qtrotator">
 
-                   
-                        <?php //var_dump(get_sub_field('testimonial_post')); ?>
-                       
-                        <div class="cbp-qtcontent">
-                        <blockquote>
-                              <p><?php echo get_sub_field('testimonial_post')->post_content ; ?></p>
-                              <footer><?php echo get_sub_field('testimonial_post')->post_title; ?></footer>
-                            </blockquote>
-                        </div>
-
-                     
+                    </div>
+                  <?php endif; ?> 
 
                 </div>
-
-          
-            </div>
            <div class="ico-quote quote-right fr"></div>
-         <?php endwhile; endif; ?>  
+        
 
-    </div>			
+    </div>	
+<?php include (TEMPLATEPATH . '/library/super-map.php'); ?>
 <?php get_footer(); ?>
