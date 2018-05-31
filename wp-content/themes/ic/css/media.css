@@ -1566,6 +1566,10 @@ padding: 8px 12px;
 li.blue-btn {
 	width: 20px;
 }
+/*    landing page*/
+    .landing-page-logo, .landing-page-logo-header {
+        display:none;
+    }
 }
 /* ================================================  MAX HEIGHT 480 ======================================= */
 @media only screen
