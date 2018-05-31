@@ -58,6 +58,7 @@
 	
 	<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/style.css">
 	<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/custom.css">
+	<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/landingpage.css">
 
 	<!-- Fonts -->
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -68,13 +69,7 @@
 	<link rel="stylesheet" href="<?php bloginfo ('template_url'); ?>/css/slidejs.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="<?php bloginfo ('template_url'); ?>/js/flexslider/flexslider.css" type="text/css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/jquery.mmenu.css">
-    <link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/js/slick/slick.css">
-    <link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/js/slick/slick-theme.css">
-    <link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/magnific-popup.css">
-    <?php if (is_page_template('page_landing_template_without_map.php')) : ?>
-        <link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/landingpage.css">
-    
-    <?php endif; ?>
+
 	<?php if ( 'rooms' == get_post_type() ) 	{ ?>
 		<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/iosslider.css">
 	<?php } ?>
@@ -84,7 +79,11 @@
 
 	<!-- responsive style -->
 	<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/media.css">
-
+	
+    <!--    slick css-->
+    <link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/js/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/js/slick/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/magnific-popup.css">
 	<!-- Color Override CSS -->
 	<!-- <link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/oceana-hotel.css"> -->
 	
@@ -129,23 +128,6 @@
 		pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(pl);
 		})();
 	</script>
-	<!-- End Sojern -->
-
-	<!--<script type="application/ld+json">
-		{
-		"@context": "http://schema.org",
-		"@type": "NewsArticle",
-		"headline": "Article headline",
-		"alternativeHeadline": "The headline of the Article",
-		"image": [
-		"thumbnail1.jpg",
-		"thumbnail2.jpg"
-		],
-		"datePublished": "2015-02-05T08:00:00+08:00",
-		"description": "A most wonderful article",
-		"articleBody": "The full body of the article"
-		}
-	</script> -->
 
 	<script>
 		!function(w,d,s,u) {
@@ -182,7 +164,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="menu-wrap">
 
-	<div id="navigation">
+	<div id="navigation" class="lp-navigation">
 			
 			<div class="ressys">
 				
@@ -254,124 +236,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				</div>
 			</div>
 			
-			
-		<div id="property-nav">
-			<nav class="click-nav" style="border: none;">
-			<nav class="click-nav">
-				<ul class="container no-js">
-					<li><a href="//iclocalrewards.com/en-US/Login?ReturnUrl=%2F#signup" target="_blank" class="clicknav-clicker">Join The IC Local Perks Program & Get Rewarded With Every Stay</a></li>
-					<li class="blue-btn"><a href="//theboxerboston.com/blue"><i class="fa fa-info-circle"></i><span class="blue-mobile">why blue?</span></a></li>
-				</ul>
-			</nav>
-			
-			
-			
-	
-		</div>
-	
-		<div id="primary-nav" style="overflow:visible;">
-		
-            <a href="<?php bloginfo('url'); ?>" class="logo droplogo"><img src="<?php echo get_option('cebo_logo'); ?>" alt="<?php echo the_title(); ?>" /></a>
-            
-			<a href="<?php bloginfo('url'); ?>" class="logo mobile"><img src="<?php echo get_option('cebo_logo'); ?>" alt="<?php echo the_title().'-mobile'; ?>" /></a>
-			
-<!--            countdown picker-->
-            <?php 
-				$arg = array(
-							'post_type' => array('specials', 'tribe_events'),
-							'value' => time(),
-							'meta_key' => 'ticker_date_end',
-							'order' => 'ASC',
-							'meta_query' => array(
-								'relation' => 'AND',
-								array(
-									'key' => 'ticker_status',
-									'value' => 'On',
-									'compare' => '='
-								),
-								array(
-									'relation' => 'OR',
-									array(
-										'key' => 'ticker_date_start',
-										'value' => date('Ymd'),
-										'compare' => '<='
-									),
-									array(
-										'relation' => 'AND',
-										array(
-											'key' => 'ticker_date_start',
-											'value' => date('Ymd'),
-											'compare' => '>='
-										),
-										array(
-											'key' => 'ticker_date_end',
-											'value' => date('Ymd'),
-											'compare' => '<='
-										),
-									)
-								)
-							)
-						);
-				$text = new WP_Query($arg);
+				
+		<div id="primary-nav" class="landing-page display-none" style="overflow:visible;position: absolute;top: 0px;z-index: 1;width: 100%;">
+          <?php if ( have_rows('landing_page') ) : while( have_rows('landing_page') ) : the_row(); ?>
+            <?php if(get_row_layout() == 'banner') :?>  
+              <div class="landing-page-logo-header">
+                  <a href="<?php bloginfo('url'); ?>"><img src="<?php echo get_sub_field('landing_page_logo')['url']?>" alt=""/></a>
+              </div>
+             <?php endif; ?>
+        <?php endwhile; endif; ?>
 
-				if ($text->posts) {
-					foreach ($text->posts as $post) {
-						$tickerName = $post->post_title;
-						$tickerDate = date('m/d/Y H:i:s', strtotime(get_field('ticker_date_end')));
-						$tickerId = $post->ID;
-						if (strtotime("now") < strtotime($tickerDate)) {
-			?>
-							<div class="ticker">
-								<span><?php echo get_field('ticker_offer') ?></span>
-								<a class="close">X</a>
-								<div class="ticker-content">
-									<h3><?php echo get_field('ticker_title') ?></h3>
-									<div id="ticker">
-										<?php echo $tickerDate; ?>
-									</div>
-									<div class="clear"></div>
-										<a href="<?php echo get_field('ticker_cta_url'); ?>"><?php echo get_field('ticker_cta_text') ?></a>
-									<?php // } ?>
-								</div>
-							</div>
-							<?php break; ?>
-						<?php } ?>
-					<?php } ?>
-				<?php } ?>
-				<?php wp_reset_postdata(); ?>
-	
-            <a href="https://theboxerboston.reztrip.com" class="reserve fixeer button fr input-append date" rooms ="1" id="idp3" data-date="12-02-2012" data-date-format="mm-dd-yyyy">RESERVE</a>
+           <a href="https://theboxerboston.reztrip.com" class="reserve fixeer button fr input-append date lp-button " rooms ="1" id="idp3" data-date="12-02-2012" data-date-format="mm-dd-yyyy">RESERVE</a>
 
-			<a class="reserve fixeer mobile button fr" id="idp4"  onclick="_gaq.push(['_link', this.href]);return false;" href="<?php echo get_option('cebo_genbooklink'); ?>">RESERVE</a>
+			<a class="reserve fixeer mobile button fr lp-button" id="idp4"  onclick="_gaq.push(['_link', this.href]);return false;" href="<?php echo get_option('cebo_genbooklink'); ?>">RESERVE</a>
 			
-			<div class="container" style="float: right;">
-
-				<a class="mmenu-icon"><i class="fa fa-bars"></i></a>
-
-				<nav id="menus" class="fl" style="z-index:1">
-					<ul id="menu">
-						<?php
-							wp_nav_menu( array(
-								'theme_location' => 'primary',
-								'menu' => 'Header',
-								'items_wrap' => home_nav_wrap(),
-								'container' => '',
-								'menu_class' => 'navitem'
-							) );
-						?>
-					</ul>
-				</nav>
-	
-			</div>
-			<div class="clear"></div>
+			
 		</div>
 	</div>
 	
-	<div id="quiet"></div>
-
-	<div class="cookie-consent">
-	 	<p>
-	 		The Boxer Boston site uses cookies. By using this site, you are agreeing to our <a href="<?php bloginfo('url'); ?>/privacy-policy/" target="_blank" target="_blank">Privacy Policy</a>.
-	 	</p>
-	 	<a class="cookie-consent__accept-btn button">accept</a>
-	 </div>
+<!--	<div id="quiet"></div>-->
