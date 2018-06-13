@@ -98,8 +98,8 @@
                                 <div class="accordion-contentbox">
                                     <?php the_sub_field('right_content'); ?>
                                 </div>
-                            </div>
-                         </div>
+                            </div>    
+                         </div>                  
                      <?php endif; ?>
                     <?php if(get_sub_field('left_title')) : ?>
                          <div class="accordion acc-left">
@@ -111,8 +111,9 @@
                                 <div class="accordion-contentbox">
                                     <?php the_sub_field('left_content'); ?>
                                 </div>
-                             </div>            
+                             </div>                           
                         </div>
+                        <div class="clear"></div>
                     <?php endif; ?>
                      <?php if(get_sub_field('title')) : ?>
                          <div class="accordion acc-full">
@@ -124,7 +125,7 @@
                                 <div class="accordion-contentbox">
                                     <?php the_sub_field('content'); ?>
                                 </div>
-                             </div>            
+                             </div> 
                         </div>
                      <?php endif; ?>    
                 </div>      
