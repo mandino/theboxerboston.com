@@ -131,6 +131,21 @@
 					<?php wp_nav_menu( array( 'theme_location' => 'slideoutnav' ,  'items_wrap' => '%3$s', 'container' => '', 'menu_class' => 'navitem', 'before' => '<div class="tnbox">', 'after' => '</div>' ) ); ?>
 
 					<li class="social_share_side noborder"><a href="//twitter.com/<?php echo get_option('cebo_twitter'); ?>" target="_blank"><i class="fa fa-twitter"></i></a><a  href="//facebook.com/<?php echo get_option('cebo_facebook'); ?>" target="_blank"><i class="fa fa-facebook"></i></a><a href="//instagram.com/<?php echo get_option('cebo_instagram'); ?>" target="_blank"><i class="fa fa-instagram"></i></a></li>
+
+					<li>
+	                    <div class="newsletter-form-hamburger">
+						
+	                        <form action="https://web2.cendynhub.com/FormPost/FormPost.ashx" method="post">
+	                        <input name="emailAddress" required="" type="text" value="" placeholder="Your Email" />
+
+	                        <input name="formId" type="hidden" value="962957B9-AB18-4E39-BE42-D7709B48A8C2" />
+	                        <input name="CompanyID" type="hidden" value="1148" />
+	                        <input type="submit" value="Submit" />
+	                        </form>
+						
+				        </div>
+	                </li>
+                
 					<li class="locationa noborder"><a href="https://goo.gl/maps/BVnu9AdwV3z" target="_blank"><i class="fa fa-map-marker fa-lg"></i><span><?php echo get_option('cebo_address'); ?></span></a></li>
 				</ul>
 			</div>
