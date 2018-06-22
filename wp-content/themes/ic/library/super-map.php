@@ -362,7 +362,7 @@
         $.getJSON(
          url,
          function(data) {
-            console.log(data);
+
            $.each(data["places"], function(key, val){
              var docRoot = '<?php echo bloginfo ('template_url'); ?>';
              var coords = val["coords"].split(",", 2);
