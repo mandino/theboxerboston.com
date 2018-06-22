@@ -4,12 +4,23 @@ h2 {
     color: #000 !important;
 }
 
+.unstick {
+    min-height: 0 !important;
+}
+
 .landing-page {
         transition: all 0.5s;
     -moz-transition: all 0.5s;
     -webkit-transition: all 0.5s;
     -o-transition: all 0.5s;
     background: #fff !important;
+    overflow: visible !important;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    padding: 10px 0;
+    
 }
 
 .landing-page .lp-button {
@@ -26,7 +37,7 @@ h2 {
     z-index: 3;
 }
 
-.display-none {
+.display_none {
     visibility: hidden;
 }
 
@@ -82,7 +93,7 @@ h2 {
 
 
 .con-col1 p i, .con-col2 p i {
-    color: #ab0303;
+    color: #243842;
     margin-right: 10px;
 }
 
@@ -393,4 +404,11 @@ h2 {
 
 .bottom-content p {
     margin-bottom: 0;
+}
+
+.lp-slider .slick-slide {
+    display: none;
+    float: left;
+    height: auto;
+    min-height: 1px;
 }
