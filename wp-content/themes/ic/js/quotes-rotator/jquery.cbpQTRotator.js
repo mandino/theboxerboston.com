@@ -51,10 +51,8 @@
 
 			// Pause on hover in, resume on hover out
             this.$items.hover(function(){
-                console.log("Paused");
                 THIS.paused = true;
             }, function(){
-                console.log("Resumed");
                 THIS.paused = false;
             });
 

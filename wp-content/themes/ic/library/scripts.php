@@ -808,7 +808,6 @@ function fullBleedImage( elem, multiplier ) {
 }    
     
 function docReady_winResize_functions() {
-    console.log('resize');
 	fullBleedImage( jQuery('.banner--40'), 0.4 );
 	fullBleedImage( jQuery('.banner--50'), 0.5 );
 	fullBleedImage( jQuery('.banner--60'), 0.6 );
