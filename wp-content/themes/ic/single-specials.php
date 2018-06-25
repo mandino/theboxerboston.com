@@ -158,7 +158,7 @@
 							</li>
 							
 							<?php endwhile; endif; wp_reset_query(); ?>
-							
+						<?php endif; ?>	
 					
 							
 						</ul>

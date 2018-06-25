@@ -140,7 +140,9 @@
 <?php wp_footer(); ?>
 
 <!-- Scripts -->
-<script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=false"></script>
+<!--<script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=false"></script>-->
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAO3xO9JzeFJHGO52_0opniSBP52s7xWVA"></script>
 <?php include(TEMPLATEPATH. "/library/scripts.php"); ?>
 
 <!-- Sojern Body -->
