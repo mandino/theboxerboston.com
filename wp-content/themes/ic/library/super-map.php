@@ -366,8 +366,7 @@
            $.each(data["places"], function(key, val){
              var docRoot = '<?php echo bloginfo ('template_url'); ?>';
              var coords = val["coords"].split(",", 2);    
-             var latlon = [coords[0], coords[1]];
-              console.log(latlon);    
+             var latlon = [coords[0], coords[1]];  
              var goid = val["cater"];
              var imgs = (val["images"] !== undefined) ? buildPlaceCarousel(val["images"]) : '';
              <?php $perm = get_permalink(); $img = sp_get_image(); $regex = '/(?<!href=["\'])http:\/\//'; $regio = '/(?<!href=["\'])http:\/\//'; $perm = preg_replace($regio, '', $perm); $img = preg_replace($regex, '', $img); ?>
