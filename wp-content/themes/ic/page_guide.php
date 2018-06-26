@@ -19,7 +19,6 @@
 	<?php } else { 
 
 		$com_link = basename(get_permalink());
-		var_dump(get_permalink( $post->post_parent ));
 	?>
 						
 		<ul class="right-links right" id="toggles">						
