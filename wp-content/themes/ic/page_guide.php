@@ -10,10 +10,10 @@
 
 	  	<ul class="right-links right" id="toggles">
 
-			<li class="dine"><a onClick="location.href='<?php echo get_permalink( $post->post_parent ); ?>/eat'" class="linkerd2 active" href="<?php bloginfo('url'); ?>/echo-dining" title="Dining">Eat</a></li>
-			<li class="shop"><a onClick="location.href='<?php echo get_permalink( $post->post_parent ); ?>/shop'" class="linkerd2 active" href="<?php bloginfo('url'); ?>/echo-shop" title="Dining">Shop</a></li>
-			<li class="arts"><a onClick="location.href='<?php echo get_permalink( $post->post_parent ); ?>/culture'" class="linkerd2 active" href="<?php bloginfo('url'); ?>/echo-culture" title="Dining">Culture</a></li>
-			<li class="sights"><a onClick="location.href='<?php echo get_permalink( $post->post_parent ); ?>/landmarks'" class="linkerd2 active" href="<?php bloginfo('url'); ?>/echo-sights" title="Dining">Landmarks</a></li>
+			<li class="dine"><a onClick="location.href='<?php echo get_permalink( $post->post_parent ); ?>eat'" class="linkerd2 active" href="<?php bloginfo('url'); ?>/echo-dining" title="Dining">Eat</a></li>
+			<li class="shop"><a onClick="location.href='<?php echo get_permalink( $post->post_parent ); ?>shop'" class="linkerd2 active" href="<?php bloginfo('url'); ?>/echo-shop" title="Dining">Shop</a></li>
+			<li class="arts"><a onClick="location.href='<?php echo get_permalink( $post->post_parent ); ?>culture'" class="linkerd2 active" href="<?php bloginfo('url'); ?>/echo-culture" title="Dining">Culture</a></li>
+			<li class="sights"><a onClick="location.href='<?php echo get_permalink( $post->post_parent ); ?>landmarks'" class="linkerd2 active" href="<?php bloginfo('url'); ?>/echo-sights" title="Dining">Landmarks</a></li>
 		</ul>
 
 	<?php } else { 
