@@ -16,7 +16,7 @@
  *
  * @package TribeEventsCalendarPro
  *
- * @version 4.3
+ * @version 4.3.2
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -27,6 +27,7 @@ $venue_id     = get_the_ID();
 $full_address = tribe_get_full_address();
 $telephone    = tribe_get_phone();
 $website_link = tribe_get_venue_website_link();
+global $wp_query;
 ?>
 <?php while ( have_posts() ) : the_post(); ?>
 <div class="tribe-events-venue">
@@ -48,7 +49,7 @@ $website_link = tribe_get_venue_website_link();
 			</div><!-- .tribe-events-map-wrap -->
 		<?php endif; ?>
 
-		<span class="tribe-events-event-meta">
+		<div class="tribe-events-event-meta">
 
 			<?php if ( tribe_show_google_map_link() && tribe_address_exists() ) : ?>
 				<!-- Google Map Link -->
@@ -58,7 +59,7 @@ $website_link = tribe_get_venue_website_link();
 			<!-- Venue Meta -->
 			<?php do_action( 'tribe_events_single_venue_before_the_meta' ) ?>
 
-			<address class="venue-address">
+			<div class="venue-address">
 
 				<?php if ( $full_address ) : ?>
 				<address class="tribe-events-address">
@@ -80,7 +81,7 @@ $website_link = tribe_get_venue_website_link();
 					</span>
 				<?php endif; ?>
 
-			</address>
+			</div><!-- .venue-address -->
 
 			<?php do_action( 'tribe_events_single_venue_after_the_meta' ) ?>
 
@@ -96,14 +97,14 @@ $website_link = tribe_get_venue_website_link();
 		<!-- Venue Featured Image -->
 		<?php echo tribe_event_featured_image( null, 'full' ) ?>
 
-	</div><!-- .tribe-events-event-meta -->
+	</div><!-- .tribe-events-venue-meta -->
 
 	<!-- Upcoming event list -->
 	<?php do_action( 'tribe_events_single_venue_before_upcoming_events' ) ?>
 
 	<?php
-	// Use the tribe_events_single_venuer_posts_per_page to filter the number of events to get here.
-	echo tribe_venue_upcoming_events( $venue_id ); ?>
+	// Use the `tribe_events_single_venue_posts_per_page` to filter the number of events to get here.
+	echo tribe_venue_upcoming_events( $venue_id, $wp_query->query_vars ); ?>
 
 	<?php do_action( 'tribe_events_single_venue_after_upcoming_events' ) ?>
 

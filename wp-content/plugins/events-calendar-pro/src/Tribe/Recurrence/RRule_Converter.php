@@ -69,7 +69,7 @@ class Tribe__Events__Pro__Recurrence__Rrule_Converter {
 	 *
 	 * Holds the meta as we build it
 	 *
-	 * 'type' => null, // string - None, Every Day, Every Week, Every Month, Every Year, Custom
+	 * 'type' => null, // string - None, Daily, Weekly, Monthly, Yearly, Custom
 		 * 'end-type' => null, // string - On, After, Never
 		 * 'end' => null, // string - YYYY-MM-DD - If end-type is On, recurrence ends on this date
 		 * 'end-count' => null, // int - If end-type is After, recurrence ends after this many instances
@@ -194,7 +194,7 @@ class Tribe__Events__Pro__Recurrence__Rrule_Converter {
 	 */
 	private function daily() {
 		if ( empty( $this->args['INTERVAL'] ) ) {
-			$this->recurrence_meta[ 'type' ] = 'Every Day';
+			$this->recurrence_meta[ 'type' ] = 'Daily';
 			$this->end_type( );
 			return;
 		}
@@ -215,7 +215,7 @@ class Tribe__Events__Pro__Recurrence__Rrule_Converter {
 	 */
 	private function weekly() {
 		if ( empty( $this->args['BYDAY'] ) && empty( $this->args['INTERVAL'] ) ) {
-			$this->recurrence_meta[ 'type' ] = 'Every Week';
+			$this->recurrence_meta[ 'type' ] = 'Weekly';
 			$this->end_type( );
 			return;
 		}
@@ -241,7 +241,7 @@ class Tribe__Events__Pro__Recurrence__Rrule_Converter {
 			&& empty( $this->args['BYSETPOS'] )
 			&& empty( $this->args['BYMONTHDAY'] ) ) {
 
-			$this->recurrence_meta[ 'type' ] = 'Every Month';
+			$this->recurrence_meta[ 'type' ] = 'Monthly';
 			$this->end_type();
 			return;
 		}
@@ -279,7 +279,7 @@ class Tribe__Events__Pro__Recurrence__Rrule_Converter {
 			&& empty( $this->args['BYYEARDAY'] )
 			&& empty( $this->args['BYWEEKNO'] ) ) {
 
-			$this->recurrence_meta[ 'type' ] = 'Every Year';
+			$this->recurrence_meta[ 'type' ] = 'Yearly';
 			$this->end_type();
 			return;
 		}

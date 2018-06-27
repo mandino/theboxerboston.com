@@ -8,6 +8,14 @@
 <!DOCTYPE HTML>
 <html <?php language_attributes() ?>>
 <head>
+    
+    <style>.async-hide { opacity: 0 !important} </style>
+    <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+    h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+    (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+    })(window,document.documentElement,'async-hide','dataLayer',4000,
+    {'GTM-5XBBBWD':true});</script>
+    
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<title>
 		<?php global $page, $paged; wp_title( '|', true, 'right' ); //bloginfo( 'name' );
@@ -60,7 +68,13 @@
 	<link rel="stylesheet" href="<?php bloginfo ('template_url'); ?>/css/slidejs.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="<?php bloginfo ('template_url'); ?>/js/flexslider/flexslider.css" type="text/css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/jquery.mmenu.css">
-
+    <link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/js/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/js/slick/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/magnific-popup.css">
+    <?php if (is_page_template('page_landing_template_without_map.php')) : ?>
+        <link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/landingpage.css">
+    
+    <?php endif; ?>
 	<?php if ( 'rooms' == get_post_type() ) 	{ ?>
 		<link rel="stylesheet" type="text/css" href="<?php bloginfo ('template_url'); ?>/css/iosslider.css">
 	<?php } ?>
@@ -80,7 +94,8 @@
 
 	<!-- Jquery -->
 	<?php //include(TEMPLATEPATH. "/library/jquery.php"); ?>	
-	<script type="text/javascript" src="//code.jquery.com/jquery-1.8.2.min.js"></script>
+<!--	<script type="text/javascript" src="//code.jquery.com/jquery-1.8.2.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script type='text/javascript' src='<?php bloginfo ('url'); ?>/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
 	
 
@@ -97,30 +112,28 @@
 		wp_head();
 	?>
 
-<!-- Google Tag Manager -->
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-5XBBBWD');</script>
+	<!-- End Google Tag Manager -->
 
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-W8NRVV2');</script>
+	<!-- Sojern Head -->
+	<script>
+		(function () {
+		var pl = document.createElement('script');
+		pl.type = 'text/javascript';
+		pl.async = true;
+		pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(pl);
+		})();
+	</script>
+	<!-- End Sojern -->
 
-<!-- End Google Tag Manager -->
-
-<!-- Sojern Head -->
-<script>
-(function () {
-var pl = document.createElement('script');
-pl.type = 'text/javascript';
-pl.async = true;
-pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(pl);
-})();
-</script>
-<!-- End Sojern -->
-
-	<script type="application/ld+json">
+	<!--<script type="application/ld+json">
 		{
-		"@context": "//schema.org",
+		"@context": "http://schema.org",
 		"@type": "NewsArticle",
 		"headline": "Article headline",
 		"alternativeHeadline": "The headline of the Article",
@@ -132,35 +145,39 @@ pl.src = 'https://beacon.sojern.com/pixel/p/3035';(document.getElementsByTagName
 		"description": "A most wonderful article",
 		"articleBody": "The full body of the article"
 		}
-	</script> 
-	
-<script> 
+	</script> -->
 
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new
-Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-37161096-1', 'auto',{'allowLinker': true });
-ga('require', 'linker'); ga('linker:autoLink', ['theboxerboston.reztrip.com','theboxerboston.reztripmobile.com']);
-ga('send', 'pageview');
+	<script>
+		!function(w,d,s,u) {
+		if(window.curacity) { return; }
+		window.curacity = function() { window.curacity.callMethod ?
+		window.curacity.callMethod.apply(window.curacity, arguments) :
+		window.curacity.queue.push(arguments); }
+		window.curacity.version = '1.0';
+		window.curacity.queue = [];
+		var scriptElement = document.createElement(s);
+		scriptElement.type = 'text/javascript';
+		scriptElement.async = true;
+		scriptElement.src = u;
+		var e = d.getElementsByTagName(s)[0];
+		e.parentNode.insertBefore(scriptElement,e);
+		}(window, document, 'script',
+		'https://booking.curacity.com/api/js/curacity_events.js');
+		curacity('init', 'merchant', '365'); // 365 = hotel id
+		curacity('track', 'view_checkout', null);
+	</script>
 
-</script>
-
-<script type="text/javascript">
-function viewContent(){
-
-	fbq('track', "ViewContent");
-
-}
-</script>
+	<noscript>
+		<img height="1" width="1" style="display: none" src="https://booking.curacity.com/trackevent?merchant_id=365&ev=view_checkout&noscript=1" />
+	</noscript>
 
 </head> 
 	
 <body id="oceana" <?php body_class($class); ?>>
 
 <!-- Google Tag Manager (noscript) -->
-
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W8NRVV2"
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5XBBBWD"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-
 <!-- End Google Tag Manager (noscript) -->
 
 <div class="menu-wrap">
@@ -208,7 +225,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 							</select>
 						</span>
 						
-						<button type="submit" class="button" onClick="fbq('track', 'Lead'); ga('send', 'event', 'Booking-widget', 'Search-now', 'Search dates with booking widget');">Search Now</button>
+						<button type="submit" class="button">Search Now</button>
 						
 					
 						</form>
@@ -219,7 +236,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 					<div class="reservationform flexdate">
 					
-						<p><a href="https://theboxerboston.reztrip.com" onclick="fbq('track', 'Lead'); ga('send', 'event', 'Flexible Dates', 'click', 'Booking-widget');">Flexible dates?</a> Search for our best available rate</p>
+						<p><a href="https://theboxerboston.reztrip.com/calendar">Flexible dates?</a> Search for our best available rate</p>
 						
 					</div>
 
@@ -239,12 +256,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			
 			
 		<div id="property-nav">
-			
+			<nav class="click-nav" style="border: none;">
 			<nav class="click-nav">
 				<ul class="container no-js">
-					<li>
-						<a href="//www.iclocalrewards.com/" target="_blank" class="clicknav-clicker">Join IC Local and Start Receiving Perks with Every Stay</a>	
-					</li>
+					<li><a href="//iclocalrewards.com/en-US/Login?ReturnUrl=%2F#signup" target="_blank" class="clicknav-clicker">Join The IC Local Perks Program & Get Rewarded With Every Stay</a></li>
 					<li class="blue-btn"><a href="//theboxerboston.com/blue"><i class="fa fa-info-circle"></i><span class="blue-mobile">why blue?</span></a></li>
 				</ul>
 			</nav>
@@ -254,45 +269,109 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	
 		</div>
 	
-		<div id="primary-nav">
+		<div id="primary-nav" style="overflow:visible;">
 		
-			<a href="<?php bloginfo('url'); ?>" class="logo<?php if(is_home()) { ?> droplogo<?php } ?>"><img src="<?php echo get_option('cebo_logo'); ?>" alt="<?php echo the_title(); ?>" /></a>
-
-			<a href="<?php bloginfo('url'); ?>" class="logo mobile"><img src="<?php echo get_option('cebo_logo'); ?>" alt="<?php echo the_title(); ?>" /></a>
+            <a href="<?php bloginfo('url'); ?>" class="logo droplogo"><img src="<?php echo get_option('cebo_logo'); ?>" alt="<?php echo the_title(); ?>" /></a>
+            
+			<a href="<?php bloginfo('url'); ?>" class="logo mobile"><img src="<?php echo get_option('cebo_logo'); ?>" alt="<?php echo the_title().'-mobile'; ?>" /></a>
 			
-			<a href="https://theboxerboston.reztrip.com" class="reserve fixeer button fr input-append date" rooms ="1" id="idp3" data-date="12-02-2012" data-date-format="mm-dd-yyyy">RESERVE</a>
+<!--            countdown picker-->
+            <?php 
+				$arg = array(
+							'post_type' => array('specials', 'tribe_events'),
+							'value' => time(),
+							'meta_key' => 'ticker_date_end',
+							'order' => 'ASC',
+							'meta_query' => array(
+								'relation' => 'AND',
+								array(
+									'key' => 'ticker_status',
+									'value' => 'On',
+									'compare' => '='
+								),
+								array(
+									'relation' => 'OR',
+									array(
+										'key' => 'ticker_date_start',
+										'value' => date('Ymd'),
+										'compare' => '<='
+									),
+									array(
+										'relation' => 'AND',
+										array(
+											'key' => 'ticker_date_start',
+											'value' => date('Ymd'),
+											'compare' => '>='
+										),
+										array(
+											'key' => 'ticker_date_end',
+											'value' => date('Ymd'),
+											'compare' => '<='
+										),
+									)
+								)
+							)
+						);
+				$text = new WP_Query($arg);
 
-			<a class="reserve fixeer mobile button fr" id="idp4"  onclick=" ga('send', 'event', 'Booking', 'Reserve'); _gaq.push(['_link', this.href]);return false;" href="<?php echo get_option('cebo_genbooklink'); ?>" target="_blank">RESERVE</a>
+				if ($text->posts) {
+					foreach ($text->posts as $post) {
+						$tickerName = $post->post_title;
+						$tickerDate = date('m/d/Y H:i:s', strtotime(get_field('ticker_date_end')));
+						$tickerId = $post->ID;
+						if (strtotime("now") < strtotime($tickerDate)) {
+			?>
+							<div class="ticker">
+								<span><?php echo get_field('ticker_offer') ?></span>
+								<a class="close">X</a>
+								<div class="ticker-content">
+									<h3><?php echo get_field('ticker_title') ?></h3>
+									<div id="ticker">
+										<?php echo $tickerDate; ?>
+									</div>
+									<div class="clear"></div>
+										<a href="<?php echo get_field('ticker_cta_url'); ?>"><?php echo get_field('ticker_cta_text') ?></a>
+									<?php // } ?>
+								</div>
+							</div>
+							<?php break; ?>
+						<?php } ?>
+					<?php } ?>
+				<?php } ?>
+				<?php wp_reset_postdata(); ?>
+	
+            <a href="https://theboxerboston.reztrip.com" class="reserve fixeer button fr input-append date" rooms ="1" id="idp3" data-date="12-02-2012" data-date-format="mm-dd-yyyy">RESERVE</a>
+
+			<a class="reserve fixeer mobile button fr" id="idp4"  onclick="_gaq.push(['_link', this.href]);return false;" href="<?php echo get_option('cebo_genbooklink'); ?>">RESERVE</a>
 			
 			<div class="container" style="float: right;">
 
-				<a class="mmenu-icon" href="#menu"><i class="fa fa-bars"></i></a>
-	
-				<nav id="menu" class="fl" style="z-index:1">
-					<ul>
-						<?php wp_nav_menu( array( 'theme_location' => 'primary' ,  'items_wrap' => '%3$s', 'container' => '', 'menu_class' => 'navitem' ) ); ?>
-						<li class="hamburgermenu">
-							<a class="cheese" href="#">
-								<div class="hamburger">
-									<span></span>
-									<span></span>
-									<span></span>
-								</div>
-								<span class="menutext">Menu</span>
-							</a>
-						</li>
-						<?php wp_nav_menu( array( 
-							'theme_location' => 'mobilenav',
-							'items_wrap' => '%3$s', 
-							'container' => ''
-						)); ?>
+				<a class="mmenu-icon"><i class="fa fa-bars"></i></a>
+
+				<nav id="menus" class="fl" style="z-index:1">
+					<ul id="menu">
+						<?php
+							wp_nav_menu( array(
+								'theme_location' => 'primary',
+								'menu' => 'Header',
+								'items_wrap' => home_nav_wrap(),
+								'container' => '',
+								'menu_class' => 'navitem'
+							) );
+						?>
 					</ul>
 				</nav>
 	
 			</div>
-
+			<div class="clear"></div>
 		</div>
-
 	</div>
 	
 	<div id="quiet"></div>
+
+    <div class="cookie-consent">
+	 	<p>
+	 		<?php echo get_bloginfo( 'name' ); ?> site uses cookies. By using this site, you are agreeing to our <a href="<?php bloginfo('url'); ?>/privacy-policy/" target="_blank" target="_blank">Privacy Policy</a>.
+	 	</p>
+	 	<a class="cookie-consent__accept-btn button">accept</a>
+	 </div>

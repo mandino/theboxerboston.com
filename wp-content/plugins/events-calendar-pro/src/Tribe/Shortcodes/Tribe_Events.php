@@ -72,6 +72,7 @@ class Tribe__Events__Pro__Shortcodes__Tribe_Events {
 			'view'      => '',
 			'category'  => '',
 			'cat'       => '',
+			'featured'  => 'false',
 		);
 
 		$this->atts = shortcode_atts( $defaults, $atts, 'tribe_events' );
@@ -83,6 +84,7 @@ class Tribe__Events__Pro__Shortcodes__Tribe_Events {
 
 		$this->set_view_attribute();
 
+		add_action( 'tribe_events_pro_tribe_events_shortcode_prepare', array( $this, 'prepare_assets' ) );
 		add_action( 'tribe_events_pro_tribe_events_shortcode_prepare', array( $this, 'prepare_query' ) );
 		add_action( 'tribe_events_pro_tribe_events_shortcode_prepare_day', array( $this, 'prepare_day' ) );
 		add_action( 'tribe_events_pro_tribe_events_shortcode_prepare_list', array( $this, 'prepare_list' ) );
@@ -172,6 +174,14 @@ class Tribe__Events__Pro__Shortcodes__Tribe_Events {
 	}
 
 	/**
+	 * Ensures supporting assets are available to the embedded views.
+	 */
+	public function prepare_assets() {
+		// Scripts to support PRO views
+		Tribe__Events__Pro__Main::instance()->enqueue_pro_scripts( true, true );
+	}
+
+	/**
 	 * Prepares day view.
 	 *
 	 */
@@ -252,6 +262,7 @@ class Tribe__Events__Pro__Shortcodes__Tribe_Events {
 			'eventDate'         => $this->get_attribute( 'date', $this->get_url_param( 'date' ) ),
 			'eventDisplay'      => $this->get_attribute( 'view' ),
 			'tribe_events_cat'  => $this->atts[ 'category' ],
+			'featured'          => $this->is_attribute_truthy( 'featured' ),
 		) );
 	}
 
@@ -519,6 +530,8 @@ class Tribe__Events__Pro__Shortcodes__Tribe_Events {
 	 * For default supported views, performs rendering and returns the result.
 	 */
 	public function render_view() {
+		$attributes = array();
+
 		/**
 		 * Fires before the embedded view is rendered.
 		 *
@@ -529,8 +542,15 @@ class Tribe__Events__Pro__Shortcodes__Tribe_Events {
 		ob_start();
 
 		$this->get_template_object()->add_input_hash();
+		$attributes[] = 'id="tribe-events"';
+		$attributes[] = 'class="' . $this->get_wrapper_classes() . '"';
 
-		echo '<div id="tribe-events" class="' . $this->get_wrapper_classes() . '">';
+		if ( ! empty( $this->query_args['tribe_events_cat'] ) ) {
+			$attributes[] = 'data-category="' . esc_attr( $this->query_args['tribe_events_cat'] ) . '"';
+		}
+
+		// Creates id='tribe-events' container
+		echo '<div ' . implode( ' ', $attributes ) . '>';
 
 		// Include the tribe bar HTML if required
 		if ( $this->is_attribute_truthy( 'tribe-bar', true ) ) {

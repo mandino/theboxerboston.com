@@ -40,15 +40,13 @@
 	
 				<div class="newsletter-form">
 					
-					<form method="get" action="//zmaildirect.com/app/new/MTIzNDA5OTE3" name="surveys">  
+					<form action="https://web2.cendynhub.com/FormPost/FormPost.ashx" method="post">
+					<input name="emailAddress" required="" type="text" value="" placeholder="Your Email" />
 
-					<input type="hidden" value="MTIzNDA5OTE3" name="formId">
-					    <div>
-					<input type="text" placeholder="Exclusive offers" name="email">
-						</div>
-					  <div>	
-					<input type="submit" value="Sign Up">
-						</div>
+					<input name="formId" type="hidden" value="965E1153-624C-4188-B671-E94187920640" />
+					<input name="CompanyID" type="hidden" value="1151" />
+					<input type="submit" value="Submit" />
+
 					</form>
 	
 				</div>
@@ -110,6 +108,10 @@
 					<span class="mobile-number"><?php echo get_option('cebo_tele'); ?></span></p>
 					<?php } ?>
 			</div>
+            <?php if(get_option('cebo_locb-schema')) 
+                echo get_option('cebo_locb-schema');
+            ?>
+            
 		</div>
 
 	</footer>
@@ -129,7 +131,7 @@
 					<?php wp_nav_menu( array( 'theme_location' => 'slideoutnav' ,  'items_wrap' => '%3$s', 'container' => '', 'menu_class' => 'navitem', 'before' => '<div class="tnbox">', 'after' => '</div>' ) ); ?>
 
 					<li class="social_share_side noborder"><a href="//twitter.com/<?php echo get_option('cebo_twitter'); ?>" target="_blank"><i class="fa fa-twitter"></i></a><a  href="//facebook.com/<?php echo get_option('cebo_facebook'); ?>" target="_blank"><i class="fa fa-facebook"></i></a><a href="//instagram.com/<?php echo get_option('cebo_instagram'); ?>" target="_blank"><i class="fa fa-instagram"></i></a></li>
-					<li class="locationa noborder"><a href="https://goo.gl/maps/5qPvMF26WTy" target="_blank"><i class="fa fa-map-marker fa-lg"></i><span>944 Collins Ave Miami Beach, FL 33139</span></a></li>
+					<li class="locationa noborder"><a href="https://goo.gl/maps/BVnu9AdwV3z" target="_blank"><i class="fa fa-map-marker fa-lg"></i><span><?php echo get_option('cebo_address'); ?></span></a></li>
 				</ul>
 			</div>
 		</div>
@@ -138,24 +140,10 @@
 <?php wp_footer(); ?>
 
 <!-- Scripts -->
+<!--<script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=false"></script>-->
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAO3xO9JzeFJHGO52_0opniSBP52s7xWVA"></script>
 <?php include(TEMPLATEPATH. "/library/scripts.php"); ?>
-
-<!-- Google Code for Remarketing Tag -->
-
-<script type="text/javascript">
-/* <![CDATA[ */
-var google_conversion_id = 969927793;
-var google_custom_params = window.google_tag_params;
-var google_remarketing_only = true;
-/* ]]> */
-</script>
-<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-</script>
-<noscript>
-<div style="display:inline;">
-<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/969927793/?value=0&amp;guid=ON&amp;script=0"/>
-</div>
-</noscript>
 
 <!-- Sojern Body -->
 <script>
@@ -317,9 +305,6 @@ fjs.parentNode.insertBefore(js, fjs);
 	
 <!-- End Email signup popup -->
 
-<!-- VOYAT CODE -->
-<script> (function(){ var v = document.createElement('script'); var s = document.getElementsByTagName('script')[0]; v.src = '//io.voyat.com/v.js'; v.async = true; s.parentNode.insertBefore(v, s); })(); </script>
-<!-- VOYAT CODE -->	
 
 </body>
 </html>

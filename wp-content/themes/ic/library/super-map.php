@@ -4,11 +4,9 @@
 
 <!-- Google Map API Files -->
 
-<script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=false"></script>
-
 <script type="text/javascript">
     $(document).ready(function() {
-
+     
       /* Submit tweet */
       $('#twitter-form').submit(function(){  
           //setup variables  
@@ -103,7 +101,7 @@
 	<script>!window.jQuery && document.write(unescape('%3Cscript src="js/libs/jquery-1.4.4.min.js"%3E%3C/script%3E'))</script>
 	<script type="text/javascript">
     $(document).ready(function() {
-
+          
        $("#infoBox").show();
 
       /* Hide Sidebar */
@@ -138,7 +136,7 @@
   <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/gmap3new.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
-  
+    
     var list = [];
     var i = 0; // Ordinal for locations.
     var locations = [];
@@ -212,7 +210,7 @@
     }
   }
 );
-    
+  
     getPlaces();
     
     $("#toggles li a").click(function(e) {
@@ -353,27 +351,28 @@
     }
     
     function getPlaces() {
+        
       $("#toggles li a.active").each(function() {
         getPlaceData($(this).attr("href"), $(this).parent().attr("class"));
       });
     }
     
     function getPlaceData(url, type) {
+         
         $.getJSON(
          url,
          function(data) {
-           list = $.parseJSON(data);
+           
            $.each(data["places"], function(key, val){
              var docRoot = '<?php echo bloginfo ('template_url'); ?>';
-             var coords = val["coords"].split(",", 2);
-             var latlon = [coords[0], coords[1]];
+             var coords = val["coords"].split(",", 2);    
+             var latlon = [coords[0], coords[1]];  
              var goid = val["cater"];
              var imgs = (val["images"] !== undefined) ? buildPlaceCarousel(val["images"]) : '';
-
              <?php $perm = get_permalink(); $img = sp_get_image(); $regex = '/(?<!href=["\'])http:\/\//'; $regio = '/(?<!href=["\'])http:\/\//'; $perm = preg_replace($regio, '', $perm); $img = preg_replace($regex, '', $img); ?>
             
              placeContainer = '<div class="placeData" id="placeData' + i + '"><p class="streetview">See it up close. Drag your streeview!</p><a href="#" class="closeData">X</a><div class="qualinfo"><a href="' + val["permalink"] + '"><img src="' + val["photo"] + '"/></a><div class="marco"><h4><span>' + val["name"] + '</span></h4><p class="smaller" id="' + val["cater"] + '">' + val["cater"] + '</p><p class="desc">' + val["desc"] + '</p></div></div><div class="specialinfo"><a href="' + val["permalink"] + '">More Info</a><a class="fac" href="//www.facebook.com/sharer.php?s= 100&amp;p[title]=' + val["name"] + '&amp;p[url]=' + val["permalink"] + '&amp;p[images][0]=' + val["photo"] + '&amp;p[summary]=' + val["desc"] + '" target="_blank">Share It</a><a href="//twitter.com/share?text=' + val["name"] + '&url=' + val["permalink"] + '"target="_blank">Tweet It</a><a class="pin" href="//pinterest.com/pin/create/button/?url=http%3A%2F%2F<?php echo $perm; ?>&media=http%3A%2F%2F<?php echo $img; ?>&description=' + val["desc"] + ' on <?php bloginfo ('url'); ?>" target="_blank">Pin It</a></div>';
-             
+           
              $("#maparea").gmap3({ 
                  marker:{
 				    latLng: latlon,

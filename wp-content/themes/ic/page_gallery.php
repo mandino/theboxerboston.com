@@ -16,7 +16,7 @@
 <div class="fullpic">
 
 	<div class="slide-header">
-		<a class="button" onclick="fbq('track', 'InitiateCheckout'); ga('send', 'event', 'Reserve', 'Reservation-button-banner', 'Reserve Now');" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>"><?php _e('RESERVE NOW', 'cebolang'); ?></a>
+		<a class="button" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>"><?php _e('RESERVE NOW', 'cebolang'); ?></a>
 	</div>
 	<img src="<?php echo tt(get_post_meta($post->ID, 'cebo_fullpic', true), 1400, 350); ?>" alt="<?php echo get_custom_image_thumb_alt_text(get_post_meta($post->ID, 'cebo_fullpic', true), ''); ?>" />
 
@@ -122,7 +122,13 @@
 			<?php } } ?>
 			<div class="wonderline"></div>
 			<div class="post-content" style="width: 100%;">
-			
+                <?php
+                    if ( function_exists('yoast_breadcrumb') ) {
+                    yoast_breadcrumb('
+                    <p id="breadcrumbs">','</p>
+                    ');
+                    }
+                ?>
 				<?php if(have_posts()) : while(have_posts()) : the_post(); ?>
 				
 					<?php the_content(); ?>

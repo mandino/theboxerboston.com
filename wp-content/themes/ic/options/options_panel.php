@@ -1223,7 +1223,8 @@ function cebo_machine($options) {
 			if($counter >= 2){
 			   $output .= '</div>'."\n";
 			}
-			$jquery_click_hook = ereg_replace("[^A-Za-z0-9]", "", strtolower($value['name']) );
+			$jquery_click_hook = preg_replace("[^A-Za-z0-9]", "", strtolower($value['name']) );
+			$jquery_click_hook = str_replace(' ', '-', $jquery_click_hook);
 			$jquery_click_hook = "of-option-" . $jquery_click_hook;
 			$menu .= '<li><a title="'.  $value['name'] .'" href="#'.  $jquery_click_hook  .'">'.  $value['name'] .'</a></li>';
 			$output .= '<div class="group" id="'. $jquery_click_hook  .'"><h2>'.$value['name'].'</h2>'."\n";
@@ -1497,7 +1498,18 @@ $options[] = array( "name" => __('Footer Background Image','cebolang'),
 			"std" => "",
 			"type" => "upload");
 
-			
+$options[] = array( "name" => __('Video Thumbnail Homepage Hero Banner','cebolang'),
+			"desc" => __('Image before video will display for Homepage ','cebolang'),
+			"id" => $shortname."_video_thumbnail_homepage_hero_banner",
+			"std" => "",
+			"type" => "upload");
+
+$options[] = array( "name" => __('Video Homepage Hero Banner','cebolang'),
+			"desc" => "if you would like to replace the image header with a small, ambient video, upload video here. Best formatting is an MP4 and a filesize under 10MB. Upload via Media Uploader and paste link here",
+			"id" => $shortname."_video_homepage_hero_banner",
+			"std" => "",
+			"type" => "text");
+
 $options[] = array( "name" => __('Address','cebolang'),
 			"desc" => "This address will be converted into coordinates that will populate the contact maps.",
 			"id" => $shortname."_address",
@@ -1524,6 +1536,11 @@ $options[] = array( "name" => __('Email','cebolang'),
 			"std" => "",
 			"type" => "text");			
 
+$options[] = array( "name" => __('Local Business Schema','cebolang'),
+			"desc" => __('Paste Local Business Schema JSON-LD','cebolang'),
+			"id" => $shortname."_locb-schema",
+			"std" => "",
+			"type" => "textarea");    
 
 $options[] = array( "name" => __('Email Newsletter Form Code','cebolang'),
 			"desc" => __('Paste in your newsletter signup form in the footer','cebolang'),

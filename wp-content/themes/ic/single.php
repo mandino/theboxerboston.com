@@ -16,7 +16,7 @@
 <div class="fullpic">
 
 	<div class="slide-header">
-		<a class="button" target="_blank" onclick="fbq('track', 'InitiateCheckout'); ga('send', 'event', 'Reserve', 'Reservation-button-banner', 'Reserve Now');" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>"><?php _e('RESERVE NOW', 'cebolang'); ?></a>
+		<a class="button" target="_blank" onclick="href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>"><?php _e('RESERVE NOW', 'cebolang'); ?></a>
 	</div>
 	<img src="<?php echo get_post_meta($post->ID, 'cebo_fullpic', true); ?>" alt="<?php echo get_custom_image_thumb_alt_text(get_post_meta($post->ID, 'cebo_fullpic', true), ''); ?>" />
 
@@ -94,7 +94,13 @@ if( count( $children ) != 0 ) { ?>
 			
 			<div class="wonderline"></div>
 			<?php } ?>			
-			
+			<?php                        
+                if ( function_exists('yoast_breadcrumb') ) {
+                    yoast_breadcrumb('
+                    <p id="breadcrumbs">','</p>
+                    ');
+                }
+            ?>  
 			<div class="post-content fl">
 			
 				<?php if(have_posts()) : while(have_posts()) : the_post(); ?>
@@ -108,7 +114,7 @@ if( count( $children ) != 0 ) { ?>
 
 			<div class="sidebar fr">
 				
-				<a class="button" onclick="fbq('track', 'InitiateCheckout'); ga('send', 'event', 'Booking', 'Reserve', '<?php echo get_the_title(); ?>');" target="_blank" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>"><?php _e('RESERVE NOW', 'cebolang'); ?></a>
+				<a class="button" target="_blank" href="<?php if(get_post_meta ($post->ID, 'cebo_booklink', true)) { echo get_post_meta ($post->ID, 'cebo_booklink', true); } else { echo get_option('cebo_genbooklink'); } ?>"><?php _e('RESERVE NOW', 'cebolang'); ?></a>
 				
 				
 				<ul class="thumbgal">

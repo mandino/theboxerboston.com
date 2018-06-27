@@ -1720,6 +1720,7 @@ h1, h2, h3, h4, h5, h6, h7 {
 .quote {
 	border-top: 1px solid #CBCBCB;
 	padding-top: 40px;
+  margin-top: 50px;
 }
 .ico-quote {
 	width: 65px;
@@ -4731,3 +4732,215 @@ li.social_share_side a i:hover{
 }
 
 /* End of Right Nav */ 
+
+
+/* Pride Banner in the heading */
+ 
+#property-nav {
+    overflow:hidden;
+    position: relative;
+    border-bottom: 2px solid #333333;
+}
+
+#property-nav .pride.pos-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1001;
+}
+
+#property-nav .pride.pos-left {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1001;
+    -ms-transform: rotate(180deg); /* IE 9 */
+    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+    transform: rotate(180deg);
+}
+
+#property-nav .pride.pos-right a {
+    position: absolute;
+    top: 4px;
+    right: 10px;
+    border: 1px solid #1c93d1;
+    background: #1c93d1;
+    color: #ffffff;
+    padding: 8px;
+}
+
+#property-nav .pride.pos-right a i {
+    margin-right: 8px;
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+.white-shadow {
+  display: none;
+  height: 60px;
+  width: 100%;
+  bottom: 14px;
+  left: 0;
+  position: absolute;
+  background: linear-gradient(transparent , white 32%, white);
+}
+
+.read-more {
+  display: block;
+  overflow: hidden;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.relative {
+  position: relative;
+  transition: all 3s ease-in-out;
+}
+
+.height-auto {
+  height: auto;
+  transition: all 3s ease-in-out;
+}
+
+.read-more-button {
+  display: none;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  letter-spacing: 5px;
+  font-weight: 700;
+}
+
+.read-more-button i {
+  position: absolute;
+    top: 15px;
+    right: 49%;
+    font-size: 26px;
+    color: #CC9933;
+}
+
+/*countdown ticker*/
+
+.ticker {
+    text-transform: uppercase;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    position: absolute;
+    text-align: center;
+    max-width: 207px;
+    background: #fff;
+    display: none;
+    z-index: 2000;
+    width: 100%;
+    opacity: 1;
+    left: 0;
+    top: 41px;
+}
+
+.show {
+  display: block;
+}
+
+.ticker-down {
+    top: 145px;
+}
+
+.ticker-content {
+    box-sizing: border-box;
+    margin: 24px 0 0;
+    padding: 10px;
+}
+
+.ticker span {
+    box-sizing: border-box;
+    text-transform: none;
+    position: absolute;
+    color: #fff;
+    width: 100%;
+    padding: 5px;
+    left: 0;
+    top: 0;
+}
+
+.ticker a.close {
+  width: 10px;
+  position: absolute;
+  padding-top: 5px;
+  margin-top: 0px;
+  z-index: 2;
+  right: 10px;
+  cursor: pointer;
+
+}
+
+.ticker h3 {
+    line-height: 24px;
+    color: #3d3d3d;
+}
+
+.ticker div#ticker {
+    font-family: 'scala-sans';
+    margin: 10px auto 5px;
+    font-weight: bold;
+    max-width: 190px;
+    font-size: 14px;
+    color: #3d3d3d;
+    width: 90%;
+}
+
+.ticker div#ticker {
+    display: none;
+}
+
+.ticker a {
+    box-sizing: border-box;
+    margin: 10px 0 0;
+    display: block;
+    padding: 5px 0;
+    width: 100%;
+    color: #fff;
+}
+
+.ticker a:hover {
+    color: #fff;
+}
+
+.tick-label {
+    text-transform: none;
+    text-align: center;
+    font-size: 10px;
+}
+
+.tick-days,
+.tick-hours {
+    float: left;
+    width: 20%;
+}
+
+.tick-minutes,
+.tick-seconds {
+    float: left;
+    width: 30%;
+}
+
+/*cookie consent*/
+.cookie-consent {
+  display: none;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  background: #fff;
+  border-top: 3px solid #ab0303;
+  z-index: 99999999;
+  text-align: center;
+  padding: 0; }
+  .cookie-consent__accept-btn {
+    padding: 7px;
+    text-transform: uppercase;
+    color: #fff;
+    position: relative;
+    top: -15px;
+    cursor: pointer;
+    font-size: 13px;
+    letter-spacing: 1px; }

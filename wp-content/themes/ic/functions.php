@@ -183,21 +183,25 @@ function get_custom_image_thumb_alt_text($img_url,$img_id) {
     return $image_thumb_alt_text;
 }
 
-function facebook_pixel_code_header() {
-?>
-<!--Facebook Pixel Code -->
-<script> !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n; n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0; t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+add_filter('amp_post_template_file', 'amp_set_custom_footer_template', 10, 2);
 
-fbq('init', '1845802005668396'); // Insert your pixel ID here.
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1845802005668396&ev=PageView&noscript=1" /></noscript>
-<!-- DO NOT MODIFY -->
-<!-- End Facebook Pixel Code -->
-<?php 
+function amp_set_custom_footer_template($file, $type) {
+	if ('footer' === $type) {
+		$file = TEMPLATEPATH . '/amp/templates/footer.php';
+	}
+
+	return $file;
 }
 
-add_action('wp_head', 'facebook_pixel_code_header');
+add_filter('amp_post_template_file', 'amp_set_custom_style_css', 10, 3);
+
+function amp_set_custom_style_css($file, $type, $post) {
+	if ('style' === $type) {
+		$file = TEMPLATEPATH . '/amp/templates/style.php';
+	}
+
+	return $file;
+}
 
 /*
 	widget-calendar.js in plugin transfer to ic theme tribe-events-widget-calendar.js
@@ -280,3 +284,164 @@ $class_even = $class_even ? '' : 'class="even"';
 
 endwhile; endif; wp_reset_postdata(); wp_die();
 }
+
+// Image with src, srcset and sizes $class => image class
+
+function get_image_with_detail( $photo_id, $size = 'Full' ) {
+	$imgsrc = wp_get_attachment_image_src( $photo_id, $size);
+	$srcset = esc_attr( wp_get_attachment_image_srcset( $photo_id, $size ) );
+	$imgsize = esc_attr( wp_get_attachment_image_sizes( $photo_id, $size ) );
+
+	return array( 'imgsrc' => $imgsrc, 'srcset' => $srcset, 'sizes' => $imgsize );
+}
+
+function custom_tribe_event_thumbnail_image( $post_id = null, $size = 'full', $link = true, $wrapper = true ) {
+	if ( is_null( $post_id ) ) {
+		$post_id = get_the_ID();
+	}
+
+	/**
+	 * Provides an opportunity to modify the featured image size.
+	 *
+	 * @param string $size
+	 * @param int    $post_id
+	 */
+	$size = apply_filters( 'tribe_event_featured_image_size', $size, $post_id );
+
+	$featured_image = $wrapper
+		? get_the_post_thumbnail( $post_id, $size )
+		: wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), $size, false );
+
+	if ( is_array( $featured_image ) ) {
+		$featured_image = $featured_image[ 0 ];
+	}
+
+	/**
+	 * Controls whether the featured image should be wrapped in a link
+	 * or not.
+	 *
+	 * @param bool $link
+	 */
+
+	if (get_field('thumbnail')) :
+		$image_detail = get_image_with_detail( get_field('thumbnail'), $size );
+		$banner_photo = $image_detail['imgsrc'];
+		$banner = $banner_photo;
+		$featured_image = '<img src="'.$banner[0].'" class="attachment-full size-full wp-post-image" srcset="'.$image_detail['srcset'].'" sizes="'.$image_detail['sizes'].'" alt="'.get_the_title().'">';
+
+	endif;
+
+	if ( ! empty( $featured_image ) && apply_filters( 'tribe_event_featured_image_link', $link ) ) {
+		$featured_image = '<a href="' . esc_url( tribe_get_event_link( $post_id ) ) . '">' . $featured_image . '</a>';
+	}
+
+	/**
+	 * Whether to wrap the featured image in our standard div (used to
+	 * assist in targeting featured images from stylesheets, etc).
+	 *
+	 * @param bool $wrapper
+	 */
+	if ( ! empty( $featured_image ) && apply_filters( 'tribe_events_featured_image_wrap', $wrapper ) ) {
+		$featured_image = '<div class="tribe-events-event-image">' . $featured_image . '</div>';
+	}
+
+	/**
+	 * Provides an opportunity to modify the featured image HTML.
+	 *
+	 * @param string $featured_image
+	 * @param int    $post_id
+	 * @param string $size
+	 */
+	return apply_filters( 'tribe_event_featured_image', $featured_image, $post_id, $size );
+}
+
+function home_nav_wrap() {
+
+$mobilenav = wp_nav_menu( array(
+	'theme_location'=> 'mobilenav',
+	'fallback_cb'	=> false,
+	'container'		=> '',
+	'items_wrap' => '%3$s',
+	'echo' => false
+) );
+
+$getTel = get_option('cebo_tele');
+$getTel = str_replace('(', '', $getTel);
+$getTel = str_replace(')', '', $getTel);
+$getTel = str_replace(' ', '-', $getTel);
+$getTel = str_replace('.', '-', $getTel);
+
+	// $wrap  = '<ul>';
+
+	$wrap .= '<li class="navis-mobile">
+			<a id="lnkP2Talkmobile" href="tel:+1-'.$getTel.'" target="new"><span class="ic-navis"><i class="fa fa-phone"></i> <span id="NavisTFNmobnav">'.get_option('cebo_tele').'</span></span></a>
+								</li>';
+
+	$wrap .= '%3$s';
+
+	$wrap .= '<li class="hamburgermenu">
+				<a class="cheese" href="#">
+					<div class="hamburger">
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+					<span class="menutext">Menu</span>
+				</a>
+			</li>';
+
+	$wrap .= $mobilenav;
+
+	// $wrap .= '</ul>';
+
+	return $wrap;
+}
+
+if (!class_exists('walker_menu')) {
+	class walker_menu extends Walker_Nav_Menu {
+		function start_el( &$output, $item, $depth = 0, $args = array() ) {
+			$has_children = array_search ( 'menu-item-has-children' , $item->classes );
+			// if($has_children != false) :
+				$item_output .= '<div class="toggle-button"></div>';
+			// endif;
+		}
+	}
+}
+
+
+// Get Attachment by ID
+
+function get_attachment_id_by_url($attachment_url = '') {
+ 
+	global $wpdb;
+	$attachment_id = false;
+
+	if ('' == $attachment_url)
+		return;
+ 
+	$upload_dir_paths = wp_upload_dir();
+ 
+	if (false !== strpos($attachment_url, $upload_dir_paths['baseurl'])) {
+		$attachment_url = preg_replace('/-\d+x\d+(?=\.(jpg|jpeg|png|gif)$)/i', '', $attachment_url);
+		$attachment_url = str_replace($upload_dir_paths['baseurl'] . '/', '', $attachment_url);
+		$attachment_id = $wpdb->get_var($wpdb->prepare("SELECT wposts.ID FROM $wpdb->posts wposts, $wpdb->postmeta wpostmeta WHERE wposts.ID = wpostmeta.post_id AND wpostmeta.meta_key = '_wp_attached_file' AND wpostmeta.meta_value = '%s' AND wposts.post_type = 'attachment'", $attachment_url));
+	}
+ 
+	return $attachment_id;
+}
+
+
+// ACF - Options
+
+if ( function_exists('acf_add_options_page') ) {
+	acf_add_options_page();	
+}
+
+
+// Custom Image Sizes
+
+add_image_size('Image 540x290', 540, 290, false);
+add_image_size('Image 540x290', 540, 290, false);
+add_image_size('Image 260x290', 260, 290, false);
+add_image_size('Image 531x290', 531, 290, false);
+add_image_size('Image 257x290', 257, 290, false);

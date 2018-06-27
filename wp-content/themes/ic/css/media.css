@@ -5,6 +5,8 @@ and (max-width : 1280px) {
 	#primary-nav .container {
 	    width: 1040px;
 	}
+    
+    
 }
 /* ================================================  MAX WIDTH 1439 ======================================= */
 @media only screen
@@ -30,10 +32,12 @@ and (max-width : 1240px) {
 	#primary-nav nav ul li a {
 	    font-size: 12px;
 	}
+
 }
 /* ================================================  MAX WIDTH 1099 ======================================= */
 @media only screen
 and (max-width : 1099px) {
+
 	/* General settings */
 	.container, #tribe-events-pg-template {
 		width: 95%;
@@ -106,6 +110,7 @@ and (max-width : 1099px) {
 	}
 	.section-photos li h3, .thumbgal li h3 {
 	    bottom: 2px;
+	    left: 0;
 	}
 	.section-photos li div.hover-effect, .thumbgal li div.hover-effect {
 	    height: 98.7%;
@@ -249,6 +254,10 @@ and (max-width : 1099px) {
 	li.blue-btn {
 		left: 0px;
 	}
+    
+    .ticker-down {
+        top: 170px;
+    }
 }
 /* ================================================  MAX WIDTH 1024 ======================================= */
 @media only screen
@@ -259,14 +268,87 @@ and (max-width : 1024px) {
 	#home-slider .specialsbox h3 {
 		font-size: 22px !important
 	}
+
+	.read-more {
+		display: none;
+	}
+
+	.read-more-button {
+		display: block;
+	}
+
+	#home-slider {
+		background-image: none !important;
+	}
+	#home-slider.home-video {
+		display: table;
+	}
+
+	.flexslider--mobileonly {
+		display: block;
+		height: 100%;
+	}
+
+	.flexslider--mobileonly .slides,
+	.flexslider--mobileonly .slides > li {
+		height: 100%;
+	}
+
+	.flexslider--mobileonly .slides > li {
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center center;
+	}
+
+	.flexslider--mobileonly .slide-header {
+		height: 100%;
+		top: 0;
+	}
+
+	.flexslider--mobileonly .slide-header .slicer {
+		height: 100%;
+		background-position: center center;
+		min-height: 0;
+	}
+
+	.video-banner {
+		display: none;
+	}
+    .ticker-down {
+        top:
+    }
 }
 /* ================================================  MAX WIDTH 1023 ======================================= */
 @media only screen
 and (max-width : 1023px) {
 	#maparea, #toggles {
-		display: none !important;
+		/*display: none !important;*/
 	}
 }
+
+/* ================================================  MAX WIDTH 999 ======================================= */
+@media only screen
+and (max-width : 999px) {
+	#primary-nav {
+		position: relative;
+		overflow: visible;
+	}
+    #primary-nav .fl {
+		display: none;
+	}
+
+	/* Navigation */
+
+	.logo.mobile > img {
+		height: 100%;
+		padding: 0;
+	}
+
+    .ticker-down {
+        top :170px;
+    }
+}
+
 /* ================================================  MAX WIDTH 940 ======================================= */
 @media only screen
 and (max-width : 940px)
@@ -305,8 +387,14 @@ and (max-width : 940px)
 	    width: 80%;
 	    height: auto;
 	}
+	.fl .slidesjs-slide .ptit, .fr .slidesjs-slide {
+		max-height: none;
+	}
 	.fl .slidesjs-slide .ptit, .fr .slidesjs-slide .ptits {
-	    bottom: -104px;
+	    bottom: 0;
+	}
+	.slides-mini .slidesjs-navigation {
+		top: calc(55% - 50px);
 	}
 	/* Post */
 	.post-content.fl {
@@ -468,6 +556,106 @@ and (max-width : 940px)
 	.upcoming-events .event-description {
     padding: 5px 36px 5px 19px !important;
 	}
+
+	.sub-menu {
+		display: none;
+		background-color: #fff;
+	}
+	.sub-menu li a {
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+		color: #333333;
+		line-height: 35px;
+		display: block;
+		padding: 10px 10px 10px 20px;
+		margin: 0;
+		font-size: 18px;
+	}
+
+	.menu-item-has-children .button {
+		display: block;
+	}
+
+	.menu-item-has-children .button:before {
+		content: '';
+		background-color: #fff;
+		position: absolute;
+		height: 2px;
+		width: 25px;
+		top: 50%;
+		right: 7px;
+		-webkit-transition: all 0.5s ease;
+		-moz-transition: all 0.5s ease;
+		-ms-transition: all 0.5s ease;
+		-o-transition: all 0.5s ease;
+		transition: all 0.5s ease;
+	}
+
+	.menu-item-has-children .button:after {
+		content: '';
+		background-color: #fff;
+		position: absolute;
+		height: 2px;
+		width: 25px;
+		top: 50%;
+		right: 7px;
+		-moz-transform: rotate(90deg);
+		-webkit-transform: rotate(90deg);
+		-o-transform: rotate(90deg);
+		-ms-transform: rotate(90deg);
+		transform: rotate(90deg);
+		-webkit-transition: all 0.5s ease;
+		-moz-transition: all 0.5s ease;
+		-ms-transition: all 0.5s ease;
+		-o-transition: all 0.5s ease;
+		transition: all 0.5s ease;
+	}
+
+
+	.menu-item-has-children .button.show:before {
+		-moz-transform: rotate(180deg);
+		-webkit-transform: rotate(180deg);
+		-o-transform: rotate(180deg);
+		-ms-transform: rotate(180deg);
+		transform: rotate(180deg);
+	}
+
+	.menu-item-has-children .button.show:after {
+		-moz-transform: rotate(180deg);
+		-webkit-transform: rotate(180deg);
+		-o-transform: rotate(180deg);
+		-ms-transform: rotate(180deg);
+		transform: rotate(180deg);
+	}
+
+	.page-template-page_blog .catlist .room-box {
+		height: auto !important;
+	}
+
+	.page-template-page_blog .catlist .room-box .fl {
+		height: 330px;
+	}
+
+	.page-template-page_blog .catlist .room-box .fr {
+		height: auto;
+	}
+
+	.page-template-page_gallery .post-content .imagegal ul li {
+		display: inline-block !important;
+		height: auto;
+	}
+
+	.page-template-page_gallery .post-content .imagegal.photos ul li:nth-child(4n) {
+		margin-right: 1.5%;
+	}
+    
+/*    landing page*/
+    
+    .accordion-title h3 {
+        font-size: 12px;
+    }
+    
 }
 /* ================================================  MAX WIDTH 939 ======================================= */
 @media only screen
@@ -558,6 +746,27 @@ and (max-width : 939px) {
 	}
 	.mm-list > li.display-none {
 		display: block !important;
+	}
+	/* Pride Banner*/
+	#property-nav nav ul li.blue-btn {
+		bottom: 13px;
+	}
+	#property-nav .pride.pos-right {
+		right: -105px;
+		top: -25px;
+	}
+	#property-nav .pride.pos-right img {
+		width: 50%;
+	}
+	#property-nav .pride.pos-left {
+		left: -103px;
+		bottom: -27px;
+	}
+	#property-nav .pride.pos-left img {
+		width: 50%;
+	}
+	#property-nav .pride.pos-right a {
+		display: none;
 	}
 	/* Double Flyout */
 	.welcome-text { font-size: 13px; }
@@ -650,10 +859,32 @@ and (max-width : 939px) {
 	li.blue-btn {
 		bottom: 13px;
 	}
+    
+    .ticker {
+        top: 67px;
+    }
+    
+    .ticker-down {
+        top:50px;
+    }
 }
+
+/* ================================================  MAX WIDTH 840 ======================================= */
+@media only screen
+and (max-width:840px){
+
+}
+
+/* ================================================  MAX WIDTH 800 ======================================= */
+@media only screen
+and (max-width:800px){
+
+}
+
 /* ================================================  MAX WIDTH 768 ======================================= */
 @media only screen
 and (max-width : 768px) {
+
 	/* Double Flyout */
 	.welcome-text { font-size: 13px; }
 	.ID1 { top: 15px; }
@@ -673,11 +904,44 @@ and (max-width : 768px) {
 	li.blue-btn a span.blue-mobile {
 		display: none;
 	}
+
+	.single-specials .post-tags li {
+		float: none;
+		text-align: center;
+		display: block;
+	}
+
+	.video-banner video[style] {
+		width: 100% !important;
+		height: 100% !important;
+		position: relative !important;
+		top: 0 !important;
+		left: 0 !important;
+		-moz-transform: none !important;
+		-webkit-transform: none !important;
+		-o-transform: none !important;
+		-ms-transform: none !important;
+		transform: none !important;
+	}
+
+	#home-slider.home-video {
+		min-height: 0;
+	}
+    
+    /*    landing page*/
+    .landing-page-logo-header a img {
+        width: 200px;
+    }
+    
+    .landing-page-logo a img {
+        width: 200px;
+    }
 }
 @media only screen
 and (min-width : 640px)
 and (max-width : 720px)
 {
+
 	#home-slider {
 		height: 350px;
 	}
@@ -696,11 +960,13 @@ and (max-width : 720px)
 	#home-slider .specialsbox h3 {
 		font-size: 18px !important
 	}
+    
 }
 /* ================================================  MAX WIDTH 640 ======================================= */
 @media only screen
 and (max-width : 640px)
 {
+
 	.specialsbox {
 		display: none;
 	}
@@ -719,6 +985,9 @@ and (max-width : 640px)
 	.slide-header {
 		top: 7%;
 	}
+	.flexslider--mobileonly .slide-header {
+		top: 0;
+	}
 	.slicer {
     	width: 300px !important;
 	}
@@ -734,20 +1003,33 @@ and (max-width : 640px)
 		height: 300px;
 		overflow: hidden;
 	}
+	#home-slider.home-video {
+		overflow: hidden;
+	}
 	.flex-control-nav {
 	    bottom: 360px;
 	    display: block;
 	    z-index: 99;
 	}
+	.flexslider--mobileonly .flex-control-nav {
+		bottom: 10px;
+	}
 	.flexslider .slides img {
 		width: auto;
 		height: 100%;
+	}
+	.flexslider.flexslider--mobileonly .slides img {
+		width: auto;
+		height: auto;
 	}
 	.home .flexslider .slides img {
 		width: 150%;
 	}
 	.slide-header {
    	 top: 10%;
+	}
+	.flexslider--mobileonly .slide-header {
+		top: 0;
 	}
 	#home-slider h2 {
 	    font-size: 33px;
@@ -963,6 +1245,44 @@ and (max-width : 640px)
 		padding: 20px 0 0;
 		width: 260px;
 	}
+
+	.post-content .imagegal ul li {
+		width: 48.5%;
+		display: inline-block !important;
+	}
+	.post-content .imagegal ul li:nth-child(3n) {
+		margin-right: 13px;
+	}
+	.post-content .imagegal ul li:nth-child(odd) {
+		margin-right: 3%;
+	}
+	.post-content .imagegal ul li:nth-child(even) {
+		margin-right: 0;
+	}
+
+	.page-template-page_gallery .post-content .imagegal ul li {
+		display: inline-block !important;
+		width: 48.5%;
+		margin-right: 1.5%;
+	}
+
+	.page-template-page_gallery .post-content .imagegal.photos ul li:nth-child(3n),
+	.page-template-page_gallery .post-content .imagegal.photos ul li:nth-child(4n) {
+		margin-right: 1.5%;
+	}
+
+	.page-template-page_gallery .post-content .imagegal ul li:nth-child(even) {
+		margin-right: 1.5%;
+	}
+    
+    /*landing page    */
+    .page-template-page_landing_template_without_map .section-header div.fl:first-of-type {
+        margin-bottom: 0;
+    }   
+    
+    .page-template-page_landing_template_without_map .section-header h1.section-title {
+        top: 0;
+    }
 }
 /* ================================================  MOBILES BELOW 639 ======================================= */
 @media only screen
@@ -1015,14 +1335,62 @@ and (max-width : 575px) {
 		bottom: 22px;
 	}
 
+	.post-content p iframe {
+		width: 100%;
+	}
+    
+/*    landing page*/
+    
+    .acc-right {
+        width: 100%;
+    }
+    
+    .acc-left {
+        width: 100%;
+        float:none;
+    }
+    
+    .slide-header.lp-banner-slide {
+        top: 64%;
+    }
+    
+    .exc-icons-container {
+        width: 100%;
+    }
+    
+    .exc-icon-items {
+        font-size: 14px !important;
+    }
+    
+    .exc-button {
+        width: 100%;
+        float: none;
+        position: relative;
+        left: 5%;
+    }
+    
+    .slider-container {
+        margin-top: 0;
+    }
+
 }
+
+/* ================================================  MOBILES BELOW 530 ======================================= */
+@media only screen
+and (max-width : 530px) {
+	.post-content .imagegal ul li {
+		height: 260px;
+	}
+}
+
 /* ================================================  MOBILES BELOW 480 ======================================= */
 @media only screen
 and (max-width : 480px)
 {
-		#home-slider {
-	height: 200px;
+	#home-slider, #home-slider.home-video {
+		height: 200px;
 	}
+
 	.slicer {
     width: 275px !important;
 	}
@@ -1050,6 +1418,11 @@ padding: 8px 12px;
 	    float: none;
 	    margin-right: 14px;
 	}
+
+	.single-specials .post-tags li {
+		display: block;
+	}
+
 	/* Post */
 	.post-content.fl {
 	    padding: 20px 20px 30px;
@@ -1114,7 +1487,30 @@ padding: 8px 12px;
 	}
 	/* Page - Specials */
 	.post-content .imagegal ul li {
-		width: 31.33%;
+		width: 70%;
+		float: none;
+		margin: 0 auto;
+		margin-bottom: 20px;
+		display: block !important;
+	}
+	.post-content .imagegal ul li:nth-child(odd) {
+		margin-right: auto;
+	}
+	.post-content .imagegal ul li:nth-child(even) {
+		margin-right: auto;
+	}
+	.post-content .imagegal ul li:nth-child(3n),
+	.post-content .imagegal ul li:nth-child(4n) {
+		margin: 0 auto;
+		margin-bottom: 20px;
+	}
+
+	.page-template-page_gallery .post-content .imagegal ul li:nth-child(odd) {
+		margin-right: 1.5%;
+	}
+	.page-template-page_gallery .post-content .imagegal ul li:nth-child(3n),
+	.page-template-page_gallery .post-content .imagegal ul li:nth-child(4n) {
+		margin-bottom: 10px;
 	}
 	/* Page - Guide */
 	.whats-hot ul, .whats-hot li {
@@ -1170,6 +1566,10 @@ padding: 8px 12px;
 li.blue-btn {
 	width: 20px;
 }
+/*    landing page*/
+    .landing-page-logo, .landing-page-logo-header {
+        display:none;
+    }
 }
 /* ================================================  MAX HEIGHT 480 ======================================= */
 @media only screen
@@ -1340,6 +1740,10 @@ padding: 11px 5px;
 	.post-content .imagegal ul li:before {
 		display: block;
 	}
+	.page-template-page_gallery .post-content .imagegal ul li:before {
+		display: none;
+	}
+
 	.post-content .imagegal.photos ul li:nth-child(3n), .post-content .imagegal.photos ul li:nth-child(4n) {
 		margin-right: 1.5%;
 	}
@@ -1403,6 +1807,22 @@ and (max-width : 320px)
 	.slide-header .button {
     display: none;
 }
+
+.eat-menu-container {
+    width: 100%;
+}
+.menu-list.right-menu {
+	float: none;
+}
+
+.drink-menu-container .menu-content-1 .glass-price{
+	margin-left: 135px;
+}
+
+.drink-menu-container .menu-content-1 .bottle-price{
+	margin-left: 210px;
+}
+
 }
 /* ================================================  MOBILES BELOW 480 to 400 ======================================= */
 @media only screen

@@ -46,6 +46,7 @@ require_once( $path_to_wp . '/wp-load.php' );
 							<option value="quote"><?php _e('Blockquote', 'cebolang'); ?></option>
 							<option value="accordion-content"><?php _e('Accordion Content', 'cebolang'); ?></option>
 							<option value="content-tabs"><?php _e('Content Tabs', 'cebolang'); ?></option>
+							<option value="read-more-dropdown"><?php _e('Read More Dropdown', 'cebolang'); ?></option>
 						</optgroup>				
 						<optgroup label="- <?php _e('Layout Columns', 'cebolang'); ?> -">
 							<option value="one-half"><?php _e('1/2', 'cebolang'); ?></option>
@@ -507,6 +508,26 @@ require_once( $path_to_wp . '/wp-load.php' );
 
 			</tr>
 			<!-- end content-tabs -->
+
+			<!-- start read-more-dropdown -->
+
+			<tr class="option read-more-dropdown">
+
+				<th class="label">
+
+					<label for="read-more-dropdown-content"><?php _e('Content', 'cebolang'); ?><span class="red">*</span></label></br><em>(Add all the text need to be hide/unhide)</em>
+
+				</th>
+
+				<td class="field">
+				
+					<textarea name="read-more-dropdown-content" id="read-more-dropdown-content" cols="30" rows="5" class="widefat"></textarea>
+
+				</td>
+
+			</tr>
+
+			<!-- end read-more-dropdown -->
 
 			<!-- start pricing-tables -->
 			<tr class="option pricing-tables">

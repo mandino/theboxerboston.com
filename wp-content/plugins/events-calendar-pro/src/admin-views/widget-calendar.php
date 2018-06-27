@@ -5,7 +5,7 @@
 </p>
 
 <p>
-	<label for="<?php echo esc_attr( $this->get_field_id( 'count' ) ); ?>"><?php esc_html_e( 'Number of events to show:', 'tribe-events-calendar-pro' ); ?>
+	<label for="<?php echo esc_attr( $this->get_field_id( 'count' ) ); ?>"><?php esc_html_e( 'Number of events to list below the mini calendar:', 'tribe-events-calendar-pro' ); ?>
 		<input type="text" class="widefat" name="<?php echo esc_attr( $this->get_field_name( 'count' ) ); ?>"
 		       id="<?php echo esc_attr( $this->get_field_id( 'count' ) ); ?>"
 		       value="<?php echo esc_attr( strip_tags( $instance['count'] ) ); ?>" />
@@ -30,6 +30,7 @@ if ( empty( $instance['filters'] ) ) {
 	<ul class="calendar-widget-filter-list">
 
 		<?php
+		$disabled = array();
 		if ( ! empty( $instance['filters'] ) ) {
 
 			foreach ( json_decode( $instance['filters'] ) as $tax => $terms ) {
@@ -40,6 +41,9 @@ if ( empty( $instance['filters'] ) ) {
 						continue;
 					}
 					$term_obj = get_term( $term, $tax );
+
+					// Add to the disabled ones
+					$disabled[] = $term_obj->term_id;
 					echo sprintf(
 						"<li><p>%s: %s&nbsp;&nbsp;<span><a href='#' class='calendar-widget-remove-filter' data-tax='%s' data-term='%s'>(" . esc_html__( 'remove', 'tribe-events-calendar-pro' ) . ')</a></span></p></li>',
 						esc_html( $tax_obj->labels->name ),
@@ -63,22 +67,18 @@ if ( empty( $instance['filters'] ) ) {
 			<?php esc_html_e( 'Match any', 'tribe-events-calendar-pro' ); ?></label>
 	</p>
 </div>
-<p>
-	<label><?php esc_html_e( 'Add a filter', 'tribe-events-calendar-pro' ); ?>:
-		<select class="widefat calendar-widget-add-filter" id="<?php echo esc_attr( $this->get_field_id( 'selector' ) ); ?>" data-storage="<?php echo esc_attr( $this->get_field_id( 'filters' ) ); ?>">
-			<?php
-			echo "<option value='0'>" . esc_html__( 'Select one...', 'tribe-events-calendar-pro' ) . '</option>';
-			foreach ( $taxonomies as $tax ) {
-				echo sprintf( "<optgroup id='%s' label='%s'>", esc_attr( $tax->name ), esc_attr( $tax->labels->name ) );
-				$terms = get_terms( $tax->name, array( 'hide_empty' => false ) );
-				foreach ( $terms as $term ) {
-					echo sprintf( "<option value='%d'>%s</option>", esc_attr( $term->term_id ), esc_html( $term->name ) );
-				}
-				echo '</optgroup>';
-			}
-			?>
-		</select>
-	</label>
+<p class="tribe-widget-term-filter">
+	<label><?php esc_html_e( 'Add a filter', 'tribe-events-calendar-pro' ); ?>:	</label>
+	<input
+		type="hidden"
+		placeholder="<?php esc_attr_e( 'Select a Taxonomy Term', 'tribe-events-calendar-pro' ); ?>"
+		data-source="terms"
+		data-hide-search
+		data-prevent-clear
+		class="widefat calendar-widget-add-filter tribe-widget-select2"
+		id="<?php echo esc_attr( $this->get_field_id( 'selector' ) ); ?>"
+		data-disabled="<?php echo esc_attr( json_encode( $disabled ) ); ?>"
+	/>
 </p>
 <p>
 	<?php $jsonld_enable = ( isset( $instance['jsonld_enable'] ) && $instance['jsonld_enable'] ) || false === $this->updated; ?>

@@ -17,12 +17,17 @@ class Tribe__Main {
 	const OPTIONNAME          = 'tribe_events_calendar_options';
 	const OPTIONNAMENETWORK   = 'tribe_events_calendar_network_options';
 
-	const VERSION             = '4.4.1';
+	const VERSION             = '4.6';
+
 	const FEED_URL            = 'https://theeventscalendar.com/feed/';
 
 	protected $plugin_context;
 	protected $plugin_context_class;
 	protected $doing_ajax = false;
+
+	/**
+	 * @var Tribe__Log
+	 */
 	protected $log;
 
 	/**
@@ -110,6 +115,7 @@ class Tribe__Main {
 		$this->doing_ajax = defined( 'DOING_AJAX' ) && DOING_AJAX;
 
 		Tribe__Extension_Loader::instance();
+
 		/**
 		 * Runs once all common libs are loaded and initial hooks are in place.
 		 *
@@ -158,12 +164,16 @@ class Tribe__Main {
 	 */
 	public function init_libraries() {
 		Tribe__Debug::instance();
-		tribe('settings.manager');
+		tribe( 'settings.manager' );
+		tribe( 'tracker' );
+		tribe( 'plugins.api' );
 		$this->pue_notices();
 
 		require_once $this->plugin_path . 'src/functions/utils.php';
 		require_once $this->plugin_path . 'src/functions/template-tags/general.php';
 		require_once $this->plugin_path . 'src/functions/template-tags/date.php';
+
+		tribe( 'ajax.dropdown' );
 
 		// Starting the log manager needs to wait until after the tribe_*_option() functions have loaded
 		$this->log = new Tribe__Log();
@@ -173,7 +183,7 @@ class Tribe__Main {
 	 * Registers resources that can/should be enqueued
 	 */
 	public function load_assets() {
-		// These ones are only registred
+		// These ones are only registered
 		tribe_assets(
 			$this,
 			array(
@@ -197,6 +207,7 @@ class Tribe__Main {
 				array( 'tribe-dropdowns', 'dropdowns.js', array( 'jquery', 'underscore', 'tribe-select2' ) ),
 				array( 'tribe-jquery-timepicker', 'vendor/jquery-timepicker/jquery.timepicker.js', array( 'jquery' ) ),
 				array( 'tribe-jquery-timepicker-css', 'vendor/jquery-timepicker/jquery.timepicker.css' ),
+
 			)
 		);
 
@@ -213,7 +224,19 @@ class Tribe__Main {
 			),
 			'admin_enqueue_scripts',
 			array(
-				'filter' => array( Tribe__Admin__Helpers::instance(), 'is_post_type_screen' ),
+				'conditionals' => array( $this, 'should_load_common_admin_css' ),
+			)
+		);
+
+		$datepicker_months = array_values( Tribe__Date_Utils::get_localized_months_full() );
+
+		tribe_asset(
+			$this,
+			'tribe-common',
+			'tribe-common.js',
+			array( 'tribe-clipboard' ),
+			'admin_enqueue_scripts',
+			array(
 				'localize' => (object) array(
 					'name' => 'tribe_system_info',
 					'data' => array(
@@ -226,28 +249,21 @@ class Tribe__Main {
 			)
 		);
 
-		$datepicker_months = array_values( Tribe__Date_Utils::get_localized_months_full() );
-
-		tribe_asset(
-			$this,
-			'tribe-common',
-			'tribe-common.js',
-			array( 'tribe-clipboard' ),
-			'admin_enqueue_scripts'
-		);
-
 		tribe( 'tribe.asset.data' )->add( 'tribe_l10n_datatables', array(
 			'aria' => array(
 				'sort_ascending' => __( ': activate to sort column ascending', 'tribe-common' ),
 				'sort_descending' => __( ': activate to sort column descending', 'tribe-common' ),
 			),
-			'length_menu'   => __( 'Show _MENU_ entries', 'tribe-common' ),
-			'empty_table'   => __( 'No data available in table', 'tribe-common' ),
-			'info'          => __( 'Showing _START_ to _END_ of _TOTAL_ entries', 'tribe-common' ),
-			'info_empty'    => __( 'Showing 0 to 0 of 0 entries', 'tribe-common' ),
-			'info_filtered' => __( '(filtered from _MAX_ total entries)', 'tribe-common' ),
-			'zero_records'  => __( 'No matching records found', 'tribe-common' ),
-			'search'        => __( 'Search:', 'tribe-common' ),
+			'length_menu'       => __( 'Show _MENU_ entries', 'tribe-common' ),
+			'empty_table'       => __( 'No data available in table', 'tribe-common' ),
+			'info'              => __( 'Showing _START_ to _END_ of _TOTAL_ entries', 'tribe-common' ),
+			'info_empty'        => __( 'Showing 0 to 0 of 0 entries', 'tribe-common' ),
+			'info_filtered'     => __( '(filtered from _MAX_ total entries)', 'tribe-common' ),
+			'zero_records'      => __( 'No matching records found', 'tribe-common' ),
+			'search'            => __( 'Search:', 'tribe-common' ),
+			'all_selected_text' => __( 'All items on this page were selected. ', 'tribe-common' ),
+			'select_all_link'   => __( 'Select all pages', 'tribe-common' ),
+			'clear_selection'   => __( 'Clear Selection.', 'tribe-common' ),
 			'pagination' => array(
 				'all' => __( 'All', 'tribe-common' ),
 				'next' => __( 'Next', 'tribe-common' ),
@@ -313,6 +329,32 @@ class Tribe__Main {
 	}
 
 	/**
+	 * Tells us if we're on an admin screen that needs the Common admin CSS.
+	 *
+	 * Currently this includes post type screens, the Plugins page, Settings pages
+	 * and tabs, Tribe App Shop page, and the Help screen.
+	 *
+	 * @since 4.5.7
+	 *
+	 * @return bool
+	 */
+	public function should_load_common_admin_css() {
+		$helper = Tribe__Admin__Helpers::instance();
+
+		// Are we on a post type screen?
+		$is_post_type = $helper->is_post_type_screen();
+
+		// Are we on the Plugins page?
+		$is_plugins = $helper->is_screen( 'plugins' );
+
+		// Are we viewing a generic Tribe screen?
+		// Includes: Events > Settings, Events > Help, App Shop page, and more.
+		$is_tribe_screen = $helper->is_screen();
+
+		return $is_post_type || $is_plugins || $is_tribe_screen;
+	}
+
+	/**
 	 * A Helper method to load text domain
 	 * First it tries to load the wp-content/languages translation then if falls to the
 	 * try to load $dir language files
@@ -324,7 +366,7 @@ class Tribe__Main {
 	 */
 	public function load_text_domain( $domain, $dir = false ) {
 		// Added safety just in case this runs twice...
-		if ( is_textdomain_loaded( $domain ) && ! is_a( $GLOBALS['l10n'][ $domain ], 'NOOP_Translations' ) ) {
+		if ( is_textdomain_loaded( $domain ) && ! $GLOBALS['l10n'][ $domain ] instanceof NOOP_Translations ) {
 			return true;
 		}
 
@@ -489,5 +531,14 @@ class Tribe__Main {
 		tribe_singleton( 'settings.manager', 'Tribe__Settings_Manager' );
 		tribe_singleton( 'settings', 'Tribe__Settings', array( 'hook' ) );
 		tribe_singleton( 'tribe.asset.data', 'Tribe__Asset__Data', array( 'hook' ) );
+		tribe_singleton( 'ajax.dropdown', 'Tribe__Ajax__Dropdown', array( 'hook' ) );
+		tribe_singleton( 'tracker', 'Tribe__Tracker', array( 'hook' ) );
+		tribe_singleton( 'chunker', 'Tribe__Meta__Chunker', array( 'set_post_types', 'hook' ) );
+		tribe_singleton( 'cache', 'Tribe__Cache' );
+		tribe_singleton( 'plugins.api', new Tribe__Plugins_API );
+		tribe_singleton( 'logger', array( $this, 'log' ) );
+		tribe_singleton( 'cost-utils', array( 'Tribe__Cost_Utils', 'instance' ) );
+		tribe_singleton( 'post-duplicate.strategy-factory', 'Tribe__Duplicate__Strategy_Factory' );
+		tribe_singleton( 'post-duplicate', 'Tribe__Duplicate__Post' );
 	}
 }

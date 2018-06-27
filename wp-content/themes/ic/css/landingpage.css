@@ -1,0 +1,414 @@
+/*landing page*/
+
+h2 {
+    color: #000 !important;
+}
+
+.unstick {
+    min-height: 0 !important;
+}
+
+.landing-page {
+        transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    background: #fff !important;
+    overflow: visible !important;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    padding: 10px 0;
+    
+}
+
+.landing-page .lp-button {
+    margin: 10px 10px 10px 20px !important;
+}
+
+.lp-navigation {
+   border-bottom: 0 !important;
+}
+
+.landing-page-logo,.landing-page-logo-header {
+    position: absolute;
+    left: 50px;
+    z-index: 3;
+}
+
+.display_none {
+    visibility: hidden;
+}
+
+.intro h2 {
+    font-size: 46px;
+    color: #000;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/*
+.intro-content {
+    width: 50%;
+}
+*/
+
+.intro-content p {
+    text-align: center;
+    padding: 0 15%;
+}
+
+.intro-btn {
+    font-size: 20px;
+    font-weight: 700;
+    padding: 15px 60px;
+}
+
+.content-list-title {
+    margin-top: 50px;
+}
+
+.content-list {
+    margin: 50px auto 0;
+    width: 85%;
+}
+
+.content-list p {
+    margin: 10px;
+    line-height: 20px;
+    width: 100%;
+    font-size: 15px;
+}
+
+.con-col1 {
+    display: inline-block;
+    width: 50%;
+    box-sizing: border-box;
+    padding-left: 25px;
+}
+
+
+
+.con-col1 p i, .con-col2 p i {
+    color: #243842;
+    margin-right: 10px;
+}
+
+.con-col2 {
+    display: inline-block;
+    width: 50%;
+    float: right;
+    box-sizing: border-box;
+    padding-left: 25px;
+}
+
+.slick-arrow.slick-prev {
+  left: 100px;
+/*  background: red; to notice it, is white*/
+  z-index: 1;
+}
+.slick-arrow.slick-next {
+  right: 100px;
+/*  background: red; to notice it, is white*/
+}
+
+.slider-container {
+    width: 100%;
+    margin-top: 50px;
+    position: relative;
+}
+
+.slider-container img {
+    width: 100%;
+}
+
+.slider-caption {
+    display: inline-block;
+    width: auto;
+    position: absolute;
+    bottom: 5px;
+    
+}
+
+.slider-caption p {
+    color: #fff;
+    font-size: 30px;
+    margin-left: 35px;
+    
+}
+
+.icon-expand {
+    display: inline-block;
+    width: auto;
+    float:right;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.lp-slider-prev {
+    display: block;
+    left: 0;
+    z-index: 1;
+    font-size:0;
+    line-height: 0;
+    position: absolute;
+    top: 50%;
+    width:30px;
+    height: 30px;
+    padding: 0;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    cursor: pointer;
+    color: transparent;
+    border: none;
+    outline: none;
+    background-color: #f8f8f8;
+    text-decoration: none;
+    font-weight: normal;
+    white-space: inherit;
+    text-indent: 0;
+    border-radius: 0 4px 4px 0;
+}
+
+.lp-slider-prev i {
+    font-size: 25px;
+    color: #000;
+    position: relative;
+    top: 3px;
+    left: 10px;
+    font-weight: bolder;
+}
+
+.lp-slider-next {
+    right: 0;
+    display: block;
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    top: 50%;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    cursor: pointer;
+    color: transparent;
+    border: none;
+    outline: none;
+    background-color: #f8f8f8;
+    border-radius: 4px 0 0 4px;
+}
+
+.lp-slider-next i {
+    font-size: 25px;
+    color: #000;
+    position: relative;
+    top: 3px;
+    left: 10px;
+    font-weight: bolder;
+}
+
+.accordion-main-title {
+    margin-top: 50px;
+}
+
+.accordion-main-title h2 {
+    text-align: center;
+}
+
+.accordion-layout {
+    width: 85%;
+    margin: 50px auto;
+}
+
+.accordion-section {
+    box-sizing: border-box;
+}
+
+.accordion {
+    margin: 0 auto;
+    padding: 5px;
+}
+
+.acc-right {
+    width: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.acc-left {
+    width: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    float: right;
+}
+
+/*
+.acc-right .accordion-item {
+    border-right: 1px solid #64676e;
+}
+
+.acc-left .accordion-item {
+   border-left: 1px solid #64676e;
+} 
+*/
+
+.accordion-item {
+    border: 2px solid #64676e;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.accordion-titlebox {
+    background-color: #fff;
+    box-sizing: border-box;
+    padding: 27px 35px 0 35px;
+    position: relative;
+    cursor: pointer;
+}
+
+.accordion-title {
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 18px;
+    color: #0e111b;
+}
+
+.accordion-title h3 {
+    color: #000 !important;
+    font-size: 14px;
+}
+
+.accordion-btn-plus::before {
+    content: '+';
+}
+
+.accordion-btn-minus::before {
+    content: '-';
+}
+
+.accordion-btn {
+    position: absolute;
+    font-size: 24px;
+    display: block;
+    right: 30px;
+    top: 22px;
+}
+
+.accordion-contentbox {
+    display: none;
+}
+
+.accordion-contentbox p {
+    padding: 0 35px;
+}
+
+.qoute-container {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.lp-qoute, .lp-neighborhood {
+    border: 0 !important;
+}
+
+.lp-qoute {
+    margin: 0;
+    padding: 0;
+}
+
+.testimonial-image img {
+    display: block;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.cbp-qtrotator .cbp-qtcontent img {
+    float: none !important;
+    margin: 0 auto !important;
+}
+
+.quote-right {
+    margin: 50px 0 0 0;
+}
+
+/*template two*/
+
+.lp-banner-slide .button {
+    display: inline-block !important;
+}
+
+.exc-container {
+    width: 100%;
+    position: relative;
+}
+
+.exc-icons-container {
+    display: inline-block;
+    width: 50%;
+    box-sizing: border-box;
+    position:relative;
+}
+
+.exc-icons-container ul {
+    float:none;
+    width: auto;
+    overflow: hidden;
+}
+
+.exc-icons-container ul li.exc-icon-items:before {
+    display:none;
+}
+
+.exc-icons-container ul li .exc-icons {
+   display: inline-block;
+    top: 15px;
+    position: relative;
+    
+
+}
+
+.exc-icons-container ul li .exc-icons img {
+    width: 32px;
+}
+
+.exc-icons-container ul li .label {
+    display: inline-block;
+    position: relative;
+    left: 10px;
+}
+
+
+.exc-button {
+    width: 50%;
+    display:inline-block;
+    box-sizing: border-box;
+    float: right;
+    margin: 50px auto;
+}
+
+.exc-btn {
+    padding: 20px 80px;
+}
+
+.bottom-content {
+    margin-top: 40px;
+}
+
+.bottom-content p {
+    margin-bottom: 0;
+}
+
+.lp-slider .slick-slide {
+    display: none;
+    float: left;
+    height: auto;
+    min-height: 1px;
+}

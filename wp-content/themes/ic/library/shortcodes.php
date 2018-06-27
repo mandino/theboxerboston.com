@@ -243,7 +243,7 @@
 			'mode'       => ''
 		), $atts ) );
 
-		return '<ul id="toggle-view"><li><h3>' . esc_attr( $title ) . '</h3><div class="panel"><p>' . do_shortcode( $content ) . '<p></div></li></ul>';
+		return '<ul class="accbox-item"><li><h3 class="accbox-title">' . esc_attr( $title ) . '</h3><div class="accbox-btn"></div><div class="accbox-hidden"><p>' . do_shortcode( $content ) . '<p></div></li></ul>';
 	
 	}
 	add_shortcode('accordion_content', 'ss_framework_accordion_content_sc');
@@ -311,7 +311,7 @@
 	/* -------------------------------------------------- */
 
 	function ss_framework_shortcode_fixer( $content ) {
-		$ss_framework_shortcodes = join('|', array('one_half', 'one_half_last', 'one_third', 'one_third_last', 'one_fourth', 'one_fourth_last', 'two_third', 'two_third_last', 'three_fourth', 'three_fourth_last', 'error', 'success', 'info', 'notice', 'divider', 'slogan', 'button', 'dropcap', 'infobox', 'list', 'quote', 'lightbox', 'accordion_content', 'tabgroup', 'tab', 'pricing_table', 'pricing_column', 'check', 'video', 'audio', 'post_carousel', 'projects_carousel', 'portfolio', 'slider', 'team_member', 'fullwidth_map',' raw') );
+		$ss_framework_shortcodes = join('|', array('one_half', 'one_half_last', 'one_third', 'one_third_last', 'one_fourth', 'one_fourth_last', 'two_third', 'two_third_last', 'three_fourth', 'three_fourth_last', 'error', 'success', 'info', 'notice', 'divider', 'slogan', 'button', 'dropcap', 'infobox', 'list', 'quote', 'lightbox', 'accordion_content', 'tabgroup', 'tab', 'pricing_table', 'pricing_column', 'check', 'video', 'audio', 'post_carousel', 'projects_carousel', 'portfolio', 'slider', 'team_member', 'fullwidth_map',' raw', 'read_more_dropdown') );
 
 		$new_content = preg_replace( "/(<p>)?\[($ss_framework_shortcodes)(\s[^\]]+)?\](<\/p>|<br \/>)?/", "[$2$3]", $content );
 
@@ -370,3 +370,15 @@ function my_refresh_mce( $ver ) {
 
 }
 add_filter('tiny_mce_version', 'my_refresh_mce');
+
+/* -------------------------------------------------- */
+/*	Read More Dropdown
+/* -------------------------------------------------- */
+function ss_framework_read_more_sc( $atts, $content = null ) {
+	extract( shortcode_atts( array(
+		'style' => ''
+	), $atts ) );
+	return "<div class=\"white-shadow\"></div>\n<div class=\"read-more\">" . $content . "</div>\n<div class=\"read-more-button\">Read More<i class=\"fa fa-angle-down\" aria-hidden=\"true\"></i></div>";
+
+}
+add_shortcode('read_more_dropdown', 'ss_framework_read_more_sc');

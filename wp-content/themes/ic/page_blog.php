@@ -51,7 +51,13 @@
 			<div class="wonderline"></div>
 
 			<div class="fl room-list catlist">
-
+                <?php
+                    if ( function_exists('yoast_breadcrumb') ) {
+                    yoast_breadcrumb('
+                    <p id="breadcrumbs">','</p>
+                    ');
+                    }
+                    ?>    
 				<ul>
 
 					<?php

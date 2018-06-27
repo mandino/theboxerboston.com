@@ -80,6 +80,7 @@ if ( ! class_exists( 'Tribe__Events__Pro__Templates__Photo' ) ) {
 				'post_type'    => Tribe__Events__Main::POSTTYPE,
 				'post_status'  => $post_status,
 				'paged'        => $tribe_paged,
+				'featured'     => tribe( 'tec.featured_events' )->featured_events_requested(),
 			);
 
 			$view_state = 'photo';
