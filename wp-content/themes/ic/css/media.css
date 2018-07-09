@@ -1283,6 +1283,14 @@ and (max-width : 640px)
     .page-template-page_landing_template_without_map .section-header h1.section-title {
         top: 0;
     }
+
+	.eat-menu-container {
+		width: 100%;
+	}
+
+	.menu-list.left-menu {
+		width: calc(50% - 10px);
+	}
 }
 /* ================================================  MOBILES BELOW 639 ======================================= */
 @media only screen
@@ -1811,9 +1819,6 @@ and (max-width : 320px)
 .eat-menu-container {
     width: 100%;
 }
-.menu-list.right-menu {
-	float: none;
-}
 
 .drink-menu-container .menu-content-1 .glass-price{
 	margin-left: 135px;
@@ -1844,11 +1849,11 @@ and (max-width : 639px)
 {
 	/* reserve button on banner */
 	.slide-header .button {
-    display: none;
-}
-.upcoming-calendar .tribe-mini-calendar-no-event {
-	 padding: 13px 0;
-}
+	    display: none;
+	}
+	.upcoming-calendar .tribe-mini-calendar-no-event {
+		 padding: 13px 0;
+	}
 }
 /* ================================================  LARGE MOBILE DEVICES AND SMALL TABLETS BELOW 799  ======================================= */
 @media only screen
