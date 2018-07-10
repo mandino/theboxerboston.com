@@ -1291,7 +1291,13 @@ and (max-width : 640px)
 	}
 
 	.menu-list.left-menu {
-		width: calc(50% - 10px);
+		width: 100%;
+		float: none;
+	}
+
+	.menu-list.right-menu {
+		width: 100%;
+		float: none;
 	}
 }
 /* ================================================  MOBILES BELOW 639 ======================================= */
