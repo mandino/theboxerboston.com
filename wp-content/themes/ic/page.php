@@ -184,7 +184,10 @@
 												<td>
 													<div class="menu-items-container">
 														<div class="menu-items">
-															<?php the_sub_field('content') ?>
+															<?php 
+																if (get_sub_field('content')) the_sub_field('content'); 
+																else echo "<p>-</p>";
+															?>
 														</div>
 													</div>
 												</td>
@@ -219,8 +222,11 @@
 											</tr>
 											<tr>
 												<td>
-													<div class="menu-items">	
-														<?php the_sub_field('content') ?>
+													<div class="menu-items">
+														<?php 
+															if (get_sub_field('content')) the_sub_field('content'); 
+															else echo "<p>-</p>";
+														?>
 													</div>
 												</td>
 												<td>
