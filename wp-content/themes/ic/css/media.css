@@ -1288,6 +1288,7 @@ and (max-width : 640px)
 
 	.eat-menu-container {
 		width: 100%;
+		margin-bottom: 30px;
 	}
 
 	.menu-list.left-menu {
