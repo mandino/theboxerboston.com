@@ -186,7 +186,7 @@
 														<div class="menu-items">
 															<?php 
 																if (get_sub_field('content')) the_sub_field('content'); 
-																else echo "<span>-</span>";
+																else echo "<p>-</p>";
 															?>
 														</div>
 													</div>
@@ -225,7 +225,7 @@
 													<div class="menu-items">
 														<?php 
 															if (get_sub_field('content')) the_sub_field('content'); 
-															else echo "<span>-</span>";
+															else echo "<p>-</p>";
 														?>
 													</div>
 												</td>
