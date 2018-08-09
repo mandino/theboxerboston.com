@@ -3770,6 +3770,30 @@ ul.tabs li:last-child {
     margin: 10px 0;
 }
 
+.section-photos.fl > ul {
+    margin: 10px 0 30px;
+    padding-left: 60px;
+}
+
+.section-photos.fl li {
+    color: #545454;
+    font-family: scala-sans,sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 2.3;
+    margin: 10px 0;
+}
+
+.section-photos.fl li:before {
+    color: #999898;
+    content: "\f061";
+    font-family: 'font-awesome';
+    font-size: 10px;
+    margin-right: 15px;
+    margin-left: -25px;
+}
+
+
 
 
 /* Post Sidebar */
