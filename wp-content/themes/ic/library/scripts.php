@@ -708,15 +708,13 @@
 
     });
     
-// landing-page
-    
+//landing page
   
-$(window).scroll(function () {
-	$trigger = $('.banner').height();
+jQuery(window).scroll(function () {
 
-	if ( $(window).scrollTop() >= ($trigger - 350) ) {
+	if ( $(window).scrollTop() >=  250 ) {
 		$('body').addClass('onscroll');
-        $('.landing-page').removeClass('display-none');
+        $('.landing-page').removeClass('display_none');
         $(".landing-page").fadeIn(700);
 		
        // $('landing-page-logo img').fadeIn(500);
@@ -724,15 +722,14 @@ $(window).scroll(function () {
 		$('body').removeClass('onscroll');
         $(".landing-page").fadeOut(300);
        // $('landing-page-logo img').fadeIn(500);
-		$('.landing-page').addClass('display-none');
+		$('.landing-page').addClass('display_none');
 	}
 
-});    
-
-//slick
-$(document).ready(function() {
+});       
     
-
+//slick
+jQuery(document).ready(function($) {
+    
  $('.lp-slider, .lp-slider-no-map').slick({
       dots: false,
       infinite: true,
@@ -769,7 +766,7 @@ $(document).ready(function() {
 		}
 	}
     
-  	$('.lp-icon-link').magnificPopup(gallery_magnific_popup);    
+  $('.lp-icon-link').magnificPopup(gallery_magnific_popup);    
     
   $('.accordion-titlebox').on('click', function() {
 		$btn = $(this).find('.accordion-btn');
@@ -788,8 +785,38 @@ $(document).ready(function() {
 		}
 
   });    
-    
+   
 });
+    
+jQuery(window).resize(function() {
+	docReady_winResize_functions();
+});
+    
+jQuery(document).ready(function() {
+     docReady_winResize_functions();
+});
+    
+function fullBleedImage( elem, multiplier ) {
+
+	var getHeight = jQuery(window).height();
+	var getWidth = jQuery(window).width();
+
+	elem.css('height', ''); // reset
+
+	elem.height(getHeight * multiplier);
+
+}    
+    
+function docReady_winResize_functions() {
+	fullBleedImage( jQuery('.banner--40'), 0.4 );
+	fullBleedImage( jQuery('.banner--50'), 0.5 );
+	fullBleedImage( jQuery('.banner--60'), 0.6 );
+	fullBleedImage( jQuery('.banner--70'), 0.7 );
+	fullBleedImage( jQuery('.banner--80'), 0.8 );
+	fullBleedImage( jQuery('.banner--90'), 0.9 );
+	fullBleedImage( jQuery('.banner--100'), 1 );
+	
+}      
 
     
     
