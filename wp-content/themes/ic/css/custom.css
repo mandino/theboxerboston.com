@@ -4531,3 +4531,7 @@ li.blue-btn i {
     background-size: cover;
     position: relative;
 }
+
+.cf7sr-g-recaptcha {
+    display: inline-block;
+}
