@@ -37,7 +37,7 @@
 					<li class="email"><i class="fa fa-envelope fa-lg"></i> <a href="mailto:<?php echo get_option('cebo_email'); ?>"><?php echo get_option('cebo_email'); ?></a></li>
 					<?php } ?>
 				</ul>
-	
+	            <p class="sub_text">Sign up below to enjoy exclusive perks and member offers</p>
 				<div class="newsletter-form">
 					
 					<form action="https://web2.cendynhub.com/FormPost/FormPost.ashx" method="post">

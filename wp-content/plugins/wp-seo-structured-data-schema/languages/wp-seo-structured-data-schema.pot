@@ -1,0 +1,990 @@
+# Copyright (C) 2018 WP SEO Structured Data Schema
+# This file is distributed under the same license as the WP SEO Structured Data Schema package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP SEO Structured Data Schema\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../lib/classes/KcSeoHelper.php:190, ../wp-seo-structured-data-schema/lib/classes/KcSeoHelper.php:190
+msgid "Pro Version Features"
+msgstr ""
+
+#: ../lib/classes/KcSeoHelper.php:192, ../wp-seo-structured-data-schema/lib/classes/KcSeoHelper.php:192
+msgid "Includes Auto-fill function <---Popular"
+msgstr ""
+
+#: ../lib/classes/KcSeoHelper.php:193, ../wp-seo-structured-data-schema/lib/classes/KcSeoHelper.php:193
+msgid "Supports Custom Post Types beyond default page and posts"
+msgstr ""
+
+#: ../lib/classes/KcSeoHelper.php:194, ../wp-seo-structured-data-schema/lib/classes/KcSeoHelper.php:194
+msgid "Supports WordPress Multisite"
+msgstr ""
+
+#: ../lib/classes/KcSeoHelper.php:195, ../wp-seo-structured-data-schema/lib/classes/KcSeoHelper.php:195
+msgid "Supports more schema types:"
+msgstr ""
+
+#: ../lib/classes/KcSeoHelper.php:197, ../wp-seo-structured-data-schema/lib/classes/KcSeoHelper.php:197
+msgid "Books"
+msgstr ""
+
+#: ../lib/classes/KcSeoHelper.php:198, ../wp-seo-structured-data-schema/lib/classes/KcSeoHelper.php:198
+msgid "Courses"
+msgstr ""
+
+#: ../lib/classes/KcSeoHelper.php:199, ../wp-seo-structured-data-schema/lib/classes/KcSeoHelper.php:199
+msgid "Job Postings"
+msgstr ""
+
+#: ../lib/classes/KcSeoHelper.php:200, ../wp-seo-structured-data-schema/lib/classes/KcSeoHelper.php:200
+msgid "Movies"
+msgstr ""
+
+#: ../lib/classes/KcSeoHelper.php:201, ../lib/models/KcSeoSchemaModel.php:1467, ../wp-seo-structured-data-schema/lib/classes/KcSeoHelper.php:201, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1467
+msgid "Music"
+msgstr ""
+
+#: ../lib/classes/KcSeoHelper.php:202, ../lib/models/KcSeoSchemaModel.php:1471, ../wp-seo-structured-data-schema/lib/classes/KcSeoHelper.php:202, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1471
+msgid "Recipe"
+msgstr ""
+
+#: ../lib/classes/KcSeoHelper.php:203, ../wp-seo-structured-data-schema/lib/classes/KcSeoHelper.php:203
+msgid "TV Episode"
+msgstr ""
+
+#: ../lib/classes/KcSeoHelper.php:204, ../lib/models/KcSeoSchemaModel.php:1479, ../wp-seo-structured-data-schema/lib/classes/KcSeoHelper.php:204, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1479
+msgid "QAPage"
+msgstr ""
+
+#: ../lib/classes/KcSeoHelper.php:210, ../wp-seo-structured-data-schema/lib/classes/KcSeoHelper.php:210
+msgid "Get the Pro Version"
+msgstr ""
+
+#: ../lib/classes/KcSeoInit.php:32, ../wp-seo-structured-data-schema/lib/classes/KcSeoInit.php:32
+msgid "Documentation"
+msgstr ""
+
+#: ../lib/classes/KcSeoInit.php:33, ../wp-seo-structured-data-schema/lib/classes/KcSeoInit.php:33
+msgid "Get Pro"
+msgstr ""
+
+#: ../lib/classes/KcSeoInit.php:205, ../lib/views/schema-options.php:7, ../wp-seo-structured-data-schema/lib/classes/KcSeoInit.php:205, ../wp-seo-structured-data-schema/lib/views/schema-options.php:7
+msgid "WP SEO Structured Data Schema"
+msgstr ""
+
+#: ../lib/classes/KcSeoInit.php:205, ../wp-seo-structured-data-schema/lib/classes/KcSeoInit.php:205
+msgid "WP SEO Schema"
+msgstr ""
+
+#: ../lib/classes/KcSeoInit.php:207, ../wp-seo-structured-data-schema/lib/classes/KcSeoInit.php:207
+msgid "WP SEO Schema settings"
+msgstr ""
+
+#: ../lib/classes/KcSeoInit.php:207, ../wp-seo-structured-data-schema/lib/classes/KcSeoInit.php:207
+msgid "Settings"
+msgstr ""
+
+#: ../lib/classes/KcSeoMetaData.php:60, ../lib/views/schema-options.php:26, ../wp-seo-structured-data-schema/lib/classes/KcSeoMetaData.php:60, ../wp-seo-structured-data-schema/lib/views/schema-options.php:26
+msgid "For more detailed information on how to configure this plugin, please visit:"
+msgstr ""
+
+#: ../lib/classes/KcSeoMetaData.php:61, ../wp-seo-structured-data-schema/lib/classes/KcSeoMetaData.php:61
+msgid "Once you save these structured data schema settings, validate this page url here:"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:685, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:685
+msgid "Article"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:691, ../lib/models/KcSeoSchemaModel.php:765, ../lib/models/KcSeoSchemaModel.php:834, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:691, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:765, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:834
+msgid "Headline"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:693, ../lib/models/KcSeoSchemaModel.php:836, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:693, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:836
+msgid "Article title"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:697, ../lib/models/KcSeoSchemaModel.php:771, ../lib/models/KcSeoSchemaModel.php:840, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:697, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:771, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:840
+msgid "Page URL"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:699, ../lib/models/KcSeoSchemaModel.php:773, ../lib/models/KcSeoSchemaModel.php:842, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:699, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:773, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:842
+msgid "The canonical URL of the article page"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:703, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:703
+msgid "Author Name"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:705, ../lib/models/KcSeoSchemaModel.php:779, ../lib/models/KcSeoSchemaModel.php:848, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:705, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:779, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:848
+msgid "Author display name"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:709, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:709
+msgid "Article Feature Image"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:712, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:712
+msgid "Images should be at least 696 pixels wide.<br>Images should be in .jpg, .png, or. gif format."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:715, ../lib/models/KcSeoSchemaModel.php:789, ../lib/models/KcSeoSchemaModel.php:858, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:715, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:789, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:858
+msgid "Published date"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:719, ../lib/models/KcSeoSchemaModel.php:726, ../lib/models/KcSeoSchemaModel.php:792, ../lib/models/KcSeoSchemaModel.php:799, ../lib/models/KcSeoSchemaModel.php:861, ../lib/models/KcSeoSchemaModel.php:869, ../lib/models/KcSeoSchemaModel.php:1111, ../lib/models/KcSeoSchemaModel.php:1228, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:719, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:726, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:792, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:799, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:861, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:869, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1111, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1228
+msgid "Like this: 2015-12-25"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:722, ../lib/models/KcSeoSchemaModel.php:796, ../lib/models/KcSeoSchemaModel.php:865, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:722, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:796, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:865
+msgid "Modified date"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:729, ../lib/models/KcSeoSchemaModel.php:803, ../lib/models/KcSeoSchemaModel.php:872, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:729, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:803, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:872
+msgid "Publisher"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:731, ../lib/models/KcSeoSchemaModel.php:805, ../lib/models/KcSeoSchemaModel.php:874, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:731, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:805, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:874
+msgid "Publisher name or Organization name"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:735, ../lib/models/KcSeoSchemaModel.php:809, ../lib/models/KcSeoSchemaModel.php:878, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:735, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:809, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:878
+msgid "Publisher Logo"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:737, ../lib/models/KcSeoSchemaModel.php:811, ../lib/models/KcSeoSchemaModel.php:880, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:737, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:811, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:880
+msgid "Logos should have a wide aspect ratio, not a square icon.<br>Logos should be no wider than 600px, and no taller than 60px.<br>Always retain the original aspect ratio of the logo when resizing. Ideally, logos are exactly 60px tall with width <= 600px. If maintaining a height of 60px would cause the width to exceed 600px, downscale the logo to exactly 600px wide and reduce the height accordingly below 60px to maintain the original aspect ratio.<br>"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:741, ../lib/models/KcSeoSchemaModel.php:815, ../lib/models/KcSeoSchemaModel.php:884, ../lib/models/KcSeoSchemaModel.php:986, ../lib/models/KcSeoSchemaModel.php:1067, ../lib/models/KcSeoSchemaModel.php:1299, ../lib/models/KcSeoSchemaModel.php:1412, ../lib/views/schema-options.php:170, ../lib/views/schema-options.php:255, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:741, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:815, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:884, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:986, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1067, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1299, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1412, ../wp-seo-structured-data-schema/lib/views/schema-options.php:170, ../wp-seo-structured-data-schema/lib/views/schema-options.php:255
+msgid "Description"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:743, ../lib/models/KcSeoSchemaModel.php:817, ../lib/models/KcSeoSchemaModel.php:886, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:743, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:817, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:886
+msgid "Short description"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:746, ../lib/models/KcSeoSchemaModel.php:820, ../lib/models/KcSeoSchemaModel.php:889, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:746, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:820, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:889
+msgid "Article body"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:748, ../lib/models/KcSeoSchemaModel.php:822, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:748, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:822
+msgid "Article content"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:751, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:751
+msgid "Alternative headline"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:753, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:753
+msgid "A secondary headline for the article."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:759, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:759
+msgid "Blog Posting"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:767, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:767
+msgid "Blog posting title"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:777, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:777
+msgid "Author name"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:783, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:783
+msgid "Feature Image"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:785, ../lib/models/KcSeoSchemaModel.php:854, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:785, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:854
+msgid "The representative image of the article. Only a marked-up image that directly belongs to the article should be specified.<br> Images should be at least 696 pixels wide. <br>Images should be in .jpg, .png, or. gif format."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:828, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:828
+msgid "News Article"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:846, ../lib/models/KcSeoSchemaModel.php:1218, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:846, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1218
+msgid "Author"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:852, ../lib/models/KcSeoSchemaModel.php:981, ../lib/models/KcSeoSchemaModel.php:1379, ../lib/views/schema-options.php:247, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:852, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:981, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1379, ../wp-seo-structured-data-schema/lib/views/schema-options.php:247
+msgid "Image"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:891, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:891
+msgid "Article body content"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:897, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:897
+msgid "Event"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:903, ../lib/models/KcSeoSchemaModel.php:975, ../lib/models/KcSeoSchemaModel.php:1061, ../lib/models/KcSeoSchemaModel.php:1123, ../lib/models/KcSeoSchemaModel.php:1407, ../lib/views/schema-options.php:224, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:903, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:975, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1061, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1123, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1407, ../wp-seo-structured-data-schema/lib/views/schema-options.php:224
+msgid "Name"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:906, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:906
+msgid "The name of the event."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:909, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:909
+msgid "Location name"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:912, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:912
+msgid "Event Location name"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:915, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:915
+msgid "Location address"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:918, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:918
+msgid "The location of for example where the event is happening, an organization is located, or where an action takes place."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:921, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:921
+msgid "Start date"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:925, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:925
+msgid "Event start date"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:928, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:928
+msgid "End date (Recommended)"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:931, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:931
+msgid "Event end date"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:934, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:934
+msgid "Description (Recommended)"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:936, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:936
+msgid "Event description"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:939, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:939
+msgid "Performer Name (Recommended)"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:941, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:941
+msgid "The performer's name."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:944, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:944
+msgid "Image URL (Recommended)"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:946, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:946
+msgid "URL of an image or logo for the event or tour"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:949, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:949
+msgid "Price (Recommended)"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:952, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:952
+msgid "This is highly recommended. The lowest available price, including service charges and fees, of this type of ticket. <span class='required'>Not required but (Recommended)</span>"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:955, ../lib/models/KcSeoSchemaModel.php:1014, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:955, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1014
+msgid "Price currency"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:957, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:957
+msgid "The 3-letter currency code. (USD)"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:963, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:963
+msgid "A link to the event's details page. <span class='required'>Not required but (Recommended)</span>"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:969, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:969
+msgid "Product"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:978, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:978
+msgid "The name of the product."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:983, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:983
+msgid "The URL of a product photo. Pictures clearly showing the product, e.g. against a white background, are preferred."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:988, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:988
+msgid "Product description."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:991, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:991
+msgid "Brand"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:993, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:993
+msgid "The brand of the product."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:996, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:996
+msgid "Ratting value"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:999, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:999
+msgid "Rating value. (1 , 2.5, 3, 5 etc)"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1002, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1002
+msgid "Total review count"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1005, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1005
+msgid "Rating ratting value. <span class='required'>This is required if (Ratting value) is given</span>"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1008, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1008
+msgid "Price"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1011, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1011
+msgid "The lowest available price, including service charges and fees, of this type of ticket."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1016, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1016
+msgid "The 3-letter currency code."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1032, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1032
+msgid "Select a availability type"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1044, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1044
+msgid "Select a condition"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1047, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1047
+msgid "Product URL"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1049, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1049
+msgid "A URL to the product web page (that includes the Offer). (Don't use offerURL for markup that appears on the product page itself.)"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1055, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1055
+msgid "Video"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1064, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1064
+msgid "The title of the video"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1070, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1070
+msgid "The description of the video"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1077, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1077
+msgid "A URL pointing to the video thumbnail image file. Images must be at least 160x90 pixels and at most 1920x1080 pixels."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1080, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1080
+msgid "Updated date"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1083, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1083
+msgid "2015-02-05T08:00:00+08:00"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1086, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1086
+msgid "Duration"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1088, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1088
+msgid "The duration of the video in ISO 8601 format.(PT1M33S)"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1094, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1094
+msgid "A URL pointing to the actual video media file. This file should be in .mpg, .mpeg, .mp4, .m4v, .mov, .wmv, .asf, .avi, .ra, .ram, .rm, .flv, or other video file format."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1100, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1100
+msgid "A URL pointing to a player for the specific video. Usually this is the information in the src element of an < embed> tag.Example: Dailymotion: http://www.dailymotion.com/swf/x1o2g."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1103, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1103
+msgid "Interaction count"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1105, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1105
+msgid "The number of times the video has been viewed."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1108, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1108
+msgid "Expires"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1117, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1117
+msgid "Service"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1126, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1126
+msgid "The name of the Service."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1129, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1129
+msgid "Service type"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1132, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1132
+msgid "The type of service being offered, e.g. veterans' benefits, emergency relief, etc."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1138, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1138
+msgid "An additional type for the service, typically used for adding more specific types from external vocabularies in microdata syntax."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1141, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1141
+msgid "Award"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1143, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1143
+msgid "An award won by or for this service."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1146, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1146
+msgid "Category"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1148, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1148
+msgid "A category for the service."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1151, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1151
+msgid "Provider mobility"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1153, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1153
+msgid "Indicates the mobility of a provided service (e.g. 'static', 'dynamic')."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1159, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1159
+msgid "A short description of the service."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1165, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1165
+msgid "An image of the service. This should be a URL."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1171, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1171
+msgid "Indicates a page (or other CreativeWork) for which this thing is the main entity being described."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1177, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1177
+msgid "URL of a reference Web page that unambiguously indicates the service's identity. E.g. the URL of the service's Wikipedia page, Freebase page, or official website."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1183, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1183
+msgid "URL of the service."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1186, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1186
+msgid "Alternate name"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1188, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1188
+msgid "An alias for the service."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1194, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1194
+msgid "Review"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1200, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1200
+msgid "Name of the reviewed item"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1203, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1203
+msgid "The item that is being reviewed."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1206, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1206
+msgid "Review body"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1209, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1209
+msgid "The actual body of the review."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1212, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1212
+msgid "Review name"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1215, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1215
+msgid "A particular name for the review."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1222, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1222
+msgid "The author of the review. The reviewer’s name needs to be a valid name."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1225, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1225
+msgid "Date of Published"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1231, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1231
+msgid "Rating value"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1234, ../lib/models/KcSeoSchemaModel.php:1322, ../lib/models/KcSeoSchemaModel.php:1329, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1234, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1322, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1329
+msgid "A numerical quality rating for the item."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1237, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1237
+msgid "Best rating"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1240, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1240
+msgid "The highest value allowed in this rating system."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1243, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1243
+msgid "Worst rating"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1246, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1246
+msgid "The lowest value allowed in this rating system. * Required if the rating system is not on a 5-point scale. If worstRating is omitted, 1 is assumed."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1249, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1249
+msgid "Name of the organization"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1251, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1251
+msgid "The publisher of the review."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1257, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1257
+msgid "Aggregate Ratings"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1263, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1263
+msgid "Schema type"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1268, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1268
+msgid "Use the most appropriate schema type for what is being reviewed."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1271, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1271
+msgid "Name of the item"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1274, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1274
+msgid "The item that is being rated."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1286, ../lib/models/KcSeoSchemaModel.php:1423, ../lib/views/schema-options.php:118, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1286, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1423, ../wp-seo-structured-data-schema/lib/views/schema-options.php:118
+msgid "The price range of the business, for example $$$."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1301, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1301
+msgid "Description for thr review"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1304, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1304
+msgid "Rating Count"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1308, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1308
+msgid "The total number of ratings for the item on your site. <span class='required'>* At least one of ratingCount or reviewCount is required.</span>"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1311, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1311
+msgid "Review Count"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1315, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1315
+msgid "Specifies the number of people who provided a review with or without an accompanying rating. At least one of ratingCount or reviewCount is required."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1318, ../lib/models/KcSeoSchemaModel.php:1325, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1318, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1325
+msgid "Rating Value"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1332, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1332
+msgid "Best Rating"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1336, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1336
+msgid "The highest value allowed in this rating system. <span class='required'>* Required if the rating system is not a 5-point scale.</span> If bestRating is omitted, 5 is assumed."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1339, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1339
+msgid "Worst Rating"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1343, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1343
+msgid "The lowest value allowed in this rating system. <span class='required'>* Required if the rating system is not a 5-point scale.</span> If worstRating is omitted, 1 is assumed."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1349, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1349
+msgid "Restaurant"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1355, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1355
+msgid "Name of the Restaurant"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1360, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1360
+msgid "Description of the Restaurant"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1364, ../lib/models/KcSeoSchemaModel.php:1369, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1364, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1369
+msgid "Opening Hours"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1366, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1366
+msgid "Mo,Tu,We,Th,Fr,Sa,Su 11:30-23:00"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1371, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1371
+msgid "+155501003333"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1374, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1374
+msgid "Menu"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1376, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1376
+msgid "http://example.com/menu"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1384, ../lib/views/schema-options.php:270, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1384, ../wp-seo-structured-data-schema/lib/views/schema-options.php:270
+msgid "Address"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1388, ../lib/views/schema-options.php:113, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1388, ../wp-seo-structured-data-schema/lib/views/schema-options.php:113
+msgid "Price Range"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1390, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1390
+msgid "The price range of the business, for example $$$"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1393, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1393
+msgid "Serves Cuisine"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1395, ../lib/views/schema-options.php:159, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1395, ../wp-seo-structured-data-schema/lib/views/schema-options.php:159
+msgid "The cuisine of the restaurant."
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1401, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1401
+msgid "Local Business"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1416, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1416
+msgid "Business Logo"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1421, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1421
+msgid "Price Range (Recommended)"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1426, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1426
+msgid "Address locality"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1428, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1428
+msgid "City (i.e Kansas city)"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1431, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1431
+msgid "Address region"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1433, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1433
+msgid "State (i.e. MO)"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1436, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1436
+msgid "Postal code"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1440, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1440
+msgid "Street address"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1444, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1444
+msgid "Telephone (Recommended)"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1451, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1451
+msgid "Book"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1455, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1455
+msgid "Course"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1459, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1459
+msgid "Job Posting"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1463, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1463
+msgid "Movie"
+msgstr ""
+
+#: ../lib/models/KcSeoSchemaModel.php:1475, ../wp-seo-structured-data-schema/lib/models/KcSeoSchemaModel.php:1475
+msgid "TVEpisode"
+msgstr ""
+
+#: ../lib/views/schema-options.php:13, ../wp-seo-structured-data-schema/lib/views/schema-options.php:13
+msgid "General settings for WP SEO Structured Data Schema by <a href=\"https://wpsemplugins.com/\">WPSEMPlugins.com</a>"
+msgstr ""
+
+#: ../lib/views/schema-options.php:35, ../wp-seo-structured-data-schema/lib/views/schema-options.php:35
+msgid "Site Type"
+msgstr ""
+
+#: ../lib/views/schema-options.php:38, ../wp-seo-structured-data-schema/lib/views/schema-options.php:38
+msgid "Select one type"
+msgstr ""
+
+#: ../lib/views/schema-options.php:78, ../wp-seo-structured-data-schema/lib/views/schema-options.php:78
+msgid "Organization or Business name"
+msgstr ""
+
+#: ../lib/views/schema-options.php:85, ../wp-seo-structured-data-schema/lib/views/schema-options.php:85
+msgid "Site Image"
+msgstr ""
+
+#: ../lib/views/schema-options.php:122, ../wp-seo-structured-data-schema/lib/views/schema-options.php:122
+msgid "Site Telephone"
+msgstr ""
+
+#: ../lib/views/schema-options.php:127, ../wp-seo-structured-data-schema/lib/views/schema-options.php:127
+msgid "The telephone number."
+msgstr ""
+
+#: ../lib/views/schema-options.php:131, ../wp-seo-structured-data-schema/lib/views/schema-options.php:131
+msgid "Additional Type"
+msgstr ""
+
+#: ../lib/views/schema-options.php:138, ../wp-seo-structured-data-schema/lib/views/schema-options.php:138
+msgid "Add \"Additional Type\""
+msgstr ""
+
+#: ../lib/views/schema-options.php:142, ../wp-seo-structured-data-schema/lib/views/schema-options.php:142
+msgid ""
+"Product Ontology is an extension to schema using WikiPedia definitions that enables you to further define a type by adding an \"AdditionalType” attribute.Example for a Tailor (which is not available\n"
+"                                                as a schema “Type”): Pick LocalBusiness as a generic Type, then add additional type as follows:"
+msgstr ""
+
+#: ../lib/views/schema-options.php:156, ../wp-seo-structured-data-schema/lib/views/schema-options.php:156
+msgid "Restaurant Information"
+msgstr ""
+
+#: ../lib/views/schema-options.php:167, ../wp-seo-structured-data-schema/lib/views/schema-options.php:167
+msgid "Others local business info"
+msgstr ""
+
+#: ../lib/views/schema-options.php:177, ../wp-seo-structured-data-schema/lib/views/schema-options.php:177
+msgid "Operation Hours"
+msgstr ""
+
+#: ../lib/views/schema-options.php:204, ../wp-seo-structured-data-schema/lib/views/schema-options.php:204
+msgid "GeoCoordinates"
+msgstr ""
+
+#: ../lib/views/schema-options.php:207, ../wp-seo-structured-data-schema/lib/views/schema-options.php:207
+msgid "Latitude"
+msgstr ""
+
+#: ../lib/views/schema-options.php:214, ../wp-seo-structured-data-schema/lib/views/schema-options.php:214
+msgid "Longitude"
+msgstr ""
+
+#: ../lib/views/schema-options.php:221, ../wp-seo-structured-data-schema/lib/views/schema-options.php:221
+msgid "Person"
+msgstr ""
+
+#: ../lib/views/schema-options.php:231, ../wp-seo-structured-data-schema/lib/views/schema-options.php:231
+msgid "Work For"
+msgstr ""
+
+#: ../lib/views/schema-options.php:239, ../wp-seo-structured-data-schema/lib/views/schema-options.php:239
+msgid "Job Title"
+msgstr ""
+
+#: ../lib/views/schema-options.php:251, ../wp-seo-structured-data-schema/lib/views/schema-options.php:251
+msgid "Add your personal photo here"
+msgstr ""
+
+#: ../lib/views/schema-options.php:262, ../wp-seo-structured-data-schema/lib/views/schema-options.php:262
+msgid "Birth date"
+msgstr ""
+
+#: ../lib/views/schema-options.php:273, ../wp-seo-structured-data-schema/lib/views/schema-options.php:273
+msgid "Address Country"
+msgstr ""
+
+#: ../lib/views/schema-options.php:288, ../wp-seo-structured-data-schema/lib/views/schema-options.php:288
+msgid "Address Locality"
+msgstr ""
+
+#: ../lib/views/schema-options.php:295, ../wp-seo-structured-data-schema/lib/views/schema-options.php:295
+msgid "Address Region"
+msgstr ""
+
+#: ../lib/views/schema-options.php:302, ../wp-seo-structured-data-schema/lib/views/schema-options.php:302
+msgid "Postal Code"
+msgstr ""
+
+#: ../lib/views/schema-options.php:308, ../wp-seo-structured-data-schema/lib/views/schema-options.php:308
+msgid "Street Address"
+msgstr ""
+
+#: ../lib/views/schema-options.php:317, ../wp-seo-structured-data-schema/lib/views/schema-options.php:317
+msgid "Add New Address"
+msgstr ""
+
+#: ../lib/views/schema-options.php:324, ../wp-seo-structured-data-schema/lib/views/schema-options.php:324
+msgid "Organization Logo"
+msgstr ""
+
+#: ../lib/views/schema-options.php:327, ../lib/views/schema-options.php:390, ../wp-seo-structured-data-schema/lib/views/schema-options.php:327, ../wp-seo-structured-data-schema/lib/views/schema-options.php:390
+msgid "Social Profile"
+msgstr ""
+
+#: ../lib/views/schema-options.php:330, ../wp-seo-structured-data-schema/lib/views/schema-options.php:330
+msgid "Corporate Contacts"
+msgstr ""
+
+#: ../lib/views/schema-options.php:336, ../wp-seo-structured-data-schema/lib/views/schema-options.php:336
+msgid "Select Organization Logo"
+msgstr ""
+
+#: ../lib/views/schema-options.php:380, ../wp-seo-structured-data-schema/lib/views/schema-options.php:380
+msgid "Company Name"
+msgstr ""
+
+#: ../lib/views/schema-options.php:387, ../wp-seo-structured-data-schema/lib/views/schema-options.php:387
+msgid "Social Profiles"
+msgstr ""
+
+#: ../lib/views/schema-options.php:416, ../wp-seo-structured-data-schema/lib/views/schema-options.php:416
+msgid "Add Social Profile"
+msgstr ""
+
+#: ../lib/views/schema-options.php:424, ../wp-seo-structured-data-schema/lib/views/schema-options.php:424
+msgid "Contacts"
+msgstr ""
+
+#: ../lib/views/schema-options.php:443, ../wp-seo-structured-data-schema/lib/views/schema-options.php:443
+msgid "Contact Phone"
+msgstr ""
+
+#: ../lib/views/schema-options.php:447, ../wp-seo-structured-data-schema/lib/views/schema-options.php:447
+msgid "Please follow the format below"
+msgstr ""
+
+#: ../lib/views/schema-options.php:458, ../wp-seo-structured-data-schema/lib/views/schema-options.php:458
+msgid "Contact Email"
+msgstr ""
+
+#: ../lib/views/schema-options.php:465, ../wp-seo-structured-data-schema/lib/views/schema-options.php:465
+msgid "Contact Option"
+msgstr ""
+
+#: ../lib/views/schema-options.php:469, ../wp-seo-structured-data-schema/lib/views/schema-options.php:469
+msgid "Select an option"
+msgstr ""
+
+#: ../lib/views/schema-options.php:472, ../wp-seo-structured-data-schema/lib/views/schema-options.php:472
+msgid "TollFree"
+msgstr ""
+
+#: ../lib/views/schema-options.php:476, ../wp-seo-structured-data-schema/lib/views/schema-options.php:476
+msgid "HearingImpairedSupported"
+msgstr ""
+
+#: ../lib/views/schema-options.php:482, ../wp-seo-structured-data-schema/lib/views/schema-options.php:482
+msgid "Area Served"
+msgstr ""
+
+#: ../lib/views/schema-options.php:500, ../wp-seo-structured-data-schema/lib/views/schema-options.php:500
+msgid "Available language"
+msgstr ""
+
+#: ../lib/views/schema-options.php:518, ../wp-seo-structured-data-schema/lib/views/schema-options.php:518
+msgid "Site Name in Search Results"
+msgstr ""
+
+#: ../lib/views/schema-options.php:521, ../wp-seo-structured-data-schema/lib/views/schema-options.php:521
+msgid "Enable Site link Search Box"
+msgstr ""
+
+#: ../lib/views/schema-options.php:529, ../wp-seo-structured-data-schema/lib/views/schema-options.php:529
+msgid "Site Name:"
+msgstr ""
+
+#: ../lib/views/schema-options.php:536, ../wp-seo-structured-data-schema/lib/views/schema-options.php:536
+msgid "Site Alternative Name:"
+msgstr ""
+
+#: ../lib/views/schema-options.php:543, ../wp-seo-structured-data-schema/lib/views/schema-options.php:543
+msgid "Site Url:"
+msgstr ""
+
+#: ../lib/views/schema-options.php:551, ../lib/views/settings.php:105, ../wp-seo-structured-data-schema/lib/views/schema-options.php:551, ../wp-seo-structured-data-schema/lib/views/settings.php:105
+msgid "Save Changes"
+msgstr ""
+
+#: ../lib/views/settings.php:6, ../wp-seo-structured-data-schema/lib/views/settings.php:6
+msgid "Schema Settings"
+msgstr ""
+
+#: ../lib/views/settings.php:13, ../wp-seo-structured-data-schema/lib/views/settings.php:13
+msgid "Business / Org Schema"
+msgstr ""
+
+#: ../lib/views/settings.php:17, ../wp-seo-structured-data-schema/lib/views/settings.php:17
+msgid ""
+"Home page\n"
+"                                only"
+msgstr ""
+
+#: ../lib/views/settings.php:21, ../wp-seo-structured-data-schema/lib/views/settings.php:21
+msgid ""
+"Sitewide (Apply General Settings schema\n"
+"                                sitewide)"
+msgstr ""
+
+#: ../lib/views/settings.php:26, ../wp-seo-structured-data-schema/lib/views/settings.php:26
+msgid "Turn off (Turn off global schema)"
+msgstr ""
+
+#: ../lib/views/settings.php:93, ../wp-seo-structured-data-schema/lib/views/settings.php:93
+msgid "Delete all data"
+msgstr ""
+
+#: ../lib/views/settings.php:98, ../wp-seo-structured-data-schema/lib/views/settings.php:98
+msgid "Enable"
+msgstr ""
+
+#: ../lib/views/settings.php:99, ../wp-seo-structured-data-schema/lib/views/settings.php:99
+msgid ""
+"This will delete all schema created and applied by this plugin when plugin is\n"
+"                                deleted."
+msgstr ""
