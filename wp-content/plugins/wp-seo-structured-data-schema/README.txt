@@ -1,10 +1,10 @@
 === WP SEO Structured Data Schema ===
 Contributors: kcseopro
 Donate link:
-Tags: seo, schema, structured data, rich snippets, microdata, json-ld, search engine optimization, local seo, google, sitelinks, schema.org, microformat, serp, amp
-Requires at least: 3.5
-Tested up to: 4.9
-Stable tag: 2.5.3
+Tags: seo, schema, structured data, rich snippets, microdata, json-ld, search engine optimization, local seo, google, sitelinks, schema.org, microformat, serp
+Requires at least: 4.5
+Tested up to: 5.0
+Stable tag: 2.5.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -119,6 +119,9 @@ You'll find the [FAQ on Kcseopro.com](https://wpsemplugins.com/).
 
 
 == Changelog ==
+
+== 2.5.4 =
+* Add a Hack
 
 == 2.5.3 =
 * Bug fixed
