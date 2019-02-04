@@ -103,13 +103,6 @@
 	<meta name="p:domain_verify" content="fdcd1755542385831e526a2a712cc134"/>
 
 	<?php
-		// Do not index date
-		if ( is_date() ) {
-			echo ('<meta name="robots" content="noindex,nofollow" />');
-		}
-	?>
-
-	<?php
 		/****************** DO NOT REMOVE **********************
 		/* We add some JavaScript to pages with the comment form
 		 * to support sites with threaded comments (when in use).
@@ -117,6 +110,13 @@
 		if ( is_singular() && get_option( 'thread_comments' ) )
 			wp_enqueue_script( 'comment-reply' );
 		wp_head();
+	?>
+
+	<?php
+		// Do not index date based archives eg. www.site.com/2016/07
+		if ( is_date() ) {
+			echo ('<meta name="robots" content="noindex,nofollow" />');
+		}
 	?>
 
 	<!-- Google Tag Manager -->
