@@ -103,6 +103,13 @@
 	<meta name="p:domain_verify" content="fdcd1755542385831e526a2a712cc134"/>
 
 	<?php
+		// Do not index date
+		if ( is_date() ) {
+			echo ('<meta name="robots" content="noindex,nofollow" />');
+		}
+	?>
+
+	<?php
 		/****************** DO NOT REMOVE **********************
 		/* We add some JavaScript to pages with the comment form
 		 * to support sites with threaded comments (when in use).
