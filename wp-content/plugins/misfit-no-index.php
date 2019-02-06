@@ -69,9 +69,9 @@ add_action('wp_head', 'misfit_noindex_past_events');
 
 
 function disable_wpseo_meta_robots() {
-    return $robotsstr = '';
+    add_filter('wpseo_robots','__return_false');
 }
-add_filter('wpseo_robots','disable_wpseo_meta_robots');
+
 
 //disable ajax on day view
 
