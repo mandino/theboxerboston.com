@@ -1,0 +1,54 @@
+.wpmudev-ui #wph-wizard-settings-position {
+
+	.wpmudev-box-full {
+
+		.wpmudev-tabs {
+			margin-top: 10px;
+			margin-bottom: 15px;
+		}
+
+		.wpmudev-input_text {
+			margin-bottom: 30px;
+		}
+
+		.wpmudev-box-gray {
+			padding: 26px 29px 30px 29px;
+
+			.wpmudev-row:nth-child(2) {
+
+				.wpmudev-col:first-child {
+					flex: 1;
+
+					@include screen("small") {
+						min-width: 259px;
+						flex: 0 0 259px;
+					}
+				}
+
+				.wpmudev-col:last-child {
+					flex: 1;
+				}
+			}
+
+			.wpmudev-tabs {
+				margin-top: 0;
+				margin-bottom: 0;
+
+				.wpmudev-tabs-menu {
+					margin-bottom: 20px;
+
+					.wpmudev-tabs-menu_item {
+						min-width: 80px;
+					}
+				}
+
+				.wpmudev-tabs-content {
+
+					.wpmudev-input_number {
+						max-width: 130px;
+					}
+				}
+			}
+		}
+	}
+}

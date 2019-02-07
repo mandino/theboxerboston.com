@@ -1,0 +1,67 @@
+.hustle-modal.hustle-modal-simple {
+
+	.hustle-modal-body {
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+
+		.hustle-modal-content {
+			max-height: calc(60vh - 150px);
+			overflow-y: auto;
+			flex: 1;
+			padding: 20px;
+
+			section {
+
+				.hustle-modal-message {
+					
+					@include screen("small") {
+						max-height: 100%;
+						overflow-y: auto;
+					}
+				}
+
+				@include screen("small") {
+					max-height: 100%;
+				}
+			}
+
+			@include screen("small") {
+				max-height: none;
+			}
+		}
+
+		&.hustle-modal-image_right {
+			flex-direction: column-reverse;
+
+			@include screen("small") {
+				flex-direction: row-reverse;
+			}
+		}
+
+		@include screen("small") {
+			max-height: 70vh;
+			flex-wrap: wrap;
+			flex-direction: row;
+		}
+	}
+
+	header {
+		margin: 0 0 20px;
+		padding: 0 0 20px;
+		border-bottom: 1px solid rgba(0,0,0,0.08);
+
+		&:last-child {
+			margin: 0;
+			padding: 0;
+			border-bottom: 0;
+		}
+	}
+
+	section {
+		
+		@include screen("small") {
+			flex-direction: column;
+		}
+	}
+}

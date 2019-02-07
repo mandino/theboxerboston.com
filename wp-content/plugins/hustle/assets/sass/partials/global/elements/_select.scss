@@ -1,0 +1,112 @@
+.wpmudev-ui .wpmudev-select_mask {
+	position: relative;
+	z-index: 1;
+	margin: 5px 0 15px;
+
+	.wpmudev-select_chosen {
+		width: 100%;
+		overflow: hidden;
+		cursor: pointer;
+		display: block;
+		position: relative;
+		padding: 7px 38px 7px 14px;
+		border: 1px solid $color-silver;
+		border-radius: 5px;
+		background: #FAFAFA;
+		box-shadow: none;
+		color: $color-gray--dark;
+		font: 400 15px/24px $font;
+		letter-spacing: -0.25px;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		transform-style: preserve-3d;
+		transition: $transition;
+
+		.wpmudev-icon_wrap {
+			display: block;
+			position: absolute;
+			top: 50%;
+			right: 14px;
+			transform: translateY(-50%) rotate(0deg);
+			transition: transform .3s linear;
+		}
+
+		.wpmudev-i_arrow {
+			max-width: 10px;
+			max-height: 6px;
+			display: block;
+
+			path {
+				fill: $color-gray--light;
+			}
+		}
+
+		&:hover {
+			border-color: $color-silver;
+		}
+
+		&.active {
+			border-bottom-color: #FAFAFA;
+			border-radius: 5px 5px 0 0;
+
+			.wpmudev-icon_wrap {
+				transform: translateY(-50%) rotate(-180deg);
+			}
+
+			.wpmudev-i_arrow {
+
+				path {
+					fill: $color-gray--dark;
+				}
+			}
+		}
+	}
+
+	.wpmudev-select_options {
+		display: none;
+		width: 100%;
+		max-height: 142px;
+		overflow-x: hidden;
+		overflow-y: auto;
+		position: absolute;
+		top: 39px;
+		left: 0;
+		margin: 0;
+		border: 1px solid $color-silver;
+		border-top: 0;
+		border-radius: 0 0 5px 5px;
+		background: #FAFAFA;
+		list-style: none;
+
+		li {
+			cursor: pointer;
+			margin: 0;
+			padding: 0 14px;
+			color: #AAA;
+			font: 400 13px/28px $font;
+			list-style: none;
+			transition: $transition;
+
+			&:before {
+				display: none;
+			}
+
+			&:hover {
+				background: $color-silver;
+				color: $color-gray--dark;
+			}
+		}
+	}
+
+	&:first-child {
+		margin-top: 0;
+	}
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.wpmudev-ui select.wpmudev-select {
+	display: none;
+}

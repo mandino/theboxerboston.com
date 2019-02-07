@@ -1,0 +1,240 @@
+.wpmudev-ui #wph-wizard-settings-conditions {
+	
+	.wph-conditions {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: column;
+
+		.wph-conditions--side,
+		.wph-conditions--box {
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: column;
+
+			label {
+				display: block;
+				flex: 0 0 auto;
+				margin-bottom: 10px;
+
+				@include screen("small") {
+					margin-bottom: 0;
+				}
+			}
+			
+			.wph-conditions--items {
+				max-height: 130px;
+				min-height: 130px;
+				overflow-y: auto;
+				flex: 1;
+				padding: 5px;
+				border: 1px solid #DFDFDF;
+
+				&.wph-conditions-is_empty {
+					display: flex;
+					flex-wrap: wrap;
+					flex-direction: row;
+					align-items: center;
+					justify-content: center;
+
+					.wph-conditions--empty {
+
+						p {
+							margin: 0;
+							padding: 0;
+							color: #7F7F7F;
+							font: 400 14px/21px $font;
+							text-align: center;
+						}
+					}
+				}
+
+				@include screen("small") {
+					max-height: 300px;
+					min-height: 300px;
+				}
+			}
+		}
+
+		.wph-conditions--side {
+			flex: 1;
+			margin-bottom: 20px;
+
+			.wph-conditions--items {
+				display: block;
+				border-radius: 3px;
+				background: #FAFAFA;
+
+				.wph-conditions--item {
+					cursor: pointer;
+					display: block;
+					position: relative;
+					margin: 0 0 5px;
+					padding: 0 5px;
+					border: 1px solid #CCC;
+					border-radius: 2px;
+					background: $color-white;
+					color: #7F7F7F;
+					font: 400 12px/24px $font;
+
+					&:hover .wph-conditions-icon,
+					.wph-conditions-icon:hover,
+					.wph-conditions-icon:focus,
+					.wph-conditions-icon:active {
+						background: rgba(51,51,51,0.6);
+					}
+
+					&.disabled {
+						opacity: 0.5;
+						cursor: default;
+						pointer-events: none;
+					}
+
+					&:last-child {
+						margin: 0;
+					}
+				}
+
+				.wph-conditions-icon {
+					width: 16px;
+					height: 16px;
+					cursor: pointer;
+					display: flex;
+					flex-wrap: wrap;
+					flex-direction: row;
+					align-items: center;
+					justify-content: center;
+					position: absolute;
+					top: 5px;
+					right: 5px;
+					border-radius: 20px;
+					background: rgba(51,51,51,0.3);
+					transition: 0.2s ease;
+
+					.wpmudev-icon {
+						width: 8px;
+						height: 8px;
+						display: block;
+
+						path {
+							fill: #FAFAFA;
+						}
+
+						.wpmudev-i_plus_y {
+							transform: rotate(0deg);
+							transform-origin: 50% 50%;
+							transition: transform .2s linear, opacity .2s linear;
+							opacity: 1;
+						}
+					}
+				}
+
+				.wph-conditions--item.added .wph-conditions-icon {
+
+					.wpmudev-icon .wpmudev-i_plus_y {
+						transform: rotate(-90deg);
+						transform-origin: 50% 50%;
+						transform-origin-y: 50%;
+						opacity: 0;
+					}
+				}
+
+				@include screen("small") {
+					border-radius: 3px 0 0 3px;
+				}
+			}
+
+			@include screen("small") {
+				min-width: 240px;
+				flex: 0 0 240px;
+				margin-bottom: 0;
+			}
+		}
+
+		.wph-conditions--box {
+			display: flex;
+			flex: 1;
+
+			.wph-conditions--items {
+				border-radius: 3px;
+
+				.wph-conditions--item {
+					overflow: hidden;
+					margin: 0 0 5px;
+					border: 1px solid #CCC;
+					border-radius: 2px;
+
+					header {
+						cursor: pointer;
+						display: flex;
+						flex-wrap: wrap;
+						flex-direction: column;
+						padding: 0 9px;
+						background: #F6F7F8;
+						box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+
+						.wph-condition--name,
+						.wph-condition--preview {
+							display: block;
+							flex: 0 0 auto;
+							margin: 0;
+							padding: 0;
+							border: 0;
+							font: 500 12px/28px $font;
+							letter-spacing: -0.05px;
+						}
+
+						.wph-condition--preview {
+							margin-left: 18px;
+							font-weight: 300;
+							font-style: italic;
+						}
+
+						@include screen("small") {
+							flex-direction: row;
+						}
+					}
+
+					section {
+						padding: 14px;
+						border-top: 1px solid #CCC;
+						background: $color-white;
+
+						.wpmudev-tabs {
+							margin: 0 0 20px;
+						}
+
+						.rule-description h4 {
+							color: $color-gray--light;
+						}
+
+						.rule-form ul li:before {
+							display: none;
+						}
+					}
+
+					&:last-child {
+						margin: 0;
+					}
+
+					section {
+						background: $color-white;
+					}
+				}
+
+				@include screen("small") {
+					border-left: 0;
+					border-radius: 0 3px 3px 0;
+				}
+			}
+		}
+
+		+ .wpmudev-helper {
+			display: inline-block;
+			margin-top: 15px;
+		}
+
+		@include screen("small") {
+			flex-direction: row;
+		}
+	}
+}

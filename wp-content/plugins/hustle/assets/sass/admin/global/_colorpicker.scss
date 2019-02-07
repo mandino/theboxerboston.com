@@ -1,0 +1,133 @@
+// ============================================== //
+// ================= HUSTLE 2.0 ================= //
+// ============================================== //
+// ======== by Leighton Sapir (WPMU DEV) ======== //
+// ============================================== //
+
+.hustle-two .wph-pickers {
+	max-width: 88px;
+	display: flex;
+	position: relative;
+	border: 1px solid $color--gainsboro;
+	border-radius: 3px;
+	background: $color--white;
+	.wp-picker-container {
+		.wp-color-result {
+			width: 26px;
+			height: 26px;
+			margin: 0;
+			padding: 0;
+			border: 0;
+			border-radius: 0;
+			box-shadow: none;
+			span {
+				border-radius: 0 !important;
+			}
+			&:after {
+				display: none;
+			}
+			.wp-color-result-text {
+				display: none;
+			}
+		}
+		.wp-picker-input-wrap,
+		.wp-picker-holder {
+			position: absolute;
+		}
+		.wp-picker-input-wrap {
+			width: 257px;
+			top: 34px;
+			left: -1px;
+			.wp-color-picker {
+				width: 100% !important;
+				padding: 9px 10px 0;
+				border: 1px solid $color--gainsboro;
+				border-bottom: 0;
+				border-radius: 3px 3px 0 0;
+				font: 400 12px/17px $font;
+			}
+			.button {
+				display: none;
+			}
+		}
+		.wp-picker-holder {
+			top: 60px;
+			left: -1px;
+			.iris-picker {
+				margin-top: 0;
+				border-top: 0;
+				border-radius: 0 0 3px 3px;
+			}
+		}
+		.iris-picker .iris-square,
+		.iris-picker .iris-slider,
+		.iris-picker .iris-square-inner,
+		.iris-picker .iris-palette {
+			border-radius: 1px;
+		}
+		// Color Tooltips
+		+ .wph-pickers--tip:before {
+			margin-bottom: -40px;
+			margin-left: 8px;
+			border-top-color: transparent;
+			border-bottom-color: $color--shaft;
+		}
+		+ .wph-pickers--tip:after {
+			width: 150px;
+			margin-bottom: -69px;
+			margin-left: -65px;
+			padding: 6px 5px;
+			background: $color--shaft;
+			color: $color--white;
+			font: 400 13px/18px $font;
+			text-transform: none;
+		}
+		&:not(.wp-picker-active):hover + .wph-pickers--tip:before,
+		&:not(.wp-picker-active):hover + .wph-pickers--tip:after {
+			opacity: 1;
+			z-index: 1;
+			transition: margin .2s, opacity .2s;
+		}
+		&:not(.wp-picker-active):hover + .wph-pickers--tip:before {
+			margin-bottom: -10px;
+		}
+		&:not(.wp-picker-active):hover + .wph-pickers--tip:after {
+			margin-bottom: -39px;
+		}
+	}
+	&.wph-pickers--single .wph-pickers--color {
+		width: 28px;
+		height: 28px;
+	}
+	&:not(.wph-pickers--single) .wph-pickers--color {
+		flex: 0 26px;
+		z-index: 9;
+		padding: 1px;
+		border-right: 1px solid $color--gainsboro;
+		&:first-child {
+			.wp-color-result,
+			.wp-color-result span {
+				border-radius: 1px 0 0 1px !important;
+			}
+		}
+		&:last-child {
+			border-right: 0;
+			.wp-color-result,
+			.wp-color-result span {
+				border-radius: 0 1px 1px 0 !important;
+			}
+		}
+	}
+}
+.hustle-two .wph-pickers--single {
+	width: 30px;
+	.wph-pickers--color {
+		display: block;
+		z-index: 9;
+		padding: 1px;
+	}
+	.wp-pickers--color .wp-color-result
+	.wp-pickers--color .wp-color-result span {
+		border-radius: 1px !important;
+	}
+}

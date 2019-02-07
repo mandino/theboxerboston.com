@@ -1,0 +1,154 @@
+.wpmudev-ui #wph-modal-error {
+	
+	.wpmudev-box-modal {
+
+		.wpmudev-box-body {
+			padding: 0;
+
+			.wpmudev-listing {
+				position: relative;
+
+				.wpmudev-listing-body {
+					max-height: 196px;
+					overflow-y: auto;
+					display: block;
+
+					.wpmudev-listing-row {
+
+						.hustle-optin-error {
+							width: 18px;
+							height: 18px;
+							display: none;
+							align-items: center;
+							justify-content: center;
+							margin: 0 auto;
+							border-radius: 30px;
+							background: $color-red--light;
+
+							.wpmudev-icon {
+								width: auto;
+								height: 10px;
+
+								path {
+									fill: $color-white;
+								}
+							}
+
+							&.wpmudev-tip {
+								position: inherit;
+
+								&:before {
+									display: none;
+								}
+
+								&:after {
+									bottom: auto;
+									left: auto;
+									margin: 0;
+								}
+							}
+
+							@include screen("small") {
+								display: flex;
+							}
+						}
+					}
+					
+					@include screen("small") {
+						max-height: 284px;
+					}
+				}
+			}
+		}
+
+		.wpmudev-box-footer {
+
+			.wpmudev-button:not(.wpmudev-button-sm) {
+				height: 30px;
+				padding: 0 16px;
+				border-radius: 4px;
+				font: 400 12px/30px $font--alt;
+				
+				@include screen("small") {
+					height: 40px;
+					padding: 0 20px;
+					border-radius: 5px;
+					font: 400 15px/40px $font;
+				}
+			}
+
+			.wpmudev-footer-clear {
+				display: flex;
+				flex: 1;
+				flex-direction: column;
+				margin-bottom: 20px;
+
+				.hustle-delete-logs-confirmation {
+					display: flex;
+					flex: 0 0 auto;
+					flex-wrap: wrap;
+					align-items: center;
+					padding: 10px;
+					border: 1px solid $color-silver--alt;
+					border-radius: 3px;
+					background: #F2F2F2;
+
+					label {
+						min-width: 100%;
+						display: block;
+						flex: 0 0 100%;
+						margin-bottom: 5px;
+						
+						@include screen("small") {
+							min-width: 1px;
+							flex: 0 0 auto;
+							margin-right: 10px;
+							margin-bottom: 0;
+						}
+					}
+
+					.wpmudev-button-sm {
+						margin: 0 10px 0 0;
+
+						&:last-child {
+							margin: 0;
+
+							@include screen("small") {
+								margin: 0;
+							}
+						}
+
+						@include screen("small") {
+							min-width: 40px;
+							margin: 0 5px 0 0;
+							padding: 0 5px;
+						}
+					}
+
+					@include screen("small") {
+						margin-left: 10px;
+						padding: 4px 10px;
+					}
+				}
+
+				@include screen("small") {
+					flex: 1 0 auto;
+					flex-direction: row;
+					align-items: center;
+					margin-right: 20px;
+					margin-bottom: 0;
+				}
+			}
+
+			.wpmudev-footer-export {
+				display: flex;
+				flex-direction: column;
+				flex: 1;
+
+				@include screen("small") {
+					flex: 0 0 auto;
+				}
+			}
+		}
+	}
+}

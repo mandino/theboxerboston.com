@@ -1,0 +1,77 @@
+.wpmudev-ui .wpmudev-menu {
+	display: flex;
+	align-items: center;
+
+	ul {
+		display: none;
+		margin: 0;
+		list-style: none;
+
+		li {
+			margin: 0 0 10px;
+			padding: 0;
+			list-style: none;
+
+			a {
+				opacity: 0.7;
+				display: block;
+				padding: 0 15px;
+				border-radius: 20px;
+				color: $color-gray--dark;
+				font: 400 14px/30px $font;
+
+				&:hover, &:focus {
+					opacity: 1;
+					box-shadow: none;
+					color: $color-gray--dark;
+				}
+			}
+
+			&:before {
+				display: none;
+			}
+
+			&:last-child {
+				margin: 0;
+			}
+		}
+
+		li.current {
+
+			a, a:hover, a:focus {
+				opacity: 1;
+				background: $color-silver--soft;
+				font-weight: 500;
+			}
+		}
+
+		@include screen("small") {
+			display: block;
+		}
+	}
+
+	.wpmudev-select + .select2 {
+		max-width: none;
+		flex: 1;
+		display: block;
+		margin: 0;
+
+		@include screen("small") {
+			display: none;
+		}
+	}
+
+	.wpmudev-preview {
+		height: 30px;
+		margin-left: 10px;
+
+		@include screen("small") {
+			height: auto;
+			margin-left: 0;
+		}
+	}
+
+	@include screen("small") {
+		display: block;
+	}
+}

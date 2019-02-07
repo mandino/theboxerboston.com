@@ -1,0 +1,69 @@
+.hustle-modal .hustle-modal-message {
+
+	#mc_embed_signup {
+		
+		form {
+			padding: 0;
+		}
+
+		h1, h2, h3, h4, h5, h6, p {
+			
+			&:first-child {
+				margin-top: 0;
+			}
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		.indicates-required {
+			margin-right: 0;
+		}
+
+		.mc-field-group {
+
+			ul {
+				margin: 10px 0;
+				
+				li {
+
+					&:before {
+						display: none;
+					}
+				}
+			}
+
+			&:not(.size1of2) {
+				width: 100%;
+			}
+
+			&.size1of2 {
+				width: 48%;
+				margin-right: 4%;
+
+				+ .size1of2 {
+					margin-right: 0;
+				}
+			}
+
+			&.input-group input {
+				position: relative;
+				top: 2px;
+				margin-right: 6px;
+			}
+		}
+
+		input.email {
+			width: auto;
+		}
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}

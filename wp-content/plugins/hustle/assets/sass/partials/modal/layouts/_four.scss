@@ -1,0 +1,250 @@
+.hustle-modal-four {
+
+	.hustle-modal-body {
+		max-height: 60vh;
+		overflow: hidden;
+		display: flex;
+		flex-wrap: nowrap;
+		flex-direction: column;
+
+		aside {
+			display: flex;
+			flex: 0 0 auto;
+			flex-wrap: nowrap;
+			flex-direction: column;
+
+			.hustle-modal-image {
+
+				&.hustle-modal-image_fill,
+				&.hustle-modal-image_contain,
+				&.hustle-modal-image_cover {
+
+					@include screen("small") {
+						flex: 0 0 150px;
+					}
+				}
+
+				&.hustle-modal-image_none {
+
+					@include screen("small") {
+						max-width: 100%;
+					}
+				}
+			}
+
+			// For IE Fix.
+			@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+				.hustle-modal-optin_form:not(.hustle-modal-optin_groups){
+					display: block;
+				}
+			}
+
+			.hustle-modal-optin_form:not(.hustle-modal-optin_groups){
+				max-height: 100%;
+			}
+
+			.hustle-modal-optin_wrap {
+				display: flex;
+				flex: 1;
+				flex-direction: column;
+				height: calc( 60vh - 150px );
+				overflow-y: auto;
+				overflow-x: hidden;
+
+				@include screen("small") {
+					flex-direction: row;
+					align-items: center;
+				}
+			}
+
+			.hustle-modal-optin_form {
+
+				&:not(.hustle-modal-optin_groups) {
+					max-height: 200px;
+					overflow-y: auto;
+					overflow-x: hidden;
+					flex-wrap: nowrap;
+
+					.hustle-modal-optin_field {
+
+						@include screen("small") {
+							margin-right: 0;
+							margin-bottom: 1px;
+						}
+					}
+
+					.hustle-modal-optin_button button {
+
+						@include screen("small") {
+							width: 100%;
+						}
+					}
+
+					.wpoi-submit-failure {
+
+						@include screen("small") {
+							margin-top: 1px;
+							margin-right: 0;
+						}
+					}
+
+					&.hustle-modal-optin_separated {
+
+						.hustle-modal-optin_field {
+
+							@include screen("small") {
+								margin-right: 0;
+								margin-bottom: 10px;
+							}
+						}
+
+						.wpoi-submit-failure {
+
+							@include screen("small") {
+								margin-top: 10px;
+								margin-right: 0;
+							}
+						}
+					}
+
+					@media (min-height: 737px) {
+						max-height: 240px;
+					}
+
+					@media (min-height: 920px) {
+						max-height: 300px;
+					}
+
+					@media (min-height: 1025px) {
+						max-height: none;
+						justify-content: center;
+						flex-wrap: wrap;
+					}
+
+					@include screen("small") {
+						flex-direction: column;
+					}
+				}
+
+				&:only-child {
+
+					@include screen("small") {
+						flex: 1;
+					}
+				}
+
+				&.hustle-modal-optin_groups {
+
+					.hustle-modal-optin_group,
+					.hustle-modal-mc_title {
+
+						@include screen("small") {
+							flex: 0 0 auto;
+						}
+					}
+				}
+
+				@include screen("small") {
+					flex: 0 0 auto;
+					flex-direction: column;
+					justify-content: center;
+				}
+			}
+
+			&:only-child {
+
+				@include screen("small") {
+					flex: 1;
+				}
+			}
+
+			@include screen("small") {
+				flex: 0 0 300px;
+			}
+		}
+
+		section {
+			// max-height: 200px;
+			max-height: 100%;
+			display: flex;
+			flex: 1;
+			flex-wrap: nowrap;
+			flex-direction: column;
+			justify-content: flex-start;
+
+			article {
+				max-height: 100%;
+				display: flex;
+				flex: 1 1 auto;
+				-webkit-flex-direction: row;
+				flex-direction: column;
+				-webkit-align-items: left;
+
+				.hustle-modal-article {
+					max-height: 55vh;
+					overflow-y: auto;
+				}
+			}
+
+			@media (min-height: 737px) {
+				max-height: 300px;
+			}
+
+			@media (min-height: 890px) {
+				max-height: 360px;
+			}
+
+			@media (min-height: 920px) {
+				max-height: 500px;
+			}
+
+			@media (min-height: 1025px) {
+				max-height: none;
+				justify-content: center;
+			}
+		}
+
+		&.hustle-modal-image_right {
+			flex-direction: column-reverse;
+
+			@include screen("small") {
+				flex-direction: row-reverse;
+			}
+		}
+
+		@include screen("small") {
+			max-height: 70vh;
+			flex-wrap: wrap;
+			flex-direction: row;
+		}
+	}
+}
+
+// Fix for IE.
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+	.wph-modal {
+		.hustle-modal-four {
+			.hustle-modal-body {
+				aside {
+					.hustle-modal-optin_wrap{
+						display: block;
+						flex:none;
+					}
+				}
+			}
+		}
+	}
+}
+
+.hustle_module_shortcode_wrap,
+.hustle_module_widget_wrap {
+	.hustle-modal-four {
+		.hustle-modal-body {
+			aside{
+				.hustle-modal-optin_form:not(.hustle-modal-optin_groups) {
+					max-height:100%;
+				}
+			}
+		}
+	}
+}

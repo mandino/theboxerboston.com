@@ -1,0 +1,35 @@
+.wpmudev-ui #wph-wizard-design-css_holder {
+
+	&.wpmudev-show {
+		display: flex;
+	}
+
+	&.wpmudev-hidden {
+		display: none;
+	}
+
+	.wpmudev-css-selectors {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		margin: 15px 0 10px;
+		
+		.wpmudev-css-stylable {
+			flex: 0 0 auto;
+			margin: 0 10px 5px 0;
+			padding: 0 5px;
+			border-radius: 3px;
+			background: linear-gradient(#828BC9, #A7ADD9);
+			box-shadow: inset 0 1px 0 rgba(130, 139, 201, 0.5);
+			color: #F3F4FA;
+			font: 400 12px/21px $font--opn;
+			letter-spacing: 0;
+			transition: background 0.2s ease-in-out;
+
+			&:hover, &:focus, &:active {
+				background: linear-gradient(#828BC9, #828BC9);
+				color: #F3F4FA;
+			}
+		}
+	}
+}

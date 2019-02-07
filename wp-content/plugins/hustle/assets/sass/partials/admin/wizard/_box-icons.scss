@@ -1,0 +1,111 @@
+.wpmudev-ui #wph-wizard-design-icons {
+
+	.wpmudev-tabs {
+		margin-top: 5px;
+
+		.wpmudev-tabs-menu {
+
+			.wpmudev-tabs-menu_item label {
+				padding: 10px 20px;
+
+				.hustle-social-icon {
+					width: 18px;
+					min-width: 18px;
+					height: 18px;
+					min-height: 18px;
+					opacity: 0.7;
+					margin: 0 auto;
+
+					&:not(.hustle-icon-rounded) {
+						
+						.hustle-icon-container {
+							width: 16px;
+							min-width: 16px;
+							height: 16px;
+						}
+					}
+
+					&.hustle-icon-rounded {
+
+						.hustle-icon-container {
+							width: 18px;
+							min-width: 18px;
+							height: 18px;
+						}
+					}
+
+					@include screen("large") {
+						margin: 10px auto;
+					}
+				}
+
+				.hustle-icon-flat .hustle-icon {
+					width: 16px;
+					height: 16px;
+
+					.hustle-icon-path {
+						fill: $color-gray--dark;
+					}
+				}
+
+				.hustle-icon-outline,
+				.hustle-icon-rounded,
+				.hustle-icon-squared {
+					border-color: $color-gray--dark;
+				}
+
+				.hustle-icon-outline {
+
+					.hustle-icon {
+						width: 10px;
+						height: 10px;
+					}
+
+					.hustle-icon-path {
+						fill: $color-gray--dark;
+					}
+				}
+
+				.hustle-icon-rounded,
+				.hustle-icon-squared {
+
+					.hustle-icon-container {
+						background: $color-gray--dark;
+
+						.hustle-icon {
+							width: 8px;
+							height: 8px;
+						}
+
+						.hustle-icon-path {
+							fill: $color-white;
+						}
+					}
+				}
+
+				@include screen("large") {
+					padding: 0 20px;
+				}
+			}
+
+			.wpmudev-tabs-menu_item.current label {
+
+				.hustle-social-icon {
+					opacity: 1;
+				}
+			}
+		}
+	}
+
+	.wpmudev-box-reorder {
+		margin-top: 5px;
+	}
+
+	#wpmudev-choose-icons-style {
+		margin-bottom: 20px;
+
+		@include screen("small") {
+			margin-bottom: 30px;
+		}
+	}
+}

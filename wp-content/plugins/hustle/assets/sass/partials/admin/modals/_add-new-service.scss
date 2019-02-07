@@ -1,0 +1,92 @@
+.wpmudev-ui #wph-add-new-service-modal {
+
+	.wpmudev-box-body {
+		
+		.wpmudev-provider-block {
+			margin: 20px 0 0;
+			
+			.wpmudev-select + .select2 {
+				margin-top: 0;
+			}
+
+			.wpmudev-provider-group {
+				display: flex;
+				flex-wrap: wrap;
+				flex-direction: column;
+				padding: 2px;
+				border: 1px solid $color-silver;
+				border-radius: 5px;
+				background: $color-white;
+
+				.wpmudev-input_text {
+					height: 34px;
+					flex: 1;
+					padding-right: 0;
+					padding-left: 12px;
+					margin: 0 2px 0 0;
+					border: 0;
+					border-radius: 0;
+					line-height: 34px;
+				}
+
+				.wpmudev-button-sm {
+					min-width: 77px;
+					height: 34px;
+					display: block;
+					flex: 0 0 auto;
+					margin: 0;
+					padding: 0 6px;
+					background: $color-silver--soft;
+					color: $color-gray--dark;
+					line-height: 34px;
+					font-family: $font;
+					font-weight: 400;
+					text-transform: none;
+
+					&:hover, &:focus {
+						background: $color-silver;
+						color: #AAA;
+					}
+				}
+
+				+ p {
+					margin-top: 0;
+				}
+
+				@include screen("xs") {
+					flex-direction: row;
+					align-items: center;
+				}
+			}
+
+			.wph-optin-list-group-interests-wrap {
+				margin: 20px 0 0;
+
+				&:first-child {
+					margin: 0;
+				}
+			}
+
+			.wph-optin-list-groups {
+				margin-top: 20px;
+
+				label {
+					display: block;
+				}
+
+				.wpmudev-label--notice {
+					margin-top: 20px;
+				}
+			}
+			
+			&:first-child {
+				margin: 0;
+			}
+		}
+
+		input[type=hidden] + .wpmudev-provider-block {
+			margin: 0;
+		}
+
+	}
+}

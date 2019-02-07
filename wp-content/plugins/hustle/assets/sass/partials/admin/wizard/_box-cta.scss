@@ -1,0 +1,40 @@
+.wpmudev-ui #wph-wizard-content-cta {
+
+	.wpmudev-box-right {
+
+		.wpmudev-box-gray {
+
+			.wpmudev-cta-elements {
+				display: flex;
+				flex-wrap: wrap;
+				flex-direction: column;
+				margin-bottom: 10px;
+
+				.wpmudev-cta-label,
+				.wpmudev-cta-url {
+					flex: 1;
+					margin-bottom: 10px;
+
+					&:last-child {
+						margin-right: 0;
+						margin-bottom: 0;
+					}
+
+					@include screen("medium") {
+						margin-right: 19px;
+						margin-bottom: 0;
+					}
+				}
+
+				@include screen("medium") {
+					flex-direction: row;
+				}
+			}
+			
+			.wpmudev-tabs {
+				margin-top: 10px;
+				margin-bottom: 0;
+			}
+		}
+	}
+}

@@ -1,0 +1,89 @@
+.wpmudev-ui #wph-edit-form-modal {
+
+	.wpmudev-box-modal {
+
+		.wpmudev-box-body {
+			padding: 0;
+
+			@include screen("small") {
+				padding: 0;
+			}
+		}
+
+		.wpmudev-box-footer {
+
+			.wpmudev-button-blue {
+				min-width: 146px;
+			}
+		}
+	}
+
+	.wpmudev-table-fields {
+
+		.wpmudev-table-body {
+			min-height: 308px;
+			max-height: 308px;
+			overflow-x: hidden;
+			overflow-y: auto;
+		}
+
+		.wpmudev-table-body-content {
+
+			.wpmudev-row {
+				margin-bottom: 15px;
+
+				&:first-child {
+					margin-bottom: 10px;
+				}
+
+				&:last-child {
+					margin-bottom: 0;
+
+					.wpmudev-col:last-child {
+						text-align: right;
+					}
+
+					.wpmudev-icon-delete {
+						display: inline-flex;
+						align-items: center;
+						color: #898989;
+						font: 400 15px/36px $font;
+						letter-spacing: 0.25px;
+
+						span {
+							flex: 0 0 auto;
+						}
+
+						&:hover,
+						&:focus {
+							color: $color-gray--dark;
+
+							.wpmudev-i_delete path {
+								fill: $color-red;
+							}
+						}
+					}
+
+					.wpmudev-i_delete {
+						max-width: 16px;
+						min-width: 16px;
+						max-height: 16px;
+						flex: 0 0 16px;
+						display: block;
+						margin-right: 5px;
+
+						path {
+							fill: rgba(249, 0, 0, 0.7);
+							transition: $transition;
+						}
+					}
+				}
+			}
+
+			.wpmudev-input_text,
+			.wpmudev-select + .select2 {
+				margin-top: 0;
+			}
+		}
+	}
+}

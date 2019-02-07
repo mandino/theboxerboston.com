@@ -1,0 +1,194 @@
+.wpmudev-ui #wph-wizard-content-email {
+
+	.wpmudev-table {
+
+		thead {
+			display: block;
+			margin-bottom: 10px;
+			border-radius: 5px;
+
+			@include screen("medium") {
+				display: table-header-group;
+				margin-bottom: 0;
+				border-radius: 0;
+			}
+		}
+
+		tbody tr td {
+			padding: 10px 0;
+
+			.wpmudev-table_inner {
+
+				tbody tr td {
+					padding-right: 0;
+
+					@include screen("medium") {
+						padding-top: 0;
+						padding-bottom: 0;
+					}
+				}
+			}
+
+			&:first-child {
+
+				@include screen("medium") {
+					padding-left: 0;
+				}
+			}
+
+			&:last-child {
+
+				@include screen("medium") {
+					padding-right: 0;
+				}
+			}
+
+			@include screen("medium") {
+				padding: 20px 15px 10px;
+			}
+		}
+	}
+	
+	.wpmudev-table .wpmudev-table_inner {
+
+		tr {
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: column-reverse;
+
+			td {
+				padding: 0;
+				vertical-align: top;
+
+				.wpmudev-switch {
+					display: block;
+					padding: 0;
+				}
+
+				.wpmudev-icon {
+					max-width: 25px;
+					max-height: 25px;
+
+					&.wpmudev-i_hustle {
+						
+						@include screen("medium") {
+							margin-top: 2px;
+						}
+					}
+
+					&.wpmudev-i_mailchimp {
+						max-width: 30px;
+						max-height: 30px;
+
+						@include screen("medium") {
+							margin-top: 0;
+						}
+					}
+
+					&.wpmudev-i_madmimi {
+						width: 25px;
+						height: 25px;
+						background: url("../img/icon-madmimi.png") no-repeat transparent;
+						background-size: cover;
+					}
+
+					@include screen("medium") {
+						margin-top: 5px;
+					}
+				}
+
+				.wpmudev-table_name,
+				.wpmudev-table_desc {
+					display: block;
+				}
+
+				.wpmudev-table_name {
+					color: $color-gray--alt;
+					font: 400 16px/26px $font;
+					letter-spacing: 0;
+				}
+
+				.wpmudev-table_desc {
+					overflow: hidden;
+					color: $color-gray--alt;
+					font: 400 12px/16px $font;
+					letter-spacing: 0;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+				}
+				
+				&:first-child {
+					
+					@include screen("xs") {
+						flex: 0 40px;
+						margin-top: 7px;
+						margin-right: 10px;
+					}
+					
+					@include screen("medium") {
+						width: 40px;
+					}
+				}
+
+				&:not(:first-child):not(:last-child) {
+					display: none;
+
+					@include screen("xs") {
+						display: block;
+						flex: 0 25px;
+						margin-top: 7px;
+						margin-right: 10px;
+					}
+					
+					@include screen("medium") {
+						width: 50px;
+						display: table-cell;
+						padding-left: 20px;
+					}
+				}
+
+				&:last-child {
+					margin-bottom: 5px;
+
+					@include screen("xs") {
+						overflow: hidden;
+						flex: 1;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+					}
+					
+					@include screen("medium") {
+						margin-bottom: 0;
+						padding-left: 11px;
+					}
+				}
+			}
+
+			@include screen("xs") {
+				flex-direction: row;
+			}
+
+			@include screen("medium") {
+				display: table-row;
+			}
+		}
+	}
+
+	&:not(.last) {
+		padding-bottom: 0;
+		border-bottom: 0;
+
+		.wpmudev-box-right {
+			padding-bottom: 20px;
+			border-bottom: 1px solid $color-silver--alt;
+			
+			@include screen("small") {
+				padding-bottom: 30px;
+			}
+
+			@include screen("medium") {
+				padding-bottom: 92px;
+			}
+		}
+	}
+}

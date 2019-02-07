@@ -1,0 +1,219 @@
+.wpmudev-ui .wpmudev-box {
+	margin-bottom: 20px;
+	border-radius: 5px;
+	background: $color-white;
+	box-shadow: 0 2px 0 $color-silver--alt;
+	
+	.wpmudev-box-head {
+		padding: 0 20px;
+		border-bottom: 1px solid $color-silver--alt;
+
+		h2 {
+			margin: 0;
+			color: $color-gray--dark;
+			font-size: 18px;
+			line-height: 60px;
+			letter-spacing: -0.45px;
+			text-transform: uppercase;
+		}
+		
+		h3 {
+			margin: 0;
+			font-size: 15px;
+			letter-spacing: -0.15px;
+			text-transform: uppercase;
+		}
+
+		@include screen("small") {
+			padding: 0 30px;
+		}
+	}
+	
+	.wpmudev-box-body {
+		padding: 20px 21px;
+
+		&.wpmudev-box-hero {
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: column;
+
+			.wpmudev-box-character {
+				max-height: 222px;
+				overflow: hidden;
+				display: none;
+
+				.wpmudev-character {
+					display: block;
+				}
+
+				@include screen("small") {
+					display: block;
+				}
+
+				@include screen("medium") {
+					margin-right: 66px;
+				}
+			}
+
+			.wpmudev-box-content {
+				flex: 1;
+			}
+
+			@include screen("small") {
+				flex-direction: row;
+				align-items: center;
+				padding-top: 17px;
+				padding-bottom: 0;
+				padding-left: 18px;
+			}
+		}
+
+		@include screen("small") {
+			padding: 30px 31px;
+		}
+	}
+
+	.wpmudev-box-footer {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: column;
+		margin: 20px -21px 0;
+		padding: 20px 20px 0;
+		border-top: 1px solid $color-silver--alt;
+
+		.wpmudev-button {
+			margin: 0 0 20px;
+
+			&:last-child {
+				margin: 0;
+
+				@include screen("small") {
+					margin: 0;
+				}
+			}
+
+			@include screen("small") {
+				margin: 0 20px 0 0;
+			}
+		}
+
+		.wpmudev-box-fwrap {
+			display: flex;
+			flex: 1;
+			flex-direction: column;
+			margin-bottom: 20px;
+
+			&:first-child {
+
+				@include screen("small") {
+					justify-content: flex-start;
+				}
+			}
+
+			&:last-child {
+				margin-bottom: 0;
+				
+				@include screen("small") {
+					justify-content: flex-end;
+					margin-right: 0;
+				}
+			}
+
+			@include screen("small") {
+				flex-wrap: wrap;
+				flex-direction: row;
+				margin-right: 20px;
+				margin-bottom: 0;
+			}
+		}
+
+		@include screen("small") {
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+			margin: 30px -31px 0;
+			padding: 30px 30px 0;
+		}
+	}
+
+	// WHEN box can close
+	&.wpmudev-box-close {
+
+		.wpmudev-box-head {
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: row;
+			align-items: center;
+			padding-top: 21px;
+			padding-bottom: 21px;
+
+			h2, h3 {
+				flex: 1;
+				margin-right: 20px;
+				line-height: 18px;
+
+				&:last-child {
+					margin-right: 0;
+				}
+			}
+
+			.wpmudev-icon {
+				max-width: 18px;
+				max-height: 18px;
+				margin-right: 20px;
+
+				&.wpmudev-i_close {
+					max-width: 12px;
+					max-height: 12px;
+					cursor: pointer;
+
+					path {
+						fill: rgba(51,51,51,0.5);
+					}
+				}
+
+				&.wpmudev-i_plus {
+					max-width: 13px;
+					max-height: 13px;
+					cursor: pointer;
+
+					path {
+						fill: rgba(51,51,51,0.5);
+					}
+				}
+
+				.wpmudev-i_plus_y {
+					transform: rotate(-90deg);
+					transform-origin: 50% 50%;
+					transition: transform .2s linear;
+				}
+
+				
+				&:last-child {
+					margin-right: 0;
+				}
+			}
+
+			.wpmudev-box-action {
+				cursor: pointer;
+				padding: 5px 0;
+
+				.wpmudev-icon {
+					display: block;
+				}
+			}
+		}
+
+		.wpmudev-box-head.wpmudev-collapsed {
+			.wpmudev-icon .wpmudev-i_plus_y {
+				transform: rotate(0deg);
+				transform-origin: 50% 50%;
+			}
+		}
+
+	}
+
+	@include screen("xs") {
+		margin-bottom: 30px;
+	}
+}

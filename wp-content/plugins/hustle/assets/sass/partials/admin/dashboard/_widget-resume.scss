@@ -1,0 +1,168 @@
+.wpmudev-ui #wpmudev-dashboard-widget-resume {
+
+	.wpmudev-box .wpmudev-box-body {
+		display: flex;
+
+		.wpmudev-box-character {
+			overflow: hidden;
+			display: none;
+			flex: 0 0 auto;
+
+			.wpmudev-character {
+				display: block;
+			}
+
+			@include screen("small") {
+				display: block;
+			}
+
+			@include screen("medium") {
+				max-height: 219px;
+				margin-top: 20px;
+			}
+		}
+
+		.wpmudev-box-content {
+			display: flex;
+			flex: 1;
+			flex-direction: column;
+
+			.wpmudev-dashboard-resume-text {
+				margin-bottom: 20px;
+
+				h2 {
+					margin-bottom: 19px;
+					line-height: 22px;
+					letter-spacing: -0.5px;
+				}
+				
+				p {
+					margin-top: 0;
+					letter-spacing: -0.22px;
+				}
+
+				@include screen("small") {
+					margin-bottom: 30px;
+				}
+
+				@include screen("medium") {
+					margin-bottom: 0;
+					padding-right: 30px;
+					text-align: center;
+				}
+
+				@include screen("large") {
+					margin-right: 40px;
+					padding-right: 15px;
+					padding-left: 15px;
+				}
+			}
+
+			.wpmudev-dashboard-resume-table {
+				flex: 0 0 auto;
+
+				.wpmudev-table {
+
+					tbody tr {
+						padding-top: 10px;
+						padding-bottom: 10px;
+
+						th, td {
+							padding: 0;
+							text-align: left;
+
+							@include screen("xs") {
+								flex: 1;
+							}
+
+							@include screen("medium") {
+								padding-top: 18px;
+								padding-bottom: 18px;
+							}
+						}
+
+						th {
+
+							@include screen("small") {
+								font-size: 15px;
+							}
+
+							@include screen("medium") {
+								overflow: hidden;
+								text-overflow: ellipsis;
+								white-space: nowrap;
+							}
+						}
+
+						td {
+
+							@include screen("xs") {
+								text-align: right;
+							}
+						}
+
+						&:first-child {
+							padding-top: 0;
+
+							th, td {
+
+								@include screen("medium") {
+									padding-top: 0;
+								}
+							}
+						}
+
+						&:last-child {
+							padding-bottom: 0;
+							border-bottom: 0;
+
+							th, td {
+
+								@include screen("medium") {
+									padding-bottom: 0;
+									border-bottom: 0;
+								}
+							}
+						}
+
+						@include screen("xs") {
+							display: flex;
+						}
+
+						@include screen("medium") {
+							display: table-row;
+						}
+					}
+				}
+
+				@include screen("medium") {
+					min-width: 300px;
+					flex: 0 0 300px;
+				}
+
+				@include screen("large") {
+					min-width: 374px;
+					flex: 0 0 374px;
+				}
+			}
+
+			@include screen("medium") {
+				flex-direction: row;
+				align-items: center;
+				padding-bottom: 0;
+			}
+		}
+
+		@include screen("small") {
+			align-items: center;
+		}
+
+		@include screen("medium") {
+			padding: 0 31px 0 0;
+		}
+
+		@include screen("large") {
+			padding: 0 30px 0 37px;
+		}
+	}
+}

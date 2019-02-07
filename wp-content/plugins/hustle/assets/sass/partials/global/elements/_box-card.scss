@@ -1,0 +1,69 @@
+.wpmudev-ui .wpmudev-box-card {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	align-items: center;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	background: $color-white;
+	box-shadow: 0 2px 0 $color-silver--alt;
+
+	.wpmudev-box-image {
+		overflow: hidden;
+		display: none;
+		flex: 0 0 auto;
+		border-radius: 5px 0 0 5px;
+
+		.wpmudev-icon {
+			width: 144px;
+			height: 144px;
+			display: block;
+			background: #F9F9F9;
+		}
+
+		@include screen("small") {
+			display: block;
+		}
+	}
+
+	.wpmudev-box-content {
+		flex: 1;
+		padding: 20px;
+
+		h3 {
+			margin: 5px 0;
+			line-height: 20px;
+			text-transform: uppercase;
+
+			&:first-child {
+				margin-top: 3px;
+			}
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		p {
+			margin: 5px 0;
+			font-size: 12px;
+			line-height: 20px;
+
+			&:first-child {
+				margin-top: 0;
+			}
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		@include screen("small") {
+			padding: 10px 30px;
+		}
+	}
+
+	@include screen("small") {
+		margin-bottom: 30px;
+	}
+}

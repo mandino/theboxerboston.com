@@ -1,0 +1,70 @@
+.wpmudev-ui .wpmudev-google-chart {
+	text-transform: uppercase;
+
+	svg {
+
+		#defs + rect + g {
+
+			rect + g {
+
+				g:first-child {
+
+					rect:not(:first-child) {
+						fill: transparent !important;
+					}
+				}
+			}
+		}
+	}
+
+	.google-visualization-tooltip {
+		padding: 4px;
+		border: 1px solid #FFD904;
+
+		.google-visualization-tooltip-item-list {
+			margin: 0;
+
+			.google-visualization-tooltip-item {
+				display: block;
+				margin: 0;
+				padding: 0;
+				color: $color-black;
+				font: 400 11px/12px $font--alt;
+				text-transform: none;
+
+				span {
+					overflow: hidden;
+					display: block;
+					color: $color-black;
+					font-size: 11px !important;
+					font-family: $font--alt !important;
+					font-weight: 400 !important;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+				}
+				
+				&:before {
+					display: none;
+				}
+			}
+
+			&:last-child {
+
+				.google-visualization-tooltip-item {
+
+					&:last-child {
+
+						span:first-child {
+							display: none;
+						}
+
+						span:last-child:after {
+							content: "Conv";
+							margin-left: 4px;
+						}
+					}
+				}
+			}
+		}
+	}
+}

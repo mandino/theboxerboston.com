@@ -1,0 +1,25 @@
+.wpmudev-ui #wph-welcome {
+
+	.wpmudev-box-body {
+
+		.wpmudev-box-content {
+
+			h2 {
+				margin: 0 0 18px;
+				line-height: 22px;
+			}
+
+			p {
+				margin: 0;
+			}
+
+			ul {
+				margin-bottom: 0;
+
+				@include screen("small") {
+					margin-bottom: 22px;
+				}
+			}
+		}
+	}
+}

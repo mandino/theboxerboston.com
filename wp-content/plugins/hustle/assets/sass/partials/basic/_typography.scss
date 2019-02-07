@@ -1,0 +1,134 @@
+// Headings
+.wpmudev-ui {
+
+	h1, h2, h3, h4, h5, h6 {
+		margin: 15px 0;
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	h1 {
+		color: $color-gray--dark;
+		font: 700 30px/40px $font--alt;
+		letter-spacing: -0.6px;
+		text-transform: uppercase;
+	}
+
+	h2 {
+		color: $color-gray;
+		font: 700 22px/60px $font--alt;
+		letter-spacing: -0.5px;
+	}
+
+	h3 {
+		color: $color-gray--dark;
+		font: 700 18px/60px $font--alt;
+		letter-spacing: -0.45px;
+	}
+
+	h4 {
+		color: $color-gray--dark;
+		font: 400 15px/30px $font;
+		letter-spacing: 0;
+
+		strong {
+			font-weight: 500;
+			letter-spacing: -0.25px;
+		}
+	}
+
+	h5 {
+		color: $color-gray--dark;
+		font: 700 14px/70px $font--alt;
+	}
+
+	h6 {
+		color: #141414;
+		font: 400 14px/19px $font--opn;
+		
+		small {
+			line-height: 20px;
+		}
+	}
+}
+
+// Paragraph + Links
+.wpmudev-ui {
+	
+	p {
+		margin: 30px 0;
+		color: $color-gray--alt;
+		font: 400 14px/22px $font;
+		letter-spacing: 0;
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		@include screen("small") {
+			font-size: 16px;
+			line-height: 26px;
+		}
+	}
+
+	small {
+		color: $color-gray;
+		font-size: 12px;
+		line-height: inherit;
+		font-family: inherit;
+		font-weight: inherit;
+	}
+
+	a:not(.wpmudev-button) {
+		outline: none;
+		color: $color-blue;
+		font-weight: inherit;
+		text-decoration: none;
+		transition: $transition;
+
+		&:hover, &:focus {
+			outline: none;
+			color: $color-blue--dark;
+		}
+	}
+}
+
+// Unordered Lists
+.wpmudev-ui {
+
+	ul {
+		margin: 10px 0 22px 10px;
+		padding: 0;
+		list-style: none;
+
+		li {
+			margin: 0;
+			color: $color-gray--alt;
+			font: 400 15px/24px $font;
+			list-style: none;
+
+			&:before {
+				content: "•";
+				margin-right: 4px;
+			}
+
+			&:last-child {
+				margin: 0;
+			}
+		}
+	}
+}
+
+// Ordered Lists
+
+// Blockquotes

@@ -1,0 +1,86 @@
+/* Disable scrolling */
+html.hustle-no-scroll, html.hustle-no-scroll body {
+	overflow: hidden;
+}
+
+.hustle-modal {
+	width: 100%;
+	max-width: 800px;
+	opacity: 0;
+	flex: 0 0 auto;
+	position: relative;
+	box-sizing: border-box;
+
+	* {
+		box-sizing: border-box;
+		text-rendering: geometricPrecision;
+		-webkit-font-smoothing: antialiased;
+	}
+
+	.hustle-sr-only {
+		width: 1px !important;
+		height: 1px !important;
+		overflow: hidden !important;
+		position: absolute !important;
+		margin: 0 !important;
+		padding: 0 !important;
+		border: 0 !important;
+		clip: rect(0,0,0,0) !important;
+	}
+
+	&.hustle-modal-image_only {
+		width: auto;
+		max-width: 100%;
+	}
+
+	&.hustle-modal-static {
+		opacity: 1;
+		position: relative;
+	}
+
+	.hustle-modal-body{
+		max-height:100%;
+	}
+
+	// For IE Fix.
+	@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+		.hustle-modal-optin_wrap {
+			.hustle-modal-optin_form {
+				.hustle-modal-optin_field{
+				 display:block;
+				 flex:none;
+			 }
+			}
+		}
+	}
+
+	&:not(.hustle-modal-image_only) {
+		.hustle-modal-image.hustle-modal-image_contain {
+			img{
+				position: relative;
+			}
+		}
+	}
+}
+
+
+.hustle_module_shortcode_wrap,
+.hustle_module_widget_wrap {
+	.hustle-modal {
+		.hustle-modal-body {
+			max-height:100%;
+			.hustle-modal-optin_wrap{
+				margin: auto;
+				background: transparent;
+			}
+		}
+
+		section {
+			article {
+				.hustle-modal-article {
+					max-height: 100%;
+				}
+			}
+		}
+	}
+}

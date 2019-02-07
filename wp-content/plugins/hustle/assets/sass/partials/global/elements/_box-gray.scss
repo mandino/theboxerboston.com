@@ -1,0 +1,14 @@
+.wpmudev-ui .wpmudev-box-gray {
+	margin: 10px 0;
+	padding: 15px;
+	border-radius: 5px;
+	background: #F8F8F8;
+
+	&:first-child {
+		margin-top: 0;
+	}
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}

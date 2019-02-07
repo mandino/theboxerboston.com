@@ -1,0 +1,262 @@
+.wpmudev-ui #wpmudev-dashboard-widget-modules {
+
+	.wpmudev-box {
+
+		.wpmudev-box-body {
+
+			.wpmudev-table {
+
+				thead, tbody {
+
+					.wpmudev-table--name {
+
+						@include screen("medium") {
+							padding-left: 10px;
+						}
+					}
+
+					.wpmudev-table--multistatus {
+
+						@include screen("medium") {
+							width: 131px;
+							padding-left: 10px;
+						}
+					}
+
+					.wpmudev-table--views,
+					.wpmudev-table--rate,
+					.wpmudev-table--status {
+
+						@include screen("medium") {
+							width: 70px;
+							padding-left: 10px;
+							text-align: center;
+						}
+					}
+
+					.wpmudev-table--button {
+
+						.wpmudev-button-sm {
+							
+							@include screen("medium") {
+								width: 60px;
+								min-width: 1px;
+								padding: 0 10px;
+							}
+						}
+
+						@include screen("medium") {
+							width: 80px;
+							padding-right: 10px;
+							padding-left: 10px;
+							text-align: right;
+						}
+					}
+				}
+
+				tbody {
+
+					tr {
+
+						&:last-child {
+							
+							@media (max-width: 960px) {
+								margin-bottom: 0;
+							}
+						}
+
+						@media (max-width: 960px) {
+							margin-bottom: 20px;
+							padding-bottom: 20px;
+						}
+					}
+					
+					.wpmudev-table--name {
+						color: $color-gray--dark;
+						font-family: $font--alt;
+						font-weight: 700;
+						text-transform: uppercase;
+
+						span {
+							margin-left: 5px;
+							padding: 3px 5px;
+							border-radius: 2px;
+							background: #F2F2F2;
+							color: #929292;
+						}
+
+						@include screen("medium") {
+							font-family: $font;
+							font-weight: 500;
+							text-transform: none;
+						}
+					}
+
+					.wpmudev-table--views,
+					.wpmudev-table--rate,
+					.wpmudev-table--status {
+
+						&:before {
+
+							@media (max-width: 960px) {
+								content: attr(data-name);
+								margin-right: 6px;
+								color: $color-gray--dark;
+								font-weight: 700;
+							}
+						}
+
+						@media (max-width: 960px) {
+							padding: 0 10px;
+							background: $color-silver--alt;
+						}
+					}
+
+					.wpmudev-table--views {
+						
+						@media (max-width: 960px) {
+							padding-top: 10px;
+							border-radius: 4px 4px 0 0;
+						}
+					}
+
+					.wpmudev-table--status {
+
+						.module-status-off,
+						.module-status-test,
+						.module-status-live {
+							font-weight: 600;
+						}
+
+						.module-status-test {
+							color: $color-yellow;
+						}
+
+						.module-status-live {
+							color: $color-blue;
+						}
+
+						@media (max-width: 960px) {
+							margin-bottom: 10px;
+							padding-bottom: 10px;
+							border-radius: 0 0 4px 4px;
+						}
+					}
+
+					.wpmudev-table--multistatus {
+
+						.wpmudev-multistatus--wrap {
+							display: flex;
+
+							.wpmudev-multistatus--status {
+								margin-right: 5px;
+
+								&:last-child {
+									margin-right: 0;
+								}
+							}
+						}
+
+						.wpmudev-multistatus--status {
+							display: flex;
+							align-items: center;
+							padding: 4px 5px;
+							border-radius: 5px;
+							background: #EDEDED;
+
+							.wpmudev-multistatus--module-off,
+							.wpmudev-multistatus--module-test,
+							.wpmudev-multistatus--module-live {
+								width: 6px;
+								height: 6px;
+								display: block;
+								margin-right: 3px;
+								border-radius: 10px;
+							}
+
+							.wpmudev-multistatus--module-off {
+								background: #CCCCCC;
+
+								+ .wpmudev-multistatus--module-icon {
+									opacity: 0.3;
+								}
+							}
+
+							.wpmudev-multistatus--module-test {
+								background: $color-yellow;
+							}
+
+							.wpmudev-multistatus--module-live {
+								background: $color-blue;
+							}
+
+							.wpmudev-multistatus--module-icon {
+
+								.wpmudev-icon {
+									display: block;
+								}
+							}
+						}
+
+						~ .wpmudev-table--rate {
+							margin-bottom: 10px;
+							padding-bottom: 10px;
+							border-radius: 0 0 4px 4px;
+
+							@include screen("medium") {
+								margin-bottom: 0;
+								border-radius: 0;
+							}
+						}
+					}
+
+					.wpmudev-table--button {
+
+						@media (max-width: 960px) {
+							padding-bottom: 0;
+						}
+					}
+				}
+			}
+
+			.wpmudev-button-sm {
+				padding: 0 22px;
+			}
+		}
+
+		// Widget: Social Shares
+		&#wpmudev-dashboard-widget-shares {
+
+			.wpmudev-box-body {
+
+				p {
+
+					&:last-child {
+
+						@include screen("medium") {
+							margin-bottom: 0;
+						}
+					}
+
+					@include screen("medium") {
+						margin-bottom: 56px;
+					}
+				}
+
+				.wpmudev-table-comulative {
+
+					thead tr th,
+					tbody tr td {
+
+						&:last-child {
+
+							@include screen("medium") {
+								text-align: right;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,87 @@
+.hustle-modal-one {
+
+	.hustle-modal-body {
+		overflow: hidden;
+
+		section {
+			max-height: 60vh;
+			overflow: hidden;
+			display: flex;
+			flex-wrap: nowrap;
+			flex-direction: column;
+
+			article {
+				overflow: hidden;
+				display: flex;
+				flex: 1;
+				flex-direction: column;
+
+				.hustle-modal-article {
+					overflow-y: auto;
+					flex: 1;
+					
+					@include screen("small") {
+						max-width: 100%;
+						max-height: 100%;
+						flex: 0 1 auto;
+					}
+				}
+
+				@include screen("small") {
+					justify-content: center;
+				}
+			}
+
+			&.hustle-modal-image_right {
+				flex-direction: column-reverse;
+
+				@include screen("small") {
+					flex-direction: row-reverse;
+				}
+			}
+
+			&.hustle-modal-image_above {
+				
+				@include screen("small") {
+					flex-direction: column;
+				}
+			}
+
+			&.hustle-modal-image_below {
+				flex-direction: column-reverse;
+
+				@include screen("small") {
+					flex-direction: column-reverse;
+				}
+			}
+
+			@include screen("small") {
+				max-height: 70vh;
+				flex-direction: row;
+			}
+		}
+	}
+}
+
+.hustle-modal-one:not(.hustle-modal-image_only) {
+
+	.hustle-modal-image_above,
+	.hustle-modal-image_below {
+
+		.hustle-modal-image:not(.hustle-modal-image_none) {
+
+			@include screen("small") {
+				flex: 0 0 150px;
+			}
+		}
+
+		.hustle-modal-image_none {
+
+			@include screen("small") {
+				max-width: 100%;
+				max-height: 50%;
+				flex: 0 0 auto;
+			}
+		}
+	}
+}

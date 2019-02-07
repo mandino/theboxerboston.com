@@ -1,0 +1,80 @@
+.wpmudev-ui .wpmudev-pagination {
+	display: flex;
+	justify-content: flex-start;
+	margin: 0;
+	padding: 8px 15px;
+	border-radius: 5px;
+	background: #F2F2F2;
+
+	li {
+		flex: 0 0 auto;
+
+		.wpmudev-icon {
+			width: 13px;
+			max-height: 8px;
+			display: block;
+		}
+
+		a, span {
+			display: block;
+			font: 400 12px/24px $font--alt;
+		}
+
+		a {
+			
+			.wpmudev-icon path {
+				fill: $color-blue;
+				transition: $transition;
+			}
+
+			&:hover {
+
+				.wpmudev-icon path {
+					fill: $color-blue--dark;
+				}
+			}
+		}
+
+		span {
+			color: #CCCCCC;
+
+			.wpmudev-icon path {
+				fill: #CCCCCC;
+			}
+		}
+
+		&:before {
+			display: none;
+		}
+
+		&.wpmudev-prev {
+			margin-right: 10px;
+			
+			a, span {
+				transform: rotate(90deg);
+				transform-origin: 2px 7px;
+			}
+		}
+
+		&.wpmudev-number {
+			margin-right: 10px;
+		}
+
+		&.wpmudev-next {
+			
+			a, span {
+				border-bottom: 0;
+				transform: rotate(-90deg);
+				transform-origin: 11px 7px;
+			}
+		}
+	}
+
+	@include screen("xs") {
+		justify-content: center;
+	}
+
+	@include screen("small") {
+		justify-content: flex-end;
+	}
+}

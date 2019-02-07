@@ -1,0 +1,668 @@
+.wpmudev-ui .wpmudev-list {
+	margin: 22px 0 0;
+
+	.wpmudev-list--action {
+		display: flex;
+		align-items: center;
+
+		.wpmudev-action--left {
+			display: flex;
+			flex: 1;
+
+			.wpmudev-select + .select2 {
+				
+				@include screen("small") {
+					max-width: 350px;
+				}
+			}
+
+			.wpmudev-button {
+				margin-left: 5px;
+			}
+		}
+
+		.wpmudev-action--right {
+			flex: 0 0 auto;
+			margin-left: 10px;
+		}
+	}
+
+	.wpmudev-list--header {
+		display: none;
+		margin: 20px 0 0;
+		padding: 8px 15px;
+
+		div[class^="wpmudev-header--"] {
+			display: none;
+			color: $color-gray--dark;
+			font: 600 12px/20px $font;
+			letter-spacing: -0.2px;
+
+			@include screen("small") {
+				display: block;
+			}
+		}
+
+		.wpmudev-header--check {
+
+			.wpmudev-input_checkbox {
+				width: 20px;
+				height: 20px;
+				display: block;
+				margin: 0;
+
+				input + label {
+					width: 20px;
+					height: 20px;
+					border: 1px solid #D9D9D9;
+					background: #F7F7F7;
+
+					&:before {
+						color: #F7F7F7;
+						line-height: 17px;
+					}
+				}
+
+				input:checked + label {
+					border-color: $color-blue;
+					background: $color-blue;
+				}
+			}
+
+			@include screen("small") {
+				flex: 0 0 20px;
+			}
+		}
+
+		@include screen("large") {
+			display: flex;
+			margin: 30px 0 0;
+		}
+	}
+
+	.wpmudev-list--section {
+		display: block;
+		margin: 30px 0 0;
+
+		.wpmudev-list--element {
+			display: flex;
+			flex-direction: column;
+			position: relative;
+			margin: 0 0 20px;
+			padding: 10px;
+			border-radius: 5px;
+			background: $color-white;
+			box-shadow: 0 2px 0 $color-silver--alt;
+
+			/*div[class^="wpmudev-element--"] {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+
+				.wpmudev-element--title {
+					
+					@include screen("large") {
+						display: none;
+					}
+				}
+
+				.wpmudev-element--content {
+					
+					@include screen("large") {
+						overflow: hidden;
+						margin: 0;
+						color: $color-gray--dark;
+						font: 400 12px/20px $font;
+						letter-spacing: -0.2px;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+					}
+				}
+			}*/
+
+			.wpmudev-element--check {
+				width: 20px;
+				height: 20px;
+				position: absolute;
+				top: 15px;
+				left: 10px;
+
+				.wpmudev-input_checkbox {
+					width: 20px;
+					height: 20px;
+					display: block;
+					margin: 0;
+
+					input + label {
+						width: 20px;
+						height: 20px;
+						border: 1px solid #D9D9D9;
+						background: #F7F7F7;
+
+						&:before {
+							color: #F7F7F7;
+							line-height: 17px;
+						}
+					}
+
+					input:checked + label {
+						border-color: $color-blue;
+						background: $color-blue;
+					}
+				}
+
+				+ .wpmudev-element--name {
+					margin-left: 30px;
+
+					@include screen("large") {
+						margin-left: 0;
+					}
+				}
+
+				@include screen("small") {
+					top: 25px;
+					left: 20px;
+				}
+
+				@include screen("large") {
+					flex: 0 0 20px;
+					position: relative;
+					top: auto;
+					left: auto;
+				}
+			}
+
+			.wpmudev-element--name {
+				flex: 1;
+				margin-right: 40px;
+
+				.wpmudev-element--content {
+					overflow: hidden;
+					display: block;
+					margin: 0;
+					padding: 0;
+					color: $color-gray--dark;
+					font: 700 13px/30px $font--alt;
+					letter-spacing: -0.15px;
+					text-transform: uppercase;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+
+					@include screen("large") {
+						overflow: hidden;
+						margin: 0;
+						color: $color-gray--dark;
+						font: 400 12px/20px $font;
+						letter-spacing: -0.2px;
+						text-transform: none;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+						max-width: 10em;
+					}
+				}
+
+				@include screen("large") {
+					flex: 0 0 140px;
+					margin-right: 0;
+					padding: 0 5px 0 15px;
+				}
+			}
+
+			.wpmudev-element--email,
+			.wpmudev-element--conditions,
+			.wpmudev-element--views,
+			.wpmudev-element--conversions,
+			.wpmudev-element--rate {
+				display: flex;
+				align-items: center;
+				background: $color-silver--alt;
+
+				.wpmudev-element--title {
+					display: block;
+					margin: 0 6px 0 0;
+					padding: 0;
+					color: $color-gray--dark;
+					font: 700 13px/22px $font;
+					letter-spacing: -0.25px;
+
+					@include screen("large") {
+						display: none;
+					}
+				}
+
+				.wpmudev-element--content {
+					display: block;
+					margin: 0;
+					padding: 0;
+					color: $color-gray--light;
+					font: 400 13px/22px $font;
+					letter-spacing: -0.25px;
+
+					@include screen("large") {
+						overflow: hidden;
+						margin: 0;
+						color: $color-gray--dark;
+						font: 400 12px/20px $font;
+						letter-spacing: -0.2px;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+					}
+				}
+
+				@include screen("large") {
+					border-radius: 0;
+					background: transparent;
+				}
+			}
+
+			.wpmudev-element--email {
+				margin: 10px 0 0;
+				padding: 10px 10px 5px;
+				border-radius: 5px 5px 0 0;
+
+				@include screen("small") {
+					margin: 20px 0 0;
+					padding: 20px 20px 5px;
+				}
+
+				@include screen("large") {
+					overflow: hidden;
+					flex: 0 0 111px;
+					margin: 0;
+					padding: 0 5px;
+					border-radius: 0;
+				}
+			}
+
+			.wpmudev-element--conditions {
+				padding: 5px 10px;
+
+				@include screen("small") {
+					padding: 5px 20px;
+				}
+
+				@include screen("large") {
+					overflow: hidden;
+					flex: 0 0 190px;
+					padding: 0 5px;
+				}
+			}
+
+			.wpmudev-element--views {
+				padding: 5px 10px;
+
+				.wpmudev-element--content {
+
+					@include screen("large") {
+						flex: 1;
+						text-align: center;
+					}
+				}
+
+				@include screen("small") {
+					padding: 5px 20px;
+				}
+
+				@include screen("large") {
+					flex: 1;
+					text-align: center;
+				}
+			}
+
+			.wpmudev-element--conversions {
+				padding: 5px 10px;
+
+				.wpmudev-element--content {
+
+					@include screen("large") {
+						flex: 1;
+						text-align: center;
+					}
+				}
+				
+				@include screen("small") {
+					padding: 5px 20px;
+				}
+
+				@include screen("large") {
+					flex: 1;
+					text-align: center;
+				}
+			}
+
+			.wpmudev-element--rate {
+				padding: 5px 10px 10px;
+				border-radius: 0 0 5px 5px;
+
+				.wpmudev-element--content {
+
+					@include screen("large") {
+						flex: 1;
+						text-align: center;
+					}
+				}
+
+				@include screen("small") {
+					padding: 5px 20px 20px;
+				}
+
+				@include screen("large") {
+					flex: 1;
+					padding: 5px 20px;
+					border-radius: 0;
+					text-align: center;
+				}
+			}
+
+			.wpmudev-element--status {
+				display: flex;
+				flex: 0 0 100%;
+				align-items: center;
+				margin: 10px 0 0;
+
+				.wpmudev-element--title {
+					display: block;
+					flex: 0 1 auto;
+					margin: 0 10px 0 0;
+					padding: 0;
+					color: $color-gray--dark;
+					font: 700 13px/22px $font;
+					letter-spacing: -0.25px;
+
+					@include screen("large") {
+						display: none;
+					}
+				}
+
+				.wpmudev-element--content {
+					flex: 0 0 auto;
+
+					@include screen("large") {
+						flex: 1;
+					}
+				}
+
+				@include screen("small") {
+					margin: 20px 0 0;
+				}
+
+				@include screen("large") {
+					flex: 0 0 168px;
+					margin: 0;
+					padding: 0 20px 0 0;
+				}
+			}
+
+			.wpmudev-element--settings {
+				flex: 0 0 auto;
+				position: absolute;
+				top: 10px;
+				right: 10px;
+
+				.wpmudev-element--title {
+					display: none;
+				}
+
+				@include screen("small") {
+					top: 20px;
+					right: 20px;
+				}
+
+				@include screen("large") {
+					flex: 0 0 30px;
+					position: relative;
+					top: auto;
+					right: auto;
+				}
+			}
+
+			.wpmudev-tabs {
+				margin: 0;
+
+				.wpmudev-tabs-menu {
+					flex-direction: row;
+					padding: 0 1px;
+					
+					.wpmudev-tabs-menu_item {
+						margin: 0 -1px;
+
+						input + label {
+							min-width: 50px;
+							padding: 0 5px;
+
+							@include screen("large") {
+								min-width: 1px;
+							}
+						}
+
+						&.current {
+
+							input + .wpmudev-status-test {
+								border-color: #E69A20;
+								background: #F3A422;
+								color: $color-white;
+							}
+
+							input + .wpmudev-status-live {
+								border-color: $color-blue;
+								background: #1498CC;
+								color: $color-white;
+							}
+						}
+
+						&:first-child {
+							
+							input + label {
+								border-radius: 5px 0 0 5px;
+							}
+						}
+
+						&:not(:last-child) {
+							
+							input + label {
+								border-bottom-width: 1px;
+							}
+						}
+
+						&:last-child {
+
+							input + label {
+								border-radius: 0 5px 5px 0;
+							}
+						}
+					}
+				}
+			}
+
+			.wpmudev-dots-dropdown {
+				position: relative;
+
+				.wpmudev-dots-button {
+					width: 30px;
+					height: 30px;
+					cursor: pointer;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					justify-content: center;
+					padding: 0;
+					border: 1px solid #E6E6E6;
+					border-radius: 3px;
+					background: $color-white;
+					box-shadow: none;
+					outline: none;
+					transition: 0.2s ease;
+
+					svg {
+						display: block;
+					}
+
+					svg circle {
+						transition: 0.2s ease;
+					}
+
+					&:hover {
+						background: #F2F2F2;
+					}
+
+					&.wpmudev-active {
+						background: #F2F2F2;
+
+						svg circle {
+							fill: $color-blue;
+						}
+					}
+				}
+
+				.wpmudev-dots-nav {
+					min-width: 180px;
+					position: absolute;
+					top: 100%;
+					right: 0;
+					margin: 10px 0 0;
+					padding: 10px;
+					border: 1px solid #CCC;
+					border-radius: 3px;
+					background: $color-white;
+					box-shadow: 0 1px 5px 0 rgba(0,0,0,0.15);
+
+					li {
+						margin: 0;
+						padding: 0;
+						font-size: 13px;
+						line-height: 30px;
+						
+						&:before {
+							display: none;
+						}
+
+						a {
+							cursor: pointer;
+							display: block;
+							padding: 0 10px;
+							border-radius: 2px;
+							
+							&, &:visited {
+								color: #333333;
+							}
+
+							&:hover, &:active, &:focus {
+								color: $color-white;
+								background: $color-blue;
+							}
+						}
+
+						&:last-child {
+							border-top: 1px solid #E9E9E9;
+
+							a {
+								
+								&, &:visited {
+									color: $color-red;
+								}
+
+								&:hover, &:active, &:focus {
+									color: $color-white;
+									background: $color-red;
+								}
+							}
+						}
+					}
+
+					&.wpmudev-hide {
+						display: none;
+					}
+
+					@include screen("large") {
+						right: 0;
+						margin: 5px 0 0;
+					}
+				}
+			}
+
+			@include screen("small") {
+				padding: 20px;
+			}
+
+			@include screen("large") {
+				flex-wrap: wrap;
+				flex-direction: row;
+				align-items: center;
+				margin: 0;
+				padding: 20px 15px;
+				border-bottom: 1px solid $color-silver--alt;
+				border-radius: 0;
+				background: transparent;
+				box-shadow: none;
+			}
+		}
+
+		@include screen("large") {
+			margin: 0;
+			padding: 5px 0;
+			border-radius: 5px;
+			background: $color-white;
+			box-shadow: 0 2px 0 $color-silver--alt;
+		}
+	}
+
+	.wpmudev-list--header {
+		
+		.wpmudev-header--name {
+			
+			@include screen("large") {
+				flex: 0 0 140px;
+				padding: 0 5px 0 15px;
+			}
+		}
+
+		.wpmudev-header--email {
+
+			@include screen("large") {
+				flex: 0 0 111px;
+				padding: 0 5px;
+			}
+		}
+
+		.wpmudev-header--conditions {
+
+			@include screen("large") {
+				flex: 0 0 190px;
+				padding: 0 5px;
+			}
+		}
+
+		.wpmudev-header--views,
+		.wpmudev-header--rate,
+		.wpmudev-header--conversions {
+
+			@include screen("large") {
+				flex: 1;
+				text-align: center;
+			}
+		}
+
+		.wpmudev-header--status {
+
+			@include screen("large") {
+				flex: 0 0 168px;
+				padding: 0 20px 0 0;
+			}
+		}
+
+		.wpmudev-header--settings {
+
+			@include screen("large") {
+				flex: 0 0 30px;
+			}
+		}
+
+		.wpmudev-element--settings {
+			overflow: inherit !important;
+
+			.wpmudev-element--content {
+				overflow: inherit !important;
+			}
+		}
+	}
+} 

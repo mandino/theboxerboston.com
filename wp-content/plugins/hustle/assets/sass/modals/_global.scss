@@ -1,0 +1,330 @@
+.wph-modal {
+	width: 100%;
+	z-index: 9990;
+
+	* {
+		box-sizing: border-box;
+	}
+	.hidden {
+		display: none !important;
+	}
+	.mobile-hidden {
+		@media (max-width: 770px) {
+			display: none !important;
+		}
+	}
+	.wph-modal--clear {
+		&:before, &:after {
+			content: " ";
+			display: table;
+		}
+		&:after {
+			clear: both;
+		}
+	}
+	.wph-modal--close {
+		margin-bottom: 10px;
+		color: $white;
+		text-align: right;
+		a {
+			border: 0;
+			box-shadow: none;
+			color: $green;
+			font-size: 13px;
+			text-decoration: none;
+			transition: 0.2s ease;
+			&:hover {
+				color: $green-dark;
+			}
+		}
+	}
+	.wph-modal--content {
+		header {
+			margin: 0 0 20px;
+			h2.wph-modal--title {
+				font: 400 34px/38px $font;
+				text-transform: none;
+				@media (max-width: 770px) {
+					font-size: 24px;
+					line-height: 28px;
+				}
+			}
+			h4.wph-modal--subtitle {
+				font: 400 16px/24px $font--alt;
+				text-transform: none;
+				@media (max-width: 770px) {
+					font-size: 14px;
+					line-height: 20px;
+				}
+			}
+			h2.wph-modal--title,
+			h4.wph-modal--subtitle {
+				margin: 0 0 8px;
+				&:last-child {
+					margin: 0;
+					padding: 0;
+				}
+			}
+			@media (max-width: 770px) {
+				margin: 0 0 10px;
+			}
+		}
+		.wph-modal--message {
+			width: 100%;
+			overflow: auto;
+			color: $gray-dark;
+			h1, h2, h3, h4, h5, h6, p, a, em, ul, ol, li, strong, blockquote {
+				margin: 0;
+				padding: 0;
+				color: $gray-dark;
+				text-transform: none;
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+			h1, h2, h3, h4, h5, h6 {
+				color: $black;
+			}
+			h1, h2, h3 {
+				margin: 0 0 0.25em;
+				&:last-child {
+					margin: 0;
+				}
+			}
+			h1 {
+				font: 400 42px/54px $font;
+				@media (max-width: 770px) {
+					font-size: 38px;
+					line-height: 50px;
+				}
+			}
+			h2 {
+				font: 400 34px/38px $font;
+				@media (max-width: 770px) {
+					font-size: 30px;
+					line-height: 34px;
+				}
+			}
+			h3 {
+				font: 400 28px/34px $font;
+				@media (max-width: 770px) {
+					font-size: 24px;
+					line-height: 30px;
+				}
+			}
+			h4, h5, h6 {
+				margin: 0 0 0.8em;
+				&:last-child {
+					margin: 0;
+				}
+			}
+			h4 {
+				font: 400 16px/24px $font--alt;
+			}
+			h5 {
+				font: 400 14px/20px $font--alt;
+			}
+			h6 {
+				font: 400 12px/16px $font--alt;
+			}
+			&, p, ul, ol, li {
+				font: 400 14px/20px $font--alt;
+			}
+			p {
+				margin: 0 0 1em;
+				&:last-child {
+					margin: 0;
+				}
+			}
+			a {
+				color: $green;
+				transition: 0.2s ease;
+				&:hover {
+					color: $green-dark;
+				}
+			}
+			ul, ol {
+				position: relative;
+				margin: 0 0 1em;
+				list-style: none;
+				li {
+					margin: 0 0 0.4em;
+					&:last-child {
+						margin: 0;
+					}
+				}
+				&:last-child {
+					margin: 0;
+				}
+			}
+			ul li {
+				position: relative;
+				padding: 0 0 0 20px;
+				&:before {
+					content: " ";
+					width: 6px;
+					height: 6px;
+					display: block;
+					position: absolute;
+					top: 6px;
+					left: 0;
+					border-radius: 100%;
+					background: $gray-dark;
+				}
+			}
+			ol {
+				counter-reset: my-counter;
+				li {
+					&:before {
+						content: counter(my-counter) ".";
+						counter-increment: my-counter;
+						margin-right: 11px;
+					}
+				}
+			}
+			figure {
+				max-width: 100%;
+				height: auto;
+				img {
+					display: block;
+				}
+				.wp-caption-text {
+					margin: 10px 0 0;
+					font: 400 12px/16px $font--alt;
+				}
+				&.alignnone {
+					display: block;
+					margin: 0;
+					.wp-caption-text {
+						margin: 10px 0 15px;
+					}
+				}
+				&.alignleft {
+					max-width: 450px;
+					float: left;
+					display: inline-block;
+					margin: 0 20px 0 0;
+				}
+				&.aligncenter {
+					display: block;
+					margin: 0 auto;
+					.wp-caption-text {
+						margin: 10px 0 15px;
+						text-align: center;
+					}
+				}
+				&.alignright {
+					max-width: 450px;
+					float: right;
+					display: inline-block;
+					margin: 0 0 0 20px;
+				}
+			}
+			img {
+				max-width: 100%;
+				height: auto;
+				&.alignnone {
+					display: block;
+				}
+				&.alignleft {
+					float: left;
+					display: inline-block;
+					margin: 0 20px 0 0;
+				}
+				&.aligncenter {
+					float: none;
+					display: block;
+					margin: 0 auto;
+				}
+				&.alignright {
+					float: right;
+					display: inline-block;
+					margin: 0 0 0 20px;
+				}
+			}
+		}
+	}
+	.wph-modal--image,
+	.wph-modal--image_full {
+		overflow: hidden;
+		margin: 0;
+		padding: 0;
+		max-width: 100%;
+
+		img {
+			width: auto;
+			max-width: 100%;
+			height: auto;
+			max-height: 100%;
+			display: block;
+			position: relative;
+			margin: 0;
+			object-fit: cover;
+			object-position: center;
+			@media (max-width: 770px){
+				width: 100%;
+				max-width: none;
+				max-height: none;
+			}
+		}
+		@media (max-width: 770px) {
+			max-height: 250px;
+		}
+	}
+	.wph-modal--image {
+		background-size: cover;
+		background-position: center;
+	}
+	.wph-modal--image_full {
+		max-height: 600px;
+	}
+	.wph-modal--cta,
+	.wph-modal--message a.wph-modal--cta {
+		width: auto;
+		max-width: 100%;
+		height: 36px;
+		display: inline-block;
+		padding: 0 20px;
+		border: 0;
+		border-radius: 3px;
+		background: $green;
+		box-shadow: none !important;
+		color: $white;
+		font: 400 14px/36px $font--alt;
+		text-decoration: none;
+		transition: 0.2s ease;
+		&:hover {
+			background: $green-dark;
+			color: $white;
+		}
+	}
+	.wph-modal--hide, footer {
+		margin-top: 15px;
+		text-align: center;
+		a {
+			color: $green;
+			font: 400 12px/20px $font--alt;
+			transition: 0.2s ease;
+			&:hover {
+				color: $green-dark;
+			}
+		}
+	}
+	// For Custom Size
+	&.wph-modal--custom {
+		.wph-modal--message {
+			overflow: hidden;
+		}
+	}
+}
+
+// Modal Mask (Front End)
+body:not(.wp-admin) .wph-modal--mask {
+	position: fixed;
+	z-index: 9990;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(51, 51, 51, 0.9);
+}

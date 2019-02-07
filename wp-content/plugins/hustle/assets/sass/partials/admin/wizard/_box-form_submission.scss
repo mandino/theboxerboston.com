@@ -1,0 +1,15 @@
+.wpmudev-ui #wph-wizard-content-form_submission {
+	
+	.wpmudev-tabs {
+		margin-top: 6px;
+		margin-bottom: 0;
+
+		+ .wpmudev-input_text {
+			margin-top: 20px;
+
+			@include screen("medium") {
+				margin-top: 30px;
+			}
+		}
+	}
+}

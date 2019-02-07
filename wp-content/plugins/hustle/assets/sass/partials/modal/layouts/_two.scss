@@ -1,0 +1,137 @@
+.hustle-modal-two {
+
+	.hustle-modal-body {
+		max-height: 60vh;
+		overflow: hidden;
+		display: flex;
+		flex-wrap: nowrap;
+		flex-direction: column;
+
+		.hustle-modal-content {
+			display: flex;
+			flex: 1 1 auto;
+			flex-wrap: nowrap;
+			flex-direction: column;
+
+			section {
+				flex: 1 1 auto;
+				flex-wrap: nowrap;
+				flex-direction: column;
+
+				article {
+					max-height: 100%;
+					overflow: hidden;
+					display: flex;
+					flex-direction: column;
+
+
+
+					.hustle-modal-article {
+						max-height: 100%;
+						overflow-x: hidden;
+						overflow-y: auto;
+
+						// Fix for FF.
+						@-moz-document url-prefix() {
+								flex:1 1 76px;
+						}
+
+						// Fix for IE.
+						@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+							flex:1 1 76px;
+						}
+
+						// Edge popup issue fixing.
+						@supports ( -ms-ime-align:auto ) {
+							flex:1 1 200px;
+						}
+						flex: 1 1 auto;
+					}
+				}
+			}
+
+			footer {
+				display: flex;
+				flex: 0 0 auto;
+				align-items: center;
+
+				form {
+					flex: 1;
+					@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+						&.hustle-modal-optin_groups {
+							-ms-flex:  1 0 167px;
+							flex: 1 0 167px;
+						}
+					}
+				}
+
+				@include screen("small") {
+					flex: 1 0 auto;
+				}
+
+        // Footer IE issue fix.
+				@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+
+					.hustle-modal-optin_group,
+					.hustle-modal-mc_groups {
+            -ms-flex-preferred-size:36px;
+					}
+
+					.hustle-modal-mc_title{
+						-ms-flex-preferred-size:36px;
+					}
+
+					.hustle-modal-optin_form {
+						.hustle-select+.select2 {
+							.selection {
+								.select2-selection {
+									position: relative;
+									top: -4px;
+								}
+							}
+						}
+					}
+				}
+			}
+
+			@include screen("small") {
+				flex: 1;
+				flex-wrap: nowrap;
+				flex-direction: column;
+			}
+		}
+
+		&.hustle-modal-image_right {
+			flex-wrap: nowrap;
+			flex-direction: column-reverse;
+
+			@include screen("small") {
+				flex-wrap: wrap;
+				flex-direction: row-reverse;
+			}
+		}
+
+		@include screen("small") {
+			flex-wrap: wrap;
+			flex-direction: row;
+		}
+	}
+}
+
+.wph-modal {
+	.hustle-modal-two {
+		.hustle-modal-body {
+			.hustle-modal-content{
+				section{
+					article{
+						@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+							.hustle-modal-article {
+								flex:1 1 200px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,75 @@
+.wpmudev-ui #wph-wizard-design-border {
+	position: relative;
+	z-index: 6;
+
+	.wpmudev-box-gray {
+		
+		.wpmudev-row .wpmudev-col {
+			min-width: 100%;
+			flex-basis: 100%;
+
+			.wpmudev-input_number {
+				margin-top: 0;
+			}
+
+			.wpmudev-select + .select2 {
+				margin-top: 0;
+			}
+
+			.wpmudev-picker {
+				margin-top: 5px;
+			}
+
+			&:nth-child(1),
+			&:nth-child(2) {
+
+				@include screen("xs") {
+					max-width: 90px;
+				}
+
+				@include screen("small") {
+					max-width: none;
+				}
+
+				@include screen("large") {
+					max-width: 90px;
+				}
+			}
+
+			&:nth-child(3),
+			&:nth-child(4) {
+				position: relative;
+			}
+
+			&:nth-child(3) {
+				z-index: 2;
+			}
+
+			&:nth-child(4) {
+				z-index: 1;
+			}
+
+			@include screen("xs") {
+				min-width: 1px;
+				flex: 1;
+				padding-right: 5px;
+			}
+
+			@include screen("small") {
+				min-width: 100%;
+				flex-basis: 100%;
+				padding-right: 15px;
+			}
+
+			@include screen("large") {
+				min-width: 1px;
+				flex: 1;
+				padding-right: 5px;
+			}
+		}
+
+		@include screen("small") {
+			padding: 30px;
+		}
+	}
+}

@@ -1,0 +1,43 @@
+.wpmudev-ui #wph-modal-email {
+	
+	.wpmudev-box-modal {
+
+		.wpmudev-box-body {
+			padding: 0;
+
+			.wpmudev-listing {
+
+				.wpmudev-listing-body {
+					max-height: 196px;
+					overflow-y: auto;
+					display: block;
+					
+					@include screen("small") {
+						max-height: 284px;
+					}
+				}
+			}
+		}
+
+		.wpmudev-box-footer {
+
+			.wpmudev-button {
+				height: 30px;
+				padding: 0 16px;
+				border-radius: 4px;
+				font: 400 12px/30px $font--alt;
+				
+				@include screen("small") {
+					height: 40px;
+					padding: 0 20px;
+					border-radius: 5px;
+					font: 400 15px/40px $font;
+				}
+			}
+
+			@include screen("small") {
+				justify-content: flex-end;
+			}
+		}
+	}
+}

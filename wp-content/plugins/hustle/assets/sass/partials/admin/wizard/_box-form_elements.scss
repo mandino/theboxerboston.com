@@ -1,0 +1,51 @@
+.wpmudev-ui #wph-wizard-content-form_elements {
+
+	.wpmudev-table {
+		margin-top: 10px;
+
+		thead tr th,
+		tbody tr td {
+			
+			&:first-child {
+				
+				@include screen("medium") {
+					width: 31.8%;
+				}
+			}
+
+			&:not(:first-child):not(:last-child) {
+
+				@include screen("medium") {
+					width: 25.7%;
+				}
+			}
+		}
+
+		tbody tr td {
+
+			&:not(.wpmudev-field-required) {
+				padding-left: 15px;
+			}
+
+			&.wpmudev-field-required {
+
+				.wpdui-fi-asterisk {
+					width: 15px;
+					height: 20px;
+					display: inline-block;
+					color: $color-red;
+					font-size: 11px;
+					text-align: left;
+				}
+			}
+		}
+
+		tfoot tr td {
+			padding-top: 20px;
+
+			@include screen("medium") {
+				padding-top: 19px;
+			}
+		}
+	}
+}

@@ -1,0 +1,51 @@
+// Load modules
+@import "modules/modules";
+
+// Load "modal" commons
+@import "partials/modal/common";
+@import "partials/modal/animation";
+
+// Load "icons" pack
+@import "partials/global/elements/icons";
+
+// Load "modal" basics
+@import "partials/modal/basic/typography";
+
+// Load "modal" elements
+@import "partials/modal/elements/modal";
+@import "partials/modal/elements/close";
+@import "partials/modal/elements/image";
+@import "partials/modal/elements/cta";
+@import "partials/modal/elements/form";
+
+// Load "modal" zones
+@import "partials/modal/zones/header";
+@import "partials/modal/zones/section";
+@import "partials/modal/zones/article";
+@import "partials/modal/zones/footer";
+
+// Load "modal" styles
+@import "partials/modal/styles/simple";
+@import "partials/modal/styles/minimal";
+@import "partials/modal/styles/cabriolet";
+
+// Load "modal" layouts
+@import "partials/modal/layouts/one";
+@import "partials/modal/layouts/two";
+@import "partials/modal/layouts/three";
+@import "partials/modal/layouts/four";
+
+// Load "modal" success
+@import "partials/modal/success";
+
+// Load "modal" compat
+@import "partials/modal/compat/mc-form_embeded";
+
+// Load "social" commons
+@import "partials/social/common";
+
+// Load "social" icons
+@import "partials/social/icons/flat";
+@import "partials/social/icons/outline";
+@import "partials/social/icons/rounded";
+@import "partials/social/icons/squared";

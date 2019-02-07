@@ -1,0 +1,154 @@
+#wph-wizard-design-widget {
+
+	.wpmudev-box-right {
+
+		#wph-wizard-widget-color-options {
+			margin-bottom: 20px;
+
+			.wpmudev-tabs {
+				margin-top: 5px;
+				margin-bottom: 10px;
+			}
+
+			#wph-wizard-sshare-widget-customize-colors-options .wpmudev-row {
+
+				.wpmudev-col {
+					margin-bottom: 15px;
+
+					&:last-child {
+						margin-bottom: 0;
+
+						@include screen("small") {
+							margin-bottom: 0;
+						}
+					}
+
+					@include screen("xs") {
+						margin-bottom: 0;
+					}
+
+					@include screen("small") {
+						margin-bottom: 15px;
+					}
+
+					@include screen("large") {
+						margin-bottom: 0;
+					}
+				}
+			}
+
+			> .wpmudev-row {
+
+				.wpmudev-col {
+					margin-bottom: 15px;
+
+					&:last-child {
+						margin-bottom: 0;
+
+						@include screen("small") {
+							margin-bottom: 0;
+						}
+					}
+
+					@include screen("xs") {
+						margin-bottom: 0;
+					}
+
+					@include screen("small") {
+						margin-bottom: 15px;
+					}
+
+					@include screen("large") {
+						margin-bottom: 0;
+					}
+				}
+			}
+
+			@include screen("small") {
+				margin-bottom: 30px;
+			}
+		}
+
+		#wph-wizard-widget-shadow-options {
+			margin-bottom: 20px;
+
+			.wpmudev-box-gray {
+				margin-top: 0;
+
+				.wpmudev-row .wpmudev-col {
+					min-width: 100%;
+					flex-basis: 100%;
+
+					.wpmudev-input_number {
+						margin-top: 0;
+					}
+
+					.wpmudev-picker {
+						margin-top: 5px;
+					}
+
+					&:not(:last-child) {
+
+						@include screen("xs") {
+							max-width: 80px;
+						}
+
+						@include screen("small") {
+							max-width: none;
+						}
+
+						@include screen("large") {
+							max-width: 80px;
+						}
+					}
+
+					@include screen("xs") {
+						min-width: 1px;
+						flex: 1;
+						padding-right: 5px;
+					}
+
+					@include screen("small") {
+						min-width: 100%;
+						flex-basis: 100%;
+						padding-right: 15px;
+					}
+
+					@include screen("large") {
+						min-width: 1px;
+						flex: 1;
+						padding-right: 5px;
+					}
+				}
+
+				@include screen("small") {
+					padding: 30px;
+				}
+			}
+
+			@include screen("small") {
+				margin-bottom: 30px;
+			}
+		}
+
+		#wph-wizard-widget-inline-count-options {
+			margin-bottom: 20px;
+
+			@include screen("small") {
+				margin-bottom: 30px;
+			}
+		}
+
+		#wph-wizard-widget-animation-options {
+			margin-bottom: 20px;
+
+			@include screen("small") {
+				margin-bottom: 30px;
+			}
+		}
+
+		#wph-sshare-preview-widget {
+			margin-top: 10px;
+		}
+	}
+}

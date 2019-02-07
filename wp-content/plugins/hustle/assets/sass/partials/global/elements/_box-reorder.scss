@@ -1,0 +1,82 @@
+.wpmudev-ui .wpmudev-box-reorder {
+	display: flex;
+	flex-direction: column;
+	margin: 20px 0;
+	padding: 28px;
+	border: 2px dashed #E1E1E1;
+	border-radius: 5px;
+	background: #F5F5F5;
+
+	.hustle-social-icon {
+		cursor: all-scroll;
+		margin-bottom: 10px;
+
+		&:last-child {
+			margin-bottom: 0;
+
+			@include screen("xs") {
+				margin-right: 0;
+			}
+		}
+
+		@include screen("xs") {
+			margin-right: 20px;
+			margin-bottom: 0;
+		}
+	}
+
+	// Flat icons
+	.hustle-icon-flat {
+
+		.hustle-icon-path {
+			fill: $color-gray--dark;
+		}
+	}
+
+	// Outline icons
+	.hustle-icon-outline {
+		border-color: $color-gray--dark;
+
+		.hustle-icon-path {
+			fill: $color-gray--dark;
+		}
+	}
+
+	// Rounded icons
+	.hustle-icon-rounded {
+		border-color: $color-gray--dark;
+
+		.hustle-icon-container {
+			background: $color-gray--dark;
+		}
+
+		.hustle-icon-path {
+			fill: $color-white;
+		}
+	}
+
+	// Squared icons
+	.hustle-icon-squared {
+		border-color: $color-gray--dark;
+
+		.hustle-icon-container {
+			background: $color-gray--dark;
+		}
+
+		.hustle-icon-path {
+			fill: $color-white;
+		}
+	}
+
+	&:first-child {
+		margin-top: 0;
+	}
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+	@include screen("xs") {
+		flex-direction: row;
+	}
+}

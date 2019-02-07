@@ -1,0 +1,58 @@
+.wpmudev-ui .wpmudev-social-custom {
+	display: flex;
+	flex-direction: column;
+
+	.wpmudev-social-item {
+		display: flex;
+		flex: 1;
+		flex-wrap: wrap;
+		align-items: center;
+		margin-bottom: 30px;
+		min-height: 40px;
+
+		.wpmudev-switch {
+			min-width: 40px;
+			flex: 0 0 40px;
+			margin-right: 21px;
+		}
+
+		.hustle-social-icon {
+			min-width: 30px;
+			cursor: default;
+			flex: 0 0 30px;
+
+			@include screen("xs") {
+				margin-right: 20px;
+			}
+		}
+
+		.wpmudev-input_text {
+			min-width: 100%;
+			display: block;
+			flex: 0 0 100%;
+			margin: 10px 0 0;
+
+			@include screen("xs") {
+				min-width: 1px;
+				flex: 1;
+				margin: 0;
+			}
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		// WHEN disabled
+		&.disabled {
+
+			.hustle-icon-rounded {
+				border-color: #DBDBDB;
+				
+				.hustle-icon-container {
+					background: #DBDBDB;
+				}
+			}
+		}
+	}
+}

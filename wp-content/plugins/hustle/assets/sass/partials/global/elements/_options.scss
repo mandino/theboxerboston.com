@@ -1,0 +1,29 @@
+.wpmudev-ui .wpmudev-options-list {
+	display: block;
+	margin: 10px 0;
+
+	.wpmudev-options-item {
+		display: block;
+		margin: 5px 0;
+
+		.wpmudev-helper {
+			cursor: pointer;
+		}
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	&:first-child {
+		margin-top: 0;
+	}
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}

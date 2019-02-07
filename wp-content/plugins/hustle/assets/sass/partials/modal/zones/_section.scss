@@ -1,0 +1,42 @@
+.hustle-modal section {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+
+	.hustle-modal-message {
+		flex: 1;
+	}
+
+	.hustle-modal-footer {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: column;
+
+		.hustle-modal-cta {
+			display: block;
+			flex: 1;
+						
+			@include screen("small") {
+				max-width: 100%;
+				flex: 0 0 auto;
+			}
+		}
+
+		&:not(:first-child) {
+			margin-top: 20px;
+
+			@include screen("small") {
+				margin-top: 30px;
+			}
+		}
+
+		@include screen("small") {
+			flex-direction: row;
+			align-items: center;
+		}
+	}
+
+	@include screen("small") {
+		flex-direction: row;
+	}
+}

@@ -1,0 +1,134 @@
+#hustle-sshare-module-display.hustle-sshare-floating_social {
+	position: fixed;
+	top: 0;
+	z-index: 99;
+}
+.hustle-social-icon {
+	min-width: 30px;
+	min-height: 30px;
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid transparent;
+	outline: none;
+	box-shadow: none;
+
+	.hustle-icon-container {
+		min-width: 28px;
+		height: 28px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.hustle-shares-counter {
+		min-width: 28px;
+		height: 28px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		padding: 6px 0 8px;
+		font: 600 12px/14px $font;
+		text-align: center;
+
+		span {
+			flex: 0 0 auto;
+		}
+	}
+
+	&:hover, &:focus, &:active {
+		outline: none;
+		box-shadow: none;
+	}
+
+	// IF has "inline" counter enabled
+	&.hustle-social-inline {
+
+		.hustle-shares-counter {
+
+			@include screen("xs") {
+				align-items: flex-end;
+				padding: 0 8px 0 6px;
+			}
+		}
+
+		@include screen("xs") {
+			flex-direction: row;
+			justify-content: space-between;
+		}
+	}
+}
+
+.hustle-shares-widget,
+.hustle-shares-floating {
+
+	.hustle-social-icon {
+		cursor: pointer;
+	}
+	
+	&.hustle-shares-animated {
+		transform-style: preserve-3d;
+
+		.hustle-social-icon {
+			position: relative;
+			transform: translateX(0);
+			transition: transform 0.15s linear;
+
+			&:hover, &:focus, &:active {
+				transform: translateX(3px);
+			}
+		}
+	}
+}
+
+.hustle-shares-widget {
+	display: flex;
+	padding: 15px 20px;
+	background: #37454D; // SAMPLE ONLY – Remove later
+
+	.hustle-social-icon {
+		margin-right: 15px;
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+
+	@include screen("small") {
+		display: inline-flex;
+	}
+}
+
+.hustle-shares-floating {
+	display: flex;
+	padding: 15px 20px;
+	background: #37454D; // SAMPLE ONLY – Remove later
+
+	.hustle-social-icon {
+		margin-right: 15px;
+
+		.hustle-shares-counter {
+			border-top: 0;
+		}
+
+		&:last-child {
+			margin-right: 0;
+			
+			@include screen("small") {
+				margin-bottom: 0;
+			}
+		}
+
+		@include screen("small") {
+			margin-right: 0;
+			margin-bottom: 15px;
+		}
+	}
+
+	@include screen("small") {
+		display: inline-flex;
+		flex-direction: column;
+	}
+}

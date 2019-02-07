@@ -1,0 +1,13 @@
+.wpmudev-hustle-dashboard {
+	
+	&#wpmudev-hustle {
+		max-width: 1146px;
+
+		#wpmudev-hustle-content {
+			
+			@include screen("small") {
+				margin-top: 16px;
+			}
+		}
+	}
+}

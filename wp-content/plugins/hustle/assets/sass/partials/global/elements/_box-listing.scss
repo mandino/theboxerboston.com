@@ -1,0 +1,429 @@
+.wpmudev-ui .wpmudev-box-listing {
+	margin-bottom: 20px;
+	box-shadow: 0 2px 0 $color-silver--alt;
+	border-radius: 5px;
+	background: $color-white;
+
+	.wpmudev-box-head {
+		cursor: pointer;
+		display: flex;
+		padding: 20px;
+
+		.wpmudev-box-group {
+			display: flex;
+			flex: 1;
+			margin-right: 20px;
+
+			.wpmudev-group-switch {
+				flex: 0 0 auto;
+
+				.wpmudev-switch {
+					width: 40px;
+					display: block;
+					margin: 0;
+					padding: 0;
+				}
+
+				+ .wpmudev-group-title {
+					margin-left: 10px;
+
+					@include screen("small") {
+						margin-left: 10px;
+					}
+				}
+			}
+
+			.wpmudev-group-title {
+				display: flex;
+				flex: 0 0 auto;
+				margin-right: 10px;
+
+				h5 {
+					margin: 0;
+					line-height: 30px;
+
+					+ .wpmudev-helper {
+						margin-left: 10px;
+					}
+				}
+
+				.wpmudev-helper {
+					display: none;
+					padding: 3px 0 1px;
+					line-height: 26px;
+
+					@include screen("small") {
+						display: block;
+					}
+				}
+
+				@include screen("small") {
+					margin-right: 20px;
+				}
+			}
+
+			.hustle-delete-module-confirmation {
+				display: flex;
+				flex: 0 0 auto;
+				align-items: center;
+				
+				label {
+					display: block;
+					flex: 0 0 auto;
+					margin-right: 10px;
+				}
+
+				.hustle-delete-module-confirm,
+				.hustle-delete-module-cancel {
+					min-width: 40px;
+					flex: 0 0 auto;
+					margin-right: 10px;
+					padding: 0 5px;
+
+					&:last-child {
+						margin-right: 10px;
+
+						@include screen("small") {
+							margin-right: 0;
+						}
+					}
+
+					@include screen("small") {
+						min-width: 40px;
+						margin-right: 10px;
+						padding: 0 5px;
+					}
+				}
+			}
+
+			.wpmudev-group-buttons {
+				display: flex;
+				flex: 0 0 auto;
+				flex-wrap: wrap;
+
+				.wpmudev-button {
+					display: block;
+					flex: 0 0 auto;
+					margin-right: 10px;
+
+					&:last-child {
+						margin-right: 0;
+						
+						@include screen("small") {
+							margin-right: 0;
+						}
+					}
+
+					@include screen("small") {
+						margin-right: 10px;
+					}
+				}
+
+				+ .hustle-delete-module-confirmation {
+					margin-left: 10px;
+				}
+			}
+
+			.wpmudev-box-group--inner {
+				display: flex;
+				flex: 1;
+				flex-wrap: wrap;
+				align-items: center;
+
+				.wpmudev-group-buttons {
+
+					.wpmudev-button {
+
+						&:last-child {
+
+							@include screen("small") {
+								margin-right: 0;
+							}
+						}
+
+						@include screen("small") {
+							margin-right: 10px;
+						}
+					}
+				}
+
+				+ .wpmudev-group-buttons {
+					margin-left: 10px;
+					
+					@include screen("small") {
+						margin-left: 10px;
+					}
+				}
+			}
+
+			@include screen("small") {
+				flex-direction: row;
+				align-items: center;
+				margin-right: 28px;
+			}
+		}
+
+		.wpmudev-box-action {
+			min-width: 12px;
+			cursor: pointer;
+			display: flex;
+			flex: 0 0 12px;
+			flex-direction: column;
+			align-content: center;
+			justify-content: center;
+			padding: 8px 0;
+			
+			.wpmudev-icon {
+				width: 12px;
+
+				path {
+					fill: $color-silver--dark;
+				}
+
+				&.wpmudev-i_arrow {
+					max-height: 8px;
+				}
+			}
+
+			&:hover,
+			&:focus {
+
+				.wpmudev-icon path {
+					fill: $color-gray--light;
+				}
+			}
+		}
+
+		// Button: Edit
+		.hustle-edit-module {
+			min-width: 40px;
+			padding: 0;
+
+			.wpmudev-button-icon {
+				height: 30px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+
+				.wpmudev-icon {
+					width: 14px;
+					height: 14px;
+
+					path {
+						fill: $color-white;
+					}
+				}
+
+				@include screen("small") {
+					display: none;
+				}
+			}
+
+			.wpmudev-button-text {
+				display: none;
+
+				@include screen("small") {
+					display: block;
+					text-align: center;
+				}
+			}
+
+			@include screen("small") {
+				min-width: 60px;
+				padding: 0 16px;
+			}
+		}
+
+		// Button: Delete
+		.hustle-delete-module {
+			min-width: 40px;
+			padding: 0;
+
+			.wpmudev-button-icon {
+				height: 30px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				position: relative;
+
+				.wpmudev-icon {
+					width: 20px;
+					height: 20px;
+
+					path {
+						fill: $color-red--light;
+					}
+				}
+
+				&:before {
+					content: " ";
+					width: 18px;
+					height: 18px;
+					position: absolute;
+					z-index: -1;
+					border-radius: 30px;
+					background: $color-white;
+				}
+
+				@include screen("small") {
+					display: none;
+				}
+			}
+
+			.wpmudev-button-text {
+				display: none;
+
+				@include screen("small") {
+					display: block;
+					text-align: center;
+				}
+			}
+
+			&:hover, &:active {
+
+				.wpmudev-button-icon {
+
+					.wpmudev-icon path {
+						fill: $color-red;
+					}
+				}
+			}
+
+			@include screen("small") {
+				min-width: 60px;
+				padding: 0 16px;
+			}
+		}
+
+		// Button: Error log
+		.button-view-log-list {
+			min-width: 40px;
+			padding: 0 !important;
+
+			.wpmudev-button-icon {
+				height: 26px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+
+				.wpmudev-icon {
+					width: auto;
+					height: 16px;
+
+					path {
+						fill: $color-red--light;
+					}
+				}
+
+				@include screen("small") {
+					display: none;
+				}
+			}
+
+			.wpmudev-button-text {
+				display: none;
+
+				@include screen("small") {
+					display: block;
+					text-align: center;
+				}
+			}
+
+			&:hover, &:active {
+
+				.wpmudev-button-icon {
+
+					.wpmudev-icon path {
+						fill: $color-white;
+					}
+				}
+			}
+
+			@include screen("small") {
+				min-width: 80px;
+				padding: 0 14px !important;
+			}
+		}
+
+		// Button: View email
+		.button-view-email-list {
+			min-width: 40px;
+			padding: 0;
+
+			.wpmudev-button-icon {
+				height: 30px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+
+				.wpmudev-icon {
+					width: 14px;
+					height: auto;
+
+					path {
+						fill: $color-white;
+					}
+				}
+
+				@include screen("small") {
+					display: none;
+				}
+			}
+
+			.wpmudev-button-text {
+				display: none;
+
+				@include screen("small") {
+					display: block;
+					text-align: center;
+				}
+			}
+
+			@include screen("small") {
+				min-width: 80px;
+				padding: 0 16px;
+			}
+		}
+
+		@include screen("medium") {
+			padding: 19px 30px 20px;
+		}
+	}
+
+	.wpmudev-box-body {
+		position: relative;
+		border-top: 1px solid $color-silver--alt;
+		//background: #F6F7F8;
+
+		.wpmudev-box-enabled,
+		.wpmudev-box-disabled {
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			position: absolute;
+			z-index: 1;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			border-radius: 0 0 5px 5px;
+			background: #F6F7F8;
+		}
+
+		.wpmudev-box-enabled {
+			display: none;
+		}
+
+		.wpmudev-box-disabled {
+			display: flex;
+		}
+	}
+
+	@include screen("medium") {
+		margin-bottom: 30px;
+	}
+}

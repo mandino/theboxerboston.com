@@ -1,0 +1,19 @@
+.hustle-modal .hustle-modal-close,
+.wpmudev-ui .hustle-modal .hustle-modal-close {
+	display: block;
+	margin: 0 0 15px;
+	font-weight: bold;
+	text-align: center;
+
+	.hustle-icon {
+		max-width: 12px;
+		max-height: 12px;
+		cursor: pointer;
+		display: block;
+		margin: 0 0 0 auto;
+
+		path {
+			fill: $color-white;
+		}
+	}
+}

@@ -1,0 +1,48 @@
+.wpmudev-ui #wph-wizard-design-style {
+	position: relative;
+	z-index: 7;
+
+	.wpmudev-select + .select2 {
+		position: relative;
+		z-index: 9;
+
+		+ .wpmudev-switch-labeled {
+			margin-top: 20px;
+		}
+	}
+
+	#wph-modal-styles-palette {
+		padding: 0 20px 20px;
+		
+		h5 {
+			margin: 0;
+			line-height: 60px;
+			text-transform: uppercase;
+		}
+
+		.wpmudev-row {
+			position: relative;
+			margin-bottom: 11px;
+
+			.wpmudev-col {
+
+				label {
+					display: inline-block;
+					margin-top: -1px;
+				}
+			}
+
+			+ h5 {
+				margin-top: -11px;
+			}
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		@include screen("small") {
+			padding: 0 30px 30px;
+		}
+	}
+}

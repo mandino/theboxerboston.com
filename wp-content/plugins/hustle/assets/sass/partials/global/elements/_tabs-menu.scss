@@ -1,0 +1,150 @@
+.wpmudev-ui .wpmudev-tabs {
+	margin: 30px 0;
+
+	.wpmudev-tabs-menu {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: column;
+		margin: 0 0 30px;
+		padding: 0;
+
+		.wpmudev-tabs-menu_item {
+			flex: 1;
+			margin: 0;
+			padding: 0;
+
+			&:before {
+				display: none;
+			}
+
+			&:first-child input {
+
+				+ label {
+					border-radius: 5px 5px 0 0;
+
+					@include screen("large") {
+						border-radius: 10px 0 0 10px;
+					}
+				}
+			}
+
+			&:not(:last-child) input {
+
+				+ label {
+					border-bottom-width: 0;
+
+					@include screen("large") {
+						border-right-width: 0;
+						border-bottom-width: 1px;
+					}
+				}
+			}
+
+			&:last-child input {
+
+				+ label {
+					border-radius: 0 0 5px 5px;
+
+					@include screen("large") {
+						border-radius: 0 10px 10px 0;
+					}
+				}
+			}
+
+			&.current input {
+
+				+ label {
+					background: #EEE;
+					pointer-events: none;
+					font-weight: 500;
+				}
+			}
+
+			@include screen("large") {
+				flex: 0 0 auto;
+			}
+		}
+
+		.wpmudev-tabs-menu_item input {
+			display: none;
+
+			+ label {
+				cursor: pointer;
+				display: block;
+				padding: 0 15px;
+				border: 1px solid $color-silver;
+				background: #FAFAFA;
+				color: $color-gray--dark;
+				font: 400 13px/38px $font;
+				text-align: center;
+				transition: $transition;
+
+				&:hover, &:focus {
+					background: #EEE;
+				}
+			}
+
+			&:checked + label {
+				background: #EEE;
+				font-weight: 500;
+			}
+		}
+
+		&.wpmudev-tabs-menu_md {
+
+			.wpmudev-tabs-menu_item input + label {
+
+				@include screen("large") {
+					min-width: 120px;
+				}
+			}
+		}
+
+		&.wpmudev-tabs-menu_lg {
+
+			.wpmudev-tabs-menu_item input + label {
+
+				@include screen("large") {
+					min-width: 170px;
+				}
+			}
+		}
+
+		&.wpmudev-tabs-menu_full {
+
+			.wpmudev-tabs-menu_item {
+
+				@include screen("large") {
+					flex: 1;
+				}
+			}
+		}
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		@include screen("large") {
+			flex-direction: row;
+		}
+	}
+
+	.wpmudev-tabs-content {
+
+		.wpmudev-tabs-content_item {
+			display: none;
+
+			&.current {
+				display: block;
+			}
+		}
+	}
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}

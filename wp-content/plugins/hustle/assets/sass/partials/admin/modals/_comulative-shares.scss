@@ -1,0 +1,38 @@
+.wpmudev-ui #wph-comulative-shares-modal {
+
+	.wpmudev-table {
+
+		thead tr th,
+		tbody tr td {
+
+			&:last-child {
+
+				@include screen("medium") {
+					width: 170px;
+					text-align: right;
+				}
+			}
+		}
+
+		tbody tr {
+
+			&:last-child {
+
+				td {
+					padding-bottom: 0;
+					border-bottom: 0;
+				}
+			}
+		}
+
+		tfoot tr {
+
+			td {
+
+				@include screen("medium") {
+					padding-top: 20px;
+				}
+			}
+		}
+	}
+}

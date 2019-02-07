@@ -1,0 +1,29 @@
+.wpmudev-ui #wph-wizard-content-image_fit {
+
+	.wpmudev-box-right {
+
+		h4 {
+			margin-bottom: 20px;
+		}
+
+		.wpmudev-tabs {
+			margin: 0;
+		}
+
+		.wpmudev-box-gray {
+
+			.wpmudev-tabs,
+			.wpmudev-show {
+				margin-bottom: 10px;
+
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+
+			.wpmudev-input_number {
+				max-width: 130px;
+			}
+		}
+	}
+}

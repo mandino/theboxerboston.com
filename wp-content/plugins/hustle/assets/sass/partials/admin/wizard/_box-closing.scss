@@ -1,0 +1,43 @@
+.wpmudev-ui #wph-wizard-settings-closing {
+
+	.wpmudev-box-gray {
+
+		label + .wpmudev-fields-group {
+			margin-top: 5px;
+		}
+
+		.wpmudev-fields-group {
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: column;
+
+			.wpmudev-input_number {
+				width: auto;
+				flex: 1;
+				margin: 0 0 10px;
+
+				@include screen("medium") {
+					width: 100%;
+					max-width: 100px;
+					margin: 0 5px 0 0;
+				}
+			}
+
+			.wpmudev-select + .select2 {
+				width: auto;
+				flex: 1;
+				margin: 0;
+				z-index: 2;
+
+				@include screen("medium") {
+					width: 100%;
+					max-width: 150px;
+				}
+			}
+			
+			@include screen("medium") {
+				flex-direction: row;
+			}
+		}
+	}
+}

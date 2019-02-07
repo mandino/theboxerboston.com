@@ -1,0 +1,25 @@
+.hustle-modal article {
+	margin: 0;
+	padding: 20px;
+
+	hgroup {
+		margin: 0 0 12px;
+		padding: 0;
+
+		.hustle-modal-title {
+			margin: 0 0 10px;
+			padding: 0;
+			font: 600 20px/27px $font--opn;
+		}
+
+		.hustle-modal-subtitle {
+			margin: 0;
+			padding: 0;
+			font: 600 14px/18px $font--opn;
+		}
+
+		&:last-child {
+			margin: 0;
+		}
+	}
+}

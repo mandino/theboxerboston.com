@@ -1,0 +1,109 @@
+.wpmudev-ui {
+
+	.wpmudev-choose_image {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: column;
+
+		.wpmudev-wrap-show_image {
+			display: flex;
+			flex: 1;
+			flex-wrap: wrap;
+			flex-direction: row;
+			margin-bottom: 5px;
+
+			.wpmudev-show_image {
+				width: 40px;
+				height: 40px;
+				flex: 0 0 auto;
+				border: 1px solid $color-silver;
+				border-radius: 5px 0 0 5px;
+				background-color: #F2F4F5;
+				background-image: linear-gradient(45deg, $color-white 25%, transparent 25%, transparent 75%, $color-white 75%, $color-white), linear-gradient(45deg, $color-white 25%, transparent 25%, transparent 75%, $color-white 75%, $color-white);
+				background-size: 20px 20px;
+				background-position: 0 0, 10px 10px;
+
+				.wpmudev-inserted_image {
+					width: 100%;
+					height: 100%;
+					background-size: contain;
+					background-repeat: no-repeat;
+					background-position: center;
+				}
+			}
+
+			.wpmudev-input_text {
+				width: auto;
+				min-width: 1px;
+				flex: 1;
+				margin: 0;
+				padding-right: 2px;
+				padding-left: 9px;
+				border-right: 0;
+				border-left: 0;
+				border-radius: 0;
+
+				&:hover, &:focus {
+					color: #AAA;
+				}
+			}
+
+			.wpmudev-clear_image {
+				flex: 0 0 auto;
+				padding: 2px;
+				border: 1px solid $color-silver;
+				border-left: 0;
+				border-radius: 0 5px 5px 0;
+				background: $color-white;
+			}
+
+			.wpmudev-button-sm {
+				min-width: 57px;
+				height: 34px;
+				display: block;
+				margin: 0;
+				padding: 0 6px;
+				background: $color-silver--soft;
+				color: $color-gray--dark;
+				line-height: 34px;
+				font-family: $font;
+				font-weight: 400;
+				text-transform: none;
+
+				&:hover, &:focus {
+					background: $color-silver;
+					color: #AAA;
+				}
+			}
+
+			@include screen("large") {
+				margin-right: 5px;
+				margin-bottom: 0;
+			}
+		}
+
+		.wpmudev-button {
+			flex: 1;
+			font-weight: 500;
+
+			@include screen("large") {
+				min-width: 95px;
+				flex: 0 0 auto;
+				padding: 0 10px;
+			}
+		}
+
+		+ .wpmudev-switch-labeled {
+			margin-top: 10px;
+
+			.wpmudev-switch {
+				margin-bottom: 0;
+			}
+		}
+
+		@include screen("large") {
+			flex-direction: row;
+			align-items: center;
+		}
+	}
+}

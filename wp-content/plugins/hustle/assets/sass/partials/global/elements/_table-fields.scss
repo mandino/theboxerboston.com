@@ -1,0 +1,203 @@
+.wpmudev-ui .wpmudev-table-fields {
+	
+	.wpmudev-table-head {
+		display: none;
+		padding-right: 45px;
+		padding-left: 50px;
+		background: #FAFAFA;
+		box-shadow: 0 1px 0 $color-silver--alt;
+
+		.wpmudev-table-head-item {
+			flex: 1;
+			color: $color-gray--alt;
+			font: 500 12px/30px $font;
+			letter-spacing: 0.2px;
+			text-transform: uppercase;
+
+			&.wpmudev-head-item-label {
+				min-width: 19.3%;
+				flex: 0 0 19.3%;
+			}
+
+			&.wpmudev-head-item-name {
+				min-width: 19%;
+				flex: 0 0 19%;
+			}
+
+			&.wpmudev-head-item-type {
+				min-width: 18%;
+				flex: 0 0 18%;
+			}
+
+			&.wpmudev-head-item-required {
+				min-width: 16%;
+				flex: 0 0 16%;
+
+				.wpdui-fi-asterisk {
+					color: $color-red;
+
+					&:before {
+						display: inline-block;
+						vertical-align: sub;
+						font-size: 18px;
+					}
+				}
+			}
+		}
+
+		@include screen("small") {
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: row;
+		}
+	}
+
+	.wpmudev-table-body {
+		padding: 3px 5px 5px;
+		background: $color-silver--alt;
+
+		.wpmudev-table-body-row {
+			margin-bottom: 2px;
+			border: 1px solid #E1E1E1;
+			border-radius: 5px;
+			background: $color-white;
+
+			.wpmudev-table-body-preview {
+				display: flex;
+				flex-wrap: wrap;
+				flex-direction: row;
+				align-items: center;
+				color: $color-gray--dark;
+				font: 400 12px/40px $font;
+				letter-spacing: 0;
+				transition: color .2s ease;
+
+				.wpmudev-table-preview-item {
+					flex: 1;
+				}
+
+				.wpmudev-preview-item-drag {
+					min-width: 30px;
+					cursor: move;
+					flex: 0 0 30px;
+					margin-right: 14px;
+
+					.wpmudev-i_drag {
+						max-width: 12px;
+						max-height: 14px;
+						display: block;
+						margin: 0 auto;
+						
+						path {
+							fill: rgba(89,89,89,0.3);
+						}
+					}
+				}
+
+				.wpmudev-preview-item-label {
+					min-width: 17%;
+					flex: 0 0 17%;
+					padding-right: 10px;
+				}
+				
+				.wpmudev-preview-item-name {
+					min-width: 16.56%;
+					flex: 0 0 16.56%;
+					padding-right: 10px;
+				}
+
+				.wpmudev-preview-item-type {
+					min-width: 16%;
+					flex: 0 0 16%;
+					padding-right: 10px;
+				}
+
+				.wpmudev-preview-item-required {
+					min-width: 14%;
+					flex: 0 0 14%;
+					padding-right: 10px;
+
+					.wpdui-fi-check {
+						color: $color-gray--alt;
+
+						&:before {
+							display: inline-block;
+							vertical-align: sub;
+							font-size: 18px;
+						}
+					}
+				}
+
+				.wpmudev-preview-item-placeholder {
+					padding-right: 10px;
+				}
+
+				.wpmudev-preview-item-manage {
+					min-width: 38px;
+					cursor: pointer;
+					flex: 0 0 38px;
+					padding: 14px 0;
+					border-top-right-radius: 5px;
+					border-bottom-left-radius: 5px;
+
+					.wpmudev-i_plus {
+						max-width: 12px;
+						max-height: 12px;
+						display: block;
+						margin: 0 auto;
+
+						path {
+							fill: $color-gray--dark;
+							transform: rotate(0deg);
+							transform-origin: 50% 50%;
+							transition: transform .2s linear;
+						}
+					}
+				}
+			}
+
+			.wpmudev-table-body-content {
+				height: 0;
+				opacity: 0;
+				padding: 0;
+				border-radius: 0 0 5px 5px;
+				background: #F6F6F6;
+				transform: scaleY(0);
+				animation: ToggleHide 200ms cubic-bezier(0.57, 0.74, 0.36, 1);
+			}
+
+			// IF item is "open"
+			&.wpmudev-open {
+
+				.wpmudev-table-body-preview {
+					color: #999999;
+
+					.wpmudev-preview-item-manage {
+						border-bottom-left-radius: 0;
+						background: #F6F6F6;
+
+						.wpmudev-i_plus {
+							
+							.wpmudev-i_plus_y {
+								transform: rotate(-90deg);
+								transform-origin: 50% 50%;
+							}
+						}
+					}
+				}
+
+				.wpmudev-table-body-content {
+					height: auto;
+					opacity: 1;
+					padding: 13px 20px 11px;
+					transform: scaleY(1);
+					animation: ToggleShow 200ms cubic-bezier(0.57, 0.74, 0.36, 1);
+				}
+			}
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+}

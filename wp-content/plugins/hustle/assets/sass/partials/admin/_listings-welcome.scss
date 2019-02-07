@@ -1,0 +1,40 @@
+.wpmudev-ui.wpmudev-hustle-welcome-view {
+
+	&#wpmudev-hustle {
+		max-width: 1146px;
+
+		#wpmudev-hustle-content {
+			
+			@include screen("small") {
+				margin-top: 16px;
+			}
+		}
+	}
+
+	#wph-welcome-box {
+
+		.wpmudev-box-body {
+
+			.wpmudev-box-content {
+
+				h2 {
+					margin: 0 0 18px;
+					line-height: 22px;
+					text-transform: uppercase;
+				}
+
+				p {
+					margin: 0;
+
+					&:last-child {
+						margin-top: 10px;
+
+						@include screen("small") {
+							text-align: right;
+						}
+					}
+				}
+			}
+		}
+	}
+}

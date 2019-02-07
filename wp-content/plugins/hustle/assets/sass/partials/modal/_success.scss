@@ -1,0 +1,48 @@
+.hustle-modal {
+
+	.hustle-modal-success {
+		opacity: 0;
+		visibility: hidden;
+		overflow: hidden;
+		display: flex;
+		flex-wrap: nowrap;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		position: absolute;
+		z-index: 1;
+		top: 27px;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		padding: 20px;
+		background: #38454E; // SAMPLE ONLY – Remove later
+		animation-duration: 1s;
+		animation-fill-mode: both;
+		transform-origin: center;
+		transform-style: preserve-3d;
+
+		.hustle-modal-success_icon {
+			display: block;
+			flex: 0 0 auto;
+			margin-bottom: 20px;
+
+			.hustle-icon {
+				width: 30px;
+				height: auto;
+				display: block;
+				margin: 0 auto;
+			}
+		}
+
+		.hustle-modal-success_message {
+			flex: 0 0 auto;
+		}
+
+		&.hustle-modal-success_show {
+			opacity: 1;
+			visibility: visible;
+			animation-name: slideInUp;
+		}
+	}
+}

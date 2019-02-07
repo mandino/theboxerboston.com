@@ -1,0 +1,33 @@
+.hustle-modal header {
+	margin: 0;
+	border: 0;
+	padding: 0;
+
+	.hustle-modal-title {
+		margin: 0 0 8px;
+		padding: 0;
+		font: 400 24px/28px "Georgia",serif;
+		text-transform: none;
+		text-align: left;
+
+		&:last-child {
+			margin: 0;
+		}
+
+		@include screen("small") {
+			font: 400 34px/38px "Georgia",serif;
+		}
+	}
+
+	.hustle-modal-subtitle {
+		margin: 0;
+		padding: 0;
+		font: 400 14px/20px $font;
+		text-transform: none;
+		text-align: left;
+
+		@include screen("small") {
+			font: 400 16px/24px $font;
+		}
+	}
+}

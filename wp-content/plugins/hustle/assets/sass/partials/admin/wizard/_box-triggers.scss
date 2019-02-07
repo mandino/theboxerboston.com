@@ -1,0 +1,99 @@
+.wpmudev-ui #wph-wizard-settings-triggers {
+
+	.wpmudev-tabs {
+		margin: 0;
+
+		.wpmudev-tabs-content {
+
+			.wpmudev-switch-labeled + .wpmudev-box-gray {
+				margin-top: 4px;
+			}
+		}
+	}
+
+	.wpmudev-box-gray {
+
+		label + .wpmudev-fields-group {
+			margin-top: 5px;
+		}
+
+		.wpmudev-fields-group {
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: column;
+
+			.wpmudev-input_number {
+				width: auto;
+				flex: 1;
+				margin: 0 0 10px;
+
+				@include screen("medium") {
+					width: 100%;
+					max-width: 100px;
+					margin: 0 5px 0 0;
+				}
+			}
+
+			.wpmudev-select_mask {
+				width: auto;
+				flex: 1;
+				margin: 0;
+
+				@include screen("medium") {
+					width: 100%;
+					max-width: 150px;
+				}
+			}
+			
+			@include screen("medium") {
+				flex-direction: row;
+			}
+		}
+	}
+
+	// Trigger: Scroll
+	#wpmudev-display-trigger-scroll-options {
+		margin-top: 20px;
+	}
+	
+	.wpmudev-ui #wph-wizard-settings-triggers .wpmudev-box-gray .wpmudev-fields-group .wpmudev-input_number {
+		width: 100%;
+		max-width: 100px;
+		margin: 0 5px 0 0;
+	}
+	
+	// Trigger: Exit intent
+	#wpmudev-display-trigger-exit_intent {
+
+		#wpmudev-display-exit-intent-delayed-options {
+			
+			.wpmudev-fields-group {
+				display: flex;
+				flex-direction: column;
+				margin: 10px 0 0;
+
+				.wpmudev-input_number {
+					flex: 0 0 auto;
+					
+					@include screen("small") {
+						flex: 0 1 100px;
+						margin: 0 5px 0 0;
+					}
+				}
+
+				.wpmudev-select + .select2 {
+					flex: 0 0 auto;
+
+					@include screen("small") {
+						flex: 0 1 150px;
+					}
+				}
+
+				@include screen("small") {
+					flex-direction: row;
+					margin: 5px 0 0;
+				}
+			}
+		}
+	}
+}

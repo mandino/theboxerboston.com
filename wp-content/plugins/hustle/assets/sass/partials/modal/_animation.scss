@@ -1,0 +1,271 @@
+.hustle-modal {
+
+	&.hustle-animated {
+		animation-duration: 1s;
+		animation-fill-mode: both;
+		transform-origin: center;
+		transform-style: preserve-3d;
+
+		// IN animations
+		&.hustle-animate-bounceIn {
+			opacity: 1;
+			animation-name: bounceIn;
+			animation-duration: .75s;
+		}
+		&.hustle-animate-bounceInUp {
+			opacity: 1;
+			animation-name: bounceInUp;
+		}
+		&.hustle-animate-bounceInRight {
+			opacity: 1;
+			animation-name: bounceInRight;
+		}
+		&.hustle-animate-bounceInDown {
+			opacity: 1;
+			animation-name: bounceInDown;
+		}
+		&.hustle-animate-bounceInLeft {
+			opacity: 1;
+			animation-name: bounceInLeft;
+		}
+		&.hustle-animate-fadeIn {
+			opacity: 1;
+			animation-name: fadeIn;
+			animation-duration: 300ms;
+		}
+		&.hustle-animate-fadeInUp {
+			opacity: 1;
+			animation-name: fadeInUp;
+		}
+		&.hustle-animate-fadeInUpBig {
+			opacity: 1;
+			animation-name: fadeInUpBig;
+		}
+		&.hustle-animate-fadeInRight {
+			opacity: 1;
+			animation-name: fadeInRight;
+		}
+		&.hustle-animate-fadeInRightBig {
+			opacity: 1;
+			animation-name: fadeInRightBig;
+		}
+		&.hustle-animate-fadeInDown {
+			opacity: 1;
+			animation-name: fadeInDown;
+		}
+		&.hustle-animate-fadeInDownBig {
+			opacity: 1;
+			animation-name: fadeInDownBig;
+		}
+		&.hustle-animate-fadeInLeft {
+			opacity: 1;
+			animation-name: fadeInLeft;
+		}
+		&.hustle-animate-fadeInLeftBig {
+			opacity: 1;
+			animation-name: fadeInLeftBig;
+		}
+		&.hustle-animate-rotateIn {
+			opacity: 1;
+			animation-name: rotateIn;
+		}
+		&.hustle-animate-rotateInDownLeft {
+			opacity: 1;
+			animation-name: rotateInDownLeft;
+		}
+		&.hustle-animate-rotateInDownRight {
+			opacity: 1;
+			animation-name: rotateInDownRight;
+		}
+		&.hustle-animate-rotateInUpLeft {
+			opacity: 1;
+			animation-name: rotateInUpLeft;
+		}
+		&.hustle-animate-rotateInUpRight {
+			opacity: 1;
+			animation-name: rotateInUpRight;
+		}
+		&.hustle-animate-slideInUp {
+			opacity: 1;
+			animation-name: slideInUp;
+		}
+		&.hustle-animate-slideInRight {
+			opacity: 1;
+			animation-name: slideInRight;
+		}
+		&.hustle-animate-slideInDown {
+			opacity: 1;
+			animation-name: slideInDown;
+		}
+		&.hustle-animate-slideInLeft {
+			opacity: 1;
+			animation-name: slideInLeft;
+		}
+		&.hustle-animate-zoomIn {
+			opacity: 1;
+			animation-name: zoomIn;
+		}
+		&.hustle-animate-zoomInUp {
+			opacity: 1;
+			animation-name: zoomInUp;
+		}
+		&.hustle-animate-zoomInRight {
+			opacity: 1;
+			animation-name: zoomInRight;
+		}
+		&.hustle-animate-zoomInDown {
+			opacity: 1;
+			animation-name: zoomInDown;
+		}
+		&.hustle-animate-zoomInLeft {
+			opacity: 1;
+			animation-name: zoomInLeft;
+		}
+		&.hustle-animate-rollIn {
+			opacity: 1;
+			animation-name: rollIn;
+		}
+		&.hustle-animate-lightSpeedIn {
+			opacity: 1;
+			animation-name: lightSpeedIn;
+			animation-timing-function: ease-out;
+		}
+		&.hustle-animate-newspaperIn {
+			opacity: 1;
+			animation-name: newspaperIn;
+			animation-duration: .5s;
+			animation-timing-function: ease;
+		}
+
+		// OUT animations
+		&.hustle-animate-bounceOut {
+			opacity: 0;
+			animation-name: bounceOut;
+			animation-duration: .75s;
+		}
+		&.hustle-animate-bounceOutUp {
+			opacity: 0;
+			animation-name: bounceOutUp;
+		}
+		&.hustle-animate-bounceOutRight {
+			opacity: 0;
+			animation-name: bounceOutRight;
+		}
+		&.hustle-animate-bounceOutDown {
+			opacity: 0;
+			animation-name: bounceOutDown;
+		}
+		&.hustle-animate-bounceOutLeft {
+			opacity: 0;
+			animation-name: bounceOutLeft;
+		}
+		&.hustle-animate-fadeOut {
+			opacity: 0;
+			animation: fadeOut;
+			animation-duration: 300ms;
+		}
+		&.hustle-animate-fadeOutUp {
+			opacity: 0;
+			animation-name: fadeOutUp;
+		}
+		&.hustle-animate-fadeOutUpBig {
+			opacity: 0;
+			animation-name: fadeOutUpBig;
+		}
+		&.hustle-animate-fadeOutRight {
+			opacity: 0;
+			animation-name: fadeOutRight;
+		}
+		&.hustle-animate-fadeOutRightBig {
+			opacity: 0;
+			animation-name: fadeOutRightBig;
+		}
+		&.hustle-animate-fadeOutDown {
+			opacity: 0;
+			animation-name: fadeOutDown;
+		}
+		&.hustle-animate-fadeOutDownBig {
+			opacity: 0;
+			animation-name: fadeOutDownBig;
+		}
+		&.hustle-animate-fadeOutLeft {
+			opacity: 0;
+			animation-name: fadeOutLeft;
+		}
+		&.hustle-animate-fadeOutLeftBig {
+			opacity: 0;
+			animation-name: fadeOutLeftBig;
+		}
+		&.hustle-animate-rotateOut {
+			opacity: 0;
+			animation-name: rotateOut;
+		}
+		&.hustle-animate-rotateOutDownLeft {
+			opacity: 0;
+			animation-name: rotateOutDownLeft;
+		}
+		&.hustle-animate-rotateOutDownRight {
+			opacity: 0;
+			animation-name: rotateOutDownRight;
+		}
+		&.hustle-animate-rotateOutUpLeft {
+			opacity: 0;
+			animation-name: rotateOutUpLeft;
+		}
+		&.hustle-animate-rotateOutUpRight {
+			opacity: 0;
+			animation-name: rotateOutUpRight;
+		}
+		&.hustle-animate-slideOutUp {
+			opacity: 1;
+			animation-name: slideOutUp;
+		}
+		&.hustle-animate-slideOutRight {
+			opacity: 1;
+			animation-name: slideOutRight;
+		}
+		&.hustle-animate-slideOutDown {
+			opacity: 1;
+			animation-name: slideOutDown;
+		}
+		&.hustle-animate-slideOutLeft {
+			opacity: 1;
+			animation-name: slideOutLeft;
+		}
+		&.hustle-animate-zoomOut {
+			opacity: 0;
+			animation-name: zoomOut;
+		}
+		&.hustle-animate-zoomOutUp {
+			opacity: 0;
+			animation-name: zoomOutUp;
+		}
+		&.hustle-animate-zoomOutRight {
+			opacity: 0;
+			animation-name: zoomOutRight;
+		}
+		&.hustle-animate-zoomOutDown {
+			opacity: 0;
+			animation-name: zoomOutDown;
+		}
+		&.hustle-animate-zoomOutLeft {
+			opacity: 0;
+			animation-name: zoomOutLeft;
+		}
+		&.hustle-animate-rollOut {
+			opacity: 0;
+			animation-name: rollOut;
+		}
+		&.hustle-animate-lightSpeedOut {
+			opacity: 0;
+			animation-name: lightSpeedOut;
+			animation-timing-function: ease-in;
+		}
+		&.hustle-animate-newspaperOut {
+			opacity: 0;
+			animation-name: newspaperOut;
+			animation-duration: .5s;
+			animation-timing-function: ease;
+		}
+	}
+}

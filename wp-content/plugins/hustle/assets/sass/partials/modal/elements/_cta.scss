@@ -1,0 +1,21 @@
+.hustle-modal .hustle-modal-cta,
+.wpmudev-ui .hustle-modal .hustle-modal-cta {
+	display: inline-block;
+	margin: 0;
+	padding: 0 20px;
+	border: 0;
+	background: $color-blue;
+	box-shadow: none;
+	color: $color-white;
+	font: 400 14px/36px $font;
+	text-decoration: none;
+	text-align: center;
+	transition: $transition;
+
+	&:hover, &:focus {
+		outline: none;
+		background: $color-blue--dark;
+		box-shadow: none;
+		color: $color-white;
+	}
+}

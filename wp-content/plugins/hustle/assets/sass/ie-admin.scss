@@ -1,0 +1,36 @@
+.wpmudev-ui{
+	#wph-wizard-settings-conditions {
+		.wph-conditions {
+			.wph-conditions--box {
+				min-height: 300px;
+			}
+		}
+	}
+	#wph-wizard-settings-position{
+		.wpmudev-box-full{
+			.wpmudev-box-gray{
+				.wpmudev-tabs{
+					.wpmudev-tabs-content{
+						.wpmudev-input_number{
+							height: 36px;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.wpmudev-social-custom {
+		.wpmudev-social-item{
+			padding-bottom: 21px;
+			.wpmudev-input_text{
+				height: 35px;
+			}
+		}
+	}
+	.wpmudev-row{
+		.col-12{
+			width: 96%;
+		}
+	}
+}

@@ -1,0 +1,238 @@
+.wpmudev-ui #wpmudev-dashboard-widget-data {
+
+	.wpmudev-dashboard-data-content {
+		display: flex;
+		flex-direction: column;
+
+		.wpmudev-dashboard-data-table {
+			flex: 0 0 auto;
+
+			.wpmudev-table {
+				display: block;
+
+				thead tr th,
+				tbody tr td {
+
+					&:not(.wpmudev-table-module_name) {
+						
+						@include screen("large") {
+							width: 80px;
+							text-align: center;
+						}
+					}
+					
+					&.wpmudev-table-module_month {
+						color: $color-gray--dark;
+						font-weight: 500;
+					}
+				}
+
+				thead {
+					display: none;
+
+					tr th {
+						overflow: hidden;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+
+						@include screen("large") {
+							padding: 0;
+						}
+					}
+
+					tr th.wpmudev-table-module_name {
+
+						@include screen("large") {
+							padding-left: 15px;
+						}
+					}
+
+					tr th.wpmudev-table-module_all {
+
+						@include screen("large") {
+							padding-right: 15px;
+						}
+					}
+
+					@include screen("large") {
+						display: table-header-group;
+					}
+				}
+
+				tbody {
+					display: block;
+
+					@include screen("large") {
+						display: table-row-group;
+					}
+				}
+
+				tbody tr {
+					display: block;
+					padding: 10px 0 17px;
+
+					td {
+						display: block;
+						padding-bottom: 0;
+						border-bottom: 0;
+
+						&:before {
+							content: attr(data-name);
+							margin-right: 6px;
+							color: $color-gray--dark;
+							font-weight: 700;
+
+							@include screen("large") {
+								display: none;
+							}
+						}
+
+						&.wpmudev-table-module_name {
+							padding-bottom: 10px;
+							color: $color-gray--dark;
+							font-family: $font--alt;
+							font-weight: 700;
+							text-transform: uppercase;
+
+							&:before {
+								display: none;
+							}
+
+							@include screen("large") {
+								padding-left: 15px;
+								color: $color-gray--light;
+								font-family: $font;
+								font-weight: 400;
+								text-transform: none;
+							}
+						}
+
+						&:not(.wpmudev-table-module_name) {
+							padding: 0 10px;
+							background: $color-silver--alt;
+
+							@include screen("large") {
+								padding: 10px 0;
+								background: $color-white;
+							}
+						}
+
+						&.wpmudev-table-module_rate {
+							padding-top: 10px;
+							border-radius: 4px 4px 0 0;
+
+							@include screen("large") {
+								padding-top: 7px;
+								border-radius: 0;
+							}
+						}
+
+						&.wpmudev-table-module_all {
+							padding-bottom: 10px;
+							border-radius: 0 0 4px 4px;
+
+							@include screen("large") {
+								padding-right: 15px;
+								border-radius: 0;
+							}
+						}
+
+						@include screen("large") {
+							display: table-cell;
+							padding: 10px 0;
+							border-bottom: 1px solid $color-silver--alt;
+						}
+					}
+
+					&:first-child {
+						padding-top: 0;
+					}
+
+					&:last-child {
+						padding-bottom: 0;
+						border-bottom: 0;
+
+						td {
+
+							@include screen("large") {
+								padding-bottom: 0;
+								border-bottom: 0;
+							}
+						}
+					}
+
+					@include screen("large") {
+						display: table-row;
+						padding: 0;
+					}
+				}
+
+				@include screen("large") {
+					display: table;
+				}
+			}
+
+			@include screen("small") {
+				flex: 1;
+			}
+
+			@include screen("medium") {
+				margin-right: 20px;
+			}
+
+			@include screen("large") {
+				margin-right: 40px;
+			}
+		}
+
+		.wpmudev-dashboard-data-graph {
+			display: none;
+			flex: 0 0 auto;
+
+			@include screen("xs") {
+				display: block;
+				margin-top: 40px;
+			}
+
+			@include screen("large") {
+				min-width: 527px;
+				flex: 0 0 527px;
+				align-self: center;
+				margin-top: 0;
+			}
+		}
+
+		.wpmudev-dashboard-data-no_content {
+			display: none;
+			flex: 0 0 auto;
+
+			h5, h6 {
+				text-align: center;
+			}
+
+			h5 {
+				line-height: 18px;
+				text-transform: uppercase;
+			}
+
+			@include screen("xs") {
+				display: block;
+				margin-top: 20px;
+			}
+
+			@include screen("medium") {
+				align-self: center;
+			}
+
+			@include screen("large") {
+				min-width: 527px;
+				flex: 0 0 527px;
+				margin-top: 0;
+			}
+		}
+
+		@include screen("medium") {
+			flex-direction: row;
+		}
+	}
+}

@@ -1,0 +1,224 @@
+.wpmudev-ui {
+
+	input, textarea {
+		max-width: 100%;
+		display: block;
+		margin: 0;
+	}
+
+	select {
+		max-width: 100%;
+		display: block;
+		margin: 0 0 15px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	.wpmudev-textarea,
+	.wpmudev-input_text,
+	.wpmudev-input_number {
+		width: 100%;
+		height: 40px;
+		display: block;
+		margin: 5px 0 15px;
+		padding: 0 14px;
+		border: 1px solid $color-silver;
+		border-radius: 5px;
+		outline: none;
+		background: $color-white;
+		box-shadow: none;
+		color: #AAA;
+		font: 400 15px/38px $font;
+		letter-spacing: -0.25px;
+		transition: $transition;
+
+		&::-webkit-input-placeholder {
+			color: #AAA;
+		}
+
+		&:-ms-input-placeholder {
+			color: #AAA;
+		}
+
+		&::-moz-placeholder {
+			color: #AAA;
+		}
+
+		&:-moz-placeholder {
+			color: #AAA;
+		}
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		&:hover,
+		&:focus {
+			color: $color-gray--dark;
+			border-color: $color-silver--dark;
+			box-shadow: none;
+		}
+	}
+
+	.wpmudev-input_number {
+		height: auto;
+		min-height: 40px;
+	}
+
+	.wpmudev-shortcode {
+		width: 100%;
+		display: block;
+		margin: 5px 0 15px;
+		padding: 0 14px;
+		border: 1px solid $color-silver;
+		border-radius: 5px;
+		outline: none;
+		background: #FAFAFA;
+		box-shadow: none;
+		color: $color-silver--dark;
+		font: 400 15px/38px $font;
+		letter-spacing: -0.25px;
+		transition: $transition;
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		&:hover,
+		&:focus,
+		&:disabled {
+			color: $color-silver--dark;
+			border-color: $color-silver;
+			box-shadow: none;
+			outline: none;
+		}
+
+		&:disabled {
+			cursor: text;
+		}
+	}
+
+	.wpmudev-input_checkbox {
+		width: 18px;
+		height: 18px;
+		display: inline-block;
+		margin: 0 10px 0 0;
+
+		input {
+			display: none;
+
+			& + label {
+				width: 18px;
+				height: 18px;
+				cursor: pointer;
+				display: block;
+				margin: 0;
+				border-radius: 3px;
+				background: #EDEFED;
+
+				&:before {
+					display: block;
+					padding: 1px 0 0;
+					border-radius: 3px;
+					color: #EDEFED;
+					font-size: 13px;
+					line-height: 18px;
+					text-align: center;
+				}
+			}
+
+			&:checked + label {
+				background: $color-blue;
+
+				&:before {
+					color: $color-white;
+				}
+			}
+		}
+	}
+
+	.wpmudev-input_radio {
+		width: 18px;
+		height: 18px;
+		display: inline-block;
+		margin: 0 10px 0 0;
+
+		input {
+			display: none;
+
+			& + label {
+				width: 18px;
+				height: 18px;
+				cursor: pointer;
+				display: block;
+				margin: 0;
+				border-radius: 20px;
+				background: #EDEFED;
+
+				&:before {
+					display: block;
+					padding: 1px 0 0;
+					border-radius: 20px;
+					color: #EDEFED;
+					font-size: 13px;
+					line-height: 18px;
+					text-align: center;
+				}
+			}
+
+			&:checked + label {
+				background: $color-blue;
+
+				&:before {
+					color: $color-white;
+				}
+			}
+		}
+	}
+}
+
+// WITH labels
+.wpmudev-ui {
+
+	.wpmudev-radio_with_label {
+		display: flex;
+		position: relative;
+		margin: 10px 0;
+
+		.wpmudev-input_radio {
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			margin: 0;
+
+			+ label {
+				cursor: pointer !important;
+				display: block;
+				flex: 0 0 auto;
+				margin-left: 24px;
+				font-size: 14px;
+				line-height: 18px;
+				font-weight: 400;
+			}
+		}
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}

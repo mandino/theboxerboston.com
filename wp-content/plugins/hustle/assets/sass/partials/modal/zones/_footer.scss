@@ -1,0 +1,13 @@
+.hustle-modal footer {
+	margin: 0;
+	padding: 0;
+
+	.hustle-modal-cta {
+		display: block;
+		flex: 1;
+
+		@include screen("small") {
+			flex: 0 0 auto;
+		}
+	}
+}
