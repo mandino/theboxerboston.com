@@ -1,8 +1,7 @@
 <?php
 
-class Hustle_SShare_Settings extends Hustle_Meta
-{
-	var $defaults = array(
+class Hustle_SShare_Settings extends Hustle_Meta {
+	public $defaults = array(
 		'floating_social_enabled' => true,
 		'widget_enabled' => true,
 		'shortcode_enabled' => true,

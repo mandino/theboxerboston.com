@@ -15,7 +15,8 @@
 			var slidein = new Optin.SlideIn(module);
 		}
 		if ( module.module_type === 'social_sharing' ) {
-			var is_admin = hustle_vars.is_admin === '1';
+			//var is_admin = hustle_vars.is_admin === '1';
+			var is_admin = inc_opt.is_admin === '1';
 			
 			// if not admin and test mode enabled
 			if ( typeof module.test_types !== 'undefined' && module.test_types !== null 

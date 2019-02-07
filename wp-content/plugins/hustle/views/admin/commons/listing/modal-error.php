@@ -10,7 +10,7 @@
 
             <h2>{{name}}</h2>
 
-            <label class="wpmudev-helper"><?php _e( "Total errors", Opt_In::TEXT_DOMAIN ); ?></label>
+            <label class="wpmudev-helper"><?php esc_attr_e( "Total errors", Opt_In::TEXT_DOMAIN ); ?></label>
 
         </div>
 
@@ -38,22 +38,22 @@
 
         <div class="wpmudev-footer-clear">
 
-            <button type="button" class="wpmudev-button wpmudev-button-clear-logs"><?php _e( "Clear Logs", Opt_In::TEXT_DOMAIN ); ?></button>
+            <button type="button" class="wpmudev-button wpmudev-button-clear-logs"><?php esc_attr_e( "Clear Logs", Opt_In::TEXT_DOMAIN ); ?></button>
 
             <span class="hustle-delete-logs-confirmation wpmudev-hidden">
 
-                <label><?php _e( "Are you sure?", Opt_In::TEXT_DOMAIN ); ?></label>
+                <label><?php esc_attr_e( "Are you sure?", Opt_In::TEXT_DOMAIN ); ?></label>
 
-                <button type="button" class="wpmudev-button wpmudev-button-sm wpmudev-button-delete-logs"><?php _e( "Yes", Opt_In::TEXT_DOMAIN ); ?></button>
+                <button type="button" class="wpmudev-button wpmudev-button-sm wpmudev-button-delete-logs"><?php esc_attr_e( "Yes", Opt_In::TEXT_DOMAIN ); ?></button>
 
-                <button type="button" class="wpmudev-button wpmudev-button-sm wpmudev-button-cancel-delete-logs"><?php _e( "No", Opt_In::TEXT_DOMAIN ); ?></button>
+                <button type="button" class="wpmudev-button wpmudev-button-sm wpmudev-button-cancel-delete-logs"><?php esc_attr_e( "No", Opt_In::TEXT_DOMAIN ); ?></button>
 
 			</span>
 
         </div>
 
         <div class="wpmudev-footer-export">
-            <a href="<?php echo wp_nonce_url( get_admin_url(null, 'admin-ajax.php?action=inc_optin_export_error_logs&id=__id&type=__type'  ), 'optin_export_error_logs' ) ?>" class="wpmudev-button wpmudev-button-blue button-download-csv" data-id="{{id}}" target="_blank"><?php _e("Export CSV", Opt_In::TEXT_DOMAIN); ?></a>
+			<a href="<?php echo esc_url( wp_nonce_url( get_admin_url(null, 'admin-ajax.php?action=inc_optin_export_error_logs&id=__id&type=__type'  ), 'optin_export_error_logs' ) ); ?>" class="wpmudev-button wpmudev-button-blue button-download-csv" data-id="{{id}}" target="_blank"><?php esc_attr_e("Export CSV", Opt_In::TEXT_DOMAIN); ?></a>
 		</div>
 
     </div>
@@ -66,7 +66,7 @@
 
     <# _.each( module_fields, function( v, k ) { #>
 
-		<# if ( v.name !== 'submit' || v.label.toLowerCase() !== 'submit' ) { #>
+		<# if ( 'submit' !== v.name || 'submit' !== v.label.toLowerCase() ) { #>
 
 			<div class="wpmudev-listing-col">{{v.label}}</div>
 
@@ -74,19 +74,19 @@
 
     <# }) #>
 
-    <div class="wpmudev-listing-error"><?php _e( "Error", Opt_In::TEXT_DOMAIN ); ?></div>
+    <div class="wpmudev-listing-error"><?php esc_attr_e( "Error", Opt_In::TEXT_DOMAIN ); ?></div>
 
-    <div class="wpmudev-listing-date"><?php _e( "Date", Opt_In::TEXT_DOMAIN ); ?></div>
+    <div class="wpmudev-listing-date"><?php esc_attr_e( "Date", Opt_In::TEXT_DOMAIN ); ?></div>
 
 </script>
 
 <script id="hustle-error-list-tpl" type="text/template">
 
-	<# if ( model !== null && typeof model !== 'undefined' ) {  #>
+	<# if ( model !== null && 'undefined' !== typeof model ) {  #>
 
         <# _.each( module_fields, function( v, k ) {  #>
 
-			<# if ( v.name !== 'submit' || v.label.toLowerCase() !== 'submit' ) { #>
+			<# if ( 'submit' !== v.name || 'submit' !== v.label.toLowerCase() ) { #>
 
 				<div class="wpmudev-listing-col">
 
@@ -102,7 +102,7 @@
 
         <div class="wpmudev-listing-error">
 
-            <p class="wpmudev-listing-title"><?php _e( "Error", Opt_In::TEXT_DOMAIN ); ?></p>
+            <p class="wpmudev-listing-title"><?php esc_attr_e( "Error", Opt_In::TEXT_DOMAIN ); ?></p>
 
 			<p class="wpmudev-listing-content">
 
@@ -114,7 +114,7 @@
 
                 <# } else { #>
 
-                    <span class="hustle-optin-success-text"><?php _e( "All good", Opt_In::TEXT_DOMAIN ); ?></span>
+                    <span class="hustle-optin-success-text"><?php esc_attr_e( "All good", Opt_In::TEXT_DOMAIN ); ?></span>
 
                     <span class="hustle-optin-error"><?php $this->render("general/icons/admin-icons/icon-checkmark" ); ?></span>
 
@@ -126,7 +126,7 @@
 
         <div class="wpmudev-listing-date">
 
-            <p class="wpmudev-listing-title"><?php _e( "Date", Opt_In::TEXT_DOMAIN ); ?></p>
+            <p class="wpmudev-listing-title"><?php esc_attr_e( "Date", Opt_In::TEXT_DOMAIN ); ?></p>
 
 		    <p class="wpmudev-listing-content"><# if( model.date ) { #>{{ model.date }}<# } else { #>–<# } #></p>
 

@@ -13,15 +13,22 @@ if ( $module ) {
 
 	<div class="wpmudev-box-left">
 
-		<h4><strong><?php _e( "Manage form elements", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
+		<h4><strong><?php esc_attr_e( "Manage form elements", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
 
-		<label class="wpmudev-helper"><?php _e( "Configure what fields do you want to display on this form, which are required and what is their default text / placeholder.", Opt_In::TEXT_DOMAIN ); ?></label>
+		<label class="wpmudev-helper"><?php esc_attr_e( "Configure what fields do you want to display on this form, which are required and what is their default text / placeholder.", Opt_In::TEXT_DOMAIN ); ?></label>
 
 	</div>
 
 	<div class="wpmudev-box-right">
 
-		<label class="wpmudev-helper"><?php _e( "Required form elements marked with <span class=\"wpdui-fi wpdui-fi-asterisk\"></span>", Opt_In::TEXT_DOMAIN ); ?></label>
+		<label class="wpmudev-helper">
+			<?php
+			printf(
+				esc_attr__( "Required form elements marked with %s", Opt_In::TEXT_DOMAIN ),
+				'<span class="wpdui-fi wpdui-fi-asterisk"></span>'
+			);
+			?>
+		</label>
 
         <table cellspacing="0" cellpadding="0" class="wpmudev-table">
 
@@ -29,9 +36,9 @@ if ( $module ) {
 
 				<tr>
 
-					<th><?php _e( "Form Element", Opt_In::TEXT_DOMAIN ); ?></th>
-					<th><?php _e( "Type", Opt_In::TEXT_DOMAIN ); ?></th>
-					<th><?php _e( "Default Text", Opt_In::TEXT_DOMAIN ); ?></th>
+					<th><?php esc_attr_e( "Form Element", Opt_In::TEXT_DOMAIN ); ?></th>
+					<th><?php esc_attr_e( "Type", Opt_In::TEXT_DOMAIN ); ?></th>
+					<th><?php esc_attr_e( "Default Text", Opt_In::TEXT_DOMAIN ); ?></th>
 
 				</tr>
 
@@ -43,15 +50,21 @@ if ( $module ) {
 					<?php
 						$required = false;
 						if(is_string($form_element['required'])){
-							$required = ($form_element['required'] == 'true');
+							$required = in_array( $form_element['required'], array( 'true', true ), true );
 						}else{
 							$required = $form_element['required'];
 						}
+						$required = $required || 'recaptcha'=== $form_element['type'];
 					?>
-					<tr class="wph-form-element-row-<?php echo $form_element['name']; ?>">
-						<td<?php if ($required) { echo ' class="wpmudev-field-required"'; } ?> data-text="<?php _e( "Form Element", Opt_In::TEXT_DOMAIN ); ?>"><?php if ($required) { echo '<span class="wpdui-fi wpdui-fi-asterisk"></span>'; } ?><?php echo $form_element['label']; ?></td>
-						<td data-text="<?php _e( "Form Type", Opt_In::TEXT_DOMAIN ); ?>"><?php echo $form_element['type']; ?></td>
-						<td data-text="<?php _e( "Default Text", Opt_In::TEXT_DOMAIN ); ?>"><?php echo $form_element['placeholder']; ?></td>
+					<tr class="wph-form-element-row-<?php echo esc_attr( $form_element['name'] ); ?>">
+						<td<?php if ($required) echo ' class="wpmudev-field-required"'; ?> data-text="<?php esc_attr_e( "Form Element", Opt_In::TEXT_DOMAIN ); ?>">
+							<?php if ($required) echo '<span class="wpdui-fi wpdui-fi-asterisk"></span>'; ?>
+								<?php echo 'recaptcha'=== $form_element['type'] ? '' : esc_html( $form_element['label'] ); ?>
+						</td>
+						<td data-text="<?php esc_attr_e( "Form Type", Opt_In::TEXT_DOMAIN ); ?>"><?php echo esc_html( $form_element['type'] ); ?></td>
+						<td data-text="<?php esc_attr_e( "Default Text", Opt_In::TEXT_DOMAIN ); ?>">
+							<?php echo 'recaptcha'=== $form_element['type'] ? '' : esc_html( $form_element['placeholder'] ); ?>
+						</td>
 					</tr>
 				<?php endforeach; ?>
 
@@ -59,7 +72,7 @@ if ( $module ) {
 
 			<tfoot>
 
-				<tr><td><a href="" id="wph-edit-form" class="wpmudev-button wpmudev-button-blue"><?php _e( "Edit Form", Opt_In::TEXT_DOMAIN ); ?></a></td></tr>
+				<tr><td><a href="" id="wph-edit-form" class="wpmudev-button wpmudev-button-blue"><?php esc_attr_e( "Edit Form", Opt_In::TEXT_DOMAIN ); ?></a></td></tr>
 
 			</tfoot>
 

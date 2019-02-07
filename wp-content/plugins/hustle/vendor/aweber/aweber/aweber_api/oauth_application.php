@@ -115,7 +115,7 @@ class OAuthApplication implements AWeberOAuthAdapter {
         if ($method == 'POST' or $method == 'GET') {
             foreach ($data as $key => $value) {
                 if (is_array($value)) {
-                    $data[$key] = json_encode($value);
+                    $data[$key] = wp_json_encode($value);
                 }
             }
         }
@@ -502,7 +502,7 @@ class OAuthApplication implements AWeberOAuthAdapter {
         $url = $this->_addParametersToUrl($url, $oauth);
         $handle = $this->curl->init($url);
         $this->curl->setopt($handle, CURLOPT_CUSTOMREQUEST, 'PATCH');
-        $this->curl->setopt($handle, CURLOPT_POSTFIELDS, json_encode($data));
+        $this->curl->setopt($handle, CURLOPT_POSTFIELDS, wp_json_encode($data));
         $resp = $this->_sendRequest($handle, array('Expect:', 'Content-Type: application/json'));
         return $resp;
     }

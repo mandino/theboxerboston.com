@@ -4,7 +4,7 @@ if( !class_exists("Hustle_SShare_Admin") ):
 
 class Hustle_SShare_Admin extends Opt_In {
 
-	function __construct() {
+	public function __construct() {
 
 		add_action( 'admin_init', array( $this, "check_free_version" ) );
 		add_action( 'admin_menu', array( $this, "register_admin_menu" ) );
@@ -12,7 +12,7 @@ class Hustle_SShare_Admin extends Opt_In {
 		add_filter("hustle_optin_vars", array( $this, "register_current_json" ) );
 	}
 
-	function register_admin_menu() {
+	public function register_admin_menu() {
 		// Social Sharings
 		add_submenu_page( 'hustle', __("Social Sharing", Opt_In::TEXT_DOMAIN) , __("Social Sharing", Opt_In::TEXT_DOMAIN) , "manage_options", Hustle_Module_Admin::SOCIAL_SHARING_LISTING_PAGE,  array( $this, "render_sshare_listing" )  );
 		add_submenu_page( 'hustle', __("New Social Sharing", Opt_In::TEXT_DOMAIN) , __("New Social Sharing", Opt_In::TEXT_DOMAIN) , "manage_options", Hustle_Module_Admin::SOCIAL_SHARING_WIZARD_PAGE,  array( $this, "render_sshare_wizard_page" )  );
@@ -23,7 +23,7 @@ class Hustle_SShare_Admin extends Opt_In {
 	 *
 	 * @since 3.0
 	 */
-	function hide_unwanted_submenus(){
+	public function hide_unwanted_submenus(){
 		remove_submenu_page( 'hustle', Hustle_Module_Admin::SOCIAL_SHARING_WIZARD_PAGE );
 	}
 
@@ -32,7 +32,7 @@ class Hustle_SShare_Admin extends Opt_In {
 	 *
 	* @since 3.0
 	 */
-	function render_sshare_wizard_page() {
+	public function render_sshare_wizard_page() {
 		$module_id = filter_input( INPUT_GET, "id", FILTER_VALIDATE_INT );
 		$provider = filter_input( INPUT_GET, "provider" );
 		$current_section = Hustle_Module_Admin::get_current_section();
@@ -52,12 +52,12 @@ class Hustle_SShare_Admin extends Opt_In {
 	 *
 	* @since 3.0
 	 */
-	function check_free_version() {
-		if (  isset( $_GET['page'] ) && $_GET['page'] == Hustle_Module_Admin::SOCIAL_SHARING_WIZARD_PAGE ) {
+	public function check_free_version() {
+		if (  isset( $_GET['page'] ) && Hustle_Module_Admin::SOCIAL_SHARING_WIZARD_PAGE === $_GET['page'] ) {
 			$collection_args = array( 'module_type' => 'social_sharing' );
 			$total_sshares = count(Hustle_Module_Collection::instance()->get_all( null, $collection_args ));
-			if ( Opt_In_Utils::_is_free() && ! Hustle_Module_Admin::is_edit() && $total_sshares >= 1 ) {
-				wp_safe_redirect( 'admin.php?page=' . Hustle_Module_Admin::UPGRADE_PAGE );
+			if ( Opt_In_Utils::_is_free() && ! Hustle_Module_Admin::is_edit() && $total_sshares >= 3 ) {
+				wp_safe_redirect( 'admin.php?page=' . Hustle_Module_Admin::SOCIAL_SHARING_LISTING_PAGE . '&' . Hustle_Module_Admin::UPGRADE_MODAL_PARAM . '=true' );
 				exit;
 			}
 		}
@@ -68,7 +68,7 @@ class Hustle_SShare_Admin extends Opt_In {
 	 *
 	 * @since 3.0
 	 */
-	function render_sshare_listing(){
+	public function render_sshare_listing(){
 		$current_user = wp_get_current_user();
 		$new_module = isset( $_GET['module'] ) ? Hustle_SShare_Model::instance()->get( intval($_GET['module'] ) ) : null;
 		$updated_module = isset( $_GET['updated_module'] ) ? Hustle_SShare_Model::instance()->get( intval($_GET['updated_module'] ) ) : null;
@@ -80,16 +80,17 @@ class Hustle_SShare_Admin extends Opt_In {
 			'updated_module' =>  $updated_module,
 			'types' => $types,
 			'add_new_url' => admin_url( "admin.php?page=" . Hustle_Module_Admin::SOCIAL_SHARING_WIZARD_PAGE ),
-			'user_name' => ucfirst($current_user->display_name)
+			'user_name' => ucfirst($current_user->display_name),
+			'is_free' => Opt_In_Utils::_is_free()
 		));
 	}
 
 	private function _is_edit(){
-		return  (bool) filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT) && isset( $_GET['page'] ) && $_GET['page'] === Hustle_Module_Admin::SOCIAL_SHARING_WIZARD_PAGE;
+		return  (bool) filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT) && isset( $_GET['page'] ) && Hustle_Module_Admin::SOCIAL_SHARING_WIZARD_PAGE === $_GET['page'];
 	}
 
-	function register_current_json( $current_array ){
-		if( Hustle_Module_Admin::is_edit() && isset( $_GET['page'] ) && $_GET['page'] == Hustle_Module_Admin::SOCIAL_SHARING_WIZARD_PAGE ){
+	public function register_current_json( $current_array ){
+		if( Hustle_Module_Admin::is_edit() && isset( $_GET['page'] ) && Hustle_Module_Admin::SOCIAL_SHARING_WIZARD_PAGE === $_GET['page'] ){
 
 			$ss = Hustle_SShare_Model::instance()->get( filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT) );
 			$all_ss = Hustle_Module_Collection::instance()->get_all( null, array( 'module_type' => 'social_sharing' ) );
@@ -98,13 +99,23 @@ class Hustle_SShare_Admin extends Opt_In {
 			$current_array['current'] = array(
 				'listing_page' => Hustle_Module_Admin::SOCIAL_SHARING_LISTING_PAGE,
 				'wizard_page' => Hustle_Module_Admin::SOCIAL_SHARING_WIZARD_PAGE,
+				'data' => $ss->get_data(),
 				'content' => $ss->get_sshare_content()->to_array(),
 				'design' => $ss->get_sshare_design()->to_array(),
 				'settings' => $ss->get_sshare_display_settings()->to_array(),
 				'types' => $ss->get_sshare_display_types()->to_array(),
 				'section' => ( !$current_section ) ? 'services' : $current_section,
-				'is_ss_limited' => (int) ( Opt_In_Utils::_is_free() && '-1' === $_GET['id'] && $total_ss >= 1 )
+				'is_ss_limited' => (int) ( Opt_In_Utils::_is_free() && '-1' === $_GET['id'] && $total_ss >= 3 )
 			);
+		}
+
+		// backwards compatibility for new counter types from 3.0.3
+		if ( isset( $current_array['current']['content'] ) && isset( $current_array['current']['content']['click_counter'] ) ) {
+			if ( '1' === $current_array['current']['content']['click_counter'] ) {
+				$current_array['current']['content']['click_counter'] = 'click';
+			} elseif ( '0' === $current_array['current']['content']['click_counter'] ) {
+				$current_array['current']['content']['click_counter'] ='none';
+			}
 		}
 
 		return $current_array;

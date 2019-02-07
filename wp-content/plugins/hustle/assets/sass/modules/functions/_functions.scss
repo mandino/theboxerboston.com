@@ -1,6 +1,0 @@
-// Convert PX to EM
-$browser-context: 16;
-
-@function getEm($pixels, $context: $browser-context) {
-	@return #{$pixels/$context}em;
-}

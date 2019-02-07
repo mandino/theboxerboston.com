@@ -11,10 +11,10 @@ Hustle.define( "SShare.Models",  function(){
 	var Content = Hustle.get("Models.M").extend({
 		defaults: {
 			module_name: '',
-			active: 1,
+			active: 0,
 			test_mode: 0,
 			service_type: 'native',
-			click_counter: 1,
+			click_counter: 'click',
 			social_icons: ''
 		}
 	});
@@ -35,7 +35,7 @@ Hustle.define( "SShare.Models",  function(){
 			drop_shadow_y: 0,
 			drop_shadow_blur: 0,
 			drop_shadow_spread: 0,
-			drop_shadow_color: 'rgba(0,0,0,0)',
+			drop_shadow_color: 'rgba(0,0,0,0.2)',
 			floating_inline_count: 0,
 			// counter_border: 'rgba(146, 158, 170, 1)',
 			// counter_text: 'rgba(255, 255, 255, 1)',
@@ -49,7 +49,7 @@ Hustle.define( "SShare.Models",  function(){
 			widget_drop_shadow_y: 0,
 			widget_drop_shadow_blur: 0,
 			widget_drop_shadow_spread: 0,
-			widget_drop_shadow_color: 'rgba(0,0,0,0)',
+			widget_drop_shadow_color: 'rgba(0,0,0,0.2)',
 			widget_inline_count: 0,
 			// widget_counter_text: 'rgba(255, 255, 255, 1)',
 			widget_counter_border: 'rgba(146, 158, 170, 1)',

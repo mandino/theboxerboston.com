@@ -114,7 +114,7 @@ class ActivityService extends BaseService
         $baseUrl = Config::get('endpoints.base_url') . Config::get('endpoints.clear_lists_activity');
         $url = $this->buildUrl($baseUrl);
         $payload = array('lists' => $lists);
-        $response = parent::getRestClient()->post($url, parent::getHeaders($accessToken), json_encode($payload));
+        $response = parent::getRestClient()->post($url, parent::getHeaders($accessToken), wp_json_encode($payload));
         return Activity::create(json_decode($response->body, true));
     }
 
@@ -128,7 +128,7 @@ class ActivityService extends BaseService
     {
         $baseUrl = Config::get('endpoints.base_url') . Config::get('endpoints.export_contacts_activity');
         $url = $this->buildUrl($baseUrl);
-        $response = parent::getRestClient()->post($url, parent::getHeaders($accessToken), json_encode($exportContacts));
+        $response = parent::getRestClient()->post($url, parent::getHeaders($accessToken), wp_json_encode($exportContacts));
         return Activity::create(json_decode($response->body, true));
     }
 
@@ -152,7 +152,7 @@ class ActivityService extends BaseService
             $payload['import_data'][] = array('email_addresses' => array($emailAddress));
         }
 
-        $response = parent::getRestClient()->post($url, parent::getHeaders($accessToken), json_encode($payload));
+        $response = parent::getRestClient()->post($url, parent::getHeaders($accessToken), wp_json_encode($payload));
         return Activity::create(json_decode($response->body, true));
     }
 

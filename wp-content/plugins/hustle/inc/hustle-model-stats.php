@@ -10,8 +10,7 @@
  *
  * Class Hustle_Model_Stats
  */
-class Hustle_Model_Stats extends Hustle_Data
-{
+class Hustle_Model_Stats extends Hustle_Data {
 	/**
 	 * @var Hustle_Model $_module
 	 */
@@ -31,7 +30,7 @@ class Hustle_Model_Stats extends Hustle_Data
 	 * @param Hustle_Model $module
 	 * @param $module_type
 	 */
-	function __construct( Hustle_Model $module, $module_type ){
+	public function __construct( Hustle_Model $module, $module_type ){
 		parent::__construct();
 		$this->_module = $module;
 		$this->_module_type = $module_type;
@@ -53,7 +52,7 @@ class Hustle_Model_Stats extends Hustle_Data
 	 *
 	 * @return int
 	 */
-	function get_views_count(){
+	public function get_views_count(){
 		return (int) $this->_wpdb->get_var( $this->_wpdb->prepare( "SELECT COUNT(meta_id) FROM " . $this->get_meta_table() . " WHERE `module_id`=%d AND `meta_key`=%s ", $this->_module->id,  $this->_get_key( self::KEY_VIEW ) ) );
 	}
 
@@ -62,7 +61,7 @@ class Hustle_Model_Stats extends Hustle_Data
 	 *
 	 * @return int
 	 */
-	function get_conversions_count(){
+	public function get_conversions_count(){
 		return (int) $this->_wpdb->get_var( $this->_wpdb->prepare( "SELECT COUNT(meta_id) FROM " . $this->get_meta_table() . " WHERE `module_id`=%d AND `meta_key`=%s ", $this->_module->id,  $this->_get_key( self::KEY_CONVERSION )  ) );
 	}
 
@@ -71,7 +70,7 @@ class Hustle_Model_Stats extends Hustle_Data
 	 *
 	 * @return float|int
 	 */
-	function get_conversion_rate(){
+	public function get_conversion_rate(){
 		return (int) $this->views_count > 0 ?  round( ( $this->conversions_count / $this->views_count )  * 100, 2 ) : 0;
 	}
 
@@ -80,7 +79,7 @@ class Hustle_Model_Stats extends Hustle_Data
 	 *
 	 * @return array
 	 */
-	function get_conversion_data(){
+	public function get_conversion_data(){
 		return (object) $this->_wpdb->get_results( $this->_wpdb->prepare( "SELECT * FROM " . $this->get_meta_table() . " WHERE `module_id`=%d AND `meta_key`=%s ", $this->_module->id,  $this->_get_key( self::KEY_CONVERSION )  ) );
 	}
 }

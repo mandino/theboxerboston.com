@@ -5,8 +5,7 @@
  * Class Hustle_Settings_Admin
  *
  */
-class Hustle_Settings_Admin
-{
+class Hustle_Settings_Admin {
 
 	/**
 	 * @var Opt_In$_hustle
@@ -23,8 +22,7 @@ class Hustle_Settings_Admin
 	 * @param Opt_In $hustle
 	 * @param Hustle_Email_Services $email_services
 	 */
-	function __construct( Opt_In $hustle, Hustle_Email_Services $email_services )
-	{
+	public function __construct( Opt_In $hustle, Hustle_Email_Services $email_services ) {
 		$this->_hustle = $hustle;
 		$this->_email_services = $email_services;
 		add_action( 'admin_menu', array( $this, "register_menu" ), 99 );
@@ -36,31 +34,34 @@ class Hustle_Settings_Admin
 	 *
 	 * @since 2.0
 	 */
-	function register_menu(){
+	public function register_menu(){
 		add_submenu_page( 'hustle', __("Hustle Settings", Opt_In::TEXT_DOMAIN) , __("Settings", Opt_In::TEXT_DOMAIN) , "manage_options", 'hustle_settings',  array( $this, "render_page" )  );
 	}
-
 
 	/**
 	 * Renders Hustle Settings page
 	 *
 	 * @since 2.0
 	 */
-	function render_page(){
+	public function render_page(){
 		$current_user = wp_get_current_user();
-
+		$email_settings = Hustle_Module_Model::get_email_settings();
+		$recaptcha_settings = Hustle_Module_Model::get_recaptcha_settings();
 		$this->_hustle->render("admin/settings", array(
 			"user_name" => ucfirst($current_user->display_name),
-			"enews_sync_state_toggle_nonce" => wp_create_nonce( "optin_sync_toggle" ),
-			"enews_sync_setup_nonce" => wp_create_nonce( "optin_sync_setup" ),
-			"enews_double_optin_state_toggle_nonce" => wp_create_nonce( "optin_double_optin_toggle" ),
 			"modules" => Hustle_Module_Collection::instance()->get_all(true),
 			"modules_state_toggle_nonce" => wp_create_nonce( "hustle_modules_toggle" ),
-			"is_e_newsletter_active" => $this->_hustle->get_e_newsletter()->is_plugin_active(),
+			"email_name" => $email_settings['sender_email_name'],
+			"email_address" => $email_settings['sender_email_address'],
+			"unsubscription_messages" => Hustle_Module_Model::get_unsubscribe_messages(),
+			"unsubscription_email" => Hustle_Module_Model::get_unsubscribe_email_settings(),
+			"recaptcha_enabled" => $recaptcha_settings['enabled'],
+			"recaptcha_sitekey" => $recaptcha_settings['sitekey'],
+			"recaptcha_secret" => $recaptcha_settings['secret'],
 		));
 	}
 
-	function set_proper_current_screen( $current ){
+	public function set_proper_current_screen( $current ){
 		global $current_screen;
 		if ( !Opt_In_Utils::_is_free() ) {
 			$current_screen->id = Opt_In_Utils::clean_current_screen($current_screen->id);

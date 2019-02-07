@@ -67,6 +67,6 @@ class TestSend extends Component
         if ($testSend->personal_message == null) {
             unset($testSend->personal_message);
         }
-        return json_encode($testSend);
+        return wp_json_encode($testSend);
     }
 }

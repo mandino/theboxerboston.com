@@ -10,7 +10,7 @@
 
         </div>
 
-        <label class="wpmudev-switch-label" for="wph-shares-widget-shadow"><?php _e( "Drop shadow", Opt_In::TEXT_DOMAIN ); ?></label>
+        <label class="wpmudev-switch-label" for="wph-shares-widget-shadow"><?php esc_attr_e( "Drop shadow", Opt_In::TEXT_DOMAIN ); ?></label>
 
     </div>
 
@@ -20,7 +20,7 @@
 
 			<div class="wpmudev-col">
 
-				<label><?php _e( "X-offset", Opt_In::TEXT_DOMAIN ); ?></label>
+				<label><?php esc_attr_e( "X-offset", Opt_In::TEXT_DOMAIN ); ?></label>
 
 				<input type="number" value="{{widget_drop_shadow_x}}" data-attribute="widget_drop_shadow_x" class="wpmudev-input_number">
 
@@ -28,7 +28,7 @@
 
 			<div class="wpmudev-col">
 
-				<label><?php _e( "Y-offset", Opt_In::TEXT_DOMAIN ); ?></label>
+				<label><?php esc_attr_e( "Y-offset", Opt_In::TEXT_DOMAIN ); ?></label>
 
 				<input type="number" value="{{widget_drop_shadow_y}}" data-attribute="widget_drop_shadow_y" class="wpmudev-input_number">
 
@@ -36,7 +36,7 @@
 
 			<div class="wpmudev-col">
 
-				<label><?php _e( "Blur", Opt_In::TEXT_DOMAIN ); ?></label>
+				<label><?php esc_attr_e( "Blur", Opt_In::TEXT_DOMAIN ); ?></label>
 
 				<input type="number" value="{{widget_drop_shadow_blur}}" data-attribute="widget_drop_shadow_blur" class="wpmudev-input_number">
 
@@ -44,7 +44,7 @@
 
 			<div class="wpmudev-col">
 
-				<label><?php _e( "Spread", Opt_In::TEXT_DOMAIN ); ?></label>
+				<label><?php esc_attr_e( "Spread", Opt_In::TEXT_DOMAIN ); ?></label>
 
 				<input type="number" value="{{widget_drop_shadow_spread}}" data-attribute="widget_drop_shadow_spread" class="wpmudev-input_number">
 
@@ -52,7 +52,7 @@
 
 			<div class="wpmudev-col">
 
-				<label><?php _e( "Color", Opt_In::TEXT_DOMAIN ); ?></label>
+				<label><?php esc_attr_e( "Color", Opt_In::TEXT_DOMAIN ); ?></label>
 
 				<div class="wpmudev-picker"><input class="wpmudev-color_picker" type="text"  value="{{widget_drop_shadow_color}}" data-attribute="widget_drop_shadow_color" data-alpha="true" /></div>
 

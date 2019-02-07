@@ -5,8 +5,7 @@
  * Any changes made here should also be made to the dashboard CSS!
  */
 
-.wrap .frash-notice.notice,
-#wpwrap .frash-notice.notice {
+.wrap .frash-notice.notice {
 	padding: 0;
 	margin: 5px 0 10px;
 	border: 1px solid #E5E5E5;
@@ -166,4 +165,4 @@
 }
 
 
-/* 176081-1519328155-au */
+/* 176081-1549515970-au */

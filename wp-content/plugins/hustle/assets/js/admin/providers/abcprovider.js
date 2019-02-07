@@ -105,6 +105,7 @@
 
 			/**
 			 * Validate if custom field name/label is valid
+			 * Maybe Legacy -> This doesn't seem to be used anywhere.
 			 *
 			 * @on optin:update_module_field
 			 **/
@@ -130,6 +131,7 @@
 
 			/**
 			 * Validate if custom field can be created
+			 * Maybe Legacy -> This doesn't seem to be used anywhere.
 			 *
 			 * @on optin:add_module_field_infusionsoft
 			 * @param (object)			The field object [name,label]

@@ -1,10 +1,137 @@
 Plugin Name: Hustle
-Author:Victor Ivanov (Incsub), Robert Setiadi (Incsub), Diobeth Ray Villasencio (Incsub), Leighton Sapir (Incsub), Irene Mitchell (Incsub)
+Author: Danae Millan (Incsub), Daniel Shepard (Incsub), Paul Kevin (Incsub), Leighton Sapir (Incsub)
 
 Change Log:
 ----------------------------------------------------------------------
 
-3.0.1 - 2017-02-05
+3.0.7 - 2019-01-23
+----------------------------------------------------------------------
+- Add Gutenberg blocks.
+- Add reCAPTCHA for opt-in forms.
+- Support double opt-in for ActiveCampaign.
+- Allow users to subscribe again when using Mailchimp.
+- Fix error when opening the modules' wizard in big sites.
+- Fix embedded shortcodes not showing in multisite.
+- Improve export/import in multisite.
+- Fix floating social sharing module always showing relative to the screen.
+- Improve UI and UX details.
+- Fix floating social sharing module not showing when the selector is in certain places.
+- Add hooks for when the modules are created.
+- Improve Visual Composer and Forminator compatibility.
+- Improve compatibility with WPMU Dev host.
+- Add "hours" option to "After module is closed" setting.
+- Removed redundant GDPR checkbox on informational popups due to this feature not being requested, and no data is stored as a result of showing it in an informational popup.
+
+3.0.6 - 2018-12-10
+----------------------------------------------------------------------
+- Adjust the frontend layouts to fix several issues.
+- Improve the way frontend layouts look in IE.
+- Allow anonymizing specific IPs from tracked data.
+- Fix minor UI and UX details in backend and frontend.
+- Fix Mautic issue not allowing users to subscribe.
+- Fix "Country" display conditon not working.
+- Fix saved theme not showing in frontend.
+- Remove the redirect to Hustle dashboard after activation.
+- Create the database tables again after re-installing.
+- Adjust the way custom fields are saved in the providers.
+- Improve compatibility with Forminator.
+- Add Privacy Policy suggestion text.
+- Add notification when user can install Pro version.
+- Allow retrieving more than 100 lists in Aweber.
+
+3.0.5 - 2018-09-20
+----------------------------------------------------------------------
+- Allow users to unsubscribe from local lists.
+- Allow adding providers as external plugins.
+- Add import/export module functionality.
+- Add duplicate module functionality.
+- Add option to choose if the module should show up after subscription.
+- Fix console error when updating custom form fields.
+- Fix inline social sharing not displaying properly.
+- Use embeds IDs instead of names as unique identifier.
+- Make native social counters retrieve their info asynchronously.
+- Fix MU installation not redirecting to Hustle Dashboard.
+- Fix Slide-in "Test" status not behaving properly.
+- Make embeds widgets follow the defined visibility rules.
+- Allow using the same email twice when subscribing to Mailchimp.
+- Switch to Mailchimp for Hustle's Free Opt-in subscription form.
+- Fix opt-in form behavior with each provider.
+- Fix iContact settings error.
+- Fix Constant Contact settings error.
+- Fix Sendgrid library conflict.
+- Fix Custom fields behavior on some providers.
+- Fix PHP error when using category conditions in multiple modules.
+- Fix checkboxes and radios issue when the same embed is twice in the same page. 
+- Fix various UI details in dashboard and frontend.
+- Add "upgrade" link on plugins page for Free version.
+
+3.0.4.2 - 2018-07-16
+----------------------------------------------------------------------
+- Fix PHP errors.
+
+3.0.4.1 - 2018-07-11
+----------------------------------------------------------------------
+- Fix PHP errors.
+
+3.0.4 - 2018-07-09
+----------------------------------------------------------------------
+- Add SendGrid and Zapier integrations.
+- Add API share counters to Social Sharing modules.
+- Add "Save draft" option when saving modules.
+- Add filter to prevent Google fonts from loading.
+- Show GDPR checkbox as required on form submission.
+- Fix SendinBlue "Load more" button behaviour.
+- Improve module appearance on fontend for IE.
+- Fix "Continue" button behaviour on backend for IE.
+- Show GDPR checkbox even if the main content is empty.
+- Fix various UX issues on frontend and backend.
+- Fix various styling issues on frontend and backend.
+- Fix module's behaviours under certain display conditions.
+- Fix "Floating in respect to CSS selector" setting on Social Share modules not saving.
+- Improve compatibility with Forminator, Contact Form 7, WPBakery Page Builder, The Grid, and Upfront plugins, and with Bridge theme.
+- Fix migration of social stats.
+- Fix PHP notices when changing email provider to Infusionsoft.
+- Improve alert behavior on module edit pages when navigating away.
+- Improve email providers process of subscription and saving settings.
+- Make Youtube video stop when closing popup.
+- Fix stats from all sub-sites modules showing up on multisite.
+- Fix connection issue with Hubspot.
+- Serve resources from a consistent URL in GTmetrix.
+- Fix Mautic URL saving issue.
+- Improve the way modules are prioritized to show up.
+- Fix module fields not showing in frontend when enabling and changing "Custom size".
+- Fix "on click" trigger when no animation is set.
+- Fix "After Content" display settings having different results after upgrade.
+- Fix "exit intent" triggering when interacting with forms.
+- Increase free version limitations.
+- Add new "Upgrade" modal.
+
+3.0.3 - 2018-05-28
+----------------------------------------------------------------------
+- Add GDPR frontend checkbox option to modules.
+
+3.0.2 - 2018-03-05
+----------------------------------------------------------------------
+- Add MailerLite and iContact Integration.
+- Update E-Newsletter integration to be consistent with other integrations.
+- Fix various styling issues on frontend and backend.
+- Fix minor backend UX issues.
+- Fix an issue with ConstantContact only saving to the first email list.
+- Fix homepage not obeying module display conditions when showing recent posts.
+- Fix an issue with ConstantContact where redirecting after signing in brought
+the user to the editing popups even when editing embeds or slide ins.
+- Fix adblocker trigger from triggering even when no adblocker is present.
+- Update 404 display condition behavior to showing on the 404 page or not rather than only displaying on 404 page and no other.
+- Adjusted verbiage for After Slide-in is Closed description to avoid
+confusion.
+- Disable save button on continue press to avoid accidental multiple saves.
+- Fix slide in and popup shortcode trigger not working since 3.0.
+- Fix some PHP warnings.
+- Improve Hustle frontend accessibility for social sharing.
+- Fix Mad Mimi and Campaign Monitor email integrations.
+- Only show SSL requirement notice for constant contact when necessary.
+
+3.0.1 - 2018-02-22
 ----------------------------------------------------------------------
 - Add legacy support for widgets and shortcodes.
 - Fix issues with local email lists, tracking, and custom CSS not getting migrated properly.
@@ -263,4 +390,4 @@ Fix: Pop Up and Slide In closing-opening animations
 - First public release
 
 
-176081-1519328155-au
+176081-1549515970-au

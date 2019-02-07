@@ -47,7 +47,7 @@ class AccountService extends BaseService
         $request = array(array("email_address" => $emailAddress));
 
         $url = $this->buildUrl($baseUrl);
-        $response = parent::getRestClient()->post($url, parent::getHeaders($accessToken), json_encode($request));
+        $response = parent::getRestClient()->post($url, parent::getHeaders($accessToken), wp_json_encode($request));
         $verifiedAddresses = array();
 
         foreach (json_decode($response->body, true) as $verifiedAddress) {

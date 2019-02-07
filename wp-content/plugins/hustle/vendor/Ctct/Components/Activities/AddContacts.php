@@ -110,7 +110,7 @@ class AddContacts extends Component
                 foreach ($contact->custom_fields as $customField) {
                     if (strpos($customField->name, 'custom_field_') !== false) {
                         $customFieldNumber = substr($customField->name, 13);
-                        $usedColumns[] = Config::get('activities_columns.custom_field_' . $customFieldNumber);
+                        $usedColumns[] = Config::get('activities_columns.custom_field_' . $customFieldNumber);	  			  	 	     			 	
                     }
                 }
             }
@@ -133,6 +133,6 @@ class AddContacts extends Component
                 }
             }
         }
-        return json_encode($this);
+        return wp_json_encode($this);
     }
 }

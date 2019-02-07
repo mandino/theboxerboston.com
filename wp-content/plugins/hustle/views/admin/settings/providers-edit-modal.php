@@ -8,7 +8,7 @@
 
 			<div class="box-title">
 
-				<h3><?php _e('Edit List', Opt_In::TEXT_DOMAIN); ?></h3>
+				<h3><?php esc_attr_e('Edit List', Opt_In::TEXT_DOMAIN); ?></h3>
 
 				<a class="wph-icon i-close"></a>
 
@@ -30,13 +30,13 @@
 
 							<div class="col-half">
 
-								<button class="wph-button wph-button--gray js-wph-button-cancel"><?php _e('Cancel', Opt_In::TEXT_DOMAIN); ?></button>
+								<button class="wph-button wph-button--gray js-wph-button-cancel"><?php esc_attr_e('Cancel', Opt_In::TEXT_DOMAIN); ?></button>
 
 							</div>
 
 							<div class="col-half">
 
-								<button id="wph-edit-service-save" data-nonce="<?php echo wp_create_nonce( 'hustle-edit-service-save' ); ?>" class="wph-button wph-button--filled wph-button--blue" style="width: auto"><?php _e('Save Settings', Opt_In::TEXT_DOMAIN); ?></button>
+								<button id="wph-edit-service-save" data-nonce="<?php echo esc_attr( wp_create_nonce( 'hustle-edit-service-save' ) ); ?>" class="wph-button wph-button--filled wph-button--blue" style="width: auto"><?php esc_attr_e('Save Settings', Opt_In::TEXT_DOMAIN); ?></button>
 
 							</div>
 

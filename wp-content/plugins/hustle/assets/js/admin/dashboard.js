@@ -121,11 +121,12 @@ Hustle.define("Dashboard.View", function($, doc, win){
 			chart.draw(data, options);
 		},
 		render: function(){
+			$(".hustle-free-version-create").on('click', this.show_upgrade_modal);
+			$(".wpmudev-box-head .wpmudev-icon.wpmudev-i_close").on('click', this.close_modal);
 			$(".tabs-header li label").on('click', this.toggle_overview);
 			$(".can-close .wph-icon.i-close").on('click', this.close);
 			$(".can-hide .wpmudev-box-action").on('click', this.hide);
 			$("a#sshare_view_all_stats").on('click', this.toggle_sshare_modal);
-			$(".wpmudev-box-head .wpmudev-icon.wpmudev-i_close").on('click', this.close);
 			$("#wpmudev-dashboard-widget-modules .wpmudev-box-head").on('click', this.toggle_module_accordion);
 			this.handle_sshare_modal_pagination();
 
@@ -184,6 +185,11 @@ Hustle.define("Dashboard.View", function($, doc, win){
 				$body.toggleClass('wpmudev-hidden');
 			} );
 		},
+		close_modal: function(e){
+			e.preventDefault();
+			var $modal_container = $(e.target).closest('.wpmudev-modal');
+			$modal_container.removeClass('wpmudev-modal-active');
+		},
 		close: function(e){
 			e.preventDefault();
 			// var $parent_section = $(e.target).closest('.content-box').remove();
@@ -210,6 +216,13 @@ Hustle.define("Dashboard.View", function($, doc, win){
 			var $parent_body = $(e.target).closest(".wpmudev-box-head").next(".wpmudev-box-body");
 			$parent_body.toggleClass(".wpmudev-hide");
 		},
+		show_upgrade_modal: function(e){
+			if ( typeof( e ) !== 'undefined' ) {
+				e.preventDefault();
+			}
+			var $upgrade_modal = $('#wph-upgrade-modal');
+			$upgrade_modal.addClass('wpmudev-modal-active');
+		},
 		toggle_overview: function(e){
 			e.preventDefault();
 			var $this = $(e.target),
@@ -224,9 +237,8 @@ Hustle.define("Dashboard.View", function($, doc, win){
 		},
 		toggle_sshare_modal: function(e) {
 			e.preventDefault();
-			var $stats_modal = $('#wph-comulative-shares-modal');
-			$stats_modal.toggleClass('wpmudev-modal-active');
-			$stats_modal.find('.wpmudev-box-modal').toggleClass('wpmudev-show');
+			var $stats_modal = $('#wph-cumulative-shares-modal');
+			$stats_modal.addClass('wpmudev-modal-active');
 		},
 		handle_sshare_modal_pagination: function(){
 			$("li.wph-sshare--prev_page a").on('click', $.proxy(this.sshare_modal_prev, this));
@@ -336,7 +348,7 @@ Hustle.define("Dashboard.View", function($, doc, win){
 		},
 		sshare_show_page_content: function(page, nonce){
 			var ss_modal_template = Optin.template('wpmudev-hustle-sshare-stats-modal-tpl'),
-				$table_items = $('#wph-comulative-shares-modal table.wpmudev-table-paginated tbody');
+				$table_items = $('#wph-cumulative-shares-modal table.wpmudev-table-paginated tbody');
 
 			$table_items.html('<div class="wph-sshare--loading_stats"><span class="on-action">Loading...</span></div>');
 

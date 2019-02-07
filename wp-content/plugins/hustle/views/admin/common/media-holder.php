@@ -2,7 +2,7 @@
 
 	<div class="wph-media--holder">
 
-		<button class="wph-media--add {{_.class(!!image, 'hidden')}}"><span class="dashicons dashicons-format-image"></span><?php _e('Click to Add Image', Opt_In::TEXT_DOMAIN); ?></button>
+		<button class="wph-media--add {{_.class(!!image, 'hidden')}}"><span class="dashicons dashicons-format-image"></span><?php esc_attr_e('Click to Add Image', Opt_In::TEXT_DOMAIN); ?></button>
 
 		<div class="wph-media--options {{_.class(!image, 'hidden')}}" >
 
@@ -30,15 +30,15 @@
 
 					<div class="wph-media--title">
 
-						<span class="f-left"><?php _e('OPTIONS', Opt_In::TEXT_DOMAIN); ?></span>
+						<span class="f-left"><?php esc_attr_e('OPTIONS', Opt_In::TEXT_DOMAIN); ?></span>
 
 						<i class="wph-icon i-close"></i>
 
 					</div>
 
-					<li><a class="wpoi-swap-image-button" href="#"><span class="dashicons dashicons-format-gallery"></span><?php _e("Swap Image", Opt_In::TEXT_DOMAIN) ?></a></li>
+					<li><a class="wpoi-swap-image-button" href="#"><span class="dashicons dashicons-format-gallery"></span><?php esc_attr_e("Swap Image", Opt_In::TEXT_DOMAIN); ?></a></li>
 
-					<li><a class="wpoi-delete-image-button" href="#"><span class="dashicons dashicons-trash"></span><?php _e("Delete Image", Opt_In::TEXT_DOMAIN) ?></a></li>
+					<li><a class="wpoi-delete-image-button" href="#"><span class="dashicons dashicons-trash"></span><?php esc_attr_e("Delete Image", Opt_In::TEXT_DOMAIN); ?></a></li>
 
 				</ul>
 

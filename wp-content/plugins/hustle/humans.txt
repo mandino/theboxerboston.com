@@ -1,21 +1,12 @@
 /* TEAM */
-    Product Manager: Robert Setiadi
-    Location: Melbourne, Australia
+	Lead Developer: Danae Millan
+	Location: Uruguay
 
-	Developer: Diobeth Ray Villasencio
-	Location: Cebu, Philippines
-
-	Developer: Daniel Shepard
-	Location: USA
-
-	Developer: Leighton Sapir
-	Location: Cuenca, Ecuador
-
-    Developer: Irene Mitchell
-    Location: Cagayan de Oro, Philippines
+	Front Developer: Leighton Sapir
+	Location: Ecuador
 
     Designer: Victor Ivanov
     Location: Melbourne, Australia
 
 
-176081-1519328155-au
+176081-1549515970-au

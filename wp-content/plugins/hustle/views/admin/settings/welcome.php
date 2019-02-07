@@ -2,7 +2,7 @@
 
 	<header id="wpmudev-hustle-title">
 
-		<h1><?php _e( "Settings", Opt_In::TEXT_DOMAIN ); ?></h1>
+		<h1><?php esc_attr_e( "Settings", Opt_In::TEXT_DOMAIN ); ?></h1>
 
 	</header>
 
@@ -16,7 +16,7 @@
 
 					<div class="wpmudev-box-head">
 
-						<h2><?php printf( __('Hello there, %s', Opt_In::TEXT_DOMAIN), $user_name ); ?></h2>
+						<h2><?php printf( esc_attr__('Hello there, %s', Opt_In::TEXT_DOMAIN), esc_html( $user_name ) ); ?></h2>
 
 					</div>
 
@@ -26,9 +26,9 @@
 
 						<div class="wpmudev-box-content">
 
-							<h2><?php _e( "A little extra Hustle", Opt_In::TEXT_DOMAIN ); ?></h2>
+							<h2><?php esc_attr_e( "A little extra Hustle", Opt_In::TEXT_DOMAIN ); ?></h2>
 
-							<p><?php _e( "Hide specific modules from the admin and logged in users and manage plugin integrations when available.", Opt_In::TEXT_DOMAIN ); ?></p>
+							<p><?php esc_attr_e( "Hide specific modules from the admin and logged in users and manage plugin integrations when available.", Opt_In::TEXT_DOMAIN ); ?></p>
 
 							<p></p>
 
@@ -43,7 +43,5 @@
 		</div><?php // .wpmudev-row ?>
 
 	</section>
-
-	<?php $this->render( "admin/commons/footer", array() ); ?>
 
 </main>

@@ -46,6 +46,6 @@ class Schedule extends Component
     {
         $schedule = clone $this;
         unset($schedule->id);
-        return json_encode($schedule);
+        return wp_json_encode($schedule);
     }
 }

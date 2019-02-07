@@ -5,8 +5,7 @@
  * Class Hustle_Email_Services
  *
  */
-class Hustle_Email_Services
-{
+class Hustle_Email_Services {
 
 	const SERVICE_PROVIDER_META_KEY = "service_provider";
 
@@ -29,8 +28,7 @@ class Hustle_Email_Services
 	 *
 	 * Hustle_Email_Services constructor.
 	 */
-	function __construct()
-	{
+	public function __construct() {
 		global $wpdb;
 		$this->_wpdb = $wpdb;
 
@@ -105,14 +103,14 @@ class Hustle_Email_Services
 	 * since 2.0
 	 * @return array module_id => (object) array( name, list_id, api_key )
 	 */
-	function get_all(){
+	public function get_all(){
 		return array_unique( $this->_services, SORT_REGULAR );
 	}
 
 	/**
 	 * @return int count of unique service->list_id
 	 */
-	function get_count(){
+	public function get_count(){
 		return $this->_count;
 	}
 
@@ -122,7 +120,7 @@ class Hustle_Email_Services
 	 * @param $id
 	 * @return object array( name, list_id, api_key )
 	 */
-	function get( $id ){
+	public function get( $id ){
 		return  isset( $this->_services[ $id ] ) ? $this->_services[ $id ] : new stdClass() ;
 	}
 }

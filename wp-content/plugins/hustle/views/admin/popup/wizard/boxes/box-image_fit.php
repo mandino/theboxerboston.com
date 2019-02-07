@@ -2,117 +2,117 @@
 
 	<div class="wpmudev-box-left">
 
-		<h4><strong><?php _e( "Featured image fitting", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
+		<h4><strong><?php esc_attr_e( "Featured image fitting", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
 
-        <label class="wpmudev-helper"><?php _e("Improve the way the featured image fits its container. Preview each option to find one that suits you.", Opt_In::TEXT_DOMAIN); ?></label>
+        <label class="wpmudev-helper"><?php esc_attr_e("Improve the way the featured image fits its container. Preview each option to find one that suits you.", Opt_In::TEXT_DOMAIN); ?></label>
 
 	</div>
 
 	<div class="wpmudev-box-right">
 
-		<label><?php _e("Choose image fitting type", Opt_In::TEXT_DOMAIN); ?></label>
+		<label><?php esc_attr_e("Choose image fitting type", Opt_In::TEXT_DOMAIN); ?></label>
 
         <div class="wpmudev-tabs">
 
             <ul class="wpmudev-tabs-menu wpmudev-tabs-menu_full wpmudev-feature-image-fit-options">
 
-                <li class="wpmudev-tabs-menu_item{{ ( feature_image_fit === 'fill' ) ? ' current' : '' }}">
+                <li class="wpmudev-tabs-menu_item{{ ( 'fill' === feature_image_fit ) ? ' current' : '' }}">
                     <input type="checkbox" value="fill">
-                    <label><?php _e( "Fill", Opt_In::TEXT_DOMAIN ); ?></label>
+                    <label><?php esc_attr_e( "Fill", Opt_In::TEXT_DOMAIN ); ?></label>
                 </li>
 
-                <li class="wpmudev-tabs-menu_item{{ ( feature_image_fit === 'contain' ) ? ' current' : '' }}">
+                <li class="wpmudev-tabs-menu_item{{ ( 'contain' === feature_image_fit ) ? ' current' : '' }}">
                     <input type="checkbox" value="contain">
-                    <label><?php _e( "Contain", Opt_In::TEXT_DOMAIN ); ?></label>
+                    <label><?php esc_attr_e( "Contain", Opt_In::TEXT_DOMAIN ); ?></label>
                 </li>
 
-                <li class="wpmudev-tabs-menu_item{{ ( feature_image_fit === 'cover' ) ? ' current' : '' }}">
+                <li class="wpmudev-tabs-menu_item{{ ( 'cover' === feature_image_fit ) ? ' current' : '' }}">
                     <input type="checkbox" value="cover">
-                    <label><?php _e( "Cover", Opt_In::TEXT_DOMAIN ); ?></label>
+                    <label><?php esc_attr_e( "Cover", Opt_In::TEXT_DOMAIN ); ?></label>
                 </li>
 
-                <li class="wpmudev-tabs-menu_item{{ ( feature_image_fit === 'none' ) ? ' current' : '' }}">
+                <li class="wpmudev-tabs-menu_item{{ ( 'none' === feature_image_fit ) ? ' current' : '' }}">
                     <input type="checkbox" value="none">
-                    <label><?php _e( "None", Opt_In::TEXT_DOMAIN ); ?></label>
+                    <label><?php esc_attr_e( "None", Opt_In::TEXT_DOMAIN ); ?></label>
                 </li>
 
             </ul>
 
         </div>
 
-        <div id="wph-wizard-content-image_fit_horizontal_vertical_options" class="wpmudev-box-gray {{ ( feature_image_fit === 'contain' || feature_image_fit === 'cover' ) ? 'wpmudev-show' : 'wpmudev-hidden' }}">
+        <div id="wph-wizard-content-image_fit_horizontal_vertical_options" class="wpmudev-box-gray {{ ( 'contain' === feature_image_fit || 'cover' === feature_image_fit ) ? 'wpmudev-show' : 'wpmudev-hidden' }}">
 
-            <label><?php _e("Horizontal image position", Opt_In::TEXT_DOMAIN); ?></label>
+            <label><?php esc_attr_e("Horizontal image position", Opt_In::TEXT_DOMAIN); ?></label>
 
             <div class="wpmudev-tabs">
 
                 <ul class="wpmudev-tabs-menu wpmudev-tabs-menu_full wpmudev-feature-image-horizontal-options">
 
-                    <li class="wpmudev-tabs-menu_item{{ ( feature_image_horizontal === 'left' ) ? ' current' : '' }}">
+                    <li class="wpmudev-tabs-menu_item{{ ( 'left' === feature_image_horizontal ) ? ' current' : '' }}">
                         <input type="checkbox" value="left">
-                        <label><?php _e( "Left", Opt_In::TEXT_DOMAIN ); ?></label>
+                        <label><?php esc_attr_e( "Left", Opt_In::TEXT_DOMAIN ); ?></label>
                     </li>
 
-                    <li class="wpmudev-tabs-menu_item{{ ( feature_image_horizontal === 'center' ) ? ' current' : '' }}">
+                    <li class="wpmudev-tabs-menu_item{{ ( 'center' === feature_image_horizontal ) ? ' current' : '' }}">
                         <input type="checkbox" value="center">
-                        <label><?php _e( "Center", Opt_In::TEXT_DOMAIN ); ?></label>
+                        <label><?php esc_attr_e( "Center", Opt_In::TEXT_DOMAIN ); ?></label>
                     </li>
 
-                    <li class="wpmudev-tabs-menu_item{{ ( feature_image_horizontal === 'right' ) ? ' current' : '' }}">
+                    <li class="wpmudev-tabs-menu_item{{ ( 'right' === feature_image_horizontal ) ? ' current' : '' }}">
                         <input type="checkbox" value="right">
-                        <label><?php _e( "Right", Opt_In::TEXT_DOMAIN ); ?></label>
+                        <label><?php esc_attr_e( "Right", Opt_In::TEXT_DOMAIN ); ?></label>
                     </li>
 
-                    <li class="wpmudev-tabs-menu_item{{ ( feature_image_horizontal === 'custom' ) ? ' current' : '' }}">
+                    <li class="wpmudev-tabs-menu_item{{ ( 'custom' === feature_image_horizontal ) ? ' current' : '' }}">
                         <input type="checkbox" value="custom">
-                        <label><?php _e( "Custom", Opt_In::TEXT_DOMAIN ); ?></label>
+                        <label><?php esc_attr_e( "Custom", Opt_In::TEXT_DOMAIN ); ?></label>
                     </li>
 
                 </ul>
 
             </div>
 
-            <div id="wph-wizard-design-horizontal-position" class="{{ ( feature_image_horizontal === 'custom' ) ? 'wpmudev-show' : 'wpmudev-hidden' }}">
+            <div id="wph-wizard-design-horizontal-position" class="{{ ( 'custom' === feature_image_horizontal ) ? 'wpmudev-show' : 'wpmudev-hidden' }}">
 
-                <label><?php _e("Horizontal position (px)", Opt_In::TEXT_DOMAIN); ?></label>
+                <label><?php esc_attr_e("Horizontal position (px)", Opt_In::TEXT_DOMAIN); ?></label>
 
                 <input type="number" data-attribute="feature_image_horizontal_px" value="{{feature_image_horizontal_px}}" class="wpmudev-input_number">
 
             </div>
 
-            <label><?php _e("Vertical image position", Opt_In::TEXT_DOMAIN); ?></label>
+            <label><?php esc_attr_e("Vertical image position", Opt_In::TEXT_DOMAIN); ?></label>
 
             <div class="wpmudev-tabs">
 
                 <ul class="wpmudev-tabs-menu wpmudev-tabs-menu_full wpmudev-feature-image-vertical-options">
 
-                    <li class="wpmudev-tabs-menu_item{{ ( feature_image_vertical === 'top' ) ? ' current' : '' }}">
+                    <li class="wpmudev-tabs-menu_item{{ ( 'top' === feature_image_vertical ) ? ' current' : '' }}">
                         <input type="checkbox" value="top">
-                        <label><?php _e( "Top", Opt_In::TEXT_DOMAIN ); ?></label>
+                        <label><?php esc_attr_e( "Top", Opt_In::TEXT_DOMAIN ); ?></label>
                     </li>
 
-                    <li class="wpmudev-tabs-menu_item{{ ( feature_image_vertical === 'center' ) ? ' current' : '' }}">
+                    <li class="wpmudev-tabs-menu_item{{ ( 'center' === feature_image_vertical ) ? ' current' : '' }}">
                         <input type="checkbox" value="center">
-                        <label><?php _e( "Center", Opt_In::TEXT_DOMAIN ); ?></label>
+                        <label><?php esc_attr_e( "Center", Opt_In::TEXT_DOMAIN ); ?></label>
                     </li>
 
-                    <li class="wpmudev-tabs-menu_item{{ ( feature_image_vertical === 'bottom' ) ? ' current' : '' }}">
+                    <li class="wpmudev-tabs-menu_item{{ ( 'bottom' === feature_image_vertical ) ? ' current' : '' }}">
                         <input type="checkbox" value="bottom">
-                        <label><?php _e( "Bottom", Opt_In::TEXT_DOMAIN ); ?></label>
+                        <label><?php esc_attr_e( "Bottom", Opt_In::TEXT_DOMAIN ); ?></label>
                     </li>
 
-                    <li class="wpmudev-tabs-menu_item{{ ( feature_image_vertical === 'custom' ) ? ' current' : '' }}">
+                    <li class="wpmudev-tabs-menu_item{{ ( 'custom' === feature_image_vertical ) ? ' current' : '' }}">
                         <input type="checkbox" value="custom">
-                        <label><?php _e( "Custom", Opt_In::TEXT_DOMAIN ); ?></label>
+                        <label><?php esc_attr_e( "Custom", Opt_In::TEXT_DOMAIN ); ?></label>
                     </li>
 
                 </ul>
 
             </div>
 
-            <div id="wph-wizard-design-vertical-position" class="{{ ( feature_image_vertical === 'custom' ) ? 'wpmudev-show' : 'wpmudev-hidden' }}">
+            <div id="wph-wizard-design-vertical-position" class="{{ ( 'custom' === feature_image_vertical ) ? 'wpmudev-show' : 'wpmudev-hidden' }}">
 
-                <label><?php _e("Vertical position (px)", Opt_In::TEXT_DOMAIN); ?></label>
+                <label><?php esc_attr_e("Vertical position (px)", Opt_In::TEXT_DOMAIN); ?></label>
 
                 <input type="number" data-attribute="feature_image_vertical_px" value="{{feature_image_vertical_px}}" class="wpmudev-input_number">
 

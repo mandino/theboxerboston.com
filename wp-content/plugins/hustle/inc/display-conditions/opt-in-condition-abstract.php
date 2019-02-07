@@ -1,7 +1,6 @@
 <?php
 
-abstract class Opt_In_Condition_Abstract
-{
+abstract class Opt_In_Condition_Abstract {
 	protected $module_type;
 
 	protected $args;
@@ -20,7 +19,7 @@ abstract class Opt_In_Condition_Abstract
 	 */
 	private $_geo;
 
-	function __construct($args){
+	public function __construct($args){
 		$this->args = (object)$args;
 	}
 
@@ -29,7 +28,7 @@ abstract class Opt_In_Condition_Abstract
 	 *
 	 * @return Opt_In_Utils
 	 */
-	function utils(){
+	public function utils(){
 		if( empty( $this->_utils ) ){
 			if( empty( $this->_geo ) )
 				$this->_geo = new Opt_In_Geo();
@@ -45,12 +44,12 @@ abstract class Opt_In_Condition_Abstract
 	 *
 	 * @param $type
 	 */
-	function set_type( $type ){
+	public function set_type( $type ){
 		$this->module_type = $type;
 	}
 
 	/**
 	 * @return string
 	 */
-	abstract function label();
+	abstract public function label();
 }

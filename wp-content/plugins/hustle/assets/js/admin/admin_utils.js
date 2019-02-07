@@ -40,5 +40,37 @@
 		}
 	};
 	
+	Module.Utils = {
+		
+		/*
+		 * Return URL param value
+		 */
+		get_url_param: function ( param ) {
+			var page_url = window.location.search.substring(1),
+				url_params = page_url.split('&');
+
+			for ( var i = 0; i < url_params.length; i++ ) {
+				var param_name = url_params[i].split('=');
+				if ( param_name[0] === param ) {
+					return param_name[1];
+				}
+			}
+
+			return false;
+		},
+
+		service_supports_fields: function( save_local_list, active_email_service ) {
+			if ( '1' === String(save_local_list) ) {
+				return true;
+			} else if (
+				! _.isEmpty( active_email_service ) && 
+				typeof( optin_vars.providers[active_email_service] ) !== 'undefined'
+			) {
+				return optin_vars.providers[active_email_service].supports_fields;
+			}
+			return false;
+		},
+	}
+	
 	
 }(jQuery));

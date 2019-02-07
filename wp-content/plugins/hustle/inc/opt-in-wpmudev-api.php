@@ -14,7 +14,7 @@ class Opt_In_WPMUDEV_API {
 	 *
 	 * @return string The unique nonce value.
 	 */
-	function get_nonce_value() {
+	public function get_nonce_value() {
 		$nonce = is_multisite() ? get_site_option( $this->nonce_option_name ) : get_option( $this->nonce_option_name );
 
 		if ( empty( $nonce ) ) {
@@ -22,7 +22,7 @@ class Opt_In_WPMUDEV_API {
 			 * Generate the nonce value only once to avoid error response
 			 * when retrieving access token.
 			 */
-			$nonce = wp_generate_password(40,false,false);
+			$nonce = wp_generate_password(40, false, false);
 
 			if ( is_multisite() )
 				update_site_option( $this->nonce_option_name, $nonce );
@@ -40,11 +40,11 @@ class Opt_In_WPMUDEV_API {
 	 *
 	 * @return bool
 	 */
-	function verify_nonce( $nonce ) {
-		return $nonce == $this->get_nonce_value();
+	public function verify_nonce( $nonce ) {
+		return $nonce === $this->get_nonce_value();
 	}
 
-	function _get_redirect_uri( $provider, $action, $params = array() ) {
+	public function _get_redirect_uri( $provider, $action, $params = array() ) {
 		$params = wp_parse_args( $params, array(
 			'action' => $action,
 			'provider' => $provider,
@@ -60,13 +60,13 @@ class Opt_In_WPMUDEV_API {
 	 *
 	 * @return bool
 	 */
-	function validate_callback_request( $provider ) {
+	public function validate_callback_request( $provider ) {
 		$wpnonce = filter_input( INPUT_GET, 'wpnonce', FILTER_SANITIZE_STRING );
 		$domain = filter_input( INPUT_GET, 'domain', FILTER_VALIDATE_URL );
 		$provider_input = filter_input( INPUT_GET, 'provider' );
 
 		return ! empty( $wpnonce ) && $this->verify_nonce( $wpnonce )
-			&& self::DOMAIN == $domain && $provider == $provider_input;
+			&& self::DOMAIN === $domain && $provider === $provider_input;
 	}
 
 	/**
@@ -76,7 +76,7 @@ class Opt_In_WPMUDEV_API {
 	 * @param string $retry_url
 	 * @param string $cancel_url
 	 */
-	function wp_die( $message, $retry_url = '', $cancel_url = '' ) {
+	public function wp_die( $message, $retry_url = '', $cancel_url = '' ) {  //phpcs:ignore
 		$html = sprintf( '<p><img src="%s" /></p>', Opt_In::$plugin_url . 'assets/img/hustle.png' );
 		$html .= sprintf( '<p>%s</p>', $message );
 
@@ -88,6 +88,6 @@ class Opt_In_WPMUDEV_API {
 
 		$html = sprintf( '<div style="text-align: center;">%s</div>', $html );
 
-		wp_die( $html, __( 'Hustle failure notice.', Opt_In::TEXT_DOMAIN ), 403 );
+		wp_die( esc_html( $html ), esc_html__( 'Hustle failure notice.', Opt_In::TEXT_DOMAIN ), 403 );
 	}
 }

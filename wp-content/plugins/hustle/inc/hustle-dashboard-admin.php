@@ -1,20 +1,18 @@
 <?php
 
 
-class Hustle_Dashboard_Admin extends Opt_In
-{
+class Hustle_Dashboard_Admin extends Opt_In {
 
 	private $_data;
 
-	function __construct()
-	{
+	public function __construct() {
 		add_action( 'admin_menu', array( $this, "register_menus" ), 1 );
 		add_filter("hustle_optin_vars", array( $this, "register_dashboard_vars" ));
 		if( $this->_is_dashboard() )
 			$this->_data = new Hustle_Dashboard_Data();
 	}
 
-	function register_menus(){
+	public function register_menus(){
 
 		$parent_menu_title = ( Opt_In_Utils::_is_free() )
 			? __("Hustle", Opt_In::TEXT_DOMAIN)
@@ -31,7 +29,7 @@ class Hustle_Dashboard_Admin extends Opt_In
 	 *
 	 * @since 2.0
 	 */
-	function render_dashboard(){
+	public function render_dashboard(){
 		$current_user = wp_get_current_user();
 
 		$modules_except_ss = count($this->_data->popups) + count($this->_data->slideins) + count($this->_data->embeds);
@@ -62,9 +60,9 @@ class Hustle_Dashboard_Admin extends Opt_In
 		return isset( $_GET['page'] ) &&  ( in_array($_GET['page'], array(
 			'hustle_dashboard',
 			'hustle'
-		   ) ) );
+		   ), true ) );
 	}
-	function register_dashboard_vars( $vars ){
+	public function register_dashboard_vars( $vars ){
 		if( !$this->_is_dashboard() ) return $vars;
 
 		$vars['top_active_modules'] = $this->_data->top_active_modules;

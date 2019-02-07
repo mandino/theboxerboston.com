@@ -9,13 +9,13 @@ $content_hide = false;
 
         <?php $this->render("general/icons/admin-icons/icon-shortcode" ); ?>
 
-        <h2><?php _e("Embeds", Opt_In::TEXT_DOMAIN); ?></h2>
+        <h2><?php esc_attr_e("Embeds", Opt_In::TEXT_DOMAIN); ?></h2>
 
         <div class="wpmudev-box-action"><?php $this->render("general/icons/icon-plus" ); ?></div>
 
     </div>
 
-    <div class="wpmudev-box-body<?php if ($content_hide === true) { echo ' wpmudev-hidden'; } ?>">
+    <div class="wpmudev-box-body<?php if ( true === $content_hide ) echo ' wpmudev-hidden'; ?>">
 
         <?php if ( count($embeds) ) { ?>
 
@@ -25,13 +25,13 @@ $content_hide = false;
 
                     <tr>
 
-                        <th class="wpmudev-table--name"><?php _e("Name", Opt_In::TEXT_DOMAIN); ?></th>
+                        <th class="wpmudev-table--name"><?php esc_attr_e("Name", Opt_In::TEXT_DOMAIN); ?></th>
 
                         <th class="wpmudev-table--multistatus"></th>
 
-                        <th class="wpmudev-table--views"><?php _e( "Views", Opt_In::TEXT_DOMAIN ); ?></th>
+                        <th class="wpmudev-table--views"><?php esc_attr_e( "Views", Opt_In::TEXT_DOMAIN ); ?></th>
 
-                        <th class="wpmudev-table--rate"><?php _e( "Conv. rate", Opt_In::TEXT_DOMAIN ); ?></th>
+                        <th class="wpmudev-table--rate"><?php esc_attr_e( "Rate", Opt_In::TEXT_DOMAIN ); ?></th>
 
                         <th class="wpmudev-table--button"></th>
 
@@ -41,7 +41,8 @@ $content_hide = false;
 
                 <tbody>
 
-                    <?php foreach( $embeds as $embed ) :
+                    <?php
+					foreach( $embeds as $embed ) :
 
 						$after_content_statistics = $embed->get_statistics('after_content');
 						$widget_statistics = $embed->get_statistics('widget');
@@ -59,9 +60,9 @@ $content_hide = false;
 
 						// status
 						$status_label = array(
-							'off' => __( 'OFF', Opt_In::TEXT_DOMAIN ),
-							'test' => __( 'TEST', Opt_In::TEXT_DOMAIN ),
-							'live' => __( 'LIVE', Opt_In::TEXT_DOMAIN )
+							'off' => esc_attr__( 'OFF', Opt_In::TEXT_DOMAIN ),
+							'test' => esc_attr__( 'TEST', Opt_In::TEXT_DOMAIN ),
+							'live' => esc_attr__( 'LIVE', Opt_In::TEXT_DOMAIN )
 						);
 						$after_content_status = "off";
 						if ( $embed->is_test_type_active( 'after_content' ) ) {
@@ -86,31 +87,31 @@ $content_hide = false;
 
                         <tr>
 
-                            <td class="wpmudev-table--name"><?php echo $embed->module_name; ?></td>
+                            <td class="wpmudev-table--name"><?php echo esc_html( $embed->module_name ); ?></td>
 
                             <td class="wpmudev-table--multistatus">
 
                                 <div class="wpmudev-multistatus--wrap">
 
-                                    <div class="wpmudev-multistatus--status wpmudev-tip" data-tip="<?php printf( __( 'After Content is %s', Opt_In::TEXT_DOMAIN ), $status_label[$after_content_status] ); ?>">
+                                    <div class="wpmudev-multistatus--status wpmudev-tip" data-tip="<?php printf( esc_attr__( 'After Content is %s', Opt_In::TEXT_DOMAIN ), esc_attr( $status_label[$after_content_status] ) ); ?>">
 
-                                        <div class="wpmudev-multistatus--module-<?php echo $after_content_status; ?>"></div>
+                                        <div class="wpmudev-multistatus--module-<?php echo esc_attr( $after_content_status ); ?>"></div>
 
                                         <div class="wpmudev-multistatus--module-icon"><?php $this->render("general/icons/admin-icons/icon-embedded" ); ?></div>
 
                                     </div>
 
-                                    <div class="wpmudev-multistatus--status wpmudev-tip" data-tip="<?php printf( __( 'Widget is %s', Opt_In::TEXT_DOMAIN ), $status_label[$widget_status] ); ?>">
+                                    <div class="wpmudev-multistatus--status wpmudev-tip" data-tip="<?php printf( esc_attr__( 'Widget is %s', Opt_In::TEXT_DOMAIN ), esc_attr( $status_label[$widget_status] ) ); ?>">
 
-                                        <div class="wpmudev-multistatus--module-<?php echo $widget_status; ?>"></div>
+                                        <div class="wpmudev-multistatus--module-<?php echo esc_attr( $widget_status ); ?>"></div>
 
                                         <div class="wpmudev-multistatus--module-icon"><?php $this->render("general/icons/admin-icons/icon-widget" ); ?></div>
 
                                     </div>
 
-                                    <div class="wpmudev-multistatus--status wpmudev-tip" data-tip="<?php printf( __( 'Shortcode is %s', Opt_In::TEXT_DOMAIN ), $status_label[$shortcode_status] ); ?>">
+                                    <div class="wpmudev-multistatus--status wpmudev-tip" data-tip="<?php printf( esc_attr__( 'Shortcode is %s', Opt_In::TEXT_DOMAIN ), esc_attr( $status_label[$shortcode_status] ) ); ?>">
 
-                                        <div class="wpmudev-multistatus--module-<?php echo $shortcode_status; ?>"></div>
+                                        <div class="wpmudev-multistatus--module-<?php echo esc_attr( $shortcode_status ); ?>"></div>
 
                                         <div class="wpmudev-multistatus--module-icon"><?php $this->render("general/icons/admin-icons/icon-shortcode" ); ?></div>
 
@@ -120,11 +121,11 @@ $content_hide = false;
 
                             </td>
 
-                            <td class="wpmudev-table--views" data-name="<?php _e( 'Views', Opt_In::TEXT_DOMAIN ); ?>"><?php echo $total_views; ?></td>
+                            <td class="wpmudev-table--views" data-name="<?php esc_attr_e( 'Views', Opt_In::TEXT_DOMAIN ); ?>"><?php echo esc_html( $total_views ); ?></td>
 
-                            <td class="wpmudev-table--rate" data-name="<?php _e( 'Conv. rate', Opt_In::TEXT_DOMAIN ); ?>"><?php echo $conversion_rate; ?>%</td></td>
+                            <td class="wpmudev-table--rate" data-name="<?php esc_attr_e( 'Rate', Opt_In::TEXT_DOMAIN ); ?>"><?php echo esc_html( $conversion_rate ); ?>%</td></td>
 
-                            <td class="wpmudev-table--button"><a href="<?php echo $embed->decorated->get_edit_url( Hustle_Module_Admin::EMBEDDED_WIZARD_PAGE ,'' ); ?>" class="wpmudev-button wpmudev-button-sm wpmudev-button-ghost"><?php _e("Edit", Opt_In::TEXT_DOMAIN); ?></a></td>
+                            <td class="wpmudev-table--button"><a href="<?php echo esc_url( $embed->decorated->get_edit_url( Hustle_Module_Admin::EMBEDDED_WIZARD_PAGE, '' ) ); ?>" class="wpmudev-button wpmudev-button-sm wpmudev-button-ghost"><?php esc_attr_e("Edit", Opt_In::TEXT_DOMAIN); ?></a></td>
 
                         </tr>
 
@@ -134,7 +135,7 @@ $content_hide = false;
 
                 <tfoot>
 
-                    <tr><td colspan="4"><a href="<?php echo admin_url( "admin.php?page=" . Hustle_Module_Admin::EMBEDDED_WIZARD_PAGE ); ?>" class="wpmudev-button wpmudev-button-sm wpmudev-button-blue"><?php _e("New Embed", Opt_In::TEXT_DOMAIN); ?></a></td></tr>
+                    <tr><td colspan="4"><a href="<?php echo esc_url( admin_url( "admin.php?page=" . Hustle_Module_Admin::EMBEDDED_WIZARD_PAGE ) ); ?>" class="wpmudev-button wpmudev-button-sm wpmudev-button-blue<?php echo $is_limited ? ' hustle-free-version-create' : '' ?>"><?php esc_attr_e("New Embed", Opt_In::TEXT_DOMAIN); ?></a></td></tr>
 
                 </tfoot>
 
@@ -142,9 +143,9 @@ $content_hide = false;
 
         <?php } else { ?>
 
-            <p><?php _e("Here you can create an Embed module with your custom content, or for collectiong users' emails. Embed modules can then be appended to posts or pages, or displayed inside widgets and shortcodes.", Opt_In::TEXT_DOMAIN); ?></p>
+            <p><?php esc_attr_e("Here you can create an Embed module with your custom content, or for collecting users' emails. Embed modules can then be appended to posts or pages, or displayed inside widgets and shortcodes.", Opt_In::TEXT_DOMAIN); ?></p>
 
-            <p><a href="<?php echo admin_url( "admin.php?page=" . Hustle_Module_Admin::EMBEDDED_WIZARD_PAGE ); ?>" class="wpmudev-button wpmudev-button-sm wpmudev-button-ghost"><?php _e("Create Embed Module", Opt_In::TEXT_DOMAIN); ?></a></p>
+            <p><a href="<?php echo esc_url( admin_url( "admin.php?page=" . Hustle_Module_Admin::EMBEDDED_WIZARD_PAGE ) ); ?>" class="wpmudev-button wpmudev-button-sm wpmudev-button-ghost"><?php esc_attr_e("Create Embed Module", Opt_In::TEXT_DOMAIN); ?></a></p>
 
         <?php } ?>
 

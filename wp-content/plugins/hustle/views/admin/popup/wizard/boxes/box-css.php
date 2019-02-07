@@ -2,9 +2,9 @@
 
 	<div class="wpmudev-box-left">
 
-		<h4><strong><?php _e( "Custom CSS", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
+		<h4><strong><?php esc_attr_e( "Custom CSS", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
 
-		<label class="wpmudev-helper"><?php _e( "For more advanced customization options use custom CSS.", Opt_In::TEXT_DOMAIN ); ?></label>
+		<label class="wpmudev-helper"><?php esc_attr_e( "For more advanced customization options use custom CSS.", Opt_In::TEXT_DOMAIN ); ?></label>
 
 	</div>
 
@@ -20,7 +20,7 @@
 
 			</div>
 
-			<label class="wpmudev-switch-label" for="wph-popup-custom_css"><?php _e( "Use custom CSS for this module", Opt_In::TEXT_DOMAIN ); ?></label>
+			<label class="wpmudev-switch-label" for="wph-popup-custom_css"><?php esc_attr_e( "Use custom CSS for this module", Opt_In::TEXT_DOMAIN ); ?></label>
 
 		</div>
 

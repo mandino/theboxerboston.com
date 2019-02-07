@@ -8,7 +8,7 @@ $float_icons_color = "custom";
 
 <div id="wph-wizard-widget-color-options">
 
-    <label><?php _e( "BG & Icon colors", Opt_In::TEXT_DOMAIN ); ?></label>
+    <label><?php esc_attr_e( "BG & Icon colors", Opt_In::TEXT_DOMAIN ); ?></label>
 
     <div class="wpmudev-tabs">
 
@@ -18,7 +18,7 @@ $float_icons_color = "custom";
 
                 <input type="radio" id="wph-wizard-disable-widget-customize-colors" name="customize_widget_colors" data-attribute="customize_widget_colors" value="0" {{_.checked(_.isFalse(customize_widget_colors), true)}}>
 
-                <label for="wph-wizard-disable-widget-customize-colors"><?php _e( "Default colors", Opt_In::TEXT_DOMAIN ); ?></label>
+                <label for="wph-wizard-disable-widget-customize-colors"><?php esc_attr_e( "Default colors", Opt_In::TEXT_DOMAIN ); ?></label>
 
             </li>
 
@@ -26,7 +26,7 @@ $float_icons_color = "custom";
 
                 <input type="radio" id="wph-wizard-enable-widget-customize-colors" name="customize_widget_colors" data-attribute="customize_widget_colors" value="1" {{_.checked(_.isTrue(customize_widget_colors), true)}}>
 
-                <label for="wph-wizard-enable-widget-customize-colors"><?php _e( "Custom colors", Opt_In::TEXT_DOMAIN ); ?></label>
+                <label for="wph-wizard-enable-widget-customize-colors"><?php esc_attr_e( "Custom colors", Opt_In::TEXT_DOMAIN ); ?></label>
 
             </li>
 
@@ -38,20 +38,20 @@ $float_icons_color = "custom";
 
         <div class="wpmudev-row" style="z-index: 2;">
 
-            <# if ( icon_style !== 'flat' ) { #>
+            <# if ( 'flat' !== icon_style ) { #>
 
-                <# if ( icon_style !== 'outline' ||
-                        ( icon_style === 'outline' && ( service_type === 'custom' ) || ( service_type === 'native' && _.isFalse(click_counter) ) ) ) { #>
+                <# if ( 'outline' !== icon_style ||
+                        ( 'outline' === icon_style && ( 'custom' === service_type ) || ( 'native' === service_type && _.isFalse(click_counter) ) ) ) { #>
 
                     <div class="wpmudev-col col-12 col-xs-4 col-sm-12 col-lg-4">
 
-                        <# if ( icon_style === 'outline' ) { #>
+                        <# if ( 'outline' === icon_style ) { #>
 
-                            <label><?php _e( "Icon border", Opt_In::TEXT_DOMAIN ); ?></label>
+                            <label><?php esc_attr_e( "Icon border", Opt_In::TEXT_DOMAIN ); ?></label>
 
                         <# } else { #>
 
-                            <label><?php _e( "Icon BG", Opt_In::TEXT_DOMAIN ); ?></label>
+                            <label><?php esc_attr_e( "Icon BG", Opt_In::TEXT_DOMAIN ); ?></label>
 
                         <# } #>
 
@@ -65,14 +65,14 @@ $float_icons_color = "custom";
 
             <#
                 var widget_icon_color_class = '';
-                if ( icon_style !== 'flat' ) {
-                    if ( (service_type === 'custom') || ( service_type === 'native' && _.isFalse(click_counter) ) ) {
+                if ( 'flat' !== icon_style ) {
+                    if ( ( 'custom' === service_type ) || ( 'native' === service_type && _.isFalse(click_counter) ) ) {
                         widget_icon_color_class = 'col-xs-8 col-sm-12 col-lg-8';
                     } else {
                         widget_icon_color_class = 'col-xs-4 col-sm-12 col-lg-4';
                     }
                 } else {
-                    if ( service_type === 'native' && _.isTrue(click_counter) ) {
+                    if ( 'native' === service_type && _.isTrue(click_counter) ) {
                         widget_icon_color_class = 'col-xs-4 col-sm-12 col-lg-4';
                     }
                 }
@@ -80,18 +80,18 @@ $float_icons_color = "custom";
 
             <div class="wpmudev-col col-12 {{widget_icon_color_class}}">
 
-                <label><?php _e( "Icon color", Opt_In::TEXT_DOMAIN ); ?></label>
+                <label><?php esc_attr_e( "Icon color", Opt_In::TEXT_DOMAIN ); ?></label>
 
                 <div class="wpmudev-picker" style="z-index: 2;"><input id="widget_icon_color" class="wpmudev-color_picker" type="text"  value="{{widget_icon_color}}" data-attribute="widget_icon_color" data-alpha="true" /></div>
 
             </div>
 
-            <# if ( service_type === 'native' && _.isTrue(click_counter) ) { #>
+            <# if ( 'native' === service_type && _.isTrue(click_counter) ) { #>
 
                 <#
                     var widget_icon_border_class = '';
-                    if ( icon_style !== 'flat' ) {
-                        if ( ( icon_style !== 'outline' ) || ( icon_style === 'outline' && ( service_type === 'custom' ) ) || ( icon_style === 'outline' && ( service_type === 'native' && _.isFalse(click_counter) ) ) ) {
+                    if ( 'flat' !== icon_style ) {
+                        if ( ( 'outline' !== icon_style ) || ( 'outline' === icon_style && ( 'custom' === service_type ) ) || ( 'outline' === icon_style && ( 'native' === service_type && _.isFalse(click_counter) ) ) ) {
                             widget_icon_border_class = 'col-xs-4 col-sm-12 col-lg-4';
                         } else {
                             widget_icon_border_class = 'col-xs-8 col-sm-12 col-lg-8';
@@ -103,7 +103,7 @@ $float_icons_color = "custom";
 
                 <div class="wpmudev-col col-12 {{widget_icon_border_class}}">
 
-                    <label><?php _e( "Counter border", Opt_In::TEXT_DOMAIN ); ?></label>
+                    <label><?php esc_attr_e( "Counter border", Opt_In::TEXT_DOMAIN ); ?></label>
 
                     <div class="wpmudev-picker" style="z-index: 2;"><input id="widget_counter_border" class="wpmudev-color_picker" type="text"  value="{{widget_counter_border}}" data-attribute="widget_counter_border" data-alpha="true" /></div>
 
@@ -117,19 +117,19 @@ $float_icons_color = "custom";
 
     <div class="wpmudev-row">
 
-        <div class="wpmudev-col col-12 {{ ( service_type === 'native' && _.isTrue(click_counter) ) ? 'col-xs-6 col-sm-12 col-lg-6' : '' }}">
+        <div class="wpmudev-col col-12 {{ ( 'native' === service_type && _.isTrue(click_counter) ) ? 'col-xs-6 col-sm-12 col-lg-6' : '' }}">
 
-            <label><?php _e( "Container BG", Opt_In::TEXT_DOMAIN ); ?></label>
+            <label><?php esc_attr_e( "Container BG", Opt_In::TEXT_DOMAIN ); ?></label>
 
             <div class="wpmudev-picker" style="z-index: 2;"><input id="widget_bg_color" class="wpmudev-color_picker" type="text"  value="{{widget_bg_color}}" data-attribute="widget_bg_color" data-alpha="true" /></div>
 
         </div>
 
-        <# if ( service_type === 'native' && _.isTrue(click_counter) ) { #>
+        <# if ( 'native' === service_type && _.isTrue(click_counter) ) { #>
 
             <div class="wpmudev-col col-12 col-xs-6 col-sm-12 col-lg-6">
 
-                <label><?php _e( "Counter text", Opt_In::TEXT_DOMAIN ); ?></label>
+                <label><?php esc_attr_e( "Counter text", Opt_In::TEXT_DOMAIN ); ?></label>
 
                 <div class="wpmudev-picker" style="z-index: 1;"><input id="widget_counter_color" class="wpmudev-color_picker" type="text"  value="{{widget_counter_color}}" data-attribute="widget_counter_color" data-alpha="true" /></div>
 

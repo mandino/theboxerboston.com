@@ -4,7 +4,7 @@ $close_icon = '<svg xmlns="http://www.w3.org/2000/svg" width="50" height="38" vi
 
 <div class="hustle-modal-success">
 
-    <div class="hustle-modal-success_icon" aria-hidden="true"><?php echo $close_icon; ?></div>
+    <div class="hustle-modal-success_icon" aria-hidden="true"><?php echo $close_icon; //phpcs:ignore ?></div>
 
     <div class="hustle-modal-success_message">{{{content.success_message}}}</div>
 

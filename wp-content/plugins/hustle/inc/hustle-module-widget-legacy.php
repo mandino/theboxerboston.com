@@ -15,7 +15,7 @@ class Hustle_Module_Widget_Legacy extends WP_Widget {
 	 *
 	 * @var string
 	 */
-	const Widget_Id = 'inc_opt_widget';
+	const WIDGET_ID = 'inc_opt_widget';
 
 
 	/**
@@ -23,9 +23,9 @@ class Hustle_Module_Widget_Legacy extends WP_Widget {
 	 */
 	public function __construct() {
 		parent::__construct(
-			self::Widget_Id,
+			self::WIDGET_ID,
 			__( 'Hustle Legacy', Opt_In::TEXT_DOMAIN ),
-			array( 'description' => __( 'A legacy widget to add Opt-ins', Opt_In::TEXT_DOMAIN ), )
+			array( 'description' => __( 'A legacy widget to add Opt-ins', Opt_In::TEXT_DOMAIN ) )
 		);
 	}
 
@@ -61,6 +61,7 @@ class Hustle_Module_Widget_Legacy extends WP_Widget {
 			$instance['module_id'] = $this->get_module_id( $instance['optin_id'] );
 		}
 
+		// phpcs:disable
 		if( empty( $instance['module_id'] ) ){
 
 			echo $args['before_widget'];
@@ -68,7 +69,7 @@ class Hustle_Module_Widget_Legacy extends WP_Widget {
 			if ( ! empty( $instance['title'] ) ) {
 				echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
 			}
-			_e("Select Module", Opt_In::TEXT_DOMAIN);
+			esc_attr_e("Select Module", Opt_In::TEXT_DOMAIN);
 
 			echo $args['after_widget'];
 
@@ -91,16 +92,17 @@ class Hustle_Module_Widget_Legacy extends WP_Widget {
 			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ). $args['after_title'];
 		}
 
-		$widget_css_class = ( $module->module_type == 'social_sharing' )
-			? Hustle_Module_Front::SShare_Widget_CSS_CLass
-			: Hustle_Module_Front::Widget_CSS_CLass;
+		$widget_css_class = ( 'social_sharing' === $module->module_type )
+			? Hustle_Module_Front::SSHARE_WIDGET_CSS_CLASS
+			: Hustle_Module_Front::WIDGET_CSS_CLASS;
 
 		?>
 
-		<div class="<?php echo $widget_css_class; ?> module_id_<?php echo esc_attr( $instance['module_id'] ); ?>" data-type="widget" data-id="<?php echo esc_attr( $instance['module_id'] ); ?>"></div>
+		<div class="<?php echo esc_attr( $widget_css_class ); ?> module_id_<?php echo esc_attr( $instance['module_id'] ); ?>" data-type="widget" data-id="<?php echo esc_attr( $instance['module_id'] ); ?>"></div>
 		<?php
 
 		echo $args['after_widget'];
+		// phpcs:enable
 	}
 
 
@@ -118,26 +120,29 @@ class Hustle_Module_Widget_Legacy extends WP_Widget {
 			$instance['module_id'] = $this->get_module_id( $instance['optin_id'] );
 		}
 		$title = ! empty( $instance['title'] ) ? $instance['title'] : __( 'New title', 'text_domain' );
-		if( empty( $instance['module_id'] ) ) $instance['module_id'] = -1;
+		if( empty( $instance['module_id'] ) )
+			$instance['module_id'] = -1;
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', Opt_In::TEXT_DOMAIN ); ?></label>
-			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_attr_e( 'Title:', Opt_In::TEXT_DOMAIN ); ?></label>
+			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'module_id' ); ?>"><?php _e( 'Select Module:', Opt_In::TEXT_DOMAIN ); ?></label>
-			<select name="<?php echo $this->get_field_name( 'module_id' ); ?>" id="hustle_module_id">
-				<option value=""><?php _e("Select Module", Opt_In::TEXT_DOMAIN); ?></option>
-				<?php $types = array( 'embedded', 'social_sharing' );
+			<label for="<?php echo esc_attr( $this->get_field_id( 'module_id' ) ); ?>"><?php esc_attr_e( 'Select Module:', Opt_In::TEXT_DOMAIN ); ?></label>
+			<select name="<?php echo esc_attr( $this->get_field_name( 'module_id' ) ); ?>" id="hustle_module_id">
+				<option value=""><?php esc_attr_e("Select Module", Opt_In::TEXT_DOMAIN); ?></option>
+				<?php
+					$types = array( 'embedded', 'social_sharing' );
 					foreach( Hustle_Module_Collection::instance()->get_embed_id_names($types) as $mod ) :
 					$module = Hustle_Module_Model::instance()->get( $mod->module_id );
 						//if( $module->settings->widget->show_in_front() ):
 					?>
-					<option <?php selected( $instance['module_id'],  $mod->module_id); ?> value="<?php echo esc_attr( $mod->module_id ) ?>"><?php echo esc_attr( $mod->module_name ); ?></option>
+					<option <?php selected( $instance['module_id'],  $mod->module_id); ?> value="<?php echo esc_attr( $mod->module_id ); ?>"><?php echo esc_attr( $mod->module_name ); ?></option>
 
 				<?php
-						//endif;
-						endforeach; ?>
+					//endif;
+					endforeach;
+				?>
 			</select>
 		</p>
 		<?php
@@ -156,8 +161,8 @@ class Hustle_Module_Widget_Legacy extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance = array();
-		$instance['title'] =  ! empty( $new_instance['title'] )  ? strip_tags( $new_instance['title'] ) : '';
-		$instance['module_id'] =  ! empty( $new_instance['module_id'] )  ? strip_tags( $new_instance['module_id'] ) : '';
+		$instance['title'] =  ! empty( $new_instance['title'] )  ? wp_strip_all_tags( $new_instance['title'] ) : '';
+		$instance['module_id'] =  ! empty( $new_instance['module_id'] )  ? wp_strip_all_tags( $new_instance['module_id'] ) : '';
 
 		return $instance;
 	}

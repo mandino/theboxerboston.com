@@ -4,51 +4,51 @@
 
 		<ul class="tabs-header">
 
-			<li class="<# if( trigger === 'time' ){ #>current<# } #>">
+			<li class="<# if( 'time' === trigger ){ #>current<# } #>">
 
 				<label href="#wpoi-triggers-{{type}}-time" for="wpoi-{{type}}-appear_after_time">
 
-					<input type="radio" class="wpoi-display-trigger-radio" name="wpoi-{{type}}-trigger" id="wpoi-{{type}}-trigger_time" data-attribute="trigger" value="time" {{_.checked(trigger, "time" )}} ><?php _e("Time", Opt_In::TEXT_DOMAIN) ?>
+					<input type="radio" class="wpoi-display-trigger-radio" name="wpoi-{{type}}-trigger" id="wpoi-{{type}}-trigger_time" data-attribute="trigger" value="time" {{_.checked(trigger, "time" )}} ><?php esc_attr_e("Time", Opt_In::TEXT_DOMAIN); ?>
 
 				</label>
 
 			</li><!-- Time -->
 
-			<li class="<# if( trigger === 'scrolled' || trigger === 'scroll' ){ #>current<# } #>" >
+			<li class="<# if( 'scrolled' === trigger || 'scroll' === trigger ){ #>current<# } #>" >
 
 				<label href="#wpoi-triggers-{{type}}-scroll" for="wpoi-{{type}}-appear_after_scrolled">
 
-					<input type="radio" name="wpoi-{{type}}-trigger" class="wpoi-display-trigger-radio" id="wpoi-{{type}}-trigger_scrolled"  data-attribute="trigger" value="scroll" {{_.checked(trigger, "scroll" )}} ><?php _e("Scroll", Opt_In::TEXT_DOMAIN) ?>
+					<input type="radio" name="wpoi-{{type}}-trigger" class="wpoi-display-trigger-radio" id="wpoi-{{type}}-trigger_scrolled"  data-attribute="trigger" value="scroll" {{_.checked(trigger, "scroll" )}} ><?php esc_attr_e("Scroll", Opt_In::TEXT_DOMAIN); ?>
 
 				</label>
 
 			</li>
 
-			<li class="<# if( trigger === 'click' ){ #>current<# } #>">
+			<li class="<# if( 'click' === trigger ){ #>current<# } #>">
 
 				<label href="#wpoi-triggers-{{type}}-click" for="wpoi-{{type}}-appear_after_click">
 
-					<input type="radio" name="wpoi-{{type}}-trigger" class="wpoi-display-trigger-radio" id="wpoi-{{type}}-trigger_click" data-attribute="trigger" value="click" {{_.checked(trigger, "click" )}} ><?php _e("Click", Opt_In::TEXT_DOMAIN) ?>
+					<input type="radio" name="wpoi-{{type}}-trigger" class="wpoi-display-trigger-radio" id="wpoi-{{type}}-trigger_click" data-attribute="trigger" value="click" {{_.checked(trigger, "click" )}} ><?php esc_attr_e("Click", Opt_In::TEXT_DOMAIN); ?>
 
 				</label>
 
 			</li>
 
-			<li class="<# if( trigger === 'exit_intent' ){ #>current<# } #>">
+			<li class="<# if( 'exit_intent' === trigger ){ #>current<# } #>">
 
 				<label href="#wpoi-triggers-{{type}}-exit_intent" for="wpoi-{{type}}-appear_after_exit_intent">
 
-					<input type="radio" name="wpoi-{{type}}-trigger" class="wpoi-display-trigger-radio" data-attribute="trigger" id="wpoi-{{type}}-trigger_exit_intent" value="exit_intent" {{_.checked(trigger, "exit_intent" )}} ><?php _e("Exit Intent", Opt_In::TEXT_DOMAIN) ?>
+					<input type="radio" name="wpoi-{{type}}-trigger" class="wpoi-display-trigger-radio" data-attribute="trigger" id="wpoi-{{type}}-trigger_exit_intent" value="exit_intent" {{_.checked(trigger, "exit_intent" )}} ><?php esc_attr_e("Exit Intent", Opt_In::TEXT_DOMAIN); ?>
 
 				</label>
 
 			</li>
 
-			<li class="<# if( trigger === 'adblock' ){ #>current<# } #>">
+			<li class="<# if( 'adblock' === trigger ){ #>current<# } #>">
 
 				<label href="#wpoi-triggers-{{type}}-adblock" for="wpoi-{{type}}-appear_after_adblock">
 
-					<input type="radio" name="wpoi-{{type}}-trigger" class="wpoi-display-trigger-radio" data-attribute="trigger" id="wpoi-{{type}}-trigger_adblock" value="adblock" {{_.checked(trigger, "adblock" )}} ><?php _e("AdBlock Use", Opt_In::TEXT_DOMAIN) ?>
+					<input type="radio" name="wpoi-{{type}}-trigger" class="wpoi-display-trigger-radio" data-attribute="trigger" id="wpoi-{{type}}-trigger_adblock" value="adblock" {{_.checked(trigger, "adblock" )}} ><?php esc_attr_e("AdBlock Use", Opt_In::TEXT_DOMAIN); ?>
 
 				</label>
 
@@ -58,11 +58,11 @@
 
 		<div class="tabs-body">
 
-			<div id="wpoi-triggers-{{type}}-time" class="tabs-content<# if( trigger === 'time' ){ #> current<# } #>">
+			<div id="wpoi-triggers-{{type}}-time" class="tabs-content<# if( 'time' === trigger ){ #> current<# } #>">
 
 				<div class="wph-label--radio">
 
-					<label for="wpoi-{{type}}-trigger_on_time_immediately" class="wph-label--alt"><?php _e("Trigger immediately", Opt_In::TEXT_DOMAIN); ?></label>
+					<label for="wpoi-{{type}}-trigger_on_time_immediately" class="wph-label--alt"><?php esc_attr_e("Trigger immediately", Opt_In::TEXT_DOMAIN); ?></label>
 
 					<div class="wph-input--radio">
 
@@ -76,7 +76,7 @@
 
 				<div class="wph-label--mix">
 
-					<label for="wpoi-{{type}}-trigger_on_time_time" class="wph-label--alt"><?php _e("Trigger after", Opt_In::TEXT_DOMAIN); ?></label>
+					<label for="wpoi-{{type}}-trigger_on_time_time" class="wph-label--alt"><?php esc_attr_e("Trigger after", Opt_In::TEXT_DOMAIN); ?></label>
 
 					<div class="wph-input--radio">
 
@@ -90,9 +90,9 @@
 
 					<select data-attribute="on_time_unit" class="wpmuiSelect">
 
-						<option {{_.selected(on_time_unit, "seconds")}} value="seconds"><?php _e("Seconds", Opt_In::TEXT_DOMAIN); ?></option>
-						<option {{_.selected(on_time_unit, "minutes")}} value="minutes"><?php _e("Minutes", Opt_In::TEXT_DOMAIN) ?></option>
-						<option {{_.selected(on_time_unit, "hours")}}  value="hours"><?php _e("Hours", Opt_In::TEXT_DOMAIN); ?></option>
+						<option {{_.selected(on_time_unit, "seconds")}} value="seconds"><?php esc_attr_e("Seconds", Opt_In::TEXT_DOMAIN); ?></option>
+						<option {{_.selected(on_time_unit, "minutes")}} value="minutes"><?php esc_attr_e("Minutes", Opt_In::TEXT_DOMAIN); ?></option>
+						<option {{_.selected(on_time_unit, "hours")}}  value="hours"><?php esc_attr_e("Hours", Opt_In::TEXT_DOMAIN); ?></option>
 
 					</select>
 
@@ -100,11 +100,11 @@
 
 			</div><!-- Time -->
 
-			<div id="wpoi-triggers-{{type}}-scroll" class="tabs-content<# if( trigger === 'scrolled' || trigger === 'scroll' ){ #> current<# } #>">
+			<div id="wpoi-triggers-{{type}}-scroll" class="tabs-content<# if( 'scrolled' === trigger || 'scroll' === trigger ){ #> current<# } #>">
 
 				<div class="wph-label--mix">
 
-					<label for="wpoi-{{type}}-appear-scrolled" class="wph-label--alt"><?php _e("Trigger after", Opt_In::TEXT_DOMAIN); ?></label>
+					<label for="wpoi-{{type}}-appear-scrolled" class="wph-label--alt"><?php esc_attr_e("Trigger after", Opt_In::TEXT_DOMAIN); ?></label>
 
 					<div class="wph-input--radio">
 
@@ -116,13 +116,13 @@
 
 					<input min="0" type="number" max="100" name="" value="{{on_scroll_page_percent}}"  data-attribute="on_scroll_page_percent" class="wpmudev-input_number">
 
-					<label for="wpoi-{{type}}-appear-scrolled" class="wph-label--alt"><?php _e("% of the page has been scrolled", Opt_In::TEXT_DOMAIN); ?></label>
+					<label for="wpoi-{{type}}-appear-scrolled" class="wph-label--alt"><?php esc_attr_e("% of the page has been scrolled", Opt_In::TEXT_DOMAIN); ?></label>
 
 				</div>
 
 				<div class="wph-label--radio">
 
-					<label for="wpoi-{{type}}-appear-selector" class="wph-label--alt"><?php _e("Appear after user scrolled past a CSS selector", Opt_In::TEXT_DOMAIN); ?></label>
+					<label for="wpoi-{{type}}-appear-selector" class="wph-label--alt"><?php esc_attr_e("Appear after user scrolled past a CSS selector", Opt_In::TEXT_DOMAIN); ?></label>
 
 					<div class="wph-input--radio">
 
@@ -138,19 +138,19 @@
 
 			</div><!-- Scroll -->
 
-			<div id="wpoi-triggers-{{type}}-click" class="tabs-content<# if( trigger === 'click' ){ #> current<# } #>">
+			<div id="wpoi-triggers-{{type}}-click" class="tabs-content<# if( 'click' === trigger ){ #> current<# } #>">
 
-				<label for="wpoi-{{type}}-click-selector" class="wph-label--alt"><?php _e("Trigger after user clicks on existing element with this ID or Class", Opt_In::TEXT_DOMAIN); ?></label>
+				<label for="wpoi-{{type}}-click-selector" class="wph-label--alt"><?php esc_attr_e("Trigger after user clicks on existing element with this ID or Class", Opt_In::TEXT_DOMAIN); ?></label>
 
 				<input type="text" id="wpoi-{{type}}-click-selector" value="{{on_click_element}}" data-attribute="on_click_element" placeholder="<?php esc_attr_e('only use .class or #ID selector', Opt_In::TEXT_DOMAIN); ?>">
 
 			</div><!-- Click -->
 
-			<div id="wpoi-triggers-{{type}}-exit_intent" class="tabs-content<# if( trigger === 'exit_intent' ){ #> current<# } #>">
+			<div id="wpoi-triggers-{{type}}-exit_intent" class="tabs-content<# if( 'exit_intent' === trigger ){ #> current<# } #>">
 
 				<div class="wph-label--toggle">
 
-					<label for="wpoi-{{type}}-trigger-exit" class="wph-label--alt"><?php _e("Trigger when exit intent is detected", Opt_In::TEXT_DOMAIN); ?></label>
+					<label for="wpoi-{{type}}-trigger-exit" class="wph-label--alt"><?php esc_attr_e("Trigger when exit intent is detected", Opt_In::TEXT_DOMAIN); ?></label>
 
 					<span class="toggle">
 
@@ -163,7 +163,7 @@
 
 				<div class="wph-label--toggle">
 
-					<label for="wpoi-{{type}}-trigger-exit-once" class="wph-label--alt"><?php _e("Trigger once per session only", Opt_In::TEXT_DOMAIN); ?></label>
+					<label for="wpoi-{{type}}-trigger-exit-once" class="wph-label--alt"><?php esc_attr_e("Trigger once per session only", Opt_In::TEXT_DOMAIN); ?></label>
 
 					<span class="toggle">
 
@@ -176,11 +176,11 @@
 
 			</div><!-- Exit Intent -->
 
-			<div id="wpoi-triggers-{{type}}-adblock" class="tabs-content {{_.class( trigger === 'adblock' , 'current' )}}">
+			<div id="wpoi-triggers-{{type}}-adblock" class="tabs-content {{_.class( 'adblock' === trigger , 'current' )}}">
 
 				<div class="wph-label--toggle">
 
-					<label for="wpoi-{{type}}-trigger-on-adblock"><?php _e("Trigger when AdBlock is detected", Opt_In::TEXT_DOMAIN); ?></label>
+					<label for="wpoi-{{type}}-trigger-on-adblock"><?php esc_attr_e("Trigger when AdBlock is detected", Opt_In::TEXT_DOMAIN); ?></label>
 
 					<span class="toggle">
 
@@ -193,7 +193,7 @@
 
 				<div class="wph-label--radio wpoi-popup-trigger-on-adblock-option" style="display: <# if( _.isTrue( on_adblock )  ){ #>block<# }else{ #>none<# } #>">
 
-					<label for="wpoi-{{type}}-trigger-on-adblock-immediately"><?php _e("Trigger immediately", Opt_In::TEXT_DOMAIN); ?></label>
+					<label for="wpoi-{{type}}-trigger-on-adblock-immediately"><?php esc_attr_e("Trigger immediately", Opt_In::TEXT_DOMAIN); ?></label>
 
 					<div class="wph-input--radio">
 
@@ -207,7 +207,7 @@
 
 				<div class="wph-label--mix wpoi-popup-trigger-on-adblock-option" style="display: <# if( _.isTrue( on_adblock )  ){ #>block<# }else{ #>none<# } #>">
 
-					<label for="wpoi-{{type}}-trigger-on-adblock-delayed"><?php _e("Trigger after", Opt_In::TEXT_DOMAIN); ?></label>
+					<label for="wpoi-{{type}}-trigger-on-adblock-delayed"><?php esc_attr_e("Trigger after", Opt_In::TEXT_DOMAIN); ?></label>
 
 					<div class="wph-input--radio">
 
@@ -220,9 +220,9 @@
 					<input min="0" type="number" name="" class="wpoi_trigger_on_adblock_timed_val" value="{{on_adblock_delayed_time}}"  data-attribute="on_adblock_delayed_time" class="wpmudev-input_number">
 
 					<select data-attribute="on_adblock_delayed_unit" class="wpoi_trigger_on_adblock_delayed_unit wpmuiSelect">
-						<option {{_.selected(on_adblock_delayed_unit, "seconds")}} value="seconds"><?php _e("Seconds", Opt_In::TEXT_DOMAIN); ?></option>
-						<option {{_.selected(on_adblock_delayed_unit, "minutes")}} value="minutes"><?php _e("Minutes", Opt_In::TEXT_DOMAIN) ?></option>
-						<option {{_.selected(on_adblock_delayed_unit, "hours")}}  value="hours"><?php _e("Hours", Opt_In::TEXT_DOMAIN); ?></option>
+						<option {{_.selected(on_adblock_delayed_unit, "seconds")}} value="seconds"><?php esc_attr_e("Seconds", Opt_In::TEXT_DOMAIN); ?></option>
+						<option {{_.selected(on_adblock_delayed_unit, "minutes")}} value="minutes"><?php esc_attr_e("Minutes", Opt_In::TEXT_DOMAIN); ?></option>
+						<option {{_.selected(on_adblock_delayed_unit, "hours")}}  value="hours"><?php esc_attr_e("Hours", Opt_In::TEXT_DOMAIN); ?></option>
 					</select>
 
 				</div>

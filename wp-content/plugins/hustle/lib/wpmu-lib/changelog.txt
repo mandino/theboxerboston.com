@@ -1,10 +1,49 @@
 Plugin Name: WPMU Dev code library
-Author:      Philipp Stracker, Marcin Pietrzak
+Author:      Philipp Stracker, Marcin Pietrzak, Joel James, Ivan Svyrsky
 
 Change Log:
 ----------------------------------------------------------------------
 
+3.1.0 - 2018-08-28
+----------------------------------------------------------------------
+PLUGIN
+- Update modues version in package.json
+
+PHP
+- Add ability to show pointers with default WP style.
+
+3.0.9 - 2018-07-14
+----------------------------------------------------------------------
+
+3.0.8 - 2018-06-25
+----------------------------------------------------------------------
+PHP
+- Added get_link() method to core function to return URL link for wp.org, wpmudev, support, live chat, docs, installing plugin.
+JS
+- Fix bug with inability to scroll in some instances of select2.
+
+3.0.7 - 2018-03-29
+----------------------------------------------------------------------
+PHP
+- Added "disabled" attribute.
+
+3.0.6
+----------------------------------------------------------------------
+PHP
+- Change variable name to correct one.
+- Added filter 'wpmu_style_version'.
+- Added filter 'wpmu_script_version'.
+
+3.0.5
+----------------------------------------------------------------------
+PHP
+- Added sanitization of css classes.
+- Added wpColorPicker field.
+- Added wp_media field.
+- Fixed a url port problem.
+
 3.0.4
+----------------------------------------------------------------------
 JS
 - Added check is function "el.wpmuiSelect" to avoid JavaScript errors.
 
@@ -188,4 +227,4 @@ Migration notes
 - First version.
 
 
-176081-1519328155-au
+176081-1549515970-au

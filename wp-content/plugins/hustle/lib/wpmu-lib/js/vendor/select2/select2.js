@@ -8,6 +8,17 @@
  *     dropdownAutoWidth: true
  *     containerCssClass: 'wpmui-select2 :all:'
  *     dropdownCssClass: 'wpmui-select2'
+ *  3) Fix bug with inability to scroll in some instances.
+ *     https://github.com/select2/select2/issues/3125
+ *     Replace:
+ *     var position = $(this).data('select2-scroll-position');
+ *     $(this).scrollTop(position.y);
+ *     With:
+ *     var position = $(this).data('select2-scroll-position');
+ *     // Prevent inability to scroll.
+ *     if ($(this).find('.select2-container--open').length > 0) {
+ *     	$(this).scrollTop(position.y);
+ *     }
  *
  * Select2 4.0.3
  * https://select2.github.io
@@ -4233,7 +4244,10 @@
 
                     $watchers.on(scrollEvent, function(ev) {
                         var position = $(this).data('select2-scroll-position');
-                        $(this).scrollTop(position.y);
+                        // Prevent inability to scroll.
+                        if ($(this).find('.select2-container--open').length>0) {
+                           	$(this).scrollTop(position.y);
+                        }
                     });
 
                     $(window).on(scrollEvent + ' ' + resizeEvent + ' ' + orientationEvent,

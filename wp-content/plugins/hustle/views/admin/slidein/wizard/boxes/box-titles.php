@@ -2,9 +2,9 @@
 
 	<div class="wpmudev-box-left">
 
-		<h4><strong><?php _e( "Slide-in titles", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
+		<h4><strong><?php esc_attr_e( "Slide-in titles", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
 
-		<label class="wpmudev-helper"><?php _e( "Titles are an optional part of the design", Opt_In::TEXT_DOMAIN ); ?></label>
+		<label class="wpmudev-helper"><?php esc_attr_e( "Titles are an optional part of the design", Opt_In::TEXT_DOMAIN ); ?></label>
 
 	</div>
 
@@ -20,19 +20,19 @@
 
 			</div>
 
-			<label class="wpmudev-switch-label" for="wph-slidein-titles"><?php _e( "Use titles", Opt_In::TEXT_DOMAIN ); ?></label>
+			<label class="wpmudev-switch-label" for="wph-slidein-titles"><?php esc_attr_e( "Use titles", Opt_In::TEXT_DOMAIN ); ?></label>
 
 		</div>
 
 		<div id="wph-wizard-content-title-textboxes" class="wpmudev-box-gray {{ ( _.isFalse(has_title) ) ? 'wpmudev-hidden' : '' }}">
 
-			<label><?php _e( "Title (optional)", Opt_In::TEXT_DOMAIN ); ?></label>
+			<label><?php esc_attr_e( "Title (optional)", Opt_In::TEXT_DOMAIN ); ?></label>
 
-			<input type="text" data-attribute="title" id="wph_slidein_new_title" class="wpmudev-input_text" name="title" placeholder="<?php esc_attr_e('Type title here...', Opt_In::TEXT_DOMAIN) ?>" value="{{title}}">
+			<input type="text" data-attribute="title" id="wph_slidein_new_title" class="wpmudev-input_text" name="title" placeholder="<?php esc_attr_e('Type title here...', Opt_In::TEXT_DOMAIN); ?>" value="{{title}}">
 
-			<label><?php _e( "Subtitle (optional)", Opt_In::TEXT_DOMAIN ); ?></label>
+			<label><?php esc_attr_e( "Subtitle (optional)", Opt_In::TEXT_DOMAIN ); ?></label>
 
-			<input type="text" data-attribute="sub_title" id="wph_slidein_new_subtitle" class="wpmudev-input_text" name="sub_title" placeholder="<?php esc_attr_e('Type subtitle here...', Opt_In::TEXT_DOMAIN) ?>" value="{{sub_title}}">
+			<input type="text" data-attribute="sub_title" id="wph_slidein_new_subtitle" class="wpmudev-input_text" name="sub_title" placeholder="<?php esc_attr_e('Type subtitle here...', Opt_In::TEXT_DOMAIN); ?>" value="{{sub_title}}">
 
 		</div>
 

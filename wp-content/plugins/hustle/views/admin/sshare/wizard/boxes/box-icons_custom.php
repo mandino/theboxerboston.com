@@ -1,16 +1,16 @@
-<div id="wph-wizard-services-icons-custom" class="wpmudev-box-content last wph-wizard-services-icons-custom {{ ( service_type === 'native' ) ? 'wpmudev-hidden' : '' }}">
+<div id="wph-wizard-services-icons-custom" class="wpmudev-box-content last wph-wizard-services-icons-custom {{ ( 'native' === service_type ) ? 'wpmudev-hidden' : '' }}">
 
     <div class="wpmudev-box-right">
 
-        <h4><strong><?php _e( "Pick social icons & set URLs for them", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
+        <h4><strong><?php esc_attr_e( "Pick social icons & set URLs for them", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
 
         <div class="wpmudev-social wpmudev-social-custom">
 
-            <div class="wpmudev-social-item {{ ( typeof social_icons.facebook == 'undefined' ) ? 'disabled' : '' }}">
+            <div class="wpmudev-social-item {{ ( 'undefined' === typeof social_icons.facebook ) ? 'disabled' : '' }}">
 
                 <div class="wpmudev-switch">
 
-                    <input id="wph-sshares-facebook-custom" class="toggle-checkbox" type="checkbox" data-id="facebook" {{ ( typeof social_icons.facebook == 'undefined' ) ? '' : _.checked(social_icons.facebook.enabled, 'true') }}>
+                    <input id="wph-sshares-facebook-custom" class="toggle-checkbox" type="checkbox" data-id="facebook" {{ ( 'undefined' === typeof social_icons.facebook ) ? '' : _.checked(social_icons.facebook.enabled, 'true') }}>
 
                     <label class="wpmudev-switch-design" for="wph-sshares-facebook-custom" aria-hidden="true"></label>
 
@@ -22,15 +22,15 @@
 
                 </div>
 
-                <input class="wpmudev-input_text" type="text" placeholder="<?php _e( "Type URL here", Opt_In::TEXT_DOMAIN ); ?>" value="{{ typeof social_icons.facebook === 'undefined' ? '' : social_icons.facebook.link }}">
+                <input class="wpmudev-input_text" type="text" placeholder="<?php esc_attr_e( "Type URL here", Opt_In::TEXT_DOMAIN ); ?>" value="{{ 'undefined' === typeof social_icons.facebook ? '' : social_icons.facebook.link }}">
 
             </div>
 
-            <div class="wpmudev-social-item {{ ( typeof social_icons.twitter == 'undefined' ) ? 'disabled' : '' }}">
+            <div class="wpmudev-social-item {{ ( 'undefined' === typeof social_icons.twitter ) ? 'disabled' : '' }}">
 
                 <div class="wpmudev-switch">
 
-                    <input id="wph-sshares-twitter-custom" class="toggle-checkbox" type="checkbox" data-id="twitter" {{ ( typeof social_icons.twitter == 'undefined' ) ? '' : _.checked(social_icons.twitter.enabled, 'true') }}>
+                    <input id="wph-sshares-twitter-custom" class="toggle-checkbox" type="checkbox" data-id="twitter" {{ ( 'undefined' === typeof social_icons.twitter ) ? '' : _.checked(social_icons.twitter.enabled, 'true') }}>
 
                     <label class="wpmudev-switch-design" for="wph-sshares-twitter-custom" aria-hidden="true"></label>
 
@@ -42,15 +42,15 @@
 
                 </div>
 
-                <input class="wpmudev-input_text" type="text" placeholder="<?php _e( "Type URL here", Opt_In::TEXT_DOMAIN ); ?>" value="{{ typeof social_icons.twitter === 'undefined' ? '' : social_icons.twitter.link }}">
+                <input class="wpmudev-input_text" type="text" placeholder="<?php esc_attr_e( "Type URL here", Opt_In::TEXT_DOMAIN ); ?>" value="{{ 'undefined' === typeof social_icons.twitter ? '' : social_icons.twitter.link }}">
 
             </div>
 
-            <div class="wpmudev-social-item {{ ( typeof social_icons.google == 'undefined' ) ? 'disabled' : '' }}">
+            <div class="wpmudev-social-item {{ ( 'undefined' === typeof social_icons.google ) ? 'disabled' : '' }}">
 
                 <div class="wpmudev-switch">
 
-                    <input id="wph-sshares-google-custom" class="toggle-checkbox" type="checkbox" data-id="google" {{ ( typeof social_icons.google == 'undefined' ) ? '' : _.checked(social_icons.google.enabled, 'true') }}>
+                    <input id="wph-sshares-google-custom" class="toggle-checkbox" type="checkbox" data-id="google" {{ ( 'undefined' === typeof social_icons.google ) ? '' : _.checked(social_icons.google.enabled, 'true') }}>
 
                     <label class="wpmudev-switch-design" for="wph-sshares-google-custom" aria-hidden="true"></label>
 
@@ -62,15 +62,15 @@
 
                 </div>
 
-                <input class="wpmudev-input_text" type="text" placeholder="<?php _e( "Type URL here", Opt_In::TEXT_DOMAIN ); ?>" value="{{ typeof social_icons.google === 'undefined' ? '' : social_icons.google.link }}">
+                <input class="wpmudev-input_text" type="text" placeholder="<?php esc_attr_e( "Type URL here", Opt_In::TEXT_DOMAIN ); ?>" value="{{ 'undefined' === typeof social_icons.google ? '' : social_icons.google.link }}">
 
             </div>
 
-            <div class="wpmudev-social-item {{ ( typeof social_icons.pinterest == 'undefined' ) ? 'disabled' : '' }}">
+            <div class="wpmudev-social-item {{ ( 'undefined' === typeof social_icons.pinterest ) ? 'disabled' : '' }}">
 
                 <div class="wpmudev-switch">
 
-                    <input id="wph-sshares-pinterest-custom" class="toggle-checkbox" type="checkbox" data-id="pinterest" {{ ( typeof social_icons.pinterest == 'undefined' ) ? '' : _.checked(social_icons.pinterest.enabled, 'true') }}>
+                    <input id="wph-sshares-pinterest-custom" class="toggle-checkbox" type="checkbox" data-id="pinterest" {{ ( 'undefined' === typeof social_icons.pinterest ) ? '' : _.checked(social_icons.pinterest.enabled, 'true') }}>
 
                     <label class="wpmudev-switch-design" for="wph-sshares-pinterest-custom" aria-hidden="true"></label>
 
@@ -82,15 +82,15 @@
 
                 </div>
 
-                <input class="wpmudev-input_text" type="text" placeholder="<?php _e( "Type URL here", Opt_In::TEXT_DOMAIN ); ?>" value="{{ typeof social_icons.pinterest === 'undefined' ? '' : social_icons.pinterest.link }}">
+                <input class="wpmudev-input_text" type="text" placeholder="<?php esc_attr_e( "Type URL here", Opt_In::TEXT_DOMAIN ); ?>" value="{{ 'undefined' === typeof social_icons.pinterest ? '' : social_icons.pinterest.link }}">
 
             </div>
 
-            <div class="wpmudev-social-item {{ ( typeof social_icons.reddit == 'undefined' ) ? 'disabled' : '' }}">
+            <div class="wpmudev-social-item {{ ( 'undefined' === typeof social_icons.reddit ) ? 'disabled' : '' }}">
 
                 <div class="wpmudev-switch">
 
-                    <input id="wph-sshares-reddit-custom" class="toggle-checkbox" type="checkbox" data-id="reddit" {{ ( typeof social_icons.reddit == 'undefined' ) ? '' : _.checked(social_icons.reddit.enabled, 'true') }}>
+                    <input id="wph-sshares-reddit-custom" class="toggle-checkbox" type="checkbox" data-id="reddit" {{ ( 'undefined' === typeof social_icons.reddit ) ? '' : _.checked(social_icons.reddit.enabled, 'true') }}>
 
                     <label class="wpmudev-switch-design" for="wph-sshares-reddit-custom" aria-hidden="true"></label>
 
@@ -102,15 +102,15 @@
 
                 </div>
 
-                <input class="wpmudev-input_text" type="text" placeholder="<?php _e( "Type URL here", Opt_In::TEXT_DOMAIN ); ?>" value="{{ typeof social_icons.reddit === 'undefined' ? '' : social_icons.reddit.link }}">
+                <input class="wpmudev-input_text" type="text" placeholder="<?php esc_attr_e( "Type URL here", Opt_In::TEXT_DOMAIN ); ?>" value="{{ 'undefined' === typeof social_icons.reddit ? '' : social_icons.reddit.link }}">
 
             </div>
 
-            <div class="wpmudev-social-item {{ ( typeof social_icons.linkedin == 'undefined' ) ? 'disabled' : '' }}">
+            <div class="wpmudev-social-item {{ ( 'undefined' === typeof social_icons.linkedin ) ? 'disabled' : '' }}">
 
                 <div class="wpmudev-switch">
 
-                    <input id="wph-sshares-linkedin-custom" class="toggle-checkbox" type="checkbox" data-id="linkedin" {{ ( typeof social_icons.linkedin == 'undefined' ) ? '' : _.checked(social_icons.linkedin.enabled, 'true') }}>
+                    <input id="wph-sshares-linkedin-custom" class="toggle-checkbox" type="checkbox" data-id="linkedin" {{ ( 'undefined' === typeof social_icons.linkedin ) ? '' : _.checked(social_icons.linkedin.enabled, 'true') }}>
 
                     <label class="wpmudev-switch-design" for="wph-sshares-linkedin-custom" aria-hidden="true"></label>
 
@@ -122,15 +122,15 @@
 
                 </div>
 
-                <input class="wpmudev-input_text" type="text" placeholder="<?php _e( "Type URL here", Opt_In::TEXT_DOMAIN ); ?>" value="{{ typeof social_icons.linkedin === 'undefined' ? '' : social_icons.linkedin.link }}">
+                <input class="wpmudev-input_text" type="text" placeholder="<?php esc_attr_e( "Type URL here", Opt_In::TEXT_DOMAIN ); ?>" value="{{ 'undefined' === typeof social_icons.linkedin ? '' : social_icons.linkedin.link }}">
 
             </div>
 
-            <div class="wpmudev-social-item {{ ( typeof social_icons.vkontakte == 'undefined' ) ? 'disabled' : '' }}">
+            <div class="wpmudev-social-item {{ ( 'undefined' === typeof social_icons.vkontakte ) ? 'disabled' : '' }}">
 
                 <div class="wpmudev-switch">
 
-                    <input id="wph-sshares-vkontakte-custom" class="toggle-checkbox" type="checkbox" data-id="vkontakte" {{ ( typeof social_icons.vkontakte == 'undefined' ) ? '' : _.checked(social_icons.vkontakte.enabled, 'true') }}>
+                    <input id="wph-sshares-vkontakte-custom" class="toggle-checkbox" type="checkbox" data-id="vkontakte" {{ ( 'undefined' === typeof social_icons.vkontakte ) ? '' : _.checked(social_icons.vkontakte.enabled, 'true') }}>
 
                     <label class="wpmudev-switch-design" for="wph-sshares-vkontakte-custom" aria-hidden="true"></label>
 
@@ -142,15 +142,15 @@
 
                 </div>
 
-                <input class="wpmudev-input_text" type="text" placeholder="<?php _e( "Type URL here", Opt_In::TEXT_DOMAIN ); ?>" value="{{ typeof social_icons.vkontakte === 'undefined' ? '' : social_icons.vkontakte.link }}">
+                <input class="wpmudev-input_text" type="text" placeholder="<?php esc_attr_e( "Type URL here", Opt_In::TEXT_DOMAIN ); ?>" value="{{ 'undefined' === typeof social_icons.vkontakte ? '' : social_icons.vkontakte.link }}">
 
             </div>
 
-            <div class="wpmudev-social-item {{ ( typeof social_icons.fivehundredpx == 'undefined' ) ? 'disabled' : '' }}">
+            <div class="wpmudev-social-item {{ ( 'undefined' === typeof social_icons.fivehundredpx ) ? 'disabled' : '' }}">
 
                 <div class="wpmudev-switch">
 
-                    <input id="wph-sshares-fivehundredpx-custom" class="toggle-checkbox" type="checkbox" data-id="fivehundredpx" {{ ( typeof social_icons.fivehundredpx == 'undefined' ) ? '' : _.checked(social_icons.fivehundredpx.enabled, 'true') }}>
+                    <input id="wph-sshares-fivehundredpx-custom" class="toggle-checkbox" type="checkbox" data-id="fivehundredpx" {{ ( 'undefined' === typeof social_icons.fivehundredpx ) ? '' : _.checked(social_icons.fivehundredpx.enabled, 'true') }}>
 
                     <label class="wpmudev-switch-design" for="wph-sshares-fivehundredpx-custom" aria-hidden="true"></label>
 
@@ -162,15 +162,15 @@
 
                 </div>
 
-                <input class="wpmudev-input_text" type="text" placeholder="<?php _e( "Type URL here", Opt_In::TEXT_DOMAIN ); ?>" value="{{ typeof social_icons.fivehundredpx === 'undefined' ? '' : social_icons.fivehundredpx.link }}">
+                <input class="wpmudev-input_text" type="text" placeholder="<?php esc_attr_e( "Type URL here", Opt_In::TEXT_DOMAIN ); ?>" value="{{ 'undefined' === typeof social_icons.fivehundredpx ? '' : social_icons.fivehundredpx.link }}">
 
             </div>
 
-			<div class="wpmudev-social-item {{ ( typeof social_icons.houzz == 'undefined' ) ? 'disabled' : '' }}">
+			<div class="wpmudev-social-item {{ ( 'undefined' === typeof social_icons.houzz ) ? 'disabled' : '' }}">
 
                 <div class="wpmudev-switch">
 
-                    <input id="wph-sshares-houzz-custom" class="toggle-checkbox" type="checkbox" data-id="houzz" {{ ( typeof social_icons.houzz == 'undefined' ) ? '' : _.checked(social_icons.houzz.enabled, 'true') }}>
+                    <input id="wph-sshares-houzz-custom" class="toggle-checkbox" type="checkbox" data-id="houzz" {{ ( 'undefined' === typeof social_icons.houzz ) ? '' : _.checked(social_icons.houzz.enabled, 'true') }}>
 
                     <label class="wpmudev-switch-design" for="wph-sshares-houzz-custom" aria-hidden="true"></label>
 
@@ -182,15 +182,15 @@
 
                 </div>
 
-                <input class="wpmudev-input_text" type="text" placeholder="<?php _e( "Type URL here", Opt_In::TEXT_DOMAIN ); ?>" value="{{ typeof social_icons.houzz === 'undefined' ? '' : social_icons.houzz.link }}">
+                <input class="wpmudev-input_text" type="text" placeholder="<?php esc_attr_e( "Type URL here", Opt_In::TEXT_DOMAIN ); ?>" value="{{ 'undefined' === typeof social_icons.houzz ? '' : social_icons.houzz.link }}">
 
             </div>
 
-            <div class="wpmudev-social-item {{ ( typeof social_icons.instagram == 'undefined' ) ? 'disabled' : '' }}">
+            <div class="wpmudev-social-item {{ ( 'undefined' === typeof social_icons.instagram ) ? 'disabled' : '' }}">
 
                 <div class="wpmudev-switch">
 
-                    <input id="wph-sshares-instagram-custom" class="toggle-checkbox" type="checkbox" data-id="instagram" {{ ( typeof social_icons.instagram == 'undefined' ) ? '' : _.checked(social_icons.instagram.enabled, 'true') }}>
+                    <input id="wph-sshares-instagram-custom" class="toggle-checkbox" type="checkbox" data-id="instagram" {{ ( 'undefined' === typeof social_icons.instagram ) ? '' : _.checked(social_icons.instagram.enabled, 'true') }}>
 
                     <label class="wpmudev-switch-design" for="wph-sshares-instagram-custom" aria-hidden="true"></label>
 
@@ -202,15 +202,15 @@
 
                 </div>
 
-                <input class="wpmudev-input_text" type="text" placeholder="<?php _e( "Type URL here", Opt_In::TEXT_DOMAIN ); ?>" value="{{ typeof social_icons.instagram === 'undefined' ? '' : social_icons.instagram.link }}">
+                <input class="wpmudev-input_text" type="text" placeholder="<?php esc_attr_e( "Type URL here", Opt_In::TEXT_DOMAIN ); ?>" value="{{ 'undefined' === typeof social_icons.instagram ? '' : social_icons.instagram.link }}">
 
             </div>
 
-			<div class="wpmudev-social-item {{ ( typeof social_icons.twitch == 'undefined' ) ? 'disabled' : '' }}">
+			<div class="wpmudev-social-item {{ ( 'undefined' === typeof social_icons.twitch ) ? 'disabled' : '' }}">
 
                 <div class="wpmudev-switch">
 
-                    <input id="wph-sshares-twitch-custom" class="toggle-checkbox" type="checkbox" data-id="twitch" {{ ( typeof social_icons.twitch == 'undefined' ) ? '' : _.checked(social_icons.twitch.enabled, 'true') }}>
+                    <input id="wph-sshares-twitch-custom" class="toggle-checkbox" type="checkbox" data-id="twitch" {{ ( 'undefined' === typeof social_icons.twitch ) ? '' : _.checked(social_icons.twitch.enabled, 'true') }}>
 
                     <label class="wpmudev-switch-design" for="wph-sshares-twitch-custom" aria-hidden="true"></label>
 
@@ -222,15 +222,15 @@
 
                 </div>
 
-                <input class="wpmudev-input_text" type="text" placeholder="<?php _e( "Type URL here", Opt_In::TEXT_DOMAIN ); ?>" value="{{ typeof social_icons.twitch === 'undefined' ? '' : social_icons.twitch.link }}">
+                <input class="wpmudev-input_text" type="text" placeholder="<?php esc_attr_e( "Type URL here", Opt_In::TEXT_DOMAIN ); ?>" value="{{ 'undefined' === typeof social_icons.twitch ? '' : social_icons.twitch.link }}">
 
             </div>
 
-			<div class="wpmudev-social-item {{ ( typeof social_icons.youtube == 'undefined' ) ? 'disabled' : '' }}">
+			<div class="wpmudev-social-item {{ ( 'undefined' === typeof social_icons.youtube ) ? 'disabled' : '' }}">
 
                 <div class="wpmudev-switch">
 
-                    <input id="wph-sshares-youtube-custom" class="toggle-checkbox" type="checkbox" data-id="youtube" {{ ( typeof social_icons.youtube == 'undefined' ) ? '' : _.checked(social_icons.youtube.enabled, 'true') }}>
+                    <input id="wph-sshares-youtube-custom" class="toggle-checkbox" type="checkbox" data-id="youtube" {{ ( 'undefined' === typeof social_icons.youtube ) ? '' : _.checked(social_icons.youtube.enabled, 'true') }}>
 
                     <label class="wpmudev-switch-design" for="wph-sshares-youtube-custom" aria-hidden="true"></label>
 
@@ -242,15 +242,15 @@
 
                 </div>
 
-                <input class="wpmudev-input_text" type="text" placeholder="<?php _e( "Type URL here", Opt_In::TEXT_DOMAIN ); ?>" value="{{ typeof social_icons.youtube === 'undefined' ? '' : social_icons.youtube.link }}">
+                <input class="wpmudev-input_text" type="text" placeholder="<?php esc_attr_e( "Type URL here", Opt_In::TEXT_DOMAIN ); ?>" value="{{ 'undefined' === typeof social_icons.youtube ? '' : social_icons.youtube.link }}">
 
             </div>
 
-			<div class="wpmudev-social-item {{ ( typeof social_icons.telegram == 'undefined' ) ? 'disabled' : '' }}">
+			<div class="wpmudev-social-item {{ ( 'undefined' === typeof social_icons.telegram ) ? 'disabled' : '' }}">
 
                 <div class="wpmudev-switch">
 
-                    <input id="wph-sshares-telegram-custom" class="toggle-checkbox" type="checkbox" data-id="telegram" {{ ( typeof social_icons.telegram == 'undefined' ) ? '' : _.checked(social_icons.telegram.enabled, 'true') }}>
+                    <input id="wph-sshares-telegram-custom" class="toggle-checkbox" type="checkbox" data-id="telegram" {{ ( 'undefined' === typeof social_icons.telegram ) ? '' : _.checked(social_icons.telegram.enabled, 'true') }}>
 
                     <label class="wpmudev-switch-design" for="wph-sshares-telegram-custom" aria-hidden="true"></label>
 
@@ -262,7 +262,7 @@
 
                 </div>
 
-                <input class="wpmudev-input_text" type="text" placeholder="<?php _e( "Type URL here", Opt_In::TEXT_DOMAIN ); ?>" value="{{ typeof social_icons.telegram === 'undefined' ? '' : social_icons.telegram.link }}">
+                <input class="wpmudev-input_text" type="text" placeholder="<?php esc_attr_e( "Type URL here", Opt_In::TEXT_DOMAIN ); ?>" value="{{ 'undefined' === typeof social_icons.telegram ? '' : social_icons.telegram.link }}">
 
             </div>
 

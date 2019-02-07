@@ -99,17 +99,33 @@
 
 		// Check if module should display.
 		should_display: function() {
+			var display;
 			if ( this.settings.after_close === 'no_show_on_post' ) {
 				if ( parseInt( inc_opt.page_id, 10 ) > 0 ) {
-					return !_.isTrue( Optin.cookie.get( this.cookie_key + '_' + inc_opt.page_id ) );
+					display = !_.isTrue( Optin.cookie.get( this.cookie_key + '_' + inc_opt.page_id ) );
 				} else {
-					return true;
+					display = true;
 				}
 			} else if ( this.settings.after_close === 'no_show_all' ) {
-				return !_.isTrue( Optin.cookie.get( this.cookie_key ) );
+				display = !_.isTrue( Optin.cookie.get( this.cookie_key ) );
 			} else {
-				return true;
+				display = true;
 			}
+			if ( !display ) {
+				return display;
+			}
+			//check if user is already subscribed
+			if ( 'no_show_on_post' === this.data.content.after_subscription ) {
+				if ( parseInt( inc_opt.page_id, 10 ) > 0 ) {
+					display = !_.isTrue( Optin.cookie.get( this.cookie_key + '_success_' + inc_opt.page_id ) );
+				} else {
+					display = true;
+				}
+			} else if ( 'no_show_all' === this.data.content.after_subscription ) {
+				display = !_.isTrue( Optin.cookie.get( this.cookie_key + '_success' ) );
+			}
+
+			return display;
 		},
 
 		get_expiration_days: function() {
@@ -136,6 +152,9 @@
 
 		render: function() {
 
+			if ( 'undefined' === typeof( this.data.unique_id ) ) {
+				this.data.unique_id = '';
+			}
 			var template = ( parseInt(this.data.content.use_email_collection, 10) )
 				? Optin.template("wpmudev-hustle-modal-with-optin-tpl")
 				: Optin.template("wpmudev-hustle-modal-without-optin-tpl");
@@ -146,8 +165,8 @@
 			this.$el.html( html );
 
 			// supply with provider args
-			if ( typeof this.data.content.args !== 'undefined' && typeof this.data.content.active_email_service !== 'undefined' ) {
-				var provider_template = Optin.template( 'optin-'+ this.data.content.active_email_service +'-args-tpl' ),
+			if ( typeof this.data.content.args !== 'undefined' && this.data.content.args !== null && typeof this.data.content.active_email_service !== 'undefined' ) {
+				var provider_template = Optin.template( 'optin-'+ this.data.content.active_email_service + '-' + this.module_id + '-args-tpl' ),
 					provider_content = provider_template(this.data.content.args),
 					$target_provider_container = this.$('.hustle-modal-provider-args-container');
 
@@ -158,13 +177,15 @@
 
 			this.$el.appendTo(this.parent);
 			this.$el.display = $.proxy( this, 'display' );
-			this.$el.on( 'show', $.proxy( this, 'on_module_show' ) );
-			this.$el.on( 'hide', $.proxy( this, 'on_module_hide' ) );
+			this.$el.on( 'hustle_show', $.proxy( this, 'on_module_show' ) );
+			this.$el.on( 'hustle_hide', $.proxy( this, 'on_module_hide' ) );
 			this.$el.data(this.data);
 			this.html = this.$el.html();
 
 			// Prepare display
 			this.prepare_display();
+
+			this.maybeRenderRecaptcha();
 
 			// Trigger display
 			if (typeof this[this.appear_after + '_trigger'] === 'function') {
@@ -174,8 +195,50 @@
 			return this;
 		},
 
-		prepare_display: function() {
+		maybeRenderRecaptcha: function() {
+
+			if ( 'false' === this.data.content.use_email_collection || '0' === this.data.content.use_email_collection ) {
+				return;
+			}
+
+			/**
+			 * reCAPTCHA
+			 *
+			 * @since 3.0.7
+			 */
 			var me = this;
+
+			if (
+				'undefined' !== typeof inc_opt.recaptcha
+				&& 'undefined' !== typeof inc_opt.recaptcha.enabled
+				&& 'undefined' !== typeof inc_opt.recaptcha.sitekey
+				&& '1' === inc_opt.recaptcha.enabled
+				&& 'undefined' !== typeof this.data.content.form_elements.recaptcha
+			) {
+				if ( typeof this.unique_id === 'undefined' )
+					this.unique_id = '';
+
+				var id = 'hustle-modal-recaptcha' + this.module_id + this.unique_id;
+				this.$el.find('.hustle-modal-recaptcha').attr('id', id);
+
+				this.$el.find('.hustle-modal-body button').prop('disabled', true );
+
+				grecaptcha.ready( function() {
+					var recaptcha_id = grecaptcha.render( id, {
+						'sitekey' : inc_opt.recaptcha.sitekey,
+						'callback': function() {
+							me.$el.find('.hustle-modal-body button').removeProp('disabled' );
+						}
+					});
+
+					me.$el.find('.hustle-modal-recaptcha').attr('recaptcha-id', recaptcha_id);
+
+					me.apply_custom_size();
+				});
+			}
+		},
+
+		prepare_display: function() {
 
 			// Marked viewed when display is triggered
 			this.viewed = true;
@@ -198,7 +261,7 @@
 
 			this.$el.removeClass( this.settings.animation_out );
 			this.add_mask();
-			this.$el.trigger( 'show', this );
+			this.$el.trigger( 'hustle_show', this );
 			// Add escape key listener.
 			$(document).on( 'keydown', $.proxy( this.escape_key, this ) );
 
@@ -209,8 +272,17 @@
 					data_type = ( typeof this.data.type !== 'undefined' )
 						? this.data.type
 						: this.data.module_type;
-				if ( after_submit === 'close' ) {
-					this.$el.find( "form" ).on("submit", _.bind( this.close, this ) );
+				if ( after_submit === 'close' || after_submit === 'default' ) {
+               // Fix for CF7.
+					if(this.$el.find( "form.wpcf7-form" ).length > 0 ) {
+						this.$el.on( 'wpcf7mailsent', function( e ){
+							setTimeout( function() {
+									me.close();
+								}, 2000 );
+							});
+					} else {
+						this.$el.find( "form" ).on("submit", _.bind( this.close, this ) );
+					}
 					this.handle_compatibility();
 				} else if ( after_submit === 'redirect' ) {
 					this.$el.find( "form" ).on("submit", _.bind( this.redirect_form_submit, this ) );
@@ -223,8 +295,8 @@
 
 		add_mask: function() {
 			var me = this,
-			  no_scroll = _.isFalse(this.settings.allow_scroll_page),
-			  no_bg_click = _.isFalse(this.settings.not_close_on_background_click);
+			  no_scroll = ! _.isTrue(this.settings.allow_scroll_page),
+			  no_bg_click = ! _.isTrue(this.settings.not_close_on_background_click);
 
 			if (
 				// Only add mask to popups.
@@ -348,12 +420,17 @@
 
 			// handle per session
 			if ( _.isTrue( this.triggers.on_exit_intent_per_session ) ) {
-				$(doc).one("mouseleave", _.debounce( function(e){
-					me.set_exit_timer();
+				$(doc).on("mouseleave", _.debounce( function(e){
+					if(!$('input').is(':focus')) {
+						me.set_exit_timer();
+						$( this ).off( e );
+					}
 				}, 300 ));
 			} else {
 				$(doc).on("mouseleave", _.debounce( function(e){
-					me.set_exit_timer();
+					if(!$('input').is(':focus')) {
+						me.set_exit_timer();
+					}
 				}, 300 ));
 			}
 
@@ -475,6 +552,9 @@
 				if ( this.data.settings.animation_out === 'bounceOut' ) {
 					time_out = 755;
 				}
+				if ( this.data.settings.animation_out.length === 0 || this.data.settings.animation_out === 'no_animation' ) {
+					time_out = 0;
+				}
 
 				setTimeout(function(){
 					me.$el.removeClass('wph-modal-active');
@@ -484,8 +564,10 @@
 			}
 
 			if ($modal.hasClass('hustle-modal-static')) {
-				$modal.removeClass('hustle-modal-static');
-				me.$el.removeClass('wph-modal-active');
+				setTimeout(function(){
+					$modal.removeClass('hustle-modal-static');
+					me.$el.removeClass('wph-modal-active');
+				}, 0);
 			}
 
 			// Allow scrolling if previously disabled.
@@ -501,6 +583,9 @@
 			} else if ( this.settings.after_close === 'no_show_all' ) {
 				Optin.cookie.set( this.cookie_key, this.module_id, this.expiration_days );
 			}
+			$modal.find("iframe").each( function(){
+				$( this ).attr("src", $( this ).attr("src"));
+			});
 		},
 		escape_key: function(e) {
 			// If escape key, close.

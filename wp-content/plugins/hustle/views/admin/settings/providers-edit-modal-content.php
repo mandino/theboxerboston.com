@@ -4,7 +4,7 @@
 
 		<div class="wph-label--block">
 
-			<label class="wph-label--alt"><?php _e("Choose email service provider:", Opt_In::TEXT_DOMAIN); ?></label>
+			<label class="wph-label--alt"><?php esc_attr_e("Choose email service provider:", Opt_In::TEXT_DOMAIN); ?></label>
 
 		</div>
 
@@ -12,7 +12,7 @@
 
 			<?php foreach( $providers as $provider ) : ?>
 
-				<option  value="<?php echo esc_attr( $provider['id'] );  ?>" <?php selected( $selected_provider, $provider['id'] ); ?> ><?php echo $provider['name']; ?> </option>
+				<option  value="<?php echo esc_attr( $provider['id'] ); ?>" <?php selected( $selected_provider, $provider['id'] ); ?> ><?php echo esc_html( $provider['name'] ); ?> </option>
 
 			<?php endforeach; ?>
 
@@ -33,7 +33,9 @@
 
 			foreach( $options as $key =>  $option ){
 
-				if( $option['type'] === 'wrapper'  ){ $option['apikey'] = $optin->api_key; }
+				if( 'wrapper' === $option['type'] ){
+					$option['apikey'] = $optin->api_key;
+				}
 
 				$option = apply_filters("wpoi_optin_filter_optin_options", $option, $optin );
 
@@ -43,7 +45,8 @@
 
 			do_action("wpoi_optin_show_provider_account_options", $current_provider, $provider_instance );
 
-		} ?>
+		}
+		?>
 
 	</div>
 

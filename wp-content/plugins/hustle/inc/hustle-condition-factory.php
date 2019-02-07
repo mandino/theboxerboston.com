@@ -5,8 +5,7 @@
  *
  * Class Hustle_Condition_Factory
  */
-class Hustle_Condition_Factory
-{
+class Hustle_Condition_Factory {
 
 	/**
 	 * Callback to use with preg_replace_callback in self::build

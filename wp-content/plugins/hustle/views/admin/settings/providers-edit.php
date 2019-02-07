@@ -5,7 +5,7 @@
 ?>
 <div class="box-title">
 
-    <h3><?php _e('Email Lists & Services', Opt_In::TEXT_DOMAIN); ?></h3>
+    <h3><?php esc_attr_e('Email Lists & Services', Opt_In::TEXT_DOMAIN); ?></h3>
 
 </div>
 
@@ -17,7 +17,7 @@
 
         <tr>
 
-            <th colspan="2"><?php _e('Name', Opt_In::TEXT_DOMAIN); ?></th>
+            <th colspan="2"><?php esc_attr_e('Name', Opt_In::TEXT_DOMAIN); ?></th>
 
             <th>&nbsp;</th>
 
@@ -27,38 +27,41 @@
 
         <tbody>
 
-        <tr class="wph-settings-message <?php echo $services->get_count() ? 'hidden' : '';  ?>" >
+        <tr class="wph-settings-message <?php echo $services->get_count() ? 'hidden' : ''; ?>" >
 
             <td colspan="3">
 
-                <p><?php _e('You haven\'t added any Email Service yet, what you\'re waiting for? Remember we support Mailchimp, Aweber, Campaign Monitor and many other services.', Opt_In::TEXT_DOMAIN); ?></p>
+                <p><?php esc_attr_e('You haven\'t added any Email Service yet, what you\'re waiting for? Remember we support Mailchimp, Aweber, Campaign Monitor and many other services.', Opt_In::TEXT_DOMAIN); ?></p>
 
             </td>
 
         </tr>
-        <?php foreach( $services->get_all() as $id => $service ): $service = (object) $service; ?>
+        <?php
+		foreach( $services->get_all() as $id => $service ) :
+			$service = (object) $service;
+			?>
             <tr>
 
                 <td class="wph-list--icon">
 
-                    <div class="wph-list--<?php echo esc_attr( $service->name ) ?>"></div>
+                    <div class="wph-list--<?php echo esc_attr( $service->name ); ?>"></div>
 
                 </td>
 
                 <td class="wph-list--info">
 
-                    <span class="wph-table--title"><?php echo ucfirst( $service->name ); ?></span>
+                    <span class="wph-table--title"><?php echo esc_html( ucfirst( $service->name ) ); ?></span>
 
-                    <span class="wph-table--subtitle"><?php echo $service->api_key; ?></span>
+                    <span class="wph-table--subtitle"><?php echo esc_html( $service->api_key ); ?></span>
                     <?php if( !empty( $service->list_id ) ): ?>
-                        <span class="wph-table--subtitle"><?php echo $service->list_id; ?></span>
+						<span class="wph-table--subtitle"><?php echo esc_html( $service->list_id ); ?></span>
                     <?php endif; ?>
 
                 </td>
 
                 <td class="wph-list--edit">
 
-                    <button  data-source="<?php echo esc_attr( $service->source ); ?>" data-nonce="<?php echo $nonce; ?>" data-id="<?php echo esc_attr( $id ); ?>" class="wph-button wph-button--small wph-button--gray wph-providers-edit"><?php _e("Edit", Opt_In::TEXT_DOMAIN); ?></button>
+                    <button  data-source="<?php echo esc_attr( $service->source ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>" data-id="<?php echo esc_attr( $id ); ?>" class="wph-button wph-button--small wph-button--gray wph-providers-edit"><?php esc_attr_e("Edit", Opt_In::TEXT_DOMAIN); ?></button>
 
                 </td>
 
@@ -74,7 +77,7 @@
 
             <td colspan="3">
 
-                <a href="" class="wph-button wph-button--blue wph-button--addList"><?php _e("Add List", Opt_In::TEXT_DOMAIN); ?></a>
+                <a href="" class="wph-button wph-button--blue wph-button--addList"><?php esc_attr_e("Add List", Opt_In::TEXT_DOMAIN); ?></a>
 
             </td>
 

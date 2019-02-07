@@ -17,11 +17,11 @@ class Hustle_Module_Admin {
 	const SOCIAL_SHARING_LISTING_PAGE = 'hustle_sshare_listing';
 	const SOCIAL_SHARING_WIZARD_PAGE = 'hustle_sshare';
 	const SETTINGS_PAGE = 'hustle_settings';
-	const UPGRADE_PAGE = 'hustle_upgrade';
+	const UPGRADE_MODAL_PARAM = 'requires_pro';
 
 	private $_hustle;
 
-	function __construct( Opt_In $hustle ){
+	public function __construct( Opt_In $hustle ){
 
 		$this->_hustle = $hustle;
 
@@ -38,15 +38,20 @@ class Hustle_Module_Admin {
 			add_filter("wp_default_editor", array( $this, 'set_editor_to_tinymce' ));
 			add_filter("tiny_mce_plugins", array( $this, 'remove_despised_editor_plugins' ));
 
+			// Show upgrade notice only if this is free, and Hustle Pro is not already installed.
+			if ( Opt_In_Utils::_is_free() && ! file_exists( WP_PLUGIN_DIR . '/hustle/opt-in.php' ) ) {
+				add_action( 'admin_notices', array( $this, 'show_hustle_pro_available_notice' ) );
+			}
 		}
 
 		add_filter( 'w3tc_save_options', array( $this, 'filter_w3tc_save_options' ), 10, 1 );
 		add_filter('plugin_action_links', array( $this, 'add_plugin_action_links' ), 10, 5 );
+		add_filter('network_admin_plugin_action_links', array( $this, 'add_plugin_action_links' ), 10, 5 );
 
 	}
 
 	// force reject minify for hustle js and css
-	function filter_w3tc_save_options( $config ) {
+	public function filter_w3tc_save_options( $config ) {
 
 		// reject js
 		$defined_rejected_js = $config['new_config']->get("minify.reject.files.js");
@@ -56,7 +61,7 @@ class Hustle_Module_Admin {
 			$this->_hustle->get_static_var( "plugin_url" ) . 'assets/js/front.min.js'
 		);
 		foreach( $reject_js as $r_js ) {
-			if ( !in_array( $r_js, $defined_rejected_js ) ) {
+			if ( !in_array( $r_js, $defined_rejected_js, true ) ) {
 				array_push($defined_rejected_js, $r_js);
 			}
 		}
@@ -65,11 +70,11 @@ class Hustle_Module_Admin {
 		// reject css
 		$defined_rejected_css = $config['new_config']->get("minify.reject.files.css");
 		$reject_css = array(
-			$this->_hustle->get_static_var( "plugin_url" ) . 'assets/css/front.css',
-			$this->_hustle->get_static_var( "plugin_url" ) . 'assets/css/admin.css',
+			$this->_hustle->get_static_var( "plugin_url" ) . 'assets/css/front.min.css',
+			$this->_hustle->get_static_var( "plugin_url" ) . 'assets/css/admin.min.css',
 		);
 		foreach( $reject_css as $r_css ) {
-			if ( !in_array( $r_css, $defined_rejected_css ) ) {
+			if ( !in_array( $r_css, $defined_rejected_css, true ) ) {
 				array_push($defined_rejected_css, $r_css);
 			}
 		}
@@ -84,9 +89,9 @@ class Hustle_Module_Admin {
 	 * @param $plugins
 	 * @return mixed
 	 */
-	function remove_despised_editor_plugins( $plugins ){
-
-		if( ( $k = array_search( "fullscreen", $plugins) ) !== false ){
+	public function remove_despised_editor_plugins( $plugins ){
+		$k = array_search( "fullscreen", $plugins, true );
+		if( false !== $k ){
 			unset( $plugins[ $k ] );
 		}
 		$plugins[] = "paste";
@@ -99,7 +104,7 @@ class Hustle_Module_Admin {
 	 * @param $editor_type
 	 * @return string
 	 */
-	function set_editor_to_tinymce( $editor_type ){
+	public function set_editor_to_tinymce( $editor_type ){
 		return "tinymce";
 	}
 
@@ -108,18 +113,36 @@ class Hustle_Module_Admin {
 	 *
 	 * @since 3.0
 	 */
-	function init(){
-
-
-		return;
+	public function init(){
+		$this->add_privacy_message();
 	}
+
+	/**
+	 *
+	 * @since 3.0.7
+	 * @param array $settings Display settings
+	 * @param string $type posts|pages|tags|categories|{cpt}
+	 * @return array
+	 */
+	private function get_conditions_ids( $settings, $type ) {
+		if ( !empty( $settings['conditions'] ) && !empty( $settings['conditions'][ $type ] ) &&
+				( !empty( $settings['conditions'][ $type ][ $type ] ) || !empty( $settings['conditions'][ $type ][ 'selected_cpts' ] ) ) ) {
+			$ids = !empty( $settings['conditions'][ $type ][ $type ] ) ? $settings['conditions'][ $type ][ $type ]
+					: $settings['conditions'][ $type ][ 'selected_cpts' ];
+		} else {
+			$ids = array();
+		}
+
+		return $ids;
+	}
+
 
 	/**
 	 * Register scripts for the admin page
 	 *
 	 * @since 1.0
 	 */
-	function register_scripts(){
+	public function register_scripts( $page_slug ){
 
 		/**
 		 * Register popup requirements
@@ -143,42 +166,66 @@ class Hustle_Module_Admin {
 		wp_enqueue_script(  'optin_admin_select2' );
 
 		wp_enqueue_script(  'optin_admin_fitie' );
+
+		/**
+		 * reCAPTCHA
+		 * @since 3.0.7
+		 */
+		$recaptcha_settings = Hustle_Module_Model::get_recaptcha_settings();
+		$is_wizard_page = preg_match( '/hustle_(popup|slidein|embedded)$/', $page_slug );
+		if ( $is_wizard_page && isset( $recaptcha_settings['enabled'] ) && '1' === $recaptcha_settings['enabled'] ) {
+			wp_enqueue_script( 'recaptcha', 'https://www.google.com/recaptcha/api.js?render=explicit' );
+		}
+
 		add_filter( 'script_loader_tag', array($this, "handle_specific_script"), 10, 2 );
 		add_filter( 'style_loader_tag', array($this, "handle_specific_style"), 10, 2 );
 
+		$is_edit =  self::is_edit();
+		$post_ids = array();
+		$page_ids = array();
+		$tag_ids = array();
+		$cat_ids = array();
+		if ( $is_edit ) {
+			$module = Hustle_Module_Model::instance()->get( filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT) );
+			$settings = $module->get_display_settings()->to_array();
+
+			$post_ids = $this->get_conditions_ids( $settings, 'posts' );
+			$page_ids = $this->get_conditions_ids( $settings, 'pages' );
+			$tag_ids = $this->get_conditions_ids( $settings, 'tags' );
+			$cat_ids = $this->get_conditions_ids( $settings, 'categories' );
+		}
+
 		$tags = array_map(array($this, "terms_to_select2_data"), get_categories(array(
 			"hide_empty" =>false,
+			'include' => $tag_ids,
 			'taxonomy' => 'post_tag'
 		)));
 
 		$cats = array_map(array($this, "terms_to_select2_data"), get_categories(array(
+			'include' => $cat_ids,
 			"hide_empty" =>false,
 		)));
 
 
-		$posts = array_map(array($this, "posts_to_select2_data"), get_posts(array(
-				'numberposts' => -1
-		 )));
+		$posts = $this->get_select2_data( 'post', $post_ids );
+
 		/**
 		 * Add all posts
 		 */
-		$allPosts = new stdClass();
-		$allPosts->id = "all";
-		$allPosts->text = __("ALL POSTS", Opt_In::TEXT_DOMAIN);
-		array_unshift($posts, $allPosts);
+		$all_posts = new stdClass();
+		$all_posts->id = "all";
+		$all_posts->text = __("All Posts");
+		array_unshift($posts, $all_posts);
 
-		$pages = array_map(array($this, "posts_to_select2_data"), get_posts(array(
-			'numberposts' => -1,
-			'post_type' => 'page'
-		)));
+		$pages = $this->get_select2_data( 'page', $page_ids );
 
 		/**
 		 * Add all pages
 		 */
-		$allPages = new stdClass();
-		$allPages->id = "all";
-		$allPages->text = __("ALL PAGES", Opt_In::TEXT_DOMAIN);
-		array_unshift($pages, $allPages);
+		$all_pages = new stdClass();
+		$all_pages->id = "all";
+		$all_pages->text = __("All Pages");
+		array_unshift($pages, $all_pages);
 
 		/**
 		 * Add all custom post types
@@ -191,45 +238,36 @@ class Hustle_Module_Admin {
 		foreach( $cpts as $cpt ) {
 
 			// skip ms_invoice
-			if ( $cpt->name === 'ms_invoice' ) {
+			if ( 'ms_invoice' === $cpt->name ) {
 				continue;
+			}
+			if ( $is_edit ) {
+				$cpt_ids = $this->get_conditions_ids( $settings, $cpt->label );
+			} else {
+				$cpt_ids = array();
 			}
 
 			$cpt_array['name'] = $cpt->name;
 			$cpt_array['label'] = $cpt->label;
-			$cpt_array['data'] = array_map(array($this, "posts_to_select2_data"), get_posts(array(
-				'numberposts' => -1,
-				'post_type' => $cpt->name
-			)));
+			$cpt_array['data'] = $this->get_select2_data( $cpt->name, $cpt_ids );
+
 			// all posts under this custom post type
-			$allCPTPosts = new stdClass();
-			$allCPTPosts->id = "all";
-			$allCPTPosts->text = __("ALL ", Opt_In::TEXT_DOMAIN) . $cpt->label;
-			array_unshift($cpt_array['data'], $allCPTPosts);
+			$all_cpt_posts = new stdClass();
+			$all_cpt_posts->id = "all";
+			$all_cpt_posts->text = !empty( $cpt->labels ) && !empty( $cpt->labels->all_items )
+					? $cpt->labels->all_items : __( "All Items", Opt_In::TEXT_DOMAIN );
+			array_unshift($cpt_array['data'], $all_cpt_posts);
 
 			$post_types[$cpt->name] = $cpt_array;
 		}
 
 		$optin_vars = array(
 			'messages' => array(
-			  'dont_navigate_away' => __("Changes are not saved, are you sure you want to navigate away?", Opt_In::TEXT_DOMAIN),
-			  'undefined_name_service_provider' => __("Please define proper Opt-in name and service provider", Opt_In::TEXT_DOMAIN),
-			  'undefined_name' => __("Please define proper Opt-in name", Opt_In::TEXT_DOMAIN),
-			  'unselected_provider' => __("Please select service provider", Opt_In::TEXT_DOMAIN),
-			  'error' => __("Error", Opt_In::TEXT_DOMAIN),
-			  'ok' => __("Ok", Opt_In::TEXT_DOMAIN),
-			  'sure_to_delete' => __("Are you sure you want to delete this optin?", Opt_In::TEXT_DOMAIN ),
-			  'something_went_wrong' => '<label class="wpmudev-label--notice"><span>' . __("Something went wrong. Please try again.", Opt_In::TEXT_DOMAIN ) . '</span></label>',
-			  'positions' => array(
-				  'top_left' => __("Top Left", Opt_In::TEXT_DOMAIN ),
-				  'top_center' => __("Top Center", Opt_In::TEXT_DOMAIN ),
-				  'top_right' => __("Top Right", Opt_In::TEXT_DOMAIN ),
-				  'center_left' => __("Center Left", Opt_In::TEXT_DOMAIN ),
-				  'center_right' => __("Center Right", Opt_In::TEXT_DOMAIN ),
-				  'bottom_left' => __("Bottom Left", Opt_In::TEXT_DOMAIN ),
-				  'bottom_center' => __("Bottom Center", Opt_In::TEXT_DOMAIN ),
-				  'bottom_right' => __("Bottom Right", Opt_In::TEXT_DOMAIN ),
-				),
+				'settings_rows_updated' => __( ' number of IPs removed from database successfully.', Opt_In::TEXT_DOMAIN ),
+				'settings_saved' => __( 'Settings saved.' , Opt_In::TEXT_DOMAIN ),
+				'dont_navigate_away' => __("Changes are not saved, are you sure you want to navigate away?", Opt_In::TEXT_DOMAIN),
+				'ok' => __("Ok", Opt_In::TEXT_DOMAIN),
+				'something_went_wrong' => '<label class="wpmudev-label--notice"><span>' . __("Something went wrong. Please try again.", Opt_In::TEXT_DOMAIN ) . '</span></label>',
 				'settings' => array(
 					'popup' => __("Pop-up", Opt_In::TEXT_DOMAIN ),
 					'slide_in' => __("Slide-in", Opt_In::TEXT_DOMAIN ),
@@ -238,7 +276,7 @@ class Hustle_Module_Admin {
 					'floating_social' => __("Floating Social", Opt_In::TEXT_DOMAIN ),
 				),
 				'conditions' => array(
-					'only_on_not_found' => __("Only on 404 page", Opt_In::TEXT_DOMAIN ),
+					'only_on_not_found' => __("404 page", Opt_In::TEXT_DOMAIN ),
 					'visitor_logged_in' => __("Visitor is logged in", Opt_In::TEXT_DOMAIN ),
 					'visitor_not_logged_in' => __("Visitor not logged in", Opt_In::TEXT_DOMAIN ),
 					'shown_less_than' => __("{type_name} shown less than", Opt_In::TEXT_DOMAIN ),
@@ -305,7 +343,7 @@ class Hustle_Module_Admin {
 					"everywhere" => __("Show everywhere", Opt_In::TEXT_DOMAIN)
 				),
 				'conditions_body' => array(
-					'only_on_not_found' => __('Shows the {type_name} only to 404 page.', Opt_In::TEXT_DOMAIN),
+					'only_on_not_found' => __('Shows the {type_name} on the 404 page.', Opt_In::TEXT_DOMAIN),
 					'visitor_has_commented' => __('Shows the {type_name} if the user has already left a comment. You may want to combine this condition with either "Visitor is logged in" or "Visitor is not logged in".', Opt_In::TEXT_DOMAIN),
 					'visitor_has_never_commented' => __('Shows the {type_name} if the user has never left a comment. You may want to combine this condition with either "Visitor is logged in" or "Visitor is not logged in".', Opt_In::TEXT_DOMAIN),
 					'from_search_engine' => __('Shows the {type_name} if the user arrived via a search engine.', Opt_In::TEXT_DOMAIN),
@@ -315,44 +353,10 @@ class Hustle_Module_Admin {
 					'visitor_not_logged_in' => __('<label class="wph-label--alt">Shows the {type_name} if the user is not logged in to your site.</label>', Opt_In::TEXT_DOMAIN),
 					'visitor_logged_in' => __('<label class="wph-label--alt">Shows the {type_name} if the user is logged in to your site.</label>', Opt_In::TEXT_DOMAIN),
 				),
-				'model' => array(
-					"defaults" => array(
-						"module_name" => '',
-						"module_title" => __("e.g. Get 50% Early-bird Special", Opt_In::TEXT_DOMAIN),
-						"module_message" => __("Please fill in the form and submit to subscribe", Opt_In::TEXT_DOMAIN),
-						"success_message" => __("Congratulations! You have been subscribed to {name}", Opt_In::TEXT_DOMAIN),
-						"cta_button" => __("Sign Up", Opt_In::TEXT_DOMAIN)
-					),
-					"errors" => array(
-						'name' => __('Please fill "name" field.', Opt_In::TEXT_DOMAIN),
-						'provider' => __('Please choose a valid provider.', Opt_In::TEXT_DOMAIN),
-						'api_key' => __('Please provide api key.', Opt_In::TEXT_DOMAIN),
-						'mail_list' => __('Please select a mail list.', Opt_In::TEXT_DOMAIN)
-					)
-				),
-				'custom_content' => array(
-					'errors' => array(
-						'cta_url' => __('Please provide a valid url (http://example.net).', Opt_In::TEXT_DOMAIN)
-					),
-					'no_name' => __( 'Please provide name.', Opt_In::TEXT_DOMAIN ),
-				),
 				'form_fields' => array(
 					'errors' => array(
 						'custom_field_not_supported' => __('Custom fields are not supported by the active provider', Opt_In::TEXT_DOMAIN)
 					),
-				),
-				'providers' => array(
-					'select_list' => __('Selected list (campaign), Press the Fetch Lists button to update value.', Opt_In::TEXT_DOMAIN ),
-					'no_fetch_list'	=> __('Selected list (campaign).', Opt_In::TEXT_DOMAIN ),
-				),
-				"sendy" => array(
-					"enter_url" => __("Please enter installation URL", Opt_In::TEXT_DOMAIN)
-				),
-				"mad_mimi" => array(
-					"username" => __("Please enter username or email address", Opt_In::TEXT_DOMAIN)
-				),
-				"infusionsoft" => array(
-					"enter_account_name" => __("Please enter your account name", Opt_In::TEXT_DOMAIN)
 				),
 				"media_uploader" => array(
 					"select_or_upload" => __("Select or Upload Image", Opt_In::TEXT_DOMAIN),
@@ -360,25 +364,6 @@ class Hustle_Module_Admin {
 				),
 				"dashboard" => array(
 					"not_enough_data" => __("There is no enough data yet, please try again later.", Opt_In::TEXT_DOMAIN)
-				),
-				"activecampaign" => array(
-					"enter_url" => __("Please enter your ActiveCampaign URL", Opt_In::TEXT_DOMAIN)
-				),
-				"convertkit" => array(
-					"enter_api_secret" => __("Please enter your API Secret key from ConvertKit", Opt_In::TEXT_DOMAIN)
-				),
-				'module_fields' => array(
-					'no_label' => __( 'Please enter field label', Opt_In::TEXT_DOMAIN ),
-					'no_name' => __( 'Please enter field name', Opt_In::TEXT_DOMAIN ),
-					'custom_field_already_exists' => __( 'Custom field "{name}" already exists.', Opt_In::TEXT_DOMAIN ),
-					'custom_field_not_exist' => __( 'Custom field doesn\'t exist! Please check your provider.', Opt_In::TEXT_DOMAIN ),
-					'cannot_create_custom_field' => __( 'Unable to create new custom field. Please check your provider.', Opt_In::TEXT_DOMAIN ),
-				),
-				'mautic' => array(
-					'enter_url' => __( 'Please enter installation URL', Opt_In::TEXT_DOMAIN ),
-					'invalid_url' => __( 'Please enter valid installation URL', Opt_In::TEXT_DOMAIN ),
-					'username' => __( 'Please enter username', Opt_In::TEXT_DOMAIN ),
-					'password' => __( 'Please enter password', Opt_In::TEXT_DOMAIN ),
 				),
 			),
 			'url' => get_home_url(),
@@ -390,14 +375,12 @@ class Hustle_Module_Admin {
 			'posts' => $posts,
 			'post_types' => $post_types,
 			'pages' => $pages,
-			'is_edit' => Hustle_Module_Admin::is_edit(),
+			'is_edit' => $is_edit,
 			'current' => array(),
 			'is_admin' => (int) is_admin(),
-			// 'module_fields' => Opt_In_Meta_Design::default_fields(),
 			// 'get_module_field_nonce' => wp_create_nonce( 'optin_add_module_field' ),
 			'error_log_nonce' => wp_create_nonce( 'hustle_get_error_logs' ),
 			'clear_log_nonce' => wp_create_nonce( 'optin_clear_logs' ),
-	        // 'hubspot_nonce' => wp_create_nonce( 'hustle_hubspot_referrer' ),
 		);
 
 		$ap_vars = array(
@@ -406,24 +389,21 @@ class Hustle_Module_Admin {
 		);
 
 		$optin_vars['countries'] = $this->_hustle->get_countries();
-		$optin_vars['animations'] = $this->_hustle->get_animations();
-		// $optin_vars['services'] = $this->_email_services->get_all();
+		//$optin_vars['animations'] = $this->_hustle->get_animations();
 		$optin_vars['providers'] = $this->_hustle->get_providers();
 
 		$optin_vars = apply_filters("hustle_optin_vars", $optin_vars);
 
 		$optin_vars['is_free'] = (int) Opt_In::is_free();
 
-		// $total_optins = count(Opt_In_Collection::instance()->get_all_optins( null ));
-		// $optin_vars['is_limited'] = (int) ( Opt_In_Utils::_is_free( 'opt-ins' ) && ! $this->_is_edit() && $total_optins >= 1 );
-
-		if( isset($_GET['page'] ) && 'hustle' == $_GET['page'] ) {
+		if( isset($_GET['page'] ) && 'hustle' === $_GET['page'] ) { // WPCS: CSRF ok.
 			wp_enqueue_script( 'jquery-sortable' );
 		}
-		if(isset( $_GET['page'] ) && $_GET['page'] != 'hustle') wp_enqueue_script( 'wp-color-picker-alpha', $this->_hustle->get_static_var( "plugin_url" ) . 'assets/js/vendor/wp-color-picker-alpha.min.js', array( 'wp-color-picker' ), '1.2.2', true );
+		if(isset( $_GET['page'] ) && 'hustle' !== $_GET['page']) // WPCS: CSRF ok.
+			wp_enqueue_script( 'wp-color-picker-alpha', $this->_hustle->get_static_var( "plugin_url" ) . 'assets/js/vendor/wp-color-picker-alpha.min.js', array( 'wp-color-picker' ), '1.2.2', true );
 		wp_register_script( 'optin_admin_scripts', $this->_hustle->get_static_var( "plugin_url" ) . 'assets/js/admin.min.js', array( 'jquery', 'backbone', 'jquery-effects-core' ), $this->_hustle->get_const_var( "VERSION" ), true );
 		wp_localize_script( 'optin_admin_scripts', 'optin_vars', $optin_vars );
-		wp_localize_script( 'optin_admin_scripts', 'hustle_vars', $optin_vars );
+		//wp_localize_script( 'optin_admin_scripts', 'hustle_vars', $optin_vars );
 		wp_enqueue_script( 'optin_admin_scripts' );
 
 	}
@@ -457,8 +437,8 @@ class Hustle_Module_Admin {
 	 * Handling specific scripts for each scenario
 	 *
 	 */
-	function handle_specific_script( $tag, $handle ) {
-		if ( $handle === 'optin_admin_fitie' ) {
+	public function handle_specific_script( $tag, $handle ) {
+		if ( 'optin_admin_fitie' === $handle ) {
 			$tag = "<!--[if IE]>$tag<![endif]-->";
 		}
 		return $tag;
@@ -468,14 +448,14 @@ class Hustle_Module_Admin {
 	 * Handling specific style for each scenario
 	 *
 	 */
-	function handle_specific_style( $tag, $handle ) {
-		if ( $handle == 'hustle_admin_ie' ) {
+	public function handle_specific_style( $tag, $handle ) {
+		if ( 'hustle_admin_ie' === $handle ) {
 			$tag = "<!--[if IE]>". $tag ."<![endif]-->";
 		}
 		return $tag;
 	}
 
-	function set_proper_current_screen( $current ){
+	public function set_proper_current_screen( $current ){
 		global $current_screen;
 		if ( !Opt_In_Utils::_is_free() ) {
 			$current_screen->id = Opt_In_Utils::clean_current_screen($current_screen->id);
@@ -487,12 +467,16 @@ class Hustle_Module_Admin {
 	 *
 	 *
 	 */
-	function register_styles(){
+	public function register_styles(){
+
+		$sanitize_version = str_replace( '.', '-', HUSTLE_SUI_VERSION );
+		$sui_body_class   = "sui-$sanitize_version";
+
 		wp_enqueue_style('thickbox');
 
 		wp_register_style( 'optin_admin_select2', $this->_hustle->get_static_var( "plugin_url" ) . 'assets/js/vendor/select2/css/select2.min.css', array(), $this->_hustle->get_const_var( "VERSION" ));
-		wp_register_style( 'wpoi_admin', $this->_hustle->get_static_var( "plugin_url" ) . 'assets/css/admin.css', array(), $this->_hustle->get_const_var( "VERSION" ));
-		wp_register_style( 'hustle_admin_ie', $this->_hustle->get_static_var( "plugin_url" ) . 'assets/css/ie-admin.css', array(), $this->_hustle->get_const_var( "VERSION" ));
+		wp_register_style( 'wpoi_admin', $this->_hustle->get_static_var( "plugin_url" ) . 'assets/css/admin.min.css', array(), $this->_hustle->get_const_var( "VERSION" ));
+		wp_register_style( 'hustle_admin_ie', $this->_hustle->get_static_var( "plugin_url" ) . 'assets/css/ie-admin.min.css', array(), $this->_hustle->get_const_var( "VERSION" ));
 		wp_register_style( 'hstl-roboto', 'https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i', $this->_hustle->get_const_var( "VERSION" ) );
 		wp_register_style( 'hstl-opensans', 'https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i', $this->_hustle->get_const_var( "VERSION" ) );
 		wp_register_style( 'hstl-source', 'https://fonts.googleapis.com/css?family=Source+Code+Pro', $this->_hustle->get_const_var( "VERSION" ) );
@@ -507,6 +491,13 @@ class Hustle_Module_Admin {
 		wp_enqueue_style( 'hstl-opensans' );
 		wp_enqueue_style( 'hstl-source' );
 
+		wp_enqueue_style(
+			'sui_styles',
+			$this->_hustle->get_static_var( 'plugin_url' ) . 'assets/css/shared-ui.min.css',
+			array(),
+			$sui_body_class
+		);
+
 	}
 
 	/**
@@ -514,7 +505,7 @@ class Hustle_Module_Admin {
 	 * @param $term Term
 	 * @return stdClass
 	 */
-	function terms_to_select2_data( $term ){
+	public static function terms_to_select2_data( $term ){
 		$obj = new stdClass();
 		$obj->id = $term->term_id;
 		$obj->text = $term->name;
@@ -522,16 +513,22 @@ class Hustle_Module_Admin {
 	}
 
 	/**
-	 * Converts post object to usable object for select2
+	 * Get usable objects for select2
 	 *
-	 * @param $post WP_Post
-	 * @return stdClass
+	 * @param string $post_type post type
+	 * @param array $include_ids IDs
+	 * @return array
 	 */
-	function posts_to_select2_data($post){
-		$obj = new stdClass();
-		$obj->id = $post->ID;
-		$obj->text = $post->post_title;
-		return $obj;
+	private function get_select2_data( $post_type, $include_ids ) {
+		if ( empty( $include_ids ) ) {
+			$data = array();
+		} else {
+			global $wpdb;
+			$data = $wpdb->get_results( $wpdb->prepare( "SELECT ID as id, post_title as text FROM {$wpdb->posts} "
+			. "WHERE post_type = %s AND post_status = 'publish' AND ID IN ('" . implode( "','", $include_ids ) . "')", $post_type ) ); //phpcs:ignore
+		}
+
+		return $data;
 	}
 
 
@@ -541,22 +538,21 @@ class Hustle_Module_Admin {
 	 * @return bool
 	 */
 	private function _is_admin_module() {
-		return isset( $_GET['page'] ) &&  ( in_array($_GET['page'], array(
-		Hustle_Module_Admin::ADMIN_PAGE,
-		Hustle_Module_Admin::DASHBOARD_PAGE,
-		Hustle_Module_Admin::POPUP_LISTING_PAGE,
-		Hustle_Module_Admin::POPUP_WIZARD_PAGE,
-		Hustle_Module_Admin::SLIDEIN_LISTING_PAGE,
-		Hustle_Module_Admin::SLIDEIN_WIZARD_PAGE,
-		Hustle_Module_Admin::EMBEDDED_LISTING_PAGE,
-		Hustle_Module_Admin::EMBEDDED_WIZARD_PAGE,
-		Hustle_Module_Admin::SOCIAL_SHARING_LISTING_PAGE,
-		Hustle_Module_Admin::SOCIAL_SHARING_WIZARD_PAGE,
-		Hustle_Module_Admin::SETTINGS_PAGE,
-		Hustle_Module_Admin::UPGRADE_PAGE) ) );
+		return isset( $_GET['page'] ) && in_array( $_GET['page'], array( // WPCS: CSRF ok.
+			self::ADMIN_PAGE,
+			self::DASHBOARD_PAGE,
+			self::POPUP_LISTING_PAGE,
+			self::POPUP_WIZARD_PAGE,
+			self::SLIDEIN_LISTING_PAGE,
+			self::SLIDEIN_WIZARD_PAGE,
+			self::EMBEDDED_LISTING_PAGE,
+			self::EMBEDDED_WIZARD_PAGE,
+			self::SOCIAL_SHARING_LISTING_PAGE,
+			self::SOCIAL_SHARING_WIZARD_PAGE,
+			self::SETTINGS_PAGE,
+		), true );
 
 	}
-
 
 	/**
 	 * Modify admin body class to our own advantage!
@@ -564,8 +560,24 @@ class Hustle_Module_Admin {
 	 * @param $classes
 	 * @return mixed
 	 */
-	function admin_body_class( $classes ){
-		return str_replace(array("wpmud ", "wpmud"), "", $classes);
+	public function admin_body_class( $classes ) {
+
+		$sanitize_version = str_replace( '.', '-', HUSTLE_SUI_VERSION );
+		$sui_body_class   = "sui-$sanitize_version";
+
+		$screen = get_current_screen();
+
+		$classes = ' wpmud ';
+
+		// Do nothing if not a hustle page
+		if ( strpos( $screen->base, '_page_hustle' ) === false ) {
+			return $classes;
+		}
+
+		$classes .= $sui_body_class;
+
+		return $classes;
+
 	}
 
 	/**
@@ -573,28 +585,100 @@ class Hustle_Module_Admin {
 	 *
 	 * @param $settings
 	 */
-	function set_tinymce_settings( $settings ) {
+	public function set_tinymce_settings( $settings ) {
 		$settings['paste_as_text'] = 'true';
 		return $settings;
+	}
+
+	/**
+	 * Add Privacy Messages
+	 *
+	 * @since 3.0.6
+	 */
+	public function add_privacy_message() {
+		if ( function_exists( 'wp_add_privacy_policy_content' ) ) {
+			$external_integrations_list = '';
+			$external_integrations_privacy_url_list = '';
+			$params = array(
+				'external_integrations_list' => apply_filters( 'hustle_privacy_external_integrations_list', $external_integrations_list ),
+				'external_integrations_privacy_url_list' => apply_filters( 'hustle_privacy_url_external_integrations_list', $external_integrations_privacy_url_list )
+			);
+			// TODO: get the name from a variable instead
+			$content = $this->_hustle->render( 'general/policy-text', $params, true );
+			wp_add_privacy_policy_content( 'Hustle', wp_kses_post( $content ) );
+		}
 	}
 
 	/**
 	 * Adds custom links on plugin page
 	 *
 	 */
-	function add_plugin_action_links( $actions, $plugin_file ) {
+	public function add_plugin_action_links( $actions, $plugin_file ) {
 		static $plugin;
 
 		if (!isset($plugin))
 			$plugin = Opt_In::$plugin_base_file;
 
-		if ($plugin == $plugin_file) {
-			$dashboard_url = 'admin.php?page=hustle';
-			$settings = array('settings' => '<a href="'. $dashboard_url .'">' . __('Settings', Opt_In::TEXT_DOMAIN) . '</a>');
-			$actions = array_merge($settings, $actions);
+		if ($plugin === $plugin_file) {
+			$settings = array();
+			if ( ! is_network_admin() ) {
+				$dashboard_url = 'admin.php?page=hustle';
+				$settings = array('settings' => '<a href="'. $dashboard_url .'">' . __('Settings', Opt_In::TEXT_DOMAIN) . '</a>');
+			}
+			$actions = array_merge( $actions, $settings );
+
+			// Documentation link.
+//			$actions['docs'] = '<a href="' . lib3()->get_link( 'hustle', 'docs', '' ) . '" aria-label="' . esc_attr( __( 'View Hustle Documentation', Opt_In::TEXT_DOMAIN ) ) . '" target="_blank">' . esc_html__( 'Docs', Opt_In::TEXT_DOMAIN ) . '</a>';
+
+			// Upgrade link.
+			if ( Opt_In_Utils::_is_free() ) {
+				if ( ! lib3()->is_member() ) {
+					$url = lib3()->get_link( 'hustle', 'plugin', 'hustle_pluginlist_upgrade' );
+				} else {
+					$url = lib3()->get_link( 'hustle', 'install_plugin', '' );
+				}
+				if ( is_network_admin() || ! is_multisite() ) {
+					$actions['upgrade'] = '<a href="' . esc_url( $url ) . '" aria-label="' . esc_attr( __( 'Upgrade to Hustle Pro', Opt_In::TEXT_DOMAIN ) ) . '" target="_blank" style="color: #1ABC9C;">' . esc_html__( 'Upgrade', Opt_In::TEXT_DOMAIN ) . '</a>';
+				}
+			}
 		}
 
 		return $actions;
+	}
+
+	/**
+	 * Displays an admin notice when the user is an active member and doesn't have Hustle Pro installed
+	 *
+	 * @since 3.0.6
+	 */
+	public function show_hustle_pro_available_notice() {
+		// Show the notice only to super admins who are members.
+		if ( ! is_super_admin() || ! lib3()->is_member() ) {
+			return;
+		}
+
+		// The notice was already dismissed.
+		$dismissed_notices = array_filter( explode( ',', (string) get_user_meta( get_current_user_id(), 'hustle_dismissed_admin_notices', true ) ) );
+		if ( in_array( 'hustle_pro_is_available', $dismissed_notices, true ) ) {
+			return;
+		}
+
+		$link = lib3()->html->element( array(
+			'type' => 'html_link',
+			'value' => esc_html__( 'Upgrade' ),
+			'url' => esc_url( lib3()->get_link( 'hustle', 'install_plugin', '' ) ),
+			'class' => 'button-primary',
+		), true );
+
+		$profile = get_site_option( 'wdp_un_profile_data', '' );
+		$name = ! empty( $profile ) ? $profile['profile']['name'] : 'Hey';
+
+		$message = esc_html( sprintf( __( '%s, it appears you have an active WPMU DEV membership but haven\'t upgraded Hustle to the pro version. You won\'t lose an any settings upgrading, go for it!', Opt_In::TEXT_DOMAIN ), $name ) );
+
+		$html = '<div id="hustle-notice-pro-is-available" class="notice notice-info is-dismissible"><p>' . $message . '</p><p>' . $link . '</p></div>';
+
+		echo $html; // WPCS: XSS ok.
+
 	}
 }
 

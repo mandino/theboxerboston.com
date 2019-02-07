@@ -12,17 +12,17 @@
 
                     <div class="wpmudev-dashboard-resume-text">
 
-                        <?php if ( $has_modules === true ) { ?>
+                        <?php if ( true === $has_modules ) { ?>
 
-                            <h2><?php _e( "WELCOME BACK.", Opt_In::TEXT_DOMAIN ); ?></h2>
+                            <h2><?php esc_attr_e( "WELCOME BACK.", Opt_In::TEXT_DOMAIN ); ?></h2>
 
-                            <p><?php _e( "We have collected some conversion data that is summarized on this page.", Opt_In::TEXT_DOMAIN ); ?></p>
+                            <p><?php esc_attr_e( "We have collected some conversion data that is summarized on this page.", Opt_In::TEXT_DOMAIN ); ?></p>
 
                         <?php } else { ?>
 
-                            <h2><?php _e( "LET'S GET YOU STARTED", Opt_In::TEXT_DOMAIN ); ?></h2>
+                            <h2><?php esc_attr_e( "LET'S GET YOU STARTED", Opt_In::TEXT_DOMAIN ); ?></h2>
 
-                            <p><?php _e( "First, choose what type of marketing material you want to set-up.", Opt_In::TEXT_DOMAIN ); ?></p>
+                            <p><?php esc_attr_e( "First, choose what type of marketing material you want to set-up.", Opt_In::TEXT_DOMAIN ); ?></p>
 
                         <?php } ?>
 
@@ -36,7 +36,7 @@
 
                                 <tr>
 
-                                    <th><?php _e( "Active Modules", Opt_In::TEXT_DOMAIN ); ?></th>
+                                    <th><?php esc_attr_e( "Active Modules", Opt_In::TEXT_DOMAIN ); ?></th>
 
                                     <td><?php echo count($active_modules); ?></td>
 
@@ -44,19 +44,19 @@
 
                                 <tr>
 
-                                    <th><?php _e( "Today's Conversions", Opt_In::TEXT_DOMAIN ); ?></th>
+                                    <th><?php esc_attr_e( "Today's Conversions", Opt_In::TEXT_DOMAIN ); ?></th>
 
-                                    <td><?php echo $today_total_conversions; ?></td>
+                                    <td><?php echo esc_html( $today_total_conversions ); ?></td>
 
                                 </tr>
 
-                                <?php if ( $most_converted_module !== '' ) { ?>
+                                <?php if ( '' !== $most_converted_module ) { ?>
 
                                     <tr>
 
-                                        <th><?php _e( "Most Conversions (All Time)", Opt_In::TEXT_DOMAIN ); ?></th>
+                                        <th><?php esc_attr_e( "Most Conversions (All Time)", Opt_In::TEXT_DOMAIN ); ?></th>
 
-                                        <td><?php echo $most_converted_module; ?></td>
+                                        <td><?php echo esc_html( $most_converted_module ); ?></td>
 
                                     </tr>
 

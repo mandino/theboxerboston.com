@@ -9,7 +9,7 @@
 
 		<header id="header">
 
-			<h1><?php _e('DASHBOARD', Opt_In::TEXT_DOMAIN); ?></h1>
+			<h1><?php esc_attr_e('DASHBOARD', Opt_In::TEXT_DOMAIN); ?></h1>
 
 		</header>
 
@@ -21,7 +21,8 @@
 
 					$new_welcome_notice_dismissed = (bool) get_option( "hustle_new_welcome_notice_dismissed", false );
 
-					if ( !( (bool) $data->all_modules ) && !$new_welcome_notice_dismissed ) : ?>
+					if ( !( (bool) $data->all_modules ) && !$new_welcome_notice_dismissed ) :
+						?>
 
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
@@ -35,7 +36,15 @@
 
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-						<?php $this->render("admin/dashboard/widget-welcome-on", array( 'data_exists' => $data_exists, 'types' => $types, 'conversions' => $conversions, 'active_modules' => $active_modules, 'most_conversions' => $most_conversions ) ); ?>
+						<?php
+						$this->render("admin/dashboard/widget-welcome-on", array(
+							'data_exists' => $data_exists,
+							'types' => $types,
+							'conversions' => $conversions,
+							'active_modules' => $active_modules,
+							'most_conversions' => $most_conversions,
+						) );
+						?>
 
 					</div>
 
@@ -69,20 +78,30 @@
 								"total_custom_contents" => count($data->custom_contents),
 								"custom_contents" => $data->active_cc_modules,
 								"inactive_cc" => $data->inactive_cc_modules,
-							) ); ?>
+							) );
+							?>
 
 						<?php } ?>
 
-						<?php $this->render("admin/dashboard/widget-module-setup", array( 'has_optins' => $has_optins, 'has_custom_content' => $has_custom_content, 'has_social_sharing' => $has_social_sharing, 'has_social_rewards' => $has_social_rewards ) ); ?>
+						<?php
+						$this->render("admin/dashboard/widget-module-setup", array(
+							'has_optins' => $has_optins,
+							'has_custom_content' => $has_custom_content,
+							'has_social_sharing' => $has_social_sharing,
+							'has_social_rewards' => $has_social_rewards,
+						) );
+						?>
 
 					</section>
 
 					<?php if ( count($data->social_sharing) > 0 ) : ?>
 
                         <section class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                            <?php $this->render("admin/dashboard/widget-sshare-stats", array(
+                            <?php
+							$this->render("admin/dashboard/widget-sshare-stats", array(
                                 "ss_share_stats" => $data->ss_share_stats_data
-                            )); ?>
+                            ));
+							?>
 
                         </section>
 
@@ -100,9 +119,17 @@
 							"total_custom_contents" => count($data->custom_contents),
 							"custom_contents" => $data->active_cc_modules,
 							"inactive_cc" => $data->inactive_cc_modules,
-						) ); ?>
+						) );
+						?>
 
-						<?php $this->render("admin/dashboard/widget-module-setup", array( 'has_optins' => $has_optins, 'has_custom_content' => $has_custom_content, 'has_social_sharing' => $has_social_sharing, 'has_social_rewards' => $has_social_rewards ) ); ?>
+						<?php
+						$this->render("admin/dashboard/widget-module-setup", array(
+							'has_optins' => $has_optins,
+							'has_custom_content' => $has_custom_content,
+							'has_social_sharing' => $has_social_sharing,
+							'has_social_rewards' => $has_social_rewards,
+						) );
+						?>
 
 					</section>
 
@@ -110,9 +137,11 @@
 
                         <section class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 
-                            <?php $this->render("admin/dashboard/widget-sshare-stats", array(
+                            <?php
+							$this->render("admin/dashboard/widget-sshare-stats", array(
                                 "ss_share_stats" => $data->ss_share_stats_data
-                            )); ?>
+                            ));
+							?>
 
                         </section>
 
@@ -128,7 +157,9 @@
 
 </div>
 
-<?php $this->render("admin/dashboard/widget-sshare-stats-modal", array(
+<?php
+$this->render("admin/dashboard/widget-sshare-stats-modal", array(
     "ss_share_stats" => $data->ss_share_stats_data,
     "total_stats" => $data->ss_total_share_stats
-)); ?>
+));
+?>

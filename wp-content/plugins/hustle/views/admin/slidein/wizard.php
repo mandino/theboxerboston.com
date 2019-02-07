@@ -3,13 +3,15 @@
  *
  * @var bool $is_edit if it's in edit mode
  */
+$recaptcha_settings = Hustle_Module_Model::get_recaptcha_settings();
+$recaptcha_key = isset( $recaptcha_settings['sitekey'] ) && '1' === $recaptcha_settings['enabled'] ? $recaptcha_settings['sitekey'] : '';
 ?>
 
 <main id="wpmudev-hustle" class="wpmudev-ui wpmudev-hustle-slidein-wizard-view">
 
 	<header id="wpmudev-hustle-title">
 
-		<h1><?php $is_edit ? _e('Edit Slide-in', Opt_In::TEXT_DOMAIN) : _e('New Slide-in', Opt_In::TEXT_DOMAIN); ?></h1>
+		<h1><?php $is_edit ? esc_attr_e('Edit Slide-in', Opt_In::TEXT_DOMAIN) : esc_attr_e('New Slide-in', Opt_In::TEXT_DOMAIN); ?></h1>
 
 	</header>
 
@@ -21,29 +23,34 @@
 
 				<ul>
 
-                    <?php $id_link = ( $is_edit ) ? '&id=' . $module_id : '';?>
+                    <?php $id_link = ( $is_edit ) ? '&id=' . $module_id : ''; ?>
 
-					<li class="wpmudev-menu-content-link<?php if ($section === 'content') { echo ' current'; } ?>"><a href="<?php echo admin_url( 'admin.php?page=hustle_slidein' . $id_link );?>" data-link="<?php echo admin_url( 'admin.php?page=hustle_slidein' . $id_link );?>"><?php _e( "Content", Opt_In::TEXT_DOMAIN ); ?></a></li>
-					<li class="wpmudev-menu-design-link<?php if ($section === 'design') { echo ' current'; } ?>"><a href="<?php echo ( $is_edit ) ? admin_url( 'admin.php?page=hustle_slidein'. $id_link .'&section=design' ) : '#';?>" data-link="<?php echo admin_url( 'admin.php?page=hustle_slidein'. $id_link .'&section=design' );?>"><?php _e( "Design", Opt_In::TEXT_DOMAIN ); ?></a></li>
-					<li class="wpmudev-menu-settings-link<?php if ($section === 'settings') { echo ' current'; } ?>"><a href="<?php echo ( $is_edit ) ? admin_url( 'admin.php?page=hustle_slidein'. $id_link .'&section=settings' ) : '#';?>" data-link="<?php echo admin_url( 'admin.php?page=hustle_slidein'. $id_link .'&section=settings' );?>"><?php _e( "Display Settings", Opt_In::TEXT_DOMAIN ); ?></a></li>
+					<li class="wpmudev-menu-content-link<?php if ( 'content' === $section ) echo ' current'; ?>"><a href="<?php echo esc_url( admin_url( 'admin.php?page=hustle_slidein' . $id_link ) ); ?>" data-link="<?php echo esc_url( admin_url( 'admin.php?page=hustle_slidein' . $id_link ) ); ?>"><?php esc_attr_e( "Content", Opt_In::TEXT_DOMAIN ); ?></a></li>
+					<li class="wpmudev-menu-design-link<?php if ( 'design' === $section ) echo ' current'; ?>"><a href="<?php echo ( $is_edit ) ? esc_url( admin_url( 'admin.php?page=hustle_slidein'. $id_link .'&section=design' ) ) : '#'; ?>" data-link="<?php echo esc_url( admin_url( 'admin.php?page=hustle_slidein'. $id_link .'&section=design' ) ); ?>"><?php esc_attr_e( "Design", Opt_In::TEXT_DOMAIN ); ?></a></li>
+					<li class="wpmudev-menu-settings-link<?php if ( 'settings' === $section ) echo ' current'; ?>"><a href="<?php echo ( $is_edit ) ? esc_url( admin_url( 'admin.php?page=hustle_slidein'. $id_link .'&section=settings' ) ) : '#'; ?>" data-link="<?php echo esc_url( admin_url( 'admin.php?page=hustle_slidein'. $id_link .'&section=settings' ) ); ?>"><?php esc_attr_e( "Display Settings", Opt_In::TEXT_DOMAIN ); ?></a></li>
 
 				</ul>
 
 				<select class="wpmudev-select">
 
-					<option value="content" <?php if ($section === 'content') {echo 'selected';}?>><?php _e( "Content", Opt_In::TEXT_DOMAIN ); ?></option>
-					<option value="design" <?php if ($section === 'design') {echo 'selected';}?>><?php _e( "Design", Opt_In::TEXT_DOMAIN ); ?></option>
-					<option value="settings" <?php if ($section === 'settings') {echo 'selected';}?>><?php _e( "Display Settings", Opt_In::TEXT_DOMAIN ); ?></option>
+					<option value="content" <?php if ( 'content' === $section ) echo 'selected'; ?>><?php esc_attr_e( "Content", Opt_In::TEXT_DOMAIN ); ?></option>
+					<option value="design" <?php if ( 'design' === $section ) echo 'selected'; ?>><?php esc_attr_e( "Design", Opt_In::TEXT_DOMAIN ); ?></option>
+					<option value="settings" <?php if ( 'settings' === $section ) echo 'selected'; ?>><?php esc_attr_e( "Display Settings", Opt_In::TEXT_DOMAIN ); ?></option>
 
 				</select>
 
 				<div class="wpmudev-preview-anchor" aria-hidden="true"></div>
 
-				<div class="wpmudev-preview" aria-hidden="true" data-nonce="<?php echo $shortcode_render_nonce;?>">
+				<div
+					class="wpmudev-preview"
+					aria-hidden="true"
+					data-sitekey="<?php echo esc_attr( $recaptcha_key ); ?>"
+					data-nonce="<?php echo esc_attr( $shortcode_render_nonce ); ?>"
+					data-custom-css-nonce="<?php echo esc_attr( wp_create_nonce('hustle_module_prepare_custom_css') ); ?>">
 
 					<?php $this->render( "general/icons/icon-preview", array() ); ?>
 
-					<span><?php _e( "Preview Slide-in", Opt_In::TEXT_DOMAIN ); ?></span>
+					<span><?php esc_attr_e( "Preview Slide-in", Opt_In::TEXT_DOMAIN ); ?></span>
 
 				</div>
 
@@ -55,21 +62,21 @@
 
 					<div class="wpmudev-box-head">
 
-						<?php if ($section === 'content') { ?>
+						<?php if ( 'content' === $section ) { ?>
 
-							<h3><?php _e( "Content", Opt_In::TEXT_DOMAIN ); ?></h3>
-
-						<?php } ?>
-
-						<?php if ($section === 'design') { ?>
-
-							<h3><?php _e( "Design", Opt_In::TEXT_DOMAIN ); ?></h3>
+							<h3><?php esc_attr_e( "Content", Opt_In::TEXT_DOMAIN ); ?></h3>
 
 						<?php } ?>
 
-						<?php if ($section === 'settings') { ?>
+						<?php if ( 'design' === $section ) { ?>
 
-							<h3><?php _e( "Display Settings", Opt_In::TEXT_DOMAIN ); ?></h3>
+							<h3><?php esc_attr_e( "Design", Opt_In::TEXT_DOMAIN ); ?></h3>
+
+						<?php } ?>
+
+						<?php if ( 'settings' === $section ) { ?>
+
+							<h3><?php esc_attr_e( "Display Settings", Opt_In::TEXT_DOMAIN ); ?></h3>
 
 						<?php } ?>
 
@@ -77,24 +84,30 @@
 
 					<div class="wpmudev-box-body">
 
-						<?php if ($section === 'content') { ?>
+						<?php if ( 'content' === $section ) { ?>
 
-							<?php $this->render( "admin/slidein/wizard/wizard-content", array(
+							<?php
+							$this->render( "admin/slidein/wizard/wizard-content", array(
                                 'is_edit' => $is_edit,
                                 'module' => $module,
                                 'providers' => $providers,
-								'default_form_fields' => $default_form_fields
-                            ) ); ?>
+								'default_form_fields' => $default_form_fields,
+								'allowed_extensions' => array(
+									'image_ext' => Opt_In_Utils::get_allowed_image_extensions(),
+									'render_ext' => Opt_In_Utils::get_allowed_renderable_extensions(),
+								),
+                            ) );
+							?>
 
                         <?php } ?>
 
-						<?php if ($section === 'design') { ?>
+						<?php if ( 'design' === $section ) { ?>
 
                             <?php $this->render( "admin/slidein/wizard/wizard-design", array( 'content_data' => ( !is_null($module) && $module ) ? $module->get_content() : array() ) ); ?>
 
 						<?php } ?>
 
-						<?php if ($section === 'settings') { ?>
+						<?php if ( 'settings' === $section ) { ?>
 
 							<?php $this->render( "admin/slidein/wizard/wizard-settings", array() ); ?>
 
@@ -104,15 +117,18 @@
 
 							<div class="wpmudev-box-fwrap">
 
-								<?php if ($section === 'content') { ?>
+								<?php if ( 'content' === $section ) { ?>
 
-									<a class="wpmudev-button wpmudev-button-cancel"><?php _e( "Cancel", Opt_In::TEXT_DOMAIN ); ?></a>
+									<a class="wpmudev-button wpmudev-button-cancel"><?php esc_attr_e( "Cancel", Opt_In::TEXT_DOMAIN ); ?></a>
 
 								<?php } ?>
 
-								<?php if ($section === 'design' || $section === 'settings') { ?>
+								<?php if ( 'design' === $section || 'settings' === $section ) { ?>
 
-									<a class="wpmudev-button wpmudev-button-back"><?php _e( "Back", Opt_In::TEXT_DOMAIN ); ?></a>
+									<a class="wpmudev-button wpmudev-button-back">
+										<span class="wpmudev-loading-text"><?php esc_attr_e( "Back", Opt_In::TEXT_DOMAIN ); ?></span>
+										<span class="wpmudev-loading"></span>
+									</a>
 
 								<?php } ?>
 
@@ -120,27 +136,46 @@
 
 							<div class="wpmudev-box-fwrap">
 
-								<?php if ($section === 'content' || $section === 'design') { ?>
+								<?php if ( 'content' === $section || 'design' === $section ) { ?>
 
-									<a class="wpmudev-button wpmudev-button-save" data-nonce="<?php echo $save_nonce;?>" data-id="<?php echo $module_id;?>">
-										<span class="wpmudev-loading-text"><?php _e( "Save", Opt_In::TEXT_DOMAIN ); ?></span>
+									<a class="wpmudev-button wpmudev-button-save" data-nonce="<?php echo esc_attr( $save_nonce ); ?>" data-id="<?php echo esc_attr( $module_id ); ?>">
+										<span class="wpmudev-loading-text"><?php esc_html_e( "Save Changes", Opt_In::TEXT_DOMAIN ); ?></span>
 										<span class="wpmudev-loading"></span>
 									</a>
 
 
-									<a class="wpmudev-button wpmudev-button-blue wpmudev-button-continue" data-nonce="<?php echo $save_nonce;?>" data-id="<?php echo $module_id;?>"><?php _e( "Continue", Opt_In::TEXT_DOMAIN ); ?></a>
+									<a class="wpmudev-button wpmudev-button-blue wpmudev-button-continue" data-nonce="<?php echo esc_attr( $save_nonce ); ?>" data-id="<?php echo esc_attr( $module_id ); ?>">
+										<span class="wpmudev-loading-text"><?php esc_html_e( "Continue", Opt_In::TEXT_DOMAIN ); ?></span>
+										<span class="wpmudev-loading"></span>
+									</a>
 
 								<?php } ?>
 
-								<?php if ($section === 'settings') { ?>
+								<?php if ( 'settings' === $section ) { ?>
 
-									<a class="wpmudev-button wpmudev-button-save" data-nonce="<?php echo $save_nonce;?>" data-id="<?php echo $module_id;?>">
-										<span class="wpmudev-loading-text"><?php _e( "Save", Opt_In::TEXT_DOMAIN ); ?></span>
+									<?php if ( ! $module->active ) { ?>
+										<a class="wpmudev-button wpmudev-button-save" data-nonce="<?php echo esc_attr( $save_nonce ); ?>" data-id="<?php echo esc_attr( $module_id ); ?>">
+											<span class="wpmudev-loading-text"><?php esc_html_e( "Save Draft", Opt_In::TEXT_DOMAIN ); ?></span>
+											<span class="wpmudev-loading"></span>
+										</a>
+									<?php } else { ?>
+									<a class="wpmudev-button wpmudev-button-save" data-nonce="<?php echo esc_attr( $save_nonce ); ?>" data-id="<?php echo esc_attr( $module_id ); ?>">
+										<span class="wpmudev-loading-text"><?php esc_html_e( "Save Changes", Opt_In::TEXT_DOMAIN ); ?></span>
 										<span class="wpmudev-loading"></span>
 									</a>
+									<?php } ?>
 
 
-									<a class="wpmudev-button wpmudev-button-blue wpmudev-button-finish" data-nonce="<?php echo $save_nonce;?>" data-id="<?php echo $module_id;?>"><?php _e( "Finish", Opt_In::TEXT_DOMAIN ); ?></a>
+									<a class="wpmudev-button wpmudev-button-blue wpmudev-button-finish" data-nonce="<?php echo esc_attr( $save_nonce ); ?>" data-id="<?php echo esc_attr( $module_id ); ?>">
+										<?php
+											if ( $module->active ) {
+												esc_html_e( "Update", Opt_In::TEXT_DOMAIN );
+											} else {
+												esc_html_e( "Publish", Opt_In::TEXT_DOMAIN );
+											}
+										?>
+										<span class="wpmudev-loading"></span>
+									</a>
 
 								<?php } ?>
 
@@ -158,17 +193,23 @@
 
 	</section>
 
-	<?php $this->render( "admin/commons/footer", array() ); ?>
-
-	<?php $this->render( "admin/commons/wizard/add-new-service", array(
+	<?php
+	$this->render( "admin/commons/wizard/add-new-service", array(
         'module' => $module,
         'providers' => $providers
-    ) ); ?>
+    ) );
+	?>
 
-	<?php $this->render( "admin/commons/wizard/manage-form-fields", array() ); ?>
+	<?php
+	$this->render( "admin/commons/wizard/manage-form-fields", array(
+			'recaptcha_enabled' => $recaptcha_enabled,
+	) );
+	?>
 
 	<?php $this->render( "admin/commons/wizard/preview-modal", array() ); ?>
 
     <?php $this->render("admin/settings/conditions"); ?>
 
 </main>
+
+<?php $this->render( 'admin/footer/footer-simple' ); ?>

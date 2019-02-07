@@ -1,12 +1,12 @@
 <?php
 /**
- * @var Opt_In_Admin $this
+ * @var Opt_In $this
  */
 ?>
 
-<?php if ( count( $modules ) == 0 ) : ?>
+<?php if ( 0 === count( $modules ) ) : ?>
 
-	<?php $this->render( "admin/settings/welcome", array( 'user_name' => $user_name ) ); ?>
+	<?php $this->render( 'admin/settings/welcome', array( 'user_name' => $user_name ) ); ?>
 
 <?php else : ?>
 
@@ -14,7 +14,7 @@
 
 		<header id="wpmudev-hustle-title">
 
-			<h1><?php _e( "Settings", Opt_In::TEXT_DOMAIN ); ?></h1>
+			<h1><?php esc_attr_e( 'Settings', Opt_In::TEXT_DOMAIN ); ?></h1>
 
 		</header>
 
@@ -22,42 +22,70 @@
 
 			<div class="wpmudev-row">
 
-				<div id="wpmudev-settings-activity" class="wpmudev-col col-12 col-sm-6">
+				<div id="wpmudev-settings-unsubscribe" class="wpmudev-col col-12 col-sm-6">
 
-					<?php $this->render( "admin/settings/widget-modules", array(
-						"modules" => $modules,
-						"modules_state_toggle_nonce" => $modules_state_toggle_nonce
-					) ); ?>
+					<?php
+					$this->render( 'admin/settings/widget-unsubscribe', array(
+						'messages' => $unsubscription_messages,
+						'email'	=> $unsubscription_email,
+					) );
+					?>
 
-				</div><?php // #wpmudev-settings-activity ?>
+				</div><?php // #wpmudev-settings-unsubscribe ?>
 
-				<?php if ( $is_e_newsletter_active ){ ?>
+				<div id="wpmudev-settings-mail" class="wpmudev-col col-12 col-sm-6">
 
-					<div id="wpmudev-settings-enews" class="wpmudev-col col-12 col-sm-6">
+					<?php
+					$this->render( "admin/settings/widget-mail", array(
+						'name' => $email_name,
+						'email' => $email_address
+					) );
+					?>
 
-						<div id="wpmudev-settings-widget-enews" class="wpmudev-box wpmudev-box-close">
-
-							<?php $this->render( "admin/settings/widget-enews", array(
-								"modules" => $modules,
-								"enews_sync_state_toggle_nonce" => $enews_sync_state_toggle_nonce,
-								"enews_sync_setup_nonce" => $enews_sync_setup_nonce,
-								"enews_double_optin_state_toggle_nonce" => $enews_double_optin_state_toggle_nonce
-							) ); ?>
-
-							<?php $this->render("admin/settings/widget-enews_sync"); ?>
-
-						</div>
-
-					</div>
-
-				<?php } ?>
+				</div><?php // #wpmudev-settings-mail ?>
 
 			</div><?php // .wpmudev-row ?>
 
-		</section>
+			<div class="wpmudev-row">
 
-		<?php $this->render( "admin/commons/footer", array() ); ?>
+				<div id="wpmudev-settings-activity" class="wpmudev-col col-12 col-sm-6">
+
+					<?php
+					$this->render( 'admin/settings/widget-modules', array(
+						'modules'                    => $modules,
+						'modules_state_toggle_nonce' => $modules_state_toggle_nonce,
+					) );
+					?>
+
+				</div><?php // #wpmudev-settings-activity ?>
+
+				<div id="wpmudev-settings-gdpr" class="wpmudev-col col-12 col-sm-6">
+
+					<?php
+					$this->render( 'admin/settings/widget-gdpr', array() );
+					?>
+
+				</div><?php // #wpmudev-settings-gdpr ?>
+
+			</div><?php // .wpmudev-row ?>
+
+			<div class="wpmudev-row">
+
+				<div id="wpmudev-settings-recaptcha" class="wpmudev-col col-12 col-sm-6">
+					<?php
+					$this->render( 'admin/settings/widget-recaptcha', array(
+						'enabled' => $recaptcha_enabled,
+						'sitekey' => $recaptcha_sitekey,
+						'secret' => $recaptcha_secret,
+					) );
+					?>
+				</div><?php // #wpmudev-settings-recaptcha ?>
+
+			</div><?php // .wpmudev-row ?>
+		</section>
 
 	</main>
 
 <?php endif; ?>
+
+<?php $this->render( 'admin/footer/footer-simple' ); ?>

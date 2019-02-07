@@ -56,6 +56,6 @@ class Folder extends Component {
     }
 
     public function toJson() {
-        return json_encode($this);
+        return wp_json_encode($this);
     }
 }

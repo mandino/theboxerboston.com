@@ -77,7 +77,7 @@ if (!class_exists('CS_REST_NativeJsonSerialiser')) {
 
         function serialise($data) {
         	if(is_null($data) || $data == '') return '';
-            return json_encode($this->check_encoding($data));
+            return wp_json_encode($this->check_encoding($data));
         }
 
         function deserialise($text) {

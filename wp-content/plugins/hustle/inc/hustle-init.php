@@ -6,24 +6,14 @@ if( !class_exists("Hustle_Init") ):
  */
 class Hustle_Init {
 
-	function __construct( Opt_In $hustle ){
+	public function __construct( Opt_In $hustle ){
 
 		$hustle_db = new Hustle_Db();
 		$email_services = new Hustle_Email_Services();
-		$enews_letter = new Opt_In_E_Newsletter();
-		$hustle->set_e_newsletter( $enews_letter );
 		$hustle->set_email_services( $email_services );
 
-		// Hustle Migration from Wordpress Popup and Hustle 2.x
+		// Hustle Migration from WordPress Popup and Hustle 2.x
 		$hustle_migration = new Hustle_Migration( $hustle );
-
-		// Hubspot
-		$hustle_hubpost = new Opt_In_HubSpot_Api();
-
-		if ( version_compare( PHP_VERSION, '5.3', '>=' ) ) {
-			//Constant Contact
-			$hustle_constantcontact = new Opt_In_ConstantContact_Api();
-		}
 
 		// Admin
 		if( is_admin() ) {
@@ -45,8 +35,6 @@ class Hustle_Init {
 
 			$social_sharing_admin = new Hustle_SShare_Admin();
 			new Hustle_SShare_Admin_Ajax( $hustle, $social_sharing_admin );
-
-			$upgrade_page = new Hustle_Upgrade_Free_Admin($hustle);
 		}
 
 		// Front

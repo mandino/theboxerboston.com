@@ -2,7 +2,7 @@
 
 	<div class="wpmudev-box-left">
 
-		<h4><strong><?php _e( "Custom embed size", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
+		<h4><strong><?php esc_attr_e( "Custom embed size", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
 
 	</div>
 
@@ -18,7 +18,7 @@
 
 			</div>
 
-			<label class="wpmudev-switch-label" for="wph-aftercontent-custom_size"><?php _e( "Use custom size", Opt_In::TEXT_DOMAIN ); ?></label>
+			<label class="wpmudev-switch-label" for="wph-aftercontent-custom_size"><?php esc_attr_e( "Use custom size", Opt_In::TEXT_DOMAIN ); ?></label>
 
 		</div>
 
@@ -28,7 +28,7 @@
 
 				<div class="wpmudev-col">
 
-					<label><?php _e( "Width", Opt_In::TEXT_DOMAIN ); ?></label>
+					<label><?php esc_attr_e( "Width", Opt_In::TEXT_DOMAIN ); ?></label>
 
 					<input type="number" value="{{custom_width}}" data-attribute="custom_width" class="wpmudev-input_number">
 
@@ -36,7 +36,7 @@
 
 				<div class="wpmudev-col">
 
-					<label><?php _e( "Height", Opt_In::TEXT_DOMAIN ); ?></label>
+					<label><?php esc_attr_e( "Height", Opt_In::TEXT_DOMAIN ); ?></label>
 
 					<input type="number" value="{{custom_height}}" data-attribute="custom_height" class="wpmudev-input_number">
 

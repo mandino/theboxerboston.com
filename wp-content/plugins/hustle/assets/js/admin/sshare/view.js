@@ -21,11 +21,11 @@ Hustle.define("SShare.View", function($, doc, win){
 			this.content_view = opts.content_view;
 			this.design_view = opts.design_view;
 			this.settings_view = opts.settings_view;
-			
+
 			// unset listeners
 			this.stopListening( this.content_view.model, 'change', this.update_base_model );
 			this.stopListening( this.design_view.model, 'change', this.design_view_changed );
-			
+
 			// set listeners
 			this.listenTo( this.content_view.model, 'change', this.update_base_model );
 			this.listenTo( this.design_view.model, 'change', this.design_view_changed );
@@ -39,18 +39,18 @@ Hustle.define("SShare.View", function($, doc, win){
 			this.content_view.delegateEvents();
 			this.content_view.target_container.append( this.content_view.$el );
 			this.content_view.after_render();
-			
+
 			// Appearance
 			this.render_design_view();
-			
+
 			// Settings
 			this.settings_view.target_container.html('');
 			this.settings_view.render();
 			this.settings_view.delegateEvents();
 			this.settings_view.target_container.append( this.settings_view.$el );
 			this.settings_view.after_render();
-			
-			
+
+
 			Hustle.Events.trigger("modules.view.rendered", this);
 		},
 		render_design_view: function() {
@@ -69,27 +69,27 @@ Hustle.define("SShare.View", function($, doc, win){
 			}
 		},
 		sanitize_data: function() {
-			
+
 			// module_name
 			if ( _.isEmpty( this.model.get('module_name') ) ) {
 				this.model.set( 'module_name', this.content_view.model.get('module_name') );
 			}
-			
+
 		},
 		save: function($btn) {
 			if ( !Module.Validate.validate_module_name() ) return false;
-			
+
 			this.sanitize_data();
-			
+
 			// preparing the data
 			var me = this,
 				module = this.model.toJSON(),
 				content = this.content_view.model.toJSON(),
 				design = this.design_view.model.toJSON(),
 				settings = this.settings_view.model.toJSON();
-				
+
 			content = this.content_view.get_social_icons_data(content);
-				
+
 			// ajax save here
 			return $.ajax({
 				url: ajaxurl,
@@ -112,11 +112,12 @@ Hustle.define("SShare.View", function($, doc, win){
 		save_changes: function(e) {
 			e.preventDefault();
 			var me = this,
-				$btn = $(e.target);
-				
-			me.$('.wpmudev-button-save').addClass('wpmudev-button-onload');
+				$btn = $(e.currentTarget);
+
+			me.$('.wpmudev-button-save, .wpmudev-button-continue').addClass('wpmudev-button-onload').prop('disabled', true);
+
 			var save = this.save($btn);
-			
+
 			if ( save ) {
 				save.done( function(resp) {
 					if (typeof resp === 'string') {
@@ -133,20 +134,34 @@ Hustle.define("SShare.View", function($, doc, win){
 						}
 						$btn.data( 'id', resp.data );
 						$btn.siblings().data( 'id', resp.data );
+						Module.hasChanges = false;
+
+						// redirect from the last page
+						var current = optin_vars.current.section || false;
+						if ( 'settings' === current ) {
+							var module_id = resp.data;
+							if ( $btn.hasClass( 'wpmudev-button-finish' ) ) {
+								return window.location.replace( '?page=' + optin_vars.current.listing_page + '&module=' + module_id );
+							}
+						}
 					}
 				} ).always( function() {
-					me.$('.wpmudev-button-save').removeClass('wpmudev-button-onload');
+					me.$('.wpmudev-button-save, .wpmudev-button-continue').removeClass('wpmudev-button-onload').prop('disabled', false);
+
 				});
 			} else {
-				me.$('.wpmudev-button-save').removeClass('wpmudev-button-onload');
+				// If saving did not work, remove loading icon.
+				me.$('.wpmudev-button-save, .wpmudev-button-continue').removeClass('wpmudev-button-onload').prop('disabled', false);
 			}
 		},
 		save_continue: function(e) {
 			e.preventDefault();
-			var me = this,
-				$btn = $(e.target),
-				save = this.save($btn);
-				
+			var me = this;
+			// Disable buttons during save.
+			me.$('.wpmudev-button-save, .wpmudev-button-continue').addClass('wpmudev-button-onload').prop('disabled', true);
+
+			var save = this.save($(e.currentTarget));
+
 			if ( save ) {
 				save.done( function(resp) {
 					if (typeof resp === 'string') {
@@ -157,7 +172,7 @@ Hustle.define("SShare.View", function($, doc, win){
 						// redirect
 						var current = optin_vars.current.section || false,
 							target_link = '';
-						
+
 						window.onbeforeunload = null;
 						if ( !current || current === 'services' ) {
 							target_link =  me.$('.wpmudev-menu-design-link a').data('link');
@@ -167,28 +182,37 @@ Hustle.define("SShare.View", function($, doc, win){
 						if ( target_link.indexOf('&id') === -1 ) {
 							target_link += '&id=' + module_id;
 						}
-						window.location.replace(target_link);
+						return window.location.replace(target_link);
 					}
 				} );
+			} else {
+				// If saving did not work, remove loading icon.
+				me.$('.wpmudev-button-save, .wpmudev-button-continue').removeClass('wpmudev-button-onload').prop('disabled', false);
 			}
-			
+
 		},
 		save_finish: function(e) {
 			e.preventDefault();
-			var me = this,
-				save = this.save($(e.target));
-				
+			var me = this;
+			// Disable buttons during save.
+			me.$('.wpmudev-button-save, .wpmudev-button-continue').addClass('wpmudev-button-onload').prop('disabled', true);
+
+			this.model.set( 'active', 1, { silent:true } );
+			var save = this.save($(e.currentTarget));
+
 			if ( save ) {
 				save.done( function(resp) {
 					if ( resp.success ) {
 						var module_id = resp.data;
 						window.onbeforeunload = null;
-						window.location.replace( '?page=' + optin_vars.current.listing_page + '&module=' + module_id );
-						return;
+						return window.location.replace( '?page=' + optin_vars.current.listing_page + '&module=' + module_id );
 					}
 				} );
+			} else {
+				// If saving did not work, remove loading icon.
+				me.$('.wpmudev-button-save, .wpmudev-button-continue').removeClass('wpmudev-button-onload').prop('disabled', false);
 			}
-			
+
 		},
 		cancel: function(e) {
 			e.preventDefault();
@@ -198,6 +222,8 @@ Hustle.define("SShare.View", function($, doc, win){
 		},
 		back: function(e) {
 			e.preventDefault();
+			var me = this;
+			me.$('.wpmudev-button-back').addClass('wpmudev-button-onload');
 			// redirect
 			var current = optin_vars.current.section;
 			window.onbeforeunload = null;
@@ -227,17 +253,17 @@ Hustle.define("SShare.View", function($, doc, win){
 		},
 		update_base_model: function(e) {
 			var changed = e.changed;
-			
+
 			// for module_name
 			if ( 'module_name' in changed ) {
 				this.model.set( 'module_name', changed['module_name'], { silent:true } )
 			}
-		
+
 		},
 		_get_shortcode_id: function(){
 			return this.content_view.model.get('module_name').trim().toLowerCase().replace(/\s+/g, '-');
 		},
-		
+
 	});
 
 });

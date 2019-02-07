@@ -6,8 +6,8 @@
 function wpmudev_copy_field($field_value) {
 
     echo '<div class="wpmudev-copy">
-        <input class="wpmudev-input_text" type="text" value="' . $field_value . '" disabled>
-        <button class="wpmudev-button wpmudev-button-sm">' . __( "Copy", Opt_In::TEXT_DOMAIN ) . '</button>
+        <input class="wpmudev-input_text" type="text" value="' . esc_attr( $field_value ) . '" readonly>
+        <button class="wpmudev-button wpmudev-button-sm">' . esc_attr__( "Copy", Opt_In::TEXT_DOMAIN ) . '</button>
     </div>';
 
 }
@@ -17,21 +17,54 @@ function wpmudev_copy_field($field_value) {
 
 	<div class="wpmudev-box-left">
 
-		<h4><strong><?php _e( "Widgets & Shortcodes", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
+		<h4><strong><?php esc_attr_e( "Widgets & Shortcodes", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
 
-		<label class="wpmudev-helper"><?php _e( "Widget & Shortcode display location is controlled manually.", Opt_In::TEXT_DOMAIN ); ?></label>
+		<label class="wpmudev-helper"><?php esc_attr_e( "Widget & Shortcode display location is controlled manually.", Opt_In::TEXT_DOMAIN ); ?></label>
 
 	</div>
 
 	<div class="wpmudev-box-right">
 
-		<label><?php _e( "Widgets", Opt_In::TEXT_DOMAIN ); ?></label>
+		<label><?php esc_attr_e( "Widgets", Opt_In::TEXT_DOMAIN ); ?></label>
 
-        <p><?php _e( "You can configure <strong>After Content</strong>, <strong>Pop-up</strong> and <strong>Slide-in</strong> opt-ins in the sections that follow.", Opt_In::TEXT_DOMAIN ); ?></p>
+        <p>
+			<?php
+			printf(
+				esc_html__('You can configure %1$s, %2$s and %3$s opt-ins in the sections that follow.', Opt_In::TEXT_DOMAIN),
+				sprintf(
+					'<strong>%s</strong>',
+					esc_html__('After Content', Opt_In::TEXT_DOMAIN)
+				),
+				sprintf(
+					'<strong>%s</strong>',
+					esc_html__('Pop-up', Opt_In::TEXT_DOMAIN)
+				),
+				sprintf(
+					'<strong>%s</strong>',
+					esc_html__('Slide-in', Opt_In::TEXT_DOMAIN)
+				)
+			);
+			?>
+		</p>
 
-        <p><?php _e( "Widget opt-in can be set-up in <strong>Appearance » <a href='%'>Widgets</a></strong>", Opt_In::TEXT_DOMAIN ); ?></p>
+        <p>
+			<?php
+			printf(
+				esc_html__('Widget opt-in can be set-up in %s', Opt_In::TEXT_DOMAIN),
+				sprintf(
+					'<strong>%1$s » %2$s</strong>',
+					esc_html__('Appearance', Opt_In::TEXT_DOMAIN),
+					sprintf(
+						'<a href="%1$s" target="_blank">%2$s</a>',
+						esc_url( admin_url( 'widgets.php' ) ),
+						esc_html__('Widgets', Opt_In::TEXT_DOMAIN)
+					)
+				)
+			);
+			?>
+		</p>
 
-        <label><?php _e( "Shortcode", Opt_In::TEXT_DOMAIN ); ?></label>
+        <label><?php esc_attr_e( "Shortcode", Opt_In::TEXT_DOMAIN ); ?></label>
 
         <?php wpmudev_copy_field("[wd_hustle id='". $module->shortcode_id ."' type='social_sharing']"); ?>
 

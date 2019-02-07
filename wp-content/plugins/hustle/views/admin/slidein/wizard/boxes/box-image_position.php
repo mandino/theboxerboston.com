@@ -2,36 +2,36 @@
 
 	<div class="wpmudev-box-left">
 
-		<h4><strong><?php _e( "Featured image position", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
+		<h4><strong><?php esc_attr_e( "Featured image position", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
 
 	</div>
 
 	<div class="wpmudev-box-right">
 
-		<label><?php _e( "Choose the featured image location", Opt_In::TEXT_DOMAIN ); ?></label>
+		<label><?php esc_attr_e( "Choose the featured image location", Opt_In::TEXT_DOMAIN ); ?></label>
 
         <div class="wpmudev-tabs">
 
             <ul class="wpmudev-tabs-menu wpmudev-tabs-menu_full wpmudev-feature-image-position-options">
 
-                <li class="wpmudev-tabs-menu_item{{ ( feature_image_position === 'left' ) ? ' current' : '' }}">
+                <li class="wpmudev-tabs-menu_item{{ ( 'left' === feature_image_position ) ? ' current' : '' }}">
                     <input type="checkbox" value="left">
-                    <label><?php _e( "Left", Opt_In::TEXT_DOMAIN ); ?></label>
+                    <label><?php esc_attr_e( "Left", Opt_In::TEXT_DOMAIN ); ?></label>
                 </li>
 
-                <li class="wpmudev-tabs-menu_item{{ ( feature_image_position === 'right' ) ? ' current' : '' }}">
+                <li class="wpmudev-tabs-menu_item{{ ( 'right' === feature_image_position ) ? ' current' : '' }}">
                     <input type="checkbox" value="right">
-                    <label><?php _e( "Right", Opt_In::TEXT_DOMAIN ); ?></label>
+                    <label><?php esc_attr_e( "Right", Opt_In::TEXT_DOMAIN ); ?></label>
                 </li>
 
-                <li id="wpmudev-tabs-menu_item_above" class="wpmudev-tabs-menu_item{{ ( feature_image_position === 'above' ) ? ' current' : '' }}">
+                <li id="wpmudev-tabs-menu_item_above" class="wpmudev-tabs-menu_item{{ ( 'above' === feature_image_position ) ? ' current' : '' }}">
                     <input type="checkbox" value="above">
-                	<label><?php _e( "Above content", Opt_In::TEXT_DOMAIN ); ?></label>
+                	<label><?php esc_attr_e( "Above content", Opt_In::TEXT_DOMAIN ); ?></label>
             	</li>
 
-                <li id="wpmudev-tabs-menu_item_below" class="wpmudev-tabs-menu_item{{ ( feature_image_position === 'below' ) ? ' current' : '' }}">
+                <li id="wpmudev-tabs-menu_item_below" class="wpmudev-tabs-menu_item{{ ( 'below' === feature_image_position ) ? ' current' : '' }}">
                     <input type="checkbox" value="below">
-                	<label><?php _e( "Below content", Opt_In::TEXT_DOMAIN ); ?></label>
+                	<label><?php esc_attr_e( "Below content", Opt_In::TEXT_DOMAIN ); ?></label>
             	</li>
 
             </ul>

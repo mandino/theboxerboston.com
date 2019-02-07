@@ -6,7 +6,6 @@ Hustle.define("Slidein.Content_View", function($, doc, win){
 		target_container: $('#wpmudev-hustle-box-section-content'),
 		editing_service: '',
 		is_service_modal_updated: false,
-		service_supports_fields: true,
 		current_form_elements: [],
 		content_form_container : $('.wph-form-element-list'),
 		events: {
@@ -16,7 +15,7 @@ Hustle.define("Slidein.Content_View", function($, doc, win){
 		},
 		init: function( opts ){
 			this.module_id  = opts.module_id;
-			
+			this.module_type = 'slidein';
 			_.each( Optin.Mixins.get_services_mixins(), function(mix, id){
 				if( mix && typeof mix === "function") {
 					this[id] = mix( this );
@@ -98,8 +97,8 @@ Hustle.define("Slidein.Content_View", function($, doc, win){
 				$(document).on( 'click', '.optin_refresh_provider_details', $.proxy( me.refresh_provider_details, me ) );
 				$(document).off( 'click', '.wph-save-optin-service', $.proxy( me.updated_email_service_args, me ) );
 				$(document).on( 'click', '.wph-save-optin-service', $.proxy( me.updated_email_service_args, me ) );
-				Hustle.Events.off( 'slidein.optin.service.saved', me.save_email_service );
-				Hustle.Events.on( 'slidein.optin.service.saved', me.save_email_service );
+				Hustle.Events.off( 'slidein.optin.service.saved', $.proxy( me.save_email_service, me ) );
+				Hustle.Events.on( 'slidein.optin.service.saved', $.proxy( me.save_email_service, me ) );
 
 				// hide other service if editing
 				me.hide_or_show_other_services(is_edit);

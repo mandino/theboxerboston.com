@@ -5,14 +5,13 @@
  *
  *
  */
-class Hustle_Module_Collection extends Hustle_Collection
-{
+class Hustle_Module_Collection extends Hustle_Collection {
 
 	/**
 	 * @return Hustle_Module_Collection
 	 */
 	public static function instance(){
-		return new self;
+		return new self();
 	}
 
 	/**
@@ -28,7 +27,7 @@ class Hustle_Module_Collection extends Hustle_Collection
 		$blog_id = (int) ( isset( $args['blog_id'] ) ? $args['blog_id']  : get_current_blog_id() );
 		$module_type = ( isset( $args['module_type'] ) ) ? $args['module_type'] : '' ;
 
-		if( -1 != $limit ){
+		if( -1 !== $limit ){
 			$limit = "LIMIT $limit";
 		}else{
 			$limit = "";
@@ -54,18 +53,19 @@ class Hustle_Module_Collection extends Hustle_Collection
 	 * @param $limit
 	 * @return (array|object|null) Database query results
 	 */
-	function get_top_module_conversion( $starting_date, $ending_date, $offset, $limit ){
+	public function get_top_module_conversion( $starting_date, $ending_date, $offset, $limit ){
 		$date_format = '%Y%m%d';
 		$conversion_query = '%_conversion';
 		$date_condition = ( !is_null($starting_date) && !is_null($ending_date) && !empty($starting_date) && !empty($ending_date) )
-			? "WHERE c.dates >= '". $starting_date ."' AND c.dates <= '". $ending_date ."' "
+			? "AND c.dates >= '". $starting_date ."' AND c.dates <= '". $ending_date ."' "
 			: "";
+		$blog_id = get_current_blog_id();
 
 		$offset = ( is_null($offset) || empty($offset) ) ? 0 : $offset;
 		$limit = ( is_null($limit) || empty($limit) ) ? 5 : $limit;
 
 		return self::$_db->get_results( self::$_db->prepare( "
-			SELECT COUNT(c.dates) AS conversions, c.module_id FROM (SELECT DATE_FORMAT(FROM_UNIXTIME(SUBSTRING(meta_value,9,10)), '%s') AS dates, module_id FROM `". $this->_get_meta_table() ."` WHERE meta_key LIKE '%s') AS c ". $date_condition ."GROUP BY c.module_id ORDER BY conversions DESC LIMIT %d, %d", $date_format, $conversion_query, $offset, $limit ) );
+			SELECT COUNT(c.dates) AS conversions, c.module_id FROM (SELECT DATE_FORMAT(FROM_UNIXTIME(SUBSTRING(meta_value,9,10)), '%s') AS dates, module_id FROM `". $this->_get_meta_table() ."` WHERE meta_key LIKE '%s') AS c INNER JOIN ". $this->_get_table() ." AS whd ON whd.module_id = c.module_id WHERE 1=1 ". $date_condition ." AND whd.blog_id = %d GROUP BY c.module_id ORDER BY conversions DESC LIMIT %d, %d", $date_format, $conversion_query, $blog_id, $offset, $limit ) );
 	}
 
 	/**
@@ -76,18 +76,19 @@ class Hustle_Module_Collection extends Hustle_Collection
 	 * @param $limit
 	 * @return (array|object|null) Database query results
 	 */
-	function get_top_module_conversion_without_ss( $starting_date, $ending_date, $offset, $limit ){
+	public function get_top_module_conversion_without_ss( $starting_date, $ending_date, $offset, $limit ){
 		$date_format = '%Y%m%d';
 		$conversion_query = '%_conversion';
 		$date_condition = ( !is_null($starting_date) && !is_null($ending_date) && !empty($starting_date) && !empty($ending_date) )
-			? "WHERE c.dates >= '". $starting_date ."' AND c.dates <= '". $ending_date ."' "
+			? "AND c.dates >= '". $starting_date ."' AND c.dates <= '". $ending_date ."' "
 			: "";
+		$blog_id = get_current_blog_id();
 
 		$offset = ( is_null($offset) || empty($offset) ) ? 0 : $offset;
 		$limit = ( is_null($limit) || empty($limit) ) ? 5 : $limit;
 
 		return self::$_db->get_results( self::$_db->prepare( "
-			SELECT COUNT(c.dates) AS conversions, c.module_id FROM (SELECT DATE_FORMAT(FROM_UNIXTIME(SUBSTRING(meta_value,9,10)), '%s') AS dates, module_id FROM `". $this->_get_meta_table() ."` WHERE meta_key LIKE '%s') AS c INNER JOIN ". $this->_get_table() ." AS whd ON whd.module_id = c.module_id ". $date_condition ."AND whd.module_type != 'social_sharing' GROUP BY c.module_id ORDER BY conversions DESC LIMIT %d, %d", $date_format, $conversion_query, $offset, $limit ) );
+			SELECT COUNT(c.dates) AS conversions, c.module_id FROM (SELECT DATE_FORMAT(FROM_UNIXTIME(SUBSTRING(meta_value,9,10)), '%s') AS dates, module_id FROM `". $this->_get_meta_table() ."` WHERE meta_key LIKE '%s') AS c INNER JOIN ". $this->_get_table() ." AS whd ON whd.module_id = c.module_id WHERE 1=1 ". $date_condition ." AND whd.module_type != 'social_sharing' AND whd.blog_id = %d GROUP BY c.module_id ORDER BY conversions DESC LIMIT %d, %d", $date_format, $conversion_query, $blog_id, $offset, $limit ) );
 	}
 
 	/**
@@ -95,16 +96,17 @@ class Hustle_Module_Collection extends Hustle_Collection
 	 * @param $today
 	 * @return (array|object|null) Database query results
 	 */
-	function get_today_total_conversion( $today){
+	public function get_today_total_conversion( $today){
 		$date_format = '%Y%m%d';
 		$conversion_query = '%_conversion';
 		$exclude_sshare = 'floating_social_conversion';
+		$blog_id = get_current_blog_id();
 
 		return self::$_db->get_row( self::$_db->prepare( "
-			SELECT COUNT(c.dates) AS conversions FROM (SELECT DATE_FORMAT(FROM_UNIXTIME(SUBSTRING(meta_value,9,10)), '%s') AS dates FROM `". $this->_get_meta_table() ."` WHERE meta_key LIKE '%s' AND meta_key != '%s') AS c WHERE c.dates = '%s'", $date_format, $conversion_query, $exclude_sshare, $today ) );
+			SELECT COUNT(c.dates) AS conversions FROM (SELECT DATE_FORMAT(FROM_UNIXTIME(SUBSTRING(meta_value,9,10)), '%s') AS dates, module_id FROM `". $this->_get_meta_table() ."` WHERE meta_key LIKE '%s' AND meta_key != '%s') AS c INNER JOIN ". $this->_get_table() ." AS whd ON whd.module_id = c.module_id WHERE c.dates = '%s' AND whd.blog_id = %d GROUP BY c.dates", $date_format, $conversion_query, $exclude_sshare, $today, $blog_id ) );
 	}
 
-	function prepare_except_module_types_condition( $excepts ) {
+	public function prepare_except_module_types_condition( $excepts ) {
 		$except_condition = "";
 		foreach( $excepts as $except ) {
 			$except_condition .= " AND `module_type` != '". $except ."'";
@@ -112,11 +114,11 @@ class Hustle_Module_Collection extends Hustle_Collection
 		return $except_condition;
 	}
 
-	function return_model_from_id( $id ){
+	public function return_model_from_id( $id ){
 		if( empty( $id )) return array();
 		$module = Hustle_Module_Model::instance()->get( $id );
 		if ( $module ) {
-			if ( $module->module_type == 'social_sharing' ) {
+			if ( 'social_sharing' === $module->module_type ) {
 				return Hustle_SShare_Model::instance()->get( $id );
 			} else {
 				return $module;
@@ -153,7 +155,7 @@ class Hustle_Module_Collection extends Hustle_Collection
 		return array_map( array( $this, "return_wp_from_stats" ), $stats );
 	}
 
-	function return_wp_from_stats($stats){
+	public function return_wp_from_stats($stats){
 		if( empty($stats) ) return array();
 		$page_id = (int) $stats->meta_key;
 		$page = get_post($page_id);
@@ -209,6 +211,12 @@ class Hustle_Module_Collection extends Hustle_Collection
 		}
 	}
 
+	public function get_hustle_20_page_shares() {
+		$page_shares = self::$_db->get_results( self::$_db->prepare( "SELECT optin_id, meta_key, meta_value FROM `" . self::$_db->base_prefix . "optin_meta` WHERE meta_key like '%s'", '%_page_shares' ) );
+
+		return $page_shares;
+	}
+
 	public function get_hustle_20_optins() {
 		$optins = self::$_db->get_results( "SELECT * FROM `". self::$_db->base_prefix ."optins`" );
 		foreach( $optins as $optin ) {
@@ -237,7 +245,7 @@ class Hustle_Module_Collection extends Hustle_Collection
 
 			$optin->shortcode_conversions = self::$_db->get_col( self::$_db->prepare( "SELECT meta_value FROM `". self::$_db->base_prefix ."optin_meta` WHERE optin_id = %d AND meta_key = '%s'", $optin->optin_id, 'shortcode_conversion' ) );
 
-			if ( $optin->optin_provider != 'social_sharing' ) {
+			if ( 'social_sharing' !== $optin->optin_provider ) {
 
 				$optin->design = self::$_db->get_col( self::$_db->prepare( "SELECT meta_value FROM `". self::$_db->base_prefix ."optin_meta` WHERE optin_id = %d AND meta_key = '%s'", $optin->optin_id, 'design' ) );
 				$optin->design = ( isset( $optin->design[0] ) ) ? $optin->design[0] : '';
@@ -260,10 +268,11 @@ class Hustle_Module_Collection extends Hustle_Collection
 				$optin->floating_social_views = self::$_db->get_col( self::$_db->prepare( "SELECT meta_value FROM `". self::$_db->base_prefix ."optin_meta` WHERE optin_id = %d AND meta_key = '%s'", $optin->optin_id, 'floating_social_view' ) );
 
 				$optin->floating_social_conversions = self::$_db->get_col( self::$_db->prepare( "SELECT meta_value FROM `". self::$_db->base_prefix ."optin_meta` WHERE optin_id = %d AND meta_key = '%s'", $optin->optin_id, 'floating_social_conversion' ) );
+
 			}
 
 			// specific for each module
-			if ( $optin->optin_provider == 'custom_content' ) {
+			if ( 'custom_content' === $optin->optin_provider ) {
 				// custom content
 				$optin->subtitle = self::$_db->get_col( self::$_db->prepare( "SELECT meta_value FROM `". self::$_db->base_prefix ."optin_meta` WHERE optin_id = %d AND meta_key = '%s'", $optin->optin_id, 'subtitle' ) );
 				$optin->subtitle = ( isset( $optin->subtitle[0] ) ) ? $optin->subtitle[0] : '';
@@ -277,7 +286,7 @@ class Hustle_Module_Collection extends Hustle_Collection
 				$optin->after_content = self::$_db->get_col( self::$_db->prepare( "SELECT meta_value FROM `". self::$_db->base_prefix ."optin_meta` WHERE optin_id = %d AND meta_key = '%s'", $optin->optin_id, 'after_content' ) );
 				$optin->after_content = ( isset( $optin->after_content[0] ) ) ? $optin->after_content[0] : '';
 
-			} else if ( $optin->optin_provider == 'social_sharing' ) {
+			} else if ( 'social_sharing' === $optin->optin_provider ) {
 				// social sharing
 				$optin->services = self::$_db->get_col( self::$_db->prepare( "SELECT meta_value FROM `". self::$_db->base_prefix ."optin_meta` WHERE optin_id = %d AND meta_key = '%s'", $optin->optin_id, 'services' ) );
 				$optin->services = ( isset( $optin->services[0] ) ) ? $optin->services[0] : '';

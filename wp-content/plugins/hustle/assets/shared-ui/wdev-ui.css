@@ -32,6 +32,7 @@
  * 23. FONTAWESOME
  * 24. WPMUDEV ICONFONT
  * 25. CUSTOM ANIMATIONS
+ * 26. ACCESSIBILITY
  *
  * -----------------------------------------------------------------------------
  */
@@ -2588,5 +2589,18 @@
 	animation: collapse 0.5s linear;
 }
 
+/* ****************************************************************************
+ * 26. ACCESSIBILITY
+ */
+body .wpdui-sr-only {
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: polygon(0px 0px, 0px 0px,0px 0px, 0px 0px);
+	position: absolute !important;
+	white-space: nowrap;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+}
 
-/* 176081-1519328155-au */
+
+/* 176081-1549515970-au */

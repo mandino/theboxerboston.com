@@ -2,21 +2,21 @@
 
 	<div class="wpmudev-box-left">
 
-		<h4><strong><?php _e( "Colors & Design", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
+		<h4><strong><?php esc_attr_e( "Colors & Design", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
 
-		<label class="wpmudev-helper"><?php _e( "Choose a pre-made style for your Embed and further customize it’s appearance.", Opt_In::TEXT_DOMAIN ); ?></label>
+		<label class="wpmudev-helper"><?php esc_attr_e( "Choose a pre-made style for your Embed and further customize its appearance.", Opt_In::TEXT_DOMAIN ); ?></label>
 
 	</div>
 
 	<div class="wpmudev-box-right">
 
-		<label><?php _e( "Select a style to use:", Opt_In::TEXT_DOMAIN ); ?></label>
+		<label><?php esc_attr_e( "Select a style to use:", Opt_In::TEXT_DOMAIN ); ?></label>
 
 		<select class="wpmudev-select" data-attribute="style">
 
-			<option value="simple" {{ ( style === 'simple' ) ? 'selected' : '' }} ><?php _e( "Simple", Opt_In::TEXT_DOMAIN ); ?></option>
-			<option value="minimal" {{ ( style === 'minimal' ) ? 'selected' : '' }} ><?php _e( "Minimal", Opt_In::TEXT_DOMAIN ); ?></option>
-			<option value="cabriolet" {{ ( style === 'cabriolet' ) ? 'selected' : '' }} ><?php _e( "Cabriolet", Opt_In::TEXT_DOMAIN ); ?></option>
+			<option value="simple" {{ ( 'simple' === style ) ? 'selected' : '' }} ><?php esc_attr_e( "Simple", Opt_In::TEXT_DOMAIN ); ?></option>
+			<option value="minimal" {{ ( 'minimal' === style ) ? 'selected' : '' }} ><?php esc_attr_e( "Minimal", Opt_In::TEXT_DOMAIN ); ?></option>
+			<option value="cabriolet" {{ ( 'cabriolet' === style ) ? 'selected' : '' }} ><?php esc_attr_e( "Cabriolet", Opt_In::TEXT_DOMAIN ); ?></option>
 
 		</select>
 
@@ -30,7 +30,7 @@
 
 			</div>
 
-			<label class="wpmudev-switch-label" for="wph-aftercontent-style_colors"><?php _e( "Customize colors", Opt_In::TEXT_DOMAIN ); ?></label>
+			<label class="wpmudev-switch-label" for="wph-aftercontent-style_colors"><?php esc_attr_e( "Customize colors", Opt_In::TEXT_DOMAIN ); ?></label>
 
 		</div>
 

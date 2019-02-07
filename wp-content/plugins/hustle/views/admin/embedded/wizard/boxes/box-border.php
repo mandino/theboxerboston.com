@@ -2,7 +2,7 @@
 
 	<div class="wpmudev-box-left">
 
-		<h4><strong><?php _e( "Border", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
+		<h4><strong><?php esc_attr_e( "Border", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
 
 	</div>
 
@@ -18,7 +18,7 @@
 
 			</div>
 
-			<label class="wpmudev-switch-label" for="wph-aftercontent-border"><?php _e( "Show border", Opt_In::TEXT_DOMAIN ); ?></label>
+			<label class="wpmudev-switch-label" for="wph-aftercontent-border"><?php esc_attr_e( "Show border", Opt_In::TEXT_DOMAIN ); ?></label>
 
 		</div>
 
@@ -28,7 +28,7 @@
 
 				<div class="wpmudev-col">
 
-					<label><?php _e( "Radius", Opt_In::TEXT_DOMAIN ); ?></label>
+					<label><?php esc_attr_e( "Radius", Opt_In::TEXT_DOMAIN ); ?></label>
 
 					<input type="number" data-attribute="border_radius" value="{{border_radius}}" class="wpmudev-input_number" min="0" >
 
@@ -36,7 +36,7 @@
 
 				<div class="wpmudev-col">
 
-					<label><?php _e( "Weight", Opt_In::TEXT_DOMAIN ); ?></label>
+					<label><?php esc_attr_e( "Weight", Opt_In::TEXT_DOMAIN ); ?></label>
 
 					<input type="number" data-attribute="border_weight" value="{{border_weight}}" class="wpmudev-input_number" min="0" >
 
@@ -44,21 +44,21 @@
 
 				<div class="wpmudev-col">
 
-					<label><?php _e( "Type", Opt_In::TEXT_DOMAIN ); ?></label>
+					<label><?php esc_attr_e( "Type", Opt_In::TEXT_DOMAIN ); ?></label>
 
 					<select class="wpmudev-select" data-attribute="border_type" >
-						<option value="solid" {{ ( border_type === 'solid' ) ? 'selected' : '' }} ><?php _e( "Solid", Opt_In::TEXT_DOMAIN ); ?></option>
-						<option value="dotted" {{ ( border_type === 'dotted' ) ? 'selected' : '' }} ><?php _e( "Dotted", Opt_In::TEXT_DOMAIN ); ?></option>
-						<option value="dashed" {{ ( border_type === 'dashed' ) ? 'selected' : '' }} ><?php _e( "Dashed", Opt_In::TEXT_DOMAIN ); ?></option>
-						<option value="double" {{ ( border_type === 'double' ) ? 'selected' : '' }} ><?php _e( "Double", Opt_In::TEXT_DOMAIN ); ?></option>
-						<option value="none" {{ ( border_type === 'none' ) ? 'selected' : '' }} ><?php _e( "None", Opt_In::TEXT_DOMAIN ); ?></option>
+						<option value="solid" {{ ( 'solid' === border_type ) ? 'selected' : '' }} ><?php esc_attr_e( "Solid", Opt_In::TEXT_DOMAIN ); ?></option>
+						<option value="dotted" {{ ( 'dotted' === border_type ) ? 'selected' : '' }} ><?php esc_attr_e( "Dotted", Opt_In::TEXT_DOMAIN ); ?></option>
+						<option value="dashed" {{ ( 'dashed' === border_type ) ? 'selected' : '' }} ><?php esc_attr_e( "Dashed", Opt_In::TEXT_DOMAIN ); ?></option>
+						<option value="double" {{ ( 'double' === border_type ) ? 'selected' : '' }} ><?php esc_attr_e( "Double", Opt_In::TEXT_DOMAIN ); ?></option>
+						<option value="none" {{ ( 'none' === border_type ) ? 'selected' : '' }} ><?php esc_attr_e( "None", Opt_In::TEXT_DOMAIN ); ?></option>
 					</select>
 
 				</div>
 
 				<div class="wpmudev-col">
 
-					<label><?php _e( "Border color", Opt_In::TEXT_DOMAIN ); ?></label>
+					<label><?php esc_attr_e( "Border color", Opt_In::TEXT_DOMAIN ); ?></label>
 
 					<div class="wpmudev-picker"><input id="aftercontent_modal_border" class="wpmudev-color_picker" type="text"  value="{{border_color}}" data-attribute="border_color" data-alpha="true" /></div>
 

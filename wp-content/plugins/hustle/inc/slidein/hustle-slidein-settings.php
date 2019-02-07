@@ -1,8 +1,7 @@
 <?php
 
-class Hustle_Slidein_Settings extends Hustle_Meta
-{
-	var $defaults = array(
+class Hustle_Slidein_Settings extends Hustle_Meta {
+	public $defaults = array(
 		'animation_in' => '',
 		'animation_out' => '',
 		'after_close' => 'keep_show',

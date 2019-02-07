@@ -3,10 +3,9 @@
  * WPMUDEV Frash - Free Dashboard Notification module.
  * Used by wordpress.org hosted plugins.
  *
- * @version 1.1.0
+ * @version 1.2
  * @author  Incsub (Philipp Stracker)
  */
-
 if ( ! class_exists( 'WDev_Frash' ) ) {
 	class WDev_Frash {
 
@@ -30,6 +29,16 @@ if ( ! class_exists( 'WDev_Frash' ) ) {
 		protected $stored = array();
 
 		/**
+		 * User id /API Key for Mailchimp subscriber list
+		 *
+		 * @since 1.2
+		 *
+		 * @var string
+		 *
+		 */
+		private $mc_user_id = '53a1e972a043d1264ed082a5b';
+
+		/**
 		 * Initializes and returns the singleton instance.
 		 *
 		 * @since  1.0.0
@@ -50,12 +59,11 @@ if ( ! class_exists( 'WDev_Frash' ) ) {
 		 * @since  1.0.0
 		 */
 		private function __construct() {
-
 			$this->read_stored_data();
 
 			$this->add_action( 'wdev-register-plugin', 5 );
-			//$this->add_action( 'load-index.php' );
-			$this->add_action( 'admin_init' );
+			$this->add_action( 'load-index.php' );
+
 			$this->add_action( 'wp_ajax_frash_act' );
 			$this->add_action( 'wp_ajax_frash_dismiss' );
 		}
@@ -96,7 +104,7 @@ if ( ! class_exists( 'WDev_Frash' ) ) {
 		 * @since  1.0.0
 		 */
 		protected function store_data() {
-			$t = update_site_option( 'wdev-frash', $this->stored );
+			update_site_option( 'wdev-frash', $this->stored );
 		}
 
 		/**
@@ -108,10 +116,9 @@ if ( ! class_exists( 'WDev_Frash' ) ) {
 		 * @param  string $title Plugin name for display.
 		 * @param  string $url_wp URL to the plugin on wp.org (domain not needed)
 		 * @param  string $cta_email Title of the Email CTA button.
-		 * @param  string $drip_plugin Optional. Plugin-param for the getdrip rule.
+		 * @param  string $mc_list_id required. Mailchimp mailing list id for the plugin.
 		 */
-		public function wdev_register_plugin( $plugin_id, $title, $url_wp, $cta_email = '', $drip_plugin = '' ) {
-
+		public function wdev_register_plugin( $plugin_id, $title, $url_wp, $cta_email = '', $mc_list_id = '' ) {
 			// Ignore incorrectly registered plugins to avoid errors later.
 			if ( empty( $plugin_id ) ) { return; }
 			if ( empty( $title ) ) { return; }
@@ -126,14 +133,14 @@ if ( ! class_exists( 'WDev_Frash' ) ) {
 				'title' => $title,
 				'url_wp' => $url_wp,
 				'cta_email' => $cta_email,
-				'drip_plugin' => $drip_plugin,
+				'mc_list_id' => $mc_list_id,
 			);
+
 			/*
 			 * When the plugin is registered the first time we store some infos
 			 * in the persistent module-data that help us later to find out
 			 * if/which message should be displayed.
 			 */
-
 			if ( empty( $this->stored['plugins'][$plugin_id] ) ) {
 				// First register the plugin permanently.
 				$this->stored['plugins'][$plugin_id] = time();
@@ -194,8 +201,7 @@ if ( ! class_exists( 'WDev_Frash' ) ) {
 		 *
 		 * @since  1.0.0
 		 */
-		public function admin_init() {
-
+		public function load_index_php() {
 			if ( is_super_admin() ) {
 				$this->add_action( 'all_admin_notices' );
 			}
@@ -261,12 +267,12 @@ if ( ! class_exists( 'WDev_Frash' ) ) {
 					}
 				}
 				if ( 'email' == $item['type'] ) {
-					if ( ! $plugin->drip_plugin || ! $plugin->cta_email ) {
+					//If we don't have mailchimp list id
+					if ( ! $plugin->mc_list_id || ! $plugin->cta_email ) {
 						// Do not display email message with missing email params.
 						$can_display = false;
 					}
 				}
-
 				if ( $now < $show_at ) {
 					// Do not display messages that are not due yet.
 					$can_display = false;
@@ -355,7 +361,6 @@ if ( ! class_exists( 'WDev_Frash' ) ) {
 				<input type="hidden" name="type" value="<?php echo esc_attr( $info->type ); ?>" />
 				<input type="hidden" name="plugin_id" value="<?php echo esc_attr( $info->plugin ); ?>" />
 				<input type="hidden" name="url_wp" value="<?php echo esc_attr( $plugin->url_wp ); ?>" />
-				<input type="hidden" name="drip_plugin" value="<?php echo esc_attr( $plugin->drip_plugin ); ?>" />
 				<?php
 				if ( 'email' == $info->type ) {
 					$this->render_email_message( $plugin );
@@ -375,9 +380,8 @@ if ( ! class_exists( 'WDev_Frash' ) ) {
 		 * @since  1.0.0
 		 */
 		protected function render_email_message( $plugin ) {
-			$user = wp_get_current_user();
-			$user_name = $user->display_name;
 			$admin_email = get_site_option( 'admin_email' );
+			$action = "https://edublogs.us1.list-manage.com/subscribe/post-json?u={$this->mc_user_id}&id={$plugin->mc_list_id}&c=?";
 
 			$msg = __( "We're happy that you've chosen to install %s! Are you interested in how to make the most of this plugin? How would you like a quick 5 day email crash course with actionable advice on building your membership site? Only the info you want, no subscription!", 'wdev_frash' );
 			$msg = apply_filters( 'wdev-email-message-' . $plugin->id, $msg );
@@ -393,13 +397,15 @@ if ( ! class_exists( 'WDev_Frash' ) ) {
 					?>
 				</div>
 				<div class="frash-notice-cta">
-					<input type="email" name="email" value="<?php echo esc_attr( $admin_email ); ?>" />
-					<button class="frash-notice-act button-primary" data-msg="<?php _e( 'Thanks :)', 'wdev_frash' ); ?>">
-						<?php echo esc_html( $plugin->cta_email ); ?>
-					</button>
-					<button class="frash-notice-dismiss" data-msg="<?php _e( 'Saving', 'wdev_frash' ); ?>">
-						<?php _e( 'No thanks', 'wdev_frash' ); ?>
-					</button>
+					<form action="<?php echo $action; ?>" method="get" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+						<input type="email" name="EMAIL" class="email" id="mce-EMAIL" value="<?php echo esc_attr( $admin_email ); ?>" required="required"/>
+						<button class="frash-notice-act button-primary" data-msg="<?php _e( 'Thanks :)', 'wdev_frash' ); ?>" type="submit">
+							<?php echo esc_html( $plugin->cta_email ); ?>
+						</button>
+						<button class="frash-notice-dismiss" data-msg="<?php _e( 'Saving', 'wdev_frash' ); ?>">
+							<?php _e( 'No thanks', 'wdev_frash' ); ?>
+						</button>
+					</form>
 				</div>
 			<?php
 		}
@@ -414,7 +420,7 @@ if ( ! class_exists( 'WDev_Frash' ) ) {
 			$user = wp_get_current_user();
 			$user_name = $user->display_name;
 
-			$msg = __( "Hey %s, you've been using %s for a week now and we hope you’re enjoying it!", 'wdev_frash' ) . '<br />'. __( "We put a lot of development time into building this free plugin so anyone can create awesome opt-ins that convert. We would really appreciated it if you dropped us a quick rating!", 'wdev_frash' );
+			$msg = __( "Hey %s, you've been using %s for a while now, and we hope you're happy with it.", 'wdev_frash' ) . '<br />'. __( "We've spent countless hours developing this free plugin for you, and we would really appreciate it if you dropped us a quick rating!", 'wdev_frash' );
 			$msg = apply_filters( 'wdev-rating-message-' . $plugin->id, $msg );
 
 			?>
@@ -453,7 +459,6 @@ if ( ! class_exists( 'WDev_Frash' ) ) {
 			$method_name = strtolower( $hook );
 			$method_name = preg_replace( '/[^a-z0-9]/', '_', $method_name );
 			$handler = array( $this, $method_name );
-
 			add_action( $hook, $handler, 5, $params );
 		}
 	}
@@ -461,77 +466,3 @@ if ( ! class_exists( 'WDev_Frash' ) ) {
 	// Initialize the module.
 	WDev_Frash::instance();
 }
-
-/**
- * Filters the rating message, include stats if greater than 1Mb
- *
- * @param $message
- *
- * @return string
- */
-if ( ! function_exists( 'wp_hustle_rating_message' ) ) {
-	function wp_hustle_rating_message( $message ) {
-		// global $wpsmushit_admin, $wpsmush_stats;
-		// $savings     = $wpsmushit_admin->global_stats_from_ids();
-		// $image_count = $wpsmush_stats->total_count();
-		// $show_stats  = false;
-
-		//If there is any saving, greater than 1Mb, show stats
-		// if ( ! empty( $savings ) && ! empty( $savings['bytes'] ) && $savings['bytes'] > 1048576 ) {
-			// $show_stats = true;
-		// }
-
-		$message = "Hey %s, you've been using %s for a week now and we hope you’re enjoying it!";
-
-		//Conditionally Show stats in rating message
-		// if ( $show_stats ) {
-			// $message .= sprintf( " You've smushed <strong>%s</strong> from %d images already, improving the speed and SEO ranking of this site!", $savings['human'], $image_count );
-		// }
-		$message .= " We put a lot of development time into building this free plugin so anyone can create awesome opt-ins that convert. We would really appreciated it if you dropped us a quick rating!";
-
-		return $message;
-	}
-}
-
-/**
- * NewsLetter
- *
- * @param $message
- *
- * @return string
- */
-if ( ! function_exists( 'wp_hustle_email_message' ) ) {
-	function wp_hustle_email_message( $message ) {
-		$message = "You’re awesome for installing %s! Successfully converting your visitors into subscribers and paying customers doesn’t just stop when you get their email (although it helps!). So we've put together a bunch of guides to get you started.";
-
-		return $message;
-	}
-}
-
-
-// Register the current plugin.
-do_action(
-	'wdev-register-plugin',
-	/* 1             Plugin ID */
-	plugin_basename( __FILE__ ), /* Plugin ID */
-	/* 2          Plugin Title */
-	'Hustle',
-	/* 3 https://wordpress.org */
-	'/plugins/wordpress-popup/',
-	/* 4      Email Button CTA */
-	__( 'Sign Me Up', 'hustle' ),
-	/* 5  getdrip Plugin param */
-	'Hustle'
-);
-
-// The rating message contains 2 variables: user-name, plugin-name
-add_filter(
-	'wdev-rating-message-' . plugin_basename( __FILE__ ),
-	'wp_hustle_rating_message'
-);
-
-// The email message contains 1 variable: plugin-name
-add_filter(
-	'wdev-email-message-' . plugin_basename( __FILE__ ),
-	'wp_hustle_email_message'
-);

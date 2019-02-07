@@ -132,11 +132,6 @@ body .wpmui-divider {
   bottom: 0;
   border-right: 1px solid #E5E5E5;
 }
-#wpwrap .wpmui-hidden,
-body .wpmui-hidden {
-  display: none;
-  visibility: hidden;
-}
 #wpwrap .wpmui-fa,
 body .wpmui-fa {
   font-family: Fontawesome440 !important;
@@ -360,4 +355,4 @@ body .wpmui-radio-slider-wrapper.inp-before-wrapper .wpmui-radio-slider {
 }
 
 
-/* 176081-1519328155-au */
+/* 176081-1549515970-au */

@@ -8,10 +8,12 @@
 
 <?php if ( count( $popups ) === 0 ) { ?>
 
-	<?php $this->render("admin/popup/welcome", array(
+	<?php
+	$this->render("admin/popup/welcome", array(
         'new_url' => $add_new_url,
         'user_name' => $user_name
-    )); ?>
+    ));
+	?>
 
 <?php } else { ?>
 
@@ -19,9 +21,9 @@
 
 		<header id="wpmudev-hustle-title" class="wpmudev-has-button">
 
-			<h1><?php _e( "Pop-ups Dashboard", Opt_In::TEXT_DOMAIN ); ?></h1>
+			<h1><?php esc_attr_e( "Pop-ups Dashboard", Opt_In::TEXT_DOMAIN ); ?></h1>
 
-			<a class="wpmudev-button wpmudev-button-sm wpmudev-button-ghost" href="<?php echo esc_url( $add_new_url ); ?>"><?php _e('New Pop-up', Opt_In::TEXT_DOMAIN); ?></a>
+			<a class="wpmudev-button wpmudev-button-sm wpmudev-button-ghost" <?php if ( $is_free && count( $popups ) >= 3 ) echo 'id="hustle-free-version-create"'; ?> href="<?php echo esc_url( $add_new_url ); ?>"><?php esc_attr_e('New Pop-up', Opt_In::TEXT_DOMAIN); ?></a>
 
 		</header>
 
@@ -39,12 +41,12 @@
 
 								<select id="wpmudev-bulk-action" class="wpmudev-select">
 
-									<option value=""><?php _e( "Bulk Actions", Opt_In::TEXT_DOMAIN ); ?></option>
-									<option value="delete" data-nonce="<?php echo wp_create_nonce('hustle_delete_module'); ?>" ><?php _e( "Delete", Opt_In::TEXT_DOMAIN ); ?></option>
+									<option value=""><?php esc_attr_e( "Bulk Actions", Opt_In::TEXT_DOMAIN ); ?></option>
+									<option value="delete" data-nonce="<?php echo esc_attr( wp_create_nonce('hustle_delete_module') ); ?>" ><?php esc_attr_e( "Delete", Opt_In::TEXT_DOMAIN ); ?></option>
 
 								</select>
 
-								<button id="wpmudev-bulk-action-button" class="wpmudev-button wpmudev-button-ghost"><?php _e( "Apply", Opt_In::TEXT_DOMAIN ); ?></button>
+								<button id="wpmudev-bulk-action-button" class="wpmudev-button wpmudev-button-ghost"><?php esc_attr_e( "Apply", Opt_In::TEXT_DOMAIN ); ?></button>
 
 							</div>
 
@@ -54,12 +56,13 @@
 								$count = count( $popups );
 
 								if ( $count > 1 ) {
-									$count_text = __("results", Opt_In::TEXT_DOMAIN);
+									$count_text = esc_attr__("results", Opt_In::TEXT_DOMAIN);
 								} else {
-									$count_text = __("result", Opt_In::TEXT_DOMAIN);
-								} ?>
+									$count_text = esc_attr__("result", Opt_In::TEXT_DOMAIN);
+								}
+								?>
 
-								<p><?php printf( "%s %s", $count, $count_text ); ?></p>
+								<p><?php printf( '%1$s %2$s', esc_html( $count ), esc_html( $count_text ) ); ?></p>
 
 							</div>
 
@@ -79,19 +82,19 @@
 
 							</div>
 
-							<div class="wpmudev-header--name"><?php _e( "Pop-up title", Opt_In::TEXT_DOMAIN ); ?></div>
+							<div class="wpmudev-header--name"><?php esc_attr_e( "Pop-up title", Opt_In::TEXT_DOMAIN ); ?></div>
 
-							<div class="wpmudev-header--email"><?php _e( "Email service", Opt_In::TEXT_DOMAIN ); ?></div>
+							<div class="wpmudev-header--email"><?php esc_attr_e( "Email service", Opt_In::TEXT_DOMAIN ); ?></div>
 
-							<div class="wpmudev-header--conditions"><?php _e( "Display conditions", Opt_In::TEXT_DOMAIN ); ?></div>
+							<div class="wpmudev-header--conditions"><?php esc_attr_e( "Display conditions", Opt_In::TEXT_DOMAIN ); ?></div>
 
-							<div class="wpmudev-header--views"><?php _e( "Views", Opt_In::TEXT_DOMAIN ); ?></div>
+							<div class="wpmudev-header--views"><?php esc_attr_e( "Views", Opt_In::TEXT_DOMAIN ); ?></div>
 
-							<div class="wpmudev-header--conversions"><?php _e( "Conversions", Opt_In::TEXT_DOMAIN ); ?></div>
+							<div class="wpmudev-header--conversions"><?php esc_attr_e( "Conversions", Opt_In::TEXT_DOMAIN ); ?></div>
 
-							<div class="wpmudev-header--rate"><?php _e( "Conv. rate", Opt_In::TEXT_DOMAIN ); ?></div>
+							<div class="wpmudev-header--rate"><?php esc_attr_e( "Conv. rate", Opt_In::TEXT_DOMAIN ); ?></div>
 
-							<div class="wpmudev-header--status"><?php _e( "Pop-up status", Opt_In::TEXT_DOMAIN ); ?></div>
+							<div class="wpmudev-header--status"><?php esc_attr_e( "Pop-up status", Opt_In::TEXT_DOMAIN ); ?></div>
 
 							<div class="wpmudev-header--settings"></div>
 
@@ -99,9 +102,11 @@
 
 						<div class="wpmudev-list--section">
 
-						<?php wp_nonce_field("hustle_get_emails_list", "hustle_get_emails_list_nonce");
+						<?php
+						wp_nonce_field("hustle_get_emails_list", "hustle_get_emails_list_nonce");
 
-						foreach( $popups as $key => $module ) :  ?>
+						foreach( $popups as $key => $module ) :
+							?>
 
 								<div class="wpmudev-list--element">
 
@@ -109,9 +114,9 @@
 
 										<div class="wpmudev-input_checkbox">
 
-											<input id="wph-popup-<?php echo $module->id; ?>" class="wph-module-checkbox" type="checkbox" data-id="<?php echo $module->id; ?>" >
+											<input id="wph-popup-<?php echo esc_attr( $module->id ); ?>" class="wph-module-checkbox" type="checkbox" data-id="<?php echo esc_attr( $module->id ); ?>" >
 
-											<label for="wph-popup-<?php echo $module->id; ?>" class="wpdui-fi wpdui-fi-check" aria-hidden="true"></label>
+											<label for="wph-popup-<?php echo esc_attr( $module->id ); ?>" class="wpdui-fi wpdui-fi-check" aria-hidden="true"></label>
 
 										</div>
 
@@ -119,13 +124,13 @@
 
 									<div class="wpmudev-element--name">
 
-										<p class="wpmudev-element--content"><a href="<?php echo $module->decorated->get_edit_url( Hustle_Module_Admin::POPUP_WIZARD_PAGE ,'' ); ?>"><?php echo esc_html( $module->module_name ); ?></a></p>
+										<p class="wpmudev-element--content"><a href="<?php echo esc_url( $module->decorated->get_edit_url( Hustle_Module_Admin::POPUP_WIZARD_PAGE, '' ) ); ?>"><?php echo esc_html( $module->module_name ); ?></a></p>
 
 									</div>
 
 									<div class="wpmudev-element--email">
 
-										<p class="wpmudev-element--title"><?php _e( "Email service", Opt_In::TEXT_DOMAIN ); ?>:</p>
+										<p class="wpmudev-element--title"><?php esc_attr_e( "Email service", Opt_In::TEXT_DOMAIN ); ?>:</p>
 
 										<p class="wpmudev-element--content"><?php echo (int) $module->test_mode  ? '–' : esc_html( $module->decorated->mail_service_label ); ?></p>
 
@@ -133,39 +138,39 @@
 
 									<div class="wpmudev-element--conditions">
 
-										<p class="wpmudev-element--title"><?php _e( "Display conditions", Opt_In::TEXT_DOMAIN ); ?>:</p>
+										<p class="wpmudev-element--title"><?php esc_attr_e( "Display conditions", Opt_In::TEXT_DOMAIN ); ?>:</p>
 
-										<p class="wpmudev-element--content"><?php echo $module->decorated->get_condition_labels(false); ?></p>
+										<p class="wpmudev-element--content"><?php echo esc_html( $module->decorated->get_condition_labels(false) ); ?></p>
 
 									</div>
 
 									<div class="wpmudev-element--views">
 
-										<p class="wpmudev-element--title"><?php _e( "Views", Opt_In::TEXT_DOMAIN ); ?>:</p>
+										<p class="wpmudev-element--title"><?php esc_attr_e( "Views", Opt_In::TEXT_DOMAIN ); ?>:</p>
 
-										<p class="wpmudev-element--content"><?php echo $module->get_statistics($module->module_type)->views_count; ?></p>
+										<p class="wpmudev-element--content"><?php echo esc_html(  $module->get_statistics($module->module_type)->views_count ); ?></p>
 
 									</div>
 
 									<div class="wpmudev-element--conversions">
 
-										<p class="wpmudev-element--title"><?php _e( "Conversions", Opt_In::TEXT_DOMAIN ); ?>:</p>
+										<p class="wpmudev-element--title"><?php esc_attr_e( "Conversions", Opt_In::TEXT_DOMAIN ); ?>:</p>
 
-										<p class="wpmudev-element--content"><?php echo $module->get_statistics($module->module_type)->conversions_count; ?></p>
+										<p class="wpmudev-element--content"><?php echo esc_html( $module->get_statistics($module->module_type)->conversions_count ); ?></p>
 
 									</div>
 
 									<div class="wpmudev-element--rate">
 
-										<p class="wpmudev-element--title"><?php _e( "Conv. rate", Opt_In::TEXT_DOMAIN ); ?>:</p>
+										<p class="wpmudev-element--title"><?php esc_attr_e( "Conv. rate", Opt_In::TEXT_DOMAIN ); ?>:</p>
 
-										<p class="wpmudev-element--content"><?php echo $module->get_statistics($module->module_type)->conversion_rate; ?>%</p>
+										<p class="wpmudev-element--content"><?php echo esc_html( $module->get_statistics($module->module_type)->conversion_rate ); ?>%</p>
 
 									</div>
 
 									<div class="wpmudev-element--status">
 
-										<p class="wpmudev-element--title"><?php printf( __( "%s status", Opt_In::TEXT_DOMAIN ), esc_html( $module->module_name ) ); ?>:</p>
+										<p class="wpmudev-element--title"><?php printf( esc_attr__( "%s status", Opt_In::TEXT_DOMAIN ), esc_html( $module->module_name ) ); ?>:</p>
 
 										<div class="wpmudev-element--content">
 
@@ -173,19 +178,19 @@
 
 												<ul class="wpmudev-tabs-menu wpmudev-tabs-menu_full">
 
-													<li class="wpmudev-tabs-menu_item <?php echo ( !$module->active && !$module->is_test_type_active( $module->module_type ) ) ? 'current' : '' ?>">
-														<input id="wph-module-<?php echo esc_html( $module->id ); ?>-status--off" type="radio" value="off" name="wph-module-status" data-nonce="<?php echo wp_create_nonce('popup_module_toggle_state') ?>" data-id="<?php echo esc_attr($module->id); ?>">
-														<label for="wph-module-<?php echo esc_html( $module->id ); ?>-status--off" class="wpmudev-status-off"><?php _e( "Off", Opt_In::TEXT_DOMAIN ); ?></label>
+													<li class="wpmudev-tabs-menu_item <?php echo ( !$module->active && !$module->is_test_type_active( $module->module_type ) ) ? 'current' : ''; ?>">
+														<input id="wph-module-<?php echo esc_html( $module->id ); ?>-status--off" type="radio" value="off" name="wph-module-status" data-nonce="<?php echo esc_attr( wp_create_nonce('popup_module_toggle_state') ); ?>" data-id="<?php echo esc_attr($module->id); ?>">
+														<label for="wph-module-<?php echo esc_html( $module->id ); ?>-status--off" class="wpmudev-status-off"><?php esc_attr_e( "Off", Opt_In::TEXT_DOMAIN ); ?></label>
 													</li>
 
-													<li class="wpmudev-tabs-menu_item <?php echo ( $module->is_test_type_active( $module->module_type ) ) ? 'current' : '' ?>">
-														<input id="wph-module-<?php echo esc_html( $module->id ); ?>-status--test" type="radio" value="test" name="wph-module-status" data-nonce="<?php echo wp_create_nonce('popup_toggle_test_activity'); ?>" data-type="<?php echo esc_attr($module->module_type); ?>" data-id="<?php echo esc_attr($module->id);  ?>" >
-														<label for="wph-module-<?php echo esc_html( $module->id ); ?>-status--test" class="wpmudev-status-test"><?php _e( "Test", Opt_In::TEXT_DOMAIN ); ?></label>
+													<li class="wpmudev-tabs-menu_item <?php echo ( $module->is_test_type_active( $module->module_type ) ) ? 'current' : ''; ?>">
+														<input id="wph-module-<?php echo esc_html( $module->id ); ?>-status--test" type="radio" value="test" name="wph-module-status" data-nonce="<?php echo esc_attr( wp_create_nonce('popup_toggle_test_activity') ); ?>" data-type="<?php echo esc_attr($module->module_type); ?>" data-id="<?php echo esc_attr($module->id); ?>" >
+														<label for="wph-module-<?php echo esc_html( $module->id ); ?>-status--test" class="wpmudev-status-test"><?php esc_attr_e( "Test", Opt_In::TEXT_DOMAIN ); ?></label>
 													</li>
 
-													<li class="wpmudev-tabs-menu_item <?php echo ( $module->active && !$module->is_test_type_active( $module->module_type ) ) ? 'current' : '' ?>">
-														<input id="wph-module-<?php echo esc_html( $module->id ); ?>-status--live" type="radio" value="live" name="wph-module-status" data-nonce="<?php echo wp_create_nonce('popup_module_toggle_state') ?>" data-id="<?php echo esc_attr($module->id); ?>">
-														<label for="wph-module-<?php echo esc_html( $module->id ); ?>-status--live" class="wpmudev-status-live"><?php _e( "Live", Opt_In::TEXT_DOMAIN ); ?></label>
+													<li class="wpmudev-tabs-menu_item <?php echo ( $module->active && !$module->is_test_type_active( $module->module_type ) ) ? 'current' : ''; ?>">
+														<input id="wph-module-<?php echo esc_html( $module->id ); ?>-status--live" type="radio" value="live" name="wph-module-status" data-nonce="<?php echo esc_attr( wp_create_nonce('popup_module_toggle_state') ); ?>" data-id="<?php echo esc_attr($module->id); ?>">
+														<label for="wph-module-<?php echo esc_html( $module->id ); ?>-status--live" class="wpmudev-status-live"><?php esc_attr_e( "Live", Opt_In::TEXT_DOMAIN ); ?></label>
 													</li>
 
 												</ul>
@@ -198,29 +203,47 @@
 
 									<div class="wpmudev-element--settings">
 
-										<p class="wpmudev-element--title"><?php _e( "Pop-up status", Opt_In::TEXT_DOMAIN ); ?></p>
+										<p class="wpmudev-element--title"><?php esc_attr_e( "Pop-up status", Opt_In::TEXT_DOMAIN ); ?></p>
 
 										<div class="wpmudev-element--content">
 
 											<div class="wpmudev-dots-dropdown">
 
-												<button class="wpmudev-dots-button"><svg height="4" width="16">
-													<circle cx="2" cy="2" r="2" fill="#B5BBBB" />
-													<circle cx="8" cy="2" r="2" fill="#B5BBBB" />
-													<circle cx="14" cy="2" r="2" fill="#B5BBBB" />
-												</svg></button>
+												<button class="wpmudev-dots-button"><span></span></button>
 
 												<ul class="wpmudev-dots-nav wpmudev-hide">
 
-													<li><a href="<?php echo $module->decorated->get_edit_url( Hustle_Module_Admin::POPUP_WIZARD_PAGE ,'' ); ?>"><?php _e( "Edit Pop-Up", Opt_In::TEXT_DOMAIN ); ?></a></li>
-													<?php if( $module->get_total_subscriptions() ): ?>
-														<li><a href="#" class="button-view-email-list" data-total="<?php echo esc_attr( $module->get_total_subscriptions() ); ?>" data-id="<?php echo esc_attr( $module->id ); ?>" data-name="<?php echo esc_attr( $module->module_name ); ?>" ><?php _e( "View email list", Opt_In::TEXT_DOMAIN ); ?></a></li>
+													<li><a href="<?php echo esc_url( $module->decorated->get_edit_url( Hustle_Module_Admin::POPUP_WIZARD_PAGE, '' ) ); ?>"><?php esc_attr_e( "Edit Pop-Up", Opt_In::TEXT_DOMAIN ); ?></a></li>
+													<?php if( $module->get_total_subscriptions() ) : ?>
+														<li><a href="#" class="button-view-email-list" data-total="<?php echo esc_attr( $module->get_total_subscriptions() ); ?>" data-id="<?php echo esc_attr( $module->id ); ?>" data-name="<?php echo esc_attr( $module->module_name ); ?>" ><?php esc_attr_e( "View email list", Opt_In::TEXT_DOMAIN ); ?></a></li>
 													<?php endif; ?>
-													<?php if ( ( $log_count = $module->get_total_log_errors() ) ) : ?>
-														<li><a href="#" class="button-view-log-list" data-total="<?php echo esc_attr( $log_count ); ?>" data-id="<?php echo esc_attr( $module->id ); ?>" data-name="<?php echo esc_attr( $module->module_name ); ?>" ><?php _e( "View error log", Opt_In::TEXT_DOMAIN ); ?></a></li>
+													<?php $log_count = $module->get_total_log_errors(); ?>
+													<?php if ( $log_count ) : ?>
+														<li><a href="#" class="button-view-log-list" data-total="<?php echo esc_attr( $log_count ); ?>" data-id="<?php echo esc_attr( $module->id ); ?>" data-name="<?php echo esc_attr( $module->module_name ); ?>" ><?php esc_attr_e( "View error log", Opt_In::TEXT_DOMAIN ); ?></a></li>
 													<?php endif; ?>
-													<li><a href="#" class="module-toggle-tracking-activity" data-id="<?php echo esc_attr( $module->id ) ?>" data-type="<?php echo esc_attr( $module->module_type ); ?>" <?php checked( $module->is_track_type_active( $module->module_type ), true); ?> data-nonce="<?php echo wp_create_nonce('popup_toggle_tracking_activity') ?>" data-current="<?php echo $module->is_track_type_active( $module->module_type ); ?>" ><?php ( $module->is_track_type_active( $module->module_type ) ) ? _e( "Disable tracking", Opt_In::TEXT_DOMAIN ) : _e( "Enable tracking", Opt_In::TEXT_DOMAIN ); ?></a></li>
-													<li><a href="#" class="hustle-delete-module" data-nonce="<?php echo wp_create_nonce('hustle_delete_module'); ?>" data-id="<?php echo esc_attr( $module->id ); ?>" ><?php _e( "Delete Pop-Up", Opt_In::TEXT_DOMAIN ); ?></a></li>
+														<li><a href="#" class="module-toggle-tracking-activity" data-id="<?php echo esc_attr( $module->id ); ?>" data-type="<?php echo esc_attr( $module->module_type ); ?>" <?php checked( $module->is_track_type_active( $module->module_type ), true); ?> data-nonce="<?php echo esc_attr( wp_create_nonce('popup_toggle_tracking_activity') ); ?>" data-current="<?php echo esc_attr( $module->is_track_type_active( $module->module_type ) ); ?>" ><?php ( $module->is_track_type_active( $module->module_type ) ) ? esc_attr_e( "Disable tracking", Opt_In::TEXT_DOMAIN ) : esc_attr_e( "Enable tracking", Opt_In::TEXT_DOMAIN ); ?></a></li>
+														<li><a href="#" class="module-duplicate" data-id="<?php echo esc_attr( $module->id ); ?>" data-type="<?php echo esc_attr( $module->module_type ); ?>" data-nonce="<?php echo esc_attr( wp_create_nonce('duplicate_popup') ); ?>" ><?php esc_attr_e( "Duplicate", Opt_In::TEXT_DOMAIN ); ?></a></li>
+														<?php
+															/**
+															 * single optin export
+															 */
+															$action = Opt_In::EXPORT_MODULE_ACTION;
+															$nonce = wp_create_nonce( $action );
+															$url = add_query_arg(
+																array(
+																	'page' => Hustle_Module_Admin::POPUP_LISTING_PAGE,
+																	'action' => $action,
+																	'id' => $module->id,
+																	'type' => $module->module_type,
+																	Opt_In::EXPORT_MODULE_ACTION => $nonce,
+																),
+																admin_url( 'admin.php' )
+															);
+															$url = wp_nonce_url( $url, $action, $nonce );
+														?>
+														<li><a href="<?php echo esc_url( $url ); ?>"><?php esc_attr_e( "Export module settings", Opt_In::TEXT_DOMAIN ); ?></a></li>
+														<li><a href="#" class="import-module-settings" data-id="<?php echo esc_attr( $module->id ); ?>" data-name="<?php echo esc_attr( $module->module_name ); ?>" data-type="<?php echo esc_attr( $module->module_type ); ?>" data-nonce="<?php echo esc_attr( wp_create_nonce('import_settings' . $module->id ) ); ?>"><?php esc_attr_e( "Import module settings", Opt_In::TEXT_DOMAIN ); ?></a></li>
+													<li><a href="#" class="hustle-delete-module" data-nonce="<?php echo esc_attr( wp_create_nonce('hustle_delete_module') ); ?>" data-id="<?php echo esc_attr( $module->id ); ?>" ><?php esc_attr_e( "Delete Pop-Up", Opt_In::TEXT_DOMAIN ); ?></a></li>
 
 												</ul>
 
@@ -244,14 +267,18 @@
 
 		<?php //if( ! is_null( $new_module ) && count( $popups ) === 1 ) $this->render("admin/new-module_success", array( 'new_module' => $new_module, 'types' => $types )); ?>
 
-		<?php $this->render( "admin/commons/footer", array() ); ?>
-
 		<?php $this->render("admin/commons/listing/modal-error"); ?>
 
 		<?php $this->render("admin/commons/listing/modal-email"); ?>
 
+		<?php $this->render("admin/commons/listing/modal-import"); ?>
+
 		<?php $this->render("admin/commons/listing/delete-confirmation"); ?>
+
+		<?php if ( $is_free && count( $popups ) >= 3 ) $this->render("admin/commons/listing/modal-upgrade"); ?>
 
 	</main>
 
 <?php } ?>
+
+<?php $this->render( 'admin/footer/footer-simple' ); ?>

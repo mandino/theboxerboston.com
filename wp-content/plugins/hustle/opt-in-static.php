@@ -4,8 +4,10 @@
  *
  * Class Opt_In_Static
  */
-if ( !class_exists ('Opt_In_Static', false ) ) {
+if ( ! class_exists( 'Opt_In_Static', false ) ) {
+
 	class Opt_In_Static {
+
 		/**
 		 * Returns animations
 		 * Returns Popup Pro animations if it's installed and active
@@ -13,500 +15,466 @@ if ( !class_exists ('Opt_In_Static', false ) ) {
 		 *
 		 * @return object
 		 */
-		public function get_animations(){
+		public function get_animations() {
 
 			$animations_in = array(
-				'' => array(
+				''                                        => array(
 					'' => __( 'No Animation', Opt_In::TEXT_DOMAIN ),
 				),
 				__( 'Bouncing Entrances', Opt_In::TEXT_DOMAIN ) => array(
-					'bounceIn' => __( 'Bounce In', Opt_In::TEXT_DOMAIN ),
-					'bounceInUp' => __( 'Bounce In Up', Opt_In::TEXT_DOMAIN ),
+					'bounceIn'      => __( 'Bounce In', Opt_In::TEXT_DOMAIN ),
+					'bounceInUp'    => __( 'Bounce In Up', Opt_In::TEXT_DOMAIN ),
 					'bounceInRight' => __( 'Bounce In Right', Opt_In::TEXT_DOMAIN ),
-					'bounceInDown' => __( 'Bounce In Down', Opt_In::TEXT_DOMAIN ),
-					'bounceInLeft' => __( 'Bounce In Left', Opt_In::TEXT_DOMAIN ),
+					'bounceInDown'  => __( 'Bounce In Down', Opt_In::TEXT_DOMAIN ),
+					'bounceInLeft'  => __( 'Bounce In Left', Opt_In::TEXT_DOMAIN ),
 				),
 				__( 'Fading Entrances', Opt_In::TEXT_DOMAIN ) => array(
-					'fadeIn' => __( 'Fade In', Opt_In::TEXT_DOMAIN ),
-					'fadeInUp' => __( 'Fade In Up', Opt_In::TEXT_DOMAIN ),
+					'fadeIn'      => __( 'Fade In', Opt_In::TEXT_DOMAIN ),
+					'fadeInUp'    => __( 'Fade In Up', Opt_In::TEXT_DOMAIN ),
 					'fadeInRight' => __( 'Fade In Right', Opt_In::TEXT_DOMAIN ),
-					'fadeInDown' => __( 'Fade In Down', Opt_In::TEXT_DOMAIN ),
-					'fadeInLeft' => __( 'Fade In Left', Opt_In::TEXT_DOMAIN ),
+					'fadeInDown'  => __( 'Fade In Down', Opt_In::TEXT_DOMAIN ),
+					'fadeInLeft'  => __( 'Fade In Left', Opt_In::TEXT_DOMAIN ),
 				),
-				__( 'Falling Entrances', Opt_In::TEXT_DOMAIN ) => array(
-					'fall' => __( 'Fall In', Opt_In::TEXT_DOMAIN ), // MISSING
+				__( 'Falling Entrances', Opt_In::TEXT_DOMAIN )  => array(
+					'fall'     => __( 'Fall In', Opt_In::TEXT_DOMAIN ), // MISSING
 					'sidefall' => __( 'Fade In Side', Opt_In::TEXT_DOMAIN ), // MISSING
 				),
 				__( 'Rotating Entrances', Opt_In::TEXT_DOMAIN ) => array(
-					'rotateIn' => __( 'Rotate In', Opt_In::TEXT_DOMAIN ),
-					'rotateInDownLeft' => __( 'Rotate In Down Left', Opt_In::TEXT_DOMAIN ),
+					'rotateIn'          => __( 'Rotate In', Opt_In::TEXT_DOMAIN ),
+					'rotateInDownLeft'  => __( 'Rotate In Down Left', Opt_In::TEXT_DOMAIN ),
 					'rotateInDownRight' => __( 'Rotate In Down Right', Opt_In::TEXT_DOMAIN ),
-					'rotateInUpLeft' => __( 'Rotate In Up Left', Opt_In::TEXT_DOMAIN ),
-					'rotateInUpRight' => __( 'Rotate In Up Right', Opt_In::TEXT_DOMAIN ),
+					'rotateInUpLeft'    => __( 'Rotate In Up Left', Opt_In::TEXT_DOMAIN ),
+					'rotateInUpRight'   => __( 'Rotate In Up Right', Opt_In::TEXT_DOMAIN ),
 				),
 				__( 'Sliding Entrances', Opt_In::TEXT_DOMAIN ) => array(
-					'slideInUp' => __( 'Slide In Up', Opt_In::TEXT_DOMAIN ),
+					'slideInUp'    => __( 'Slide In Up', Opt_In::TEXT_DOMAIN ),
 					'slideInRight' => __( 'Slide In Right', Opt_In::TEXT_DOMAIN ),
-					'slideInDown' => __( 'Slide In Down', Opt_In::TEXT_DOMAIN ),
-					'slideInLeft' => __( 'Slide In Left', Opt_In::TEXT_DOMAIN ),
+					'slideInDown'  => __( 'Slide In Down', Opt_In::TEXT_DOMAIN ),
+					'slideInLeft'  => __( 'Slide In Left', Opt_In::TEXT_DOMAIN ),
 				),
 				__( 'Zoom Entrances', Opt_In::TEXT_DOMAIN ) => array(
-					'zoomIn' => __( 'Zoom In', Opt_In::TEXT_DOMAIN ),
-					'zoomInUp' => __( 'Zoom In Up', Opt_In::TEXT_DOMAIN ),
+					'zoomIn'      => __( 'Zoom In', Opt_In::TEXT_DOMAIN ),
+					'zoomInUp'    => __( 'Zoom In Up', Opt_In::TEXT_DOMAIN ),
 					'zoomInRight' => __( 'Zoom In Right', Opt_In::TEXT_DOMAIN ),
-					'zoomInDown' => __( 'Zoom In Down', Opt_In::TEXT_DOMAIN ),
-					'zoomInLeft' => __( 'Zoom In Left', Opt_In::TEXT_DOMAIN ),
-					'scaled' => __( 'Super Scaled', Opt_In::TEXT_DOMAIN ), // MISSING
+					'zoomInDown'  => __( 'Zoom In Down', Opt_In::TEXT_DOMAIN ),
+					'zoomInLeft'  => __( 'Zoom In Left', Opt_In::TEXT_DOMAIN ),
+					'scaled'      => __( 'Super Scaled', Opt_In::TEXT_DOMAIN ), // MISSING
 				),
 				__( '3D Entrances', Opt_In::TEXT_DOMAIN ) => array(
-					'sign wpoi-modal' => __( '3D Sign', Opt_In::TEXT_DOMAIN ), // MISSING
-					'slit wpoi-modal' => __( '3D Slit', Opt_In::TEXT_DOMAIN ), // MISSING
-					'flipx wpoi-modal' => __( '3D Flip (Horizontal)', Opt_In::TEXT_DOMAIN ), // MISSING
-					'flipy wpoi-modal' => __( '3D Flip (Vertical)', Opt_In::TEXT_DOMAIN ), // MISSING
+					'sign wpoi-modal'    => __( '3D Sign', Opt_In::TEXT_DOMAIN ), // MISSING
+					'slit wpoi-modal'    => __( '3D Slit', Opt_In::TEXT_DOMAIN ), // MISSING
+					'flipx wpoi-modal'   => __( '3D Flip (Horizontal)', Opt_In::TEXT_DOMAIN ), // MISSING
+					'flipy wpoi-modal'   => __( '3D Flip (Vertical)', Opt_In::TEXT_DOMAIN ), // MISSING
 					'rotatex wpoi-modal' => __( '3D Rotate (Left)', Opt_In::TEXT_DOMAIN ), // MISSING
 					'rotatey wpoi-modal' => __( '3D Rotate (Bottom)', Opt_In::TEXT_DOMAIN ), // MISSING
 				),
 				__( 'Special Entrances', Opt_In::TEXT_DOMAIN ) => array(
-					'rollIn' => __( 'Roll In', Opt_In::TEXT_DOMAIN ),
+					'rollIn'       => __( 'Roll In', Opt_In::TEXT_DOMAIN ),
 					'lightSpeedIn' => __( 'Light Speed In', Opt_In::TEXT_DOMAIN ),
-					'newspaperIn' => __( 'Newspaper In', Opt_In::TEXT_DOMAIN ),
+					'newspaperIn'  => __( 'Newspaper In', Opt_In::TEXT_DOMAIN ),
 				),
 			);
 
 			$animations_out = array(
-				'' => array(
+				''                                         => array(
 					'' => __( 'No Animation', Opt_In::TEXT_DOMAIN ),
 				),
 				__( 'Bouncing Exits', Opt_In::TEXT_DOMAIN ) => array(
-					'bounceOut' => __( 'Bounce Out', Opt_In::TEXT_DOMAIN ),
-					'bounceOutUp' => __( 'Bounce Out Up', Opt_In::TEXT_DOMAIN ),
+					'bounceOut'      => __( 'Bounce Out', Opt_In::TEXT_DOMAIN ),
+					'bounceOutUp'    => __( 'Bounce Out Up', Opt_In::TEXT_DOMAIN ),
 					'bounceOutRight' => __( 'Bounce Out Right', Opt_In::TEXT_DOMAIN ),
-					'bounceOutDown' => __( 'Bounce Out Down', Opt_In::TEXT_DOMAIN ),
-					'bounceOutLeft' => __( 'Bounce Out Left', Opt_In::TEXT_DOMAIN ),
+					'bounceOutDown'  => __( 'Bounce Out Down', Opt_In::TEXT_DOMAIN ),
+					'bounceOutLeft'  => __( 'Bounce Out Left', Opt_In::TEXT_DOMAIN ),
 				),
-				__( 'Fading Exits', Opt_In::TEXT_DOMAIN ) => array(
-					'fadeOut' => __( 'Fade Out', Opt_In::TEXT_DOMAIN ),
-					'fadeOutUp' => __( 'Fade Out Up', Opt_In::TEXT_DOMAIN ),
+				__( 'Fading Exits', Opt_In::TEXT_DOMAIN )  => array(
+					'fadeOut'      => __( 'Fade Out', Opt_In::TEXT_DOMAIN ),
+					'fadeOutUp'    => __( 'Fade Out Up', Opt_In::TEXT_DOMAIN ),
 					'fadeOutRight' => __( 'Fade Out Right', Opt_In::TEXT_DOMAIN ),
-					'fadeOutDown' => __( 'Fade Out Down', Opt_In::TEXT_DOMAIN ),
-					'fadeOutLeft' => __( 'Fade Out Left', Opt_In::TEXT_DOMAIN ),
+					'fadeOutDown'  => __( 'Fade Out Down', Opt_In::TEXT_DOMAIN ),
+					'fadeOutLeft'  => __( 'Fade Out Left', Opt_In::TEXT_DOMAIN ),
 				),
 				__( 'Rotating Exits', Opt_In::TEXT_DOMAIN ) => array(
-					'rotateOut' => __( 'Rotate In', Opt_In::TEXT_DOMAIN ),
-					'rotateOutUp' => __( 'Rotate In Up', Opt_In::TEXT_DOMAIN ),
+					'rotateOut'      => __( 'Rotate In', Opt_In::TEXT_DOMAIN ),
+					'rotateOutUp'    => __( 'Rotate In Up', Opt_In::TEXT_DOMAIN ),
 					'rotateOutRight' => __( 'Rotate In Right', Opt_In::TEXT_DOMAIN ),
-					'rotateOutDown' => __( 'Rotate In Down', Opt_In::TEXT_DOMAIN ),
-					'rotateOutLeft' => __( 'Rotate In Left', Opt_In::TEXT_DOMAIN ),
+					'rotateOutDown'  => __( 'Rotate In Down', Opt_In::TEXT_DOMAIN ),
+					'rotateOutLeft'  => __( 'Rotate In Left', Opt_In::TEXT_DOMAIN ),
 				),
 				__( 'Sliding Exits', Opt_In::TEXT_DOMAIN ) => array(
-					'slideOutUp' => __( 'Slide Out Up', Opt_In::TEXT_DOMAIN ),
+					'slideOutUp'    => __( 'Slide Out Up', Opt_In::TEXT_DOMAIN ),
 					'slideOutRight' => __( 'Slide Out Left', Opt_In::TEXT_DOMAIN ),
-					'slideOutDown' => __( 'Slide Out Down', Opt_In::TEXT_DOMAIN ),
-					'slideOutLeft' => __( 'Slide Out Right', Opt_In::TEXT_DOMAIN ),
+					'slideOutDown'  => __( 'Slide Out Down', Opt_In::TEXT_DOMAIN ),
+					'slideOutLeft'  => __( 'Slide Out Right', Opt_In::TEXT_DOMAIN ),
 				),
-				__( 'Zoom Exits', Opt_In::TEXT_DOMAIN ) => array(
-					'zoomOut' => __( 'Zoom Out', Opt_In::TEXT_DOMAIN ),
-					'zoomOutUp' => __( 'Zoom Out Up', Opt_In::TEXT_DOMAIN ),
+				__( 'Zoom Exits', Opt_In::TEXT_DOMAIN )    => array(
+					'zoomOut'      => __( 'Zoom Out', Opt_In::TEXT_DOMAIN ),
+					'zoomOutUp'    => __( 'Zoom Out Up', Opt_In::TEXT_DOMAIN ),
 					'zoomOutRight' => __( 'Zoom Out Right', Opt_In::TEXT_DOMAIN ),
-					'zoomOutDown' => __( 'Slide Out Down', Opt_In::TEXT_DOMAIN ),
-					'zoomOutLeft' => __( 'Slide Out Left', Opt_In::TEXT_DOMAIN ),
-					'scaled' => __( 'Super Scaled', Opt_In::TEXT_DOMAIN ), // MISSING
+					'zoomOutDown'  => __( 'Slide Out Down', Opt_In::TEXT_DOMAIN ),
+					'zoomOutLeft'  => __( 'Slide Out Left', Opt_In::TEXT_DOMAIN ),
+					'scaled'       => __( 'Super Scaled', Opt_In::TEXT_DOMAIN ), // MISSING
 				),
-				__( '3D Effects', Opt_In::TEXT_DOMAIN ) => array(
-					'sign wpoi-modal' => __( '3D Sign', Opt_In::TEXT_DOMAIN ), // MISSING
-					'flipx wpoi-modal' => __( '3D Flip (Horizontal)', Opt_In::TEXT_DOMAIN ), // MISSING
-					'flipy wpoi-modal' => __( '3D Flip (Vertical)', Opt_In::TEXT_DOMAIN ), // MISSING
+				__( '3D Effects', Opt_In::TEXT_DOMAIN )    => array(
+					'sign wpoi-modal'    => __( '3D Sign', Opt_In::TEXT_DOMAIN ), // MISSING
+					'flipx wpoi-modal'   => __( '3D Flip (Horizontal)', Opt_In::TEXT_DOMAIN ), // MISSING
+					'flipy wpoi-modal'   => __( '3D Flip (Vertical)', Opt_In::TEXT_DOMAIN ), // MISSING
 					'rotatex wpoi-modal' => __( '3D Rotate (Left)', Opt_In::TEXT_DOMAIN ), // MISSING
 					'rotatey wpoi-modal' => __( '3D Rotate (Bottom)', Opt_In::TEXT_DOMAIN ), // MISSING
 				),
 				__( 'Special Exits', Opt_In::TEXT_DOMAIN ) => array(
-					'rollOut' => __( 'Roll Out', Opt_In::TEXT_DOMAIN ),
+					'rollOut'       => __( 'Roll Out', Opt_In::TEXT_DOMAIN ),
 					'lightSpeedOut' => __( 'Light Speed Out', Opt_In::TEXT_DOMAIN ),
-					'newspaperOut' => __( 'Newspaper Out', Opt_In::TEXT_DOMAIN ),
+					'newspaperOut'  => __( 'Newspaper Out', Opt_In::TEXT_DOMAIN ),
 				),
 			);
 
 			return (object) array(
-				'in' => $animations_in,
+				'in'  => $animations_in,
 				'out' => $animations_out,
 			);
-
 		}
 
+		/**
+		 * Returns palete name by slug.
+		 *
+		 * @since 3.0.6
+		 *
+		 * @param string $slug Palette slug.
+		 *
+		 * @return string Palette name.
+		 */
+		protected function pallets_ref( $slug ) {
+			switch( $slug ) {
+			case 'gray_slate': return 'Gray Slate';
+			case 'coffee': return 'Coffee';
+			case 'ectoplasm': return 'Ectoplasm';
+			case 'blue': return 'Blue';
+			case 'sunrise': return 'Sunrise';
+			case 'midnight': return 'Midnight';
+			}
+			return $slug;
+		}
 
 		/**
 		 * Returns palettes used to color optins
 		 *
 		 * @return array
 		 */
-		public function get_palettes(){
+		public function get_palettes() {
+
 			return array(
 				'Gray Slate' => array(
-					'main_bg_color' => '#38454E',
-					'image_container_bg' => '#35414A',
-					'form_area_bg' => '#5D7380',
-
-					'title_color' => '#FDFDFD',
-					'subtitle_color' => '#FDFDFD',
-					'content_color' => '#ADB5B7',
-
-					'link_static_color' => '#38C5B5',
-					'link_hover_color' => '#49E2D1',
-					'link_active_color' => '#49E2D1',
-
-					'cta_button_static_bg' => '#38C5B5',
-					'cta_button_hover_bg' => '#49E2D1',
-					'cta_button_active_bg' => '#49E2D1',
-
-					'cta_button_static_color' => '#FFFFFF',
-					'cta_button_hover_color' => '#FFFFFF',
-					'cta_button_active_color' => '#FFFFFF',
-
-					'optin_input_static_bg' => '#FDFDFD',
-					'optin_input_hover_bg' => '#FDFDFD',
-					'optin_input_active_bg' => '#FDFDFD',
-
-					'optin_input_icon' => '#ADB5B7',
-
-					'optin_placeholder_color' => '#ADB5B7',
-
+					// Basic
+					'main_bg_color'                      => '#38454E',
+					'image_container_bg'                 => '#35414A',
+					'form_area_bg'                       => '#5D7380',
+					'title_color'                        => '#FDFDFD',
+					'subtitle_color'                     => '#FDFDFD',
+					'content_color'                      => '#ADB5B7',
+					'link_static_color'                  => '#38C5B5',
+					'link_hover_color'                   => '#49E2D1',
+					'link_active_color'                  => '#49E2D1',
+					'cta_button_static_bg'               => '#38C5B5',
+					'cta_button_hover_bg'                => '#49E2D1',
+					'cta_button_active_bg'               => '#49E2D1',
+					'cta_button_static_color'            => '#FFFFFF',
+					'cta_button_hover_color'             => '#FFFFFF',
+					'cta_button_active_color'            => '#FFFFFF',
+					// GDPR Field
+					'gdpr_content'                       => '#ADB5B7',
+					'gdpr_chechbox_background_static'    => '#FDFDFD',
+					'gdpr_checkbox_background_active'    => '#FDFDFD',
+					'gdpr_checkbox_icon'                 => '#38C5B5',
+					// Opt-in Form
+					'optin_input_static_bg'              => '#FDFDFD',
+					'optin_input_hover_bg'               => '#FDFDFD',
+					'optin_input_active_bg'              => '#FDFDFD',
+					'optin_input_icon'                   => '#ADB5B7',
+					'optin_placeholder_color'            => '#ADB5B7',
 					'optin_form_field_text_static_color' => '#363B3F',
-					'optin_form_field_text_hover_color' => '#363B3F',
+					'optin_form_field_text_hover_color'  => '#363B3F',
 					'optin_form_field_text_active_color' => '#363B3F',
-
-					'optin_submit_button_static_bg' => '#38C5B5',
-					'optin_submit_button_hover_bg' => '#38C5B5',
-					'optin_submit_button_active_bg' => '#38C5B5',
-
-					'optin_submit_button_static_color' => '#FDFDFD',
-					'optin_submit_button_hover_color' => '#FDFDFD',
-					'optin_submit_button_active_color' => '#FDFDFD',
-
-					'optin_error_text_color' => '#F1F1F1',
-					'optin_error_text_bg' => '#EA6464',
-
-					'optin_mailchimp_title_color' => '#FDFDFD',
-					'optin_mailchimp_labels_color' => '#ADB5B7',
-
-					'optin_check_radio_bg' => '#FDFDFD',
-
-					'optin_check_radio_tick_color' => '#38C5B5',
-
-					'optin_success_tick_color' => '#38C5B5',
-
-					'optin_success_content_color' => '#FDFDFD',
-
-					'overlay_bg' => 'rgba(51,51,51,0.9)',
-
-					'close_button_static_color' => '#38C5B5',
-					'close_button_hover_color' => '#49E2D1',
-					'close_button_active_color' => '#49E2D1',
+					'optin_submit_button_static_bg'      => '#38C5B5',
+					'optin_submit_button_hover_bg'       => '#38C5B5',
+					'optin_submit_button_active_bg'      => '#38C5B5',
+					'optin_submit_button_static_color'   => '#FDFDFD',
+					'optin_submit_button_hover_color'    => '#FDFDFD',
+					'optin_submit_button_active_color'   => '#FDFDFD',
+					'optin_error_text_color'             => '#F1F1F1',
+					'optin_error_text_bg'                => '#EA6464',
+					// Mailchimp Extras
+					'optin_mailchimp_title_color'        => '#FDFDFD',
+					'optin_mailchimp_labels_color'       => '#ADB5B7',
+					'optin_check_radio_bg'               => '#FDFDFD',
+					'optin_check_radio_tick_color'       => '#38C5B5',
+					// Additional Settings
+					'optin_success_tick_color'           => '#38C5B5',
+					'optin_success_content_color'        => '#FDFDFD',
+					'overlay_bg'                         => 'rgba(51,51,51,0.9)',
+					'close_button_static_color'          => '#38C5B5',
+					'close_button_hover_color'           => '#49E2D1',
+					'close_button_active_color'          => '#49E2D1',
 				),
-				'Coffee' => array(
-					'main_bg_color' => '#46403B',
-					'image_container_bg' => '#423D38',
-					'form_area_bg' => '#59524B',
-
-					'title_color' => '#FDFDFD',
-					'subtitle_color' => '#FDFDFD',
-					'content_color' => '#ADB5B7',
-
-					'link_static_color' => '#C6A685',
-					'link_hover_color' => '#C69767',
-					'link_active_color' => '#C69767',
-
-					'cta_button_static_bg' => '#C6A685',
-					'cta_button_hover_bg' => '#C69767',
-					'cta_button_active_bg' => '#C69767',
-
-					'cta_button_static_color' => '#FFFFFF',
-					'cta_button_hover_color' => '#FFFFFF',
-					'cta_button_active_color' => '#FFFFFF',
-
-					'optin_input_static_bg' => '#FDFDFD',
-					'optin_input_hover_bg' => '#FDFDFD',
-					'optin_input_active_bg' => '#FDFDFD',
-
-					'optin_input_icon' => '#ADB5B7',
-
-					'optin_placeholder_color' => '#ADB5B7',
-
+				'Coffee'     => array(
+					// Basic
+					'main_bg_color'                      => '#46403B',
+					'image_container_bg'                 => '#423D38',
+					'form_area_bg'                       => '#59524B',
+					'title_color'                        => '#FDFDFD',
+					'subtitle_color'                     => '#FDFDFD',
+					'content_color'                      => '#ADB5B7',
+					'link_static_color'                  => '#C6A685',
+					'link_hover_color'                   => '#C69767',
+					'link_active_color'                  => '#C69767',
+					'cta_button_static_bg'               => '#C6A685',
+					'cta_button_hover_bg'                => '#C69767',
+					'cta_button_active_bg'               => '#C69767',
+					'cta_button_static_color'            => '#FFFFFF',
+					'cta_button_hover_color'             => '#FFFFFF',
+					'cta_button_active_color'            => '#FFFFFF',
+					// GDPR Field
+					'gdpr_content'                       => '#ADB5B7',
+					'gdpr_chechbox_background_static'    => '#FDFDFD',
+					'gdpr_checkbox_background_active'    => '#FDFDFD',
+					'gdpr_checkbox_icon'                 => '#38C5B5',
+					// Opt-in Form
+					'optin_input_static_bg'              => '#FDFDFD',
+					'optin_input_hover_bg'               => '#FDFDFD',
+					'optin_input_active_bg'              => '#FDFDFD',
+					'optin_input_icon'                   => '#ADB5B7',
+					'optin_placeholder_color'            => '#ADB5B7',
 					'optin_form_field_text_static_color' => '#363B3F',
-					'optin_form_field_text_hover_color' => '#363B3F',
+					'optin_form_field_text_hover_color'  => '#363B3F',
 					'optin_form_field_text_active_color' => '#363B3F',
-
-					'optin_submit_button_static_bg' => '#C6A685',
-					'optin_submit_button_hover_bg' => '#C69767',
-					'optin_submit_button_active_bg' => '#C69767',
-
-					'optin_submit_button_static_color' => '#FDFDFD',
-					'optin_submit_button_hover_color' => '#FDFDFD',
-					'optin_submit_button_active_color' => '#FDFDFD',
-
-					'optin_error_text_color' => '#F1F1F1',
-					'optin_error_text_bg' => '#EA6464',
-
-					'optin_mailchimp_title_color' => '#FDFDFD',
-					'optin_mailchimp_labels_color' => '#ADB5B7',
-
-					'optin_check_radio_bg' => '#FDFDFD',
-
-					'optin_check_radio_tick_color' => '#38C5B5',
-
-					'optin_success_tick_color' => '#38C5B5',
-
-					'optin_success_content_color' => '#FDFDFD',
-
-					'overlay_bg' => 'rgba(51,51,51,0.9)',
-
-					'close_button_static_color' => '#FDFDFD',
-					'close_button_hover_color' => '#FDFDFD',
-					'close_button_active_color' => '#FDFDFD',
+					'optin_submit_button_static_bg'      => '#C6A685',
+					'optin_submit_button_hover_bg'       => '#C69767',
+					'optin_submit_button_active_bg'      => '#C69767',
+					'optin_submit_button_static_color'   => '#FDFDFD',
+					'optin_submit_button_hover_color'    => '#FDFDFD',
+					'optin_submit_button_active_color'   => '#FDFDFD',
+					'optin_error_text_color'             => '#F1F1F1',
+					'optin_error_text_bg'                => '#EA6464',
+					// Mailchimp Extras
+					'optin_mailchimp_title_color'        => '#FDFDFD',
+					'optin_mailchimp_labels_color'       => '#ADB5B7',
+					'optin_check_radio_bg'               => '#FDFDFD',
+					'optin_check_radio_tick_color'       => '#38C5B5',
+					// Additional Settings
+					'optin_success_tick_color'           => '#38C5B5',
+					'optin_success_content_color'        => '#FDFDFD',
+					'overlay_bg'                         => 'rgba(51,51,51,0.9)',
+					'close_button_static_color'          => '#FDFDFD',
+					'close_button_hover_color'           => '#FDFDFD',
+					'close_button_active_color'          => '#FDFDFD',
 				),
-				'Ectoplasm' => array(
-					'main_bg_color' => '#403159',
-					'image_container_bg' => '#3D2F54',
-					'form_area_bg' => '#513E70',
-
-					'title_color' => '#FDFDFD',
-					'subtitle_color' => '#FDFDFD',
-					'content_color' => '#ADB5B7',
-
-					'link_static_color' => '#A4B824',
-					'link_hover_color' => '#B9CE33',
-					'link_active_color' => '#B9CE33',
-
-					'cta_button_static_bg' => '#A4B824',
-					'cta_button_hover_bg' => '#B9CE33',
-					'cta_button_active_bg' => '#B9CE33',
-
-					'cta_button_static_color' => '#FFFFFF',
-					'cta_button_hover_color' => '#FFFFFF',
-					'cta_button_active_color' => '#FFFFFF',
-
-					'optin_input_static_bg' => '#FDFDFD',
-					'optin_input_hover_bg' => '#FDFDFD',
-					'optin_input_active_bg' => '#FDFDFD',
-
-					'optin_input_icon' => '#ADB5B7',
-
-					'optin_placeholder_color' => '#ADB5B7',
-
+				'Ectoplasm'  => array(
+					// Basic
+					'main_bg_color'                      => '#403159',
+					'image_container_bg'                 => '#3D2F54',
+					'form_area_bg'                       => '#513E70',
+					'title_color'                        => '#FDFDFD',
+					'subtitle_color'                     => '#FDFDFD',
+					'content_color'                      => '#ADB5B7',
+					'link_static_color'                  => '#A4B824',
+					'link_hover_color'                   => '#B9CE33',
+					'link_active_color'                  => '#B9CE33',
+					'cta_button_static_bg'               => '#A4B824',
+					'cta_button_hover_bg'                => '#B9CE33',
+					'cta_button_active_bg'               => '#B9CE33',
+					'cta_button_static_color'            => '#FFFFFF',
+					'cta_button_hover_color'             => '#FFFFFF',
+					'cta_button_active_color'            => '#FFFFFF',
+					// GDPR Field
+					'gdpr_content'                       => '#ADB5B7',
+					'gdpr_chechbox_background_static'    => '#FDFDFD',
+					'gdpr_checkbox_background_active'    => '#FDFDFD',
+					'gdpr_checkbox_icon'                 => '#38C5B5',
+					// Opt-in Form
+					'optin_input_static_bg'              => '#FDFDFD',
+					'optin_input_hover_bg'               => '#FDFDFD',
+					'optin_input_active_bg'              => '#FDFDFD',
+					'optin_input_icon'                   => '#ADB5B7',
+					'optin_placeholder_color'            => '#ADB5B7',
 					'optin_form_field_text_static_color' => '#363B3F',
-					'optin_form_field_text_hover_color' => '#363B3F',
+					'optin_form_field_text_hover_color'  => '#363B3F',
 					'optin_form_field_text_active_color' => '#363B3F',
-
-					'optin_submit_button_static_bg' => '#A4B824',
-					'optin_submit_button_hover_bg' => '#B9CE33',
-					'optin_submit_button_active_bg' => '#B9CE33',
-
-					'optin_submit_button_static_color' => '#FDFDFD',
-					'optin_submit_button_hover_color' => '#FDFDFD',
-					'optin_submit_button_active_color' => '#FDFDFD',
-
-					'optin_error_text_color' => '#F1F1F1',
-					'optin_error_text_bg' => '#EA6464',
-
-					'optin_mailchimp_title_color' => '#FDFDFD',
-					'optin_mailchimp_labels_color' => '#ADB5B7',
-
-					'optin_check_radio_bg' => '#FDFDFD',
-
-					'optin_check_radio_tick_color' => '#38C5B5',
-
-					'optin_success_tick_color' => '#38C5B5',
-
-					'optin_success_content_color' => '#FDFDFD',
-
-					'overlay_bg' => 'rgba(51,51,51,0.9)',
-
-					'close_button_static_color' => '#FDFDFD',
-					'close_button_hover_color' => '#FDFDFD',
-					'close_button_active_color' => '#FDFDFD',
+					'optin_submit_button_static_bg'      => '#A4B824',
+					'optin_submit_button_hover_bg'       => '#B9CE33',
+					'optin_submit_button_active_bg'      => '#B9CE33',
+					'optin_submit_button_static_color'   => '#FDFDFD',
+					'optin_submit_button_hover_color'    => '#FDFDFD',
+					'optin_submit_button_active_color'   => '#FDFDFD',
+					'optin_error_text_color'             => '#F1F1F1',
+					'optin_error_text_bg'                => '#EA6464',
+					// Mailchimp Extras
+					'optin_mailchimp_title_color'        => '#FDFDFD',
+					'optin_mailchimp_labels_color'       => '#ADB5B7',
+					'optin_check_radio_bg'               => '#FDFDFD',
+					'optin_check_radio_tick_color'       => '#38C5B5',
+					// Additional Settings
+					'optin_success_tick_color'           => '#38C5B5',
+					'optin_success_content_color'        => '#FDFDFD',
+					'overlay_bg'                         => 'rgba(51,51,51,0.9)',
+					'close_button_static_color'          => '#FDFDFD',
+					'close_button_hover_color'           => '#FDFDFD',
+					'close_button_active_color'          => '#FDFDFD',
 				),
-				'Blue' => array(
-					'main_bg_color' => '#176387',
-					'image_container_bg' => '#165E80',
-					'form_area_bg' => '#78B5D1',
-
-					'title_color' => '#FDFDFD',
-					'subtitle_color' => '#FDFDFD',
-					'content_color' => '#ADB5B7',
-
-					'link_static_color' => '#78B5D1',
-					'link_hover_color' => '#4D95B6',
-					'link_active_color' => '#4D95B6',
-
-					'cta_button_static_bg' => '#4D95B6',
-					'cta_button_hover_bg' => '#78B5D1',
-					'cta_button_active_bg' => '#78B5D1',
-
-					'cta_button_static_color' => '#FFFFFF',
-					'cta_button_hover_color' => '#FFFFFF',
-					'cta_button_active_color' => '#FFFFFF',
-
-					'optin_input_static_bg' => '#FDFDFD',
-					'optin_input_hover_bg' => '#FDFDFD',
-					'optin_input_active_bg' => '#FDFDFD',
-
-					'optin_input_icon' => '#ADB5B7',
-
-					'optin_placeholder_color' => '#ADB5B7',
-
+				'Blue'       => array(
+					// Basic
+					'main_bg_color'                      => '#176387',
+					'image_container_bg'                 => '#165E80',
+					'form_area_bg'                       => '#78B5D1',
+					'title_color'                        => '#FDFDFD',
+					'subtitle_color'                     => '#FDFDFD',
+					'content_color'                      => '#ADB5B7',
+					'link_static_color'                  => '#78B5D1',
+					'link_hover_color'                   => '#4D95B6',
+					'link_active_color'                  => '#4D95B6',
+					'cta_button_static_bg'               => '#4D95B6',
+					'cta_button_hover_bg'                => '#78B5D1',
+					'cta_button_active_bg'               => '#78B5D1',
+					'cta_button_static_color'            => '#FFFFFF',
+					'cta_button_hover_color'             => '#FFFFFF',
+					'cta_button_active_color'            => '#FFFFFF',
+					// GDPR Field
+					'gdpr_content'                       => '#ADB5B7',
+					'gdpr_chechbox_background_static'    => '#FDFDFD',
+					'gdpr_checkbox_background_active'    => '#FDFDFD',
+					'gdpr_checkbox_icon'                 => '#38C5B5',
+					// Opt-in Form
+					'optin_input_static_bg'              => '#FDFDFD',
+					'optin_input_hover_bg'               => '#FDFDFD',
+					'optin_input_active_bg'              => '#FDFDFD',
+					'optin_input_icon'                   => '#ADB5B7',
+					'optin_placeholder_color'            => '#ADB5B7',
 					'optin_form_field_text_static_color' => '#363B3F',
-					'optin_form_field_text_hover_color' => '#363B3F',
+					'optin_form_field_text_hover_color'  => '#363B3F',
 					'optin_form_field_text_active_color' => '#363B3F',
-
-					'optin_submit_button_static_bg' => '#4D95B6',
-					'optin_submit_button_hover_bg' => '#176387',
-					'optin_submit_button_active_bg' => '#176387',
-
-					'optin_submit_button_static_color' => '#FDFDFD',
-					'optin_submit_button_hover_color' => '#FDFDFD',
-					'optin_submit_button_active_color' => '#FDFDFD',
-
-					'optin_error_text_color' => '#F1F1F1',
-					'optin_error_text_bg' => '#EA6464',
-
-					'optin_mailchimp_title_color' => '#FDFDFD',
-					'optin_mailchimp_labels_color' => '#ADB5B7',
-
-					'optin_check_radio_bg' => '#FDFDFD',
-
-					'optin_check_radio_tick_color' => '#38C5B5',
-
-					'optin_success_tick_color' => '#38C5B5',
-
-					'optin_success_content_color' => '#FDFDFD',
-
-					'overlay_bg' => 'rgba(51,51,51,0.9)',
-
-					'close_button_static_color' => '#FDFDFD',
-					'close_button_hover_color' => '#FDFDFD',
-					'close_button_active_color' => '#FDFDFD',
+					'optin_submit_button_static_bg'      => '#4D95B6',
+					'optin_submit_button_hover_bg'       => '#176387',
+					'optin_submit_button_active_bg'      => '#176387',
+					'optin_submit_button_static_color'   => '#FDFDFD',
+					'optin_submit_button_hover_color'    => '#FDFDFD',
+					'optin_submit_button_active_color'   => '#FDFDFD',
+					'optin_error_text_color'             => '#F1F1F1',
+					'optin_error_text_bg'                => '#EA6464',
+					// Mailchimp Extras
+					'optin_mailchimp_title_color'        => '#FDFDFD',
+					'optin_mailchimp_labels_color'       => '#ADB5B7',
+					'optin_check_radio_bg'               => '#FDFDFD',
+					'optin_check_radio_tick_color'       => '#38C5B5',
+					// Additional Settings
+					'optin_success_tick_color'           => '#38C5B5',
+					'optin_success_content_color'        => '#FDFDFD',
+					'overlay_bg'                         => 'rgba(51,51,51,0.9)',
+					'close_button_static_color'          => '#FDFDFD',
+					'close_button_hover_color'           => '#FDFDFD',
+					'close_button_active_color'          => '#FDFDFD',
 				),
-				'Sunrise' => array(
-					'main_bg_color' => '#B03E34',
-					'image_container_bg' => '#A73B31',
-					'form_area_bg' => '#CB4B40',
-
-					'title_color' => '#FDFDFD',
-					'subtitle_color' => '#FDFDFD',
-					'content_color' => '#ADB5B7',
-
-					'link_static_color' => '#CBB000',
-					'link_hover_color' => '#CCB83D',
-					'link_active_color' => '#CCB83D',
-
-					'cta_button_static_bg' => '#CBB000',
-					'cta_button_hover_bg' => '#CCB83D',
-					'cta_button_active_bg' => '#CCB83D',
-
-					'cta_button_static_color' => '#FFFFFF',
-					'cta_button_hover_color' => '#FFFFFF',
-					'cta_button_active_color' => '#FFFFFF',
-
-					'optin_input_static_bg' => '#FDFDFD',
-					'optin_input_hover_bg' => '#FDFDFD',
-					'optin_input_active_bg' => '#FDFDFD',
-
-					'optin_input_icon' => '#ADB5B7',
-
-					'optin_placeholder_color' => '#ADB5B7',
-
+				'Sunrise'    => array(
+					// Basic
+					'main_bg_color'                      => '#B03E34',
+					'image_container_bg'                 => '#A73B31',
+					'form_area_bg'                       => '#CB4B40',
+					'title_color'                        => '#FDFDFD',
+					'subtitle_color'                     => '#FDFDFD',
+					'content_color'                      => '#ADB5B7',
+					'link_static_color'                  => '#CBB000',
+					'link_hover_color'                   => '#CCB83D',
+					'link_active_color'                  => '#CCB83D',
+					'cta_button_static_bg'               => '#CBB000',
+					'cta_button_hover_bg'                => '#CCB83D',
+					'cta_button_active_bg'               => '#CCB83D',
+					'cta_button_static_color'            => '#FFFFFF',
+					'cta_button_hover_color'             => '#FFFFFF',
+					'cta_button_active_color'            => '#FFFFFF',
+					// GDPR Field
+					'gdpr_content'                       => '#ADB5B7',
+					'gdpr_chechbox_background_static'    => '#FDFDFD',
+					'gdpr_checkbox_background_active'    => '#FDFDFD',
+					'gdpr_checkbox_icon'                 => '#38C5B5',
+					// Opt-in Form
+					'optin_input_static_bg'              => '#FDFDFD',
+					'optin_input_hover_bg'               => '#FDFDFD',
+					'optin_input_active_bg'              => '#FDFDFD',
+					'optin_input_icon'                   => '#ADB5B7',
+					'optin_placeholder_color'            => '#ADB5B7',
 					'optin_form_field_text_static_color' => '#363B3F',
-					'optin_form_field_text_hover_color' => '#363B3F',
+					'optin_form_field_text_hover_color'  => '#363B3F',
 					'optin_form_field_text_active_color' => '#363B3F',
-
-					'optin_submit_button_static_bg' => '#CBB000',
-					'optin_submit_button_hover_bg' => '#CCB83D',
-					'optin_submit_button_active_bg' => '#CCB83D',
-
-					'optin_submit_button_static_color' => '#FDFDFD',
-					'optin_submit_button_hover_color' => '#FDFDFD',
-					'optin_submit_button_active_color' => '#FDFDFD',
-
-					'optin_error_text_color' => '#F1F1F1',
-					'optin_error_text_bg' => '#EA6464',
-
-					'optin_mailchimp_title_color' => '#FDFDFD',
-					'optin_mailchimp_labels_color' => '#ADB5B7',
-
-					'optin_check_radio_bg' => '#FDFDFD',
-
-					'optin_check_radio_tick_color' => '#38C5B5',
-
-					'optin_success_tick_color' => '#38C5B5',
-
-					'optin_success_content_color' => '#FDFDFD',
-
-					'overlay_bg' => 'rgba(51,51,51,0.9)',
-
-					'close_button_static_color' => '#FDFDFD',
-					'close_button_hover_color' => '#FDFDFD',
-					'close_button_active_color' => '#FDFDFD',
+					'optin_submit_button_static_bg'      => '#CBB000',
+					'optin_submit_button_hover_bg'       => '#CCB83D',
+					'optin_submit_button_active_bg'      => '#CCB83D',
+					'optin_submit_button_static_color'   => '#FDFDFD',
+					'optin_submit_button_hover_color'    => '#FDFDFD',
+					'optin_submit_button_active_color'   => '#FDFDFD',
+					'optin_error_text_color'             => '#F1F1F1',
+					'optin_error_text_bg'                => '#EA6464',
+					// Mailchimp Extras
+					'optin_mailchimp_title_color'        => '#FDFDFD',
+					'optin_mailchimp_labels_color'       => '#ADB5B7',
+					'optin_check_radio_bg'               => '#FDFDFD',
+					'optin_check_radio_tick_color'       => '#38C5B5',
+					// Additional Settings
+					'optin_success_tick_color'           => '#38C5B5',
+					'optin_success_content_color'        => '#FDFDFD',
+					'overlay_bg'                         => 'rgba(51,51,51,0.9)',
+					'close_button_static_color'          => '#FDFDFD',
+					'close_button_hover_color'           => '#FDFDFD',
+					'close_button_active_color'          => '#FDFDFD',
 				),
-				'Midnight' => array(
-					'main_bg_color' => '#25282B',
-					'image_container_bg' => '#232629',
-					'form_area_bg' => '#363B3F',
-
-					'title_color' => '#FDFDFD',
-					'subtitle_color' => '#FDFDFD',
-					'content_color' => '#ADB5B7',
-
-					'link_static_color' => '#DD4F3D',
-					'link_hover_color' => '#C63D2B',
-					'link_active_color' => '#C63D2B',
-
-					'cta_button_static_bg' => '#DD4F3D',
-					'cta_button_hover_bg' => '#C63D2B',
-					'cta_button_active_bg' => '#C63D2B',
-
-					'cta_button_static_color' => '#FFFFFF',
-					'cta_button_hover_color' => '#FFFFFF',
-					'cta_button_active_color' => '#FFFFFF',
-
-					'optin_input_static_bg' => '#FDFDFD',
-					'optin_input_hover_bg' => '#FDFDFD',
-					'optin_input_active_bg' => '#FDFDFD',
-
-					'optin_input_icon' => '#ADB5B7',
-
-					'optin_placeholder_color' => '#ADB5B7',
-
+				'Midnight'   => array(
+					// Basic
+					'main_bg_color'                      => '#25282B',
+					'image_container_bg'                 => '#232629',
+					'form_area_bg'                       => '#363B3F',
+					'title_color'                        => '#FDFDFD',
+					'subtitle_color'                     => '#FDFDFD',
+					'content_color'                      => '#ADB5B7',
+					'link_static_color'                  => '#DD4F3D',
+					'link_hover_color'                   => '#C63D2B',
+					'link_active_color'                  => '#C63D2B',
+					'cta_button_static_bg'               => '#DD4F3D',
+					'cta_button_hover_bg'                => '#C63D2B',
+					'cta_button_active_bg'               => '#C63D2B',
+					'cta_button_static_color'            => '#FFFFFF',
+					'cta_button_hover_color'             => '#FFFFFF',
+					'cta_button_active_color'            => '#FFFFFF',
+					// GDPR Field
+					'gdpr_content'                       => '#ADB5B7',
+					'gdpr_chechbox_background_static'    => '#FDFDFD',
+					'gdpr_checkbox_background_active'    => '#FDFDFD',
+					'gdpr_checkbox_icon'                 => '#38C5B5',
+					// Opt-in Form
+					'optin_input_static_bg'              => '#FDFDFD',
+					'optin_input_hover_bg'               => '#FDFDFD',
+					'optin_input_active_bg'              => '#FDFDFD',
+					'optin_input_icon'                   => '#ADB5B7',
+					'optin_placeholder_color'            => '#ADB5B7',
 					'optin_form_field_text_static_color' => '#363B3F',
-					'optin_form_field_text_hover_color' => '#363B3F',
+					'optin_form_field_text_hover_color'  => '#363B3F',
 					'optin_form_field_text_active_color' => '#363B3F',
-
-					'optin_submit_button_static_bg' => '#DD4F3D',
-					'optin_submit_button_hover_bg' => '#C63D2B',
-					'optin_submit_button_active_bg' => '#C63D2B',
-
-					'optin_submit_button_static_color' => '#FDFDFD',
-					'optin_submit_button_hover_color' => '#FDFDFD',
-					'optin_submit_button_active_color' => '#FDFDFD',
-
-					'optin_error_text_color' => '#F1F1F1',
-					'optin_error_text_bg' => '#EA6464',
-
-					'optin_mailchimp_title_color' => '#FDFDFD',
-					'optin_mailchimp_labels_color' => '#ADB5B7',
-
-					'optin_check_radio_bg' => '#FDFDFD',
-
-					'optin_check_radio_tick_color' => '#38C5B5',
-
-					'optin_success_tick_color' => '#38C5B5',
-
-					'optin_success_content_color' => '#FDFDFD',
-
-					'overlay_bg' => 'rgba(51,51,51,0.9)',
-
-					'close_button_static_color' => '#FDFDFD',
-					'close_button_hover_color' => '#FDFDFD',
-					'close_button_active_color' => '#FDFDFD',
-				)
+					'optin_submit_button_static_bg'      => '#DD4F3D',
+					'optin_submit_button_hover_bg'       => '#C63D2B',
+					'optin_submit_button_active_bg'      => '#C63D2B',
+					'optin_submit_button_static_color'   => '#FDFDFD',
+					'optin_submit_button_hover_color'    => '#FDFDFD',
+					'optin_submit_button_active_color'   => '#FDFDFD',
+					'optin_error_text_color'             => '#F1F1F1',
+					'optin_error_text_bg'                => '#EA6464',
+					// Mailchimp Extras
+					'optin_mailchimp_title_color'        => '#FDFDFD',
+					'optin_mailchimp_labels_color'       => '#ADB5B7',
+					'optin_check_radio_bg'               => '#FDFDFD',
+					'optin_check_radio_tick_color'       => '#38C5B5',
+					// Additional Settings
+					'optin_success_tick_color'           => '#38C5B5',
+					'optin_success_content_color'        => '#FDFDFD',
+					'overlay_bg'                         => 'rgba(51,51,51,0.9)',
+					'close_button_static_color'          => '#FDFDFD',
+					'close_button_hover_color'           => '#FDFDFD',
+					'close_button_active_color'          => '#FDFDFD',
+				),
 			);
 		}
 
@@ -514,55 +482,57 @@ if ( !class_exists ('Opt_In_Static', false ) ) {
 		 * Default form filds for a new form
 		 */
 		public function default_form_fields() {
+
 			return array(
-				'email' => array(
-					'required'      => true,
-					'label'         => __( 'Your email', Opt_In::TEXT_DOMAIN ),
-					'name'          => 'email',
-					'type'          => 'email',
-					'placeholder'   => 'johnsmith@example.com',
-					'delete'        => false
+				'email'      => array(
+					'required'    => true,
+					'label'       => __( 'Your email', Opt_In::TEXT_DOMAIN ),
+					'name'        => 'email',
+					'type'        => 'email',
+					'placeholder' => 'johnsmith@example.com',
+					'delete'      => false,
 				),
 				'first_name' => array(
-					'required'      => false,
-					'label'         => __( 'First Name', Opt_In::TEXT_DOMAIN ),
-					'name'          => 'first_name',
-					'type'          => 'name',
-					'placeholder'   => 'John',
-					'delete'        => true
+					'required'    => false,
+					'label'       => __( 'First Name', Opt_In::TEXT_DOMAIN ),
+					'name'        => 'first_name',
+					'type'        => 'name',
+					'placeholder' => 'John',
+					'delete'      => true,
 				),
-				'last_name' => array(
-					'required'      => false,
-					'label'         => __( 'Last Name', Opt_In::TEXT_DOMAIN ),
-					'name'          => 'last_name',
-					'type'          => 'name',
-					'placeholder'   => 'Smith',
-					'delete'        => true
+				'last_name'  => array(
+					'required'    => false,
+					'label'       => __( 'Last Name', Opt_In::TEXT_DOMAIN ),
+					'name'        => 'last_name',
+					'type'        => 'name',
+					'placeholder' => 'Smith',
+					'delete'      => true,
 				),
-				'submit' => array(
-					'required'      => true,
-					'label'         => __( 'Submit', Opt_In::TEXT_DOMAIN ),
-					'name'          => 'submit',
-					'type'          => 'submit',
-					'placeholder'   => 'Subscribe',
-					'delete'        => false
-				)
+				'submit'     => array(
+					'required'    => true,
+					'label'       => __( 'Submit', Opt_In::TEXT_DOMAIN ),
+					'name'        => 'submit',
+					'type'        => 'submit',
+					'placeholder' => 'Subscribe',
+					'delete'      => false,
+				),
 			);
 		}
 
 		public function get_providers_with_args() {
-			return array(
-				'mailchimp'
-			);
+			return array( 'mailchimp' );
 		}
 
 		public static function get_client_ip() {
 
 			$ip_addr = lib3()->net->current_ip()->ip;
-			if ( $ip_addr )
+
+			if ( $ip_addr ) {
 				$ipaddress = $ip_addr;
-			else
+			} else {
 				$ipaddress = 'UNKNOWN';
+			}
+
 			return $ipaddress;
 		}
 
@@ -573,7 +543,8 @@ if ( !class_exists ('Opt_In_Static', false ) ) {
 		 */
 		public function get_countries() {
 
-			return apply_filters( 'opt_in-country-list', array(
+			return apply_filters(
+				'opt_in-country-list', array(
 					'AU' => __( 'Australia', Opt_In::TEXT_DOMAIN ),
 					'AF' => __( 'Afghanistan', Opt_In::TEXT_DOMAIN ),
 					'AL' => __( 'Albania', Opt_In::TEXT_DOMAIN ),
@@ -613,7 +584,7 @@ if ( !class_exists ('Opt_In_Static', false ) ) {
 					'CM' => __( 'Cameroon', Opt_In::TEXT_DOMAIN ),
 					'CA' => __( 'Canada', Opt_In::TEXT_DOMAIN ),
 					'CV' => __( 'Cape Verde', Opt_In::TEXT_DOMAIN ),
-					'KY' => __( 'Cayman Is', Opt_In::TEXT_DOMAIN ),
+					'KY' => __( 'Cayman Islands', Opt_In::TEXT_DOMAIN ),
 					'CF' => __( 'Central African Republic', Opt_In::TEXT_DOMAIN ),
 					'TD' => __( 'Chad', Opt_In::TEXT_DOMAIN ),
 					'CL' => __( 'Chile', Opt_In::TEXT_DOMAIN ),
@@ -819,10 +790,9 @@ if ( !class_exists ('Opt_In_Static', false ) ) {
 					'YU' => __( 'Yugoslavia', Opt_In::TEXT_DOMAIN ),
 					'ZR' => __( 'Zaire', Opt_In::TEXT_DOMAIN ),
 					'ZM' => __( 'Zambia', Opt_In::TEXT_DOMAIN ),
-					'ZW' => __( 'Zimbabwe', Opt_In::TEXT_DOMAIN )
-				));
-
-
+					'ZW' => __( 'Zimbabwe', Opt_In::TEXT_DOMAIN ),
+				)
+			);
 		}
 	}
 }

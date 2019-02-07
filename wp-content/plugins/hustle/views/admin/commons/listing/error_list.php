@@ -11,7 +11,7 @@
 			<div class="col-xs-12">
 				<section class="box">
 					<div class="box-title">
-						<h3>{{name}}<span class="wpoi-total-errors"><?php _e('Total {{total}} errors', Opt_In::TEXT_DOMAIN); ?></span></h3>
+						<h3>{{name}}<span class="wpoi-total-errors"><?php esc_attr_e('Total {{total}} errors', Opt_In::TEXT_DOMAIN); ?></span></h3>
 						<a href="#" aria-label="Close" class="wph-icon i-close inc-opt-close-error-list"></a>
 					</div>
 
@@ -22,12 +22,12 @@
 						</div>
 						<div class="wpoi-error-list-footer">
 							<span class="hustle-delete-logs-confirmation">
-								<label class="wph-label--alt"><?php _e( 'Are you sure?', Opt_In::TEXT_DOMAIN ); ?></label>
-								<button type="button" class="wph-button wph-button--small wph-button--filled wph-button--gray button-delete-logs"><?php _e( 'Yes', Opt_In::TEXT_DOMAIN ); ?></button>
-								<button type="button" class="wph-button wph-button--small wph-button--filled wph-button--gray button-cancel-delete-logs"><?php _e( 'No', Opt_In::TEXT_DOMAIN ); ?></button>
+								<label class="wph-label--alt"><?php esc_attr_e( 'Are you sure?', Opt_In::TEXT_DOMAIN ); ?></label>
+								<button type="button" class="wph-button wph-button--small wph-button--filled wph-button--gray button-delete-logs"><?php esc_attr_e( 'Yes', Opt_In::TEXT_DOMAIN ); ?></button>
+								<button type="button" class="wph-button wph-button--small wph-button--filled wph-button--gray button-cancel-delete-logs"><?php esc_attr_e( 'No', Opt_In::TEXT_DOMAIN ); ?></button>
 							</span>
-							<button type="button" class="wph-button wph-button--small wph-button--filled wph-button--gray button-clear-logs"><?php _e( 'Clear Logs', Opt_In::TEXT_DOMAIN ); ?></button>
-							<a href="<?php echo esc_url( admin_url( 'admin-ajax.php?action=export_error_logs&optin_id=' ) ); ?>{{optin_id}}&_wpnonce=<?php echo wp_create_nonce( 'optin_export_error_logs' ); ?>" class="wph-button wph-button--small wph-button--filled wph-button--gray button-download-csv"><?php _e( 'Export CSV', Opt_In::TEXT_DOMAIN ); ?></a>
+							<button type="button" class="wph-button wph-button--small wph-button--filled wph-button--gray button-clear-logs"><?php esc_attr_e( 'Clear Logs', Opt_In::TEXT_DOMAIN ); ?></button>
+							<a href="<?php echo esc_url( admin_url( 'admin-ajax.php?action=export_error_logs&optin_id=' ) ); ?>{{optin_id}}&_wpnonce=<?php echo esc_attr( wp_create_nonce( 'optin_export_error_logs' ) ); ?>" class="wph-button wph-button--small wph-button--filled wph-button--gray button-download-csv"><?php esc_attr_e( 'Export CSV', Opt_In::TEXT_DOMAIN ); ?></a>
 						</div>
 					</div>
 				</section>
@@ -40,8 +40,8 @@
 		<# _.each( headers, function( v, k ) { #>
 		<th class="column-{{v.name}}">{{v.label}}</th>
 		<# }) #>
-		<th class="column-error"><?php _e( 'Error', Opt_In::TEXT_DOMAIN ); ?></th>
-		<th class="column-date"><?php _e( 'Date', Opt_In::TEXT_DOMAIN ); ?></th>
+		<th class="column-error"><?php esc_attr_e( 'Error', Opt_In::TEXT_DOMAIN ); ?></th>
+		<th class="column-date"><?php esc_attr_e( 'Date', Opt_In::TEXT_DOMAIN ); ?></th>
 	</tr>
 </script>
 <script id="wpoi-error-list-tpl" type="text/template">

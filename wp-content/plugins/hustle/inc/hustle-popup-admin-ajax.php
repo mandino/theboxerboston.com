@@ -10,133 +10,84 @@ class Hustle_Popup_Admin_Ajax {
 	private $_hustle;
 	private $_admin;
 
-	function __construct( Opt_In $hustle, Hustle_Popup_Admin $admin ){
+	public function __construct( Opt_In $hustle, Hustle_Popup_Admin $admin ){
 
 		$this->_hustle = $hustle;
 		$this->_admin = $admin;
 
-		add_action("wp_ajax_render_provider_account_options", array( $this, "render_provider_account_options" ));
-		add_action("wp_ajax_refresh_provider_account_details", array( $this, "refresh_provider_account_details" ));
+		add_action( "wp_ajax_provider_form_settings", array( $this , "get_provider_form_settings" ) );
 		add_action("wp_ajax_hustle_save_popup_module", array( $this, "save_popup" ));
 		add_action("wp_ajax_hustle_popup_prepare_custom_css", array( $this, "prepare_custom_css" ));
 		add_action("wp_ajax_hustle_popup_module_toggle_state", array( $this, "toggle_module_state" ));
 		add_action("wp_ajax_hustle_popup_module_toggle_tracking_activity", array( $this, "toggle_tracking_activity" ));
+		add_action("wp_ajax_hustle_popup_duplicate", array( $this, "duplicate" ));
 		add_action("wp_ajax_hustle_popup_toggle_test_activity", array( $this, "toggle_test_activity" ));
 		add_action("wp_ajax_hustle_delete_module", array( $this, "delete_module" ));
 		add_action("wp_ajax_hustle_get_email_lists", array( $this, "get_subscriptions_list" ));
 		add_action("wp_ajax_inc_optin_export_subscriptions", array( $this, "export_subscriptions" ));
 		add_action("wp_ajax_persist_new_welcome_close", array( $this, "persist_new_welcome_close" ));
+		// Maybe Legacy -> wp_ajax_add_module_field. Check in embeds and slide-ins as well
 		add_action("wp_ajax_add_module_field", array( $this, "add_module_field" ) );
 		add_action("wp_ajax_add_module_fields", array( $this, "add_module_fields" ) );
+		add_action( "wp_ajax_hustle_import_module", array( $this, "import_module" ));
 		add_action( "wp_ajax_get_error_list", array( $this, "get_error_list" ) );
 		add_action( "wp_ajax_clear_logs", array( $this, "clear_logs" ) );
 		add_action( "wp_ajax_inc_optin_export_error_logs", array( $this, "export_error_logs" ) );
 		add_action( "wp_ajax_sshare_show_page_content", array( $this, "sshare_show_page_content" ) );
-		add_action( "wp_ajax_update_hubspot_referrer", array( $this, "update_hubspot_referrer" ) );
-		add_action( "wp_ajax_update_constantcontact_referrer", array( $this, "update_constantcontact_referrer" ) );
+		add_action( "wp_ajax_get_new_condition_ids", array( $this, "get_new_condition_ids" ) );
+
+		if ( Opt_In_Utils::_is_free() && ! file_exists( WP_PLUGIN_DIR . '/hustle/opt-in.php' ) ) {
+			add_action( 'wp_ajax_hustle_dismiss_admin_notice', array( $this, 'dismiss_admin_notice' ) );
+		}
+
+		add_action( "wp_ajax_hustle_get_module_id_by_shortcode", array( $this, "get_module_id_by_shortcode" ) );
+		add_action( "wp_ajax_hustle_render_module", array( $this, "render_module" ) );
 	}
 
-	/**
-	 * Renders provider account options based on the selected provider ( provider id )
-	 *
-	 * @since 1.0
-	 */
-	function render_provider_account_options(){
+	public function get_provider_form_settings() {
+		Opt_In_Utils::validate_ajax_call( "get_provider_form_settings" );
 
-		Opt_In_Utils::validate_ajax_call( "change_provider_name" );
+		// Sanitizes the data from $_REQUEST['data'] and validate required fields
+		$sanitized_post_data = Opt_In_Utils::validate_and_sanitize_fields( $_REQUEST['data'], array( 'slug', 'step', 'current_step' ) );
+		if( isset( $sanitized_post_data['errors'] ) ){
+			wp_send_json_error(
+				array (
+					'message'	=> __( 'Please check the required fields.', Opt_In::TEXT_DOMAIN ),
+					'errors'	=> $sanitized_post_data['errors']
+				)
+			);
+		}
+		$slug                = $sanitized_post_data['slug'];
+		$step                = $sanitized_post_data['step'];
+		$current_step        = $sanitized_post_data['current_step'];
+		$is_step			 = $sanitized_post_data['is_step'];
 
-		$provider_id =  filter_input( INPUT_GET, "provider_id" );
+		$provider = Opt_In_Utils::get_provider_by_slug( $slug );
 
-		$module_id =  filter_input( INPUT_GET, "module_id" );
-
-		if( empty( $provider_id ) )  wp_send_json_error( __("Invalid provider", Opt_In::TEXT_DOMAIN) );
-
-		/**
-		 * @var $provider Opt_In_Provider_Interface
-		 */
-		$provider = Opt_In::get_provider_by_id( $provider_id );
-		$is_allowed = $this->_is_provider_allowed_to_run( $provider );
-		if( is_wp_error( $is_allowed )  ){
-			wp_send_json_error( $is_allowed->get_error_messages() );
+		if ( ! $provider ) {
+			wp_send_json_error( __( 'Provider not found', Opt_In::TEXT_DOMAIN ) );
 		}
 
-		$provider = Opt_In::provider_instance( $provider );
-
-		$provider->set_arg( 'current_page', 'hustle_popup' );
-
-		$options = $provider->is_authorized() ? $provider->get_account_options( $module_id ) : $provider->get_options();
-
-		$html = "";
-		foreach( $options as $key =>  $option ){
-			$html .= $this->_hustle->render("general/option", array_merge( $option, array( "key" => $key ) ), true);
+		if ( ! $provider->is_form_settings_available() ) {
+			wp_send_json_success(
+				array(
+					'data' =>  $provider->get_empty_wizard( __( 'This Provider does not have form settings available', Opt_In::TEXT_DOMAIN ) ),
+				)
+			);
 		}
 
-		wp_send_json_success( $html );
-	}
+		unset( $sanitized_post_data['slug'] );
+		unset( $sanitized_post_data['current_step'] );
+		unset( $sanitized_post_data['step'] );
+		unset( $sanitized_post_data['is_step'] );
 
-	/**
-	 * Refreshes provider account details after the account creds are added and submitted
-	 *
-	 * @since 1.0
-	 */
-	function refresh_provider_account_details(){
+		$wizard = $provider->get_form_settings_wizard( $sanitized_post_data, $current_step, $step, false, $is_step );
 
-		Opt_In_Utils::validate_ajax_call( "refresh_provider_details" );
-
-		$provider_id =  filter_input( INPUT_POST, "optin_provider_name" );
-
-		$module_id =  filter_input( INPUT_POST, "module_id" );
-
-		if( empty( $provider_id ) )  wp_send_json_error( __("Invalid provider", Opt_In::TEXT_DOMAIN) );
-
-		$api_key =  filter_input( INPUT_POST, "optin_api_key" );
-		/**
-		 * @var $provider Opt_In_Provider_Interface
-		 */
-		$provider = Opt_In::get_provider_by_id( $provider_id );
-
-		/**
-		 * @var $provider Opt_In_Provider_Abstract
-		 */
-		$provider = Opt_In::provider_instance( $provider );
-
-		$provider->set_arg( "api_key", $api_key );
-
-		if( filter_input( INPUT_POST, "optin_secret_key" ) )
-			$provider->set_arg( "secret", filter_input( INPUT_POST, "optin_secret_key" ) );
-		if( filter_input( INPUT_POST, "optin_username" ) )
-			$provider->set_arg( "username", filter_input( INPUT_POST, "optin_username" ) );
-		if ( filter_input( INPUT_POST, "optin_password" ) )
-			$provider->set_arg( "password", filter_input( INPUT_POST, "optin_password" ) );
-
-		if( filter_input( INPUT_POST, "optin_account_name" ) )
-			$provider->set_arg( "account_name", filter_input( INPUT_POST, "optin_account_name" ) );
-
-		if( filter_input( INPUT_POST, "optin_url" ) )
-			$provider->set_arg( "url", filter_input( INPUT_POST, "optin_url" ) );
-
-		$options = $provider->get_options( $module_id );
-
-		if( !empty( $options ) )
-			$provider->update_option( Opt_In::get_const( $provider, 'LISTS' ), serialize( $options ) );
-
-
-		if ( !is_wp_error( $options ) ) {
-			$html = "";
-			if ( !empty( $options ) ) {
-				foreach( $options as $key =>  $option ){
-					$html .= $this->_hustle->render("general/option", array_merge( $option, array( "key" => $key ) ), true);
-				}
-			}
-
-			wp_send_json_success( $html );
-		} else {
-			/**
-			 * @var WP_Error $options
-			 */
-			wp_send_json_error( implode( "<br/>", $options->get_error_messages() ) );
-		}
-
+		wp_send_json_success(
+			array(
+				'data' => $wizard
+			)
+		);
 	}
 
 	/**
@@ -144,7 +95,7 @@ class Hustle_Popup_Admin_Ajax {
 	 *
 	 * @since 1.0
 	 */
-	function prepare_custom_css(){
+	public function prepare_custom_css(){
 
 		Opt_In_Utils::validate_ajax_call( "hustle_module_prepare_custom_css" );
 
@@ -161,23 +112,120 @@ class Hustle_Popup_Admin_Ajax {
 	}
 
 	/**
+	 * Finds and repares select2 options
+	 *
+	 * @global type $wpdb
+	 * @since 3.0.7
+	 */
+	public function get_new_condition_ids() {
+		$post_type = filter_input( INPUT_POST, 'post_type', FILTER_SANITIZE_STRING );
+		$search = filter_input( INPUT_POST, 'search' );
+		$result = array();
+		$limit = 30;
+		if ( !empty( $post_type ) ) {
+			if ( in_array( $post_type, array( 'tag', 'category' ), true ) ) {
+				$args = array(
+					'hide_empty' =>false,
+					'search' => $search,
+					'number' => $limit,
+				);
+				if ( 'tag' === $post_type ) {
+					$args['taxonomy'] = 'post_tag';
+				}
+				$result = array_map(array( 'Hustle_Module_Admin', "terms_to_select2_data"), get_categories( $args ));
+			} else {
+				global $wpdb;
+				$result = $wpdb->get_results( $wpdb->prepare( "SELECT ID as id, post_title as text FROM {$wpdb->posts} "
+				. "WHERE post_type = %s AND post_status = 'publish' AND post_title LIKE %s LIMIT " . intval( $limit ), $post_type, '%'. $search . '%' ) );
+
+				$obj = get_post_type_object( $post_type );
+				$all_items = !empty( $obj ) && !empty( $obj->labels->all_items )
+						? $obj->labels->all_items : __( "All Items", Opt_In::TEXT_DOMAIN );
+				/**
+				 * Add ALL Items option
+				 */
+				$all = new stdClass();
+				$all->id = "all";
+				$all->text = $all_items;
+				if ( empty( $search ) || false !== stripos( $all_items, $search ) ) {
+					array_unshift($result, $all);
+				}
+			}
+		}
+
+		wp_send_json_success( $result );
+	}
+
+	/**
+	 * Checks if e-Newsletter should be synced with current local collection
+	 *
+	 * @since 3.0
+	 *
+	 * @return true|false
+	 */
+	public function check_enews_sync(){
+
+		//do sync if e-Newsletter plugin is active, e-Newsletter is the active provider,
+		//and if the plugin was deactivated or e-Newsletter wasn't the active provider before
+		if( 'e_newsletter' === $_POST['content']['active_email_service'] && class_exists( 'Email_Newsletter' ) ) {
+
+			if( !isset($_POST['content']['email_services']['e_newsletter']['synced']) || '0' === $_POST['content']['email_services']['e_newsletter']['synced'] ){
+				$_POST['content']['email_services']['e_newsletter']['synced'] = 1;
+				return true;
+			}
+			return false;
+
+		} else {
+
+			$_POST['content']['email_services']['e_newsletter']['synced'] = 0;
+			return false;
+		}
+	}
+
+	/**
+	 * Does the actual sync with the current local collection and e-Newsletter
+	 * It's only called when check_enews_sync method returns true
+	 *
+	 * @since 3.0
+	 *
+	 * @var int $id
+	 */
+	public function do_sync( $id ){
+		$provider = Opt_In_Utils::get_provider_by_slug( $_POST['content']['active_email_service'] );
+
+		$module = Hustle_Module_Model::instance()->get( $id );
+		$lists = isset($_POST['content']['email_services']['e_newsletter']['list_id']) ? $_POST['content']['email_services']['e_newsletter']['list_id'] : array();
+		$provider->sync_with_current_local_collection( $module, $lists );
+	}
+
+	/**
 	 * Saves new optin to db
 	 *
 	 * @since 1.0
 	 */
-	function save_popup(){
+	public function save_popup(){
 
 		Opt_In_Utils::validate_ajax_call( "hustle_save_popup_module" );
 
 		$_POST = stripslashes_deep( $_POST );
+
+		//check if e-Newsletter sync should be done and set new "Synced" value
+		if( isset($_POST['content']['email_services']['e_newsletter']) ){
+			$do_sync = $this->check_enews_sync();
+		}
 
 		if( "-1" === $_POST['id']  )
 			$res = $this->_admin->save_new( $_POST );
 		else
 			$res = $this->_admin->update_module( $_POST );
 
+		//do sync with e-Newsletter after saving because we need the ID
+		if( isset($do_sync) && $do_sync ) {
+			$this->do_sync( $res );
+		}
+
 		wp_send_json( array(
-			"success" =>  $res === false ? false: true,
+			"success" => false === $res ? false: true,
 			"data" => $res
 		) );
 	}
@@ -188,13 +236,13 @@ class Hustle_Popup_Admin_Ajax {
 	 *
 	 * @since 1.0
 	 */
-	function toggle_module_state(){
+	public function toggle_module_state(){
 
 		Opt_In_Utils::validate_ajax_call( "popup_module_toggle_state" );
 
 		$id = filter_input( INPUT_POST, 'id', FILTER_VALIDATE_INT );
 		$enabled = trim( filter_input( INPUT_POST, 'enabled', FILTER_SANITIZE_STRING ) );
-		$enabled = ( $enabled == 'true' ) ? true : false;
+		$enabled = in_array( $enabled, array( 'true', true ), true );
 
 		if( !$id )
 			wp_send_json_error(__("Invalid Request", Opt_In::TEXT_DOMAIN));
@@ -202,22 +250,24 @@ class Hustle_Popup_Admin_Ajax {
 		$module = Hustle_Module_Model::instance()->get($id);
 		$current_state = (bool) $module->active;
 
-		if ( $enabled != $current_state ) {
+		if ( $enabled !== $current_state ) {
 			$result = $module->toggle_state();
 		} else {
 			$result = true; // all is well
 		}
 
-		// clear test types
-		$module->update_meta( $this->_hustle->get_const_var( "TEST_TYPES", $module ), array() );
+		// Disable test_mode if enabled
+		if ( 1 === (int)$module->test_mode ) {
+			$module->change_test_mode( false );
+		}
 
 		if( $result )
-			wp_send_json_success( __("Successful") );
+			wp_send_json_success( __("Successful", Opt_In::TEXT_DOMAIN) );
 		else
-			wp_send_json_error( __("Failed") );
+			wp_send_json_error( __("Failed", Opt_In::TEXT_DOMAIN) );
 	}
 
-	function toggle_tracking_activity(){
+	public function toggle_tracking_activity(){
 
 		Opt_In_Utils::validate_ajax_call( "popup_toggle_tracking_activity" );
 
@@ -229,13 +279,61 @@ class Hustle_Popup_Admin_Ajax {
 
 		$module =  Hustle_Module_Model::instance()->get($id);
 
-		if( $type != 'popup' )
-			wp_send_json_error(__("Invalid environment: " . $type, Opt_In::TEXT_DOMAIN));
+		if( 'popup' !== $type )
+			wp_send_json_error( sprintf( __("Invalid environment: %s", Opt_In::TEXT_DOMAIN), $type ));
 
 		$result = $module->toggle_type_track_mode( $type );
 
 		if( $result && !is_wp_error( $result ) )
-			wp_send_json_success( __("Successful") );
+			wp_send_json_success( __("Successful", Opt_In::TEXT_DOMAIN) );
+		else
+			wp_send_json_error( $result->get_error_message() );
+	}
+
+	public function duplicate(){
+		Opt_In_Utils::validate_ajax_call( "duplicate_popup" );
+		$id = filter_input( INPUT_POST, 'id', FILTER_VALIDATE_INT );
+		$type = trim( filter_input( INPUT_POST, 'type', FILTER_SANITIZE_STRING ) );
+		if( !$id || !$type ) {
+			wp_send_json_error(__("Invalid Request", Opt_In::TEXT_DOMAIN));
+		}
+		$module =  Hustle_Module_Model::instance()->get($id);
+		if( $module->module_type !== $type && in_array( $type, array( 'popup' ), true ) ) {
+			wp_send_json_error( __("Invalid environment: %s", Opt_In::TEXT_DOMAIN), $type);
+		}
+
+		// Prevent having more than 3 modules when it's free version.
+		$total = count(Hustle_Module_Collection::instance()->get_all( null, array( 'module_type' => 'popup' ) ));
+		if ( Opt_In_Utils::_is_free() && $total >= 3 ) {
+			wp_send_json_error( array( 'requires_pro' => true ) );
+		}
+
+		// Prevent having more than 3 modules when it's free version.
+		$total = count(Hustle_Module_Collection::instance()->get_all( null, array( 'module_type' => 'embedded' ) ));
+		if ( Opt_In_Utils::_is_free() && $total >= 3 ) {
+			wp_send_json_error( array( 'requires_pro' => true ) );
+		}
+
+		$content = $module->get_content()->to_array();
+		$design = $module->get_design()->to_array();
+		$settings = $module->get_display_settings()->to_array();
+		$shortcode_id = $module->get_shortcode_id();
+		unset( $module->id );
+		//rename
+		$module->module_name .= __(" (copy)", Opt_In::TEXT_DOMAIN);
+		//turn status off
+		$module->active = 0;
+		//save
+		$result = $module->save();
+		if ( $result ) {
+			// save to meta table
+			$module->add_meta( $this->_hustle->get_const_var( "KEY_CONTENT", $module ), $content );
+			$module->add_meta( $this->_hustle->get_const_var( "KEY_DESIGN", $module ), $design );
+			$module->add_meta( $this->_hustle->get_const_var( "KEY_SETTINGS", $module ), $settings );
+			$module->add_meta( $this->_hustle->get_const_var( "KEY_SHORTCODE_ID", $module ),  $shortcode_id );
+		}
+		if( $result && !is_wp_error( $result ) )
+			wp_send_json_success( __("Successful", Opt_In::TEXT_DOMAIN) );
 		else
 			wp_send_json_error( $result->get_error_message() );
 	}
@@ -245,33 +343,97 @@ class Hustle_Popup_Admin_Ajax {
 	 *
 	 * @since 1.0
 	 */
-	function toggle_test_activity(){
+	public function toggle_test_activity(){
 
 		Opt_In_Utils::validate_ajax_call( "popup_toggle_test_activity" );
 
+		$id = filter_input( INPUT_POST, 'id', FILTER_VALIDATE_INT );
+		//$type = trim( filter_input( INPUT_POST, 'type', FILTER_SANITIZE_STRING ) );
+
+		//if( !$id || !$type )
+		if( !$id )
+			wp_send_json_error(__("Invalid Request", Opt_In::TEXT_DOMAIN));
+
+		$module =  Hustle_Module_Model::instance()->get($id);
+
+		$result = $module->change_test_mode( true );
+
+		if ( $result && !is_wp_error( $result ) ) {
+			wp_send_json_success( __("Successful", Opt_In::TEXT_DOMAIN) );
+		} else {
+			if ( is_wp_error( $result ) ) {
+				$message = $result->get_error_message();
+			} else {
+				$message = false === $result ? 'There was an error updating.' : 'No updated rows.';
+			}
+			wp_send_json_error( $message );
+		}
+	}
+
+	public function import_module() {
 		$id = filter_input( INPUT_POST, 'id', FILTER_VALIDATE_INT );
 		$type = trim( filter_input( INPUT_POST, 'type', FILTER_SANITIZE_STRING ) );
 
 		if( !$id || !$type )
 			wp_send_json_error(__("Invalid Request", Opt_In::TEXT_DOMAIN));
 
+		Opt_In_Utils::validate_ajax_call( 'import_settings' . $id );
+
+		//get old module data
 		$module =  Hustle_Module_Model::instance()->get($id);
 
-		if( $type != 'popup' )
-			wp_send_json_error(__("Invalid environment: " . $type, Opt_In::TEXT_DOMAIN));
+		//get new module data
+		$file = isset( $_FILES['file'] ) ? $_FILES['file'] : false;
 
-		$result = $module->toggle_type_test_mode( $type );
+		if ( !$file ) {
+			wp_send_json_error( __("File is required", Opt_In::TEXT_DOMAIN) );
+		} else if ( !empty( $file['error'] ) ) {
+			wp_send_json_error( sprintf( __("Error: %s", Opt_In::TEXT_DOMAIN), esc_html( $file['error'] ) ) );
+		}
+		$overrides = array(
+			'test_form' => false,
+			'test_type' => false,
+		);
+		$wp_file = wp_handle_upload( $file, $overrides );
+		$filename = $wp_file['file'];
+		$file_content = file_get_contents( $filename );
 
-		if( $result && !is_wp_error( $result ) )
-			wp_send_json_success( __("Successful") );
-		else
-			wp_send_json_error( $result->get_error_message() );
+		// Import file if it's json format
+		$data = array();
+		if ( strpos( $filename, '.json' ) || strpos( $filename, '.JSON' ) ) {
+			$data = json_decode( $file_content );
+		}
+
+		//check required data
+		if ( !isset( $data->module_name ) || empty( $data->module_type ) || !isset( $data->test_mode ) || !isset( $data->active )
+				|| empty( $data->content ) || empty( $data->design ) || empty( $data->settings ) || empty( $data->shortcode_id ) ) {
+			wp_send_json_error( __("Invalid JSON", Opt_In::TEXT_DOMAIN) );
+		}
+
+		//check module type
+		if( Hustle_Module_Model::import_export_check_type( $data->module_type, $module->module_type ) )
+			wp_send_json_error( sprintf( __("Invalid environment: %s", Opt_In::TEXT_DOMAIN), $data->module_type ) );
+
+		// save to modules table
+		$module->module_name = $data->module_name;
+		$module->module_type = $data->module_type;
+		$module->active = (int) $data->active;
+		$module->test_mode = (int) $data->test_mode;
+		$module->save();
+
+		// save to meta table
+		$module->update_meta( $this->_hustle->get_const_var( "KEY_CONTENT", $module ), $data->content );
+		$module->update_meta( $this->_hustle->get_const_var( "KEY_DESIGN", $module ), $data->design );
+		$module->update_meta( $this->_hustle->get_const_var( "KEY_SETTINGS", $module ), $data->settings );
+		$module->update_meta( $this->_hustle->get_const_var( "KEY_SHORTCODE_ID", $module ), $data->shortcode_id );
+
+		wp_send_json_success( __("Successful", Opt_In::TEXT_DOMAIN) );
 	}
 
 	/**
 	 * Delete optin
 	 */
-	function delete_module(){
+	public function delete_module(){
 
 		Opt_In_Utils::validate_ajax_call( "hustle_delete_module" );
 
@@ -284,7 +446,7 @@ class Hustle_Popup_Admin_Ajax {
 			foreach( $ids as $id ) {
 				$result = Hustle_Module_Model::instance()->get($id)->delete();
 				if ( !$result ) {
-					wp_send_json_error( __("Failed") );
+					wp_send_json_error( __("Failed", Opt_In::TEXT_DOMAIN) );
 				}
 			}
 		} else {
@@ -295,9 +457,9 @@ class Hustle_Popup_Admin_Ajax {
 		}
 
 		if( $result )
-			wp_send_json_success( __("Successful") );
+			wp_send_json_success( __("Successful", Opt_In::TEXT_DOMAIN) );
 		else
-			wp_send_json_error( __("Failed") );
+			wp_send_json_error( __("Failed", Opt_In::TEXT_DOMAIN) );
 	}
 
 	/**
@@ -306,15 +468,16 @@ class Hustle_Popup_Admin_Ajax {
 	 * @param $provider
 	 * @return bool|WP_Error
 	 */
-	private function _is_provider_allowed_to_run($provider ){
+	/*private function _is_provider_allowed_to_run( $provider ){
 		$err = new WP_Error();
-		if( 'Opt_In_ConstantContact' === $provider && version_compare( PHP_VERSION, '5.3', '<' ) ){
-			$err->add("Constant Contact Not Allowed", __("This provider requires PHP5.3+ and can't be used with current server. Please upgrade to use this provider.", Opt_In::TEXT_DOMAIN) );	  			  	 	     			 	
+		if( ! $provider->is_activable() ){
+			$err->add( $provider->get_title() . " Not Allowed", __("This provider requires a higher PHP version or a higher Hustle version. Please upgrade to use this provider.", Opt_In::TEXT_DOMAIN) );
 			return $err;
 		}
 
 		return true;
 	}
+	*/
 
 	/**
 	 * Retrieves the subscription list from db
@@ -322,7 +485,7 @@ class Hustle_Popup_Admin_Ajax {
 	 *
 	 * @since 1.1.0
 	 */
-	function get_subscriptions_list(){
+	public function get_subscriptions_list(){
 		Opt_In_Utils::validate_ajax_call("hustle_get_emails_list");
 
 		$id = filter_input( INPUT_GET, 'id', FILTER_VALIDATE_INT );
@@ -333,7 +496,7 @@ class Hustle_Popup_Admin_Ajax {
 		$subscriptions = Hustle_Module_Model::instance()->get($id)->get_local_subscriptions();
 		$module_fields = Hustle_Module_Model::instance()->get($id)->get_content()->__get( 'form_elements' );
 		// Parse JSON if string, otherwise no parsing.
-		$module_fields = (gettype($module_fields) === 'string') ? json_decode($module_fields, true) : $module_fields;
+		$module_fields = ( 'string' === gettype($module_fields) ) ? json_decode($module_fields, true) : $module_fields;
 
 		if( $subscriptions )
 			wp_send_json_success( array(
@@ -349,26 +512,26 @@ class Hustle_Popup_Admin_Ajax {
 	 *
 	 * @since 2.0.2
 	 */
-	function persist_new_welcome_close() {
+	public function persist_new_welcome_close() {
 		Opt_In_Utils::validate_ajax_call( "hustle_new_welcome_notice" );
 		update_option("hustle_new_welcome_notice_dismissed", true);
 		wp_send_json_success();
 	}
 
 
-	function export_subscriptions(){
+	public function export_subscriptions(){
 		Opt_In_Utils::validate_ajax_call( 'inc_optin_export_subscriptions' );
 
 		$id = filter_input( INPUT_GET, 'id', FILTER_VALIDATE_INT );
 		$type = trim( filter_input( INPUT_GET, 'type', FILTER_SANITIZE_STRING ) );
 
 		if( !$id )
-			die(__("Invalid Request", Opt_In::TEXT_DOMAIN));
+			die(esc_html__("Invalid Request", Opt_In::TEXT_DOMAIN));
 
 		$optin = Hustle_Module_Model::instance()->get($id);
 		$module_fields = $optin->get_content($type)->__get( 'form_elements' );
 		// Parse JSON if string, otherwise no parsing.
-		$module_fields = (gettype($module_fields) === 'string') ? json_decode($module_fields, true) : $module_fields;
+		$module_fields = ( 'string' === gettype($module_fields) ) ? json_decode($module_fields, true) : $module_fields;
 		$name = $optin->get_content($type)->__get( 'module_name' );
 		$subscriptions = $optin->get_local_subscriptions();
 
@@ -384,8 +547,10 @@ class Hustle_Popup_Admin_Ajax {
 
 			foreach ( $fields as $key => $label ) {
 				// Check for legacy
-				if ( isset( $row->f_name ) && 'first_name' == $key ) $key = 'f_name';
-				if ( isset( $row->l_name ) && 'last_name' == $key ) $key = 'l_name';
+				if ( isset( $row->f_name ) && 'first_name' === $key )
+					$key = 'f_name';
+				if ( isset( $row->l_name ) && 'last_name' === $key )
+					$key = 'l_name';
 
 				$subscriber_data[ $key ] = isset( $row->$key ) ? $row->$key : '';
 			}
@@ -394,11 +559,11 @@ class Hustle_Popup_Admin_Ajax {
 
 		$file_name = strtolower( sanitize_file_name( $name ) ) . ".csv";
 
-		header("Content-type: application/x-msdownload",true,200);
+		header("Content-type: application/x-msdownload", true, 200);
 		header("Content-Disposition: attachment; filename=$file_name");
 		header("Pragma: no-cache");
 		header("Expires: 0");
-		echo $csv;
+		echo $csv; //phpcs:ignore
 		die();
 
 	}
@@ -406,14 +571,17 @@ class Hustle_Popup_Admin_Ajax {
 	/**
 	 * Validate new/updated custom module field.
 	 **/
-	function add_module_field() {
+	public function add_module_field() {
 		Opt_In_Utils::validate_ajax_call( 'optin_add_module_field' );
 		$input = stripslashes_deep( $_REQUEST );
 
 		if ( ! empty( $input ) ) {
 			$provider = $input['provider'];
 			$registered_providers = $this->_hustle->get_providers();
-			$can_add = array( 'success' => true, 'field' => $input['field'] );
+			$can_add = array(
+				'success' => true,
+				'field' => $input['field'],
+			);
 
 			if ( isset( $registered_providers[ $provider ] ) ) {
 				$provider_class = $registered_providers[ $provider ]['class'];
@@ -436,9 +604,13 @@ class Hustle_Popup_Admin_Ajax {
 	/**
 	 * Bulk Add optin module fields
 	 */
-	function add_module_fields() {
-		Opt_In_Utils::validate_ajax_call( 'optin_add_module_fields' );
-		$can_add = array( 'error' => true, 'code' => 'custom', 'message' => __( 'Unable to add custom fields', Opt_In::TEXT_DOMAIN ) );
+	public function add_module_fields() {
+		Opt_In_Utils::validate_ajax_call( 'hustle_save_popup_module' );
+		$can_add = array(
+			'error' => true,
+			'code' => 'custom',
+			'message' => __( 'Unable to add custom fields', Opt_In::TEXT_DOMAIN ),
+		);
 		$provider = filter_input( INPUT_POST, 'provider' );
 		$module_id = filter_input( INPUT_POST, 'module_id' );
 		if ( $provider && $module_id ) {
@@ -455,7 +627,7 @@ class Hustle_Popup_Admin_Ajax {
 					$default_field_keys = array_keys( $default_form_elements );
 					if ( !empty ( $new_fields ) ){
 						foreach ( $new_fields as $key => $new_field ) {
-							if ( in_array( $new_field['name'], $default_field_keys ) ) {
+							if ( in_array( $new_field['name'], $default_field_keys, true ) ) {
 								unset( $new_fields[$key] );
 							}
 						}
@@ -469,7 +641,7 @@ class Hustle_Popup_Admin_Ajax {
 		wp_send_json_error( $can_add );
 	}
 
-	function get_error_list() {
+	public function get_error_list() {
 		Opt_In_Utils::validate_ajax_call( 'hustle_get_error_logs' );
 		$id = filter_input( INPUT_GET, 'id', FILTER_VALIDATE_INT );
 
@@ -478,14 +650,17 @@ class Hustle_Popup_Admin_Ajax {
 			$error_log = $optin->get_error_log();
 			$module_fields = Hustle_Module_Model::instance()->get($id)->get_content()->__get( 'form_elements' );
 			// Parse JSON if string, otherwise no parsing.
-			$module_fields = (gettype($module_fields) === 'string') ? json_decode($module_fields, true) : $module_fields;
+			$module_fields = ( 'string' === gettype($module_fields) ) ? json_decode($module_fields, true) : $module_fields;
 
-			wp_send_json_success( array( 'logs' => $error_log, 'module_fields' => $module_fields ) );
+			wp_send_json_success( array(
+				'logs' => $error_log,
+				'module_fields' => $module_fields,
+			) );
 		}
 		wp_send_json_error(true);
 	}
 
-	function clear_logs() {
+	public function clear_logs() {
 		Opt_In_Utils::validate_ajax_call( 'optin_clear_logs' );
 		$id = filter_input( INPUT_GET, 'id', FILTER_VALIDATE_INT );
 
@@ -495,7 +670,7 @@ class Hustle_Popup_Admin_Ajax {
 		wp_send_json_success(true);
 	}
 
-	function export_error_logs() {
+	public function export_error_logs() {
 		Opt_In_Utils::validate_ajax_call( 'optin_export_error_logs' );
 		$id = filter_input( INPUT_GET, 'id', FILTER_VALIDATE_INT );
 
@@ -508,7 +683,7 @@ class Hustle_Popup_Admin_Ajax {
 			$keys = array();
 
 			foreach ( $module_fields as $field ) {
-				if ( $field->name === 'submit' || strtolower($field->label) === 'submit' ) {
+				if ( 'submit' === $field->name || 'submit' === strtolower($field->label) ) {
 					continue;
 				}
 				$csv[0][] = $field->label;
@@ -534,7 +709,7 @@ class Hustle_Popup_Admin_Ajax {
 			}
 
 			$file_name = strtolower( sanitize_file_name( $name ) ) . "-errors.csv";
-			header("Content-type: application/x-msdownload",true,200);
+			header("Content-type: application/x-msdownload", true, 200);
 			header("Content-Disposition: attachment; filename=$file_name");
 			header("Pragma: no-cache");
 			header("Expires: 0");
@@ -544,7 +719,7 @@ class Hustle_Popup_Admin_Ajax {
 		wp_send_json_error(true);
 	}
 
-	function sshare_show_page_content() {
+	public function sshare_show_page_content() {
 		Opt_In_Utils::validate_ajax_call( "hustle_ss_stats_paged_data" );
 
 		$page_id = filter_input( INPUT_POST, 'page_id', FILTER_VALIDATE_INT );
@@ -552,8 +727,8 @@ class Hustle_Popup_Admin_Ajax {
 		$ss_share_stats = Hustle_Module_Collection::instance()->get_share_stats( $offset, 5 );
 
 		foreach($ss_share_stats as $key => $ss_stats) {
-			$ss_share_stats[$key]->page_url = ( $ss_stats->ID != 0 ) ? esc_url(get_permalink($ss_stats->ID)) : esc_url(get_home_url());
-			$ss_share_stats[$key]->page_title = ( $ss_stats->ID != 0 ) ? $ss_stats->post_title : get_bloginfo();
+			$ss_share_stats[$key]->page_url = $ss_stats->ID ? esc_url(get_permalink($ss_stats->ID)) : esc_url(get_home_url());
+			$ss_share_stats[$key]->page_title = $ss_stats->ID ? $ss_stats->post_title : get_bloginfo();
 		}
 
 		wp_send_json_success( array(
@@ -561,25 +736,114 @@ class Hustle_Popup_Admin_Ajax {
 		) );
 	}
 
-	function update_hubspot_referrer() {
-		Opt_In_Utils::validate_ajax_call( "hustle_hubspot_referrer" );
+	/**
+	 * Sets an user meta to prevent admin notice from showing up again after dismissed.
+	 *
+	 * @since 3.0.6
+	 */
+	public function dismiss_admin_notice() {
+		$user_id = get_current_user_id();
+		$notice = filter_input( INPUT_POST, 'dismissed_notice', FILTER_SANITIZE_STRING );
 
-		$optin_id = filter_input( INPUT_GET, 'optin_id', FILTER_VALIDATE_INT );
+		$dismissed_notices = get_user_meta( $user_id, 'hustle_dismissed_admin_notices', true );
+		$dismissed_notices = array_filter( explode( ',', (string) $dismissed_notices ) );
 
-		if ( class_exists( 'Opt_In_HubSpot_Api') ) {
-			$hubspot = new Opt_In_HubSpot_Api();
-			$hubspot->get_authorization_uri( $optin_id );
+		if ( $notice && ! in_array( $notice, $dismissed_notices, true ) ) {
+			$dismissed_notices[] = $notice;
+			$to_store = implode( ',', $dismissed_notices );
+			update_user_meta( $user_id, 'hustle_dismissed_admin_notices', $to_store );
 		}
+
+		wp_send_json_success();
 	}
 
-	function update_constantcontact_referrer() {
-		Opt_In_Utils::validate_ajax_call( "hustle_constantcontact_referrer" );
+	/**
+	 * Get the module_id by the shortcode_id provided.
+	 * Used by Gutenberg to create blocks.
+	 *
+	 * @since 3.0.7
+	 *
+	 * @return void
+	 */
+	public function get_module_id_by_shortcode() {
+		Opt_In_Utils::validate_ajax_call( "hustle_gutenberg_get_module" );
 
-		$optin_id = filter_input( INPUT_GET, 'optin_id', FILTER_VALIDATE_INT );
-		if ( version_compare( PHP_VERSION, '5.3', '>=' ) && class_exists( 'Opt_In_ConstantContact_Api') ) {
-			$constantcontact = new Opt_In_ConstantContact_Api();
-			$constantcontact->get_authorization_uri( $optin_id );
+		$shortcode_id = filter_input( INPUT_GET, 'shortcode_id', FILTER_SANITIZE_STRING );
+		$module_type = filter_input( INPUT_GET, 'type', FILTER_SANITIZE_STRING );
+
+		$enforce_type = ( 'embedded' === $module_type || 'social_sharing' === $module_type ) ? true : false;
+		$module = Hustle_Module_Model::instance()->get_by_shortcode( $shortcode_id, $enforce_type );
+
+		wp_send_json_success( array( 'module_id' => $module->id ) );
+	}
+
+	/**
+	 * Send the module's data to be rendered in Gutenberg.
+	 *
+	 * @since 3.0.7
+	 *
+	 */
+	public function render_module() {
+		Opt_In_Utils::validate_ajax_call( "hustle_gutenberg_get_module" );
+
+		$module_id = filter_input( INPUT_GET, 'module_id', FILTER_SANITIZE_STRING );
+		$shortcode_id = filter_input( INPUT_GET, 'shortcode_id', FILTER_SANITIZE_STRING );
+		$module_type = filter_input( INPUT_GET, 'type', FILTER_SANITIZE_STRING );
+
+		if ( $module_id ) {
+			$module = Hustle_Module_Model::instance()->get( $module_id );
+
+		} elseif ( $shortcode_id ) {
+			$enforce_type = ( 'embedded' === $module_type || 'social_sharing' === $module_type ) ? true : false;
+			$module = Hustle_Module_Model::instance()->get_by_shortcode( $shortcode_id, $enforce_type );
+
 		}
+
+		if ( ( ! $module_id && ! $shortcode_id ) || ! $module->id ) {
+			wp_send_json_error();
+		}
+
+		if ( 'social_sharing' === $module->module_type ) {
+			$module = Hustle_SShare_Model::instance()->get( $module->id );
+		}
+
+		$data = $module->get_module_data_to_display( true );
+
+
+		if ( 'social_sharing' === $module->module_type ) {
+			$shortcode_class = Hustle_Module_Front::SSHARE_SHORTCODE_CSS_CLASS;
+
+			$html = $this->_hustle->render( 'general/sshare', array(), true );
+
+		} else {
+			$shortcode_class = Hustle_Module_Front::SHORTCODE_CSS_CLASS;
+
+			$is_optin = ( ! $data['content']['use_email_collection'] || 'false' === $data['content']['use_email_collection'] ) ? false : true;
+
+			if ( $is_optin ) {
+				$html = $this->_hustle->render( 'general/modals/optin-true', array(), true );
+
+			} else {
+				$html = $this->_hustle->render( 'general/modals/optin-false', array(), true );
+
+			}
+		}
+
+		$data['shortcode_id'] = $shortcode_id;
+
+		$class =  $shortcode_class . ' hustle_module_' . esc_attr( $module->id ) . ' module_id_' . esc_attr( $module->id );
+		$opening_wrapper = '<div class="' . $class . '" data-type="shortcode" data-id="' . $module->id . '">';
+
+		$style = '<style type="text/css" class="hustle-module-styles-' . $module->id . '">' . $module->get_decorated()->get_module_styles( $module->module_type ) . '</style>';
+
+		$response = array(
+			'data' => $data,
+			'html' => $html,
+			'style' => $style,
+			'opening_wrapper' => $opening_wrapper
+		);
+
+		wp_send_json_success( $response );
 	}
 }
 endif;

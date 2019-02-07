@@ -1,30 +1,29 @@
 <?php
 
 
-class Hustle_Dashboard_Data
-{
+class Hustle_Dashboard_Data {
 
 	const CURRENT_COLOR_INDEX = 'hustle_color_index';
 	const MODULE_GRAPH_COLOR = 'graph_color';
 
-	var $modules = array();
-	var $popups = array();
-	var $slideins = array();
-	var $embeds = array();
-	var $social_sharings = array();
-	var $active_modules = array();
-	var $top_active_modules = array();
-	var $today_total_conversions = 0;
-	var $conversions_today = 0;
-	var $most_converted_module = '-';
-	var $ss_share_stats_data = array();
-	var $ss_total_share_stats = 0;
-	var $graph_date_conversions = array();
-	var $graph_dates = array();
+	public $modules = array();
+	public $popups = array();
+	public $slideins = array();
+	public $embeds = array();
+	public $social_sharings = array();
+	public $active_modules = array();
+	public $top_active_modules = array();
+	public $today_total_conversions = 0;
+	public $conversions_today = 0;
+	public $most_converted_module = '-';
+	public $ss_share_stats_data = array();
+	public $ss_total_share_stats = 0;
+	public $graph_date_conversions = array();
+	public $graph_dates = array();
 
-	var $color = 0;
-	var $types = array();
-	var  $colors = array(
+	public $color = 0;
+	public $types = array();
+	public $colors = array(
 		'#FF0000',
 		'#FFFF00',
 		'#00EAFF',
@@ -50,8 +49,7 @@ class Hustle_Dashboard_Data
 	);
 
 
-	function __construct()
-	{
+	public function __construct() {
 		$this->_prepare_data();
 	}
 
@@ -68,7 +66,7 @@ class Hustle_Dashboard_Data
 		));
 
 		if ( is_array( $this->social_sharings ) && count( $this->social_sharings ) ) {
-			$this->ss_share_stats_data = $module_instance->get_share_stats(0,5);
+			$this->ss_share_stats_data = $module_instance->get_share_stats(0, 5);
 			$this->ss_total_share_stats = $module_instance->get_total_share_stats();
 		}
 
@@ -107,7 +105,9 @@ class Hustle_Dashboard_Data
 				$total_views = $module->get_statistics($module->module_type)->views_count;
 				$rate = $module->get_statistics($module->module_type)->conversion_rate;
 
-				if( is_array( $this->colors ) && ( $this->color >= count( $this->colors ) ) ) $this->color = 0;
+				if( is_array( $this->colors ) && ( $this->color >= count( $this->colors ) ) ) {
+					$this->color = 0;
+				}
 
 				$color = $module->get_meta( self::MODULE_GRAPH_COLOR );
 
@@ -202,7 +202,7 @@ class Hustle_Dashboard_Data
 	}
 
 	public static function uasort( $a, $b ) {
-		if ( $a['month'] == $b['month'] ) {
+		if ( (int)$a['month'] === (int)$b['month'] ) {
 			return 0;
 		} elseif ( $a['month'] > $b['month'] ) {
 			return 1;

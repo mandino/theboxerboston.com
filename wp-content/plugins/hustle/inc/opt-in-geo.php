@@ -7,14 +7,13 @@
  *
  * Class Opt_In_Geo
  */
-class Opt_In_Geo
-{
+class Opt_In_Geo {
 	/**
 	 * Site option key
 	 *
 	 * @var COUNTRY_IP_MAP
 	 */
-	const COUNTRY_IP_MAP = "wpoi-county-id-map";
+	const COUNTRY_IP_MAP = 'wpoi-county-id-map';
 
 	/**
 	 * Tries to get the public IP address of the current user.
@@ -46,7 +45,7 @@ class Opt_In_Geo
 		$ip = $this->get_user_ip();
 
 		// See if an add-on provides the country for us.
-		$country = apply_filters( 'wpoi-get-user-country', "", $ip );
+		$country = apply_filters( 'wpoi-get-user-country', '', $ip );
 
 		if ( empty( $country ) ) {
 			$country = $this->get_country_from_ip( $ip );
@@ -65,37 +64,43 @@ class Opt_In_Geo
 	 * @return array List of available webservices.
 	 */
 	private function _get_geo_services() {
-		static $Geo_service = null;
-		if ( null === $Geo_service ) {
-			$Geo_service = array();
+		static $geo_service = null;
+		if ( null === $geo_service ) {
+			$geo_service = array();
 
-			$Geo_service['hostip'] = (object) array(
+			$geo_service['hostip'] = (object) array(
 				'label' => 'Host IP',
 				'url'   => 'http://api.hostip.info/country.php?ip=%ip%',
 				'type'  => 'text',
 			);
 
-			$Geo_service['telize'] = (object) array(
+			$geo_service['telize'] = (object) array(
 				'label' => 'Telize',
 				'url'   => 'http://www.telize.com/geoip/%ip%',
 				'type'  => 'json',
 				'field' => 'country_code',
 			);
 
-			$Geo_service['freegeo'] = (object) array(
+			$geo_service['nekudo'] = (object) array(
 				'label' => 'Free Geo IP',
-				'url'   => 'http://freegeoip.net/json/%ip%',
+				'url'   => 'http://geoip.nekudo.com/api/json/%ip%',
 				'type'  => 'json',
-				'field' => 'country_code',
+				'field' => array( 'country', 'code' ),
+			);
+			$geo_service['geoplugin'] = (object) array(
+				'label' => 'GeoPlugin',
+				'url'   => 'http://www.geoplugin.net/json.gp?ip=%ip%',
+				'type'  => 'json',
+				'field' => array( 'geoplugin_countryCode' ),
 			);
 
 			/**
 			 * Allow other modules/plugins to register a geo service.
 			 */
-			$Geo_service = apply_filters( 'wpoi-geo-services', $Geo_service );
+			$geo_service = apply_filters( 'wpoi-geo-services', $geo_service );
 		}
 
-		return $Geo_service;
+		return $geo_service;
 	}
 
 
@@ -104,20 +109,23 @@ class Opt_In_Geo
 	 *
 	 * @return object Service object for geo lookup
 	 */
-	private function _get_service($type = null ) {
+	private function _get_service( $type = null ) {
 		$service = false;
-
 		if ( null === $type ) {
-
-			$remote_ip_url = apply_filters("wpoi-remote-ip-url", "");
-			if (  !empty( $remote_ip_url )  ) {
+			$remote_ip_url = apply_filters( 'wpoi-remote-ip-url', '' );
+			if ( ! empty( $remote_ip_url )  ) {
 				$type = '';
 			} else {
-				$type = 'freegeo';
+				$type = 'geoplugin';
 			}
+
+			/**
+			 * Allow to choose a geo service.
+			 */
+			$type = apply_filters( 'wpoi-geo-type-service', $type );
 		}
 
-		if ( '' == $type ) {
+		if ( empty( $type ) ) {
 			$service = (object) array(
 				'url' => $remote_ip_url,
 				'label' => 'wp-config.php',
@@ -132,7 +140,7 @@ class Opt_In_Geo
 		} else {
 			$geo_service = $this->_get_geo_services();
 
-			$service = @$geo_service[ $type ];
+			$service = isset( $geo_service[ $type ] ) ? $geo_service[ $type ] : null;
 		}
 
 		return $service;
@@ -145,22 +153,44 @@ class Opt_In_Geo
 	 * @param  object $service Lookup-Service details.
 	 * @return string The country code.
 	 */
-	private function _country_from_api($ip, $service ) {
+	private function _country_from_api( $ip, $service ) {
 		$country = false;
 
 		if ( is_object( $service ) && ! empty( $service->url ) ) {
 			$url = str_replace( '%ip%', $ip, $service->url );
 			$response = wp_remote_get( $url );
-
+			$body = isset( $response['body'] ) ? $response['body'] : '' ;
 			if ( ! is_wp_error( $response )
-				&& '200' == $response['response']['code']
-				&& 'XX' != $response['body']
+				&& 200 === (int) $response['response']['code']
+				&& 'XX' !== $response['body']
+				|| false !== ( $body = file_get_contents( $url ) ) // phpcs:ignore
 			) {
-				if ( 'text' == $service->type ) {
-					$country = trim( $response['body'] );
-				} else if ( 'json' == $service->type ) {
-					$data = (array) json_decode( $response['body'] );
-					$country = @$data[ @$service->field ];
+				if ( 'text' === $service->type ) {
+					$country = trim( $body );
+				} else if ( 'json' === $service->type ) {
+					$data = (array) json_decode( $body );
+					if ( isset( $service->field ) ) {
+						if ( is_array( $service->field ) ) {
+							$keys = $service->field;
+							$value = $data;
+							while ( $a = array_shift( $keys ) ) { // phpcs:ignore
+								if ( is_array( $value ) ) {
+									if ( isset( $value[ $a ] ) ) {
+										$value = $value[ $a ];
+									}
+								} else if ( is_object( $value ) ) {
+									if ( isset( $value->$a ) ) {
+										$value = $value->$a;
+									}
+								}
+								if ( is_string( $value ) ) {
+									$country = $value;
+								}
+							}
+						} else {
+							$country = isset( $data[ $service->field ] )? $data[ $service->field ] : null;
+						}
+					}
 				}
 			}
 		}
@@ -175,7 +205,7 @@ class Opt_In_Geo
 	 * @param $country
 	 * @return mixed
 	 */
-	private function _update_ip_county_map( $ip, $country ){
+	private function _update_ip_county_map( $ip, $country ) {
 		$country_ip_map[ $ip ] = $country;
 		update_site_option( self::COUNTRY_IP_MAP, $country_ip_map );
 		return $country;
@@ -186,7 +216,7 @@ class Opt_In_Geo
 	 *
 	 * @return array
 	 */
-	private function _get_ip_county_map(){
+	private function _get_ip_county_map() {
 		return get_site_option( self::COUNTRY_IP_MAP, array() );
 	}
 
@@ -196,26 +226,25 @@ class Opt_In_Geo
 	 * @param $ip
 	 * @return string
 	 */
-	function get_country_from_ip( $ip ){
+	public function get_country_from_ip( $ip ) {
 		$ip = (string) $ip;
 
-		if( "127.0.0.1" === $ip  )
-			return $this->_update_ip_county_map( $ip, "localhost" );
+		if ( '127.0.0.1' === $ip  ) {
+			return $this->_update_ip_county_map( $ip, 'localhost' ); }
 
 		$country_ip_map = $this->_get_ip_county_map();
-		if( isset( $country_ip_map[ $ip ] ) ) {
-			if ( !empty( $country_ip_map[ $ip ] ) ) {
+		if ( isset( $country_ip_map[ $ip ] ) ) {
+			if ( ! empty( $country_ip_map[ $ip ] ) ) {
 				return $country_ip_map[ $ip ];
 			}
 		}
 		$service = $this->_get_service();
 		$country = $this->_country_from_api( $ip, $service );
 
-		if ( !empty( $country ) ) {
+		if ( ! empty( $country ) ) {
 			return $this->_update_ip_county_map( $ip, $country );
 		}
 
 		return 'XX';
 	}
-
 }

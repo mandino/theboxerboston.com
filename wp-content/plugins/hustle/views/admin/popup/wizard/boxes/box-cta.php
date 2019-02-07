@@ -2,7 +2,7 @@
 
 	<div class="wpmudev-box-left">
 
-		<h4><strong><?php _e( "Call to action button (optional)", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
+		<h4><strong><?php esc_attr_e( "Call to action button (optional)", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
 
 	</div>
 
@@ -18,7 +18,7 @@
 
 			</div>
 
-			<label class="wpmudev-switch-label" for="wph-popup-cta-button"><?php _e( "Show call to action button", Opt_In::TEXT_DOMAIN ); ?></label>
+			<label class="wpmudev-switch-label" for="wph-popup-cta-button"><?php esc_attr_e( "Show call to action button", Opt_In::TEXT_DOMAIN ); ?></label>
 
 		</div>
 
@@ -28,36 +28,36 @@
 
                 <div class="wpmudev-cta-label">
 
-                    <label><?php _e( "Label", Opt_In::TEXT_DOMAIN ); ?></label>
+                    <label><?php esc_attr_e( "Label", Opt_In::TEXT_DOMAIN ); ?></label>
 
-			        <input type="text" data-attribute="cta_label" id="wph_popup_new_label" class="wpmudev-input_text" name="wph_popup_new_label" placeholder="<?php esc_attr_e('Click me...', Opt_In::TEXT_DOMAIN) ?>" value="{{cta_label}}">
+			        <input type="text" data-attribute="cta_label" id="wph_popup_new_label" class="wpmudev-input_text" name="wph_popup_new_label" placeholder="<?php esc_attr_e('Click me...', Opt_In::TEXT_DOMAIN); ?>" value="{{cta_label}}">
 
                 </div>
 
                 <div class="wpmudev-cta-url">
 
-                    <label><?php _e( "URL", Opt_In::TEXT_DOMAIN ); ?></label>
+                    <label><?php esc_attr_e( "URL", Opt_In::TEXT_DOMAIN ); ?></label>
 
-			        <input type="text" data-attribute="cta_url" id="wph_popup_new_url" class="wpmudev-input_text" name="wph_popup_new_url" placeholder="<?php esc_attr_e('http://yourwebsite.com', Opt_In::TEXT_DOMAIN) ?>" value="{{cta_url}}">
+			        <input type="text" data-attribute="cta_url" id="wph_popup_new_url" class="wpmudev-input_text" name="wph_popup_new_url" placeholder="<?php esc_attr_e('http://yourwebsite.com', Opt_In::TEXT_DOMAIN); ?>" value="{{cta_url}}">
 
                 </div>
 
             </div>
 
-            <label><?php _e( "Link opens in", Opt_In::TEXT_DOMAIN ); ?></label>
+            <label><?php esc_attr_e( "Link opens in", Opt_In::TEXT_DOMAIN ); ?></label>
 
             <div class="wpmudev-tabs">
 
                 <ul class="wpmudev-tabs-menu wpmudev-tabs-menu_md wpmudev-cta-target-options">
 
-                    <li class="wpmudev-tabs-menu_item {{ ( cta_target === 'blank' ) ? 'current' : '' }}">
+                    <li class="wpmudev-tabs-menu_item {{ ( 'blank' === cta_target ) ? 'current' : '' }}">
                         <input type="checkbox" value="blank">
-                        <label><?php _e( "New tab", Opt_In::TEXT_DOMAIN ); ?></label>
+                        <label><?php esc_attr_e( "New tab", Opt_In::TEXT_DOMAIN ); ?></label>
                     </li>
 
-                    <li class="wpmudev-tabs-menu_item {{ ( cta_target === 'self' ) ? 'current' : '' }}">
+                    <li class="wpmudev-tabs-menu_item {{ ( 'self' === cta_target ) ? 'current' : '' }}">
                         <input type="checkbox" value="self">
-                        <label><?php _e( "This tab", Opt_In::TEXT_DOMAIN ); ?></label>
+                        <label><?php esc_attr_e( "This tab", Opt_In::TEXT_DOMAIN ); ?></label>
                     </li>
 
                 </ul>

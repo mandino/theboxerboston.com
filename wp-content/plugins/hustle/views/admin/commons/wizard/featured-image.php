@@ -8,16 +8,16 @@
 
 		</div>
 
-		<input type="text" value="{{feature_image}}" data-attribute="feature_image" placeholder="<?php _e( 'Click browse to add image...', Opt_In::TEXT_DOMAIN ); ?>" class="wpmudev-input_text wpmudev-feature-image-src-input_text">
+		<input type="text" value="{{feature_image}}" data-attribute="feature_image" placeholder="<?php esc_attr_e( 'Click browse to add image...', Opt_In::TEXT_DOMAIN ); ?>" class="wpmudev-input_text wpmudev-feature-image-src-input_text">
 
 		<div class="wpmudev-clear_image">
 
-			<button id="wpmudev-feature-image-clear" class="wpmudev-button wpmudev-button-sm"><?php _e( "Clear", Opt_In::TEXT_DOMAIN ); ?></button>
+			<button id="wpmudev-feature-image-clear" class="wpmudev-button wpmudev-button-sm"><?php esc_attr_e( "Clear", Opt_In::TEXT_DOMAIN ); ?></button>
 
 		</div>
 
 	</div>
 
-	<button id="wpmudev-feature-image-browse" class="wpmudev-button"><?php _e( "Browse", Opt_In::TEXT_DOMAIN ); ?></button>
+	<button id="wpmudev-feature-image-browse" class="wpmudev-button"><?php esc_attr_e( "Browse", Opt_In::TEXT_DOMAIN ); ?></button>
 
 </div>

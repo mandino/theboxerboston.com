@@ -2,17 +2,17 @@
 
 	<div class="wpmudev-box-left">
 
-		<h4><strong><?php _e( "Form layout", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
+		<h4><strong><?php esc_attr_e( "Form layout", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
 
 	</div>
 
 	<div class="wpmudev-box-right">
 
-		<h4><?php _e( "Select form layout that is most suited for your opt-in", Opt_In::TEXT_DOMAIN ); ?></h4>
+		<h4><?php esc_attr_e( "Select form layout that is most suited for your opt-in", Opt_In::TEXT_DOMAIN ); ?></h4>
 
 		<div class="wpmudev-box-layouts">
 
-			<div class="wpmudev-box-layout_one {{ ( form_layout === 'one' ) ? 'active' : '' }}">
+			<div class="wpmudev-box-layout_one {{ ( 'one' === form_layout ) ? 'active' : '' }}">
 
 				<div class="wpmudev-box-layout_svg" for="wph-slidein-layout_one">
 
@@ -32,7 +32,7 @@
 
 				<div class="wpmudev-input_radio">
 
-                    <input type="radio" id="wph-slidein-layout_one" name="form_layout" value="one" data-attribute="form_layout" {{_.checked( (form_layout === 'one') , true)}}>
+                    <input type="radio" id="wph-slidein-layout_one" name="form_layout" value="one" data-attribute="form_layout" {{_.checked( ( 'one' === form_layout ) , true)}}>
 
                     <label for="wph-slidein-layout_one" class="wpdui-fi wpdui-fi-check"></label>
 
@@ -40,7 +40,7 @@
 
 			</div><?php // .wpmudev-box-layout_one ?>
 
-			<div class="wpmudev-box-layout_two {{ ( form_layout === 'two' ) ? 'active' : '' }}">
+			<div class="wpmudev-box-layout_two {{ ( 'two' === form_layout ) ? 'active' : '' }}">
 
 				<div class="wpmudev-box-layout_svg" for="wph-slidein-layout_two">
 
@@ -61,7 +61,7 @@
 
 				<div class="wpmudev-input_radio">
 
-                    <input type="radio" id="wph-slidein-layout_two" name="form_layout" value="two" data-attribute="form_layout" {{_.checked( (form_layout === 'two') , true)}}>
+                    <input type="radio" id="wph-slidein-layout_two" name="form_layout" value="two" data-attribute="form_layout" {{_.checked( ( 'two' === form_layout ) , true)}}>
 
                     <label for="wph-slidein-layout_two" class="wpdui-fi wpdui-fi-check"></label>
 
@@ -69,7 +69,7 @@
 
 			</div><?php // .wpmudev-box-layout_two ?>
 
-			<div class="wpmudev-box-layout_three {{ ( form_layout === 'three' ) ? 'active' : '' }}">
+			<div class="wpmudev-box-layout_three {{ ( 'three' === form_layout ) ? 'active' : '' }}">
 
 				<div class="wpmudev-box-layout_svg" for="wph-slidein-layout_three">
 
@@ -90,7 +90,7 @@
 
 				<div class="wpmudev-input_radio">
 
-                    <input type="radio" id="wph-slidein-layout_three" name="form_layout" value="three" data-attribute="form_layout" {{_.checked( (form_layout === 'three') , true)}}>
+                    <input type="radio" id="wph-slidein-layout_three" name="form_layout" value="three" data-attribute="form_layout" {{_.checked( ( 'three' === form_layout ) , true)}}>
 
                     <label for="wph-slidein-layout_three" class="wpdui-fi wpdui-fi-check"></label>
 
@@ -98,7 +98,7 @@
 
 			</div><?php // .wpmudev-box-layout_three ?>
 
-			<div class="wpmudev-box-layout_four {{ ( form_layout === 'four' ) ? 'active' : '' }}">
+			<div class="wpmudev-box-layout_four {{ ( 'four' === form_layout ) ? 'active' : '' }}">
 
 				<div class="wpmudev-box-layout_svg" for="wph-slidein-layout_four">
 
@@ -119,7 +119,7 @@
 
 				<div class="wpmudev-input_radio">
 
-                    <input type="radio" id="wph-slidein-layout_four" name="form_layout" value="four" data-attribute="form_layout" {{_.checked( (form_layout === 'four') , true)}}>
+                    <input type="radio" id="wph-slidein-layout_four" name="form_layout" value="four" data-attribute="form_layout" {{_.checked( ( 'four' === form_layout ) , true)}}>
 
                     <label for="wph-slidein-layout_four" class="wpdui-fi wpdui-fi-check"></label>
 

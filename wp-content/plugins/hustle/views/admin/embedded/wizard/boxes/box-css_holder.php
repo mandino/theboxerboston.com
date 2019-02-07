@@ -4,7 +4,7 @@
 
         <div class="wpmudev-box-gray">
 
-            <label class="wpmudev-annotation"><?php _e('Available CSS Selectors (click to add):', Opt_In::TEXT_DOMAIN); ?></label>
+            <label class="wpmudev-annotation"><?php esc_attr_e('Available CSS Selectors (click to add):', Opt_In::TEXT_DOMAIN); ?></label>
 
 			<div class="wpmudev-css-selectors">
 
@@ -14,7 +14,7 @@
 
 			</div>
 
-			<div style="height:210px;" id="hustle_custom_css" data-nonce="<?php echo wp_create_nonce('hustle_module_prepare_custom_css'); ?>">{{custom_css}}</div>
+			<div style="height:210px;" id="hustle_custom_css">{{custom_css}}</div>
 
         </div>
 

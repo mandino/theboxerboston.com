@@ -12,9 +12,9 @@
 
         <div class="wpmudev-switch-labels">
 
-            <label class="wpmudev-switch-label" for="wph-shares-widget-animated"><?php _e( "Animate icons", Opt_In::TEXT_DOMAIN ); ?></label>
+            <label class="wpmudev-switch-label" for="wph-shares-widget-animated"><?php esc_attr_e( "Animate icons", Opt_In::TEXT_DOMAIN ); ?></label>
 
-            <label class="wpmudev-helper"><?php _e( "Play an imagion when icon is on hover.", Opt_In::TEXT_DOMAIN ); ?></label>
+            <label class="wpmudev-helper"><?php esc_attr_e( "Play animation when icon is on hover.", Opt_In::TEXT_DOMAIN ); ?></label>
 
         </div>
 

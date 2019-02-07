@@ -5,8 +5,7 @@
  *
  * @class Hustle_Migration
  */
-class Hustle_Migration
-{
+class Hustle_Migration {
 	/**
 	 * @var $_query WP_Query
 	 */
@@ -17,17 +16,16 @@ class Hustle_Migration
 	 **/
 	private $_hustle;
 
-	public function __construct( Opt_In $hustle )
-	{
+	public function __construct( Opt_In $hustle ) {
 		$this->_hustle = $hustle;
 
 		add_action( 'init', array( $this, 'do_popup_migration' ) );
 		add_action( 'init', array( $this, 'do_hustle_20_migration' ) );
 	}
 
-	// Migrating from Wordpress Popup
+	// Migrating from WordPress Popup
 	public function do_popup_migration() {
-		$reset = ( isset($_GET['reset_migration']) ) ? (bool) $_GET['reset_migration'] : false;
+		$reset = filter_input( INPUT_GET, 'reset_migration', FILTER_VALIDATE_BOOLEAN );
 		$done = get_option( 'hustle_popup_migrated', false );
 
 		if ( false === $done || empty( $done ) || $reset ) {
@@ -40,22 +38,24 @@ class Hustle_Migration
 
 	// Migrating from Hustle 2.x
 	public function do_hustle_20_migration() {
-		$reset = ( isset($_GET['reset_migration']) ) ? (bool) $_GET['reset_migration'] : false;
+		$reset = filter_input( INPUT_GET, 'reset_migration', FILTER_VALIDATE_BOOLEAN );
 		$done = get_option( 'hustle_20_migrated', false );
 		$existed = get_option( 'hustle_popover_pro_migrated', false ) && get_option( 'hustle_popup_migrated', false );
 
 		if ( ( false === $done || empty( $done ) || $reset ) && $existed ) {
 			$modules = $this->get_all_hustle_modules();
 			array_map( array( __CLASS__, 'migrate_hustle_20' ), $modules );
+			$page_shares = $this->get_all_hustle_page_shares();
+			$this->_migrate_page_shares( $page_shares );
 		}
 		update_option( 'hustle_20_migrated', true );
 	}
 
 	public function migrate_hustle_20( $module ) {
 
-		if ( $module->optin_provider == 'custom_content' ) {
+		if ( 'custom_content' === $module->optin_provider ) {
 			$this->_migrate_custom_content($module);
-		} else if ( $module->optin_provider == 'social_sharing' && isset( $module->floating_social ) ) {
+		} else if ( 'social_sharing' === $module->optin_provider && isset( $module->floating_social ) ) {
 			$this->_migrate_social_sharing($module);
 		} else {
 			$this->_migrate_optin($module);
@@ -67,13 +67,17 @@ class Hustle_Migration
 		return $module_collection_instance->get_hustle_20_optins();
 	}
 
+	private function get_all_hustle_page_shares() {
+		$module_collection_instance = Hustle_Module_Collection::instance();
+		return $module_collection_instance->get_hustle_20_page_shares();
+	}
 
 
 	private function _migrate_optin($optin) {
 
 
 		//don't migrate the modules that don't belong to the blog requesting the migration (useful on MU)
-		if( $optin->blog_id == get_current_blog_id() ){
+		if( get_current_blog_id() === (int)$optin->blog_id ){
 
 			if ( isset( $optin->settings ) ) {
 				$settings = json_decode($optin->settings);
@@ -85,7 +89,7 @@ class Hustle_Migration
 					$module->test_mode = $optin->test_mode;
 					$module->blog_id = $optin->blog_id;
 					if ( isset( $settings->popup->enabled ) ) {
-						$module->active = ( $settings->popup->enabled === '1' ) ? '1' : '0';
+						$module->active = ( '1' === $settings->popup->enabled ) ? '1' : '0';
 					}
 					$module->save();
 
@@ -121,7 +125,7 @@ class Hustle_Migration
 				$module->module_name = $optin->optin_name;
 				$module->test_mode = $optin->test_mode;
 				if ( isset( $settings->slide_in->enabled ) ) {
-					$module->active = ( $settings->slide_in->enabled === '1' ) ? '1' : '0';
+					$module->active = ( '1' === $settings->slide_in->enabled ) ? '1' : '0';
 				}
 				$module->save();
 
@@ -130,7 +134,7 @@ class Hustle_Migration
 				if ( isset($track_types['slide_in']) ) {
 					$track_types['slidein'] = $track_types['slide_in'];
 					unset($track_types['slide_in']);
-					$optin->track_types = json_encode($track_types);
+					$optin->track_types = wp_json_encode($track_types);
 				}
 
 				// save to meta table
@@ -165,7 +169,7 @@ class Hustle_Migration
 				$module->test_mode = $optin->test_mode;
 
 				if ( isset( $settings->shortcode->enabled ) || isset( $settings->widget->enabled ) || isset( $settings->after_content->enabled ) ) {
-					$module->active = ( $settings->shortcode->enabled === 'true' || $settings->widget->enabled === 'true' || $settings->after_content->enabled === 'true' ) ? '1' : '0';
+					$module->active = ( 'true' === $settings->shortcode->enabled || 'true' === $settings->widget->enabled || 'true' === $settings->after_content->enabled ) ? '1' : '0';
 				}
 
 				$module->save();
@@ -227,10 +231,10 @@ class Hustle_Migration
 				foreach ( $optin_design->module_fields as $field ) {
 					$form_elements[ $field->name ]['name'] = $field->name;
 					$form_elements[ $field->name ]['label'] = $field->label;
-					$form_elements[ $field->name ]['type'] = $field->name === 'first_name' || $field->name === 'last_name' ? 'name' : $field->type;
+					$form_elements[ $field->name ]['type'] = 'first_name' === $field->name || 'last_name' === $field->name ? 'name' : $field->type;
 					$form_elements[ $field->name ]['required'] = $field->required;
 					$form_elements[ $field->name ]['placeholder'] = $field->placeholder;
-					if( $form_elements[ $field->name ]['type'] == 'email' && !isset($first) && $form_elements[ $field->name ]['required'] === 'true' ){
+					if( 'email' === $form_elements[ $field->name ]['type'] && !isset($first) && 'true' === $form_elements[ $field->name ]['required'] ){
 						$form_elements[ $field->name ]['delete'] = 'false';
 						$first = true; // only one email field per form should not be deleted
 					}
@@ -254,7 +258,7 @@ class Hustle_Migration
 				$email_service_args['api_key'] = $optin->api_key;
 			}
 
-			if ( $email_service_key == 'mailchimp' ) {
+			if ( 'mailchimp' === $email_service_key ) {
 				// specific for mailchimp
 				$email_service_args['auto_optin'] 	= 'subscribed';
 				$email_service_args['list_id'] 		= isset( $provider_args->optin_mail_list ) ? $provider_args->optin_mail_list : $provider_args->email_list;
@@ -289,7 +293,7 @@ class Hustle_Migration
 			$content = wp_parse_args( $design, $content );
 		}
 
-		return json_encode($content);
+		return wp_json_encode($content);
 	}
 
 	private function _parse_optin_design($optin) {
@@ -298,18 +302,18 @@ class Hustle_Migration
 			$optin_design = json_decode($optin->design);
 
 			$form_layout = 'one';
-			if ( $optin_design->form_location == '1' ) {
+			if ( 1 === (int)$optin_design->form_location ) {
 				$form_layout = 'two';
-			} else if ( $optin_design->form_location == '2' ) {
+			} else if ( 2 === (int)$optin_design->form_location ) {
 				$form_layout = 'three';
-			} else if ( $optin_design->form_location == '3' ) {
+			} else if ( 3 === (int)$optin_design->form_location ) {
 				$form_layout = 'four';
 			}
 
 			if ( isset( $optin_design->input_icons ) ) {
-				if ( $optin_design->input_icons === 'animated_icon' ) {
+				if ( 'animated_icon' === $optin_design->input_icons ) {
 					$input_icons = 'animated';
-				} elseif ( $optin_design->input_icons === 'no_icon' ) {
+				} elseif ( 'no_icon' === $optin_design->input_icons ) {
 					$input_icons = 'none';
 				} else {
 					$input_icons = 'static';
@@ -376,13 +380,13 @@ class Hustle_Migration
 				$button_border = isset( $optin_design->borders->button_corners_radius ) ? $optin_design->borders->button_corners_radius : '0';
 				$form_fields_border = isset( $optin_design->borders->fields_corners_radius ) ? $optin_design->borders->fields_corners_radius : '0';
 				$borders = array(
-					'border' =>  ( $border === '0' ) ? '0' : '1',
+					'border' =>  ( '0' === $border ) ? '0' : '1',
 					'border_radius' => $border,
 					'border_type' => 'none', //set no border in order to avoid weird looking modules because there's no type, weight, nor color options in 2.x
-					'button_border' =>  ( $button_border === '0' || $optin_design->borders->fields_style === 'joined' ) ? '0' : '1',
+					'button_border' =>  ( '0' === $button_border || 'joined' === $optin_design->borders->fields_style ) ? '0' : '1',
 					'button_border_radius' => $button_border,
 					'button_border_type' => 'none',
-					'form_fields_border' =>  ( $form_fields_border === '0' || $optin_design->borders->fields_style === 'joined' ) ? '0' : '1',
+					'form_fields_border' =>  ( '0' === $form_fields_border || 'joined' === $optin_design->borders->fields_style ) ? '0' : '1',
 					'form_fields_border_radius' => $form_fields_border,
 					'form_fields_border_type' => 'none',
 					'form_fields_proximity' => $optin_design->borders->fields_style,
@@ -396,7 +400,7 @@ class Hustle_Migration
 
 		}
 
-		return json_encode($design);
+		return wp_json_encode($design);
 	}
 
 	private function _parse_optin_popup_settings($optin) {
@@ -407,7 +411,7 @@ class Hustle_Migration
 				$popup = $settings->popup;
 				$triggers = array(
 					'trigger' => $popup->appear_after,
-					'on_time' => ( $popup->trigger_on_time == 'immediately' ) ? false : true,
+					'on_time' => ( 'immediately' === $popup->trigger_on_time ) ? false : true,
 					'on_time_delay' => $popup->appear_after_time_val,
 					'on_time_unit' => $popup->appear_after_time_unit,
 					'on_scroll' => $popup->appear_after_scroll,
@@ -424,7 +428,7 @@ class Hustle_Migration
 				$popup_settings['triggers'] = $this->_map_trigger_settings($triggers);
 				$popup_settings['animation_in'] = $this->_map_animation_settings($popup->animation_in);
 				$popup_settings['animation_out'] = $this->_map_animation_settings($popup->animation_out, false);
-				$popup_settings['after_close'] = $popup->add_never_see_this_message !== 'false' || $popup->close_button_acts_as_never_see_again !== 'false' ? 'no_show_all' : 'keep_show';
+				$popup_settings['after_close'] = 'false' !== $popup->add_never_see_this_message || 'false' !== $popup->close_button_acts_as_never_see_again ? 'no_show_all' : 'keep_show';
 				$popup_settings['expiration'] = $popup->never_see_expiry;
 				$popup_settings['expiration_unit'] = 'days';
 				$popup_settings['allow_scroll_page'] = ( isset( $popup->allow_scroll_page ) ) ? $popup->allow_scroll_page : '';
@@ -443,7 +447,7 @@ class Hustle_Migration
 				$slide_in = $settings->slide_in;
 				$triggers = array(
 					'trigger' => $slide_in->appear_after,
-					'on_time' => ( $slide_in->trigger_on_time == 'immediately' ) ? false : true,
+					'on_time' => ( 'immediately' === $slide_in->trigger_on_time ) ? false : true,
 					'on_time_delay' => $slide_in->appear_after_time_val,
 					'on_time_unit' => $slide_in->appear_after_time_unit,
 					'on_scroll' => $slide_in->appear_after_scroll,
@@ -460,9 +464,9 @@ class Hustle_Migration
 				$slidein_settings['triggers'] = $this->_map_trigger_settings($triggers);
 				$slidein_settings['animation_in'] = ( isset( $slide_in->animation_in ) ) ? $this->_map_animation_settings($slide_in->animation_in) : '';
 				$slidein_settings['animation_out'] = ( isset( $slide_in->animation_out ) ) ? $this->_map_animation_settings($slide_in->animation_out, false) : '';
-				if ( $slide_in->after_close === 'hide_all' ) {
+				if ( 'hide_all' === $slide_in->after_close ) {
 					$slidein_settings['after_close'] = 'no_show_all';
-				} elseif ( $slide_in->after_close === 'no_show' ) {
+				} elseif ( 'no_show' === $slide_in->after_close ) {
 					$slidein_settings['after_close'] = 'no_show_on_post';
 				} else {
 					$slidein_settings['after_close'] = 'keep_show';
@@ -525,10 +529,10 @@ class Hustle_Migration
 				$popup = $settings->popup;
 				$embed_settings['animation_in'] = $this->_map_animation_settings($popup->animation_in);
 				$embed_settings['animation_out'] = $this->_map_animation_settings($popup->animation_out, false);
-				$embed_settings['after_content_enabled'] = ( isset( $settings->after_content->enabled ) && ( $settings->after_content->enabled === '1' || $settings->after_content->enabled === 'true'  ) ) ? 'true' : 'false';
+				$embed_settings['after_content_enabled'] = ( isset( $settings->after_content->enabled ) && ( '1' === $settings->after_content->enabled || 'true' === $settings->after_content->enabled ) ) ? 'true' : 'false';
 				$embed_settings['widget_enabled'] = ( isset( $settings->widget->enabled ) ) ? $settings->widget->enabled : 'false';
 				$embed_settings['shortcode_enabled'] = ( isset( $settings->shortcode->enabled ) ) ? $settings->shortcode->enabled : 'false';
-				$embed_settings['conditions'] = ( isset( $popup->conditions ) ) ? $popup->conditions : '';
+				$embed_settings['conditions'] = ( isset( $settings->after_content->conditions ) ) ? $settings->after_content->conditions : '';
 			}
 		}
 		return $embed_settings;
@@ -646,7 +650,7 @@ class Hustle_Migration
 	private function _migrate_custom_content($cc) {
 
 		//don't migrate the modules that don't belong to the blog requesting the migration (useful on MU)
-		if( $cc->blog_id == get_current_blog_id() ){
+		if( get_current_blog_id() === (int)$cc->blog_id ) {
 
 			// create pop-up
 			if ( isset( $cc->popup ) ) {
@@ -658,7 +662,7 @@ class Hustle_Migration
 				$module->test_mode = $cc->test_mode;
 				$module->blog_id = $cc->blog_id;
 				if ( isset( $popup->enabled ) ) {
-					$module->active = ( $popup->enabled === '1' ) ? '1' : '0';
+					$module->active = ( '1' === $popup->enabled ) ? '1' : '0';
 				}
 
 				$module->save();
@@ -692,7 +696,7 @@ class Hustle_Migration
 				$module->test_mode = $cc->test_mode;
 				$module->blog_id = $cc->blog_id;
 				if ( isset( $slide_in->enabled ) ) {
-					$module->active = ( $slide_in->enabled === '1' ) ? '1' : '0';
+					$module->active = ( '1' === $slide_in->enabled ) ? '1' : '0';
 				}
 				$module->save();
 
@@ -701,7 +705,7 @@ class Hustle_Migration
 				if ( isset($track_types['slide_in']) ) {
 					$track_types['slidein'] = $track_types['slide_in'];
 					unset($track_types['slide_in']);
-					$cc->track_types = json_encode($track_types);
+					$cc->track_types = wp_json_encode($track_types);
 				}
 
 				// save to meta table
@@ -736,7 +740,7 @@ class Hustle_Migration
 					$cc_after_content = json_decode($cc->after_content);
 
 					if ( isset( $cc_settings->shortcode->enabled ) && isset( $cc_settings->widget->enabled ) && isset( $cc_after_content->enabled ) ) {
-						$module->active = ( $cc_settings->shortcode->enabled === 'true' || $cc_settings->widget->enabled === 'true' || $cc_after_content->enabled === 'true' || $cc_after_content->enabled === '1' ) ? true : false;
+						$module->active = ( 'true' === $cc_settings->shortcode->enabled || 'true' === $cc_settings->widget->enabled || 'true' === $cc_after_content->enabled || '1' === $cc_after_content->enabled ) ? true : false;
 					}
 
 					$module->save();
@@ -803,12 +807,12 @@ class Hustle_Migration
 				'show_cta' => ( isset( $cc_design->cta_label ) && !empty( $cc_design->cta_label ) ) ? true : false,
 				'cta_label' => ( isset( $cc_design->cta_label ) ) ? $cc_design->cta_label : '',
 				'cta_url' => $cta_url,
-				'cta_target' => ( isset( $cc_design->cta_target ) && $cc_design->cta_target === '_self' ) ? 'self' : 'blank'
+				'cta_target' => ( isset( $cc_design->cta_target ) && '_self' === $cc_design->cta_target ) ? 'self' : 'blank'
 			);
 			$content = wp_parse_args( $design, $content );
 		}
 
-		return json_encode($content);
+		return wp_json_encode($content);
 	}
 
 	private function _parse_cc_design($cc) {
@@ -820,7 +824,7 @@ class Hustle_Migration
 			$customize_colors = isset( $cc_design->customize_colors ) ? $cc_design->customize_colors : 0;
 			if ( isset($cc_design->style) ) {
 				$main_bg_color = '#ffffff';
-				if ( $cc_design->style === 'cabriolet' ){
+				if ( 'cabriolet' === $cc_design->style ){
 					$title_color = '#ffffff';
 					$subtitle_color = '#ffffff';
 				} else {
@@ -840,9 +844,9 @@ class Hustle_Migration
 				'feature_image_position' => ( isset( $cc_design->image_position ) ) ? $cc_design->image_position : 'left',
 				'style' => ( isset( $cc_design->style ) ) ? $cc_design->style : 'simple',
 				'customize_colors' => ( isset( $cc_design->customize_colors ) ) ? $cc_design->customize_colors : 0,
-				'main_bg_color' => ( isset( $cc_design->main_bg_color ) && $customize_colors === '1' ) ? $cc_design->main_bg_color : $main_bg_color,
-				'title_color' => ( isset( $cc_design->title_color ) && $customize_colors === '1' ) ? $cc_design->title_color : $title_color,
-				'subtitle_color' => ( isset( $cc_design->subtitle_color )  && $customize_colors === '1' ) ? $cc_design->subtitle_color : $subtitle_color,
+				'main_bg_color' => ( isset( $cc_design->main_bg_color ) && '1' === $customize_colors ) ? $cc_design->main_bg_color : $main_bg_color,
+				'title_color' => ( isset( $cc_design->title_color ) && '1' === $customize_colors ) ? $cc_design->title_color : $title_color,
+				'subtitle_color' => ( isset( $cc_design->subtitle_color )  && '1' === $customize_colors ) ? $cc_design->subtitle_color : $subtitle_color,
 				'link_static_color' => ( isset( $cc_design->link_static_color ) ) ? $cc_design->link_static_color : '',
 				'link_hover_color' => ( isset( $cc_design->link_hover_color ) ) ? $cc_design->link_hover_color : '',
 				'link_active_color' => ( isset( $cc_design->link_active_color ) ) ? $cc_design->link_active_color : '',
@@ -852,7 +856,7 @@ class Hustle_Migration
 				'cta_button_static_color' => ( isset( $cc_design->cta_static_color ) ) ? $cc_design->cta_static_color : '',
 				'cta_button_hover_color' => ( isset( $cc_design->cta_hover_color ) ) ? $cc_design->cta_hover_color : '',
 				'cta_button_active_color' => ( isset( $cc_design->cta_active_color ) ) ? $cc_design->cta_active_color : '',
-				'border' => $cc_design->border === 'true'? '1' : '0',
+				'border' => 'true' === $cc_design->border ? '1' : '0',
 				'border_radius' => $cc_design->border_radius,
 				'border_weight' => $cc_design->border_weight,
 				'border_type' => $cc_design->border_type,
@@ -872,7 +876,7 @@ class Hustle_Migration
 		}
 
 
-		return json_encode($design);
+		return wp_json_encode($design);
 	}
 
 	private function _parse_cc_popup_settings($cc) {
@@ -880,16 +884,16 @@ class Hustle_Migration
 		if ( isset( $cc->popup ) ) {
 			$popup = json_decode($cc->popup);
 			$triggers = $popup->triggers;
-			$triggers->on_time = ( $triggers->on_time == 'immediately' ) ? false : true;
-			$triggers->on_exit_intent_per_session = ( isset( $triggers->on_exit_intent_per_session ) && $triggers->on_exit_intent_per_session == '1' ) ? 'true' : 'false';
+			$triggers->on_time = ( 'immediately' === $triggers->on_time ) ? false : true;
+			$triggers->on_exit_intent_per_session = ( isset( $triggers->on_exit_intent_per_session ) && 1 === (int)$triggers->on_exit_intent_per_session ) ? 'true' : 'false';
 			$popup_settings['triggers'] = $this->_map_trigger_settings($triggers);
 			$popup_settings['animation_in'] = $this->_map_animation_settings($popup->animation_in);
 			$popup_settings['animation_out'] = $this->_map_animation_settings($popup->animation_out, false);
-			$popup_settings['after_close'] = $popup->add_never_see_link !== 'false' || $popup->close_btn_as_never_see !== 'false' ? 'no_show_all' : 'keep_show';
+			$popup_settings['after_close'] = 'false' !== $popup->add_never_see_link || 'false' !== $popup->close_btn_as_never_see ? 'no_show_all' : 'keep_show';
 			$popup_settings['expiration'] = $popup->expiration_days;
 			$popup_settings['expiration_unit'] = 'days';
-			$popup_settings['allow_scroll_page'] = ( $popup->allow_scroll_page == '1' ) ? 'true' : 'false';
-			$popup_settings['not_close_on_background_click'] = ( $popup->not_close_on_background_click == '1' ) ? 'true' : 'false';
+			$popup_settings['allow_scroll_page'] = ( 1 === (int)$popup->allow_scroll_page ) ? 'true' : 'false';
+			$popup_settings['not_close_on_background_click'] = ( 1 === (int)$popup->not_close_on_background_click ) ? 'true' : 'false';
 			$popup_settings['on_submit'] = $popup->on_submit;
 			$popup_settings['conditions'] = ( isset( $popup->conditions ) ) ? $popup->conditions : '';
 		}
@@ -901,15 +905,15 @@ class Hustle_Migration
 		if ( isset( $cc->slide_in ) ) {
 			$slide_in = json_decode($cc->slide_in);
 			$triggers = (object) $slide_in->triggers;
-			$triggers->on_time = ( ( isset( $triggers->on_time ) ) && $triggers->on_time == 'immediately' ) ? false : true;
-			$triggers->on_exit_intent_per_session = (  isset( $triggers->on_exit_intent_per_session ) && $triggers->on_exit_intent_per_session == '1' ) ? 'true' : 'false';
+			$triggers->on_time = ( ( isset( $triggers->on_time ) ) && 'immediately' === $triggers->on_time ) ? false : true;
+			$triggers->on_exit_intent_per_session = (  isset( $triggers->on_exit_intent_per_session ) && 1 === (int)$triggers->on_exit_intent_per_session ) ? 'true' : 'false';
 			$slidein_settings['triggers'] = $this->_map_trigger_settings($triggers);
 
 			$slidein_settings['animation_in'] = ( isset( $slide_in->animation_in ) ) ? $this->_map_animation_settings($slide_in->animation_in) : '';
 			$slidein_settings['animation_out'] = ( isset( $slide_in->animation_out ) ) ? $this->_map_animation_settings($slide_in->animation_out, false) : '';
-			if ( $slide_in->after_close === 'hide_all' ) {
+			if ( 'hide_all' === $slide_in->after_close ) {
 					$slidein_settings['after_close'] = 'no_show_all';
-			} elseif ( $slide_in->after_close === 'no_show' ) {
+			} elseif ( 'no_show' === $slide_in->after_close ) {
 				$slidein_settings['after_close'] = 'no_show_on_post';
 			} else {
 				$slidein_settings['after_close'] = 'keep_show';
@@ -972,7 +976,7 @@ class Hustle_Migration
 			$embed_settings['animation_in'] = $this->_map_animation_settings($popup->animation_in);
 			$embed_settings['animation_out'] = $this->_map_animation_settings($popup->animation_out, false);
 			$embed_settings['on_submit'] = $popup->on_submit;
-			$embed_settings['after_content_enabled'] = ( isset( $after_content->enabled ) && ( $after_content->enabled === '1' || $after_content->enabled === 'true'  ) ) ? 'true' : 'false';
+			$embed_settings['after_content_enabled'] = ( isset( $after_content->enabled ) && ( '1' === $after_content->enabled || 'true' === $after_content->enabled ) ) ? 'true' : 'false';
 			$embed_settings['widget_enabled'] = ( isset( $settings->widget ) && isset( $settings->widget->enabled ) ) ? $settings->widget->enabled : 'false';
 			$embed_settings['shortcode_enabled'] = ( isset( $settings->shortcode ) && isset( $settings->shortcode->enabled ) ) ? $settings->shortcode->enabled : 'false';
 			$embed_settings['conditions'] = ( isset( $popup->conditions ) ) ? $popup->conditions : '';
@@ -1056,10 +1060,20 @@ class Hustle_Migration
 	}
 
 
+	private function _migrate_page_shares($page_shares) {
+		$ss = new Hustle_SShare_Model();
+		// floating social views
+		foreach( $page_shares as $val ) {
+			$ss->id = $val->optin_id;
+			$ss->add_meta( $val->meta_key, $val->meta_value );
+		}
+	}
+
+
 	private function _migrate_social_sharing($module) {
 
 		//don't migrate the modules that don't belong to the blog requesting the migration (useful on MU)
-		if( $module->blog_id == get_current_blog_id() ){
+		if( get_current_blog_id() === (int)$module->blog_id ){
 
 			// save to modules table
 			$ss = new Hustle_SShare_Model();
@@ -1107,12 +1121,17 @@ class Hustle_Migration
 			foreach( $module->shortcode_conversions as $conversion ) {
 				$ss->add_meta( 'shortcode_conversion', $conversion );
 			}
+
+			// Page views.
+			foreach( $module->page_shares as $page_share ) {
+				$ss->add_meta( $page_share->meta_key, $page_share->meta_value );
+			}
 		}
 	}
 
 	private function _parse_sshare_content($services) {
 		// Map service type linked to custom.
-		if ($services->service_type === 'linked') {
+		if ( 'linked' === $services->service_type ) {
 			$services->service_type = 'custom';
 		}
 		$content = array(
@@ -1123,7 +1142,7 @@ class Hustle_Migration
 			'click_counter' => $services->click_counter,
 			'social_icons' => $services->social_icons,
 		);
-		return json_encode($content);
+		return wp_json_encode($content);
 	}
 
 	private function _parse_sshare_design($appearance) {
@@ -1165,12 +1184,12 @@ class Hustle_Migration
 			'widget_counter_border' => $appearance->counter_border,
 			'widget_counter_color' => $appearance->widget_counter_text,
 		);
-		return json_encode($design);
+		return wp_json_encode($design);
 	}
 
 	private function _parse_sshare_settings($settings, $floating_social) {
 		$sshare_settings = array(
-			'floating_social_enabled' => ( isset($floating_social->enabled) && $floating_social->enabled === '1' ) ? 'true' : 'false' ,
+			'floating_social_enabled' => ( isset($floating_social->enabled) && '1' === $floating_social->enabled ) ? 'true' : 'false' ,
 			'widget_enabled' => 'true',
 			'shortcode_enabled' => 'true',
 			'conditions' => null, // "conditions" is evaluated and inserted below
@@ -1190,11 +1209,11 @@ class Hustle_Migration
 			$sshare_settings['conditions'] = $floating_social->conditions;
 		}
 
-		return json_encode($sshare_settings);
+		return wp_json_encode($sshare_settings);
 	}
 
 
-	/* FOR WORDPRESS POP-UPS */
+	/* FOR WordPress POP-UPS */
 
 
 	public function migrate_popup( $popup ) {
@@ -1204,7 +1223,7 @@ class Hustle_Migration
 			$module->module_type = Hustle_Module_Model::POPUP_MODULE;
 			$module->module_name = $popup->post_title;
 			$module->blog_id = get_current_blog_id();
-			$module->active = $popup->post_status === 'publish';
+			$module->active = 'publish' === $popup->post_status ;
 			$module->test_mode = 0;
 			$module->save();
 
@@ -1281,7 +1300,7 @@ class Hustle_Migration
 			'cta_target' => $cta_target,
 		);
 
-		return json_encode($content);
+		return wp_json_encode($content);
 	}
 
 	/**
@@ -1390,7 +1409,7 @@ class Hustle_Migration
 			'custom_css' => $custom_css
 		);
 
-		return json_encode($design);
+		return wp_json_encode($design);
 	}
 
 	/**
@@ -1446,20 +1465,20 @@ class Hustle_Migration
 		$display = get_post_meta( $popup_id, 'po_display', true );
 		$on_time = true;
 
-		if ( 'delay' == $display ) {
+		if ( 'delay' === $display ) {
 			$display = 'time';
 			$delay = (int) $saved_settings['delay'];
 
-			if ( 0 == $delay ) {
+			if ( $delay ) {
 				$on_time = false;
 			}
 		}
 
-		$triggers['trigger'] = 'anchor' == $display ? 'scrolled' : $display;
+		$triggers['trigger'] = 'anchor' === $display ? 'scrolled' : $display;
 		$triggers['on_time'] = $on_time;
 		$triggers['on_time_delay'] = (int) $saved_settings['delay'];
-		$triggers['on_time_unit'] = 's' == $saved_settings['delay_type'] ? 'seconds' : 'minutes';
-		$triggers['on_scroll'] = 'anchor' == $display ? 'selector' : 'scrolled';
+		$triggers['on_time_unit'] = 's' === $saved_settings['delay_type'] ? 'seconds' : 'minutes';
+		$triggers['on_scroll'] = 'anchor' === $display ? 'selector' : 'scrolled';
 		$triggers['on_scroll_page_percent'] = (int) $saved_settings['scroll'];
 		$triggers['on_scroll_css_selector'] = $saved_settings['anchor'];
 		$triggers['on_click_element'] = '';
@@ -1501,17 +1520,17 @@ class Hustle_Migration
 
 				// handling specific urls and referrers
 				if ( isset( $rules_data[$rule_name] ) ) {
-					if ( $rule_name == "url" || $rule_name == "no_url" ) {
+					if ( "url" === $rule_name || "no_url" === $rule_name ) {
 						$url_rules = array(
 							"urls" => implode( "\n", $rules_data[$rule_name] )
 						);
-						$rules_data[$rule_name] = str_replace("\r","",$url_rules);
+						$rules_data[$rule_name] = str_replace("\r", "", $url_rules);
 					}
-					if ( $rule_name == "referrer" || $rule_name == "no_referrer" ) {
+					if ( "referrer" === $rule_name || "no_referrer" === $rule_name ) {
 						$ref_rules = array(
 							"refs" => implode( "\n", $rules_data[$rule_name] )
 						);
-						$rules_data[$rule_name] = str_replace("\r","",$ref_rules);
+						$rules_data[$rule_name] = str_replace("\r", "", $ref_rules);
 					}
 				}
 
@@ -1583,9 +1602,9 @@ class Hustle_Migration
 	 */
 	private function _map_trigger_settings($triggers) {
 		// If trigger is scrolled, change to scroll for objects or arrays.
-		if (gettype($triggers) === 'array' && isset($triggers['trigger']) && $triggers['trigger'] === 'scrolled') {
+		if ( 'array' === gettype($triggers) && isset($triggers['trigger']) && 'scrolled' === $triggers['trigger'] ) {
 			$triggers['trigger'] = 'scroll';
-		} elseif (gettype($triggers) === 'object' && isset($triggers->trigger) && $triggers->trigger === 'scrolled') {
+		} elseif ( 'object' === gettype($triggers) && isset($triggers->trigger) && 'scrolled' === $triggers->trigger ) {
 			$triggers->trigger = 'scroll';
 		}
 

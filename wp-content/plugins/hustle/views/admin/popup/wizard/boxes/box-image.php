@@ -2,9 +2,9 @@
 
 	<div class="wpmudev-box-left">
 
-		<h4><strong><?php _e( "Featured image", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
+		<h4><strong><?php esc_attr_e( "Featured image", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
 
-		<label class="wpmudev-helper"><?php _e( "A Featured image is an optional part of the design. You can also insert images inside content, but Featured images result in a better design.", Opt_In::TEXT_DOMAIN ); ?></label>
+		<label class="wpmudev-helper"><?php esc_attr_e( "A Featured image is an optional part of the design. You can also insert images inside content, but Featured images result in a better design.", Opt_In::TEXT_DOMAIN ); ?></label>
 
 	</div>
 
@@ -20,7 +20,7 @@
 
 			</div>
 
-			<label class="wpmudev-switch-label" for="wph-popup-feature-image"><?php _e( "Use featured image", Opt_In::TEXT_DOMAIN ); ?></label>
+			<label class="wpmudev-switch-label" for="wph-popup-feature-image"><?php esc_attr_e( "Use featured image", Opt_In::TEXT_DOMAIN ); ?></label>
 
 		</div>
 
@@ -38,7 +38,7 @@
 
                 </div>
 
-                <label class="wpmudev-switch-label" for="wph-popup-mobile_hide"><?php _e( "Hide on mobile devices", Opt_In::TEXT_DOMAIN ); ?></label>
+                <label class="wpmudev-switch-label" for="wph-popup-mobile_hide"><?php esc_attr_e( "Hide on mobile devices", Opt_In::TEXT_DOMAIN ); ?></label>
 
             </div>
 

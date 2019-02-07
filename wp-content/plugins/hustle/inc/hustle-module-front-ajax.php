@@ -4,7 +4,7 @@ class Hustle_Module_Front_Ajax {
 
 	private $_hustle;
 
-	function __construct( Opt_In $hustle ){
+	public function __construct( Opt_In $hustle ){
 		$this->_hustle = $hustle;
 		// When module is viewed
 		add_action("wp_ajax_module_viewed", array( $this, "module_viewed" ));
@@ -14,6 +14,10 @@ class Hustle_Module_Front_Ajax {
 		add_action("wp_ajax_module_form_submit", array( $this, "submit_form" ));
 		add_action("wp_ajax_nopriv_module_form_submit", array( $this, "submit_form" ));
 
+		// Update the number of shares of each network
+		add_action("wp_ajax_update_network_shares", array( $this, 'update_network_shares' ));
+		add_action("wp_ajax_nopriv_update_network_shares", array( $this, 'update_network_shares' ));
+
 		// When cta is clicked
 		add_action("wp_ajax_hustle_cta_converted", array( $this, "log_cta_conversion" ) );
 		add_action("wp_ajax_nopriv_hustle_cta_converted", array( $this, "log_cta_conversion" ) );
@@ -21,27 +25,54 @@ class Hustle_Module_Front_Ajax {
 		// When SShare is converted to
 		add_action("wp_ajax_hustle_sshare_converted", array( $this, "log_sshare_conversion" ) );
 		add_action("wp_ajax_nopriv_hustle_sshare_converted", array( $this, "log_sshare_conversion" ) );
+
+		// Handles unsubscribe form submisisons
+		add_action("wp_ajax_hustle_unsubscribe_form_submission", array( $this, "unsubscribe_submit_form" ));
+		add_action("wp_ajax_nopriv_hustle_unsubscribe_form_submission", array( $this, "unsubscribe_submit_form" ));
 	}
 
 
-	function submit_form(){
-		$data = $_POST['data'];
+	public function submit_form(){
+		$data = $_POST['data']; // WPCS: CSRF ok.
 		parse_str( $data['form'], $form_data );
 
 		if( !is_email( $form_data['email'] ) )
 			wp_send_json_error( __("Invalid email address", Opt_In::TEXT_DOMAIN) );
 
-		$e_newsletter_data = array();
-		$e_newsletter_data['member_email'] = $form_data['email'];
-
-		if( isset( $form_data['first_name'] ) )
-			$e_newsletter_data['member_fname'] = $form_data['first_name'];
-
-		if( isset( $form_data['last_name'] ) )
-			$e_newsletter_data['member_lname'] = $form_data['last_name'];
-
-
 		$module = Hustle_Module_Model::instance()->get( $data['module_id'] );
+		$module_content = $module->get_content();
+
+		//check GDPR
+		$show_gdpr = $module_content->show_gdpr;
+		if ( !empty( $show_gdpr ) && empty( $data['gdpr'] ) ) {
+			wp_send_json_error( __( 'You have to agree to our terms and conditions.', Opt_In::TEXT_DOMAIN ) );
+		}
+
+		$form_elements = is_array( $module_content->form_elements ) ? $module_content->form_elements : json_decode( $module_content->form_elements );
+		$recaptcha_settings = Hustle_Module_Model::get_recaptcha_settings();
+		$recaptcha_secret = isset( $recaptcha_settings['secret'] ) && !empty( $recaptcha_settings['enabled'] ) ? $recaptcha_settings['secret'] : '';
+
+		if ( $recaptcha_secret && key_exists( 'recaptcha', $form_elements ) ) {
+			if ( empty( $data['recaptcha'] ) ) {
+				$failed = true;
+			} else {
+				# Verify captcha
+				$response = wp_remote_get( add_query_arg( array(
+					'secret'   => $recaptcha_secret,
+					'response' => $data['recaptcha'],
+					'remoteip' => isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']
+				), 'https://www.google.com/recaptcha/api/siteverify' ) );
+
+				$json = !empty( $response['body'] ) ? json_decode( $response['body'] ) : '';
+				if( is_wp_error( $response ) || ! $json  || ! $json->success ) {
+					$failed = true;
+				}
+			}
+
+			if ( !empty( $failed ) ) {
+				wp_send_json_error( __( 'reCAPTCHA validation failed. Please try again.', Opt_In::TEXT_DOMAIN ) );
+			}
+		}
 
 		$module_type = $data['type'];
 		$provider = false;
@@ -49,20 +80,24 @@ class Hustle_Module_Front_Ajax {
 		$local_saved = false;
 		$is_save_to_local = (bool) $module->content->save_local_list;
 		$is_test_mode = (bool) $module->test_mode;
-		$has_active_email_service = (bool) $module->content->active_email_service;
-		$double_opt_in = $module->get_e_newsletter_double_opt_in();
-		$subscribe = $double_opt_in ? "" : 1;
+		$active_email_service = $module->content->active_email_service;
+		$has_active_email_service = (bool) $active_email_service;
+		$activable_providers = $this->_hustle->get_providers();
 
-		if( $this->_hustle->get_e_newsletter()->is_plugin_active() && $module->sync_with_e_newsletter ){
-			$this->_hustle->get_e_newsletter()->subscribe( $e_newsletter_data, $module->get_e_newsletter_groups(), $subscribe );
+		// If the selected provider is not available, disable it, enable local list, and log errors.
+		if ( $has_active_email_service && ! isset( $activable_providers[ $active_email_service ] ) ) {
+			$is_save_to_local = true;
+			$has_active_email_service = false;
+			$error_data = $form_data;
+			$error_data['error'] = sprintf( __( 'This conversion was stored in your module\'s local list because the selected provider (%s) is not available. ', Opt_In::TEXT_DOMAIN ), $active_email_service );
+			$module->log_error( $error_data );
 		}
 
 		if( $has_active_email_service ){
 
-			$provider = Opt_In::get_provider_by_id( $module->content->active_email_service );
-			$provider = Opt_In::provider_instance( $provider );
+			$provider = Opt_In_Utils::get_provider_by_slug( $module->content->active_email_service );
 
-			if( !is_subclass_of( $provider, "Opt_In_Provider_Abstract") && !$is_test_mode )
+			if( !is_subclass_of( $provider, "Hustle_Provider_Abstract") && !$is_test_mode )
 			   wp_send_json_error( __("Invalid provider", Opt_In::TEXT_DOMAIN) );
 
 		}
@@ -88,6 +123,7 @@ class Hustle_Module_Front_Ajax {
 		}
 
 		if( $provider ) {
+			$form_data = apply_filters( 'hustle_form_data_before_subscription', $form_data, $module, $provider );
 			$api_result = $provider->subscribe( $module, $form_data );
 		}
 
@@ -121,14 +157,139 @@ class Hustle_Module_Front_Ajax {
 			$collected_errs_messages = array_merge( $collected_errs_messages, $local_saved->get_error_messages() );
 		}
 
-		if( $collected_errs_messages !== array()  ){
+		if( array() !== $collected_errs_messages  ){
 			wp_send_json_error( $collected_errs_messages);
 		}
 
 		wp_send_json_error( $api_result );
 	}
 
-	function log_cta_conversion(){
+	/**
+	 * Handles the unsubscribe form submission.
+	 *
+	 * @since 3.0.5
+	 */
+	public function unsubscribe_submit_form() {
+
+		parse_str( $_POST['data'], $submitted_data ); // WPCS: CSRF ok.
+		$sanitized_data = Opt_In_Utils::validate_and_sanitize_fields( $submitted_data );
+		$messages = Hustle_Module_Model::get_unsubscribe_messages();
+
+		// Check if we got the email address and if it's valid.
+		if ( isset( $sanitized_data['email'] ) && filter_var( $sanitized_data['email'], FILTER_VALIDATE_EMAIL ) ) {
+
+			$email = $sanitized_data['email'];
+
+			// Handle 'choose_list' form step
+			if ( isset( $sanitized_data['form_step'] ) && 'choose_list' === $sanitized_data['form_step'] ) {
+
+				// If the lists are defined, submit the email with the nonce.
+				if ( isset( $sanitized_data['lists_id'] ) && ! empty( $sanitized_data['lists_id'] ) && isset( $sanitized_data['current_url'] ) ) {
+
+					// Do the process to send the unsubscription email.
+					$email_processed = Hustle_Mail::handle_unsubscription_user_email( $email, $sanitized_data['lists_id'], $sanitized_data['current_url'] );
+
+					if ( $email_processed ) {
+
+						$html = $messages['email_submitted'];
+						$wrapper = '.hustle-form-body';
+
+						$response = array(
+							'html' => apply_filters( 'hustle_unsubscribe_email_processed_html', $html, $sanitized_data ),
+							'wrapper' => apply_filters( 'hustle_unsubscribe_email_processed_wrapper', $wrapper, $sanitized_data ),
+						);
+						wp_send_json_success( $response );
+
+					}
+				}
+
+				$html = $messages['email_not_processed'];
+				apply_filters( 'hustle_unsubscribe_email_not_processed_html', $html, $sanitized_data );
+				wp_send_json_error( array( 'html' => $html ) );
+
+			} elseif ( isset( $sanitized_data['form_step'] ) && 'enter_email' === $sanitized_data['form_step'] ) {
+
+				// The lists are not defined yet. Show the list for the user to select them.
+				$module = Hustle_Module_Model::instance();
+				$modules_id = $module->get_modules_id_by_email_in_local_list( $email );
+
+				// If not showing all, show only the ones defined in the shortcode.
+				if ( '-1' !== $sanitized_data['form_module_id'] && ! empty( $sanitized_data['form_module_id'] ) ) {
+					$form_modules_id = array_map( 'trim', explode( ',', $submitted_data['form_module_id'] ) );
+					$modules_id = array_intersect( $form_modules_id, $modules_id );
+				}
+
+				// If the email is not in any of the selected lists.
+				if ( empty( $modules_id ) ) {
+
+					$html = $messages['email_not_found'];
+					$wrapper = '.hustle-form-body';
+
+					$response = array(
+						'html' => apply_filters( 'hustle_unsubscribe_email_not_found_html', $html, $modules_id, $email ),
+						'wrapper' => apply_filters( 'hustle_unsubscribe_email_not_found_wrapper', $wrapper, $modules_id, $email ),
+					);
+					wp_send_json_success( $response );
+				}
+
+				$params = array(
+					'ajax_step' => true,
+					'modules_id' => $modules_id,
+					'module' => $module,
+					'email' => $sanitized_data['email'],
+					'current_url' => $sanitized_data['current_url'],
+					'messages' => $messages,
+					);
+				$html = $this->_hustle->render( 'general/unsubscribe-form', $params, true );
+				$wrapper = '.hustle-form-body';
+
+				$response = array(
+					'html' => apply_filters( 'hustle_render_unsubscribe_lists_html', $html, $modules_id, $email ),
+					'wrapper' => apply_filters( 'hustle_render_unsubscribe_list_wrapper', $wrapper, $modules_id, $email ),
+				);
+				wp_send_json_success( $response );
+			}
+		} else {
+			// Return an error if the email is missing or is invalid.
+			$html =  $messages['invalid_email'];
+			apply_filters( 'hustle_unsubscribe_invalid_email_address_message', $html, $sanitized_data );
+			wp_send_json_error( array( 'html' => $html ) );
+		}
+
+		wp_send_json_success( $sanitized_data );
+	}
+
+	/**
+	 * Update the number of shares
+	 */
+	public function update_network_shares() {
+		$post_id = filter_input( INPUT_POST, 'page_id', FILTER_VALIDATE_INT );
+
+		if ( !$post_id ) {
+			wp_send_json_success();
+		}
+		$modules = Hustle_Module_Collection::instance()->get_all(true);
+		$modules = apply_filters( 'hustle_sort_modules', $modules );
+		foreach( $modules as $module ) {
+			if ( 'social_sharing' === $module->module_type ) {
+				$data = array(
+					'content' => $module->get_sshare_content()->to_array(),
+					'design' => $module->get_sshare_design()->to_array(),
+					'settings' => $module->get_sshare_display_settings()->to_array(),
+					'tracking_types' => $module->get_tracking_types(),
+					'test_types' => $module->get_test_types()
+				);
+				if( $module->is_click_counter_type_enabled( 'native' ) && !empty( $data['content']['social_icons'] )
+						&& ! $module->check_if_use_stored( $post_id, true ) ) {
+					$module->retrieve_network_shares( $post_id );
+				}
+			}
+		}
+
+		wp_send_json_success();
+	}
+
+	public function log_cta_conversion(){
 		$data = json_decode( file_get_contents( 'php://input' ) );
 		$data = get_object_vars( $data );
 
@@ -150,7 +311,7 @@ class Hustle_Module_Front_Ajax {
 			wp_send_json_success( __("Stats Successfully saved", Opt_In::TEXT_DOMAIN) );
 	}
 
-	function log_sshare_conversion(){
+	public function log_sshare_conversion(){
 		$data = json_decode( file_get_contents( 'php://input' ) );
 		$data = get_object_vars( $data );
 
@@ -166,7 +327,7 @@ class Hustle_Module_Front_Ajax {
 		$ss = Hustle_SShare_Model::instance()->get( $module_id );
 
 		// only update the social counter for Native Social Sharing
-		if( $service_type && $service_type == 'native' && $source ) {
+		if( $service_type && 'native' === $service_type && $source ) {
 			$social = str_replace( '_icon', '', $source );
 			$services_content = $ss->get_sshare_content()->to_array();
 
@@ -198,7 +359,7 @@ class Hustle_Module_Front_Ajax {
 			wp_send_json_success( __("Stats Successfully saved", Opt_In::TEXT_DOMAIN) );
 	}
 
-	function module_viewed(){
+	public function module_viewed(){
 		$data = json_decode( file_get_contents( 'php://input' ) );
 		$data = get_object_vars( $data );
 
@@ -229,7 +390,7 @@ class Hustle_Module_Front_Ajax {
 
 	}
 
-	function log_conversion( $module, $data ) {
+	public function log_conversion( $module, $data ) {
 		$module_type = ( isset( $data['type'] ) ) ? $data['type'] : '';
 		$tracking_types = $module->get_tracking_types();
 		if ( $tracking_types && ( (bool) $tracking_types[$module_type] ) ) {

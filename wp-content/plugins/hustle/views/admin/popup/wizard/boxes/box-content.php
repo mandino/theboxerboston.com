@@ -2,9 +2,10 @@
 
 	<div class="wpmudev-box-full">
 
-		<h4><strong><?php _e( "Main content", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
+		<h4><strong><?php esc_attr_e( "Main content", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
 
-		<?php wp_editor( "{{main_content}}", "main_content", array(
+		<?php
+		wp_editor( "{{main_content}}", "main_content", array(
 			'textarea_name' => 'main_content',
 			'editor_css' => '<style>
 				#wp-main_content-editor-tools { margin-bottom: 5px; }
@@ -194,7 +195,8 @@
 			</style>',
 			'editor_height' => 130,
 			'drag_drop_upload' => true,
-        ) ); ?>
+        ) );
+		?>
 
 	</div>
 

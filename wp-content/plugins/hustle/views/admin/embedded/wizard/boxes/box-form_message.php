@@ -2,7 +2,8 @@
 
 	<div class="wpmudev-box-right">
 
-		<?php wp_editor( "{{success_message}}", "success_message", array(
+		<?php
+		wp_editor( "{{success_message}}", "success_message", array(
 			'textarea_name' => 'success_message',
 			'editor_css' => '<style>
 				#wp-success_message-editor-tools { margin-bottom: 5px; }
@@ -192,9 +193,10 @@
 			</style>',
 			'editor_height' => 130,
 			'drag_drop_upload' => true,
-        ) ); ?>
+        ) );
+		?>
 
-        <label class="wpmudev-helper"><?php _e( "This can be a standard ‘Thank you’ message, or even a link to a freebie / secret content.", Opt_In::TEXT_DOMAIN ); ?></label>
+        <label class="wpmudev-helper"><?php esc_attr_e( "This can be a standard ‘Thank you’ message, or even a link to a freebie / secret content.", Opt_In::TEXT_DOMAIN ); ?></label>
 
 	</div>
 

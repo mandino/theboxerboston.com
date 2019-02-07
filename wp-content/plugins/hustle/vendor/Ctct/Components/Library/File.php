@@ -140,6 +140,6 @@ class File extends Component {
         unset($this->created_date);
         unset($this->modified_date);
         unset($this->status);
-        return json_encode($this);
+        return wp_json_encode($this);
     }
 }

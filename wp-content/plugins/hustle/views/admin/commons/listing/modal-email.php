@@ -10,7 +10,7 @@
 
                 <h2>{{name}}</h2>
 
-                <label class="wpmudev-helper"><?php _e( "Total {{total}} subscriptions", Opt_In::TEXT_DOMAIN ); ?></label>
+                <label class="wpmudev-helper"><?php esc_attr_e( "Total {{total}} subscriptions", Opt_In::TEXT_DOMAIN ); ?></label>
 
             </div>
 
@@ -36,7 +36,7 @@
 
         <div class="wpmudev-box-footer">
 
-            <a href="<?php echo wp_nonce_url( get_admin_url(null, 'admin-ajax.php?action=inc_optin_export_subscriptions&id=__id&type=__type'  ), 'inc_optin_export_subscriptions' ) ?>" class="wpmudev-button wpmudev-button-blue button-export-csv" data-id="{{id}}" target="_blank"><?php _e("Export CSV", Opt_In::TEXT_DOMAIN); ?></a>
+		<a href="<?php echo esc_url( wp_nonce_url( get_admin_url(null, 'admin-ajax.php?action=inc_optin_export_subscriptions&id=__id&type=__type'  ), 'inc_optin_export_subscriptions' ) ); ?>" class="wpmudev-button wpmudev-button-blue button-export-csv" data-id="{{id}}" target="_blank"><?php esc_attr_e("Export CSV", Opt_In::TEXT_DOMAIN); ?></a>
 
         </div>
 
@@ -48,7 +48,7 @@
 
     <# _.each( module_fields, function( field ) { #>
 
-		<# if ( field.name !== 'submit' || field.label.toLowerCase() !== 'submit' ) { #>
+		<# if ( 'submit' !== field.name || 'submit' !== field.label.toLowerCase() ) { #>
 
 			<div class="wpmudev-listing-col">{{field.label}}</div>
 
@@ -65,19 +65,19 @@
 
             _.each( subscriptions, function( sub ) {
 
-				if ( sub !== null && typeof sub !== 'undefined' ) { #>
+				if ( sub !== null && 'undefined' !== typeof sub ) { #>
 
 					<div class="wpmudev-listing-row">
 
 						<# _.each( module_fields, function( field ) {
 
-							if ( field.name !== 'submit' || field.label.toLowerCase() !== 'submit' ) { #>
+							if ( 'submit' !== field.name || 'submit' !== field.label.toLowerCase() ) { #>
 
 								<div class="wpmudev-listing-col">
 
 									<p class="wpmudev-listing-title">{{field.label}}</p>
 
-									<p class="wpmudev-listing-content"><# if ( typeof sub[field.name] !== 'undefined' && sub[field.name]) { #>{{ sub[field.name] }}<# } else { #>–<# } #></p>
+									<p class="wpmudev-listing-content"><# if ( 'undefined' !== typeof sub[field.name] && sub[field.name]) { #>{{ sub[field.name] }}<# } else { #>–<# } #></p>
 
 								</div>
 

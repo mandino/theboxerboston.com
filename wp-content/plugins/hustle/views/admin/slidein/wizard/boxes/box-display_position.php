@@ -7,13 +7,13 @@ $can_close = false;
 
 	<div class="wpmudev-box-left">
 
-		<h4><strong><?php _e( "Slide-in position", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
+		<h4><strong><?php esc_attr_e( "Slide-in position", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
 
 	</div>
 
 	<div class="wpmudev-box-right">
 
-		<label><?php _e( "Pick position for Slide-in to appear", Opt_In::TEXT_DOMAIN ); ?></label>
+		<label><?php esc_attr_e( "Pick position for Slide-in to appear", Opt_In::TEXT_DOMAIN ); ?></label>
 
 		<div class="wpmudev-browser">
 
@@ -35,7 +35,7 @@ $can_close = false;
 
 						<div class="wpmudev-input_radio">
 
-							<input value="nw" type="radio" id="wph-slidein-browser-position-nw" name="display_position" data-attribute="display_position" {{_.checked(_.isTrue(display_position === 'nw'), true)}}>
+							<input value="nw" type="radio" id="wph-slidein-browser-position-nw" name="display_position" data-attribute="display_position" {{_.checked(_.isTrue( 'nw' === display_position ), true)}}>
 
 							<label for="wph-slidein-browser-position-nw" class="wpdui-fi wpdui-fi-check"></label>
 
@@ -47,7 +47,7 @@ $can_close = false;
 
 						<div class="wpmudev-input_radio">
 
-							<input value="n" type="radio" id="wph-slidein-browser-position-n" name="display_position" data-attribute="display_position" {{_.checked(_.isTrue(display_position === 'n'), true)}}>
+							<input value="n" type="radio" id="wph-slidein-browser-position-n" name="display_position" data-attribute="display_position" {{_.checked(_.isTrue( 'n' === display_position ), true)}}>
 
 							<label for="wph-slidein-browser-position-n" class="wpdui-fi wpdui-fi-check"></label>
 
@@ -59,7 +59,7 @@ $can_close = false;
 
 						<div class="wpmudev-input_radio">
 
-							<input value="ne" type="radio" id="wph-slidein-browser-position-ne" name="display_position" data-attribute="display_position" {{_.checked(_.isTrue(display_position === 'ne'), true)}}>
+							<input value="ne" type="radio" id="wph-slidein-browser-position-ne" name="display_position" data-attribute="display_position" {{_.checked(_.isTrue( 'ne' === display_position ), true)}}>
 
 							<label for="wph-slidein-browser-position-ne" class="wpdui-fi wpdui-fi-check"></label>
 
@@ -75,7 +75,7 @@ $can_close = false;
 
 						<div class="wpmudev-input_radio">
 
-							<input value="w" type="radio" id="wph-slidein-browser-position-w" name="display_position" data-attribute="display_position" {{_.checked(_.isTrue(display_position === 'w'), true)}}>
+							<input value="w" type="radio" id="wph-slidein-browser-position-w" name="display_position" data-attribute="display_position" {{_.checked(_.isTrue( 'w' === display_position ), true)}}>
 
 							<label for="wph-slidein-browser-position-w" class="wpdui-fi wpdui-fi-check"></label>
 
@@ -87,7 +87,7 @@ $can_close = false;
 
 						<div class="wpmudev-input_radio">
 
-							<input value="e" type="radio" id="wph-slidein-browser-position-e" name="display_position" data-attribute="display_position" {{_.checked(_.isTrue(display_position === 'e'), true)}}>
+							<input value="e" type="radio" id="wph-slidein-browser-position-e" name="display_position" data-attribute="display_position" {{_.checked(_.isTrue( 'e' === display_position ), true)}}>
 
 							<label for="wph-slidein-browser-position-e" class="wpdui-fi wpdui-fi-check"></label>
 
@@ -103,7 +103,7 @@ $can_close = false;
 
 						<div class="wpmudev-input_radio">
 
-							<input value="sw" type="radio" id="wph-slidein-browser-position-sw" name="display_position" data-attribute="display_position" {{_.checked(_.isTrue(display_position === 'sw'), true)}}>
+							<input value="sw" type="radio" id="wph-slidein-browser-position-sw" name="display_position" data-attribute="display_position" {{_.checked(_.isTrue( 'sw' === display_position ), true)}}>
 
 							<label for="wph-slidein-browser-position-sw" class="wpdui-fi wpdui-fi-check"></label>
 
@@ -115,7 +115,7 @@ $can_close = false;
 
 						<div class="wpmudev-input_radio">
 
-							<input value="s" type="radio" id="wph-slidein-browser-position-s" name="display_position" data-attribute="display_position" {{_.checked(_.isTrue(display_position === 's'), true)}}>
+							<input value="s" type="radio" id="wph-slidein-browser-position-s" name="display_position" data-attribute="display_position" {{_.checked(_.isTrue( 's' === display_position ), true)}}>
 
 							<label for="wph-slidein-browser-position-s" class="wpdui-fi wpdui-fi-check"></label>
 
@@ -127,7 +127,7 @@ $can_close = false;
 
 						<div class="wpmudev-input_radio">
 
-							<input value="se" type="radio" id="wph-slidein-browser-position-se" name="display_position" data-attribute="display_position" {{_.checked(_.isTrue(display_position === 'se'), true)}}>
+							<input value="se" type="radio" id="wph-slidein-browser-position-se" name="display_position" data-attribute="display_position" {{_.checked(_.isTrue( 'se' === display_position ), true)}}>
 
 							<label for="wph-slidein-browser-position-se" class="wpdui-fi wpdui-fi-check"></label>
 

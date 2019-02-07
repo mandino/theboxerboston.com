@@ -248,6 +248,6 @@ class Contact extends Component
     public function toJson()
     {
         unset($this->last_update_date);
-        return json_encode($this);
+        return wp_json_encode($this);
     }
 }

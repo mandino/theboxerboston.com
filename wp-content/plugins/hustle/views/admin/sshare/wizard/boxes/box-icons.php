@@ -2,9 +2,9 @@
 
 	<div class="wpmudev-box-left">
 
-		<h4><strong><?php _e( "Icons design and order", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
+		<h4><strong><?php esc_attr_e( "Icons design and order", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
 
-		<label class="wpmudev-helper"><?php _e( "Choose what kind of design you want for your icons.", Opt_In::TEXT_DOMAIN ); ?></label>
+		<label class="wpmudev-helper"><?php esc_attr_e( "Choose what kind of design you want for your icons.", Opt_In::TEXT_DOMAIN ); ?></label>
 
 	</div>
 
@@ -12,7 +12,7 @@
 
 		<div id="wpmudev-choose-icons-style">
 
-			<label><?php _e( "Icons style", Opt_In::TEXT_DOMAIN ); ?></label>
+			<label><?php esc_attr_e( "Icons style", Opt_In::TEXT_DOMAIN ); ?></label>
 
 			<div class="wpmudev-tabs">
 
@@ -20,7 +20,7 @@
 
 					<li class="wpmudev-tabs-menu_item">
 
-						<input id="wpmudev-sshare-flat-icon-style" type="radio" name="icon_style" data-attribute="icon_style" value="flat" {{ _.checked( (icon_style === 'flat') , true) }}>
+						<input id="wpmudev-sshare-flat-icon-style" type="radio" name="icon_style" data-attribute="icon_style" value="flat" {{ _.checked( ( 'flat' === icon_style ) , true) }}>
 
 						<label for="wpmudev-sshare-flat-icon-style">
 
@@ -36,7 +36,7 @@
 
                     <li class="wpmudev-tabs-menu_item">
 
-						<input id="wpmudev-sshare-outline-icon-style" type="radio" name="icon_style" data-attribute="icon_style" value="outline" {{ _.checked( (icon_style === 'outline') , true) }}>
+						<input id="wpmudev-sshare-outline-icon-style" type="radio" name="icon_style" data-attribute="icon_style" value="outline" {{ _.checked( ( 'outline' === icon_style ) , true) }}>
 
 						<label for="wpmudev-sshare-outline-icon-style">
 
@@ -52,7 +52,7 @@
 
                     <li class="wpmudev-tabs-menu_item">
 
-						<input id="wpmudev-sshare-rounded-icon-style" type="radio" name="icon_style" data-attribute="icon_style" value="rounded" {{ _.checked( (icon_style === 'rounded') , true) }}>
+						<input id="wpmudev-sshare-rounded-icon-style" type="radio" name="icon_style" data-attribute="icon_style" value="rounded" {{ _.checked( ( 'rounded' === icon_style ) , true) }}>
 
 						<label for="wpmudev-sshare-rounded-icon-style">
 
@@ -68,7 +68,7 @@
 
                     <li class="wpmudev-tabs-menu_item">
 
-						<input id="wpmudev-sshare-squared-icon-style" type="radio" name="icon_style" data-attribute="icon_style" value="squared" {{ _.checked( (icon_style === 'squared') , true) }}>
+						<input id="wpmudev-sshare-squared-icon-style" type="radio" name="icon_style" data-attribute="icon_style" value="squared" {{ _.checked( ( 'squared' === icon_style ) , true) }}>
 
 						<label for="wpmudev-sshare-squared-icon-style">
 
@@ -90,7 +90,7 @@
 
 		<div id="wpmudev-reoder-icons">
 
-			<label><?php _e( "Click & Drag to re-order icons", Opt_In::TEXT_DOMAIN ); ?></label>
+			<label><?php esc_attr_e( "Click & Drag to re-order icons", Opt_In::TEXT_DOMAIN ); ?></label>
 
 			<?php $this->render("admin/commons/wizard/reorder-icons"); ?>
 

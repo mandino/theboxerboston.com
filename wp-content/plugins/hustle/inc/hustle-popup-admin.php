@@ -9,12 +9,13 @@ class Hustle_Popup_Admin {
 	private $_hustle;
 	private $_email_services;
 
-	function __construct( Opt_In $hustle, Hustle_Email_Services $email_services ){
+	public function __construct( Opt_In $hustle, Hustle_Email_Services $email_services ){
 
 		$this->_hustle = $hustle;
 		$this->_email_services = $email_services;
 
 		add_action( 'admin_init', array( $this, "check_free_version" ) );
+		add_action( 'admin_init', array( $this, "export_module" ) );
 		add_action( 'admin_menu', array( $this, "register_admin_menu" ) );
 		add_action( 'admin_head', array( $this, "hide_unwanted_submenus" ) );
 		add_filter( 'hustle_optin_vars', array( $this, "register_current_json" ) );
@@ -26,7 +27,7 @@ class Hustle_Popup_Admin {
 	 *
 	 * @since 1.0
 	 */
-	function register_admin_menu() {
+	public function register_admin_menu() {
 
 		// Optins
 		add_submenu_page( 'hustle', __("Pop-ups", Opt_In::TEXT_DOMAIN) , __("Pop-ups", Opt_In::TEXT_DOMAIN) , "manage_options", Hustle_Module_Admin::POPUP_LISTING_PAGE,  array( $this, "render_popup_listing" )  );
@@ -39,13 +40,13 @@ class Hustle_Popup_Admin {
 	 *
 	 * @since 2.0
 	 */
-	function hide_unwanted_submenus(){
+	public function hide_unwanted_submenus(){
 		remove_submenu_page( 'hustle', Hustle_Module_Admin::POPUP_WIZARD_PAGE );
 	}
 
-	function register_current_json( $current_array ){
+	public function register_current_json( $current_array ){
 
-		if( Hustle_Module_Admin::is_edit() && isset( $_GET['page'] ) && $_GET['page'] == Hustle_Module_Admin::POPUP_WIZARD_PAGE ){
+		if( Hustle_Module_Admin::is_edit() && isset( $_GET['page'] ) && Hustle_Module_Admin::POPUP_WIZARD_PAGE === $_GET['page'] ){ // WPCS: CSRF ok.
 
 			$module = Hustle_Module_Model::instance()->get( filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT) );
 			$current_array['current'] = array(
@@ -69,10 +70,12 @@ class Hustle_Popup_Admin {
 	 *
 	* @since 1.0
 	 */
-	function render_popup_wizard_page( ) {
+	public function render_popup_wizard_page() {
 		$module_id = filter_input( INPUT_GET, "id", FILTER_VALIDATE_INT );
 		$provider = filter_input( INPUT_GET, "provider" );
 		$current_section = Hustle_Module_Admin::get_current_section();
+		$recaptcha_settings = Hustle_Module_Model::get_recaptcha_settings();
+		$recaptcha_enabled = isset( $recaptcha_settings['enabled'] ) && '1' === $recaptcha_settings['enabled'];
 
 		$this->_hustle->render( "/admin/popup/wizard", array(
 			'section' => ( !$current_section ) ? 'content' : $current_section,
@@ -86,6 +89,7 @@ class Hustle_Popup_Admin {
 			'save_nonce' => wp_create_nonce('hustle_save_popup_module'),
 			"shortcode_render_nonce" => wp_create_nonce("hustle_shortcode_render"),
 			'default_form_fields' => $this->_hustle->get_default_form_fields(),
+			'recaptcha_enabled' => $recaptcha_enabled,
 		));
 	}
 
@@ -94,14 +98,71 @@ class Hustle_Popup_Admin {
 	 *
 	* @since 3.0
 	 */
-	function check_free_version() {
-		if (  isset( $_GET['page'] ) && $_GET['page'] == Hustle_Module_Admin::POPUP_WIZARD_PAGE ) {
+	public function check_free_version() {
+		if (  isset( $_GET['page'] ) && Hustle_Module_Admin::POPUP_WIZARD_PAGE === $_GET['page'] ) { // WPCS: CSRF ok.
 			$collection_args = array( 'module_type' => 'popup' );
 			$total_popups = count(Hustle_Module_Collection::instance()->get_all( null, $collection_args ));
-			if ( Opt_In_Utils::_is_free() && ! Hustle_Module_Admin::is_edit() && $total_popups >= 1 ) {
-				wp_safe_redirect( 'admin.php?page=' . Hustle_Module_Admin::UPGRADE_PAGE );
+			if ( Opt_In_Utils::_is_free() && ! Hustle_Module_Admin::is_edit() && $total_popups >= 3 ) {
+				wp_safe_redirect( 'admin.php?page=' . Hustle_Module_Admin::POPUP_LISTING_PAGE . '&' . Hustle_Module_Admin::UPGRADE_MODAL_PARAM . '=true' );
 				exit;
 			}
+		}
+	}
+
+	/**
+	 * Export module settings
+	 */
+	public function export_module(){
+		$action = filter_input( INPUT_GET, 'action' );
+		if ( Opt_In::EXPORT_MODULE_ACTION === $action ) {
+			wp_verify_nonce( Opt_In::EXPORT_MODULE_ACTION );
+
+			$id = filter_input( INPUT_GET, 'id', FILTER_VALIDATE_INT );
+			$type = trim( filter_input( INPUT_GET, 'type', FILTER_SANITIZE_STRING ) );
+
+			//check required parameters
+			if( !$id || !$type )
+				die(esc_html__("Invalid Request", Opt_In::TEXT_DOMAIN));
+
+			$module =  Hustle_Module_Model::instance()->get($id);
+
+			//check type
+			if( Hustle_Module_Model::import_export_check_type( $type, $module->module_type ) )
+				die( sprintf( esc_html__("Invalid environment: %s", Opt_In::TEXT_DOMAIN), esc_html( $module->module_type ) ));
+
+			//set needed settings
+			$settings['module_name'] = $module->module_name;
+			$settings['module_type'] = $module->module_type;
+			$settings['active'] = $module->active;
+			$settings['test_mode'] = $module->test_mode;
+			$settings[ $this->_hustle->get_const_var( "KEY_CONTENT", $module ) ] = $module->get_content()->to_array();
+			$settings[ $this->_hustle->get_const_var( "KEY_DESIGN", $module ) ] = $module->get_design()->to_array();
+			$settings[ $this->_hustle->get_const_var( "KEY_SETTINGS", $module ) ] = $module->get_display_settings()->to_array();
+			$settings[ $this->_hustle->get_const_var( "KEY_SHORTCODE_ID", $module ) ] = $module->get_shortcode_id();
+
+			$filename = sanitize_file_name( $module->module_name . '.json' );
+
+			if ( ob_get_length() )
+				ob_clean();
+
+			/**
+			 * Print HTTP headers
+			 */
+			header( 'Content-Description: File Transfer' );
+			header( 'Content-Disposition: attachment; filename=' . $filename );
+			header( 'Content-Type: text/plain; charset=' . get_option( 'blog_charset' ), true );
+			/**
+			 * Check PHP version, for PHP < 3 do not add options
+			 */
+			$version = phpversion();
+			$compare = version_compare( $version, '5.3', '<' );
+			if ( $compare ) {
+				echo wp_json_encode( $settings );
+				exit;
+			}
+			$option = defined( 'JSON_PRETTY_PRINT' )? JSON_PRETTY_PRINT : null;
+			echo wp_json_encode( $settings, $option );
+			exit;
 		}
 	}
 
@@ -110,17 +171,18 @@ class Hustle_Popup_Admin {
 	 *
 	 * @since 2.0
 	 */
-	function render_popup_listing(){
+	public function render_popup_listing(){
 		$current_user = wp_get_current_user();
-		$new_module = isset( $_GET['module'] ) ? Hustle_Module_Model::instance()->get( intval($_GET['module'] ) ) : null;
-		$updated_module = isset( $_GET['updated_module'] ) ? Hustle_Module_Model::instance()->get( intval($_GET['updated_module'] ) ) : null;
+		$new_module = isset( $_GET['module'] ) ? Hustle_Module_Model::instance()->get( intval($_GET['module'] ) ) : null; // WPCS: CSRF ok.
+		$updated_module = isset( $_GET['updated_module'] ) ? Hustle_Module_Model::instance()->get( intval($_GET['updated_module'] ) ) : null; // WPCS: CSRF ok.
 
 		$this->_hustle->render("admin/popup/listing", array(
 			'popups' => Hustle_Module_Collection::instance()->get_all( null, array( 'module_type' => 'popup' ) ),
 			'new_module' =>  $new_module,
 			'updated_module' =>  $updated_module,
 			'add_new_url' => admin_url("admin.php?page=hustle_popup"),
-			'user_name' => ucfirst($current_user->display_name)
+			'user_name' => ucfirst($current_user->display_name),
+			'is_free' => Opt_In_Utils::_is_free()
 		));
 	}
 

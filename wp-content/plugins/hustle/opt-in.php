@@ -3,7 +3,7 @@
 Plugin Name: Hustle Pro
 Plugin URI: https://premium.wpmudev.org/project/hustle/
 Description: Start collecting email addresses and quickly grow your mailing list with big bold pop-ups, slide-ins, widgets, or in post opt-in forms.
-Version: 3.0.1
+Version: 3.0.7
 Author: WPMU DEV
 Author URI: https://premium.wpmudev.org
 WDP ID: 1107020
@@ -36,14 +36,17 @@ if ( ! function_exists( 'hustle_activated_deactivated' ) ) {
 		if ( get_site_option( 'hustle_free_deactivated' ) && is_super_admin() ) { ?>
 			<div class="notice notice-success is-dismissible">
 				<p><?php esc_html_e( 'Congratulations! You have activated Hustle Pro! We have automatically deactivated the free version.', 'hustle' ); ?></p>
-			</div> <?php
+			</div>
+		<?php
 			delete_site_option( 'hustle_free_deactivated' );
 		}
 		// for Free
-		if ( get_site_option( 'hustle_free_activated' ) && is_super_admin() ) { ?>
+		if ( get_site_option( 'hustle_free_activated' ) && is_super_admin() ) {
+			?>
 			<div class="notice notice-error is-dismissible">
 				<p><?php esc_html_e( 'You already have Hustle Pro activated. If you really wish to go back to the free version of Hustle, please deactivate the Pro version first.', 'hustle' ); ?></p>
-			</div> <?php
+			</div>
+			<?php
 			delete_site_option( 'hustle_free_activated' );
 		}
 	}
@@ -59,30 +62,12 @@ if ( ! function_exists( 'hustle_activated' ) ) {
 			// deactivate free version
 			deactivate_plugins( 'wordpress-popup/popover.php' );
 
-			if ( $plugin == 'hustle/opt-in.php' ) {
+			if ( 'hustle/opt-in.php' === $plugin ) {
 				//Store in database about free version deactivated, in order to show a notice on page load
 				update_site_option( 'hustle_free_deactivated', 1 );
-			} else if ( $plugin == 'wordpress-popup/popover.php' ) {
+			} else if ( 'wordpress-popup/popover.php' === $plugin ) {
 				//Store in database about free version being activated even pro is already active
 				update_site_option( 'hustle_free_activated', 1 );
-			}
-		}
-
-		hustle_redirect_to_dashboard($network_activation);
-	}
-}
-
-// Redirect to dashboard once activated
-if ( ! function_exists( 'hustle_redirect_to_dashboard' ) ) {
-	function hustle_redirect_to_dashboard( $network_activation ) {
-		$flag = get_option( 'hustle_activated_flag', false );
-		delete_option( 'hustle_activated_flag' );
-		if ( !$network_activation && $flag ) {
-			$screen = get_current_screen();
-			if ( 'plugins' === $screen->id ) {
-				$dashboard_url = 'admin.php?page=hustle';
-				wp_safe_redirect( $dashboard_url );
-				exit;
 			}
 		}
 	}
@@ -101,17 +86,25 @@ if( version_compare(PHP_VERSION, '5.3.2', ">=") ) {
 require_once 'lib/wpmu-lib/core.php';
 require_once 'opt-in-static.php';
 require_once 'assets/shared-ui/plugin-ui.php';
-require_once 'inc/providers/opt-in-e-newsletter.php';
+
+if ( ! defined( 'HUSTLE_SUI_VERSION' ) ) {
+	define( 'HUSTLE_SUI_VERSION', '2.3.15' );
+}
 
 if( !class_exists( "Opt_In" ) ):
 
 class Opt_In extends Opt_In_Static{
 
-	const VERSION = "3.0.1";
+	const VERSION = "3.0.7";
 
 	const TEXT_DOMAIN = "hustle";
 
 	const VIEWS_FOLDER = "views";
+	const EXPORT_MODULE_ACTION = 'module_export';
+
+
+	private $hustle_provider_loader;
+
 
 	public static $plugin_base_file;
 	public static $plugin_url;
@@ -120,101 +113,6 @@ class Opt_In extends Opt_In_Static{
 	public static $template_path;
 
 	protected static $_registered_providers = array();
-
-	protected $_providers = array(
-		array(
-			"id" => "aweber",
-			"name" => "AWeber",
-			"file_name" => "opt-in-aweber.php",
-			"class_name" => "Opt_In_Aweber"
-		),
-	   array(
-			"id" => "activecampaign",
-			"name" => "ActiveCampaign",
-			"file_name" => "opt-in-activecampaign.php",
-			"class_name" => "Opt_In_Activecampaign"
-		),
-		array(
-			"id" => "campaignmonitor",
-			"name" => "Campaignmonitor" ,
-			"file_name" => "opt-in-campaignmonitor.php",
-			"class_name" => "Opt_In_Campaignmonitor"
-		),
-		array(
-			"id" => "mailchimp",
-			"name" => "MailChimp",
-			"file_name" => "opt-in-mailchimp.php",
-			"class_name" => "Opt_In_Mailchimp"
-		),
-		array(
-			"id" => "constantcontact",
-			"name" => "ConstantContact",
-			"file_name" => "opt-in-constantcontact.php" ,
-			"class_name" => "Opt_In_ConstantContact"
-		),
-		array(
-			'id' => 'convertkit',
-			'name' => 'ConvertKit',
-			'file_name' => 'opt-in-convertkit.php',
-			'class_name' => 'Opt_In_ConvertKit',
-		),
-		array(
-			"id" => "getresponse",
-			"name" => "GetResponse",
-			"file_name" => "opt-in-get-response.php",
-			"class_name" => "Opt_In_Get_Response"
-		),
-		array(
-			"id" => "hubspot",
-			"name" => "Hubspot",
-			"file_name" => "opt-in-hubspot.php",
-			"class_name" => "Opt_In_HubSpot",
-		),
-		array(
-			"id" => "sendy",
-			"name" => "Sendy",
-			"file_name" => "opt-in-sendy.php",
-			"class_name" => "Opt_In_Sendy"
-		),
-		array(
-			"id" => "mad_mimi",
-			"name" => "Mad Mimi",
-			"file_name" => "opt-in-mad-mimi.php",
-			"class_name" => "Opt_In_Mad_Mimi"
-		),
-		array(
-			'id' => 'mautic',
-			'name' => 'Mautic',
-			'file_name' => 'opt-in-mautic.php',
-			'class_name' => 'Opt_In_Mautic',
-		),
-		array(
-			"id" => "infusionsoft",
-			"name" => "Infusionsoft",
-			"file_name" => "opt-in-infusion-soft.php",
-			"class_name" => "Opt_In_Infusion_Soft",
-		),
-		array(
-			"id" => "sendinblue",
-			"name" => "SendinBlue",
-			"file_name" => "opt-in-sendinblue.php",
-			"class_name" => "Opt_In_SendinBlue",
-		),
-	);
-
-	/**
-	 * @var $_skip_providers array
-	 * these providers will be skipped on PHP version lower than 5.3
-	 */
-	protected $_skip_providers = array(
-		'mautic',
-		'constantcontact'
-	);
-
-	/**
-	 * @var Opt_In_E_Newsletter $_e_newsletter
-	 */
-	protected static $_e_newsletter;
 
 	/**
 	 * @var $_email_services Hustle_Email_Services
@@ -227,7 +125,7 @@ class Opt_In extends Opt_In_Static{
 	 *
 	 * @since 1.0.0
 	 */
-	function __construct(){
+	public function __construct(){
 
 		self::$plugin_base_file = plugin_basename( __FILE__ );
 		self::$plugin_url = plugin_dir_url( self::$plugin_base_file );
@@ -252,18 +150,8 @@ class Opt_In extends Opt_In_Static{
 	 *
 	 * @param Hustle_Email_Services $email_services
 	 */
-	function set_email_services( Hustle_Email_Services $email_services){
+	public function set_email_services( Hustle_Email_Services $email_services){
 		self::$_email_services = $email_services;
-	}
-
-	/**
-	 * Sets Opt_In_E_Newsletter instance
-	 *
-	 * @since 2.0
-	 * @param $e_newsletter Opt_In_E_Newsletter
-	 */
-	function set_e_newsletter( Opt_In_E_Newsletter $e_newsletter ){
-		self::$_e_newsletter = $e_newsletter;
 	}
 
 	/**
@@ -307,23 +195,13 @@ class Opt_In extends Opt_In_Static{
 	 *
 	 * @return array
 	 */
-	function get_providers(){
+	public function get_providers(){
+		if( empty( self::$_registered_providers ) ) {
+			self::$_registered_providers = Opt_In_Utils::get_activable_providers_list();
+		}
 		return self::$_registered_providers;
 	}
 
-	/**
-	 * Returns provider class by name
-	 *
-	 * @param $id string provider ID
-	 * @return bool|Opt_In_Provider_Interface|Opt_In_Provider_Abstract provider class
-	 *
-	 * @since 1.0.0
-	 */
-	public static function get_provider_by_id( $id ){
-		if('test' == $id ) return false;
-
-		return  self::$_registered_providers !== array() && isset( self::$_registered_providers[$id],  self::$_registered_providers[$id]['class'])  ?  self::$_registered_providers[$id]['class']  : false;
-	}
 	/**
 	 * Loads text domain
 	 *
@@ -341,9 +219,9 @@ class Opt_In extends Opt_In_Static{
 	 * @param $class
 	 * @return bool
 	 */
-	function autoload( $class ) {
+	public function autoload( $class ) {
 
-		$dirs = array("inc", "inc/providers", "inc/display-conditions", "inc/popup", "inc/slidein", "inc/embed", "inc/sshare");
+		$dirs = array("inc", "inc/provider", "inc/display-conditions", "inc/popup", "inc/slidein", "inc/embed", "inc/sshare");
 
 		foreach( $dirs as $dir ){
 			$filename = self::$plugin_path  . $dir . DIRECTORY_SEPARATOR . str_replace( "_", "-", strtolower( $class ) ) . ".php";
@@ -363,37 +241,31 @@ class Opt_In extends Opt_In_Static{
 	 * @since 1.0.0
 	 */
 	private function _boot(){
-		$this->_register_providers();
+		// Registers the existing activable providers
+		$this->_init_providers();
 	}
 
+	private function _init_providers() {
 
-	/**
-	 * Scans the providers folders and includes provider classes
-	 *
-	 * @since 1.0.0
-	 */
-	private function _register_providers(){
+		/**
+		 * Triggered before registering internal providers
+		 *
+		 * @since xxx
+		 */
+		do_action( 'hustle_before_load_providers' );
 
-		foreach ( $this->_providers as $provider) {
+		$this->hustle_provider_loader = Hustle_Providers::get_instance();
+		// Load packaged providers
+		$autoloader = new Hustle_Provider_Autoload();
+		$autoloader->load();
 
-			if ( ( version_compare( PHP_VERSION, '5.3', '<' ) && in_array( $provider['id'], $this->_skip_providers ) ) ) {
-				continue;
-			}
-
-			$path = dirname(__FILE__) . "/inc/providers/" . $provider['file_name'];
-			if ( is_file($path) && is_readable( $path ) ) {
-				require_once $path;
-
-				$id = $provider['id'];
-				self::$_registered_providers[ $id ]['class'] = $provider['class_name'];
-				self::$_registered_providers[ $id ]["name"] = $provider['name'];
-				self::$_registered_providers[ $id ]['id'] = $id;
-				unset($id);
-			}
-		}
-
+		/*
+		 * Triggered after hustle packaged providers were loaded
+		 *
+		 * @since xxx
+		 */
+		do_action( 'hustle_providers_loaded' );
 	}
-
 
 	/**
 	 * Renders a view file
@@ -403,30 +275,37 @@ class Opt_In extends Opt_In_Static{
 	 * @param bool|false $return
 	 * @return string
 	 */
-	public function render( $file, $params = array(), $return = false )
-	{
+	public function render( $file, $params = array(), $return = false ) {
 //        $params = array_merge( array('self' => $this), $params );
 		/**
 		 * assign $file to a variable which is unlikely to be used by users of the method
 		 */
-		$Opt_In_To_Be_File_Name = $file;
+		$opt_in_to_be_file_name = $file;
 		if ( array_key_exists( 'this', $params  ) ) {
 			unset( $params['this'] );
 		}
-		extract( $params, EXTR_OVERWRITE );
+		extract( $params, EXTR_OVERWRITE ); // phpcs:ignore
 
 		if($return){
 			ob_start();
 		}
 
 
-		$template_file = trailingslashit( self::$plugin_path ) . self::VIEWS_FOLDER . "/" . $Opt_In_To_Be_File_Name . '.php';
+		$template_file = trailingslashit( self::$plugin_path ) . self::VIEWS_FOLDER . "/" . $opt_in_to_be_file_name . '.php';
 		if( file_exists( $template_file ) ){
 			include $template_file;
 		}else{
-			$template_path = self::$template_path . $Opt_In_To_Be_File_Name . '.php';
+			$template_path = self::$template_path . $opt_in_to_be_file_name . '.php';
+			// Render file located outside the plugin's folder. Useful when adding third party integrations.
+			$external_path = $opt_in_to_be_file_name . '.php';
 
-			if ( file_exists( $template_path ) ) include( $template_path );
+			if ( file_exists( $template_path ) ) {
+				include $template_path;
+			} elseif ( file_exists( $external_path ) ) {
+				include $external_path;
+			} elseif ( file_exists( $opt_in_to_be_file_name ) ) {
+				include $opt_in_to_be_file_name;
+			}
 		}
 
 		if($return){
@@ -450,25 +329,34 @@ class Opt_In extends Opt_In_Static{
 	 * @param bool|false $return
 	 * @return string
 	 */
-	public static function static_render( $file, $params = array(), $return = false )
-	{
+	public static function static_render( $file, $params = array(), $return = false ) {
 		$params = array_merge( $params );
 		/**
 		 * assign $file to a variable which is unlikely to be used by users of the method
 		 */
-		$Opt_In_To_Be_File_Name = $file;
-		extract( $params, EXTR_OVERWRITE );
+		$opt_in_to_be_file_name = $file;
+		extract( $params, EXTR_OVERWRITE ); // phpcs:ignore
 
 		if($return){
 			ob_start();
 		}
 
 
-		$template_file = trailingslashit( Opt_In::$plugin_path ) . Opt_In::VIEWS_FOLDER . "/" . $Opt_In_To_Be_File_Name . '.php';
+		$template_file = trailingslashit( self::$plugin_path ) . self::VIEWS_FOLDER . "/" . $opt_in_to_be_file_name . '.php';
 		if( file_exists( $template_file ) ){
 			include $template_file;
 		}else{
-			include( Opt_In::$template_path . $Opt_In_To_Be_File_Name . '.php' );
+			$template_path = self::$template_path . $opt_in_to_be_file_name . '.php';
+			// Render file located outside the plugin's folder. Useful when adding third party integrations.
+			$external_path = $opt_in_to_be_file_name . '.php';
+
+			if ( file_exists( $template_path ) ) {
+				include $template_path;
+			} elseif ( file_exists( $external_path ) ) {
+				include $external_path;
+			} elseif ( file_exists( $opt_in_to_be_file_name ) ) {
+				include $opt_in_to_be_file_name;
+			}
 		}
 
 		if($return){
@@ -493,7 +381,7 @@ class Opt_In extends Opt_In_Static{
 	}
 
 
-	function current_page_type() {
+	public function current_page_type() {
 		/**
 		 * @var $wp_query WP_Query
 		 */
@@ -537,15 +425,15 @@ class Opt_In extends Opt_In_Static{
 	 * Prepares the custom css string
 	 *
 	 * @since 1.0
-	 * @param $cssString
+	 * @param $css_string
 	 * @param $prefix
 	 * @param bool|false $as_array
 	 * @param bool|true $separate_prefix
 	 * @return array|string
 	 */
-	public static function prepare_css( $cssString, $prefix, $as_array = false, $separate_prefix = true, $wildcard = '' ) {
+	public static function prepare_css( $css_string, $prefix, $as_array = false, $separate_prefix = true, $wildcard = '' ) {
 		$css_array = array(); // master array to hold all values
-		$elements = explode('}', $cssString);
+		$elements = explode('}', $css_string);
 		// Output is the final processed CSS string.
 		$output = "";
 		$prepared = "";
@@ -609,12 +497,15 @@ class Opt_In extends Opt_In_Static{
 			// loop through each style and split apart the key from the value
 			$count = count($a_styles);
 			for ($a=0;$a<$count;$a++) {
-				if (trim($a_styles[$a]) != '') {
+				if ( trim($a_styles[$a]) ) {
 					$a_key_value = explode(':', $a_styles[$a]);
 					// build the master css array
 					if ( count($a_key_value) > 2 ) {
 						$a_key_value_to_join = array_slice($a_key_value, 1);
 						$a_key_value[1] = implode(":", $a_key_value_to_join);
+					}
+					if ( ! isset( $a_key_value[1] ) ) {
+						continue;
 					}
 					$css_array[$name][$a_key_value[0]] = $a_key_value[1];
 					$prepared .= ($a_key_value[0] . ": " . $a_key_value[1]);// . strpos($a_key_value[1], "!important") === false ? " !important;": ";";
@@ -684,16 +575,17 @@ class Opt_In extends Opt_In_Static{
 	 */
 	public static function provider_instance( $provider_obj ){
 		if ( method_exists( $provider_obj, "instance" ) ) {
-			return call_user_func( array( $provider_obj, "instance" ) );
+			$class_name = is_object( $provider_obj ) ? get_class( $provider_obj ) : $provider_obj;
+			return call_user_func( array( $provider_obj, "instance" ), $class_name );
 		} else {
 			return false;
 		}
 	}
 
 
-	public static function render_attributes( $htmlOptions, $echo = true ){
+	public static function render_attributes( $html_options, $echo = true ){
 
-		$specialAttributes = array(
+		$special_attributes = array(
 			'async' => 1,
 			'autofocus' => 1,
 			'autoplay' => 1,
@@ -721,20 +613,19 @@ class Opt_In extends Opt_In_Static{
 			'selected' => 1,
 			'typemustmatch' => 1,
 		);
-		if( $htmlOptions === array() )
+		if( array() === $html_options )
 			return '';
 
 		$html='';
-		if( isset($htmlOptions['encode']))
-		{
-			$raw = !$htmlOptions['encode'];
-			unset( $htmlOptions['encode'] );
+		if( isset( $html_options['encode'] ) ) {
+			$raw = ! $html_options['encode'];
+			unset( $html_options['encode'] );
+		} else {
+			$raw = false;
 		}
-		else
-			$raw=false;
-		foreach( $htmlOptions as $name => $value )
+		foreach( $html_options as $name => $value )
 		{
-			if(isset($specialAttributes[$name]))
+			if(isset($special_attributes[$name]))
 			{
 				if( $value )
 				{
@@ -742,24 +633,14 @@ class Opt_In extends Opt_In_Static{
 					$html .= '="' . $name . '"';
 				}
 			}
-			elseif( $value!==null )
-				$html .= ' ' . $name . '="' . ($raw ? $value : esc_attr($value) ) . '"';
+			elseif( null !== $value )
+				$html .= ' ' . esc_attr($name) . '="' . ($raw ? $value : esc_attr($value) ) . '"';
 		}
 
 		if( $echo )
-			echo $html;
+			echo $html; // WPCS: xss ok.
 		else
 			return $html;
-	}
-
-	/**
-	 * Returns instance of Opt_In_E_Newsletter
-	 *
-	 * @since 1.1.1
-	 * @return Opt_In_E_Newsletter
-	 */
-	public function get_e_newsletter(){
-		return self::$_e_newsletter;
 	}
 
 	/**
@@ -803,11 +684,22 @@ if ( file_exists( Opt_In::$plugin_path . 'lib/wpmudev-dashboard/wpmudev-dash-not
 
 if( is_admin() && Opt_In_Utils::_is_free() ) {
 	require_once Opt_In::$plugin_path . 'lib/free-dashboard/module.php';
+	// Register the current plugin.
+	do_action(
+		'wdev-register-plugin',
+		plugin_basename( __FILE__ ), 			 // 1. Plugin ID
+		'Hustle', 								 // 2. Plugin Title
+		'/plugins/wordpress-popup/', 			 // 3. https://wordpress.org
+		__( 'Sign Me Up', Opt_In::TEXT_DOMAIN ), // 4. Email Button CTA
+		'f68d9fbc51'							 // 5. Mailchimp List id
+	);
 }
 
 if ( ! function_exists( 'hustle_activation' ) ) {
 	function hustle_activation() {
 		update_option( 'hustle_activated_flag', 1 );
+		$hustle_db = new Hustle_Db();
+		$hustle_db->check_tables();
 	}
 }
 register_activation_hook(__FILE__, 'hustle_activation' );

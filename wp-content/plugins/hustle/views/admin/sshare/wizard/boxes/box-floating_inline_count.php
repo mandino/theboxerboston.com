@@ -12,7 +12,7 @@
 
         <div class="wpmudev-switch-labels">
 
-            <label class="wpmudev-switch-label" for="wph-shares-floating-inline-count"><?php _e( "Show count inline", Opt_In::TEXT_DOMAIN ); ?></label>
+            <label class="wpmudev-switch-label" for="wph-shares-floating-inline-count"><?php esc_attr_e( "Show count inline", Opt_In::TEXT_DOMAIN ); ?></label>
 
         </div>
 

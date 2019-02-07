@@ -4,13 +4,13 @@ Hustle.define("SShare.Content_View", function($, doc, win){
 		template: Optin.template("wpmudev-hustle-sshare-section-services-tpl"),
 		target_container: $('#wpmudev-hustle-box-section-services'),
 		init: function( opts ){
-			
+
 			// unset listeners
 			this.stopListening( this.model, 'change', this.model_updated );
 			
 			// set listeners
 			this.listenTo( this.model, 'change', this.model_updated );
-			
+		
 			return this.render();
 		},
 		events: {
@@ -68,19 +68,35 @@ Hustle.define("SShare.Content_View", function($, doc, win){
 			}
 		},
 		click_counter_updated: function(val) {
+
+			var $counter_notice = $('#wpmudev-sshare-counter-options .hustle-twitter-notice');
+			if ( val === 'native' ) {
+				$counter_notice.removeClass('wpmudev-hidden');
+			} else {
+				if ( !$counter_notice.hasClass('wpmudev-hidden') ) {
+					$counter_notice.addClass('wpmudev-hidden');
+				}
+			}
 			$('#wph-wizard-services-icons-native .wpmudev-social-item').each(function() {
 				var $checkbox = $(this).find('.toggle-checkbox'),
 					is_checked = $checkbox.is(':checked'),
 					$input_counter = $(this).find('input.wpmudev-input_number');
-					
-				if ( val && is_checked ) {
+
+				if ( val !== 'none' && is_checked ) {
 					$input_counter.removeClass('wpmudev-hidden');
 				} else {
 					if ( !$input_counter.hasClass('wpmudev-hidden') ) {
 						$input_counter.addClass('wpmudev-hidden');
-					} 
+					}
 				}
 			});
+
+			$('#wph-wizard-services-icons-native #wpmudev-counter-title>strong').removeClass('wpmudev-hidden');
+			if ( 'none' === val ) {
+				$('#wph-wizard-services-icons-native #wpmudev-counter-title>strong:first-child').addClass('wpmudev-hidden');
+			} else {
+				$('#wph-wizard-services-icons-native #wpmudev-counter-title>strong:nth-child(2)').addClass('wpmudev-hidden');
+			}
 		},
 		toggle_checkbox: function(e) {
 			e.preventDefault();
@@ -101,7 +117,7 @@ Hustle.define("SShare.Content_View", function($, doc, win){
 		toggle_icon: function(e) {
 			var $this = this.$(e.target),
 				is_checked = $this.is(':checked'),
-				counter_enabled = this.model.get('click_counter'),
+				counter_enabled = this.model.get('click_counter') !== 'none',
 				$parent_container = $this.closest('.wpmudev-social-item'),
 				$input_counter = $parent_container.find('input.wpmudev-input_number'),
 				show_counter = ( is_checked && counter_enabled ) ? true : false;

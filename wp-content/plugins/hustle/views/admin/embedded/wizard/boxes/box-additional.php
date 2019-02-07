@@ -2,31 +2,31 @@
 
 	<div class="wpmudev-box-left">
 
-		<h4><strong><?php _e( "Additional settings", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
+		<h4><strong><?php esc_attr_e( "Additional settings", Opt_In::TEXT_DOMAIN ); ?></strong></h4>
 
 	</div>
 
 	<div class="wpmudev-box-right">
 
-		<label><?php _e( "After Embed is closed", Opt_In::TEXT_DOMAIN ); ?></label>
+		<label><?php esc_attr_e( "After Embed is closed", Opt_In::TEXT_DOMAIN ); ?></label>
 
         <div class="wpmudev-box-gray">
 
             <select class="wpmudev-select" data-attribute="after_close" >
-                <option value="no_show" {{ ( after_close === 'no_show' ) ? 'selected' : '' }} ><?php _e( "No longer show this message on this post / page", Opt_In::TEXT_DOMAIN ); ?></option>
+                <option value="no_show" {{ ( 'no_show' === after_close ) ? 'selected' : '' }} ><?php esc_attr_e( "No longer show this message on this post / page", Opt_In::TEXT_DOMAIN ); ?></option>
             </select>
 
-            <label><?php _e( "Expires (after expiry, user will see the Embed again)", Opt_In::TEXT_DOMAIN ); ?></label>
+            <label><?php esc_attr_e( "Expires (after expiry, user will see the Embed again)", Opt_In::TEXT_DOMAIN ); ?></label>
 
             <div class="wpmudev-fields-group">
 
                 <input type="number" value="{{expiration}}" class="wpmudev-input_number" data-attribute="expiration" >
 
                 <select class="wpmudev-select" data-attribute="expiration_unit" >
-                    <option value="days" {{ ( expiration_unit === 'days' ) ? 'selected' : '' }} ><?php _e( "days", Opt_In::TEXT_DOMAIN ); ?></option>
-                    <option value="weeks" {{ ( expiration_unit === 'weeks' ) ? 'selected' : '' }} ><?php _e( "weeks", Opt_In::TEXT_DOMAIN ); ?></option>
-                    <option value="months" {{ ( expiration_unit === 'months' ) ? 'selected' : '' }} ><?php _e( "months", Opt_In::TEXT_DOMAIN ); ?></option>
-                    <option value="years" {{ ( expiration_unit === 'years' ) ? 'selected' : '' }} ><?php _e( "years", Opt_In::TEXT_DOMAIN ); ?></option>
+                    <option value="days" {{ ( 'days' === expiration_unit ) ? 'selected' : '' }} ><?php esc_attr_e( "days", Opt_In::TEXT_DOMAIN ); ?></option>
+                    <option value="weeks" {{ ( 'weeks' === expiration_unit ) ? 'selected' : '' }} ><?php esc_attr_e( "weeks", Opt_In::TEXT_DOMAIN ); ?></option>
+                    <option value="months" {{ ( 'months' === expiration_unit ) ? 'selected' : '' }} ><?php esc_attr_e( "months", Opt_In::TEXT_DOMAIN ); ?></option>
+                    <option value="years" {{ ( 'years' === expiration_unit ) ? 'selected' : '' }} ><?php esc_attr_e( "years", Opt_In::TEXT_DOMAIN ); ?></option>
                 </select>
 
             </div>
@@ -45,7 +45,7 @@
 
 			<div class="wpmudev-switch-labels">
 
-                <label class="wpmudev-switch-label" for="wph-aftercontent-setting_scroll"><?php _e( "Allow page to be scrolled while Embed is visible", Opt_In::TEXT_DOMAIN ); ?></label>
+                <label class="wpmudev-switch-label" for="wph-aftercontent-setting_scroll"><?php esc_attr_e( "Allow page to be scrolled while Embed is visible", Opt_In::TEXT_DOMAIN ); ?></label>
 
             </div>
 
@@ -63,7 +63,7 @@
 
             <div class="wpmudev-switch-labels">
 
-			    <label class="wpmudev-switch-label" for="wph-aftercontent-setting_close"><?php _e( "Clicking on the background does not close Embed", Opt_In::TEXT_DOMAIN ); ?></label>
+			    <label class="wpmudev-switch-label" for="wph-aftercontent-setting_close"><?php esc_attr_e( "Clicking on the background does not close Embed", Opt_In::TEXT_DOMAIN ); ?></label>
 
             </div>
 

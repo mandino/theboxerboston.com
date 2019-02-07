@@ -1,13 +1,12 @@
 <?php
 
-class Hustle_Collection
-{
+class Hustle_Collection {
 
 	/**
 	 * @return Hustle_Collection
 	 */
-	public static function instance(){
-		return new self;
+	public static function instance() {
+		return new self();
 	}
 
 	/**
@@ -20,12 +19,12 @@ class Hustle_Collection
 	 */
 	protected static $_db;
 
-	function __construct(){
+	public function __construct(){
 		global $wpdb;
 		self::$_db = $wpdb;
 	}
 
-	function get_count(){
+	public function get_count(){
 		return self::$_db->num_rows;
 	}
 
