@@ -124,7 +124,7 @@
 			<a class="royale" href="#">Close Menu</a>
 		</div>
 		
-		<div class="spacer"><img src="<?php echo get_option('cebo_logo'); ?>" alt="<?php bloginfo('name'); ?> Rightnav Logo" /></div>
+		<div class="spacer"><a href="/" title="go to homepage"><img src="<?php echo get_option('cebo_logo'); ?>" alt="<?php bloginfo('name'); ?> Rightnav Logo" /></a></div>
 		<div id="navmenumob">
 			<div class="topnavigationmob">
 				<ul>
