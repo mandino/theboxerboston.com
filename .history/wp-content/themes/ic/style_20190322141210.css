@@ -130,7 +130,7 @@ article ol li {
 /* remember to define focus styles! */
 :focus {outline: 0;}
 
-img {border:0; width: 100%;}
+img {border:0;}
 a img {border:0; width: 100%;}
 
 /* Float Definitions -----------------------------------------------------------*/
