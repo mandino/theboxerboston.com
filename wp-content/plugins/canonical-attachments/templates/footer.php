@@ -1,0 +1,3 @@
+<div class="conattach" style="border:1px solid;min-height:85px;">
+    <a href="http://www.hivedigital.com/?utm_source=wordpress&utm_campaign=canonical-attachments&utm_medium=plugin-dashboard" target="_blank"><img src="<?php echo plugin_dir_url( __FILE__ ) .'Hive-Digital-Logo.png';?>" alt="Hive Digital Logo" style="float:left;padding:10px;"/></a><br /><p>This plugin was developed by Jake Bohall at Hive Digital, Inc., a full service digital marketing agency. Please consider helping out the plugin developer by visiting <a href="http://www.hivedigital.com" target="_blank">our website</a> and considering us for any of your online marketing needs!</p>
+</div>

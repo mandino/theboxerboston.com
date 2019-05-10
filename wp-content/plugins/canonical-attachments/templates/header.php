@@ -1,0 +1,1 @@
+<a href='http://www.hivedigital.com?utm_source=wordpress&utm_campaign=canonical-attachments&utm_medium=plugin-dashboard' target='_blank'><img src='<?php echo plugin_dir_url( __FILE__ );?>Hive-Digital-Logo.png' alt='Hive Digital Logo' style='float:right;padding:25px;'/></a>
