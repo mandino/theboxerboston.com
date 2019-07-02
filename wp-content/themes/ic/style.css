@@ -4944,3 +4944,108 @@ li.social_share_side a i:hover{
     cursor: pointer;
     font-size: 13px;
     letter-spacing: 1px; }
+
+/* New Press Page */
+
+.press-logo {
+    position: relative;
+    width: 80%;
+    font-size: 0;
+    text-align: center;
+    margin: 0 auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.press-logo__item {
+    width: calc(25% - 10%);
+    display: inline-block;
+    margin: 0 5%;
+    vertical-align: top;
+    position: relative;
+    overflow: hidden;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.press-logo__item--displayed {
+    visibility: visible;
+    -webkit-transition: visibility 1s ease,opacity 1s ease;
+    -moz-transition: visibility 1s ease,opacity 1s ease;
+    -ms-transition: visibility 1s ease,opacity 1s ease;
+    -o-transition: visibility 1s ease,opacity 1s ease;
+    transition: visibility 1s ease,opacity 1s ease;
+}
+
+.valign-middle {
+    vertical-align: middle;
+}
+
+.press-logo__img {
+    position: relative;
+    height: 150px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
+
+.press-logo__item img {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.press-logo__item a {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 3;
+}
+
+.press-logo__item p {
+    color: #000;
+    display: inline-block;
+    font-family: 'scala-sans';
+    font-size: 20px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.press_logo__view-more {
+    text-align: center;
+    cursor: pointer;
+    margin-top: 30px;
+}
+
+.press_logo__view-more span {
+    color: #fff;
+    display: inline-block;
+    font-family: scala-sans, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    padding: 0 45px;
+}
+
+.press-logo__item--hidden {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    margin-bottom: 0;
+    -webkit-transition: visibility 1s ease,opacity 1s ease;
+    -moz-transition: visibility 1s ease,opacity 1s ease;
+    -ms-transition: visibility 1s ease,opacity 1s ease;
+    -o-transition: visibility 1s ease,opacity 1s ease;
+    transition: visibility 1s ease,opacity 1s ease;
+}
