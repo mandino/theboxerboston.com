@@ -989,6 +989,14 @@ div.section-pre-title{
     margin-right: 1.5%;
     width: 32.3%;
     margin-bottom: 11px;
+    height: 240px;
+    overflow: hidden;
+}
+
+.post-content .imagegal.photos ul li img {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
 }
 
 .post-content .imagegal.photos ul li:nth-child(3n) {
