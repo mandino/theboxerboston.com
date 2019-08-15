@@ -8,20 +8,22 @@ class Tribe__Events__REST__V1__Endpoints__Archive_Event
 	 * @var array An array mapping the REST request supported query vars to the args used in a TEC WP_Query.
 	 */
 	protected $supported_query_vars = array(
-		'page'       => 'paged',
-		'per_page'   => 'posts_per_page',
-		'start_date' => 'start_date',
-		'end_date'   => 'end_date',
-		'search'     => 's',
-		'categories' => 'categories',
-		'tags'       => 'tags',
-		'venue'      => 'venue',
-		'organizer'  => 'organizer',
-		'featured'   => 'featured',
-		'geoloc'     => 'tribe_geoloc',
-		'geoloc_lat' => 'tribe_geoloc_lat',
-		'geoloc_lng' => 'tribe_geoloc_lng',
-		'status'     => 'post_status',
+		'page'        => 'paged',
+		'per_page'    => 'posts_per_page',
+		'start_date'  => 'start_date',
+		'end_date'    => 'end_date',
+		'search'      => 's',
+		'categories'  => 'categories',
+		'tags'        => 'tags',
+		'venue'       => 'venue',
+		'organizer'   => 'organizer',
+		'featured'    => 'featured',
+		'geoloc'      => 'tribe_geoloc',
+		'geoloc_lat'  => 'tribe_geoloc_lat',
+		'geoloc_lng'  => 'tribe_geoloc_lng',
+		'status'      => 'post_status',
+		'post_parent' => 'post_parent',
+		'include'     => 'post__in',
 	);
 
 	/**
@@ -51,18 +53,54 @@ class Tribe__Events__REST__V1__Endpoints__Archive_Event
 	 * @return WP_Error|WP_REST_Response An array containing the data on success or a WP_Error instance on failure.
 	 */
 	public function get( WP_REST_Request $request ) {
-		$args = array();
+		$args        = array();
 		$date_format = Tribe__Date_Utils::DBDATETIMEFORMAT;
 
-		$args['paged'] = $request['page'];
+		$args['paged']          = $request['page'];
 		$args['posts_per_page'] = $request['per_page'];
-		$args['start_date'] = isset( $request['start_date'] ) ?
+		$args['start_date']     = isset( $request['start_date'] ) ?
 			Tribe__Timezones::localize_date( $date_format, $request['start_date'] )
 			: false;
-		$args['end_date'] = isset( $request['end_date'] ) ?
+		$args['end_date']       = isset( $request['end_date'] ) ?
 			Tribe__Timezones::localize_date( $date_format, $request['end_date'] )
 			: false;
-		$args['s'] = $request['search'];
+		$args['s']              = $request['search'];
+
+		if ( $post__in = $request['include'] ) {
+			$args['post__in']                  = $request['include'];
+			$args['tribe_remove_date_filters'] = true;
+		}
+
+		$args['post_parent'] = $request['post_parent'];
+
+		/**
+		 * Allows users to override "inclusive" start and end dates and  make the REST API use a
+		 * timezone-adjusted date range.
+		 *
+		 * Example: wp-json/tribe/events/v1/events?start_date=2017-12-21&end_date=2017-12-22
+		 *
+		 * - The "inclusive" behavior, which is the default here, would set start_date to
+		 *   2017-12-21 00:00:00 and end_date to 2017-12-22 23:59:59. Events within this range will
+		 *   be retrieved.
+		 *
+		 * - If you set this filter to false on a site whose timezone is America/New_York, then the
+		 *   REST API would set start_date to 2017-12-20 19:00:00 and end_date to
+		 *   2017-12-21 19:00:00. A different range of events to draw from.
+		 *
+		 * @since 4.6.8
+		 *
+		 * @param bool $use_inclusive Defaults to true. Whether to use "inclusive" start and end dates.
+		 */
+		if ( apply_filters( 'tribe_events_rest_use_inclusive_start_end_dates', true ) ) {
+
+			if ( $args['start_date'] ) {
+				$args['start_date'] = tribe_beginning_of_day( $request['start_date'] );
+			}
+
+			if ( $args['end_date'] ) {
+				$args['end_date'] = tribe_end_of_day( $request['end_date'] );
+			}
+		}
 
 		$args['meta_query'] = array_filter( array(
 			$this->parse_meta_query_entry( $request['venue'], '_EventVenueID', '=', 'NUMERIC' ),
@@ -84,19 +122,22 @@ class Tribe__Events__REST__V1__Endpoints__Archive_Event
 
 		// Filter by geoloc
 		if ( ! empty( $request['geoloc'] ) ) {
-			$args['tribe_geoloc'] = 1;
+			$args['tribe_geoloc']     = 1;
 			$args['tribe_geoloc_lat'] = isset( $request['geoloc_lat'] ) ? $request['geoloc_lat'] : '';
 			$args['tribe_geoloc_lng'] = isset( $request['geoloc_lng'] ) ? $request['geoloc_lng'] : '';
 		}
 
+		// When including specific posts date queries will be voided
+		if ( isset( $args['post__in'] ) ) {
+			unset( $args['start_date'], $args['end_date'] );
+			$args['orderby'] = Tribe__Utils__Array::get( $args, 'orderby', array( 'date', 'ID' ) );
+			$args['order']   = Tribe__Utils__Array::get( $args, 'order', 'ASC' );
+		}
+
 		$args = $this->parse_args( $args, $request->get_default_params() );
 
-		$data = array( 'events' => array() );
-
-		$data['rest_url'] = $this->get_current_rest_url( $args, $extra_rest_args );
-
 		if ( null === $request['status'] ) {
-			$cap = get_post_type_object( Tribe__Events__Main::POSTTYPE )->cap->edit_posts;
+			$cap                 = get_post_type_object( Tribe__Events__Main::POSTTYPE )->cap->edit_posts;
 			$args['post_status'] = current_user_can( $cap ) ? 'any' : 'publish';
 		} else {
 			$args['post_status'] = $this->filter_post_status_list( $request['status'] );
@@ -109,34 +150,63 @@ class Tribe__Events__REST__V1__Endpoints__Archive_Event
 			$args['posts_per_page'] = $this->get_default_posts_per_page();
 		}
 
-		$events = tribe_get_events( $args );
+		/** @var Tribe__Cache $cache */
+		$cache     = tribe( 'cache' );
+		$cache_key = 'rest_get_events_data_' . get_current_user_id() . '_' . wp_json_encode( $args );
 
-		$page = $this->parse_page( $request ) ? $this->parse_page( $request ) : 1;
+		$data = $cache->get( $cache_key, 'save_post' );
 
-		if ( empty( $events ) ) {
-			$message = $this->messages->get_message( 'event-archive-page-not-found' );
+		if ( ! is_array( $data ) ) {
+			$data = array( 'events' => array() );
 
-			return new WP_Error( 'event-archive-page-not-found', $message, array( 'status' => 404 ) );
+			$data['rest_url'] = $this->get_current_rest_url( $args, $extra_rest_args );
+
+			/**
+			 * Filter the arguments used to get the events on the archive page via REST API.
+			 *
+			 * @since 4.9.4
+			 *
+			 * @param array            $args Arguments used to get the events from the archive page.
+			 * @param array            $data Array with the data to be returned in the REST response.
+			 * @param \WP_REST_Request $request
+			 */
+			$args = apply_filters( 'tribe_events_archive_get_args', $args, $data, $request );
+
+			$events = tribe_get_events( $args );
+
+			$page = $this->parse_page( $request ) ? $this->parse_page( $request ) : 1;
+
+			if ( empty( $events ) && (int) $page > 1 ) {
+				$message = $this->messages->get_message( 'event-archive-page-not-found' );
+
+				return new WP_Error( 'event-archive-page-not-found', $message, array( 'status' => 404 ) );
+			}
+
+			$events = wp_list_pluck( $events, 'ID' );
+
+			unset( $args['fields'] );
+
+			if ( $this->has_next( $args, $page ) ) {
+				$data['next_rest_url'] = $this->get_next_rest_url( $data['rest_url'], $page );
+			}
+
+			if ( $this->has_previous( $page, $args ) ) {
+				$data['previous_rest_url'] = $this->get_previous_rest_url( $data['rest_url'], $page );;
+			}
+
+			foreach ( $events as $event_id ) {
+				$event = $this->repository->get_event_data( $event_id );
+
+				if ( $event && ! is_wp_error( $event ) ) {
+					$data['events'][] = $event;
+				}
+			}
+
+			$data['total']       = $total = $this->get_total( $args );
+			$data['total_pages'] = $this->get_total_pages( $total, $args['posts_per_page'] );
+
+			$cache->set( $cache_key, $data, Tribe__Cache::NON_PERSISTENT, 'save_post' );
 		}
-
-		$events = wp_list_pluck( $events, 'ID' );
-
-		unset( $args['fields'] );
-
-		if ( $this->has_next( $args, $page ) ) {
-			$data['next_rest_url'] = $this->get_next_rest_url( $data['rest_url'], $page );
-		}
-
-		if ( $this->has_previous( $page, $args ) ) {
-			$data['previous_rest_url'] = $this->get_previous_rest_url( $data['rest_url'], $page );;
-		}
-
-		foreach ( $events as $event_id ) {
-			$data['events'][] = $this->repository->get_event_data( $event_id );
-		}
-
-		$data['total'] = $total = $this->get_total( $args );
-		$data['total_pages'] = $this->get_total_pages( $total, $args['posts_per_page'] );
 
 		/**
 		 * Filters the data that will be returned for an events archive request.
@@ -337,7 +407,7 @@ class Tribe__Events__REST__V1__Endpoints__Archive_Event
 						'description' => __( 'One or more of the specified query variables has a bad format', 'the-events-calendar' ),
 					),
 					'404' => array(
-						'description' => __( 'No events match the query or the requested page was not found.', 'the-events-calendar' ),
+						'description' => __( 'The requested page was not found.', 'the-events-calendar' ),
 					),
 				),
 			),
@@ -448,27 +518,47 @@ class Tribe__Events__REST__V1__Endpoints__Archive_Event
 				'format'       => 'double',
 				'description'  => __( 'Requires Events Calendar Pro. Events should be filtered by their venue longitude location, must also provide geoloc_lat', 'the-events-calendar' ),
 			),
+			'include' => array(
+				'required'          => false,
+				'description'       => __( 'Include events with one of the post IDs specified in the array of CSV list, date filters will be ignored.', 'the-events-calendar' ),
+				'swagger_type'      => 'array',
+				'items'             => array( 'type' => 'integer' ),
+				'collectionFormat'  => 'csv',
+				'validate_callback' => array( $this->validator, 'is_positive_int_list' ),
+				'sanitize_callback' => array( 'Tribe__Utils__Array', 'list_to_array' ),
+			),
+			'post_parent' => array(
+				'required'          => false,
+				'type'              => 'integer',
+				'description'       => __( 'Events should be filtered by their post_parent being the specified one.', 'the-events-calendar' ),
+				'validate_callback' => array( $this->validator, 'is_event_id' ),
+			),
 		);
 	}
 
 	/**
+	 * Returns the total number of posts matching the request.
+	 *
+	 * @since 4.6
+	 *
 	 * @param array $args
 	 *
 	 * @return int
 	 */
 	protected function get_total( $args ) {
-		$this->total = count( tribe_get_events( array_merge( $args, array(
-			'posts_per_page'         => - 1,
-			'fields'                 => 'ids',
+		$this->total = tribe_get_events( array_merge( $args, array(
+			'found_posts'            => true,
 			'update_post_meta_cache' => false,
 			'update_post_term_cache' => false,
-		) ) ) );
+		) ) );
 
 		return $this->total;
 	}
 
 	/**
 	 * Returns the archive base REST URL
+	 *
+	 * @since 4.6
 	 *
 	 * @return string
 	 */

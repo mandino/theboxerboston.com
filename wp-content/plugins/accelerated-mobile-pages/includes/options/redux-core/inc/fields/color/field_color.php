@@ -1,5 +1,5 @@
 <?php
-
+namespace ReduxCore\ReduxFramework;
 /**
  * Redux Framework is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Don't duplicate me!
-if ( ! class_exists( 'ReduxFramework_color' ) ) {
+if ( ! class_exists( 'ReduxCore\\ReduxFramework\\ReduxFramework_color' ) ) {
 
     /**
      * Main ReduxFramework_color class
@@ -42,11 +42,16 @@ if ( ! class_exists( 'ReduxFramework_color' ) ) {
          * @access        public
          * @return        void
          */
+        private $time = '';
         function __construct( $field = array(), $value = '', $parent ) {
 
             $this->parent = $parent;
             $this->field  = $field;
             $this->value  = $value;
+            $this->time = time();
+            if ( defined('AMPFORWP_VERSION') ) {
+                $this->time = AMPFORWP_VERSION;
+            }
         }
 
         /**
@@ -70,7 +75,7 @@ if ( ! class_exists( 'ReduxFramework_color' ) ) {
                     $tChecked = ' checked="checked"';
                 }
 
-                echo '<label for="' . $this->field['id'] . '-transparency" class="color-transparency-check"><input type="checkbox" class="checkbox color-transparency ' . $this->field['class'] . '" id="' . $this->field['id'] . '-transparency" data-id="' . $this->field['id'] . '-color" value="1"' . $tChecked . '> ' . __( 'Transparent', 'redux-framework' ) . '</label>';
+                echo '<label for="' . $this->field['id'] . '-transparency" class="color-transparency-check"><input type="checkbox" class="checkbox color-transparency ' . $this->field['class'] . '" id="' . $this->field['id'] . '-transparency" data-id="' . $this->field['id'] . '-color" value="1"' . $tChecked . '> ' . __( 'Transparent', 'accelerated-mobile-pages' ) . '</label>';
             }
         }
 
@@ -93,7 +98,7 @@ if ( ! class_exists( 'ReduxFramework_color' ) ) {
                 'redux-field-color-js',
                 ReduxFramework::$_url . 'inc/fields/color/field_color' . Redux_Functions::isMin() . '.js',
                 array( 'jquery', 'wp-color-picker', 'redux-js' ),
-                time(),
+                $this->time, //time(),
                 true
             );
         }

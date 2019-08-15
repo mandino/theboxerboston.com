@@ -1,4 +1,5 @@
 <?php
+namespace AMPforWP\AMPVendor;
 /**
  * AMP class that implements a template style editor in the Customizer.
  *
@@ -110,8 +111,8 @@ class AMP_Template_Customizer {
 
 		$this->wp_customize->add_panel( self::PANEL_ID, array(
 			'type'  => 'amp',
-			'title' => __( 'AMP', 'amp' ),
-			'description' => sprintf( __( '<a href="%s" target="_blank">The AMP Project</a> is a Google-led initiative that dramatically improves loading speeds on phones and tablets. You can use the Customizer to preview changes to your AMP template before publishing them.', 'amp' ), 'https://ampproject.org' ),
+			'title' => esc_html__( 'AMP', 'accelerated-mobile-pages' ),
+			'description' => sprintf( '<a href="%s" target="_blank">%s</a> %s', 'https://ampproject.org',esc_html__('The AMP Project','accelerated-mobile-pages'), esc_html__('is a Google-led initiative that dramatically improves loading speeds on phones and tablets. You can use the Customizer to preview changes to your AMP template before publishing them.', 'accelerated-mobile-pages') ),
 		) );
 
 		do_action( 'amp_customizer_register_ui', $this->wp_customize );
@@ -156,7 +157,7 @@ class AMP_Template_Customizer {
 	}
 
 	public function force_mobile_preview( $devices ) {
-		if ( isset( $devices[ 'mobile' ] ) ) {
+		if ( isset( $devices['mobile'] ) ) {
 			$devices['mobile']['default'] = true;
 			unset( $devices['desktop']['default'] );
 		}
@@ -165,6 +166,6 @@ class AMP_Template_Customizer {
 	}
 
 	public static function is_amp_customizer() {
-		return ! empty( $_REQUEST[ AMP_CUSTOMIZER_QUERY_VAR ] );
+		return ! empty( $_REQUEST[ AMP_VENDOR_CUSTOMIZER_QUERY_VAR ] );
 	}
 }

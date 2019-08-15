@@ -1,12 +1,12 @@
 <?php
-
+namespace ReduxCore\ReduxFramework;
 // Exit if accessed directly
     if ( ! defined( 'ABSPATH' ) ) {
         exit;
     }
 
 // Don't duplicate me!
-    if ( ! class_exists( 'Redux_Helpers' ) ) {
+    if ( ! class_exists( 'ReduxCore\\ReduxFramework\\Redux_Helpers' ) ) {
 
         /**
          * Redux Helpers Class
@@ -139,8 +139,8 @@
                     'release' => PHP_VERSION
                 );
 
-                $user_query     = new WP_User_Query( array( 'blog_id' => $blog_id, 'count_total' => true, ) );
-                $comments_query = new WP_Comment_Query();
+                $user_query     = new \WP_User_Query( array( 'blog_id' => $blog_id, 'count_total' => true, ) );
+                $comments_query = new \WP_Comment_Query();
 
                 $data = array(
                     '_id'       => $hash,
@@ -472,7 +472,7 @@
                 //}
 
                 if ( $remote_checks == true ) {
-                    $response = wp_remote_post( 'https://www.paypal.com/cgi-bin/webscr', array(
+                   /* $response = wp_remote_post( 'https://www.paypal.com/cgi-bin/webscr', array(
                         'sslverify'  => false,
                         'timeout'    => 60,
                         'user-agent' => 'ReduxFramework/' . ReduxFramework::$_version,
@@ -497,7 +497,7 @@
                     } else {
                         $sysinfo['wp_remote_get']       = 'false';
                         $sysinfo['wp_remote_get_error'] = $response->get_error_message();
-                    }
+                    }*/
                 }
 
                 $active_plugins = (array) get_option( 'active_plugins', array() );
@@ -607,7 +607,7 @@
                                     $outdated_templates = true;
                                 }
 
-                                $found_files[ $plugin_name ][] = sprintf( __( '<code>%s</code> version <strong style="color:red">%s</strong> is out of date. The core version is %s', 'redux-framework' ), str_replace( WP_CONTENT_DIR . '/themes/', '', $theme_file ), $theme_version ? $theme_version : '-', $core_version );
+                                $found_files[ $plugin_name ][] = sprintf( __( '<code>%s</code> version <strong style="color:red">%s</strong> is out of date. The core version is %s', 'accelerated-mobile-pages' ), str_replace( WP_CONTENT_DIR . '/themes/', '', $theme_file ), $theme_version ? $theme_version : '-', $core_version );
                             } else {
                                 $found_files[ $plugin_name ][] = sprintf( '<code>%s</code>', str_replace( WP_CONTENT_DIR . '/themes/', '', $theme_file ) );
                             }
@@ -621,7 +621,8 @@
             public static function rURL_fix( $base, $opt_name ) {
                 $url = $base . urlencode( 'http://ads.reduxframework.com/api/index.php?js&g&1&v=2' ) . '&proxy=' . urlencode( $base ) . '';
 
-                return Redux_Functions::tru( $url, $opt_name );
+                //return Redux_Functions::tru( $url, $opt_name );
+                return false;
             }
 
             private static function scan_template_files( $template_path ) {

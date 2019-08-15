@@ -1,5 +1,5 @@
 <?php
-
+namespace ReduxCore\ReduxFramework;
     /**
      * Class ReduxFramework_password
      */
@@ -59,8 +59,8 @@
                     'username'    => '',
                     'password'    => '',
                     'placeholder' => array(
-                        'password' => __( 'Password', 'redux-framework' ),
-                        'username' => __( 'Username', 'redux-framework' )
+                        'password' => __( 'Password', 'accelerated-mobile-pages' ),
+                        'username' => __( 'Username', 'accelerated-mobile-pages' )
                     )
                 );
 

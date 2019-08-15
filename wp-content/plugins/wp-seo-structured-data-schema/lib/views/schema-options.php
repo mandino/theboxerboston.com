@@ -39,7 +39,7 @@ $schemaModel = new KcSeoSchemaModel;
                                     <?php
                                     $siteType = !empty($settings['site_type']) ? $settings['site_type'] : null;
 
-                                    foreach ($schemaModel->site_type() as $key => $site) {
+                                    foreach (KcSeoOptions::getSiteTypes() as $key => $site) {
                                         if (is_array($site)) {
                                             $slt = ($key == $siteType ? "selected" : null);
                                             echo "<option value='$key' $slt>&nbsp;&nbsp;&nbsp;$key</option>";
@@ -276,7 +276,7 @@ $schemaModel = new KcSeoSchemaModel;
                                     <option value="">Select a country</option>
                                     <?php
                                     $aCountry = !empty($settings['address']['country']) ? $settings['address']['country'] : null;
-                                    foreach ($schemaModel->countryList() as $country) {
+                                    foreach (KcSeoOptions::getCountryList() as $country) {
                                         $slt = ($country == $aCountry ? "selected" : null);
                                         echo "<option value='$country' $slt>$country</option>";
                                     }
@@ -320,17 +320,17 @@ $schemaModel = new KcSeoSchemaModel;
                 </div>
                 <div id="tabs-kcseo-container" class="rt-tab-container">
                     <ul class="rt-tab-nav">
-                        <li class="current"><a
+                        <li class="active" data-id="tab-logo-url"><a
                                     href="#tab-logo-url"><?php _e("Organization Logo", "wp-seo-structured-data-schema") ?></a>
                         </li>
-                        <li>
+                        <li data-id="tab-social-profile">
                             <a href="#tab-social-profile"><?php _e("Social Profile", "wp-seo-structured-data-schema") ?></a>
                         </li>
-                        <li>
+                        <li data-id="tab-corporate-contract">
                             <a href="#tab-corporate-contract"><?php _e("Corporate Contacts", "wp-seo-structured-data-schema") ?></a>
                         </li>
                     </ul>
-                    <div id="tab-logo-url" class="rt-tab-content">
+                    <div id="tab-logo-url" class="rt-tab-content active">
                         <table width="100%" cellpadding="10" class="form-table">
                             <tr class="field_logo">
                                 <th><?php _e("Select Organization Logo", "wp-seo-structured-data-schema") ?></th>
@@ -398,7 +398,7 @@ $schemaModel = new KcSeoSchemaModel;
                                             foreach ($socialP as $socialD) {
                                                 $html .= "<div class='sfield'>";
                                                 $html .= "<select name='social[$i][id]'>";
-                                                foreach ($schemaModel->socialList() as $sId => $social) {
+                                                foreach (KcSeoOptions::getSocialList() as $sId => $social) {
                                                     $slt = ($sId == $socialD['id'] ? "selected" : null);
                                                     $html .= "<option value='$sId' $slt>$social</option>";
                                                 }
@@ -429,7 +429,7 @@ $schemaModel = new KcSeoSchemaModel;
                                     <select name="contact[contactType]" class="select2" style="width: 200px">
                                         <?php
                                         $contactType = !empty($settings['contact']['contactType']) ? $settings['contact']['contactType'] : null;
-                                        foreach ($schemaModel->contactType() as $cType) {
+                                        foreach (KcSeoOptions::getContactTypes() as $cType) {
                                             $slt = ($cType == $contactType ? "selected" : null);
                                             echo "<option value='$cType' $slt>$cType</option>";
                                         }
@@ -487,9 +487,9 @@ $schemaModel = new KcSeoSchemaModel;
                                                 style="width: 50%">
                                             <?php
                                             $areaServed = !empty($settings['area_served']) ? $settings['area_served'] : array();
-                                            foreach ($schemaModel->countryList() as $country) {
-                                                $slt = (in_array($country, $areaServed) ? "selected" : null);
-                                                echo "<option value='$country' $slt>$country</option>";
+                                            foreach (KcSeoOptions::getCountryList() as $countryId => $country) {
+                                                $slt = (in_array($countryId, $areaServed) ? "selected" : null);
+                                                echo "<option value='$countryId' $slt>$country</option>";
                                             }
                                             ?>
                                         </select>
@@ -503,7 +503,7 @@ $schemaModel = new KcSeoSchemaModel;
                                             multiple="multiple">
                                         <?php
                                         $lanAvailable = !empty($settings['availableLanguage']) ? $settings['availableLanguage'] : array();
-                                        foreach ($schemaModel->languageList() as $language) {
+                                        foreach (KcSeoOptions::getLanguageList() as $language) {
                                             $slt = (in_array($language, $lanAvailable) ? "selected" : null);
                                             echo "<option value='$language' $slt>$language</option>";
                                         }
@@ -515,14 +515,23 @@ $schemaModel = new KcSeoSchemaModel;
                     </div>
                 </div>
 
-                <h2><?php _e("Site Name in Search Results", "wp-seo-structured-data-schema") ?></h2>
+                <h2><?php _e("Site Schema", "wp-seo-structured-data-schema") ?></h2>
                 <table width="100%" cellpadding="10" class="form-table">
+                    <tr class="default">
+                        <th><?php _e("Disable Site Schema", "wp-seo-structured-data-schema") ?></th>
+                        <td align="left" scope="row">
+                            <input type="checkbox"
+                                   name="disable_site_schema" <?php echo(!empty($settings['disable_site_schema']) ? "checked" : null); ?>
+                                   value="1"/>
+                        </td>
+                    </tr>
                     <tr class="default">
                         <th><?php _e("Enable Site link Search Box", "wp-seo-structured-data-schema") ?></th>
                         <td align="left" scope="row">
                             <input type="checkbox"
                                    name="homeonly" <?php echo(!empty($settings['homeonly']) ? "checked" : null); ?>
                                    value="1"/>
+                            <p class="description"><?php _e("Note: Preferred Name markup may no longer be supported by Google", "wp-seo-structured-data-schema") ?></p>
                         </td>
                     </tr>
                     <tr class="default">

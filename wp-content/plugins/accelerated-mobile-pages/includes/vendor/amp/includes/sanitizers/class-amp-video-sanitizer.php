@@ -1,6 +1,6 @@
 <?php
-
-require_once( AMP__DIR__ . '/includes/sanitizers/class-amp-base-sanitizer.php' );
+namespace AMPforWP\AMPVendor;
+require_once( AMP__VENDOR__DIR__ . '/includes/sanitizers/class-amp-base-sanitizer.php' );
 
 /**
  * Converts <video> tags to <amp-video>
@@ -9,6 +9,17 @@ class AMP_Video_Sanitizer extends AMP_Base_Sanitizer {
 	const FALLBACK_HEIGHT = 400;
 
 	public static $tag = 'video';
+
+	private static $script_slug = 'amp-video';
+	private static $script_src = 'https://cdn.ampproject.org/v0/amp-video-0.1.js';
+
+	public function get_scripts() {
+		if ( ! $this->did_convert_elements ) {
+			return array();
+		}
+
+		return array( self::$script_slug => self::$script_src );
+	}
 
 	public function sanitize() {
 		$nodes = $this->dom->getElementsByTagName( self::$tag );
@@ -25,7 +36,7 @@ class AMP_Video_Sanitizer extends AMP_Base_Sanitizer {
 
 			$new_attributes = $this->enforce_fixed_height( $new_attributes );
 			$new_attributes = $this->enforce_sizes_attribute( $new_attributes );
-
+			$new_attributes["dock"] = "#dock-slot";
 			$new_node = AMP_DOM_Utils::create_node( $this->dom, 'amp-video', $new_attributes );
 
 			// TODO: `source` does not have closing tag, and DOMDocument doesn't handle it well.
@@ -50,6 +61,8 @@ class AMP_Video_Sanitizer extends AMP_Base_Sanitizer {
 			} else {
 				$node->parentNode->replaceChild( $new_node, $node );
 			}
+			
+			$this->did_convert_elements = true;
 		}
 	}
 
@@ -70,6 +83,7 @@ class AMP_Video_Sanitizer extends AMP_Base_Sanitizer {
 				case 'poster':
 				case 'class':
 				case 'sizes':
+				case 'id':
 					$out[ $name ] = $value;
 					break;
 
@@ -87,6 +101,8 @@ class AMP_Video_Sanitizer extends AMP_Base_Sanitizer {
 			}
 		}
 
+		$out = ampforwp_amp_consent_check( $out );
+		
 		return $out;
 	}
 }

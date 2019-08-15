@@ -1,16 +1,6 @@
 (function ($) {
     'use strict';
 
-    $(document).ready(function () {
-        $(".rt-tab-nav li:first-child a").trigger('click');
-        if ($(".kcseo-date").length) {
-            $('.kcseo-date').datepicker({
-                'format': 'yyyy-mm-dd',
-                'autoclose': true
-            });
-        }
-    });
-
     wpSeoShowHideType();
     $("#site_type, #_schema_aggregate_rating_schema_type").change(function () {
         wpSeoShowHideType();
@@ -62,16 +52,17 @@
 
     $(".rt-tab-nav li").on('click', 'a', function (e) {
         e.preventDefault();
-        var container = $(this).parents('.rt-tab-container');
-        var nav = container.children('.rt-tab-nav');
-        var content = container.children(".rt-tab-content");
-        var $this, $id;
-        $this = $(this);
-        $id = $this.attr('href');
-        content.hide();
+        var $this = $(this),
+            li = $this.parent(),
+            container = $this.parents('.rt-tab-container'),
+            nav = container.children('.rt-tab-nav'),
+            content = container.children(".rt-tab-content"),
+            id = li.data('id');
+        content.removeClass('active');
         nav.find('li').removeClass('active');
-        $this.parent().addClass('active');
-        container.find($id).show();
+        li.addClass('active');
+        container.find('#' + id).addClass('active');
+        container.find('#_kcseo_ative_tab').val(id);
     });
 
     $(".kSeoImgAdd").on("click", function (e) {
@@ -117,10 +108,10 @@
     });
 
     function wpSeoShowHideType() {
-        if($('#_schema_aggregate_rating_schema_type').length){
+        if ($('#_schema_aggregate_rating_schema_type').length) {
             var id = $("#_schema_aggregate_rating_schema_type option:selected").val();
         }
-        if($('#site_type').length){
+        if ($('#site_type').length) {
             var id = $("#site_type option:selected").val();
         }
 
@@ -135,9 +126,9 @@
             $(".form-table tr.business-info,.form-table tr.all-type-data, .aggregate-except-organization-holder").show();
         }
 
-        if($.inArray(id, ['FoodEstablishment', 'Bakery','BarOrPub','Brewery','CafeOrCoffeeShop','FastFoodRestaurant','IceCreamShop','Restaurant','Winery']) >= 0){
+        if ($.inArray(id, ['FoodEstablishment', 'Bakery', 'BarOrPub', 'Brewery', 'CafeOrCoffeeShop', 'FastFoodRestaurant', 'IceCreamShop', 'Restaurant', 'Winery']) >= 0) {
             $(".form-table tr.restaurant").show();
-        }else {
+        } else {
             $(".form-table tr.restaurant").hide();
         }
     }
@@ -179,7 +170,7 @@
     function AjaxCall(element, action, arg, handle) {
         var data;
         if (action) data = "action=" + action;
-        if (arg)    data = arg + "&action=" + action;
+        if (arg) data = arg + "&action=" + action;
         if (arg && !action) data = arg;
         data = data;
 

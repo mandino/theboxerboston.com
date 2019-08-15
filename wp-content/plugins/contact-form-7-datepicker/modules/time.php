@@ -14,8 +14,7 @@ class ContactForm7Datepicker_Time {
 
 
 		// Tag generator
-		add_action('load-contact_page_wpcf7-new', array(__CLASS__, 'tag_generator'));
-		add_action('load-toplevel_page_wpcf7', array(__CLASS__, 'tag_generator'));
+		add_action('wpcf7_admin_init', array(__CLASS__, 'tag_generator'), 70);
 
 		// Messages
 		add_filter('wpcf7_messages', array(__CLASS__, 'messages'));
@@ -117,36 +116,35 @@ class ContactForm7Datepicker_Time {
 		$value = trim($_POST[$name]);
 
 		if ('time*' == $type && empty($value)) {
-			$result['valid'] = false;
-			$result['reason'][$name] = wpcf7_get_message('invalid_required');
+            		$result->invalidate($tag, wpcf7_get_message('invalid_required'));
 		}
 
 		if (! empty($value) && ! self::is_valid_date($value)) {
-			$result['valid'] = false;
-			$result['reason'][$name] = wpcf7_get_message('invalid_time');
+            		$result->invalidate($tag, wpcf7_get_message('invalid_time'));
 		}
 
 		return $result;
 	}
 
 	public static function tag_generator() {
-        if (! function_exists( 'wpcf7_add_tag_generator'))
+        if (! class_exists( 'WPCF7_TagGenerator' ))
             return;
 
-		wpcf7_add_tag_generator('time',
-			__('Time field', 'wpcf7'),
-			'wpcf7-tg-pane-time',
-			array(__CLASS__, 'tg_pane')
-		);
+        $tag_generator = WPCF7_TagGenerator::get_instance();
+        $tag_generator->add( 'time', __( 'time', 'contact-form-7' ),
+            array(__CLASS__, 'tg_pane') );
 	}
 
-	public static function tg_pane() {
+	public static function tg_pane($contact_form, $args = '') {
+        $args = wp_parse_args( $args, array() );
+        $type = 'time';
+
 		require_once dirname(__FILE__) . '/generators/time.php';
 	}
 
 	public static function add_shortcodes() {
-		if (function_exists('wpcf7_add_shortcode')) {
-			wpcf7_add_shortcode(array('time', 'time*'), array(__CLASS__, 'shortcode_handler'), true);
+		if (function_exists('wpcf7_add_form_tag')) {
+			wpcf7_add_form_tag(array('time', 'time*'), array(__CLASS__, 'shortcode_handler'), true);
 		}
 	}
 

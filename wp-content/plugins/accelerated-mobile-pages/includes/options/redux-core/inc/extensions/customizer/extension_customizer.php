@@ -1,4 +1,5 @@
 <?php
+namespace ReduxCore\ReduxFramework;
     // <input type="radio" value="1" name="_customize-radio-redux_demo[opt-radio]" data-customize-setting-link="redux_demo[opt-color-title]">
     //return;
     /**
@@ -24,7 +25,7 @@
     }
 
     // Don't duplicate me!
-    if ( ! class_exists( 'ReduxFramework_extension_customizer' ) ) {
+    if ( ! class_exists( 'ReduxCore\\ReduxFramework\\ReduxFramework_extension_customizer' ) ) {
 
         /**
          * Main ReduxFramework customizer extension class
@@ -167,7 +168,13 @@
 
             protected static function get_post_values() {
                 if ( empty( self::$post_values ) && isset( $_POST['customized'] ) && ! empty( $_POST['customized'] ) ) {
-                    self::$post_values = json_decode( stripslashes_deep( $_POST['customized'] ), true );
+                    if ( function_exists('sanitize_textarea_field') ) {
+                        self::$post_values = sanitize_textarea_field(json_decode( stripslashes_deep( $_POST['customized'] ), true ));
+                    }
+                    else{
+                        $post_values = json_decode( stripslashes_deep( $_POST['customized'] ), true );
+                        self::$post_values = implode( "\n", array_map( 'sanitize_text_field', explode( "\n", $post_values ) ) );
+                    }
                 }
             }
 
@@ -259,19 +266,19 @@
             // All sections, settings, and controls will be added here
             public function _register_customizer_controls( $wp_customize ) {
 
-                if ( ! class_exists( 'Redux_Customizer_Section' ) ) {
+                if ( ! class_exists( 'ReduxCore\\ReduxFramework\\Redux_Customizer_Section' ) ) {
                     require_once dirname( __FILE__ ) . '/inc/customizer_section.php';
                     if ( method_exists( $wp_customize, 'register_section_type' ) ) {
                         $wp_customize->register_section_type( 'Redux_Customizer_Section' );
                     }
                 }
-                if ( ! class_exists( 'Redux_Customizer_Panel' ) ) {
+                if ( ! class_exists( 'ReduxCore\\ReduxFramework\\Redux_Customizer_Panel' ) ) {
                     require_once dirname( __FILE__ ) . '/inc/customizer_panel.php';
                     if ( method_exists( $wp_customize, 'register_panel_type' ) ) {
                         $wp_customize->register_panel_type( 'Redux_Customizer_Panel' );
                     }
                 }
-                if ( ! class_exists( 'Redux_Customizer_Control' ) ) {
+                if ( ! class_exists( 'ReduxCore\\ReduxFramework\\Redux_Customizer_Control' ) ) {
                     require_once dirname( __FILE__ ) . '/inc/customizer_control.php';
                 }
 
@@ -541,7 +548,6 @@
                         }
 
                         $class_name = 'Redux_Customizer_Control_' . $option['type'];
-
                         do_action( 'redux/extension/customizer/control_init', $option );
 
                         if ( ! class_exists( $class_name ) ) {
@@ -636,7 +642,14 @@
                     $this->orig_options = $this->parent->options;
                 }
 
-                $options  = json_decode( stripslashes_deep( $_POST['customized'] ), true );
+                if ( function_exists('sanitize_textarea_field') ) {
+                    $options  = sanitize_textarea_field(json_decode( stripslashes_deep( $_POST['customized'] ), true ));
+                }
+                else{
+                    $unsanitized_options = json_decode( stripslashes_deep( $_POST['customized'] ), true );
+                    $options = implode( "\n", array_map( 'sanitize_text_field', explode( "\n", $unsanitized_options ) ));
+                }
+
                 $compiler = false;
                 $changed  = false;
 
@@ -682,9 +695,9 @@
                 );
 
                 $localize = array(
-                    'save_pending'   => __( 'You have changes that are not saved. Would you like to save them now?', 'redux-framework' ),
-                    'reset_confirm'  => __( 'Are you sure? Resetting will lose all custom values.', 'redux-framework' ),
-                    'preset_confirm' => __( 'Your current options will be replaced with the values of this preset. Would you like to proceed?', 'redux-framework' ),
+                    'save_pending'   => __( 'You have changes that are not saved. Would you like to save them now?', 'accelerated-mobile-pages' ),
+                    'reset_confirm'  => __( 'Are you sure? Resetting will lose all custom values.', 'accelerated-mobile-pages' ),
+                    'preset_confirm' => __( 'Your current options will be replaced with the values of this preset. Would you like to proceed?', 'accelerated-mobile-pages' ),
                     'opt_name'       => $this->args['opt_name'],
                     //'folds'             => $this->folds,
                     'options'        => $this->parent->options,
@@ -717,9 +730,9 @@
                 //wp_enqueue_style('redux-extension-customizer-css', $this->_extension_url . 'assets/css/customizer.css');
 
                 $localize = array(
-                    'save_pending'   => __( 'You have changes that are not saved.  Would you like to save them now?', 'redux-framework' ),
-                    'reset_confirm'  => __( 'Are you sure?  Resetting will lose all custom values.', 'redux-framework' ),
-                    'preset_confirm' => __( 'Your current options will be replaced with the values of this preset.  Would you like to proceed?', 'redux-framework' ),
+                    'save_pending'   => __( 'You have changes that are not saved.  Would you like to save them now?', 'accelerated-mobile-pages' ),
+                    'reset_confirm'  => __( 'Are you sure?  Resetting will lose all custom values.', 'accelerated-mobile-pages' ),
+                    'preset_confirm' => __( 'Your current options will be replaced with the values of this preset.  Would you like to proceed?', 'accelerated-mobile-pages' ),
                     'opt_name'       => $this->args['opt_name'],
                     //'folds'             => $this->folds,
                     'field'          => $this->parent->options,
@@ -740,7 +753,7 @@
                     if ( isset( $section['fields'] ) ) {
                         foreach ( $section['fields'] as $field ) {
                             if ( isset( $field['type'] ) ) {
-                                $field_class = 'ReduxFramework_' . $field['type'];
+                                $field_class = 'ReduxCore\\ReduxFramework\\ReduxFramework_' . $field['type'];
 
                                 if ( ! class_exists( $field_class ) ) {
                                     $class_file = apply_filters( 'redux-typeclass-load', $this->path . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class );

@@ -1,4 +1,5 @@
 <?php
+namespace AMPforWP\AMPVendor;
 class AMP_Image_Dimension_Extractor {
 	static $callbacks_registered = false;
 	const STATUS_FAILED_LAST_ATTEMPT = 'failed';
@@ -154,7 +155,10 @@ class AMP_Image_Dimension_Extractor {
 	 */
 	private static function fetch_images( $urls_to_fetch, &$images, $mode ) {
 		// Use FasterImage when for compatible PHP versions
-		if ( 'synchronous' === $mode ||
+		$mode_type = '';
+		$mode_type = 'synchronous';
+		$mode_type = apply_filters('amp_fetch_image_mode_type',$mode_type);
+		if ( $mode_type === $mode ||
 			false === function_exists( 'curl_multi_exec' ) ||
 			version_compare( PHP_VERSION, '5.4.0' ) < 0
 		) {
@@ -172,10 +176,10 @@ class AMP_Image_Dimension_Extractor {
 	 */
 	private static function fetch_images_via_fast_image( $urls_to_fetch, &$images ) {
 		if ( ! class_exists( 'FastImage' ) ) {
-			require_once( AMP__DIR__ . '/includes/lib/fastimage/class-fastimage.php' );
+			require_once( AMP__VENDOR__DIR__ . '/includes/lib/fastimage/class-fastimage.php' );
 		}
 
-		$image = new FastImage();
+		$image = new \FastImage();
 		$urls = array_keys( $urls_to_fetch );
 
 		foreach ( $urls as $url ) {
@@ -199,11 +203,11 @@ class AMP_Image_Dimension_Extractor {
 		$urls = array_keys( $urls_to_fetch );
 
 		if ( ! function_exists( 'amp_get_fasterimage_client' ) ) {
-			require_once( AMP__DIR__ . '/includes/lib/fasterimage/amp-fasterimage.php' );
+			require_once( AMP__VENDOR__DIR__ . '/includes/lib/fasterimage/amp-fasterimage.php' );
 		}
 
 		$user_agent = apply_filters( 'amp_extract_image_dimensions_get_user_agent', self::get_default_user_agent() );
-		$client = amp_get_fasterimage_client( $user_agent );
+		$client = \amp_get_fasterimage_client( $user_agent );
 		$images = $client->batch( $urls );
 	}
 
@@ -218,7 +222,17 @@ class AMP_Image_Dimension_Extractor {
 	 */
 	private static function process_fetched_images( $urls_to_fetch, $images, &$dimensions, $transient_expiration ) {
 		foreach ( $urls_to_fetch as $url_data ) {
+			$image = array();
+			$attachment_id = '';
 			$image_data = $images[ $url_data['url'] ];
+			// Fallback #2931
+			if ( self::STATUS_IMAGE_EXTRACTION_FAILED === $image_data['size'] ) {	
+				$attachment_id = attachment_url_to_postid($url_data['url']);
+				$image = wp_get_attachment_image_src($attachment_id, 'full');
+				if ( $image ) {
+					$image_data['size'] = array($image[1],$image[2]);
+				}
+			}
 			if ( self::STATUS_IMAGE_EXTRACTION_FAILED === $image_data['size'] ) {
 				$dimensions[ $url_data['url'] ] = false;
 				set_transient( $url_data['transient_name'], self::STATUS_FAILED_LAST_ATTEMPT, $transient_expiration );
@@ -247,6 +261,6 @@ class AMP_Image_Dimension_Extractor {
 	 * @return string
 	 */
 	public static function get_default_user_agent() {
-		return 'amp-wp, v' . AMP__VERSION . ', ' . get_site_url();
+		return 'amp-wp, v' . AMP__VENDOR__VERSION . ', ' . get_site_url();
 	}
 }

@@ -3,8 +3,8 @@ Contributors: kcseopro
 Donate link:
 Tags: seo, schema, structured data, rich snippets, microdata, json-ld, search engine optimization, local seo, google, sitelinks, schema.org, microformat, serp
 Requires at least: 4.5
-Tested up to: 5.0
-Stable tag: 2.5.4
+Tested up to: 5.2
+Stable tag: 2.5.9
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -93,12 +93,6 @@ You can validate structured data on any web page here:
 For more information on the plugin author visit:
 
 * [WP SEM Plugins](https://wpsemplugins.com/)
-* [Kansas City SEO®](https://kcseopro.com/)
-* [Twitter](https://twitter.com/kcseopro)
-* [Google+](https://plus.google.com/+Kcseopro-kansas-city-seo)
-* [Phil Singleton](https://www.linkedin.com/in/seokansascity)
-* [SEO for Growth](https://seoforgrowth.com/)
-
 
 == Installation ==
 
@@ -110,7 +104,7 @@ For more information on the plugin author visit:
 
 == Frequently Asked Questions ==
 
-You'll find the [FAQ on Kcseopro.com](https://wpsemplugins.com/).
+You'll find the [FAQ on WPSEMPlugins.com](https://wpsemplugins.com/wordpress-seo-structured-data-schema-plugin/).
 
 == Screenshots ==
 
@@ -119,6 +113,28 @@ You'll find the [FAQ on Kcseopro.com](https://wpsemplugins.com/).
 
 
 == Changelog ==
+
+== 2.5.9 =
+* Fix PHP error
+
+== 2.5.8 =
+* Fix Javascript issue
+* Update Contact Type
+
+== 2.5.7 =
+* Add Time for post
+* Event Start & End Time
+* Fix URL www issue.
+* Product Identifier for e-commerce
+
+== 2.5.6 =
+* Fix event
+* AMP support
+* Fix Spelling
+
+== 2.5.5 =
+* Add Site schema control
+* Fix Site schema search link
 
 == 2.5.4 =
 * Add a Hack

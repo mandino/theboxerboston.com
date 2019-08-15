@@ -1,5 +1,5 @@
 <?php
-
+namespace ReduxCore\ReduxFramework;
 /**
  * Redux Framework is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ if ( !defined ( 'ABSPATH' ) ) {
 }
 
 // Don't duplicate me!
-if ( !class_exists ( 'ReduxFramework_checkbox' ) ) {
+if ( !class_exists ( 'ReduxCore\\ReduxFramework\\ReduxFramework_checkbox' ) ) {
 
     /**
      * Main ReduxFramework_checkbox class
@@ -41,11 +41,16 @@ if ( !class_exists ( 'ReduxFramework_checkbox' ) ) {
          * @access      public
          * @return      void
          */
+        private $timestamp = '';
+
         function __construct ( $field = array(), $value = '', $parent ) {
 
             $this->parent = $parent;
             $this->field = $field;
             $this->value = $value;
+            if ( defined('AMPFORWP_VERSION') ) {
+                $this->timestamp = AMPFORWP_VERSION;
+            }
         }
 
         /**
@@ -141,7 +146,7 @@ if ( !class_exists ( 'ReduxFramework_checkbox' ) ) {
                     'redux-field-checkbox-css',
                     ReduxFramework::$_url . 'inc/fields/checkbox/field_checkbox.css',
                     array(),
-                    time (),
+                    $this->timestamp,//time (),
                     'all'
                 );
             }
@@ -150,7 +155,7 @@ if ( !class_exists ( 'ReduxFramework_checkbox' ) ) {
                 'redux-field-checkbox-js',
                 ReduxFramework::$_url . 'inc/fields/checkbox/field_checkbox' . Redux_Functions::isMin () . '.js',
                 array( 'jquery', 'redux-js' ),
-                time (),
+                $this->timestamp, //time (),
                 true
             );
         }

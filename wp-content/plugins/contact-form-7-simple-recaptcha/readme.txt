@@ -1,10 +1,10 @@
 === Contact Form 7 Captcha ===
 Contributors: 247wd
-Donate link: http://wordpress.org/plugins/contact-form-7-simple-recaptcha
+Donate link: https://www.paypal.me/cf7captcha
 Tags: captcha, recaptcha, new recaptcha, contact form 7, no captcha
 Requires at least: 4.1.2
-Tested up to: 4.9.8
-Stable tag: 0.0.2
+Tested up to: 5.0.1
+Stable tag: 0.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,10 +13,11 @@ Add CAPTCHA to Contact Form 7
 == Description ==
 
 To use this plugin, you need to sign up for API keys for your site via google site: https://www.google.com/recaptcha/admin<br>
+This plugin implements "I'm not a robot" checkbox. When generating keys, choose reCAPTCHA v2 -> Checkbox<br>
 Add Google CAPTCHA to Contact Form 7.<br>
 Protect your Contact Form 7 forms from spam and abuse.<br>
 Can be used to protect multiple forms on same page.<br>
-Tested with Contact Form 7 version 5.0.4 and WordPress version 4.9.8<br>
+Tested with Contact Form 7 version 5.1 and WordPress version 5.1.1<br>
 Configure plugin from Settings => CF7 Simple Recaptcha.<br>
 After configuration, add [cf7sr-simple-recaptcha] to any Contact Form 7 form.<br>
 

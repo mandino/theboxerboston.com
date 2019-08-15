@@ -24,9 +24,9 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 		 */
 		public function __construct() {
 			/* translators: title of the widget */
-			$widget_title = __( 'AMP Text Module', 'black-studio-tinymce-widget' );
+			$widget_title = esc_html__( 'AMP Text Module', 'black-studio-tinymce-widget' );
 			/* translators: description of the widget, shown in available widgets */
-			$widget_description = __( 'Arbitrary text or HTML with visual editor', 'black-studio-tinymce-widget' );
+			$widget_description = esc_html__( 'Arbitrary text or HTML with visual editor', 'black-studio-tinymce-widget' );
 			$widget_ops = array( 'classname' => 'widget_black_studio_tinymce', 'description' => $widget_description );
 			$control_ops = array( 'width' => 800, 'height' => 600 );
 			parent::__construct( 'black-studio-tinymce', $widget_title, $widget_ops, $control_ops );
@@ -54,7 +54,7 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
             $title = empty( $instance['title'] ) ? '' : $instance['title'];
 			$title = apply_filters( 'widget_title', $title , $instance, $this->id_base );
 			$text = apply_filters( 'widget_text', empty( $instance['text'] ) ? '' : $instance['text'], $instance, $this );
-            $markup_title = '<div class="amp_module_title">' . $title . '</div>';
+            $markup_title = '<div class="amp_module_title"><span>' . $title . '</span></div>';
             $markup_text = '<div class="amp_cb_text_content">' . $text . '</div>';
 			$hide_empty = apply_filters( 'black_studio_tinymce_hide_empty', false, $instance );
 			if ( ! ( $hide_empty && empty( $text ) ) ) {

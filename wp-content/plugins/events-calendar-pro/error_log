@@ -1,0 +1,1 @@
+[26-Jul-2016 22:10:37 America/Chicago] PHP Fatal error:  Call to undefined function add_action() in /home/hersha/public_html/www.theboxerboston.com/wp-content/plugins/events-calendar-pro/events-calendar-pro.php on line 1740

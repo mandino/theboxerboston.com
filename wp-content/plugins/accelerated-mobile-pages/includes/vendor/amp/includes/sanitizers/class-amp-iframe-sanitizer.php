@@ -1,13 +1,13 @@
 <?php
-
-require_once( AMP__DIR__ . '/includes/sanitizers/class-amp-base-sanitizer.php' );
+namespace AMPforWP\AMPVendor;
+require_once( AMP__VENDOR__DIR__ . '/includes/sanitizers/class-amp-base-sanitizer.php' );
 
 /**
  * Converts <iframe> tags to <amp-iframe>
  */
 class AMP_Iframe_Sanitizer extends AMP_Base_Sanitizer {
 	const FALLBACK_HEIGHT = 400;
-	const SANDBOX_DEFAULTS = 'allow-scripts allow-same-origin';
+	const SANDBOX_DEFAULTS = 'allow-scripts allow-same-origin allow-popups';
 
 	public static $tag = 'iframe';
 
@@ -54,7 +54,11 @@ class AMP_Iframe_Sanitizer extends AMP_Base_Sanitizer {
 
 			$new_attributes = $this->enforce_fixed_height( $new_attributes );
 			$new_attributes = $this->enforce_sizes_attribute( $new_attributes );
-
+			//compatible with clyp it iframe embed #2836
+			if(strpos($new_attributes['src'], 'clyp.it')){
+			$new_attributes['width'] = 280;
+			$new_attributes['sizes'] = '(min-width: 280px) 280px, 100vw';
+			}
 			$new_node = AMP_DOM_Utils::create_node( $this->dom, 'amp-iframe', $new_attributes );
 
 			if ( true === $this->args['add_placeholder'] ) {
@@ -97,7 +101,6 @@ class AMP_Iframe_Sanitizer extends AMP_Base_Sanitizer {
 					$out[ $name ] = $this->sanitize_dimension( $value, $name );
 					break;
 
-
 				case 'frameborder':
 					if ( '0' !== $value && '1' !== $value ) {
 						$value = '0';
@@ -117,9 +120,11 @@ class AMP_Iframe_Sanitizer extends AMP_Base_Sanitizer {
 			}
 		}
 
-		if ( ! isset( $out[ 'sandbox' ] ) ) {
-			$out[ 'sandbox' ] = self::SANDBOX_DEFAULTS;
+		if ( ! isset( $out['sandbox'] ) ) {
+			$out['sandbox'] = self::SANDBOX_DEFAULTS;
 		}
+
+		$out = ampforwp_amp_consent_check( $out );
 
 		return $out;
 	}
