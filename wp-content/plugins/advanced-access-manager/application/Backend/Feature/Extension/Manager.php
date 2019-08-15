@@ -24,8 +24,21 @@ class AAM_Backend_Feature_Extension_Manager extends AAM_Backend_Feature_Abstract
     /**
      * 
      */
+    public function __construct() {
+        parent::__construct();
+        
+        if (AAM_Core_Config::get('core.settings.extensionSupport', true) === false) {
+            AAM::api()->denyAccess(array('reason' => 'core.settings.extensionSupport'));
+        } elseif (!current_user_can('aam_manage_extensions')) {
+            AAM::api()->denyAccess(array('reason' => 'aam_manage_extensions'));
+        }
+    }
+    
+    /**
+     * 
+     */
     public function render() {
-        require_once(dirname(__FILE__) . '/../../phtml/extensions.phtml');
+        require_once dirname(__FILE__) . '/../../phtml/extensions.phtml';
     }
     
     /**
@@ -36,7 +49,7 @@ class AAM_Backend_Feature_Extension_Manager extends AAM_Backend_Feature_Abstract
     public function check() {
         AAM::cron();
 
-        return json_encode(array('status' => 'success'));
+        return wp_json_encode(array('status' => 'success'));
     }
     
     /**
@@ -51,27 +64,17 @@ class AAM_Backend_Feature_Extension_Manager extends AAM_Backend_Feature_Abstract
     public function install($storedLicense = null) {
         $repo    = AAM_Extension_Repository::getInstance();
         $license = AAM_Core_Request::post('license', $storedLicense);
+        $package = (object) AAM_Core_Request::post('package');
         
-        //download the extension from the server first
-        $package = AAM_Core_Server::download($license);
+        $error   = $repo->checkDirectory();
         
-        if (is_wp_error($package)) {
-            $manually = sprintf(
-                __('To install extension manually, check %sthis article%s.', AAM_KEY), 
-                '<a href="https://aamplugin.com/help/how-to-install-aam-extension-manually">', 
-                '</a>'
-            );
-            $response = array(
-                'status' => 'failure', 
-                'error'  => strip_tags($package->get_error_message()) . ' ' . $manually
-            );
-        }elseif ($error = $repo->checkDirectory()) {
+        if ($error) {
             $response = $this->installFailureResponse($error, $package);
             $repo->storeLicense($package, $license);
         } elseif (empty($package->content)) { //any unpredictable scenario
             $response = array(
                 'status' => 'failure', 
-                'error'  => 'Download failure. Please try again or contact us.'
+                'error'  => __('Download failure. Try again or contact us.', AAM_KEY)
             );
         } else { //otherwise install the extension
             $result = $repo->add(base64_decode($package->content));
@@ -107,9 +110,9 @@ class AAM_Backend_Feature_Extension_Manager extends AAM_Backend_Feature_Abstract
             if (!empty($list[$id]['license'])) {
                 $response = $this->install($list[$id]['license']);
             } else {
-                $response = json_encode(array(
+                $response = wp_json_encode(array(
                     'status' => 'failure', 
-                    'error'  => __('Enter license key to update extension.', AAM_KEY)
+                    'error'  => __('No valid license key was found.', AAM_KEY)
                 ));
             }
         }
@@ -127,7 +130,7 @@ class AAM_Backend_Feature_Extension_Manager extends AAM_Backend_Feature_Abstract
                 AAM_Extension_Repository::STATUS_INACTIVE
         );
         
-        return json_encode(array('status' => 'success'));
+        return wp_json_encode(array('status' => 'success'));
     }
     
     /**
@@ -140,7 +143,24 @@ class AAM_Backend_Feature_Extension_Manager extends AAM_Backend_Feature_Abstract
                 AAM_Extension_Repository::STATUS_INSTALLED
         );
         
-        return json_encode(array('status' => 'success'));
+        return wp_json_encode(array('status' => 'success'));
+    }
+    
+    /**
+     * 
+     * @return type
+     */
+    public function fixDirectoryIssue() {
+        $repo    = AAM_Extension_Repository::getInstance();
+        $dirname = $repo->getBasedir();
+        
+        if (file_exists($dirname) === false) {
+            @mkdir($dirname, fileperms(ABSPATH) & 0777 | 0755, true);
+        }
+        
+        return wp_json_encode(array(
+            'status' => ($repo->isWriteableDirectory() ? 'success' : 'failed')
+        ));
     }
     
     /**
@@ -152,26 +172,12 @@ class AAM_Backend_Feature_Extension_Manager extends AAM_Backend_Feature_Abstract
         $response = array();
         
         foreach(AAM_Extension_Repository::getInstance()->getList() as $item) {
-            if ($item['type'] == $type) {
+            if ($item['type'] === $type) {
                 $response[] = $item;
             }
         }
         
         return $response;
-    }
-    
-    /**
-     * 
-     * @return type
-     */
-    public function canShowLicense() {
-        $result = true;
-        
-        if (AAM_Core_API::capabilityExists('aam_display_license')) {
-            $result = !empty(AAM::getUser()->allcaps['aam_display_license']);
-        }
-        
-        return $result;
     }
     
     /**

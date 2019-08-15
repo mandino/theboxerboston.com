@@ -16,6 +16,15 @@
 class AAM_Backend_Feature_Subject_Role {
     
     /**
+     * Construct
+     */
+    public function __construct() {
+        if (!current_user_can('aam_manage_roles')) {
+            AAM::api()->denyAccess(array('reason' => 'aam_manage_roles'));
+        }
+    }
+    
+    /**
      * Get role list
      * 
      * Prepare and return the list of roles for the table view
@@ -25,64 +34,81 @@ class AAM_Backend_Feature_Subject_Role {
      * @access public
      */
     public function getTable() {
-        if (current_user_can('aam_list_roles')) {
-            //retrieve list of users
-            $count = count_users();
-            $stats = $count['avail_roles'];
+        //retrieve list of users
+        $count = count_users();
+        $stats = $count['avail_roles'];
 
-            $filtered = $this->fetchRoleList();
+        $filtered = $this->fetchRoleList();
 
-            $response = array(
-                'recordsTotal'    => count(get_editable_roles()),
-                'recordsFiltered' => count($filtered),
-                'draw'            => AAM_Core_Request::request('draw'),
-                'data'            => array(),
-            );
+        $response = array(
+            'recordsTotal'    => count(get_editable_roles()),
+            'recordsFiltered' => count($filtered),
+            'draw'            => AAM_Core_Request::request('draw'),
+            'data'            => array(),
+        );
 
-            foreach ($filtered as $id => $data) {
-                $uc = (isset($stats[$id]) ? $stats[$id] : 0);
+        foreach ($filtered as $id => $data) {
+            $uc = (isset($stats[$id]) ? $stats[$id] : 0);
 
-                $response['data'][] = array(
-                    $id,
-                    $uc,
-                    translate_user_role($data['name']),
-                    apply_filters(
-                            'aam-role-row-actions-filter', 
-                            implode(',', $this->prepareRowActions($uc)),
-                            $data
-                    ),
-                    AAM_Core_API::maxLevel($data['capabilities']),
-                    AAM_Core_API::getOption("aam-role-{$id}-expiration", '')
-                );
-            }
-        } else {
-            $response = array(
-                'recordsTotal'    => 0,
-                'recordsFiltered' => 0,
-                'draw'            => AAM_Core_Request::request('draw'),
-                'data'            => array(),
+            $response['data'][] = array(
+                $id,
+                $uc,
+                translate_user_role($data['name']),
+                apply_filters(
+                    'aam-role-row-actions-filter', 
+                    implode(',', $this->prepareRowActions($uc, $id)),
+                    $data
+                ),
+                AAM_Core_API::maxLevel($data['capabilities'])
             );
         }
         
-        return json_encode(apply_filters('aam-get-role-list-filter', $response));
+        return wp_json_encode(apply_filters('aam-get-role-list-filter', $response));
     }
     
     /**
+     * Prepare the list of role actions
      * 
-     * @param type $count
-     * @return string
+     * @param int    $count  Number of users in role
+     * @param string $roleId Role slug
+     * 
+     * @return array
+     * 
+     * @access protected
      */
-    protected function prepareRowActions($count) {
-        $actions = array('manage');
+    protected function prepareRowActions($count, $roleId) {
+        $ui = AAM_Core_Request::post('ui', 'main');
+        $id = AAM_Core_Request::post('id');
         
-        if (current_user_can('aam_edit_roles')) {
-            $actions[] = 'edit';
-        }
-        if (current_user_can('aam_create_roles')) {
-            $actions[] = 'clone';
-        }
-        if (current_user_can('aam_delete_roles') && !$count) {
-            $actions[] = 'delete';
+        if ($ui === 'principal') {
+            $subject = new AAM_Core_Subject_Role($roleId);
+            
+            $object  = $subject->getObject('policy');
+            $action  = ($object->has($id) ? 'detach' : 'attach');
+            $manager = AAM_Core_Policy_Factory::get();
+            
+            // Verify that current user can perform following action
+            $prefix = ($manager->canTogglePolicy($id, $action) ? '' : 'no-');
+            
+            $actions = array($prefix . $action);
+        } else {
+            $actions = array('manage');
+
+            if (current_user_can('aam_edit_roles')) {
+                $actions[] = 'edit';
+            } else {
+                $actions[] = 'no-edit';
+            }
+            if (current_user_can('aam_create_roles')) {
+                $actions[] = 'clone';
+            } else {
+                $actions[] = 'no-clone';
+            }
+            if (current_user_can('aam_delete_roles') && !$count) {
+                $actions[] = 'delete';
+            } else {
+                $actions[] = 'no-delete';
+            }
         }
         
         return $actions;
@@ -94,8 +120,8 @@ class AAM_Backend_Feature_Subject_Role {
      * @return string
      */
     public function getList(){
-        return json_encode(
-                apply_filters('aam-get-role-list-filter', $this->fetchRoleList())
+        return wp_json_encode(
+            apply_filters('aam-get-role-list-filter', $this->fetchRoleList())
         );
     }
     
@@ -116,7 +142,7 @@ class AAM_Backend_Feature_Subject_Role {
         
         foreach ($roles as $id => $role) {
             $match = preg_match('/^' . $search . '/i', $role['name']);
-            if (($exclude != $id) && (!$search || $match)) {
+            if (($exclude !== $id) && (!$search || $match)) {
                 $response[$id] = $role;
             }
         }
@@ -136,9 +162,8 @@ class AAM_Backend_Feature_Subject_Role {
         
         if (current_user_can('aam_create_roles')) {
             $name    = sanitize_text_field(filter_input(INPUT_POST, 'name'));
-            $expire  = filter_input(INPUT_POST, 'expire');
             $roles   = AAM_Core_API::getRoles();
-            $role_id = strtolower($name);
+            $role_id = sanitize_key(strtolower($name));
 
             //if inherited role is set get capabilities from it
             $parent = $roles->get_role(trim(filter_input(INPUT_POST, 'inherit')));
@@ -158,18 +183,13 @@ class AAM_Backend_Feature_Subject_Role {
                     $this->cloneSettings($role, $parent);
                 }
                 
-                //save expiration rule if set
-                if ($expire) {
-                    AAM_Core_API::updateOption("aam-role-{$role_id}-expiration", $expire);
-                } else {
-                    AAM_Core_API::deleteOption("aam-role-{$role_id}-expiration");
-                }
-                
                 do_action('aam-post-add-role-action', $role, $parent);
+            } else {
+                $response['reason'] = __("Role with slug [{$role_id}] already exists", AAM_KEY);
             }
         }
 
-        return json_encode($response);
+        return wp_json_encode($response);
     }
     
     /**
@@ -214,19 +234,10 @@ class AAM_Backend_Feature_Subject_Role {
      */
     public function edit() {
         if (current_user_can('aam_edit_roles')) {
-            $role    = AAM_Backend_Subject::getInstance();
-            $role->update(trim(filter_input(INPUT_POST, 'name')));
-            
-            $expire  = filter_input(INPUT_POST, 'expire');
-            //save expiration rule if set
-            if ($expire) {
-                AAM_Core_API::updateOption(
-                        'aam-role-' . $role->getId() .'-expiration', $expire
-                );
-            } else { 
-                AAM_Core_API::deleteOption('aam-role-' . $role->getId() .'-expiration');
-            }
+            $role = AAM_Backend_Subject::getInstance();
 
+            $role->update(esc_js(trim(filter_input(INPUT_POST, 'name'))));
+            
             do_action('aam-post-update-role-action', $role->get());
             
             $response = array('status' => 'success');
@@ -234,7 +245,7 @@ class AAM_Backend_Feature_Subject_Role {
             $response = array('status' => 'failure');
         }
         
-        return json_encode($response);
+        return wp_json_encode($response);
     }
 
     /**
@@ -253,7 +264,7 @@ class AAM_Backend_Feature_Subject_Role {
             }
         }
 
-        return json_encode(array('status' => $status));
+        return wp_json_encode(array('status' => $status));
     }
 
 }

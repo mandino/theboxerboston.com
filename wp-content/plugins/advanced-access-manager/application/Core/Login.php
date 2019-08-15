@@ -16,45 +16,80 @@
 class AAM_Core_Login {
 
     /**
-     *
-     * @var type 
+     * AAM Login flag
+     * 
+     * Is used to indicate that the user authentication process is handled by
+     * AAM plugin. Important to differentiate to avoid redirects
+     * 
+     * @var boolean
+     * 
+     * @access protected 
      */
     protected $aamLogin = false;
     
     /**
-     *
-     * @var type 
+     * Single instance of itself
+     * 
+     * @var AAM_Core_Login 
+     * 
+     * @access protected
+     * @static
      */
     protected static $instance = null;
 
     /**
+     * Constructor
      * 
+     * @return void
+     * 
+     * @access protected
      */
     protected function __construct() {
-        //login hook
+        // Fires after the user has successfully logged in
         add_action('wp_login', array($this, 'login'), 10, 2);
+        
+        // Fired after the user has been logged out successfully
         add_action('wp_logout', array($this, 'logout'));
         
         //user login control
-        add_filter('wp_authenticate_user', array($this, 'authenticate'), 1, 2);
+        add_filter('wp_authenticate_user', array($this, 'authenticateUser'), 1, 2);
             
         //login process
         add_filter('login_message', array($this, 'loginMessage'));
             
         //security controls
-        add_action('login_form_login', array($this, 'watch'), 1);
+        add_filter('authenticate', array($this, 'authenticate'), -1);
     }
     
     /**
+     * Fires after the user has successfully logged in
      * 
-     * @param type $username
-     * @param type $user
+     * @param string  $username Username
+     * @param WP_User $user     Current user
+     * 
+     * @return void
+     * 
+     * @access public
      */
     public function login($username, $user = null) {
         if (is_a($user, 'WP_User')) {
-            $this->updateLoginCounter(-1);
+            if (AAM_Core_Config::get('brute-force-lockout', false)) {
+                $this->updateLoginCounter(-1);
+            }
             
+            // Delete User Switch flag in case admin is impersonating user
             AAM_Core_API::deleteOption('aam-user-switch-' . $user->ID);
+            
+            // Experimental feature. Track user session
+            if (AAM::api()->getConfig('core.session.tracking', false)) {
+                $ttl = AAM::api()->getConfig(
+                    "core.session.user.{$this->ID}.ttl",
+                    AAM::api()->getConfig("core.session.user.ttl", null)
+                );
+                if (!empty($ttl)) {
+                    add_user_meta($user->ID, 'aam-authenticated-timestamp', time());
+                }
+            }
             
             if ($this->aamLogin === false) {
                 $redirect = $this->getLoginRedirect($user);
@@ -67,9 +102,112 @@ class AAM_Core_Login {
     }
     
     /**
+     * Logout redirect
      * 
-     * @param type $user
-     * @return type
+     * @return void
+     * 
+     * @access public
+     */
+    public function logout() {
+        $object = AAM::getUser()->getObject('logoutRedirect');
+        $type   = $object->get('logout.redirect.type');
+        
+        if (!empty($type) && $type !== 'default') {
+            $redirect = $object->get("logout.redirect.{$type}");
+            AAM_Core_API::redirect($redirect);
+        }
+        
+        // get user login timestamp
+        delete_user_meta(AAM::getUser()->ID, 'aam-authenticated-timestamp');
+    }
+    
+    /**
+     * Control User Block flag
+     *
+     * @param WP_Error $user
+     *
+     * @return WP_Error|WP_User
+     *
+     * @access public
+     */
+    public function authenticateUser($user) {
+        if (is_a($user, 'WP_User')) {
+            // First check if user is blocked
+            if (intval($user->user_status) === 1) {
+                $user = new WP_Error();
+
+                $message  = '[ERROR]: User is locked. Please contact your website ';
+                $message .= 'administrator.';
+
+                $user->add(
+                    'authentication_failed', 
+                    AAM_Backend_View_Helper::preparePhrase($message, 'strong')
+                );
+            } elseif (AAM_Core_Config::get('core.settings.singleSession', false)) {
+                $sessions = WP_Session_Tokens::get_instance($user->ID);
+                
+                if (count($sessions->get_all()) >= 1) {
+                    $sessions->destroy_all();
+                }
+            }
+        }
+
+        return $user;
+    }
+    
+    /**
+     * Customize login message
+     * 
+     * @param string $message
+     * 
+     * @return string
+     * 
+     * @access public
+     */
+    public function loginMessage($message) {
+        $reason = AAM_Core_Request::get('reason');
+        
+        if (empty($message)) {
+            if ($reason === 'restricted') {
+                $message = AAM_Core_Config::get(
+                    'security.redirect.message',
+                    '<p class="message">' . 
+                        __('Access denied. Please login to get access.', AAM_KEY) . 
+                    '</p>'
+                );
+            }
+        }
+        
+        return $message;
+    }
+    
+    /**
+     * Authentication hooks
+     * 
+     * @param mixed  $response
+     */
+    public function authenticate($response) {
+        // Login Timeout
+        if (AAM_Core_Config::get('core.settings.loginTimeout', false)) {
+            @sleep(intval(AAM_Core_Config::get('security.login.timeout', 1)));
+        }
+
+        // Brute Force Lockout
+        if (AAM_Core_Config::get('core.settings.bruteForceLockout', false)) {
+            $this->updateLoginCounter(1);
+        }
+        
+        return $response;
+    }
+    
+    /**
+     * Get AAM Login Redirect rule
+     * 
+     * @param WP_User $user
+     * 
+     * @return null|string
+     * 
+     * @access protected
      */
     protected function getLoginRedirect($user) {
         $redirect = null;
@@ -87,104 +225,75 @@ class AAM_Core_Login {
     }
     
     /**
+     * Update login counter
      * 
-     */
-    public function logout() {
-        $object = AAM::getUser()->getObject('logoutRedirect');
-        $type   = $object->get('logout.redirect.type');
-        
-        if (!empty($type) && $type !== 'default') {
-            $redirect = $object->get("logout.redirect.{$type}");
-            AAM_Core_API::redirect($redirect);
-        }
-    }
-    
-    /**
+     * @param int $increment
      * 
-     * @param type $message
-     * @return type
+     * @return void
+     * 
+     * @access protected
      */
-    public function loginMessage($message) {
-        $reason = AAM_Core_Request::get('reason');
-        
-        if (empty($message) && ($reason == 'access-denied')) {
-            $message = AAM_Core_Config::get(
-                'login.redirect.message', 
-                '<p class="message">' . __('Access denied. Please login to get access.', AAM_KEY) . '</p>'
+    protected function updateLoginCounter($increment) {
+        $attempts = get_transient('aam_login_attempts');
+
+        if ($attempts !== false) {
+            $timeout  = get_option('_transient_timeout_aam_login_attempts') - time();
+            $attempts = intval($attempts) + $increment;
+        } else {
+            $attempts = 1;
+            $period   = strtotime(
+                    AAM_Core_Config::get('security.login.period', '20 minutes')
             );
-        }
-        
-        return $message;
-    }
-
-    /**
-     * 
-     */
-    public function watch() {
-        //Login Timeout
-        if (AAM_Core_Config::get('login-timeout', false)) {
-            @sleep(intval(AAM_Core_Config::get('security.login.timeout', 1)));
+            $timeout  = $period - time();
         }
 
-        //Brute Force Lockout
-        if (AAM_Core_Config::get('brute-force-lockout', false)) {
-            $this->updateLoginCounter(1);
+        if ($attempts >= AAM_Core_Config::get('security.login.attempts', 20)) {
+            if (AAM_Core_Api_Area::isAPI()) {
+                throw new Exception(
+                    'Exceeded maximum number for authentication attempts. Please try later again.'
+                );
+            } else {
+                wp_safe_redirect(site_url('index.php'));
+                exit;
+            }
+        } else {
+            set_transient('aam_login_attempts', $attempts, $timeout);
         }
     }
     
     /**
-     * Control User Block flag
-     *
-     * @param WP_Error $user
-     *
-     * @return WP_Error|WP_User
-     *
+     * Handle WP core login
+     * 
+     * @return array
+     * 
      * @access public
      */
-    public function authenticate($user) {
-        if (is_a($user, 'WP_User') && $user->user_status == 1) {
-            $user = new WP_Error();
-            
-            $message  = 'ERROR]: User is locked. Please contact your website ';
-            $message .= 'administrator.';
-            
-            $user->add(
-                'authentication_failed', 
-                AAM_Backend_View_Helper::preparePhrase($message, 'strong')
-            );
-        }
-
-        return $user;
-    }
-    
-    /**
-     * 
-     * @return type
-     * @throws Exception
-     */
-    public function execute() {
+    public function execute($credentials = array(), $set_cookie = true) {
         $this->aamLogin = true;
         
+        if ($set_cookie === false) {
+            add_filter('send_auth_cookies', '__return_false');
+        }
+        
         $response = array(
-            'status' => 'failure',
+            'status'   => 'failure',
             'redirect' => AAM_Core_Request::post('redirect')
         );
 
-        $log = sanitize_user(AAM_Core_Request::post('log'));
-
         try {
-            $user = wp_signon(array(), $this->checkUserSSL($log));
+            $user = wp_signon($credentials);
 
             if (is_wp_error($user)) {
                 Throw new Exception($user->get_error_message());
             }
-            $redirect = $this->getLoginRedirect($user);
             
             if (empty($response['redirect'])) {
-                $response['redirect'] = ($redirect ? $this->normalizeRedirect($redirect) : admin_url());
+                $goto = $this->getLoginRedirect($user);
+                $response['redirect'] = ($goto ? $this->normalizeRule($goto) : admin_url());
             }
             
             $response['status'] = 'success';
+            $response['user']   = $user;
         } catch (Exception $ex) {
             $response['reason'] = $ex->getMessage();
         }
@@ -193,11 +302,15 @@ class AAM_Core_Login {
     }
     
     /**
+     * Normalize redirect rule
      * 
-     * @param type $redirect
-     * @return type
+     * @param mixed $redirect
+     * 
+     * @return string
+     * 
+     * @access protected
      */
-    protected function normalizeRedirect($redirect) {
+    protected function normalizeRule($redirect) {
         $normalized = null;
         
         if (filter_var($redirect, FILTER_VALIDATE_URL)) {
@@ -212,64 +325,12 @@ class AAM_Core_Login {
     }
 
     /**
+     * Get single instance of itself
      * 
-     * @param type $increment
-     */
-    protected function updateLoginCounter($increment) {
-        $attempts = get_transient('aam_login_attemtps');
-
-        if ($attempts !== false) {
-            $timeout = get_option('_transient_timeout_aam_login_attemtps') - time();
-            $attempts = intval($attempts) + $increment;
-        } else {
-            $attempts = 1;
-            $timeout = strtotime(
-                    '+' . AAM_Core_Config::get('security.login.period', '20 minutes')
-            ) - time();
-        }
-
-        if ($attempts >= AAM_Core_Config::get('security.login.attempts', 20)) {
-            wp_safe_redirect(site_url('index.php'));
-            exit;
-        } else {
-            set_transient('aam_login_attemtps', $attempts, $timeout);
-        }
-    }
-
-    /**
+     * @return AAM_Core_Login
      * 
-     * @param type $log
-     * @param type $pwd
-     * @throws Exception
-     */
-    protected function validate($log, $pwd) {
-        if (empty($log) || empty($pwd)) {
-            Throw new Exception(__('Username and password are required', AAM_KEY));
-        }
-    }
-
-    /**
-     * 
-     * @param type $log
-     * @return boolean
-     */
-    protected function checkUserSSL($log) {
-        $secure = false;
-        $user = get_user_by((strpos($log, '@') ? 'email' : 'login'), $log);
-
-        if ($user) {
-            if (!force_ssl_admin() && get_user_option('use_ssl', $user->ID)) {
-                $secure = true;
-                force_ssl_admin(true);
-            }
-        }
-
-        return $secure;
-    }
-
-    /**
-     * 
-     * @return type
+     * @access public
+     * @static
      */
     public static function getInstance() {
         if (is_null(self::$instance)) {
@@ -280,8 +341,12 @@ class AAM_Core_Login {
     }
     
     /**
+     * Bootstrap AAM Login feature
      * 
-     * @return type
+     * @return AAM_Core_Login
+     * 
+     * @access public
+     * @static
      */
     public static function bootstrap() {
         return self::getInstance();

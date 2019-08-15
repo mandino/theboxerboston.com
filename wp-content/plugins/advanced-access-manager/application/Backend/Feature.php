@@ -40,19 +40,24 @@ class AAM_Backend_Feature {
     public static function registerFeature(stdClass $feature) {
         $response = false;
 
+        // Determine correct AAM UI capability
         if (empty($feature->capability)){
             $cap = 'aam_manager';
         } else {
             $cap = $feature->capability;
         }
         
+        // Determine if minimum required options are enabled
         if (isset($feature->option)) {
             $show = self::isVisible($feature->option);
         } else {
             $show = true;
         }
 
-        if ($show && AAM::getUser()->hasCapability($cap)) {
+        // Determine that current user has enough level to manage requested subject
+        $allowed = AAM_Backend_Subject::getInstance()->isAllowedToManage();
+        
+        if ($show && $allowed && current_user_can($cap)) {
             self::$_features[] = $feature;
             $response = true;
         }
@@ -94,7 +99,7 @@ class AAM_Backend_Feature {
      */
     public static function initView(stdClass $feature){
         if (is_string($feature->view)){
-            $feature->view = new $feature->view;
+            $feature->view = new $feature->view(AAM_Backend_Subject::getInstance());
         }
 
         return $feature;
@@ -112,14 +117,14 @@ class AAM_Backend_Feature {
      * @access public
      * @static
      */
-    public static function retriveList($type) {
+    public static function retrieveList($type) {
         $response = array();
         
         $subject = AAM_Backend_Subject::getInstance()->getUID();
         foreach (self::$_features as $feature) {
             $ftype = (!empty($feature->type) ? $feature->type : 'main'); //TODO - legacy Nov 2018
-            if ($ftype == $type 
-                    && (empty($feature->subjects) || in_array($subject, $feature->subjects))) {
+            if ($ftype === $type 
+                    && (empty($feature->subjects) || in_array($subject, $feature->subjects, true))) {
                 $response[] = self::initView($feature);
             }
         }
@@ -144,7 +149,7 @@ class AAM_Backend_Feature {
         $pos_a = (empty($feature_a->position) ? 9999 : $feature_a->position);
         $pos_b = (empty($feature_b->position) ? 9999 : $feature_b->position);
 
-        if ($pos_a == $pos_b){
+        if ($pos_a === $pos_b){
             $response = 0;
         } else {
             $response = ($pos_a < $pos_b ? -1 : 1);

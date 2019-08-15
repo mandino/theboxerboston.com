@@ -37,7 +37,7 @@ class AAM_Backend_Feature_Main_Capability extends AAM_Backend_Feature_Abstract {
             'read_private_pages', 'read_private_posts', 'edit_permalink'
         ),
         'backend' => array(
-            'aam_manage', 'activate_plugins', 'add_users', 'update_plugins',
+            'activate_plugins', 'add_users', 'update_plugins',
             'delete_users', 'delete_themes', 'edit_dashboard', 'edit_files',
             'edit_plugins', 'edit_theme_options', 'edit_themes', 'edit_users',
             'export', 'import', 'install_plugins', 'install_themes',
@@ -51,84 +51,92 @@ class AAM_Backend_Feature_Main_Capability extends AAM_Backend_Feature_Abstract {
             'aam_manage_posts', 'aam_manage_access_denied_redirect', 'aam_create_roles',
             'aam_manage_login_redirect', 'aam_manage_logout_redirect', 'aam_manager',
             'aam_manage_settings', 'aam_manage_extensions', 'aam_show_notifications', 
-            'aam_manage_404_redirect', 'aam_manage_ip_check',
-            'aam_manage_default', 'aam_manage_visitors', 'aam_list_roles',
+            'aam_manage_404_redirect', 'aam_manage_ip_check', 'aam_manage_admin_toolbar',
+            'aam_manage_default', 'aam_manage_visitors', 'aam_manage_roles', 'aam_manage_users',
             'aam_edit_roles', 'aam_delete_roles', 'aam_toggle_users', 'aam_switch_users',
-            'aam_manage_configpress'
+            'aam_manage_configpress', 'aam_manage_api_routes', 'aam_manage_uri', 'aam_manage_policy',
+            'aam_view_help_btn', 'aam_edit_policy', 'aam_read_policy', 'aam_delete_policy',
+            'aam_delete_policies', 'aam_edit_policies', 'aam_edit_others_policies', 'aam_publish_policies',
+            'aam_manage_jwt'
         )
     );
+    
+    /**
+     * Construct
+     */
+    public function __construct() {
+        parent::__construct();
+        
+        $allowed = AAM_Backend_Subject::getInstance()->isAllowedToManage();
+        if (!$allowed || !current_user_can('aam_manage_capabilities')) {
+            AAM::api()->denyAccess(array('reason' => 'aam_manage_capabilities'));
+        }
+    }
+    
+    /**
+     * Save capability status
+     *
+     * @return string
+     * 
+     * @access public
+     */
+    public function save() {
+       $cap    = AAM_Core_Request::post('capability');
+       $status = AAM_Core_Request::post('status');
+
+       $object = AAM_Backend_Subject::getInstance()->getObject('capability');
+       $result = $object->save($cap, $status);
+
+        return wp_json_encode(array(
+           'status' => ($result ? 'success' : 'failure')
+        ));
+    }
+    
+    /**
+     * Reset capabilities
+     * 
+     * @return string
+     * 
+     * @access public
+     */
+    public function reset() {
+        $result = AAM_Backend_Subject::getInstance()->resetObject('capability');
+
+        return wp_json_encode(array(
+            'status' => ($result ? 'success' : 'failure')
+        ));
+    }
 
     /**
-     *
-     * @return type
+     * Get list of capabilities for table view
+     * 
+     * @return string
+     * 
+     * @access public
      */
     public function getTable() {
-        $response = array('data' => $this->retrieveAllCaps());
+        $data     = array();
+        $subject  = AAM_Backend_Subject::getInstance();
+        $manager  = AAM::api()->getPolicyManager();
 
-        return json_encode($response);
-    }
-    
-    /**
-     * Update capability tag
-     * 
-     * @return string
-     * 
-     * @access public
-     */
-    public function update() {
-        $capability = AAM_Core_Request::post('capability');
-        $updated    = AAM_Core_Request::post('updated');
-        $roles      = AAM_Core_API::getRoles();
-        
-        if (AAM_Core_API::capabilityExists($updated) === false) {
-            foreach($roles->role_objects as $role) {
-                //check if capability is present for current role! Note, we
-                //can not use the native WP_Role::has_cap function because it will
-                //return false if capability exists but not checked
-                if (is_array($role->capabilities) 
-                        && array_key_exists($capability, $role->capabilities)) {
-                    $role->add_cap($updated, $role->capabilities[$capability]);
-                    $role->remove_cap($capability);
-                }
+        // Compile the complete list of capabilities
+        $caps = AAM_Core_API::getAllCapabilities();
+
+        // Add also subject specific capabilities
+        $caps = array_merge($caps, $subject->getCapabilities());
+
+        foreach (array_keys($caps) as $cap) {
+            if ($manager->isAllowed("Capability:{$cap}:AAM:list") !== false) {
+                $data[] = array(
+                    $cap,
+                    $this->getGroup($cap),
+                    $cap,
+                    $this->prepareActionList($cap)
+                );
             }
-            $response = array('status' => 'success');
-        } else {
-            $response = array(
-                'status'  => 'failure', 
-                'message' => __('Capability already exists', AAM_KEY)
-            );
         }
-        
-        return json_encode($response);
-    }
-    
-    /**
-     * Delete capability
-     * 
-     * This function delete capability in all roles.
-     * 
-     * @return string
-     * 
-     * @access public
-     */
-    public function delete() {
-        $capability = AAM_Core_Request::post('capability');
-        $roles      = AAM_Core_API::getRoles();
-        $subject    = AAM_Backend_Subject::getInstance();
-        
-        if ($subject->getUID() == AAM_Core_Subject_Role::UID) {
-            foreach($roles->role_objects as $role) {
-                $role->remove_cap($capability);
-            }
-            $response = array('status' => 'success');
-        } else {
-            $response = array(
-                'status'  => 'failure', 
-                'message' => __('Can not remove the capability', AAM_KEY)
-            );
-        }
-        
-        return json_encode($response);
+
+        return wp_json_encode(array('data' => $data));
     }
     
     /**
@@ -139,71 +147,110 @@ class AAM_Backend_Feature_Main_Capability extends AAM_Backend_Feature_Abstract {
     }
     
     /**
+     * Prepare row actions
      * 
-     * @param type $cap
-     * @return type
+     * Based on current user permissions and subject's capability ownership, prepare
+     * the correct list of actions
+     * 
+     * @param string $cap
+     * 
+     * @return string
+     * 
+     * @access protected
      */
     protected function prepareActionList($cap) {
         $subject = AAM_Backend_Subject::getInstance();
         $actions = array();
         
-        $actions[] = ($subject->hasCapability($cap) ? 'checked' : 'unchecked');
-        
-        //allow to delete or update capability only for roles!
-        if (AAM_Core_Config::get('manage-capability', false) 
-                && ($subject->getUID() == AAM_Core_Subject_Role::UID)) {
-            $actions[] = 'edit';
-            $actions[] = 'delete';
+        $toggle  = ($subject->hasCapability($cap) ? 'checked' : 'unchecked');
+        $manager = AAM::api()->getPolicyManager();
+
+        if ($manager->isAllowed("Capability:{$cap}:AAM:toggle") === false) {
+            $toggle = 'no-' . $toggle;
         }
         
-        return implode(
-            ',', apply_filters('aam-cap-row-actions-filter', $actions, $subject)
-        );
+        $actions[] = $toggle;
+        
+        //allow to delete or update capability only for roles!
+        $edit   = 'edit';
+        $delete = 'delete';
+
+        if ($this->isAllowedToEdit($cap) === false) {
+            $edit = 'no-' . $edit;
+        }
+
+        if ($this->isAllowedToDelete($cap) === false) {
+            $delete = 'no-' . $delete;
+        }
+
+        $actions[] = $edit;
+        $actions[] = $delete;
+        
+        return implode(',', $actions);
     }
 
     /**
-     * Get list of user roles
+     * Check if current user can edit capability
      * 
-     * @param array $roles
+     * @param string $cap
      * 
-     * @return array
+     * @return boolean
      * 
      * @access protected
      */
-    protected function getUserRoles($roles) {
-        $response = array();
+    protected function isAllowedToEdit($cap) {
+        $allowed = false;
         
-        $names = AAM_Core_API::getRoles()->get_names();
-        
-        if (is_array($roles)) { 
-            foreach($roles as $role) {
-                if (is_array($names) && array_key_exists($role, $names)) {
-                    $response[] = translate_user_role($names[$role]);
-                }
-            }
+        if (AAM_Core_Config::get('core.settings.editCapabilities', true)) {
+            $allowed = true;
         }
+
+        // Access & Security policy has higher priority
+        $manager = AAM::api()->getPolicyManager();
+        if ($manager->isAllowed("Capability:{$cap}:AAM:update") === false) {
+            $allowed = false;
+        }
+
+        // Check if current subject contains the capability and if so, allow to
+        // edit it
+        $subject = AAM_Backend_Subject::getInstance();
+        if ($allowed) {
+            $allowed = array_key_exists($cap, $subject->getCapabilities());
+        } 
         
-        return $response;
+        return $allowed;
     }
     
     /**
+     * Check if current user can delete capability
      * 
-     * @return type
+     * @param string $cap
+     * 
+     * @return boolean
+     * 
+     * @access protected
      */
-    protected function retrieveAllCaps() {
-        $response = array();
-        $caps     = AAM_Core_API::getAllCapabilities();
+    protected function isAllowedToDelete($cap) {
+        $allowed = false;
         
-        foreach (array_keys($caps) as $cap) {
-            $response[] = array(
-                $cap,
-                $this->getGroup($cap),
-                $cap,
-                $this->prepareActionList($cap)
-            );
+        if (AAM_Core_Config::get('core.settings.editCapabilities', true)) {
+            $allowed = true;
         }
+
+        // Access & Security policy has higher priority
+        $manager = AAM::api()->getPolicyManager();
+        if ($manager->isAllowed("Capability:{$cap}:AAM:delete") === false) {
+            $allowed = false;
+        }
+
+        // Check if current subject contains the capability and if so, allow to
+        // delete it
+        $subject = AAM_Backend_Subject::getInstance();
+        if ($allowed) {
+            $allowed = array_key_exists($cap, $subject->getCapabilities());
+        } 
         
-        return $response;
+        return $allowed;
     }
 
     /**
@@ -232,17 +279,80 @@ class AAM_Backend_Feature_Main_Capability extends AAM_Backend_Feature_Abstract {
      */
     public function add() {
         $capability = sanitize_text_field(AAM_Core_Request::post('capability'));
+        $assign     = filter_input(INPUT_POST, 'assign', FILTER_VALIDATE_INT); 
 
         if ($capability) {
-            //add the capability to administrator's role as default behavior
-            AAM_Core_API::getRoles()->add_cap('administrator', $capability);
-            AAM_Backend_Subject::getInstance()->addCapability($capability);
-            $response = array('status' => 'success');
+            // Add capability to current user if checkbox checked
+            if ($assign === 1) {
+                AAM::api()->getUser()->addCapability($capability);
+            }
+
+            $result = AAM_Backend_Subject::getInstance()->addCapability($capability);
+            
+            $response = array('status' => ($result ? 'success' : 'failure'));
         } else {
             $response = array('status' => 'failure');
         }
 
-        return json_encode($response);
+        return wp_json_encode($response);
+    }
+
+    /**
+     * Update capability tag
+     * 
+     * @return string
+     * 
+     * @access public
+     */
+    public function update() {
+        $capability = AAM_Core_Request::post('capability');
+        $updated    = AAM_Core_Request::post('updated');
+        $subject    = AAM_Backend_Subject::getInstance();
+        
+        if ($this->isAllowedToEdit($capability) === false) {
+            $response = array(
+                'status'  => 'failure', 
+                'message' => __('Permission denied to update this capability', AAM_KEY)
+            );
+        } else {
+            // First we need to get the current grant status for updating capability
+            $status = $subject->hasCapability($capability);
+            // Remove updating capability
+            if ($subject->removeCapability($capability)) {
+                // Add new capability with the original grant status
+                $result = $subject->addCapability($updated, $status);
+            }
+
+            $response = array('status' => (!empty($result) ? 'success' : 'failure'));
+        }
+        
+        return wp_json_encode($response);
+    }
+
+    /**
+     * Delete capability
+     * 
+     * This function delete capability in all roles.
+     * 
+     * @return string
+     * 
+     * @access public
+     */
+    public function delete() {
+        $capability = AAM_Core_Request::post('capability');
+        $subject    = AAM_Backend_Subject::getInstance();
+        
+        if ($this->isAllowedToDelete($capability) === false) {
+            $response = array(
+                'status'  => 'failure', 
+                'message' => __('Permission denied to delete this capability', AAM_KEY)
+            );
+        } else {
+            $result   = $subject->removeCapability($capability);
+            $response = array('status' => ($result ? 'success' : 'failure'));
+        }
+        
+        return wp_json_encode($response);
     }
 
     /**
@@ -255,13 +365,13 @@ class AAM_Backend_Feature_Main_Capability extends AAM_Backend_Feature_Abstract {
      * @access protected
      */
     protected function getGroup($capability) {
-        if (in_array($capability, self::$groups['system'])) {
+        if (in_array($capability, self::$groups['system'], true)) {
             $response = __('System', AAM_KEY);
-        } elseif (in_array($capability, self::$groups['post'])) {
+        } elseif (in_array($capability, self::$groups['post'], true)) {
             $response = __('Posts & Pages', AAM_KEY);
-        } elseif (in_array($capability, self::$groups['backend'])) {
+        } elseif (in_array($capability, self::$groups['backend'], true)) {
             $response = __('Backend', AAM_KEY);
-        } elseif (in_array($capability, self::$groups['aam'])) {
+        } elseif (in_array($capability, self::$groups['aam'], true)) {
             $response = __('AAM Interface', AAM_KEY);
         } else {
             $response = __('Miscellaneous', AAM_KEY);

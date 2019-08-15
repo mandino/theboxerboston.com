@@ -16,6 +16,18 @@
 class AAM_Backend_Feature_Main_404Redirect  extends AAM_Backend_Feature_Abstract {
     
     /**
+     * Construct
+     */
+    public function __construct() {
+        parent::__construct();
+        
+        $allowed = AAM_Backend_Subject::getInstance()->isAllowedToManage();
+        if (!$allowed || !current_user_can('aam_manage_404_redirect')) {
+            AAM::api()->denyAccess(array('reason' => 'aam_manage_404_redirect'));
+        }
+    }
+    
+    /**
      * @inheritdoc
      */
     public static function getTemplate() {
@@ -35,7 +47,7 @@ class AAM_Backend_Feature_Main_404Redirect  extends AAM_Backend_Feature_Abstract
         
         AAM_Core_Config::set($param, $value);
         
-        return json_encode(array('status' => 'success'));
+        return wp_json_encode(array('status' => 'success'));
     }
     
     /**

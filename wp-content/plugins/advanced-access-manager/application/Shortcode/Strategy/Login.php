@@ -46,7 +46,6 @@ class AAM_Shortcode_Strategy_Login implements AAM_Shortcode_Strategy_Interface {
     
     /**
      * Process shortcode
-     * 
      */
     public function run() {
         $this->args['id'] = isset($this->args['id']) ? $this->args['id'] : uniqid();
@@ -63,9 +62,9 @@ class AAM_Shortcode_Strategy_Login implements AAM_Shortcode_Strategy_Interface {
             $content = call_user_func($this->args['callback'], $this);
         } else {
             ob_start();
-            require AAM_Core_Config::get(
-                'login.shortcode.template', 
-                 dirname(__FILE__) . '/../../Frontend/phtml/login.phtml'
+            require AAM::api()->getConfig(
+                'feature.secureLogin.shortcode.template', 
+                realpath(AAM_BASEDIR . '/application/Frontend/phtml/login.phtml')
             );
             $content = ob_get_contents();
             ob_end_clean();

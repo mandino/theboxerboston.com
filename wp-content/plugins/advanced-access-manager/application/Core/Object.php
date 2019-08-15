@@ -66,6 +66,15 @@ abstract class AAM_Core_Object {
     public function __construct(AAM_Core_Subject $subject) {
         $this->setSubject($subject);
     }
+    
+    /**
+     * Read object option
+     * 
+     * @return void
+     * 
+     * @access public
+     */
+    public function initialize() {}
 
     /**
      * Set current subject
@@ -115,6 +124,15 @@ abstract class AAM_Core_Object {
      */
     public function getOption() {
         return $this->_option;
+    }
+    
+    /**
+     * 
+     * @param type $external
+     * @return type
+     */
+    public function mergeOption($external) {
+        return $external;
     }
     
     /**
@@ -177,7 +195,7 @@ abstract class AAM_Core_Object {
      * 
      * @access public
      */
-    public function isOverwritten () {
+    public function isOverwritten() {
         return $this->_overwritten;
     }
     

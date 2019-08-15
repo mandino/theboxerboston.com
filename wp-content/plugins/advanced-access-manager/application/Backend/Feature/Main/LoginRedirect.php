@@ -16,13 +16,49 @@
 class AAM_Backend_Feature_Main_LoginRedirect extends AAM_Backend_Feature_Abstract {
     
     /**
+     * Construct
+     */
+    public function __construct() {
+        parent::__construct();
+        
+        $allowed = AAM_Backend_Subject::getInstance()->isAllowedToManage();
+        if (!$allowed || !current_user_can('aam_manage_login_redirect')) {
+            AAM::api()->denyAccess(array('reason' => 'aam_manage_login_redirect'));
+        }
+    }
+    
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function save() {
+       $param = AAM_Core_Request::post('param');
+       $value = AAM_Core_Request::post('value');
+
+       $object = AAM_Backend_Subject::getInstance()->getObject('loginRedirect');
+
+       $object->save($param, $value);
+
+       return wp_json_encode(array('status' => 'success'));
+    }
+    
+    /**
+     * 
+     * @return type
+     */
+    public function reset() {
+        return AAM_Backend_Subject::getInstance()->resetObject('loginRedirect');
+    }
+    
+    /**
      * 
      * @return type
      */
     public function isDefault() {
         $subject = AAM_Backend_Subject::getInstance()->getUID();
         
-        return ($subject == AAM_Core_Subject_Default::UID);
+        return ($subject === AAM_Core_Subject_Default::UID);
     }
     
     /**

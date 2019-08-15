@@ -1,15 +1,15 @@
 <?php if (defined('AAM_KEY')) { ?>
     <div class="aam-feature" id="capability-content">
         <?php $subject = AAM_Backend_Subject::getInstance(); ?>
-        
+
         <div class="row">
             <div class="col-xs-12">
                 <p class="aam-notification">
-                    <?php echo sprintf(AAM_Backend_View_Helper::preparePhrase('[Be careful!] Manage capabilities for [%s]. For more information about the concept of capabilities check %sWhat is a WordPress capability%s article.', 'b', 'b'), AAM_Backend_Subject::getInstance()->getName(), '<a href="https://aamplugin.com/help/what-is-a-wordpress-capability" target="_blank">', '</a>'); ?>
+                    <?php echo sprintf(AAM_Backend_View_Helper::preparePhrase('[Be careful!] On this tab, you can manage capabilities for [%s]. Any changes to the list of capabilities is [permanent]. Consider to backup at least your database tables [_options] and [_usermeta] regularly. For more information about this feature, refer to the %sHow to manage WordPress capabilities%s article.', 'b', 'b', 'b', 'i', 'i'), AAM_Backend_Subject::getInstance()->getName(), '<a href="https://aamplugin.com/article/how-to-manage-wordpress-capabilities" target="_blank">', '</a>'); ?>
                 </p>
             </div>
         </div>
-        
+
         <div class="aam-feature-top-actions text-right">
             <div class="btn-group">
                 <a href="#" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="capability-filter">
@@ -25,7 +25,7 @@
             </div>
             <a href="#" class="btn btn-xs btn-primary" id="add-capability"><i class="icon-plus"></i> <?php echo __('Create', AAM_KEY); ?></a>
         </div>
-        
+
         <div class="row">
             <div class="col-xs-12">
                 <div class="aam-overwrite" id="aam-capability-overwrite" style="display: <?php echo ($this->isOverwritten() ? 'block' : 'none'); ?>">
@@ -59,6 +59,11 @@
                             <label for="new-capability-name"><?php echo __('Capability', AAM_KEY); ?><span class="aam-asterix">*</span></label>
                             <input type="text" class="form-control" id="new-capability-name" placeholder="<?php echo __('Enter Capability', AAM_KEY); ?>" />
                         </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="assign-new-capability" value="1" /> <?php echo __('Also assign this capability to me', AAM_KEY); ?>
+                            </label>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-success" id="add-capability-btn"><?php echo __('Create', AAM_KEY); ?></button>
@@ -80,7 +85,11 @@
                             <label for="capability-id"><?php echo __('Capability', AAM_KEY); ?><span class="aam-asterix">*</span></label>
                             <input type="text" class="form-control" id="capability-id" placeholder="<?php echo __('Enter Capability', AAM_KEY); ?>" />
                         </div>
-                        <p class="aam-info aam-hint"><?php echo AAM_Backend_View_Helper::preparePhrase('[Please note!] Capability will be updated for all roles. Any functionality that depends on this capability may not work properly.', 'strong'); ?></p>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="update-capability" value="1" /> <?php echo __('Update this capability for me too', AAM_KEY); ?>
+                            </label>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-warning" id="update-capability-btn"><?php echo __('Update', AAM_KEY); ?></button>
@@ -98,7 +107,7 @@
                         <h4 class="modal-title"><?php echo __('Delete Capability', AAM_KEY); ?></h4>
                     </div>
                     <div class="modal-body">
-                        <p class="text-center aam-confirm-message alert alert-danger" data-message="<?php echo __('Are you sure that you want to delete %s capability for all roles?', AAM_KEY); ?>"></p>
+                        <p class="text-center aam-confirm-message alert alert-danger" data-message="<?php echo __('You are about to delete the %s capability from %n', AAM_KEY); ?>"></p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" id="delete-capability-btn"><?php echo __('Delete', AAM_KEY); ?></button>

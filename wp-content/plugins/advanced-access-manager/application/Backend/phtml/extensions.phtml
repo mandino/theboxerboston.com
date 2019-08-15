@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <p class="aam-info">
-                    <?php echo sprintf(AAM_Backend_View_Helper::preparePhrase('By purchasing any of the extensions below, you obtain the license that allows you to install and use our software for life and for one physical WordPress installation only. However you will be able to download new updates for one year from the time of purchase unless you purchased the [Extended version]. Exceptions are websites where URL is either [localhost] or starts with [dev.], [staging.], [test.] or [demo.] They are considered as development websites and you can use the purchased license unlimited number of times before it is activated on a production website. [Money back guaranteed] within 10 day from the time of purchase.', 'i', 'i', 'i', 'i', 'i', 'i', 'b'), '<a href="https://aamplugin.com/development-package" target="_blank">', '</a>'); ?><br/>
+                    <?php echo sprintf(AAM_Backend_View_Helper::preparePhrase('By purchasing any of the extensions below, you obtain the license that allows you to install and use our software for live and for one physical WordPress installation only. However you will be able to download new updates for one year from the time of purchase unless you purchased the [Extended version]. Exceptions are websites where URL is either [localhost] or starts with [dev.], [staging.], [test.] or [demo.] They are considered as development websites and you can use the purchased license unlimited number of times before it is activated on a production website. [Money back guaranteed] within 10 day from the time of purchase.', 'i', 'i', 'i', 'i', 'i', 'i', 'b'), '<a href="https://aamplugin.com/development-package" target="_blank">', '</a>'); ?><br/>
                 </p>
             </div>
         </div>
@@ -16,7 +16,17 @@
                 </div>
             </div>
             <div class="col-xs-4">
-                <button class="btn btn-primary btn-block" id="install-extension"><i class="icon-download-cloud"></i> <?php echo __('Submit', AAM_KEY); ?></button>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary btn-block dropdown-toggle" id="download-software" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="icon-download-cloud"></i> <?php echo __('Download', AAM_KEY); ?> <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" id="install-extension"><?php echo __('As extension (legacy)', AAM_KEY); ?></a></li>
+                        <li><a href="#" id="download-plugin"><?php echo __('As standard WP plugin', AAM_KEY); ?></a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="https://aamplugin.com/article/aam-extensions-become-plugins" target="_blank"><?php echo __('Learn more', AAM_KEY); ?></a></li>
+                    </ul>
+                </div>
             </div>
         </div>
         
@@ -26,7 +36,7 @@
         <div>
             <ul class="nav nav-tabs" role="tablist">
                 <?php if(count($commercial)) { ?><li role="presentation" class="active"><a href="#premium-extensions" aria-controls="premium-extensions" role="tab" data-toggle="tab"><i class='icon-basket'></i> <?php echo __('Premium', AAM_KEY); ?></a></li><?php } ?>
-                <?php if(count($free)) { ?><li role="presentation" <?php echo (!count($commercial) ? 'class="active"' : ''); ?>><a href="#free-extensions" aria-controls="free-extensions" role="tab" data-toggle="tab"><i class='icon-download-cloud'></i> <?php echo __('Free', AAM_KEY); ?></a></li><?php } ?>
+                <?php if(count($free)) { ?><li role="presentation" <?php echo (!count($commercial) ? 'class="active"' : ''); ?>><a href="#free-extensions" aria-controls="free-extensions" role="tab" data-toggle="tab"><i class='icon-download-cloud'></i> <?php echo __('Free', AAM_KEY); ?> <span class="badge sup">NEW</span></a></li><?php } ?>
                 <li class="aam-update-check"><a href="#" id="aam-update-check"><i class='icon-arrows-cw'></i> <?php echo __('Check for Updates', AAM_KEY); ?></a></li>
             </ul>
 
@@ -38,17 +48,27 @@
                             <?php foreach ($commercial as $i => $product) { ?>
                                 <tr>
                                     <td width="80%">
-                                        <span class='aam-setting-title'><?php echo $product['title'], (!empty($product['new']) ? ' <span class="badge">NEW</span> ' : ''), (!empty($product['version']) ? ' <small class="text-muted">v' . $product['version'] . '</small>' : ''); ?></span>
-                                        <?php if (!empty($product['license']) && $this->canShowLicense()) { ?><small class="aam-license-key"><b>License:</b> <?php echo $product['license'] . (!empty($product['expire']) ? " (updates expire on {$product['expire']})" : ''); ?></small><?php } ?>
+                                        <span class='aam-setting-title'><?php echo $product['title'], (!empty($product['tag']) ? '<sup><span class="badge sup">' . $product['tag'] . '</span></sup>' : ''), (!empty($product['version']) ? ' <small class="text-muted">v' . $product['version'] . '</small>' : ''); ?></span>
+                                        <?php if (!empty($product['license'])) { ?><small class="aam-license-key"><b>License:</b> <?php echo $product['license'] . (!empty($product['expire']) ? " (updates expire on {$product['expire']})" : ''); ?></small><?php } ?>
                                         <p class="aam-extension-description">
                                             <?php echo $product['description']; ?>
                                         </p>
                                     </td>
                                     <td class="text-center">
-                                        <?php if ($product['status'] == AAM_Extension_Repository::STATUS_INSTALLED) { ?>
-                                        <a href="#" class="btn btn-sm btn-danger btn-block aam-deactivate-extension" data-product="<?php echo $product['id']; ?>"><i class="icon-attention-circled"></i> <?php echo __('Deactivate', AAM_KEY); ?></a><small><?php echo __('extension is active', AAM_KEY); ?></small>
+                                        <?php if (!is_null($product['pluginStatus'])) { ?>
+                                            <?php if ($product['pluginStatus'] === true) { ?>
+                                                <a href="#" class="btn btn-sm btn-success btn-block disabled"><i class="icon-check"></i> <?php echo __('Plugin Active', AAM_KEY); ?></a>
+                                            <?php } else { ?>
+                                                <a href="#" class="btn btn-sm btn-info btn-block disabled"><i class="icon-attention-circled"></i> <?php echo __('Plugin Inactive', AAM_KEY); ?></a>
+                                            <?php } ?>    
+                                        <?php } elseif ($product['status'] == AAM_Extension_Repository::STATUS_INSTALLED) { ?>
+                                            <?php if ($product['title'] === 'Complete Package') { ?>
+                                                <a href="#" class="btn btn-sm btn-success btn-block disabled"><i class="icon-check"></i> <?php echo __('Installed', AAM_KEY); ?></a>
+                                            <?php } else { ?>
+                                                <a href="#" class="btn btn-sm btn-danger btn-block aam-deactivate-extension" data-product="<?php echo $product['id']; ?>"><i class="icon-attention-circled"></i> <?php echo __('Deactivate', AAM_KEY); ?></a><small><?php echo __('extension is active', AAM_KEY); ?></small>
+                                            <?php } ?>
                                         <?php } elseif ($product['status'] == AAM_Extension_Repository::STATUS_UPDATE) { ?>
-                                            <a href="#" class="btn btn-sm btn-warning btn-block aam-update-extension" data-product="<?php echo $product['id']; ?>"><i class="icon-arrows-cw"></i> <?php echo __('Update', AAM_KEY); ?></a>
+                                            <a href="#" class="btn btn-sm btn-warning btn-block aam-update-extension<?php echo (empty($product['license']) ? ' disabled' : ''); ?>" data-license="<?php echo (!empty($product['license']) ? $product['license'] : ''); ?>"><i class="icon-arrows-cw"></i> <?php echo __('Update', AAM_KEY); ?></a>
                                         <?php } elseif ($product['status'] == AAM_Extension_Repository::STATUS_INACTIVE) { ?>
                                             <a href="#" class="btn btn-sm btn-success btn-block aam-activate-extension" data-product="<?php echo $product['id']; ?>"><i class="icon-check"></i> <?php echo __('Activate', AAM_KEY); ?></a><small><?php echo __('extension is inactive', AAM_KEY); ?></small>
                                         <?php } else { ?>
@@ -66,7 +86,7 @@
                             <?php foreach ($free as $product) { ?>
                                 <tr>
                                     <td width="80%">
-                                        <span class='aam-setting-title'><?php echo $product['title'], (!empty($product['version']) ? ' <small class="text-muted">v' . $product['version'] . '</small>' : ''), ' - ' . ('<span class="text-success">' . __('Free', AAM_KEY) . '</span>'); ?></span>
+                                        <span class='aam-setting-title'><?php echo $product['title'], (!empty($product['tag']) ? '<sup><span class="badge sup">' . $product['tag'] . '</span></sup>' : ''), (!empty($product['version']) ? ' <small class="text-muted">v' . $product['version'] . '</small>' : ''), ' - ' . ('<span class="text-success">' . __('Free', AAM_KEY) . '</span>'); ?></span>
                                         <p class="aam-extension-description">
                                             <?php echo $product['description']; ?>
                                         </p>
@@ -130,7 +150,7 @@
                     </div>
                     <div class="modal-body aam-info-modal">
                         <p>
-                            <?php echo __('Insert license key that you recieved after the payment (find the email example below). It might take up to 2 hours to process the payment. Please remember that license key is limited only to one life domain.', AAM_KEY); ?>
+                            <?php echo __('Insert license key that you recieved after the payment (find the email example below). It might take up to 2 hours to process the payment. Please remember that license key is limited only to one live domain.', AAM_KEY); ?>
                             <br /> <br />
                             <img src="https://aamplugin.com/media/img/email-confirmation.jpg" class="img-responsive" />
                         </p>

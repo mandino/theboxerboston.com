@@ -48,8 +48,8 @@ class AAM_Backend_Subject {
         $subject = AAM_Core_Request::request('subject');
         
         if ($subject) {
-            $this->initRequestedSubject(
-                    $subject, AAM_Core_Request::request('subjectId')
+            $instance = $this->initRequestedSubject(
+                $subject, AAM_Core_Request::request('subjectId')
             );
         } else {
             $this->initDefaultSubject();
@@ -70,8 +70,15 @@ class AAM_Backend_Subject {
         $classname = 'AAM_Core_Subject_' . ucfirst($type);
         
         if (class_exists($classname)) {
-            $this->setSubject(new $classname(stripslashes($id)));
+            $subject = new $classname(stripslashes($id));
+            $subject->initialize();
+            
+            $this->setSubject($subject);
+        } else {
+            wp_die('Invalid subject type'); exit;
         }
+        
+        return $subject;
     }
     
     /**
@@ -85,13 +92,21 @@ class AAM_Backend_Subject {
      * @access protected
      */
     protected function initDefaultSubject() {
-        $user = intval(AAM_Core_Request::get('user'));
+        // This cover the scenario when we directly go to user e.g. ?page=aam&user=38
+        // or through AJAX post request with user ID
+        $forceUser = AAM_Core_Request::request('user');
         
-        if ($user && current_user_can('list_users')) {
-            $this->initRequestedSubject(AAM_Core_Subject_User::UID, $user);
-        } elseif (current_user_can('aam_list_roles')) {
+        // TODO: The aam_list_roles is legacy and can be removed in Oct 2021
+        if (!$forceUser && (current_user_can('aam_manage_roles') || current_user_can('aam_list_roles'))) {
             $roles = array_keys(get_editable_roles());
             $this->initRequestedSubject(AAM_Core_Subject_Role::UID, array_shift($roles));
+        // TODO: The list_users is legacy and can be removed in Oct 2021
+        } elseif (current_user_can('aam_manage_users') || current_user_can('list_users')) {
+            $this->initRequestedSubject(
+                AAM_Core_Subject_User::UID,
+                ($forceUser ? intval($forceUser) : get_current_user_id())
+            );
+        // TODO: The aam_list_roles is legacy and can be removed in Oct 2021
         } elseif (current_user_can('aam_manage_visitors')) {
             $this->initRequestedSubject(AAM_Core_Subject_Visitor::UID, null);
         } elseif (current_user_can('aam_manage_default')) {
@@ -108,6 +123,34 @@ class AAM_Backend_Subject {
      */
     protected function setSubject(AAM_Core_Subject $subject) {
         $this->subject = $subject;
+    }
+
+    /**
+     * Check if current subject is allowed to be managed
+     *
+     * @return boolean
+     * 
+     * @access public
+     */
+    public function isAllowedToManage() {
+        // Determine that current user has enough level to manage requested subject
+        $sameLevel = false;
+        if (AAM_Core_API::capabilityExists('manage_same_user_level')) {
+            $sameLevel = current_user_can('manage_same_user_level');
+        } else {
+            $sameLevel = current_user_can('administrator');
+        }
+
+        $userMaxLevel    = AAM::api()->getUser()->getMaxLevel();
+        $subjectMaxLevel = $this->subject->getMaxLevel();
+
+        if ($sameLevel) {
+            $allowed = $userMaxLevel >= $subjectMaxLevel;
+        } else {
+            $allowed = $userMaxLevel > $subjectMaxLevel;
+        }
+
+        return $allowed;
     }
     
     /**
@@ -127,7 +170,7 @@ class AAM_Backend_Subject {
      * @param string $name
      * @param array  $args
      * 
-     * @return mized
+     * @return mixed
      * 
      * @access public
      */

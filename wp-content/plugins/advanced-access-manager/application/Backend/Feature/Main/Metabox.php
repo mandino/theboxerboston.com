@@ -16,6 +16,44 @@
 class AAM_Backend_Feature_Main_Metabox extends AAM_Backend_Feature_Abstract {
 
     /**
+     * Construct
+     */
+    public function __construct() {
+        parent::__construct();
+        
+        $allowed = AAM_Backend_Subject::getInstance()->isAllowedToManage();
+        if (!$allowed || !current_user_can('aam_manage_metaboxes')) {
+            AAM::api()->denyAccess(array('reason' => 'aam_manage_metaboxes'));
+        }
+    }
+    
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function save() {
+       $items  = AAM_Core_Request::post('items', array());
+       $status = AAM_Core_Request::post('status');
+
+       $object = AAM_Backend_Subject::getInstance()->getObject('metabox');
+
+       foreach($items as $item) {
+           $object->save($item, $status);
+       }
+       
+       return wp_json_encode(array('status' => 'success'));
+    }
+    
+    /**
+     * 
+     * @return type
+     */
+    public function reset() {
+        return AAM_Backend_Subject::getInstance()->resetObject('metabox');
+    }
+    
+    /**
      * @inheritdoc
      */
     public static function getTemplate() {
@@ -23,69 +61,35 @@ class AAM_Backend_Feature_Main_Metabox extends AAM_Backend_Feature_Abstract {
     }
     
     /**
-     *
+     * 
      * @global type $wp_post_types
      * @return type
      */
-    public function refreshList() {
+    public function prepareInitialization() {
         global $wp_post_types;
 
         AAM_Core_API::deleteOption('aam_metabox_cache');
-        $type_list = array_keys($wp_post_types);
-
-        //used to retrieve the list of all wigets on the frontend
-        array_unshift($type_list, 'widgets');
-
-        foreach ($type_list as $type) {
-            if ($type == 'widgets') {
-                $url = add_query_arg('init', 'metabox', admin_url('index.php'));
-            } else {
-                $url = add_query_arg(
-                        'init', 
-                        'metabox', 
-                        admin_url('post-new.php?post_type=' . $type)
+        
+        $endpoints = array();
+        
+        foreach (array_merge(array('widgets'), array_keys($wp_post_types)) as $type) {
+            if ($type === 'widgets') {
+                $endpoints[] = add_query_arg('init', 'metabox', admin_url('index.php'));
+            } elseif ($wp_post_types[$type]->show_ui) {
+                $endpoints[] = add_query_arg(
+                    'init', 'metabox', admin_url('post-new.php?post_type=' . $type)
                 );
             }
-            
-            //grab metaboxes
-            AAM_Core_API::cURL($this->addHttpPasswd($url));
         }
         
-        return json_encode(array('status' => 'success'));
+        return wp_json_encode(
+            array(
+                'status'    => 'success',
+                'endpoints' => $endpoints
+            )
+        );
     }
     
-    /**
-     *
-     * @global type $wp_post_types
-     * @return type
-     */
-    public function initURL() {
-        //grab metaboxes
-        $url = $this->addHttpPasswd(AAM_Core_Request::post('url'));
-        AAM_Core_API::cURL(add_query_arg('init', 'metabox', $url));
-        
-        return json_encode(array('status' => 'success'));
-    }
-    
-    /**
-     * 
-     * @param type $url
-     * @return type
-     */
-    protected function addHttpPasswd($url) {
-        $htpasswd = AAM_Core_Config::get('htpasswd');
-        
-        if (!empty($htpasswd['user']) && !empty($htpasswd['pass'])) {
-            $url = preg_replace(
-                    '/^(http[s]?:\/\/)/', 
-                    "$1{$htpasswd['user']}:{$htpasswd['pass']}@", 
-                    $url
-            );
-        }
-        
-        return $url;
-    }
-
     /**
      * Initialize metabox list
      * 
@@ -97,7 +101,7 @@ class AAM_Backend_Feature_Main_Metabox extends AAM_Backend_Feature_Abstract {
      */
     public function initialize($post_type) {
         $cache = $this->getMetaboxList();
-
+        
         if ($post_type === 'dashboard') {
             $this->collectWidgets($cache);
         } else {
@@ -131,13 +135,13 @@ class AAM_Backend_Feature_Main_Metabox extends AAM_Backend_Feature_Abstract {
                 } elseif (is_string($data['callback'][0])) {
                     $callback = $data['callback'][0];
                 } else {
-                    $callback = null;
+                    $callback = isset($data['classname']) ? $data['classname'] : null;
                 }
 
                 if (!is_null($callback)) { //exclude any junk
                     $cache['widgets'][$callback] = array(
-                        'title' => strip_tags($data['name']),
-                        'id' => $callback
+                        'title' => wp_strip_all_tags($data['name']),
+                        'id'    => $callback
                     );
                 }
             }
@@ -146,7 +150,7 @@ class AAM_Backend_Feature_Main_Metabox extends AAM_Backend_Feature_Abstract {
         //now collect Admin Dashboard Widgets
         $this->collectMetaboxes('dashboard', $cache);
     }
-
+    
     /**
      * Collect metaboxes
      * 
@@ -173,8 +177,8 @@ class AAM_Backend_Feature_Main_Metabox extends AAM_Backend_Feature_Abstract {
                             foreach ($boxes as $data) {
                                 if (trim($data['id'])) { //exclude any junk
                                     $cache[$post_type][$data['id']] = array(
-                                        'id' => $data['id'],
-                                        'title' => strip_tags($data['title'])
+                                        'id'    => $data['id'],
+                                        'title' => wp_strip_all_tags($data['title'])
                                     );
                                 }
                             }
@@ -196,7 +200,7 @@ class AAM_Backend_Feature_Main_Metabox extends AAM_Backend_Feature_Abstract {
         $subject = AAM_Backend_Subject::getInstance();
         
         //if visitor, return only frontend widgets
-        if ($subject->getUID() == AAM_Core_Subject_Visitor::UID) {
+        if ($subject->getUID() === AAM_Core_Subject_Visitor::UID) {
             if (!empty($cache['widgets'])) {
                 $response = array('widgets' => $cache['widgets']);
             } else {
@@ -208,7 +212,7 @@ class AAM_Backend_Feature_Main_Metabox extends AAM_Backend_Feature_Abstract {
         
         //filter non-existing metaboxes
         foreach(array_keys($response) as $id) {
-            if (!in_array($id, array('dashboard', 'widgets')) 
+            if (!in_array($id, array('dashboard', 'widgets'), true) 
                     && empty($wp_post_types[$id])) {
                 unset($response[$id]);
             }
@@ -247,7 +251,7 @@ class AAM_Backend_Feature_Main_Metabox extends AAM_Backend_Feature_Abstract {
                 AAM_Core_Subject_Visitor::UID,
                 AAM_Core_Subject_Default::UID
             ),
-            'option'      => 'backend-access-control',
+            'option'      => 'core.settings.backendAccessControl',
             'view'        => __CLASS__
         ));
     }

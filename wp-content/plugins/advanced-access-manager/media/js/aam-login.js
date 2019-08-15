@@ -42,7 +42,6 @@ if (typeof jQuery !== 'undefined') {
                                 }).val('Wait...');
                             },
                             success: function(response) {
-                                console.log(response);
                                 if (response.status === "success") {
                                     if (response.redirect) {
                                         location.href = response.redirect;
@@ -64,7 +63,6 @@ if (typeof jQuery !== 'undefined') {
                                 }).val(button.attr('data-original-label'));
                             }
                         });
-                        
                     } else {
                         $('#' + prefix + 'error').html(
                             '<strong>ERROR:</strong> Username and password are required.'

@@ -57,44 +57,51 @@ class AAM_Shortcode_Strategy_Content implements AAM_Shortcode_Strategy_Interface
     public function run() {
         //prepare user
         if (get_current_user_id()) {
-            $user = array(AAM::getUser()->ID, AAM::getUser()->roles[0]);
+            $roles = array_merge(AAM::getUser()->roles);
+
+            if (AAM::api()->getConfig('core.settings.multiSubject', false)) {
+                $parts = array_merge(array((string)AAM::getUser()->ID), $roles);
+            } else {
+                $parts = array((string)AAM::getUser()->ID, array_shift($roles));
+            }
         } else {
-            $user = array('visitor');
+            $parts = array('visitor');
         }
         
         $show  = $this->getAccess('show');
         $limit = $this->getAccess('limit');
         $hide  = $this->getAccess('hide');
         $msg   = $this->getMessage();
-        
+
         if (!empty($this->args['callback'])) {
             $content = call_user_func($this->args['callback'], $this);
         } else {
             $content = $this->content;
             
             //#1. Check if content is restricted for current user
-            if (in_array('all', $hide) || $this->check($user, $hide)) {
+            if (in_array('all', $hide, true) || $this->check($parts, $hide)) {
                 $content = '';
             }
 
             //#2. Check if content is limited for current user
-            if (in_array('all', $limit) || $this->check($user, $limit)) {
+            if (in_array('all', $limit, true) || $this->check($parts, $limit)) {
                 $content = do_shortcode($msg);
             }
 
-            //#3. Check if content is allosed for current user
-            if ($this->check($user, $show)) {
+            //#3. Check if content is allowed for current user
+            if ($this->check($parts, $show)) {
                 $content = $this->content;
             }
         }
-        
+
         return $content;
     }
     
     /**
      * 
-     * @param type $user
-     * @param type $conditions
+     * @param array $user
+     * @param array $conditions
+     * 
      * @return type
      */
     protected function check($user, $conditions) {
@@ -102,14 +109,14 @@ class AAM_Shortcode_Strategy_Content implements AAM_Shortcode_Strategy_Interface
         $auth  = get_current_user_id();
         
         foreach($conditions as $condition) {
-            if (($condition == 'authenticated') && $auth) {
+            if (($condition === 'authenticated') && $auth) {
                 $match = true;
-            } else if (preg_match('/^[\d\.*\-]+$/', $condition)) {
+            } else if (preg_match('/^[\d*-]+\.[\d*-]+[\d\.*-]*[\d\.*-]*$/', $condition)) {
                 $match = $this->checkIP(
                         $condition, AAM_Core_Request::server('REMOTE_ADDR')
                 );
             } else {
-                $match = in_array($condition, $user);
+                $match = in_array($condition, $user, true);
             }
             
             if ($match) {
@@ -140,7 +147,7 @@ class AAM_Shortcode_Strategy_Content implements AAM_Shortcode_Strategy_Interface
                     break;
                 }
             } elseif ($group !== '*') {
-                if ($group != $uipSplit[$i]) {
+                if ($group !== $uipSplit[$i]) {
                     $match = false;
                     break;
                 }
@@ -152,7 +159,7 @@ class AAM_Shortcode_Strategy_Content implements AAM_Shortcode_Strategy_Interface
     
     /**
      * 
-     * @return type
+     * @return array
      */
     public function getAccess($type) {
         $access = (isset($this->args[$type]) ? $this->args[$type] : null);

@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <p class="aam-info">
-                    <?php echo sprintf(AAM_Backend_View_Helper::preparePhrase('Hide unnecessary or restricted metaboxes and widgets for [%s]. For more information please check %sHow to hide WordPress metaboxes and widgets%s.', 'b', 'b'), AAM_Backend_Subject::getInstance()->getName(), '<a href="https://aamplugin.com/help/how-to-hide-wordpress-metaboxes-and-widgets" target="_blank">', '</a>'); ?>
+                    <?php echo sprintf(AAM_Backend_View_Helper::preparePhrase('Hide unnecessary or restricted metaboxes and widgets for [%s]. For more information please check %sHow to hide WordPress metaboxes and widgets%s.', 'b', 'b'), AAM_Backend_Subject::getInstance()->getName(), '<a href="https://aamplugin.com/article/how-to-hide-wordpress-metaboxes-and-widgets" target="_blank">', '</a>'); ?>
                 </p>
             </div>
         </div>
@@ -42,9 +42,9 @@
                                         case 'dashboard':
                                             echo __('Dashboard Widgets', AAM_KEY);
                                             break;
-
+                                        
                                         case 'widgets':
-                                            echo __('Frontend Widgets', AAM_KEY);
+                                            echo AAM_Backend_View_Helper::preparePhrase('Frontend Widgets [(including Appearance->Widgets)]', 'small');
                                             break;
 
                                         default:
@@ -60,7 +60,11 @@
                                 <div class="row">
                                     <?php foreach ($metaboxes as $metabox) { ?>
                                         <div class="col-xs-12 col-md-6 aam-submenu-item">
-                                            <label for="metabox-<?php echo $screen; ?>-<?php echo $metabox['id']; ?>"><?php echo $metabox['title']; ?></label>
+                                            <label for="metabox-<?php echo $screen; ?>-<?php echo $metabox['id']; ?>">
+                                                <?php echo $metabox['title']; ?>
+                                                <small class="aam-metabox-details"><?php echo __('Screen ID:', AAM_KEY); ?> <b><?php echo $screen; ?></b></small>
+                                                <small class="aam-metabox-details"><?php echo __('ID:', AAM_KEY); ?> <b><?php echo crc32($screen . '|' . $metabox['id']); ?></b></small>
+                                            </label>
                                             <input type="checkbox" class="aam-checkbox-danger" id="metabox-<?php echo $screen; ?>-<?php echo $metabox['id']; ?>" data-metabox="<?php echo $screen; ?>|<?php echo $metabox['id']; ?>"<?php echo ($object->has($screen, $metabox['id']) ? ' checked="checked"' : ''); ?> />
                                             <label for="metabox-<?php echo $screen; ?>-<?php echo $metabox['id']; ?>" data-toggle="tooltip" title="<?php echo ($object->has($screen, $metabox['id']) ?  __('Uncheck to show', AAM_KEY) : __('Check to hide', AAM_KEY)); ?>"></label>
                                         </div>
@@ -75,8 +79,7 @@
             <div class="row">
                 <div class="col-xs-12 text-center">
                     <p class="alert alert-info text-larger">
-                        <?php echo __('The list is not initialized. Click Refresh button above.'); ?><br/>
-                        <small><?php echo sprintf(AAM_Backend_View_Helper::preparePhrase('If your website requires HTTP authentication, please refer to [%sthis article%s] for additional information.', 'b'), '<a href="https://aamplugin.com/help/how-to-hide-wordpress-metaboxes-and-widgets" target="_blank">', '</a>'); ?></small>
+                        <?php echo __('The list is not initialized. Click Refresh button above.', AAM_KEY); ?>
                     </p>
                 </div>
             </div>
