@@ -353,7 +353,8 @@
     function getPlaces() {
         
       $("#toggles li a.active").each(function() {
-        getPlaceData($(this).attr("href"), $(this).parent().attr("class"));
+        var jsonMap = $(this).data('pins');
+        getPlaceData(jsonMap, $(this).parent().attr("class"));
       });
     }
     
