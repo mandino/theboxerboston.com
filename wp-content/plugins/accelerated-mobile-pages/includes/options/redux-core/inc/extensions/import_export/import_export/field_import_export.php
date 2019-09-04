@@ -1,4 +1,5 @@
 <?php
+namespace ReduxCore\ReduxFramework;
     /**
      * Redux Framework is free software: you can redistribute it and/or modify
      * it under the terms of the GNU General Public License as published by
@@ -22,7 +23,7 @@
     }
 
 // Don't duplicate me!
-    if ( ! class_exists( 'ReduxFramework_import_export' ) ) {
+    if ( ! class_exists( 'ReduxCore\\ReduxFramework\\ReduxFramework_import_export' ) ) {
 
         /**
          * Main ReduxFramework_import_export class
@@ -44,6 +45,10 @@
                 $this->parent   = $parent;
                 $this->field    = $field;
                 $this->value    = $value;
+                $this->time = '';
+                if ( defined('AMPFORWP_VERSION') ) {
+                    $this->timestamp = AMPFORWP_VERSION;
+                }
                 $this->is_field = $this->parent->extensions['import_export']->is_field;
 
                 $this->extension_dir = ReduxFramework::$_dir . 'inc/extensions/import_export/';
@@ -101,14 +106,14 @@
 
                     <div id="redux-import-code-wrapper">
                         <p class="description" id="import-code-description">
-                            <?php echo esc_html( apply_filters( 'redux-import-file-description', __( 'Input your backup file below and hit Import to restore your sites options from a backup.', 'redux-framework' ) ) ); ?>
+                            <?php echo esc_html( apply_filters( 'redux-import-file-description', __( 'Input your backup file below and hit Import to restore your sites options from a backup.', 'accelerated-mobile-pages' ) ) ); ?>
                         </p>
                         <?php // $this->parent->args['opt_name'] is sanitized in the ReduxFramework class, no need to re-sanitize it. ?>
                         <textarea id="import-code-value" name="<?php echo $this->parent->args['opt_name']; ?>[import_code]" class="large-text noUpdate" rows="2"></textarea>
                     </div>
 
                     <div id="redux-import-link-wrapper">
-                        <p class="description" id="import-link-description"><?php echo esc_html( apply_filters( 'redux-import-link-description', __( 'Input the URL to another sites options set and hit Import to load the options from that site.', 'redux-framework' ) ) ); ?></p>
+                        <p class="description" id="import-link-description"><?php echo esc_html( apply_filters( 'redux-import-link-description', __( 'Input the URL to another sites options set and hit Import to load the options from that site.', 'accelerated-mobile-pages' ) ) ); ?></p>
                         <?php // $this->parent->args['opt_name'] is sanitized in the ReduxFramework class, no need to re-sanitize it. ?>
                         <textarea class="large-text noUpdate" id="import-link-value" name="<?php echo $this->parent->args['opt_name'] ?>[import_link]" rows="2"></textarea>
                     </div>
@@ -121,7 +126,7 @@
 
                     <div class="redux-section-desc">
                         <p class="description">
-                            <?php echo esc_html( apply_filters( 'redux-backup-description', __( 'Here you can copy/download your current option settings. Keep this safe as you can use it as a backup should anything go wrong, or you can use it to restore your settings on this site (or any other site).', 'redux-framework' ) ) ) ?>
+                            <?php echo esc_html( apply_filters( 'redux-backup-description', __( 'Here you can copy/download your current option settings. Keep this safe as you can use it as a backup should anything go wrong, or you can use it to restore your settings on this site (or any other site).', 'accelerated-mobile-pages' ) ) ) ?>
                         </p>
                     </div>
                 <?php
@@ -155,14 +160,14 @@
                     'redux-import-export',
                     $this->extension_url . 'import_export/field_import_export' . Redux_Functions::isMin() . '.js',
                     array( 'jquery' ),
-                    ReduxFramework_extension_import_export::$version,
+                     $this->timestamp, //ReduxFramework_extension_import_export::$version,
                     true
                 );
-
                 wp_enqueue_style(
                     'redux-import-export',
                     $this->extension_url . 'import_export/field_import_export.css',
-                    time(),
+                    array(),
+                    $this->timestamp, //time(),
                     true
                 );
 

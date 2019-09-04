@@ -3,16 +3,16 @@ function ampforwp_framework_get_post_pagination( $args = '' ) {
 
 	wp_reset_postdata();
 	global $page, $numpages, $multipage, $more, $redux_builder_amp;
-
+	$next_class = $previous_class = '';
 	$defaults = array(
-		'before'           => '<p>' . __( 'Page:' ),
+		'before'           => '<p>' . ( '<span>'. ampforwp_translation($redux_builder_amp['amp-translator-page-text'], 'Page') .':</span>' ),
 		'after'            => '</p>',
 		'link_before'      => '',
 		'link_after'       => '',
 		'next_or_number'   => 'number',
 		'separator'        => ' ',
-		'nextpagelink'     => __( 'Next page' ),
-		'previouspagelink' => __( 'Previous page' ),
+		'nextpagelink'     => ampforwp_translation($redux_builder_amp['amp-translator-next-text'], 'Next page'),
+		'previouspagelink' => ampforwp_translation($redux_builder_amp['amp-translator-previous-text'], 'Previous page'),
 		'pagelink'         => '%',
 		'echo'             => 1
 	);
@@ -24,13 +24,18 @@ function ampforwp_framework_get_post_pagination( $args = '' ) {
 	 * @param array $params An array of arguments for page links for paginated posts.
 	 */
 	$r = apply_filters( 'ampforwp_framework_get_post_pagination_args', $params );
-
+	if ( isset($params['next_class']) ) {
+		$next_class = $params['next_class'];
+	}
+	if ( isset($params['previous_class']) ) {
+		$previous_class = $params['previous_class'];
+	}
 	$output = '';
 	if ( $multipage ) {
 		if ( 'number' == $r['next_or_number'] ) {
 			$output .= $r['before'];
 			for ( $i = 1; $i <= $numpages; $i++ ) {
-				$link = $r['link_before'] . str_replace( '%', $i, $r['pagelink'] ) . $r['link_after'];
+				$link = $r['link_before'] . str_replace( '%', '<span>'.$i.'</span>', $r['pagelink'] ) . $r['link_after'];
 				if ( $i != $page || ! $more && 1 == $page ) {
 					$link = ampforwp_framework_get_post_paginated_link( $i ) . $link . '</a>';
 				}
@@ -50,7 +55,7 @@ function ampforwp_framework_get_post_pagination( $args = '' ) {
 			$output .= $r['before'];
 			$prev = $page - 1;
 			if ( $prev > 0 ) {
-				$link = ampforwp_framework_get_post_paginated_link( $prev ) . $r['link_before'] . $r['previouspagelink'] . $r['link_after'] . '</a>';
+				$link = ampforwp_framework_get_post_paginated_link( $prev, $previous_class ) . $r['link_before'] . $r['previouspagelink'] . $r['link_after'] . '</a>';
 				$output .= apply_filters( 'ampforwp_framework_get_post_pagination_link', $link, $prev );
 			}
 			$next = $page + 1;
@@ -58,7 +63,7 @@ function ampforwp_framework_get_post_pagination( $args = '' ) {
 				if ( $prev ) {
 					$output .= $r['separator'];
 				}
-				$link = ampforwp_framework_get_post_paginated_link( $next ) . $r['link_before'] . $r['nextpagelink'] . $r['link_after'] . '</a>';
+				$link = ampforwp_framework_get_post_paginated_link( $next, $next_class ) . $r['link_before'] . $r['nextpagelink'] . $r['link_after'] . '</a>';
 				$output .= apply_filters( 'ampforwp_framework_get_post_pagination_link', $link, $next );
 			}
 			$output .= $r['after'];
@@ -71,13 +76,10 @@ function ampforwp_framework_get_post_pagination( $args = '' ) {
 	 * @param array  $args   An array of arguments.
 	 */
 	$html = apply_filters( 'ampforwp_framework_get_post_pagination', $output, $args );
-	if($redux_builder_amp['amp-pagination']) {
 		if ( $r['echo'] ) {
-			echo $html;
+			echo ($html);
 		}
 		return $html;
-	}	
-
 }
 
 /**
@@ -89,10 +91,13 @@ function ampforwp_framework_get_post_pagination( $args = '' ) {
  * @param int $i Page number.
  * @return string Link.
  */
-function ampforwp_framework_get_post_paginated_link( $i ) {
+function ampforwp_framework_get_post_paginated_link( $i, $args = '' ) {
 	global $wp_rewrite;
 	$post = get_post();
 	$query_args = array();
+	if ( isset($args) ) {
+		$class = "class='".esc_attr($args)."'";
+	}
 	if ( 1 == $i ) {
 		$url = get_permalink();
 	} else {
@@ -113,31 +118,30 @@ function ampforwp_framework_get_post_paginated_link( $i ) {
 
 		$url = get_preview_post_link( $post, $query_args, $url );
 	}
-
-	return '<a href="' . esc_url(trailingslashit( $url) ) . '?amp">';
+	return '<a href="' . esc_url(trailingslashit( $url) ) . '?amp" ' . $class . '>';
 }
 
 add_filter('ampforwp_modify_rel_canonical','amp_paginated_post_modify_amphtml');
 function amp_paginated_post_modify_amphtml($url) {
-	if(is_single()){
+	if( is_single() && false == ampforwp_get_setting('ampforwp-amp-takeover') ){
 			$post_paginated_page='';
 			$post_paginated_page = get_query_var('page');
 			if($post_paginated_page){
 				$url = get_permalink();
 				$new_url = $url."$post_paginated_page/?amp";
-				return $new_url;
+				return esc_url($new_url);
 			}
 		} 
 	return $url;
 }
 
-add_action('amp_post_template_head','amp_paginated_post_modify_canonical',9);
+//add_action('amp_post_template_head','amp_paginated_post_modify_canonical',9);
 function amp_paginated_post_modify_canonical(){
 		if(is_single()){
 			$post_paginated_page='';
 			$post_paginated_page = get_query_var('page');
 			if($post_paginated_page){
-				remove_action( 'amp_post_template_head', 'amp_post_template_add_canonical' );
+				remove_action( 'amp_post_template_head', 'AMPforWP\\AMPVendor\\amp_post_template_add_canonical' );
 				add_action('amp_post_template_head','amp_paginated_post_rel_canonical');
 			}
 		}
@@ -151,26 +155,5 @@ function amp_paginated_post_rel_canonical(){
 	    $new_canonical_url = trailingslashit($new_canonical_url);
 		$post_paginated_page = get_query_var('page');
 		if($post_paginated_page){?>
-			<link rel="canonical" href="<?php echo $new_canonical_url.$post_paginated_page ?>/" /><?php  } 
-}
-
-add_filter('ampforwp_content_filter','ampforwp_post_paginated_content');
-function ampforwp_post_paginated_content($content){
-	global $redux_builder_amp;
-	$ampforwp_new_content = '';
-	$ampforwp_the_content = '';
-	$ampforwp_the_content = $content;
-		if($redux_builder_amp['amp-pagination']) {
-			$ampforwp_new_content = explode('<!--nextpage-->', $ampforwp_the_content);
-		    $queried_var = get_query_var('page');
-		    if ( $queried_var > 1 ) {
-		      $queried_var = $queried_var -1   ;
-		    }
-		    else{
-		    	 $queried_var = 0;
-		    }
-		    return $ampforwp_new_content[$queried_var];
-	 	} else{
-	 		return $ampforwp_the_content;
-	 	}
+			<link rel="canonical" href="<?php echo esc_url($new_canonical_url.$post_paginated_page) ?>/" /><?php  } 
 }

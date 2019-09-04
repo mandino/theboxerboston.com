@@ -1,0 +1,1 @@
+[26-Jul-2016 22:14:23 America/Chicago] PHP Fatal error:  Using $this when not in object context in /home/hersha/public_html/www.theboxerboston.com/wp-content/plugins/events-calendar-pro/admin-views/widget-calendar.php on line 2

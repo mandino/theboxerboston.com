@@ -103,18 +103,23 @@ class Tribe__Events__Venue extends Tribe__Events__Linked_Posts__Base {
 		 * @param array $args Array of arguments for register_post_type labels
 		 */
 		$this->post_type_args['labels'] = apply_filters( 'tribe_events_register_venue_post_type_labels', array(
-			'name'                    => $this->plural_venue_label,
-			'singular_name'           => $this->singular_venue_label,
-			'singular_name_lowercase' => $this->singular_venue_label_lowercase,
-			'plural_name_lowercase'   => $this->plural_venue_label_lowercase,
-			'add_new'                 => esc_html__( 'Add New', 'the-events-calendar' ),
-			'add_new_item'            => sprintf( esc_html__( 'Add New %s', 'the-events-calendar' ), $this->singular_venue_label ),
-			'edit_item'               => sprintf( esc_html__( 'Edit %s', 'the-events-calendar' ), $this->singular_venue_label ),
-			'new_item'                => sprintf( esc_html__( 'New %s', 'the-events-calendar' ), $this->singular_venue_label ),
-			'view_item'               => sprintf( esc_html__( 'View %s', 'the-events-calendar' ), $this->singular_venue_label ),
-			'search_items'            => sprintf( esc_html__( 'Search %s', 'the-events-calendar' ), $this->plural_venue_label ),
-			'not_found'               => sprintf( esc_html__( 'No %s found', 'the-events-calendar' ), strtolower( $this->plural_venue_label ) ),
-			'not_found_in_trash'      => sprintf( esc_html__( 'No %s found in Trash', 'the-events-calendar' ), strtolower( $this->plural_venue_label ) ),
+			'name'                     => $this->plural_venue_label,
+			'singular_name'            => $this->singular_venue_label,
+			'singular_name_lowercase'  => $this->singular_venue_label_lowercase,
+			'plural_name_lowercase'    => $this->plural_venue_label_lowercase,
+			'add_new'                  => esc_html__( 'Add New', 'the-events-calendar' ),
+			'add_new_item'             => sprintf( esc_html__( 'Add New %s', 'the-events-calendar' ), $this->singular_venue_label ),
+			'edit_item'                => sprintf( esc_html__( 'Edit %s', 'the-events-calendar' ), $this->singular_venue_label ),
+			'new_item'                 => sprintf( esc_html__( 'New %s', 'the-events-calendar' ), $this->singular_venue_label ),
+			'view_item'                => sprintf( esc_html__( 'View %s', 'the-events-calendar' ), $this->singular_venue_label ),
+			'search_items'             => sprintf( esc_html__( 'Search %s', 'the-events-calendar' ), $this->plural_venue_label ),
+			'not_found'                => sprintf( esc_html__( 'No %s found', 'the-events-calendar' ), strtolower( $this->plural_venue_label ) ),
+			'not_found_in_trash'       => sprintf( esc_html__( 'No %s found in Trash', 'the-events-calendar' ), strtolower( $this->plural_venue_label ) ),
+			'item_published'           => sprintf( esc_html__( '%s published.', 'the-events-calendar' ), $this->singular_venue_label ),
+			'item_published_privately' => sprintf( esc_html__( '%s published privately.', 'the-events-calendar' ), $this->singular_venue_label ),
+			'item_reverted_to_draft'   => sprintf( esc_html__( '%s reverted to draft.', 'the-events-calendar' ), $this->singular_venue_label ),
+			'item_scheduled'           => sprintf( esc_html__( '%s scheduled.', 'the-events-calendar' ), $this->singular_venue_label ),
+			'item_updated'             => sprintf( esc_html__( '%s updated.', 'the-events-calendar' ), $this->singular_venue_label ),
 		) );
 
 		$this->register_post_type();
@@ -123,7 +128,7 @@ class Tribe__Events__Venue extends Tribe__Events__Linked_Posts__Base {
 		add_filter( 'tribe_events_linked_post_id_field_index', array( $this, 'linked_post_id_field_index' ), 10, 2 );
 		add_filter( 'tribe_events_linked_post_name_field_index', array( $this, 'linked_post_name_field_index' ), 10, 2 );
 		add_filter( 'tribe_events_linked_post_type_container', array( $this, 'linked_post_type_container' ), 10, 2 );
-		add_filter( 'tribe_events_linked_post_create_' . self::POSTTYPE, array( $this, 'save' ), 10, 5 );
+		add_filter( 'tribe_events_linked_post_create_' . self::POSTTYPE, array( $this, 'save' ), 10, 4 );
 		add_filter( 'tribe_events_linked_post_meta_box_title', array( $this, 'meta_box_title' ), 5, 2 );
 		add_filter( 'tribe_events_linked_post_default', array( $this, 'linked_post_default' ), 10, 2 );
 		add_action( 'tribe_events_linked_post_new_form', array( $this, 'linked_post_new_form' ) );
@@ -297,6 +302,19 @@ class Tribe__Events__Venue extends Tribe__Events__Linked_Posts__Base {
 	 *
 	 */
 	public function save_meta( $venue_id, $data ) {
+		$venue = get_post( $venue_id );
+
+		/**
+		 * Allow hooking in prior to updating meta fields.
+		 *
+		 * @param int     $venue_id The venue ID we are modifying meta for.
+		 * @param array   $data     The meta fields we want saved.
+		 * @param WP_Post $venue    The venue itself.
+		 *
+		 * @since 4.6.9
+		 */
+		do_action( 'tribe_events_venue_save', $venue_id, $data, $venue );
+
 		// TODO: We should probably do away with 'StateProvince' and stick to 'State' and 'Province'.
 		if ( ! isset( $data['StateProvince'] ) || $data['StateProvince'] == '' ) {
 			if (
@@ -317,7 +335,6 @@ class Tribe__Events__Venue extends Tribe__Events__Linked_Posts__Base {
 			}
 		}
 
-
 		update_post_meta( $venue_id, '_EventShowMapLink', isset( $data['ShowMapLink'] ) ? $data['ShowMapLink'] : 'false' );
 		update_post_meta( $venue_id, '_EventShowMap', isset( $data['ShowMap'] ) ? $data['ShowMap'] : 'false' );
 		update_post_meta( $venue_id, '_VenueShowMapLink', isset( $data['ShowMapLink'] ) ? $data['ShowMapLink'] : 'false' );
@@ -325,14 +342,23 @@ class Tribe__Events__Venue extends Tribe__Events__Linked_Posts__Base {
 		unset( $data['ShowMapLink'] );
 		unset( $data['ShowMap'] );
 
-		if ( isset( $data['FeaturedImage'] ) && ! empty( $data['FeaturedImage'] ) ) {
-			update_post_meta( $venue_id, '_thumbnail_id', $data['FeaturedImage'] );
+		if ( isset( $data['FeaturedImage'] ) ) {
+			if ( empty( $data['FeaturedImage'] ) ) {
+				delete_post_meta( $venue_id, '_thumbnail_id' );
+			} else {
+				update_post_meta( $venue_id, '_thumbnail_id', $data['FeaturedImage'] );
+			}
 			unset( $data['FeaturedImage'] );
 		}
 
 		unset( $data['Venue'] );
 
 		foreach ( $data as $key => $var ) {
+			// Prevent these WP_Post object fields from ending up in the meta.
+			if ( in_array( $key, array( 'post_title', 'post_excerpt', 'post_content', 'post_status' ) ) ) {
+				continue;
+			}
+
 			update_post_meta( $venue_id, '_Venue' . $key, sanitize_text_field( $var ) );
 		}
 	}
@@ -405,19 +431,33 @@ class Tribe__Events__Venue extends Tribe__Events__Linked_Posts__Base {
 				? wp_insert_post( array_filter( $postdata ), true )
 				: $found;
 
+			/**
+			 * Filters the default value to be set on the creation of a new venue.
+			 *
+			 * Useful as this might be fired or required by a third party plugin like community events that would like
+			 * to change the default value for the map fields.
+			 *
+			 * @param mixed $default_value    The default value to be applied on creation.
+			 *
+			 * @since 4.6.10
+			 */
+			$default_value = apply_filters( 'tribe_events_venue_created_map_default', true );
+
 			// By default, the show map and show map link options should be on
 			if ( isset( $data['ShowMap'] ) && ! tribe_is_truthy( $data['ShowMap'] ) ) {
 				unset( $data['ShowMap'] );
 			} else {
-				$data['ShowMap'] = true;
+				$data['ShowMap'] = $default_value;
 			}
+
 			if ( isset( $data['ShowMapLink'] ) && ! tribe_is_truthy( $data['ShowMapLink'] ) ) {
 				unset( $data['ShowMapLink'] );
 			} else {
-				$data['ShowMapLink'] = true;
+				$data['ShowMapLink'] = $default_value;
 			}
 
 			if ( ! is_wp_error( $venue_id ) ) {
+
 				$this->save_meta( $venue_id, $data );
 
 				/**
@@ -484,15 +524,15 @@ class Tribe__Events__Venue extends Tribe__Events__Linked_Posts__Base {
 		unset( $data['VenueID'] );
 
 		$args = array_filter( array(
-			                      'ID'            => $venue_id,
-			                      'post_title'    => Tribe__Utils__Array::get( $data, 'post_title', $data['Venue'] ),
-			                      'post_content'  => Tribe__Utils__Array::get( $data, 'post_content', $data['Description'] ),
-			                      'post_excerpt'  => Tribe__Utils__Array::get( $data, 'post_excerpt', $data['Excerpt'] ),
-			                      'post_author'   => $data['post_author'],
-			                      'post_date'     => $data['post_date'],
-			                      'post_date_gmt' => $data['post_date_gmt'],
-			                      'post_status'   => $data['post_status'],
-		                      ) );
+			'ID'            => $venue_id,
+			'post_title'    => Tribe__Utils__Array::get( $data, 'post_title', $data['Venue'] ),
+			'post_content'  => Tribe__Utils__Array::get( $data, 'post_content', $data['Description'] ),
+			'post_excerpt'  => Tribe__Utils__Array::get( $data, 'post_excerpt', $data['Excerpt'] ),
+			'post_author'   => $data['post_author'],
+			'post_date'     => $data['post_date'],
+			'post_date_gmt' => $data['post_date_gmt'],
+			'post_status'   => $data['post_status'],
+		) );
 
 		if ( count( $args ) > 1 ) {
 			$post_type = Tribe__Events__Main::VENUE_POST_TYPE;

@@ -1,13 +1,17 @@
 <?php 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
 class AMPFORWP_Categories_Widget extends WP_Widget {
 
   // Set up the widget name and description.
   public function __construct() {
     $widget_options = array(
       'classname' => 'ampforwp_categories_widget',
-       'description' => __('This Widget adds categories where necessary in AMP Pages','accelerated-mobile-pages')
+       'description' => esc_html__('This Widget adds categories where necessary in AMP Pages','accelerated-mobile-pages')
      );
-    parent::__construct( 'ampforwp_categories_widget', __('AMP Categories Module','accelerated-mobile-pages'), $widget_options );
+    parent::__construct( 'ampforwp_categories_widget', esc_html__('AMP Categories Module','accelerated-mobile-pages'), $widget_options );
   }
 
 
@@ -28,10 +32,12 @@ class AMPFORWP_Categories_Widget extends WP_Widget {
     $ampforwp_category_link = $instance[ 'showButton' ];
     $ampforwp_show_excerpt = $instance[ 'showExcerpt' ];
 
+    global $redux_builder_amp;
+
  //   echo . $args['before_title'] .  . $args['after_title']; ?>
 
     <?php
-    $exclude_ids = get_option('ampforwp_exclude_post');
+    $exclude_ids = ampforwp_exclude_posts();
 
     $args = array(
         'cat' => $ampforwp_category_id,
@@ -42,26 +48,24 @@ class AMPFORWP_Categories_Widget extends WP_Widget {
     );
     // The Query
     $the_query = new WP_Query( $args );
+    $thumb_url = "";
 
     // The Loop
 
     if ( $the_query->have_posts() ) {
         echo '<div class="amp-wp-content amp_cb_module amp-category-block"><ul>';
-        echo '<li class="amp_module_title">'.$ampforwp_title .'</li>';
+        echo '<li class="amp_module_title"><span>'.esc_attr($ampforwp_title) .'</span></li>';
         while ( $the_query->have_posts() ) {
             $the_query->the_post();
             $ampforwp_post_url = get_permalink(); ?>
             <li class="amp-category-post">
-              <?php if ( has_post_thumbnail() ) { ?>
-                  <?php
-                  $thumb_id = get_post_thumbnail_id();
-                  $thumb_url_array = wp_get_attachment_image_src($thumb_id, 'thumbnail', true);
-                  $thumb_url = $thumb_url_array[0];
+              <?php if ( ampforwp_has_post_thumbnail() ) {
+                  $thumb_url = ampforwp_get_post_thumbnail('url');
                   ?>
-                  <a href="<?php echo trailingslashit($ampforwp_post_url) . AMPFORWP_AMP_QUERY_VAR ;?>"><amp-img  class="ampforwp_wc_shortcode_img"  src=<?php echo $thumb_url ?> width=150 height=150 layout=responsive></amp-img></a>
+                  <a href="<?php echo esc_url(ampforwp_url_controller($ampforwp_post_url));?>"><amp-img  class="ampforwp_wc_shortcode_img"  src=<?php echo $thumb_url ?> width=150 height=150 layout="responsive"></amp-img></a>
               <?php } ?>
 
-              <a class="ampforwp_wc_shortcode_title" href="<?php echo trailingslashit($ampforwp_post_url) . AMPFORWP_AMP_QUERY_VAR ;?>">
+              <a class="ampforwp_wc_shortcode_title" href="<?php echo ampforwp_url_controller($ampforwp_post_url) ;?>">
                   <?php echo get_the_title(); ?>
               </a> <?php
 
@@ -72,19 +76,29 @@ class AMPFORWP_Categories_Widget extends WP_Widget {
                   } else {
                     $content = get_the_content();
                   } ?>
-                  <p class="ampforwp_cat_wdgt_excerpt_text"><?php echo wp_trim_words( strip_tags( strip_shortcodes( $content ) ) , '15'  ); ?></p>
+                  <span class="ampforwp_cat_wdgt_excerpt_text"><?php echo wp_trim_words( strip_tags( strip_shortcodes( $content ) ) , 15  ); ?></span>
                 </div> <?php
               } ?>
 
             </li> <?php
+        } ?>
+        <div class="cb"></div>
+        <?php
+
+        //show more link
+        if( $ampforwp_category_link === 'yes' && ! empty( $ampforwp_category_id ) ) {
+          
+          $category_link =  '<a class="amp-category-block-btn" href="'.ampforwp_url_controller(get_category_link( $ampforwp_category_id) ).'">'. esc_html(ampforwp_translation($redux_builder_amp['amp-translator-show-more-text'], 'View More Posts (Widget Button)')).'</a>';
+        } else {
+          $category_link =   '<a class="amp-category-block-btn" href="'.ampforwp_url_controller( home_url() ).'">'. esc_html(ampforwp_translation($redux_builder_amp['amp-translator-show-more-text'], 'View More Posts (Widget Button)')).'</a>';
+        } 
+        if( $ampforwp_category_link === 'no' ) {
+            $category_link = '';
         }
 
-        //show more
-        if( $ampforwp_category_link === 'yes' && $ampforwp_category_id !== '' ) {
-          global $redux_builder_amp;
-          echo '<a class="amp-category-block-btn" href="'.trailingslashit(get_category_link($ampforwp_category_id)).'amp'.'">'. ampforwp_translation($redux_builder_amp['amp-translator-show-more-text'], 'View More Posts (Widget Button)').'</a>';
-        }
-        echo '</ul></div>';
+        echo  $category_link;
+
+        echo '</ul> <div class="cb"></div> </div>';
 
     } else {
         // no posts found
@@ -109,25 +123,26 @@ class AMPFORWP_Categories_Widget extends WP_Widget {
     <!-- Form Ends Here -->
         <p>
         <!-- text Start Here -->
-          <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php echo __('Title:','accelerated-mobile-pages') ?>
-          <input class="widefat" type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $ampforwp_title ); ?>" />
+          <label for="<?php echo esc_attr($this->get_field_id( 'title' )); ?>"><?php esc_attr_e('Title:','accelerated-mobile-pages') ?>
+          <input class="widefat" type="text" id="<?php echo esc_attr($this->get_field_id( 'title' )); ?>" name="<?php echo esc_attr($this->get_field_name( 'title' )); ?>" value="<?php echo esc_attr( $ampforwp_title ); ?>" />
           </label><br>
         <!-- text End Here -->
         </p>
         <!-- select Start Here -->
          <p>
-          <label for="<?php echo esc_attr( $this->get_field_id( 'category' ) ); ?>"><?php echo __('Category:','accelerated-mobile-pages') ?>
-          <select id="<?php echo $this->get_field_id('category'); ?>" name="<?php echo $this->get_field_name('category'); ?>" class="widefat" value>
+          <label for="<?php echo esc_attr( $this->get_field_id( 'category' ) ); ?>"><?php esc_attr_e('Category:','accelerated-mobile-pages') ?>
+          <select id="<?php echo esc_attr($this->get_field_id('category')); ?>" name="<?php echo esc_attr($this->get_field_name('category')); ?>" class="widefat" value>
             <?php
 
               $categories = get_categories( array(
                   'orderby' => 'name',
-                  'order'   => 'ASC'
+                  'order'   => 'ASC',
+                  'number'  => 500
               ) );
 
               echo '<option selected value="none">Recent Posts </option>';
               foreach( $categories as $category ) {
-                 echo '<option '. selected( $instance['category'], $category->term_id) . ' value="'. $category->term_id . '">' . $category->name . '</option>';
+                 echo '<option '. selected( $instance['category'], $category->term_id) . ' value="'. esc_attr($category->term_id) . '">' . esc_attr($category->name) . '</option>';
                } ?>
           </select>
           </label>
@@ -136,31 +151,31 @@ class AMPFORWP_Categories_Widget extends WP_Widget {
 
         <p>
         <!-- text starts Here -->
-          <label for="<?php echo $this->get_field_id( 'count' ); ?>"><?php echo __('Number of Posts:','accelerated-mobile-pages') ?>
-          <input class="widefat" type="number" id="<?php echo $this->get_field_id( 'count' ); ?>" name="<?php echo $this->get_field_name( 'count' ); ?>" value="<?php echo esc_attr( $ampforwp_category_count ); ?>" />
+          <label for="<?php echo esc_attr($this->get_field_id( 'count' )); ?>"><?php esc_attr_e('Number of Posts:','accelerated-mobile-pages') ?>
+          <input class="widefat" type="number" id="<?php echo esc_attr($this->get_field_id( 'count' )); ?>" name="<?php echo esc_attr($this->get_field_name( 'count' )); ?>" value="<?php echo esc_attr( $ampforwp_category_count ); ?>" />
           </label>
         </p>
         <!-- text End Here -->
         <p>
         <!-- radio buttons starts Here -->
-          <label for="<?php echo $this->get_field_id( 'showButton' ); ?>" value="<?php  echo esc_attr( $ampforwp_title );?>"><?php echo __('Show View more Button:','accelerated-mobile-pages') ?></label><br>
-          <label for="<?php echo $this->get_field_id('show_button_1'); ?>">
-              <input class="widefat" id="<?php echo $this->get_field_id('show_button_1'); ?>" name="<?php echo $this->get_field_name('showButton'); ?>" type="radio" value="yes" <?php if($radio_buttons === 'yes'){ echo 'checked="checked"'; } ?> /><?php echo __('Yes ','accelerated-mobile-pages'); ?>
+          <label for="<?php echo esc_attr($this->get_field_id( 'showButton' )); ?>" value="<?php  echo esc_attr( $ampforwp_title );?>"><?php esc_attr_e('Show View more Button:','accelerated-mobile-pages') ?></label><br>
+          <label for="<?php echo esc_attr($this->get_field_id('show_button_1')); ?>">
+              <input class="widefat" id="<?php echo esc_attr($this->get_field_id('show_button_1')); ?>" name="<?php echo esc_attr($this->get_field_name('showButton')); ?>" type="radio" value="yes" <?php if($radio_buttons === 'yes'){ echo 'checked="checked"'; } ?> /><?php esc_attr_e('Yes ','accelerated-mobile-pages'); ?>
           </label>
-           <label for="<?php echo $this->get_field_id('show_button_2'); ?>">
-              <input class="widefat" id="<?php echo $this->get_field_id('show_button_2'); ?>" name="<?php echo $this->get_field_name('showButton'); ?>" type="radio" value="no" <?php if($radio_buttons === 'no'){ echo 'checked="checked"'; } ?> /><?php echo __(' No','accelerated-mobile-pages'); ?>
+           <label for="<?php echo esc_attr($this->get_field_id('show_button_2')); ?>">
+              <input class="widefat" id="<?php echo esc_attr($this->get_field_id('show_button_2')); ?>" name="<?php echo esc_attr($this->get_field_name('showButton')); ?>" type="radio" value="no" <?php if($radio_buttons === 'no'){ echo 'checked="checked"'; } ?> /><?php esc_attr_e(' No','accelerated-mobile-pages'); ?>
           </label>
         <!-- radio buttons Ends Here -->
         </p>
 
         <p>
           <!-- Excerpt related code starts Here -->
-            <label for="<?php echo $this->get_field_id( 'showExcerpt' ); ?>" value="<?php  echo esc_attr( $ampforwp_title );?>"> <?php echo __('Show Excerpt:','accelerated-mobile-pages') ?></label><br>
-            <label for="<?php echo $this->get_field_id('show_button_3'); ?>">
-                <input class="widefat" id="<?php echo $this->get_field_id('show_button_3'); ?>" name="<?php echo $this->get_field_name('showExcerpt'); ?>" type="radio" value="yes" <?php if($excerpt_buttons === 'yes'){ echo 'checked="checked"'; } ?> /><?php echo __('Yes ','accelerated-mobile-pages'); ?>
+            <label for="<?php echo esc_attr($this->get_field_id( 'showExcerpt' )); ?>" value="<?php  echo esc_attr( $ampforwp_title );?>"> <?php esc_attr_e('Show Excerpt:','accelerated-mobile-pages') ?></label><br>
+            <label for="<?php echo esc_attr($this->get_field_id('show_button_3')); ?>">
+                <input class="widefat" id="<?php echo esc_attr($this->get_field_id('show_button_3')); ?>" name="<?php echo esc_attr($this->get_field_name('showExcerpt')); ?>" type="radio" value="yes" <?php if($excerpt_buttons === 'yes'){ echo 'checked="checked"'; } ?> /><?php esc_attr_e('Yes ','accelerated-mobile-pages'); ?>
             </label>
-             <label for="<?php echo $this->get_field_id('show_button_4'); ?>">
-                <input class="widefat" id="<?php echo $this->get_field_id('show_button_4'); ?>" name="<?php echo $this->get_field_name('showExcerpt'); ?>" type="radio" value="no" <?php if($excerpt_buttons === 'no'){ echo 'checked="checked"'; } ?> /><?php echo __(' No','accelerated-mobile-pages'); ?>
+             <label for="<?php echo esc_attr($this->get_field_id('show_button_4')); ?>">
+                <input class="widefat" id="<?php echo esc_attr($this->get_field_id('show_button_4')); ?>" name="<?php echo esc_attr($this->get_field_name('showExcerpt')); ?>" type="radio" value="no" <?php if($excerpt_buttons === 'no'){ echo 'checked="checked"'; } ?> /><?php esc_attr_e(' No','accelerated-mobile-pages'); ?>
             </label>
           <!-- Excerpt related code Ends Here -->
         </p>
@@ -191,7 +206,10 @@ class AMPFORWP_Categories_Widget extends WP_Widget {
 
 // Register the widget.
 function ampforwp_register_categories_widget() {
-  register_widget( 'AMPFORWP_Categories_Widget' );
+  global $redux_builder_amp;
+  if ( isset($redux_builder_amp['amp-design-selector']) && 4 != $redux_builder_amp['amp-design-selector'] ) {
+    register_widget( 'AMPFORWP_Categories_Widget' );
+  }
 }
 add_action( 'widgets_init', 'ampforwp_register_categories_widget' );
 

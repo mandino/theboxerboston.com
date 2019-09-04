@@ -17,7 +17,7 @@ class WPMUDEV_Dashboard_Message {
 	 * Max number of notices that are stored in the message-queue.
 	 * If more messages are added then the oldest ones are removed.
 	 */
-	const MAX_QUEUE_COUNT = 10;
+	const MAX_QUEUE_COUNT = 1;
 
 	/**
 	 * The message-queue contains recently scheduled messages.
@@ -80,7 +80,7 @@ class WPMUDEV_Dashboard_Message {
 				999
 			);
 
-			// Used on all WPMU DEV Dashboard pages.
+			//Used on all WPMU DEV Dashboard pages.
 			add_filter(
 				'wpmudev-admin-notice',
 				array( $this, 'get_global_message' )
@@ -194,7 +194,7 @@ class WPMUDEV_Dashboard_Message {
 	public function enqueue( $id, $content, $can_dismiss = true ) {
 		// Notifications are completely disabled while logged out.
 		if ( ! WPMUDEV_Dashboard::$api->has_key() ) {
-			return;
+			return false;
 		}
 
 		$this->load_queue();
@@ -357,7 +357,7 @@ class WPMUDEV_Dashboard_Message {
 	public function maybe_setup_message() {
 		// Initialize the WPMUDEV message only for authorized admins.
 		if ( WPMUDEV_Dashboard::$site->allowed_user() ) {
-			add_action( 'all_admin_notices', array( $this, 'setup_message' ), 999 );	 	 		     	  	   
+			add_action( 'all_admin_notices', array( $this, 'setup_message' ), 999 );
 		}
 	}
 
@@ -371,13 +371,36 @@ class WPMUDEV_Dashboard_Message {
 	 * @since  4.0.0
 	 */
 	public function setup_message() {
-		$msg = $this->choose_message();
+
+		//message details.
+		$msg 	= $this->choose_message();
+
 		if ( ! $msg ) { return; }
 
-		WDEV_Plugin_Ui::render_dev_notification(
-			WPMUDEV_Dashboard::$site->plugin_url . 'shared-ui/',
-			$msg
-		);
+		//flag to show notice
+		$show_notice = apply_filters( 'wpmudev_show_notice', true, $msg );
+		if ( ! $show_notice ) { return; }
+
+		//filter to select template
+		$sui_template = apply_filters( 'wpmudev_notice_template', true, $msg );
+
+		if( true === $sui_template ){
+			WDEV_Plugin_Ui::render_dev_notification(
+				WPMUDEV_Dashboard::$site->plugin_url . 'shared-ui/',
+				$msg
+			);
+		} else {
+			WPMUDEV_Dashboard::$ui->load_sui_template(
+				'wpmudev_default_notice',
+				array(
+					'module_url'=> WPMUDEV_Dashboard::$site->plugin_url . 'assets/js/',
+					'msg'		=> $msg,
+					'type'  	=> apply_filters( 'wpmudev_default_notice_type', 'info', $msg ), //use this filter to set notice types. Default is info.
+				),
+				true
+			);
+		}
+
 	}
 
 	/**

@@ -1,6 +1,6 @@
 <?php
-
-require_once( AMP__DIR__ . '/includes/embeds/class-amp-base-embed-handler.php' );
+namespace AMPforWP\AMPVendor;
+require_once( AMP__VENDOR__DIR__ . '/includes/embeds/class-amp-base-embed-handler.php' );
 
 class AMP_Vine_Embed_Handler extends AMP_Base_Embed_Handler {
 	const URL_PATTERN = '#https?://vine\.co/v/([^/?]+)#i';
@@ -28,7 +28,7 @@ class AMP_Vine_Embed_Handler extends AMP_Base_Embed_Handler {
 	}
 
 	public function oembed( $matches, $attr, $url, $rawattr ) {
-		return $this->render( array( 'url' => $url, 'vine_id' =>  end( $matches ) ) );
+		return $this->render( array( 'url' => $url, 'vine_id' => end( $matches ) ) );
 	}
 
 	public function render( $args ) {
@@ -42,15 +42,13 @@ class AMP_Vine_Embed_Handler extends AMP_Base_Embed_Handler {
 		}
 
 		$this->did_convert_elements = true;
-
-		return AMP_HTML_Utils::build_tag(
-			'amp-vine',
-			array(
+		$attrs = array(
 				'data-vineid' => $args['vine_id'],
 				'layout' => 'responsive',
 				'width' => $this->args['width'],
 				'height' => $this->args['height'],
-			)
-		);
+			);
+		$attrs = ampforwp_amp_consent_check( $attrs );
+		return AMP_HTML_Utils::build_tag('amp-vine',$attrs);
 	}
 }

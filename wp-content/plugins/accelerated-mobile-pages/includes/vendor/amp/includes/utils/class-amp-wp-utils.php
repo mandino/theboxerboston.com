@@ -1,5 +1,5 @@
 <?php
-
+namespace AMPforWP\AMPVendor;
 class AMP_WP_Utils {
 	/**
 	 * wp_parse_url in < WordPress 4.7 does not respect the component arg, so we're adding this helper so we can use it.
@@ -7,7 +7,7 @@ class AMP_WP_Utils {
 	 * This can be removed once 4.8 is out and we bump up our min supported WP version.
 	 */
 	public static function parse_url( $url, $component = -1 ) {
-		$parsed = wp_parse_url( $url, $component );
+		$parsed = \wp_parse_url( $url, $component );
 
 		// Because < 4.7 always returned a full array regardless of component
 		if ( -1 !== $component && is_array( $parsed ) ) {

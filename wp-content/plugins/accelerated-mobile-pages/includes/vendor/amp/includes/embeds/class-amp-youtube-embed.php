@@ -1,6 +1,6 @@
 <?php
-
-require_once( AMP__DIR__ . '/includes/embeds/class-amp-base-embed-handler.php' );
+namespace AMPforWP\AMPVendor;
+require_once( AMP__VENDOR__DIR__ . '/includes/embeds/class-amp-base-embed-handler.php' );
 
 // Much of this class is borrowed from Jetpack embeds
 class AMP_YouTube_Embed_Handler extends AMP_Base_Embed_Handler {
@@ -48,7 +48,7 @@ class AMP_YouTube_Embed_Handler extends AMP_Base_Embed_Handler {
 		$video_id = false;
 		if ( isset( $attr[0] ) ) {
 			$url = ltrim( $attr[0] , '=' );
-		} elseif ( function_exists ( 'shortcode_new_to_old_params' ) ) {
+		} elseif ( function_exists( 'shortcode_new_to_old_params' ) ) {
 			$url = shortcode_new_to_old_params( $attr );
 		}
 
@@ -78,16 +78,15 @@ class AMP_YouTube_Embed_Handler extends AMP_Base_Embed_Handler {
 		}
 
 		$this->did_convert_elements = true;
-
-		return AMP_HTML_Utils::build_tag(
-			'amp-youtube',
-			array(
+		$attrs = array(
 				'data-videoid' => $args['video_id'],
 				'layout' => 'responsive',
 				'width' => $this->args['width'],
 				'height' => $this->args['height'],
-			)
-		);
+			);
+		$attrs = ampforwp_amp_consent_check($attrs);
+		return AMP_HTML_Utils::build_tag(
+			'amp-youtube',$attrs);
 	}
 
 	private function get_video_id_from_url( $url ) {
@@ -113,7 +112,7 @@ class AMP_YouTube_Embed_Handler extends AMP_Base_Embed_Handler {
 			// /(v|e|embed)/{id}
 			$parts = explode( '/', $parsed_url['path'] );
 
-			if ( in_array( $parts[1], array( 'v', 'e', 'embed' ) ) ) {
+			if ( in_array( $parts[1], array( 'v', 'e', 'embed' ), true ) ) {
 				$video_id = $parts[2];
 			}
 		}

@@ -1,5 +1,5 @@
 <?php
-
+namespace ReduxCore\ReduxFramework;
 /**
  * Redux Framework is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ if( !defined( 'ABSPATH' ) ) {
 }
 
 // Don't duplicate me!
-if( !class_exists( 'ReduxFramework_color_rgba' ) ) {
+if( !class_exists( 'ReduxCore\\ReduxFramework\\ReduxFramework_color_rgba' ) ) {
 
     /**
      * Main ReduxFramework_color_rgba class
@@ -51,6 +51,10 @@ if( !class_exists( 'ReduxFramework_color_rgba' ) ) {
             $this->parent   = $parent;
             $this->field    = $field;
             $this->value    = $value;
+            $this->time = time();
+            if ( defined('AMPFORWP_VERSION') ) {
+                $this->time = AMPFORWP_VERSION;
+            }
 
             $defaults = array(
                 'color'     => '',
@@ -192,7 +196,7 @@ if( !class_exists( 'ReduxFramework_color_rgba' ) ) {
                     'redux-field-color-rgba-js', 
                     ReduxFramework::$_url . 'inc/fields/color_rgba/field_color_rgba' . Redux_Functions::isMin() . '.js',
                     array('jquery', 'redux-spectrum-js'), 
-                    time(), 
+                    $this->time, //time(), 
                     true
                 );
             }
@@ -208,7 +212,7 @@ if( !class_exists( 'ReduxFramework_color_rgba' ) ) {
                         'redux-field-color-rgba-css',
                         ReduxFramework::$_url . 'inc/fields/color_rgba/field_color_rgba.css',
                         array(),
-                        time(),
+                        $this->time, //time(),
                         'all'
                     );
                 }

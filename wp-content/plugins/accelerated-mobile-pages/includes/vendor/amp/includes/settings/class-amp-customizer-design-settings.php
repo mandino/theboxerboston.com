@@ -1,5 +1,5 @@
 <?php
-
+namespace AMPforWP\AMPVendor;
 class AMP_Customizer_Design_Settings {
 	const DEFAULT_HEADER_COLOR = '#fff';
 	const DEFAULT_HEADER_BACKGROUND_COLOR = '#0a89c0';
@@ -23,7 +23,7 @@ class AMP_Customizer_Design_Settings {
 			'type'              => 'option',
 			'default'           => self::DEFAULT_HEADER_COLOR,
 			'sanitize_callback' => 'sanitize_hex_color',
-			'transport'         => 'postMessage'
+			'transport'         => 'postMessage',
 		) );
 
 		// Header background color
@@ -31,7 +31,7 @@ class AMP_Customizer_Design_Settings {
 			'type'              => 'option',
 			'default'           => self::DEFAULT_HEADER_BACKGROUND_COLOR,
 			'sanitize_callback' => 'sanitize_hex_color',
-			'transport'         => 'postMessage'
+			'transport'         => 'postMessage',
 		) );
 
 		// Background color scheme
@@ -39,40 +39,40 @@ class AMP_Customizer_Design_Settings {
 			'type'              => 'option',
 			'default'           => self::DEFAULT_COLOR_SCHEME,
 			'sanitize_callback' => array( __CLASS__ , 'sanitize_color_scheme' ),
-			'transport'         => 'postMessage'
+			'transport'         => 'postMessage',
 		) );
 	}
 
 	public function register_customizer_ui( $wp_customize ) {
 		$wp_customize->add_section( 'amp_design', array(
-			'title' => __( 'Design', 'amp' ),
+			'title' => __( 'Design', 'accelerated-mobile-pages' ),
 			'panel' => AMP_Template_Customizer::PANEL_ID,
 		) );
 
 		// Header text color control.
 		$wp_customize->add_control(
-			new WP_Customize_Color_Control( $wp_customize, 'amp_header_color', array(
+			new \WP_Customize_Color_Control( $wp_customize, 'amp_header_color', array(
 				'settings'   => 'amp_customizer[header_color]',
-				'label'    => __( 'Header Text Color', 'amp' ),
+				'label'    => __( 'Header Text Color', 'accelerated-mobile-pages' ),
 				'section'  => 'amp_design',
-				'priority' => 10
+				'priority' => 10,
 			) )
 		);
 
 		// Header background color control.
 		$wp_customize->add_control(
-			new WP_Customize_Color_Control( $wp_customize, 'amp_header_background_color', array(
+			new \WP_Customize_Color_Control( $wp_customize, 'amp_header_background_color', array(
 				'settings'   => 'amp_customizer[header_background_color]',
-				'label'    => __( 'Header Background & Link Color', 'amp' ),
+				'label'    => __( 'Header Background & Link Color', 'accelerated-mobile-pages' ),
 				'section'  => 'amp_design',
-				'priority' => 20
+				'priority' => 20,
 			) )
 		);
 
 		// Background color scheme
 		$wp_customize->add_control( 'amp_color_scheme', array(
 			'settings'   => 'amp_customizer[color_scheme]',
-			'label'      => __( 'Color Scheme', 'amp' ),
+			'label'      => __( 'Color Scheme', 'accelerated-mobile-pages' ),
 			'section'    => 'amp_design',
 			'type'       => 'radio',
 			'priority'   => 30,
@@ -109,8 +109,8 @@ class AMP_Customizer_Design_Settings {
 
 	protected static function get_color_scheme_names() {
 		return array(
-			'light'   => __( 'Light', 'amp'),
-			'dark'    => __( 'Dark', 'amp' ),
+			'light'   => __( 'Light', 'accelerated-mobile-pages' ),
+			'dark'    => __( 'Dark', 'accelerated-mobile-pages' ),
 		);
 	}
 
@@ -129,7 +129,7 @@ class AMP_Customizer_Design_Settings {
 				'text_color'       => '#dedede',
 				'muted_text_color' => '#b1b1b1',
 				'border_color'     => '#707070',
-			)
+			),
 		);
 	}
 
@@ -147,7 +147,7 @@ class AMP_Customizer_Design_Settings {
 		$schemes = self::get_color_scheme_names();
 		$scheme_slugs = array_keys( $schemes );
 
-		if ( ! in_array( $value, $scheme_slugs ) ) {
+		if ( ! in_array( $value, $scheme_slugs, true ) ) {
 			$value = self::DEFAULT_COLOR_SCHEME;
 		}
 

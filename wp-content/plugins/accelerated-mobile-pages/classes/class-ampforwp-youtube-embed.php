@@ -1,4 +1,15 @@
-<?php require_once AMP__DIR__ . '/includes/embeds/class-amp-base-embed-handler.php';
+<?php
+
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+use AMPforWP\AMPVendor\AMP_Base_Embed_Handler;
+use AMPforWP\AMPVendor\AMP_HTML_Utils;
+$file_path = AMP__VENDOR__DIR__ . '/includes/embeds/class-amp-base-embed-handler.php';
+if( file_exists($file_path) ){
+	require_once $file_path;
+}
 
 // Much of this class is borrowed from Jetpack embeds
 class AMPforWP_YouTube_Embed_Handler extends AMP_Base_Embed_Handler {
@@ -77,16 +88,15 @@ class AMPforWP_YouTube_Embed_Handler extends AMP_Base_Embed_Handler {
 		}
 
 		$this->did_convert_elements = true;
-
-		return AMP_HTML_Utils::build_tag(
-			'amp-youtube',
-			array(
+		// Return it with a filter for the modification purpose #1378
+		$attrs = array(
 				'data-videoid' => $args['video_id'],
 				'layout' => 'responsive',
 				'width' => $this->args['width'],
 				'height' => $this->args['height'],
-			)
-		);
+				);
+		$attrs = ampforwp_amp_consent_check( $attrs );
+		return AMP_HTML_Utils::build_tag('amp-youtube',apply_filters('amp_youtube_params', $attrs) );
 	}
 
 	private function get_video_id_from_url( $url ) {

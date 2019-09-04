@@ -1,5 +1,5 @@
 <?php
-
+namespace ReduxCore\ReduxFramework;
     /**
      * Redux Framework is free software: you can redistribute it and/or modify
      * it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
     }
 
 // Don't duplicate me!
-    if ( ! class_exists( 'ReduxFramework_extension_vendor_support' ) ) {
+    if ( ! class_exists( 'ReduxCore\\ReduxFramework\\ReduxFramework_extension_vendor_support' ) ) {
 
         /**
          * Main ReduxFramework custom_field extension class
@@ -48,8 +48,9 @@
              */
             public function __construct( $parent = null ) {
                 if ( empty( $this->extension_dir ) ) {
-                    $this->extension_dir = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
-                    $this->extension_url = site_url( str_replace( trailingslashit( str_replace( '\\', '/', ABSPATH ) ), '', $this->extension_dir ) );
+                    $this->extension_dir = trailingslashit( str_replace( '\\', '/', AMPFORWP_EXTENSION_DIR.'/vendor_support/vendor_support' ) );
+                    //$this->extension_url = plugin_dir_url(__FILE__);
+                    $this->extension_url = AMPFORWP_PLUGIN_DIR_URI.'includes/options/extensions/vendor_support/vendor_support/';
                 }
 
                 include_once $this->extension_dir . 'class.vendor-url.php';

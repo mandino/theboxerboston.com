@@ -3,8 +3,8 @@ Contributors: mossifer
 Donate link: http://mosswebworks.com/donate/
 Tags: scheduled posts, missed schedule, missed scheduled posts
 Requires at least: 3.0.1
-Tested up to: 4.9.8
-Stable tag: 4.9.8
+Tested up to: 5.2.2
+Stable tag: 5.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,21 +18,25 @@ When a visitor loads your site, this lightweight script checks to see if any sch
 2. Upload the ZIP file.
 3. Activate the plugin through the 'Plugins' screen in WordPress
 
-
-Make sure that your timezone is set correctly in Settings->General.
+NOTE: Make sure that your timezone is set correctly in Settings->General.
 
 == Frequently Asked Questions ==
 
 = How often does it check missed posts? =
 
-Every time someone loads your your home page or a single blog post. 
+Every time someone loads your your home page or a single post/article.
 
 = I’ve activated the plugin-and the posts are not publishing =
 
-Please contact Moss Web Works directly to troubleshoot.
+Make sure your time zone is set correctly. Make sure there are no plugin conflicts by turning off your other plugins, one by one. Especially caching plugins.
+
+If you're still having trouble, contact Moss Web Works directly to troubleshoot.
 
 
 == Changelog ==
+
+= 3.0 =
+Optimizes database call to use index. Will check post type=post, page, and any custom post types like portfolio, recipe, testimonial, etc.
 
 = 2.21 =
 Fixes bug in date/time algorithm.

@@ -1,0 +1,2 @@
+[26-Jul-2016 22:25:40 America/Chicago] PHP Fatal error:  Call to undefined function add_action() in /home/hersha/public_html/www.theboxerboston.com/wp-content/plugins/events-calendar-pro/lib/apm_filters.php on line 11
+[26-Jul-2016 22:25:41 America/Chicago] PHP Fatal error:  Class 'TribeEventsFilter' not found in /home/hersha/public_html/www.theboxerboston.com/wp-content/plugins/events-calendar-pro/lib/TribeEventsFilter_GeoLoc.php on line 3

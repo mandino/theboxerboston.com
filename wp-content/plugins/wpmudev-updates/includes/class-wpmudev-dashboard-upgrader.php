@@ -34,23 +34,38 @@ class WPMUDEV_Dashboard_Upgrader {
 	protected $new_version = false;
 
 	/**
+	 * Tracks core update results during processing.
+	 *
+	 * @var array
+	 * @access protected
+	 */
+	protected $update_results = array();
+
+	/**
 	 * Set up actions for the Upgrader module.
 	 *
 	 * @since 4.1.0
 	 * @internal
 	 */
 	public function __construct() {
-		// Auto-Install scheduled updates.
-		add_action(
-			'admin_init',
-			array( $this, 'process_auto_upgrade' )
-		);
+		// Enable auto updates for enabled projects
+		add_filter( 'auto_update_plugin', array( $this, 'maybe_auto_update' ), 10, 2 );
+		add_filter( 'auto_update_theme', array( $this, 'maybe_auto_update' ), 10, 2 );
 
 		// Apply FTP credentials to install/update plugins and themes.
 		add_action(
 			'plugins_loaded',
 			array( $this, 'apply_credentials' )
 		);
+	}
+
+	/**
+	 * Captures core update results from hook, only way to get them
+	 *
+	 * @param $results
+	 */
+	public function capture_core_update_results( $results ) {
+		$this->update_results = $results;
 	}
 
 	/**
@@ -98,7 +113,7 @@ class WPMUDEV_Dashboard_Upgrader {
 		// Download possible?
 		if ( ! WPMUDEV_Dashboard::$api->has_key() ) { return false; }
 
-		$data = WPMUDEV_Dashboard::$api->get_membership_data();
+		$data = WPMUDEV_Dashboard::$api->get_projects_data();
 		$project = WPMUDEV_Dashboard::$api->get_project_data( $project_id );
 
 		// Valid project ID?
@@ -143,7 +158,6 @@ class WPMUDEV_Dashboard_Upgrader {
 		// Download possible?
 		if ( ! WPMUDEV_Dashboard::$api->has_key() ) { return false; }
 
-		$data = WPMUDEV_Dashboard::$api->get_membership_data();
 		$project = WPMUDEV_Dashboard::$api->get_project_data( $project_id );
 
 		// Valid project ID?
@@ -191,41 +205,46 @@ class WPMUDEV_Dashboard_Upgrader {
 	 * @return bool
 	 */
 	public function user_can_install( $project_id, $only_license = false ) {
-		$data = WPMUDEV_Dashboard::$api->get_membership_data();
+		$data            = WPMUDEV_Dashboard::$api->get_projects_data();
 		$membership_type = WPMUDEV_Dashboard::$api->get_membership_type( $license_for );
 
 		// Basic check if we have valid data.
-		if ( empty( $data['membership'] ) ) { return false; }
-		if ( empty( $data['projects'] ) ) { return false; }
-		if ( empty( $data['projects'][ $project_id ] ) ) { return false; }
+		if ( empty( $data['projects'] ) ) {
+			return false;
+		}
+		if ( empty( $data['projects'][ $project_id ] ) ) {
+			return false;
+		}
 
 		$project = $data['projects'][ $project_id ];
 
 		if ( ! $only_license ) {
-			if ( ! WPMUDEV_Dashboard::$site->allowed_user() ) { return false; }
+			if ( ! WPMUDEV_Dashboard::$site->allowed_user() ) {
+				return false;
+			}
 			//if ( ! $this->can_auto_install( $project['type'] ) ) { return false; }
 		}
 
 		$is_upfront = WPMUDEV_Dashboard::$site->id_upfront == $project_id;
-		$package = isset( $project['package'] ) ? $project['package'] : '';
-		$access = false;
+		$package    = isset( $project['package'] ) ? $project['package'] : '';
+		$access     = false;
 
 		if ( 'full' == $membership_type ) {
 			// User has full membership.
 			$access = true;
-		} elseif ( 'single' == $membership_type && $license_for == $project_id ) {
+		} else if ( 'single' == $membership_type && $license_for == $project_id ) {
 			// User has single membership for the requested project.
 			$access = true;
-		} elseif ( 'free' == $project['paid'] ) {
+		} else if ( 'free' == $project['paid'] ) {
 			// It's a free project. All users can install this.
 			$access = true;
-		} elseif ( 'lite' == $project['paid'] ) {
+		} else if ( 'lite' == $project['paid'] ) {
 			// It's a lite project. All users can install this.
 			$access = true;
-		} elseif ( 'single' == $membership_type && $package && $package == $license_for ) {
+		} else if ( 'single' == $membership_type && $package && $package == $license_for ) {
 			// A packaged project that the user bought.
 			$access = true;
-		} elseif ( $is_upfront && 'single' == $membership_type ) {
+		} else if ( $is_upfront && 'single' == $membership_type ) {
 			// User wants to get Upfront parent theme.
 			$access = true;
 		}
@@ -244,7 +263,7 @@ class WPMUDEV_Dashboard_Upgrader {
 	 * @return bool True if the project is compatible with current site.
 	 */
 	public function is_project_compatible( $project_id, &$reason = '' ) {
-		$data = WPMUDEV_Dashboard::$api->get_membership_data();
+		$data = WPMUDEV_Dashboard::$api->get_projects_data();
 		$reason = '';
 
 		if ( empty( $data['projects'][ $project_id ] ) ) {
@@ -341,14 +360,16 @@ class WPMUDEV_Dashboard_Upgrader {
 		);
 		$expire = time() + 900; // 15minutes * 60seconds.
 
+		$secure_cookie = 'https' === wp_parse_url( get_option( 'home' ), PHP_URL_SCHEME );
+
 		return setcookie(
 			COOKIEHASH . '-dev_ftp_data',
 			implode( '&', $cookie_data ),
 			$expire,
 			COOKIEPATH,
 			COOKIE_DOMAIN,
-			false,
-			false
+			$secure_cookie,
+			true
 		);
 	}
 
@@ -359,7 +380,8 @@ class WPMUDEV_Dashboard_Upgrader {
 	 * @since  1.0.0
 	 */
 	public function apply_credentials() {
-		$cookie_name = COOKIEHASH . '-dev_ftp_data';
+		$secure_cookie = 'https' === wp_parse_url( get_option( 'home' ), PHP_URL_SCHEME );
+		$cookie_name   = COOKIEHASH . '-dev_ftp_data';
 		if ( empty( $_COOKIE[ $cookie_name ] ) ) { return; }
 
 		$cookie_data = explode( '&', $_COOKIE[ $cookie_name ] );
@@ -371,8 +393,8 @@ class WPMUDEV_Dashboard_Upgrader {
 				1,
 				COOKIEPATH,
 				COOKIE_DOMAIN,
-				false,
-				false
+				$secure_cookie,
+				true
 			);
 			return;
 		}
@@ -405,7 +427,7 @@ class WPMUDEV_Dashboard_Upgrader {
 		);
 
 		// Refresh local project cache before the update starts.
-		WPMUDEV_Dashboard::$site->set_option( 'refresh_local_flag', true );
+		WPMUDEV_Dashboard::$site->refresh_local_projects('local' );
 		$local_projects = WPMUDEV_Dashboard::$site->get_cached_projects();
 
 		// Now make sure that the project is updated, no matter what!
@@ -567,7 +589,6 @@ class WPMUDEV_Dashboard_Upgrader {
 			}
 
 			// API call to inform wpmudev site about the change, as it's a single we can let it do that at the end to avoid multiple pings
-			// TODO don't ping and let api do db update when remote
 			WPMUDEV_Dashboard::$site->schedule_shutdown_refresh();
 			return true;
 		}
@@ -720,25 +741,195 @@ class WPMUDEV_Dashboard_Upgrader {
 	}
 
 	/**
+	 * Upgrade WP Core to latest version
+	 *
+	 * A lot of logic is borrowed from WP_Automatic_Updater
+	 *
+	 * @since  4.4
+	 * @return bool True on success.
+	 */
+	public function upgrade_core() {
+		global $wp_version, $wpdb;
+
+		$this->clear_error();
+		$this->clear_log();
+		$this->clear_version();
+
+		/**
+		 * mimic @see wp_maybe_auto_update()
+		 */
+		include_once( ABSPATH . 'wp-admin/includes/admin.php' );
+		include_once( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
+
+		add_action( 'automatic_updates_complete', array( $this, 'capture_core_update_results' ) );
+
+		add_filter( "auto_update_core", '__return_true', 99999 ); //temporarily allow core autoupdates
+		add_filter( "allow_major_auto_core_updates", '__return_true', 99999 ); //temporarily allow core autoupdates
+		add_filter( "allow_minor_auto_core_updates", '__return_true', 99999 ); //temporarily allow core autoupdates
+		add_filter( "auto_update_core", '__return_true', 99999 ); //temporarily allow core autoupdates
+		add_filter( "auto_update_theme", '__return_false', 99999 );
+		add_filter( "auto_update_plugin", '__return_false', 99999 );
+
+		//TODO don't send email for successful updates
+		//apply_filters( 'auto_core_update_send_email', true, $type, $core_update, $result )
+
+		$upgrader = new WP_Automatic_Updater;
+
+		/* ---- these checks are already run later, but we run them now so we can capture detailed errors --- */
+
+		if ( $upgrader->is_disabled() || ( defined( 'WP_AUTO_UPDATE_CORE' ) && false === WP_AUTO_UPDATE_CORE ) ) {
+			$this->set_error( 'core',
+			                  'autoupdates_disabled',
+			                  sprintf( __( 'You have disabled automatic core updates via define( \'WP_AUTO_UPDATE_CORE\', false ); in your wp-config.php or a filter. Remove that code to allow updating core by Automate or disable "WordPress Core" in your Automate settings. %1$sContact support%2$s if you need further assistance.',
+			                               'wpmudev' ),
+				                  '<a href="https://premium.wpmudev.org/hub/support/#get-support">',
+				                  '</a>') );
+			return false;
+		}
+
+		// Used to see if WP_Filesystem is set up to allow unattended updates.
+		$skin = new Automatic_Upgrader_Skin;
+		if ( ! $skin->request_filesystem_credentials( false, ABSPATH, false ) ) {
+			$this->set_error( 'core', 'fs_unavailable', __( 'Could not access filesystem.' ) ); //this string is from core translation
+			return false;
+		}
+
+		if ( $upgrader->is_vcs_checkout( ABSPATH ) ) {
+			$this->set_error( 'core', 'is_vcs_checkout', __( 'Automatic core updates are disabled when WordPress is checked out from version control.', 'wpmudev' ) );
+			return false;
+		}
+
+		wp_version_check(); // Check for Core updates
+		$updates = get_site_transient( 'update_core' );
+		if ( ! $updates || empty( $updates->updates ) )
+			return false;
+
+		$auto_update = false;
+		foreach ( $updates->updates as $update ) {
+			if ( 'autoupdate' != $update->response )
+				continue;
+
+			if ( ! $auto_update || version_compare( $update->current, $auto_update->current, '>' ) )
+				$auto_update = $update;
+		}
+
+		if ( ! $auto_update ) {
+			$this->set_error( 'core', 'update_unavailable', __( 'No WordPress core updates appear available.', 'wpmudev' ) );
+			return false;
+		}
+
+		//compatiblity
+		$php_compat = version_compare( phpversion(), $auto_update->php_version, '>=' );
+		if ( file_exists( WP_CONTENT_DIR . '/db.php' ) && empty( $wpdb->is_mysql ) ) {
+			$mysql_compat = true;
+		} else {
+			$mysql_compat = version_compare( $wpdb->db_version(), $auto_update->mysql_version, '>=' );
+		}
+
+		if ( ! $php_compat || ! $mysql_compat ) {
+			$this->set_error( 'core', 'incompatible', __( 'The new version of WordPress is incompatible with your PHP or MySQL version.', 'wpmudev' ) );
+			return false;
+		}
+
+		// If this was a critical update failure last try, cannot update.
+		$skip = false;
+		$failure_data = get_site_option( 'auto_core_update_failed' );
+		if ( $failure_data ) {
+			if ( ! empty( $failure_data['critical'] ) )
+				$skip = true;
+
+			// Don't claim we can update on update-core.php if we have a non-critical failure logged.
+			if ( $wp_version == $failure_data['current'] && false !== strpos( $auto_update->current, '.1.next.minor' ) )
+				$skip = true;
+
+			// Cannot update if we're retrying the same A to B update that caused a non-critical failure.
+			// Some non-critical failures do allow retries, like download_failed.
+			if ( empty( $failure_data['retry'] ) && $wp_version == $failure_data['current'] && $auto_update->current == $failure_data['attempted'] )
+				$skip = true;
+
+			if ( $skip ) {
+				$this->set_error( 'core', 'previous_failure', __( 'There was a previous failure with this update. Please update manually instead.', 'wpmudev' ) );
+				return false;
+			}
+		}
+
+		//this is the only reason left this would fail
+		if ( ! Core_Upgrader::should_update_to_version( $auto_update->current ) ) {
+			$this->set_error( 'core',
+			                  'autoupdates_disabled',
+			                  sprintf( __( 'You have disabled automatic core updates via define( \'WP_AUTO_UPDATE_CORE\', false ); in your wp-config.php or a filter. Remove that code to allow updating core by Automate or disable "WordPress Core" in your Automate settings. %1$sContact support%2$s if you need further assistance.',
+			                               'wpmudev' ),
+			                           '<a href="https://premium.wpmudev.org/hub/support/#get-support">',
+			                           '</a>') );
+			return false;
+		}
+
+		/* -------------------------- */
+
+		//ok we are good to give it a try
+		$upgrader->run();
+
+		//check populated var from hook
+		if ( ! empty( $this->update_results['core'] ) ) {
+			$update_result = $this->update_results['core'][0];
+
+			$result      = $update_result->result;
+			$this->log   = $update_result->messages;
+
+			//yay we did it!
+			if ( ! is_wp_error( $result ) ) {
+				$this->new_version = $result;
+
+				// API call to inform wpmudev site about the change, as it's a single we can let it do that at the end to avoid multiple pings
+				WPMUDEV_Dashboard::$site->schedule_shutdown_refresh();
+				return true;
+			}
+
+			$error_code = $result->get_error_code();
+			$error_msg = $result->get_error_message();
+
+			//if a rollback was run and errored append that to message.
+			if ( $error_code === 'rollback_was_required' && is_wp_error( $result->get_error_data()->rollback ) ) {
+				$rollback_result = $result->get_error_data()->rollback;
+				$error_msg .= " Rollback: " . $rollback_result->get_error_message();
+			}
+
+			$this->set_error( 'core', $error_code, $error_msg );
+			return false;
+		}
+
+
+		// An unhandled error occurred.
+		$this->set_error( 'core', 'unknown_failure', __( 'Update failed for an unknown reason.', 'wpmudev' ) );
+		return false;
+	}
+
+	/**
 	 * This function checks if the specified project is configured for automatic
 	 * upgrade in the background (without telling the user about the upgrade).
 	 *
-	 * If auto-upgrade is enabled then the information is stored in a option
-	 * value and the function returns true. The actual upgrade is done on next
-	 * page refresh.
+	 * If auto-upgrade is enabled then we enable it in the filter
 	 *
-	 * This function will only schedule auto-updates if the setting "Enable
+	 * For dashboard it respects the setting "Enable
 	 * automatic updates of WPMU DEV plugin" on the Manage page is enabled.
 	 *
-	 * @since  4.0.0
-	 * @param  object $project Return value of get_project_infos().
-	 * @return bool True means the project was scheduled for auto-upgrade.
+	 * @since  4.4
+	 *
+	 * @param  bool  $should_update Whether this item should be autoupdated
+	 * @param object $item          Plugin or Theme object
+	 *
+	 * @return boolean $should_update
 	 */
-	public function maybe_auto_upgrade( $project ) {
-		$autoupdate = WPMUDEV_Dashboard::$site->get_option( 'autoupdate_dashboard' );
-		if ( ! $autoupdate ) {
-			// Do nothing, auto-update is disabled!
-			return false;
+	public function maybe_auto_update( $should_update, $item ) {
+
+		if ( isset( $item->pid ) ) { //DEV themes have this set
+			$project_id = $item->pid;
+		} else if ( ! empty( $item->slug ) && false !== strpos( $item->slug, 'wpmudev_install-' ) ) {
+			//get the project_id
+			list( , $project_id ) = explode( '-', $item->slug );
+		} else {
+			// Do nothing, not a DEV project
+			return $should_update;
 		}
 
 		/*
@@ -752,101 +943,31 @@ class WPMUDEV_Dashboard_Upgrader {
 			)
 		);
 
-		if ( in_array( $project->pid, $auto_update_projects ) ) {
-			if ( ! $project->can_autoupdate ) { return false; }
+		if ( 119 == $project_id && ! WPMUDEV_Dashboard::$site->get_option( 'autoupdate_dashboard' ) ) {
+			// Do nothing, auto-update is disabled for Dashboard plugin!
+			return $should_update;
+		}
 
-			// Save the Project-ID to database.
-			$scheduled = WPMUDEV_Dashboard::$site->get_option( 'autoupdate_schedule' );
-			if ( ! is_array( $scheduled ) ) {
-				$scheduled = array();
-			}
-			$scheduled[] = $project->pid;
-			WPMUDEV_Dashboard::$site->set_option( 'autoupdate_schedule', $scheduled );
-
+		if ( in_array( $project_id, $auto_update_projects ) ) {
 			return true;
 		}
 
-		return false;
-	}
-
-	/**
-	 * This function is called on every admin-page load and will update any
-	 * projects that were scheduled for auto-upgrade.
-	 *
-	 * After the upgrade the page is refreshed.
-	 *
-	 * @since  4.0.0
-	 */
-	public function process_auto_upgrade() {
-
-		$autoupdate = WPMUDEV_Dashboard::$site->get_option( 'autoupdate_dashboard' );
-		if ( ! $autoupdate ) {
-			// Do nothing, auto-update is disabled!
-			return;
-		}
-
-		$scheduled = WPMUDEV_Dashboard::$site->get_option( 'autoupdate_schedule' );
-		if ( ! is_array( $scheduled ) || ! count( $scheduled ) ) {
-			// Do nothing, no updates were scheduled!
-			return;
-		}
-
-		// Time condition to avoid blocking wp-admin infinite auto-update-loop.
-		// Issue should not occur anymore, but better save than sorry!
-		$check = (int) WPMUDEV_Dashboard::$site->get_option( 'last_check_autoupdate' );
-		if ( time() > $check + (DAY_IN_SECONDS) ) {
-			// We installed auto-updates in last 3 minutes, not yet again...!
-			return;
-		}
-		WPMUDEV_Dashboard::$site->set_option( 'last_check_autoupdate', time() );
-		$all_okay = true;
-
-		// Upgrade all projects.
-		foreach ( $scheduled as $pid ) {
-			// Note: We intentionally ignore the function return value here!
-			$res = $this->upgrade( $pid );
-
-			// Log the result in default PHP error log.
-			if ( ! $res ) {
-				$all_okay = false;
-				$this->set_error( $pid, 'AUT.01', __( 'Auto-Upgrade failed', 'wpmudev' ) );
-			}
-		}
-
-		/*
-		 * If all updates were installed then we are good to install new updates
-		 * asap. Otherwise the DAY_IN_SECONDS delay is in effect to prevent
-		 * retrying a failed update too often.
-		 */
-		if ( $all_okay ) {
-			WPMUDEV_Dashboard::$site->set_option( 'last_check_autoupdate', 0 );
-		}
-
-		// Clear the whole update schedule!
-		WPMUDEV_Dashboard::$site->set_option( 'autoupdate_schedule', '' );
-
-		$args = array(
-			'wpmudev_msg' => '1',
-			'success' => time(),
-		);
-		$url = esc_url_raw( add_query_arg( $args ) );
-		header( 'X-Redirect-From: SITE process_auto_upgrade' );
-		wp_safe_redirect( $url );
-		exit;
+		return $should_update;
 	}
 
 	/**
 	 * Stores the specific error details.
 	 *
 	 * @since 4.1.0
-	 * @param string $pid The PID that was installed/updated.
-	 * @param string $code Error code.
+	 *
+	 * @param string $pid     The PID that was installed/updated.
+	 * @param string $code    Error code.
 	 * @param string $message Error message.
 	 */
 	public function set_error( $pid, $code, $message ) {
 		$this->error = array(
-			'pid' => $pid,
-			'code' => $code,
+			'pid'     => $pid,
+			'code'    => $code,
 			'message' => $message,
 		);
 
@@ -910,5 +1031,133 @@ class WPMUDEV_Dashboard_Upgrader {
 	 */
 	public function get_version() {
 		return $this->new_version;
+	}
+
+	/**
+	 * Delete Plugin, used internally
+	 *
+	 * @since  4.7
+	 *
+	 * @param  int|string $pid                 The project ID or plugin filename.
+	 * @param  bool       $skip_uninstall_hook to avoid data deleted on uninstall
+	 *
+	 * @return bool True on success.
+	 */
+	public function delete_plugin( $pid, $skip_uninstall_hook = false ) {
+		$this->clear_error();
+		$this->clear_log();
+
+		include_once ABSPATH . 'wp-admin/includes/plugin.php';
+		include_once ABSPATH . 'wp-admin/includes/file.php';
+
+		// Is a WPMU DEV project?
+		$is_dev = is_numeric( $pid );
+
+		if ( $is_dev ) {
+			$pid = (int) $pid;
+
+			if ( ! $this->is_project_installed( $pid ) ) {
+				$this->set_error( $pid, 'DEL.01', __( 'Plugin not installed', 'wpmudev' ) );
+
+				return false;
+			}
+			$local    = WPMUDEV_Dashboard::$site->get_cached_projects( $pid );
+			$filename = $local['filename'];
+		} else {
+			$filename = $pid;
+		}
+
+		$filename = plugin_basename( sanitize_text_field( $filename ) );
+
+		//Check that it's a valid plugin
+		$valid = validate_plugin( $filename );
+		if ( is_wp_error( $valid ) ) {
+			$this->set_error( $pid, 'DEL.09', $valid->get_error_message() );
+
+			return false;
+		}
+
+		// recheck
+		$active_blog    = is_plugin_active( $filename );
+		$active_network = is_multisite() && is_plugin_active_for_network( $filename );
+
+		if ( $active_blog || $active_network ) {
+			$this->set_error( $pid, 'DEL.02', __( 'You cannot delete a plugin while it is active.', 'wpmudev' ) );
+
+			return false;
+		}
+
+		// Check filesystem credentials. `delete_plugins()` will bail otherwise.
+		$url = wp_nonce_url( 'plugins.php?action=delete-selected&verify-delete=1&checked[]=' . $filename, 'bulk-plugins' );
+		ob_start();
+		$credentials = request_filesystem_credentials( $url );
+		ob_end_clean();
+		if ( false === $credentials || ! WP_Filesystem( $credentials ) ) {
+			global $wp_filesystem;
+
+			$error_code = 'DEL.03';
+			$error      = __( 'Unable to connect to the filesystem. Please confirm your credentials.', 'wpmudev' );
+
+			// Pass through the error from WP_Filesystem if one was raised.
+			if ( $wp_filesystem instanceof WP_Filesystem_Base && is_wp_error( $wp_filesystem->errors ) && $wp_filesystem->errors->get_error_code() ) {
+				$error_code = $wp_filesystem->errors->get_error_code();
+				$error      = esc_html( $wp_filesystem->errors->get_error_message() );
+			}
+
+			$this->set_error( $pid, $error_code, $error );
+
+			return false;
+		}
+
+		// skip uninstall hook if asked to
+		if ( $skip_uninstall_hook ) {
+			// uninstall hook available
+			if ( is_uninstallable_plugin( $filename ) ) {
+				/**
+				 * @see is_uninstallable_plugin()
+				 */
+				$uninstallable_plugins = (array) get_option( 'uninstall_plugins' );
+				if ( isset( $uninstallable_plugins[ $filename ] ) ) {
+					unset( $uninstallable_plugins[ $filename ] );
+					update_option( 'uninstall_plugins', $uninstallable_plugins );
+				}
+
+				if ( file_exists( WP_PLUGIN_DIR . '/' . dirname( $filename ) . '/uninstall.php' ) ) {
+					/** @var WP_Filesystem_Base $wp_filesystem */
+					global $wp_filesystem;
+					if ( $wp_filesystem instanceof WP_Filesystem_Base ) {
+						$wp_filesystem->delete( WP_PLUGIN_DIR . '/' . dirname( $filename ) . '/uninstall.php', false, 'f' );
+					}
+				}
+			}
+
+			// one recheck
+			if ( is_uninstallable_plugin( $filename ) ) {
+				$this->set_error( $pid, 'DEL.07', __( 'Plugin Uninstall hook could not be removed.', 'wpmudev' ) );
+			}
+		}
+
+		/*
+		 * Set before the update:
+		 * WP will refresh local cache via action-hook before the install()
+		 * method is finished. That refresh call must scan the FS again.
+		 */
+		WPMUDEV_Dashboard::$site->clear_local_file_cache();
+		$result = delete_plugins( array( $filename ) );
+
+		if ( true === $result ) {
+			wp_clean_plugins_cache( false );
+			WPMUDEV_Dashboard::$site->schedule_shutdown_refresh();
+
+			return true;
+		} elseif ( is_wp_error( $result ) ) {
+			$this->set_error( $pid, $result->get_error_code(), $result->get_error_message() );
+
+			return false;
+		} else {
+			$this->set_error( $pid, 'DEL.05', __( 'Plugin could not be deleted.', 'wpmudev' ) );
+
+			return false;
+		}
 	}
 }

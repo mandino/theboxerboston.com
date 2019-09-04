@@ -2,7 +2,7 @@
 // Don't load directly
 defined( 'WPINC' ) or die;
 
-class Tribe__Events__Aggregator__Record__Queue {
+class Tribe__Events__Aggregator__Record__Queue implements Tribe__Events__Aggregator__Record__Queue_Interface {
 	public static $in_progress_key = 'tribe_aggregator_queue_';
 	public static $queue_key = 'queue';
 	public static $activity_key = 'activity';
@@ -121,7 +121,7 @@ class Tribe__Events__Aggregator__Record__Queue {
 		}
 	}
 
-	public function init_queue( $items ) {
+	protected function init_queue( $items ) {
 		if ( 'csv' === $this->record->origin ) {
 			$this->record->reset_tracking_options();
 			$this->importer = $items;
@@ -135,7 +135,7 @@ class Tribe__Events__Aggregator__Record__Queue {
 		}
 	}
 
-	public function load_queue() {
+	protected function load_queue() {
 		if ( empty( $this->record->meta[ self::$queue_key ] ) ) {
 			$this->is_fetching = false;
 			$this->items       = array();
@@ -168,7 +168,7 @@ class Tribe__Events__Aggregator__Record__Queue {
 	 *
 	 * @return boolean
 	 */
-	public function is_fetching() {
+	protected function is_fetching() {
 		return $this->is_fetching;
 	}
 
@@ -178,7 +178,7 @@ class Tribe__Events__Aggregator__Record__Queue {
 	 * @return int
 	 */
 	public function count() {
-		return count( $this->items );
+		return is_array( $this->items ) ? count( $this->items ) : 0;
 	}
 
 	/**
@@ -196,7 +196,7 @@ class Tribe__Events__Aggregator__Record__Queue {
 	 *
 	 * @return int
 	 */
-	public function get_total() {
+	protected function get_total() {
 		return $this->count() + $this->activity->count( $this->get_queue_type() );
 	}
 
@@ -205,7 +205,7 @@ class Tribe__Events__Aggregator__Record__Queue {
 	 *
 	 * @return self
 	 */
-	public function save() {
+	protected function save() {
 		$this->record->update_meta( self::$activity_key, $this->activity );
 
 		/** @var Tribe__Meta__Chunker $chunker */
@@ -264,6 +264,24 @@ class Tribe__Events__Aggregator__Record__Queue {
 
 		if ( $this->has_lock ) {
 			if ( $this->is_fetching() ) {
+				if ( $this->record->should_queue_import() ) {
+					$response = $this->record->queue_import();
+
+					if ( $response instanceof WP_Error ) {
+						// the import queueing generated an error
+						$this->record->set_status_as_failed( $response );
+
+						return $this;
+					}
+
+					if ( is_numeric( $response ) ) {
+						// the import queueing was rescheduled
+						$this->record->set_status_as_pending();
+
+						return $this;
+					}
+				}
+
 				$data = $this->record->prep_import_data();
 
 				if (
@@ -282,6 +300,16 @@ class Tribe__Events__Aggregator__Record__Queue {
 
 			if ( ! $batch_size ) {
 				$batch_size = apply_filters( 'tribe_aggregator_batch_size', Tribe__Events__Aggregator__Record__Queue_Processor::$batch_size );
+			}
+
+			/*
+			 * If the queue system is switched mid-imports this might happen.
+			 * In that case we conservatively stop (kill) the queue process.
+			 */
+			if ( ! is_array( $this->items ) ) {
+				$this->kill_queue();
+
+				return $this;
 			}
 
 			// Every time we are about to process we reset the next var
@@ -327,6 +355,10 @@ class Tribe__Events__Aggregator__Record__Queue {
 	 * execution hangs half way through the processing of a batch.
 	 */
 	public function set_in_progress_flag() {
+		if ( empty( $this->record->id ) ) {
+			return;
+		}
+
 		Tribe__Post_Transient::instance()->set( $this->record->id, self::$in_progress_key, true, HOUR_IN_SECONDS );
 	}
 
@@ -334,6 +366,10 @@ class Tribe__Events__Aggregator__Record__Queue {
 	 * Clears the in progress flag.
 	 */
 	public function clear_in_progress_flag() {
+		if ( empty( $this->record->id ) ) {
+			return;
+		}
+
 		Tribe__Post_Transient::instance()->delete( $this->record->id, self::$in_progress_key );
 	}
 
@@ -343,6 +379,10 @@ class Tribe__Events__Aggregator__Record__Queue {
 	 * @return bool
 	 */
 	public function is_in_progress() {
+		if ( empty( $this->record->id ) ) {
+			return false;
+		}
+
 		Tribe__Post_Transient::instance()->get( $this->record->id, self::$in_progress_key );
 	}
 
@@ -354,7 +394,7 @@ class Tribe__Events__Aggregator__Record__Queue {
 	public function get_queue_type() {
 		$item_type = Tribe__Events__Main::POSTTYPE;
 
-		if ( 'csv' === $this->record->origin ) {
+		if ( ! empty( $this->record->origin ) && 'csv' === $this->record->origin ) {
 			$item_type = $this->record->meta['content_type'];
 		}
 
@@ -409,5 +449,48 @@ class Tribe__Events__Aggregator__Record__Queue {
 
 		return true;
 	}
-}
 
+	/**
+	 * Whether the current queue process is stuck or not.
+	 *
+	 * @since 4.6.21
+	 *
+	 * @return mixed
+	 */
+	public function is_stuck() {
+		return false;
+	}
+
+	/**
+	 * Orderly closes the queue process.
+	 *
+	 * @since 4.6.21
+	 *
+	 * @return bool
+	 */
+	public function kill_queue() {
+		return true;
+	}
+
+	/**
+	 * Whether the current queue process failed or not.
+	 *
+	 * @since 4.6.21
+	 *
+	 * @return bool
+	 */
+	public function has_errors() {
+		return false;
+	}
+
+	/**
+	 * Returns the queue error message.
+	 *
+	 * @since 4.6.21
+	 *
+	 * @return string
+	 */
+	public function get_error_message() {
+		return '';
+	}
+}

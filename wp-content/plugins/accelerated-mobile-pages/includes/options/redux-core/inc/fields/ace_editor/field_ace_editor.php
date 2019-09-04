@@ -1,5 +1,5 @@
 <?php
-
+namespace ReduxCore\ReduxFramework;
     /**
      * Redux Framework is free software: you can redistribute it and/or modify
      * it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
     }
 
 // Don't duplicate me!
-    if ( ! class_exists( 'ReduxFramework_ace_editor' ) ) {
+    if ( ! class_exists( 'ReduxCore\\ReduxFramework\\ReduxFramework_ace_editor' ) ) {
         class ReduxFramework_ace_editor {
 
             /**
@@ -32,6 +32,7 @@
              *
              * @since ReduxFramework 1.0.0
              */
+            private $time = '';
             function __construct( $field = array(), $value = '', $parent ) {
                 $this->parent = $parent;
                 $this->field  = $field;
@@ -46,6 +47,10 @@
                 if ( ! empty( $this->field['options'] ) ) {
                     $this->field['args'] = $this->field['options'];
                     unset( $this->field['options'] );
+                }
+                $this->time   = time();
+                if ( defined('AMPFORWP_VERSION') ) {
+                    $this->time = AMPFORWP_VERSION;
                 }
 
             }
@@ -112,7 +117,7 @@
                         'ace-editor-js',
                         '//cdn.jsdelivr.net/ace/1.1.9/min/ace.js',
                         array( 'jquery' ),
-                        '1.1.9',
+                        $this->time, //'1.1.9',
                         true
                     );
                 }
@@ -122,7 +127,7 @@
                         'redux-field-ace-editor-js',
                         ReduxFramework::$_url . 'inc/fields/ace_editor/field_ace_editor' . Redux_Functions::isMin() . '.js',
                         array( 'jquery', 'ace-editor-js', 'redux-js' ),
-                        time(),
+                        $this->time, //time(),
                         true
                     );
                 }

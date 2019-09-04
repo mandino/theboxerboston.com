@@ -2,7 +2,7 @@
 /*
 Plugin Name: Contact Form 7 Captcha
 Description: Add No CAPTCHA reCAPTCHA to Contact Form 7 using [cf7sr-simple-recaptcha] shortcode
-Version: 0.0.2
+Version: 0.0.3
 Author: 247wd
 */
 
@@ -106,7 +106,7 @@ if (!empty($cf7sr_key) && !empty($cf7sr_secret) && !is_admin()) {
 if (is_admin()) {
     function cf7sr_add_action_links($links) {
         array_unshift($links , '<a href="' . admin_url( 'options-general.php?page=cf7sr_edit' ) . '">Settings</a>');
-        array_unshift($links , '<a target="captcha" style="font-weight: 900; color: #d54e21;" href="http://www.cf7captcha.com">Upgrade To Pro</a>');
+        array_unshift($links , '<a target="_blank" style="font-weight: 900; color: #d54e21;" href="http://www.cf7captcha.com">Upgrade To Pro Free Limited Offer</a>');
         return $links;
     }
     add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), 'cf7sr_add_action_links', 10, 2 );
@@ -137,26 +137,36 @@ if (is_admin()) {
         }
         ?>
         <div class="cf7sr-wrap" style="font-size: 15px; background: #fff; border: 1px solid #e5e5e5; margin-top: 20px; padding: 20px; margin-right: 20px;">
-            <h2>Contact Form 7 Captcha Settings</h2>
-            You can generate Site key and Secret key <a target="_blank" href="https://www.google.com/recaptcha/admin">here</a>. Once generated, paste them below for this plugin to work.<br>
-            To add Recaptcha to CF7 form, add <strong>[cf7sr-simple-recaptcha]</strong> in your form ( preferable above submit button )<br><br>
+            <h2>
+                Captcha Settings
+                <a style="text-decoration: none" target="_blank" href="https://www.paypal.me/cf7captcha">
+                    <img style="vertical-align:middle;display:inline-block;width:100px;margin-left:5px;" src="<?php echo plugin_dir_url( __FILE__ ); ?>donate.png" alt="Donate">
+                </a>
+                <a target="_blank" style="font-size:14px;color:#d54e21;border:1px solid #d54e21;padding:5px;text-decoration:none;margin-left:4px;border-radius:3px;" href="http://www.cf7captcha.com">Upgrade To Pro Free Limited Offer</a>
+            </h2>
+            This plugin implements "I'm not a robot" checkbox.<br><br>
+            To add Recaptcha to CF7 form, add <strong>[cf7sr-simple-recaptcha]</strong> in your form ( preferable above submit button )<br>
             <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="POST">
                 <input type="hidden" value="1" name="update">
                 <ul>
                     <li><input type="text" style="width: 370px;" value="<?php echo $cf7sr_key; ?>" name="cf7sr_key"> Site key</li>
                     <li><input type="text" style="width: 370px;" value="<?php echo $cf7sr_secret; ?>" name="cf7sr_secret"> Secret key</li>
                     <li><input type="text" style="width: 370px;" value="<?php echo $cf7sr_message; ?>" name="cf7sr_message"> Invalid captcha error message</li>
-                </ul><br>
+                </ul>
                 <input type="submit" class="button-primary" value="Save Settings">
-            </form>
+            </form><br>
+            You can generate Site key and Secret key <strong><a target="_blank" href="https://www.google.com/recaptcha/admin">here</a></strong><br>
+            <strong style="color:red">Choose reCAPTCHA v2 -> Checkbox</strong><br>
+            <a target="_blank" href="https://www.google.com/recaptcha/admin"><img src="<?php echo plugin_dir_url( __FILE__ ); ?>captcha.jpg" width="400" alt="captcha" /></a><br><br>
             <?php if (!empty($updated)): ?>
                 <p>Settings were updated successfully!</p>
             <?php endif; ?>
         </div>
         <div class="cf7sr-wrap" style="font-size: 15px; background: #fff; border: 1px solid #e5e5e5; margin-top: 20px; padding: 20px; margin-right: 20px;">
+            <strong>Pro Version features: </strong>
             <ul>
-                <li><a target="captcha" style="font-weight: 900; color: #d54e21;" href="http://www.cf7captcha.com">CLICK HERE</a> to upgrade to Pro Version and get: <br></li>
-                <li>Render captcha widget in a specific language, choose from 70 languages. Free version auto-detects the user's language</li>
+                <li>WPML and POLYLANG language integration</li>
+                <li>Render captcha widget in a specific language, choose from 70 languages.</li>
                 <li>Switch between the color theme of the widget, light or dark</li>
                 <li>Switch between the type of the widget, image or audio</li>
                 <li>Switch between the size of the widget, normal or compact</li>

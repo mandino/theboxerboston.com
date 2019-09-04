@@ -1,6 +1,6 @@
 <?php
-
-require_once( AMP__DIR__ . '/includes/sanitizers/class-amp-base-sanitizer.php' );
+namespace AMPforWP\AMPVendor;
+require_once( AMP__VENDOR__DIR__ . '/includes/sanitizers/class-amp-base-sanitizer.php' );
 
 /**
  * Strips blacklisted tags and attributes from content.
@@ -19,6 +19,10 @@ class AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 
 	public function sanitize() {
 		$blacklisted_tags = $this->get_blacklisted_tags();
+		// Blacklisted tags for non-content #2835
+		if ( isset($this->args['non-content']) && 'non-content' === $this->args['non-content'] ) {
+			$blacklisted_tags = ampforwp_sidebar_blacklist_tags($blacklisted_tags);
+		}
 		$blacklisted_attributes = $this->get_blacklisted_attributes();
 		$blacklisted_protocols = $this->get_blacklisted_protocols();
 
@@ -28,12 +32,23 @@ class AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 	}
 
 	private function strip_attributes_recursive( $node, $bad_attributes, $bad_protocols ) {
-		if ( $node->nodeType !== XML_ELEMENT_NODE ) {
+		if ( XML_ELEMENT_NODE !== $node->nodeType ) {
 			return;
 		}
 
 		$node_name = $node->nodeName;
 
+		if($node->nodeName=='a' && $node->hasAttribute('href')){
+			$href = $node->getAttribute('href');
+			if ( $href ){
+				$node->setAttribute('href',\ampforwp_findInternalUrl($href));
+			}
+			// Adding rel="noreferrer" to external links to prevent security vulnerabilities #3276
+			if ( \ampforwp_isexternal($href) ) {
+				$node->setAttribute('rel', 'noreferrer');
+			}
+		}
+		
 		// Some nodes may contain valid content but are themselves invalid.
 		// Remove the node but preserve the children.
  		if ( 'font' === $node_name ) {
@@ -49,13 +64,13 @@ class AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 			for ( $i = $length - 1; $i >= 0; $i-- ) {
 				$attribute = $node->attributes->item( $i );
 				$attribute_name = strtolower( $attribute->name );
-				if ( in_array( $attribute_name, $bad_attributes ) ) {
+				if ( in_array( $attribute_name, $bad_attributes, true ) ) {
 					$node->removeAttribute( $attribute_name );
 					continue;
 				}
 
 				// on* attributes (like onclick) are a special case
-				if ( 0 === stripos( $attribute_name, 'on' ) && $attribute_name != 'on' ) {
+				if ( 0 === stripos( $attribute_name, 'on' ) && 'on' !== $attribute_name ) {
 					$node->removeAttribute( $attribute_name );
 					continue;
 				} elseif ( 'a' === $node_name ) {
@@ -73,6 +88,7 @@ class AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 	}
 
 	private function strip_tags( $node, $tag_names ) {
+		$attr = '';
 		foreach ( $tag_names as $tag_name ) {
 			$elements = $node->getElementsByTagName( $tag_name );
 			$length = $elements->length;
@@ -82,10 +98,22 @@ class AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 
 			for ( $i = $length - 1; $i >= 0; $i-- ) {
 				$element = $elements->item( $i );
+				if( is_null( $element ) ) continue; //Null check added.
+				// Allow script with application/ld+json #1958
+				if ( $element->hasAttributes() ) {
+					$attr = $element->getAttribute('type');
+					if ( '' !== $attr && 'application/ld+json' === $attr ) {
+						$element->nodeValue = htmlspecialchars($element->textContent);
+						continue;
+					}
+				}
 				$parent_node = $element->parentNode;
-				$parent_node->removeChild( $element );
+				$allowed_tags = AMP_Allowed_Tags_Generated::get_allowed_tags();
 
-				if ( 'body' !== $parent_node->nodeName && AMP_DOM_Utils::is_node_empty( $parent_node ) ) {
+				if( $parent_node->tagName != 'amp-state'){
+ 					$parent_node->removeChild( $element );
+				 }
+ 				if ( 'body' !== $parent_node->nodeName && AMP_DOM_Utils::is_node_empty( $parent_node ) ) {
 					$parent_node->parentNode->removeChild( $parent_node );
 				}
 			}
@@ -127,7 +155,10 @@ class AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 		// If no href is set and this isn't an anchor, it's invalid
 		if ( empty( $href ) ) {
 			$name_attr = $node->getAttribute( 'name' );
-			if ( ! empty( $name_attr ) ) {
+			$id_attr = $node->getAttribute( 'id' );
+			$class = $node->getAttribute( 'class' );
+			$on = $node->getAttribute( 'on' );
+			if ( ! empty( $name_attr ) || ! empty( $id_attr ) || ! empty( $class ) || ! empty( $on ) ) {
 				// No further validation is required
 				return true;
 			} else {
@@ -145,16 +176,26 @@ class AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 			$href = untrailingslashit( get_home_url() ) . $href;
 		}
 
-		$valid_protocols = array( 'http', 'https', 'mailto', 'sms', 'tel', 'viber', 'whatsapp' );
+		$valid_protocols = array( 'http', 'https', 'mailto', 'sms', 'tel', 'viber', 'whatsapp' , 'ftp');
 		$special_protocols = array( 'tel', 'sms' ); // these ones don't valid with `filter_var+FILTER_VALIDATE_URL`
 		$protocol = strtok( $href, ':' );
 
-		if ( false === filter_var( $href, FILTER_VALIDATE_URL )
-			&& ! in_array( $protocol, $special_protocols ) ) {
-			return false;
+		/* Convert space into %20 and esc url so it can work with the correct 
+		urls that have spaces */
+		if ( strpos($href, ' ') ){
+			$href = esc_url($href);
+		}
+		/*	Issue was with multibyte string.
+		 *  For more info check: https://github.com/ahmedkaludi/accelerated-mobile-pages/issues/2556 and https://github.com/ahmedkaludi/accelerated-mobile-pages/issues/2967
+		*/
+		if( false === $this->contains_any_multibyte($href) ){
+			if ( false === filter_var( $href, FILTER_VALIDATE_URL )
+				&& ! in_array( $protocol, $special_protocols, true ) ) {
+				return false;
+			}
 		}
 
-		if ( ! in_array( $protocol, $valid_protocols ) ) {
+		if ( ! in_array( $protocol, $valid_protocols, true ) ) {
 			return false;
 		}
 
@@ -193,9 +234,16 @@ class AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 			'javascript',
 		) );
 	}
-
+	private	function contains_any_multibyte($string){
+    	if(function_exists('mb_check_encoding')){
+    		return !\mb_check_encoding($string, 'ASCII') && \mb_check_encoding($string, 'UTF-8');
+    	}
+    	else{
+    		return false;
+    	}
+	}
 	private function get_blacklisted_tags() {
-		return $this->merge_defaults_with_args( 'add_blacklisted_tags', array(
+		return $this->merge_defaults_with_args( 'add_blacklisted_tags', apply_filters('amp_blacklisted_tags' , array(
 			'script',
 			'noscript',
 			'style',
@@ -212,6 +260,7 @@ class AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 			'option',
 			'link',
 			'picture',
+			'canvas',
 
 			// Sanitizers run after embed handlers, so if anything wasn't matched, it needs to be removed.
 			'embed',
@@ -225,7 +274,7 @@ class AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 			//'video',
 			//'audio',
 			//'iframe',
-		) );
+		) ) );
 	}
 
 	private function get_blacklisted_attributes() {

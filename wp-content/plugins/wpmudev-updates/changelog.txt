@@ -1,9 +1,123 @@
 Plugin Name: WPMU DEV Dashboard
-Author: Aaron Edwards, Philipp Stracker
+Author: Aaron Edwards
 
 Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
+
+4.7.3.2 - 08/08/2019 - Aaron, Leonidas, Biplav
+----------------------------------------------------------------------
+- Improvement: Added dashboard notice about Single Sign On ( SSO ) settings
+- Add: Single Sign On ( SSO ) can now be enabled from the getting started wizard on the Hub
+
+4.7.3.1 - 07/17/2019 - Aaron, Leonidas
+----------------------------------------------------------------------
+- Improvement: Automatically sync with the Hub when enabling SSO from Dashboard settings
+
+4.7.3 - 07/16/2019 - Aaron, Leonidas, Biplav
+----------------------------------------------------------------------
+- Add: Single Sign-On for The Hub (and also hosting!)
+- Improvement: New styling for analytics chart makes it easier to read when you've had the same number of views on consecutive days
+- Improvement: Add external IP address to system info (for easier checking of blacklist status).
+
+4.7.2 - 07/01/2019 - Aaron, Leonidas, Biplav
+----------------------------------------------------------------------
+- Fix: When upgrading multiple plugins from FREE to PRO, some plugins get deactivated
+- Improvement: Add text informing the $19 users of having an option to add a hosted site in the Hub
+- Improvement: Update the Documentation links
+- Improvement: Update the general error strings across the site
+- Fix: The typo in the help text on the Tools > Whitelabel menu item
+- Fix: The typo in the Permissions / Add User
+- Fix: Getting an error while updating the plugins
+
+4.7.1.3 - 06/10/2019 - Aaron, Biplav
+----------------------------------------------------------------------
+- Improvement: Better calculation of Analytics on dashboard widget.
+
+4.7.1.2 - 06/04/2019 - Aaron, Leonidas
+----------------------------------------------------------------------
+- Improvement: Stability improvements
+
+4.7.1.1 - 05/09/2019 - Aaron, Hendrawan
+----------------------------------------------------------------------
+- Fix: PHP notices on admin pages
+- Fix: Empty content on Top Plugins and Top Releases
+
+4.7.1 - 04/10/2019 - Aaron, Hendrawan
+----------------------------------------------------------------------
+- Fix: WPMU DEV Auto Install Compatibility
+
+4.7 - 10/19/2018 - Aaron, Leighton, Hendrawan
+----------------------------------------------------------------------
+- Improvement: Brand new UI/UX
+- Improvement: Better Onboarding process
+- Add: Displayed analytics metrics configuration
+
+4.6.1 - 02/26/2019 - Aaron, Hendrawan
+----------------------------------------------------------------------
+- Fix: Automate WP core update from 5.0.x to 5.1+
+
+4.6 - 09/24/2018 - Aaron, Leighton, Hendrawan
+----------------------------------------------------------------------
+- Add: new whitelabeled analytics service!
+- Add: new white-label WPMU DEV plugins settings
+- Improvement: Only redirect to login when activating the Dashboard plugin itself
+- Improvement: Accessibility for login screen
+
+4.5.2 - 04/26/2018 - Aaron
+----------------------------------------------------------------------
+- Important security fix for staff remote logins and protect against timing attacks (props Steve Truman @a3rev)
+- Fix a rare fatal error during activation in some WP installs
+- Fix a missing string in translations
+
+4.5.1 - 04/11/2018 - Aaron
+----------------------------------------------------------------------
+- Fix PHP 5.2 compatibility issue
+
+4.5 - 04/10/2018 - Aaron
+----------------------------------------------------------------------
+- Support plugin icons in update-core.php list
+- Add support for Hub upgrades of premium plugins that use the EDD updater class
+- Make support search open in a new tab
+- Fix bugs causing dash notice to show multiple times (only display the latest version)
+- Optimize and fix encoding issues when saving/caching options
+- Separate get latest projects and Hub sync API calls for efficiency
+- Lower server and API load by preventing duplicate Hub sync calls if not necessary
+- Implement exponential backoff in API calls in case of API outages
+- Retire themes sections
+- Update login error messages
+- Fix update links in plugin popovers
+- Various text changes and updates
+- Fix bug where activate button could show when plugin already activated
+- Fix missing or incorrect configure links in multisite plugin info popovers
+- Logout and remove site from Hub when deleting/uninstalling the plugin
+- Remove site from Hub immediately when logging out manually
+- Fix compatibility issue with Ultimate Branding - Admin Help Content module
+
+4.4 - 9/21/2017 - Aaron & Alex
+----------------------------------------------------------------------
+- Add WP core upgrade support from Hub/Automate
+- Improve Hub remote call error responses
+- Switch background Dashboard autoupdates to use core method
+- Fix some syncing cache issues delaying the detection of available updates
+- Accessibility improvements for screenreaders
+
+4.3.2 - 7/31/2017 - Aaron & Ricardo
+----------------------------------------------------------------------
+- Make Hub initiated actions faster/more efficient by only syncing details when necessary
+- Improve debug log detail for Hub initiated actions
+- Show detailed error messages on local install failures
+- Fix various responsive UI style issues
+- Fix broken search box on Support page
+- Various spelling and text fixes
+
+4.3.1 - 6/1/2017 - Aaron & Ricardo
+----------------------------------------------------------------------
+- Redesign of the login process, headers, and home page UX
+- Add System Info tab to login page for debugging help
+- Allow HTML in features lists (Upfront Builder link)
+- Fix System info back button link
+- Text adjustments
 
 4.3 - 1/30/2017 - Aaron
 ----------------------------------------------------------------------
@@ -345,7 +459,7 @@ Enables the brand new "Update All" function in Hub! Also includes several small 
 3.1.2 - 6/23/2012
 ----------------------------------------------------------------------
 - Added filter logic to convert images and JS to use https when admin area is using ssl.
-- Modify permissions logic for admin menus. This should work correctly when the site has blocked install/update perms on plugins and themes. Like when setting DISALLOW_FILE_MODES in wp-config.php the Plugins and Themes sections are not displayed to the user. 
+- Modify permissions logic for admin menus. This should work correctly when the site has blocked install/update perms on plugins and themes. Like when setting DISALLOW_FILE_MODES in wp-config.php the Plugins and Themes sections are not displayed to the user.
 - Improve handling of reset API keys
 - Fix permissions bug for some foreign language WP distributions
 
@@ -436,6 +550,3 @@ Added option to disable admin notices.
 1.0.0 - 12/15/2009
 ----------------------------------------------------------------------
 Initial Release.
-
-
-176081-1488796709

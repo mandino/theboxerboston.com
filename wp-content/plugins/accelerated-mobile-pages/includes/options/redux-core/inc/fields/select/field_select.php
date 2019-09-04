@@ -1,5 +1,5 @@
 <?php
-
+namespace ReduxCore\ReduxFramework;
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -14,10 +14,15 @@ if ( ! class_exists( 'ReduxFramework_select' ) ) {
          *
          * @since ReduxFramework 1.0.0
          */
+        private $time = '';
         public function __construct( $field = array(), $value = '', $parent ) {
             $this->parent = $parent;
             $this->field  = $field;
             $this->value  = $value;
+            $this->time   = time();
+            if ( defined('AMPFORWP_VERSION') ) {
+                $this->time = AMPFORWP_VERSION;
+            }
         }
 
         /**
@@ -66,8 +71,10 @@ if ( ! class_exists( 'ReduxFramework_select' ) ) {
             }
             //if
 
-            if ( ! empty( $this->field['options'] ) ) {
+            if ( ! empty( $this->field['options'] ) || ! empty( $this->field['ajax'] ) ) {
                 $multi = ( isset( $this->field['multi'] ) && $this->field['multi'] ) ? ' multiple="multiple"' : "";
+                $ajax = ( isset( $this->field['ajax'] ) && $this->field['ajax'] ) ? '-ajax' : ' ';
+                $action = ( isset( $this->field['data-action'] ) && $this->field['data-action'] ) ? 'data-action='.$this->field['data-action'] : ' ';
 
                 if ( ! empty( $this->field['width'] ) ) {
                     $width = ' style="' . $this->field['width'] . '"';
@@ -80,7 +87,7 @@ if ( ! class_exists( 'ReduxFramework_select' ) ) {
                     $nameBrackets = "[]";
                 }
 
-                $placeholder = ( isset( $this->field['placeholder'] ) ) ? esc_attr( $this->field['placeholder'] ) : __( 'Select an item', 'redux-framework' );
+                $placeholder = ( isset( $this->field['placeholder'] ) ) ? esc_attr( $this->field['placeholder'] ) : __( 'Select an option', 'accelerated-mobile-pages' );
 
                 if ( isset( $this->field['select2'] ) ) { // if there are any let's pass them to js
                     $select2_params = json_encode( $this->field['select2'] );
@@ -107,8 +114,33 @@ if ( ! class_exists( 'ReduxFramework_select' ) ) {
                 }
 
                 $sortable = ( isset( $this->field['sortable'] ) && $this->field['sortable'] ) ? ' select2-sortable"' : "";
-
-                echo '<select ' . $multi . ' id="' . $this->field['id'] . '-select" data-placeholder="' . $placeholder . '" name="' . $this->field['name'] . $this->field['name_suffix'] . $nameBrackets . '" class="redux-select-item ' . $this->field['class'] . $sortable . '"' . $width . ' rows="6">';
+                echo '<select ' . $multi . ' id="' . $this->field['id'] . '-select" data-placeholder="' . $placeholder . '" name="' . $this->field['name'] . $this->field['name_suffix'] . $nameBrackets . '" class="redux-select-item ' . 'redux-select-item'.$ajax. ' ' . $this->field['class'] . $sortable . '"' . $width . ' rows="6" '.$action.'>';
+                $redux_options = get_option('redux_builder_amp');
+                $options = $new_options = array();
+                if ( isset($this->field['data']) && 'categories' ==  $this->field['data'] ) {
+                    if ( ampforwp_get_setting('hide-amp-categories') ) {
+                        $options = ampforwp_get_setting('hide-amp-categories');
+                    }
+                    if ( is_array($options) ) {
+                        $options = array_keys(array_filter($options));
+                        foreach ($options as $option ) {
+                            echo '<option selected="selected" value="'.$option.'">'.get_the_category_by_ID($option).'</option>';
+                            $new_options[] = $option;
+                        }
+                    }
+                }
+                elseif ( isset($this->field['data']) && 'tags' ==  $this->field['data'] ) {
+                    if ( ampforwp_get_setting('hide-amp-tags-bulk-option') ) {
+                        $options = ampforwp_get_setting('hide-amp-tags-bulk-option');
+                    }
+                    if ( is_array($options) ) {
+                        $options = array_keys(array_filter($options));
+                        foreach ($options as $option ) {
+                            echo '<option selected="selected" value="'.$option.'">'.get_tag($option)->name.'</option>';
+                        }
+                    }
+                }
+                
                 echo '<option></option>';
 
                 foreach ( $this->field['options'] as $k => $v ) {
@@ -131,7 +163,7 @@ if ( ! class_exists( 'ReduxFramework_select' ) ) {
 
                 echo '</select>';
             } else {
-                echo '<strong>' . __( 'No items of this type were found.', 'redux-framework' ) . '</strong>';
+                echo '<strong>' . __( 'No items of this type were found.', 'accelerated-mobile-pages' ) . '</strong>';
             }
         } //function
 
@@ -162,7 +194,7 @@ if ( ! class_exists( 'ReduxFramework_select' ) ) {
                 'redux-field-select-js',
                 ReduxFramework::$_url . 'inc/fields/select/field_select' . Redux_Functions::isMin() . '.js',
                 array( 'jquery', 'select2-js', 'redux-js' ),
-                time(),
+                $this->time, //time(),
                 true
             );
 
@@ -171,7 +203,7 @@ if ( ! class_exists( 'ReduxFramework_select' ) ) {
                     'redux-field-select-css',
                     ReduxFramework::$_url . 'inc/fields/select/field_select.css',
                     array(),
-                    time(),
+                    $this->time, //time(),
                     'all'
                 );
             }

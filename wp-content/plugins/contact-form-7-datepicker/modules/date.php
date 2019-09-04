@@ -5,22 +5,21 @@ class ContactForm7Datepicker_Date {
 	static $inline_js = array();
 
 	public static function register() {
-		// Register shortcodes
-        add_action('wpcf7_init', array(__CLASS__, 'add_shortcodes'));
-
+        remove_action('wpcf7_init', 'wpcf7_add_shortcode_date');
 		remove_filter('wpcf7_validate_date', 'wpcf7_date_validation_filter', 10);
 		remove_filter('wpcf7_validate_date*', 'wpcf7_date_validation_filter', 10);
 		remove_filter('wpcf7_messages', 'wpcf7_date_messages');
-		remove_action('admin_init', 'wpcf7_add_tag_generator_date', 19);
+		remove_action('wpcf7_admin_init', 'wpcf7_add_tag_generator_date', 19);
+
+		// Register shortcodes
+        add_action('wpcf7_init', array(__CLASS__, 'add_shortcodes'));
 
 		// Validations
 		add_filter('wpcf7_validate_date', array(__CLASS__, 'validation_filter'), 10, 2);
 		add_filter('wpcf7_validate_date*', array(__CLASS__, 'validation_filter'), 10, 2);
 
-
 		// Tag generator
-		add_action('load-contact_page_wpcf7-new', array(__CLASS__, 'tag_generator'));
-		add_action('load-toplevel_page_wpcf7', array(__CLASS__, 'tag_generator'));
+		add_action('wpcf7_admin_init', array(__CLASS__, 'tag_generator'), 70);
 
 		// Messages
 		add_filter('wpcf7_messages', array(__CLASS__, 'messages'));
@@ -117,40 +116,39 @@ class ContactForm7Datepicker_Date {
 		$value = trim($_POST[$name]);
 
 		if ('date*' == $type && empty($value)) {
-			$result['valid'] = false;
-			$result['reason'][$name] = wpcf7_get_message('invalid_required');
+            		$result->invalidate($tag, wpcf7_get_message('invalid_required'));
 		}
 
 		if (! empty($value) && ! self::is_valid_date($value)) {
-			$result['valid'] = false;
-			$result['reason'][$name] = wpcf7_get_message('invalid_date');
+            		$result->invalidate($tag, wpcf7_get_message('invalid_date'));
 		}
 
 		return $result;
 	}
 
 	public static function tag_generator() {
-        if (! function_exists( 'wpcf7_add_tag_generator'))
+        if (! class_exists( 'WPCF7_TagGenerator' ))
             return;
 
-		wpcf7_add_tag_generator('date',
-			__('Date field', 'wpcf7'),
-			'wpcf7-tg-pane-date',
-			array(__CLASS__, 'tg_pane')
-		);
+        $tag_generator = WPCF7_TagGenerator::get_instance();
+        $tag_generator->add( 'date', __( 'date', 'contact-form-7' ),
+            array(__CLASS__, 'tg_pane') );
 	}
 
-	public static function tg_pane() {
-		require_once dirname(__FILE__) . '/generators/date.php';
+	public static function tg_pane($contact_form, $args = '') {
+        $args = wp_parse_args( $args, array() );
+        $type = 'date';
+
+        require_once dirname(__FILE__) . '/generators/date.php';
 	}
 
 	public static function add_shortcodes() {
-		if (function_exists('wpcf7_add_shortcode')) {
+		if (function_exists('wpcf7_add_form_tag')) {
             // Remove Contact Form 7's date module
             wpcf7_remove_shortcode('date');
             wpcf7_remove_shortcode('date*');
 
-			wpcf7_add_shortcode(array('date', 'date*'), array(__CLASS__, 'shortcode_handler'), true);
+			wpcf7_add_form_tag(array('date', 'date*'), array(__CLASS__, 'shortcode_handler'), true);
 		}
 	}
 

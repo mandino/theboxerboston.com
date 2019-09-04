@@ -1,5 +1,5 @@
 <?php
-
+namespace ReduxCore\ReduxFramework;
 /**
  * Field Select Image
  *
@@ -60,7 +60,7 @@ if ( ! class_exists( 'ReduxFramework_select_image' ) ) {
                 }
 
                 // Process placeholder
-                $placeholder = ( isset( $this->field['placeholder'] ) ) ? esc_attr( $this->field['placeholder'] ) : __( 'Select an item', 'redux-framework' );
+                $placeholder = ( isset( $this->field['placeholder'] ) ) ? esc_attr( $this->field['placeholder'] ) : __( 'Select an item', 'accelerated-mobile-pages' );
 
                 if ( isset( $this->field['select2'] ) ) { // if there are any let's pass them to js
                     $select2_params = json_encode( $this->field['select2'] );
@@ -91,8 +91,11 @@ if ( ! class_exists( 'ReduxFramework_select_image' ) ) {
 						if ( ! isset( $v['alt'] ) ) {
 							$v['alt'] = $v['title'];
 						}
+                        if ( ! isset( $v['demo_link'] ) ) {
+                            $v['demo_link'] = '';
+                        }
 						// Add the option tag, with values.
-						echo '<option value="' . $v['value'] . '" ' . $selected . ' data-image="'. $v['img'].'" data-alt="'. $v['alt'] .'">' . $v['title'] . '</option>';
+						echo '<option value="' . $v['value'] . '" ' . $selected . ' data-image="'. $v['img'].'" data-alt="'. $v['alt'] .'" data-demolink="'. $v['demo_link'] .'">' . $v['title'] . '</option>';
 					}else{
 						// No array?  No problem!
 						if ( ! is_array( $v ) ) {
@@ -135,7 +138,7 @@ if ( ! class_exists( 'ReduxFramework_select_image' ) ) {
                 echo '<br /><br />';
 
                 // Show the preview image.
-                echo '<div>';
+                echo '<div class="amp-theme-selector-img">';
 
                 // just in case.  You never know.
                 if ( ! isset( $arrNum ) ) {
@@ -150,7 +153,16 @@ if ( ! class_exists( 'ReduxFramework_select_image' ) ) {
                 if ( '' == $this->value ) {
                     echo '<img src="#" class="redux-preview-image" style="visibility:hidden;" id="image_' . $this->field['id'] . '">';
                 } else {
-                    echo '<img src=' . $this->field['options'][ $arrNum - 1 ]['img'] . ' class="redux-preview-image" id="image_' . $this->field['id'] . '">';
+                    $demo="#";
+                    if (isset($this->field['options'][ $arrNum - 1 ]['demo_link'])) {
+                        $demo = $this->field['options'][ $arrNum - 1 ]['demo_link'];
+                    }
+                    echo '<img src=' . $this->field['options'][ $arrNum - 1 ]['img'] . ' class="redux-preview-image" id="image_' . $this->field['id'] . '"  onclick="return window.open(\''.$demo.'\')">'; 
+                    if (isset($this->field['options'][ $arrNum - 1 ]['demo_link'])) {
+                        echo '<a href="'. $demo .'" id="theme-selected-demo-link" target="_blank">  
+                                Demo 
+                            </a>';
+                    }
                 }
 
                 // Close the <div> tag.
@@ -158,7 +170,7 @@ if ( ! class_exists( 'ReduxFramework_select_image' ) ) {
             } else {
 
                 // No options specified.  Really?
-                echo '<strong>' . __( 'No items of this type were found.', 'redux-framework' ) . '</strong>';
+                echo '<strong>' . __( 'No items of this type were found.', 'accelerated-mobile-pages' ) . '</strong>';
             }
         } //function
 
