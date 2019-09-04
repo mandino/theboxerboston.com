@@ -27,8 +27,20 @@
   define( 'AS3CF_SETTINGS', serialize( array(
     'access-key-id' => $_SERVER['AWS_KEY'],
     'secret-access-key' => $_SERVER['AWS_SECRET']
+	)));
+	
+	define( 'WPOSES_SETTINGS', serialize( array(
+    'send-via-ses'          => true,
+    'enable-open-tracking'  => true,
+    'enable-click-tracking' => true,
+    'region'                => 'us-east-1',
+    'log-duration'          => '30',
   )));
 
+  define( 'WPOSES_AWS_ACCESS_KEY_ID', $_SERVER['AWS_KEY'] );
+  define( 'WPOSES_AWS_SECRET_ACCESS_KEY', $_SERVER['AWS_SECRET'] );
+
+  define('DISALLOW_FILE_EDIT',true);
   
   $table_prefix = ($_SERVER['TABLE_PREFIX']) ? $_SERVER['TABLE_PREFIX'] : 'wp_';
   define('WP_DEBUG', false);
