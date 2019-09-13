@@ -33,7 +33,7 @@ class Hustle_E_Newsletter_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract
 			$addon = $this->addon;
 
 			if ( empty( $submitted_data['email'] ) ) {
-				throw new Exception( __('Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN ) );
+				throw new Exception( __('Required Field "email" was not filled by the user.', 'wordpress-popup' ) );
 			}
 
 			$groups = $addon_setting_values['list_id'];
@@ -75,10 +75,10 @@ class Hustle_E_Newsletter_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract
 						'name'  => 'status',
 						'value' => array(
 							'is_sent'       => true,
-							'description'   => __( 'Successfully added or updated member on e-Newsletter list', Opt_In::TEXT_DOMAIN ),
+							'description'   => __( 'Successfully added or updated member on e-Newsletter list', 'wordpress-popup' ),
 							'data_sent'     => $_data,
 							'data_received' => (array) $insert_data['results'],
-							'member_status' => 'subscribed' === $addon_setting_values['auto_optin'] ? __( 'Subscribed', Opt_In::TEXT_DOMAIN ) : __( 'Pending', Opt_In::TEXT_DOMAIN ),
+							'member_status' => 'subscribed' === $addon_setting_values['auto_optin'] ? __( 'Subscribed', 'wordpress-popup' ) : __( 'Pending', 'wordpress-popup' ),
 							'list_name' => $addon_setting_values['list_name'],
 						),
 					),
@@ -91,10 +91,10 @@ class Hustle_E_Newsletter_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract
 						'name'  => 'status',
 						'value' => array(
 							'is_sent'       => false,
-							'description'   => __( 'Something went wrong. Unable to add subscriber', Opt_In::TEXT_DOMAIN ),
+							'description'   => __( 'Something went wrong. Unable to add subscriber', 'wordpress-popup' ),
 							'data_sent'     => $_data,
 							'data_received' => array(),
-							'member_status' => __( 'Member could not be subscribed.', Opt_In::TEXT_DOMAIN ),
+							'member_status' => __( 'Member could not be subscribed.', 'wordpress-popup' ),
 							'list_name' => $addon_setting_values['list_name'],
 						),
 					),
@@ -131,7 +131,7 @@ class Hustle_E_Newsletter_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract
 		$addon_setting_values 		= $form_settings_instance->get_form_settings_values();
 
 		if ( empty( $submitted_data['email'] ) ) {
-			return __( 'Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN );
+			return __( 'Required Field "email" was not filled by the user.', 'wordpress-popup' );
 		}
 
 		if ( ! $allow_subscribed ) {

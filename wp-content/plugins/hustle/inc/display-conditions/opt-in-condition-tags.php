@@ -58,20 +58,20 @@ class Opt_In_Condition_Tags extends Opt_In_Condition_Abstract {
 			switch( $this->args->filter_type ){
 				case "only":
 					return ( in_array("all", $this->args->tags, true) )
-						? __("All tags", Opt_In::TEXT_DOMAIN)
-						: sprintf( __("%d tags", Opt_In::TEXT_DOMAIN), $total );
+						? __("All tags", 'wordpress-popup')
+						: sprintf( __("%d tags", 'wordpress-popup'), $total );
 				case "except":
 					return ( in_array("all", $this->args->tags, true) )
-						? __("No tags", Opt_In::TEXT_DOMAIN)
-						: sprintf( __("All tags except %d", Opt_In::TEXT_DOMAIN), $total );
+						? __("No tags", 'wordpress-popup')
+						: sprintf( __("All tags except %d", 'wordpress-popup'), $total );
 
 				default:
 					return null;
 			}
 		} else {
 			return ( !isset($this->args->filter_type) || "except" === $this->args->filter_type )
-				? __("All tags", Opt_In::TEXT_DOMAIN)
-				: __("No tags", Opt_In::TEXT_DOMAIN);
+				? __("All tags", 'wordpress-popup')
+				: __("No tags", 'wordpress-popup');
 		}
 	}
 }

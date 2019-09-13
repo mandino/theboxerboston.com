@@ -11,7 +11,7 @@
 		<span class="sui-toggle-slider"></span>
 	</label>
 
-	<label for="hustle-settings--<?php echo esc_html( $prefix ); ?>-enable"><?php printf( esc_html__( 'Enable %s', Opt_In::TEXT_DOMAIN ), esc_html( $label ) ); ?></label>
+	<label for="hustle-settings--<?php echo esc_html( $prefix ); ?>-enable"><?php printf( esc_html__( 'Enable %s', 'wordpress-popup' ), esc_html( $label ) ); ?></label>
 
 	<div id="hustle-<?php echo esc_html( $prefix ); ?>-toggle-wrapper" class="sui-toggle-content{{ ( _.isTrue( eval( '<?php echo esc_html( $prefix ); ?>' +  '_enabled' ) ) ) ? '' : ' sui-hidden' }}">
 
@@ -25,13 +25,13 @@
 
 				<?php if ( 'inline' !== $prefix ) { ?>
 
-					<label class="sui-settings-label"><?php esc_html_e( 'Horizontal Position', Opt_In::TEXT_DOMAIN ); ?></label>
-					<span class="sui-description"><?php esc_html_e( 'Choose the horizontal position of the Floating Social.', Opt_In::TEXT_DOMAIN ); ?></span>
+					<label class="sui-settings-label"><?php esc_html_e( 'Horizontal Position', 'wordpress-popup' ); ?></label>
+					<span class="sui-description"><?php esc_html_e( 'Choose the horizontal position of the Floating Social.', 'wordpress-popup' ); ?></span>
 
 				<?php } else { ?>
 
-					<label class="sui-settings-label"><?php esc_html_e( 'Position', Opt_In::TEXT_DOMAIN ); ?></label>
-					<span class="sui-description"><?php esc_html_e( 'Choose the position for the Floating Social.', Opt_In::TEXT_DOMAIN ); ?></span>
+					<label class="sui-settings-label"><?php esc_html_e( 'Position', 'wordpress-popup' ); ?></label>
+					<span class="sui-description"><?php esc_html_e( 'Choose the position for the Floating Social.', 'wordpress-popup' ); ?></span>
 
 				<?php } ?>
 
@@ -81,8 +81,8 @@
 
 				<div class="sui-form-field">
 
-					<label class="sui-settings-label"><?php esc_html_e( 'Vertical Position', Opt_In::TEXT_DOMAIN ); ?></label>
-					<span class="sui-description" style="margin-bottom: 10px;"><?php esc_html_e( 'Choose the vertical position of the Floating Social.', Opt_In::TEXT_DOMAIN ); ?></span>
+					<label class="sui-settings-label"><?php esc_html_e( 'Vertical Position', 'wordpress-popup' ); ?></label>
+					<span class="sui-description" style="margin-bottom: 10px;"><?php esc_html_e( 'Choose the vertical position of the Floating Social.', 'wordpress-popup' ); ?></span>
 
 					<div class="sui-side-tabs">
 
@@ -100,7 +100,7 @@
 									id="hustle-<?php echo esc_html( $prefix ); ?>-offset--top"
 									{{ _.checked( 'top' === eval( '<?php echo esc_html( $prefix ); ?>' + '_position_y' ), true) }}
 								/>
-								<?php esc_html_e( 'Top', Opt_In::TEXT_DOMAIN ); ?>
+								<?php esc_html_e( 'Top', 'wordpress-popup' ); ?>
 							</label>
 
 							<label
@@ -115,7 +115,7 @@
 									id="hustle-<?php echo esc_html( $prefix ); ?>-offset--bottom"
 									{{ _.checked( 'bottom' === eval( '<?php echo esc_html( $prefix ); ?>' + '_position_y' ), true) }}
 								/>
-								<?php esc_html_e( 'Bottom', Opt_In::TEXT_DOMAIN ); ?>
+								<?php esc_html_e( 'Bottom', 'wordpress-popup' ); ?>
 							</label>
 
 						</div>
@@ -135,8 +135,8 @@
 
 				<div class="sui-form-field">
 
-					<span class="sui-settings-label"><?php esc_html_e( 'Offset', Opt_In::TEXT_DOMAIN ); ?></span>
-					<span class="sui-description"><?php esc_html_e( "You can choose to offset the Floating Social relative to the screen of visitor's device or a specific CSS selector.", Opt_In::TEXT_DOMAIN ); ?></span>
+					<span class="sui-settings-label"><?php esc_html_e( 'Offset', 'wordpress-popup' ); ?></span>
+					<span class="sui-description"><?php esc_html_e( "You can choose to offset the Floating Social relative to the screen of visitor's device or a specific CSS selector.", 'wordpress-popup' ); ?></span>
 
 				</div>
 
@@ -144,7 +144,7 @@
 				// SETTINGS: Relative to ?>
 				<div class="sui-form-field">
 
-					<label class="sui-label"><?php esc_html_e( 'Relative to', Opt_In::TEXT_DOMAIN ); ?></label>
+					<label class="sui-label"><?php esc_html_e( 'Relative to', 'wordpress-popup' ); ?></label>
 
 					<div class="sui-side-tabs">
 
@@ -163,7 +163,7 @@
 									data-tab-menu="offset-screen"
 									{{ _.checked( 'screen' === eval( '<?php echo esc_html( $prefix ); ?>' + '_offset' ) , true)}}
 								/>
-								<?php esc_html_e( 'Screen', Opt_In::TEXT_DOMAIN ); ?>
+								<?php esc_html_e( 'Screen', 'wordpress-popup' ); ?>
 							</label>
 
 							<label
@@ -179,7 +179,7 @@
 									data-tab-menu="offset-css"
 									{{ _.checked( 'css_selector' === eval( '<?php echo esc_html( $prefix ); ?>' + '_offset' ) , true)}}
 								/>
-								<?php esc_html_e( 'CSS selector', Opt_In::TEXT_DOMAIN ); ?>
+								<?php esc_html_e( 'CSS selector', 'wordpress-popup' ); ?>
 							</label>
 
 						</div>
@@ -193,7 +193,7 @@
 
 								<div class="sui-form-field">
 
-									<label for="hustle-offset--<?php echo esc_html( $prefix ); ?>-selector" class="sui-label"><?php esc_html_e( 'CSS selector of the element', Opt_In::TEXT_DOMAIN ); ?></label>
+									<label for="hustle-offset--<?php echo esc_html( $prefix ); ?>-selector" class="sui-label"><?php esc_html_e( 'CSS selector of the element', 'wordpress-popup' ); ?></label>
 
 									<input
 										type="text"
@@ -205,7 +205,7 @@
 										class="sui-form-control"
 									/>
 
-									<span class="sui-error-message" style="display: none;"><?php esc_html_e( 'The selector you entered is not valid.', Opt_In::TEXT_DOMAIN ); ?></span>
+									<span class="sui-error-message" style="display: none;"><?php esc_html_e( 'The selector you entered is not valid.', 'wordpress-popup' ); ?></span>
 
 								</div>
 
@@ -233,7 +233,7 @@
 								id="hustle-<?php echo esc_attr( $prefix ); ?>-left-offset-label" 
 								class="sui-label<?php if ( 'right' === $display_settings[ $prefix . '_position' ] ) echo ' sui-hidden'; ?>"
 							>
-								<?php esc_html_e( 'Left offset value (px)', Opt_In::TEXT_DOMAIN ); ?>
+								<?php esc_html_e( 'Left offset value (px)', 'wordpress-popup' ); ?>
 							</label>
 
 							<label
@@ -241,7 +241,7 @@
 								id="hustle-<?php echo esc_attr( $prefix ); ?>-right-offset-label" 
 								class="sui-label<?php if ( 'right' !== $display_settings[ $prefix . '_position' ] ) echo ' sui-hidden'; ?>"
 							>
-								<?php esc_html_e( 'Right offset value (px)', Opt_In::TEXT_DOMAIN ); ?>
+								<?php esc_html_e( 'Right offset value (px)', 'wordpress-popup' ); ?>
 							</label>
 
 							<input
@@ -267,7 +267,7 @@
 								id="hustle-<?php echo esc_attr( $prefix ); ?>-top-offset-label" 
 								class="sui-label<?php if ( 'top' !== $display_settings[ $prefix . '_position_y' ] ) echo ' sui-hidden'; ?>"
 							>
-									<?php esc_html_e( 'Top offset value (px)', Opt_In::TEXT_DOMAIN ); ?>
+									<?php esc_html_e( 'Top offset value (px)', 'wordpress-popup' ); ?>
 							</label>
 
 							<label 
@@ -275,7 +275,7 @@
 								id="hustle-<?php echo esc_attr( $prefix ); ?>-bottom-offset-label" 
 								class="sui-label<?php if ( 'top' === $display_settings[ $prefix . '_position_y' ] ) echo ' sui-hidden'; ?>"
 							>
-								<?php esc_html_e( 'Bottom offset value (px)', Opt_In::TEXT_DOMAIN ); ?>
+								<?php esc_html_e( 'Bottom offset value (px)', 'wordpress-popup' ); ?>
 							</label>
 
 							<input
@@ -302,8 +302,8 @@
 
 				<div class="sui-form-field">
 
-					<label class="sui-settings-label"><?php esc_html_e( 'Alignment', Opt_In::TEXT_DOMAIN ); ?></label>
-					<span class="sui-description"><?php esc_html_e( 'You can choose between Left align, Middle or Right align. For example, choosing the left align will push the social bar to the left of the parent container.', Opt_In::TEXT_DOMAIN ); ?></span>
+					<label class="sui-settings-label"><?php esc_html_e( 'Alignment', 'wordpress-popup' ); ?></label>
+					<span class="sui-description"><?php esc_html_e( 'You can choose between Left align, Middle or Right align. For example, choosing the left align will push the social bar to the left of the parent container.', 'wordpress-popup' ); ?></span>
 
 					<div class="sui-side-tabs" style="margin-top: 10px;">
 
@@ -322,7 +322,7 @@
 									{{ _.checked( 'left' === eval( '<?php echo esc_html( $prefix ); ?>' + '_align' ), true) }}
 								/>
 								<i class="sui-icon-align-left sui-md" aria-hidden="true"></i>
-								<span class="sui-screen-reader-text"><?php esc_html_e( 'Left', Opt_In::TEXT_DOMAIN ); ?></span>
+								<span class="sui-screen-reader-text"><?php esc_html_e( 'Left', 'wordpress-popup' ); ?></span>
 							</label>
 
 							<label
@@ -338,7 +338,7 @@
 									{{ _.checked( 'center' === eval( '<?php echo esc_html( $prefix ); ?>' + '_align' ), true) }}
 								/>
 								<i class="sui-icon-align-center sui-md" aria-hidden="true"></i>
-								<span class="sui-screen-reader-text"><?php esc_html_e( 'Center', Opt_In::TEXT_DOMAIN ); ?></span>
+								<span class="sui-screen-reader-text"><?php esc_html_e( 'Center', 'wordpress-popup' ); ?></span>
 							</label>
 
 							<label
@@ -354,7 +354,7 @@
 									{{ _.checked( 'right' === eval( '<?php echo esc_html( $prefix ); ?>' + '_align' ), true) }}
 								/>
 								<i class="sui-icon-align-right sui-md" aria-hidden="true"></i>
-								<span class="sui-screen-reader-text"><?php esc_html_e( 'Right', Opt_In::TEXT_DOMAIN ); ?></span>
+								<span class="sui-screen-reader-text"><?php esc_html_e( 'Right', 'wordpress-popup' ); ?></span>
 							</label>
 
 						</div>

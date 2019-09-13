@@ -38,7 +38,7 @@ class Hustle_GHBlock_Social_Share extends Hustle_GHBlock_Abstract {
 		$css_class = isset( $properties['css_class'] ) ? $properties['css_class'] : '';
 
 		if ( isset( $properties['id'] ) ) {
-			return '[wd_hustle id="' . $properties['id'] . '" type="social_sharing" css_class="' . $css_class . '"]';
+			return '[wd_hustle id="' . $properties['id'] . '" type="social_sharing" css_class="' . $css_class . '"/]';
 		}
 	}
 
@@ -96,14 +96,14 @@ class Hustle_GHBlock_Social_Share extends Hustle_GHBlock_Abstract {
 
 	private function localize() {
 		return array(
-			'advanced' => esc_html__( 'Advanced', Opt_In::TEXT_DOMAIN ),
-			'additional_css_classes' => esc_html__( 'Additional CSS Classes', Opt_In::TEXT_DOMAIN ),
-			'name' => esc_html__( 'Name', Opt_In::TEXT_DOMAIN ),
-			'module' => esc_html__( 'Module', Opt_In::TEXT_DOMAIN ),
-			'customize_module' => esc_html__( 'Customize Social Share', Opt_In::TEXT_DOMAIN ),
-			'rendering' => esc_html__( 'Rendering...', Opt_In::TEXT_DOMAIN ),
-			'block_name' => esc_html__( 'Social Share', Opt_In::TEXT_DOMAIN ),
-			'block_description' => esc_html__( 'Display your Hustle Social Share module in this block.', Opt_In::TEXT_DOMAIN ),
+			'advanced' => esc_html__( 'Advanced', 'wordpress-popup' ),
+			'additional_css_classes' => esc_html__( 'Additional CSS Classes', 'wordpress-popup' ),
+			'name' => esc_html__( 'Name', 'wordpress-popup' ),
+			'module' => esc_html__( 'Module', 'wordpress-popup' ),
+			'customize_module' => esc_html__( 'Customize Social Share', 'wordpress-popup' ),
+			'rendering' => esc_html__( 'Rendering...', 'wordpress-popup' ),
+			'block_name' => esc_html__( 'Social Share', 'wordpress-popup' ),
+			'block_description' => esc_html__( 'Display your Hustle Social Share module in this block.', 'wordpress-popup' ),
 		);
 	}
 

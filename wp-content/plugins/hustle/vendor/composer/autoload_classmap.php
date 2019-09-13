@@ -6,21 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'AWeberAPI' => $vendorDir . '/aweber/aweber/aweber_api/aweber.php',
-    'AWeberAPIBase' => $vendorDir . '/aweber/aweber/aweber_api/aweber.php',
-    'AWeberAPIException' => $vendorDir . '/aweber/aweber/aweber_api/exceptions.php',
-    'AWeberCollection' => $vendorDir . '/aweber/aweber/aweber_api/aweber_collection.php',
-    'AWeberEntry' => $vendorDir . '/aweber/aweber/aweber_api/aweber_entry.php',
-    'AWeberEntryDataArray' => $vendorDir . '/aweber/aweber/aweber_api/aweber_entry_data_array.php',
-    'AWeberException' => $vendorDir . '/aweber/aweber/aweber_api/exceptions.php',
-    'AWeberMethodNotImplemented' => $vendorDir . '/aweber/aweber/aweber_api/exceptions.php',
-    'AWeberOAuthAdapter' => $vendorDir . '/aweber/aweber/aweber_api/oauth_adapter.php',
-    'AWeberOAuthDataMissing' => $vendorDir . '/aweber/aweber/aweber_api/exceptions.php',
-    'AWeberOAuthException' => $vendorDir . '/aweber/aweber/aweber_api/exceptions.php',
-    'AWeberResourceNotImplemented' => $vendorDir . '/aweber/aweber/aweber_api/exceptions.php',
-    'AWeberResponse' => $vendorDir . '/aweber/aweber/aweber_api/aweber_response.php',
-    'AWeberResponseError' => $vendorDir . '/aweber/aweber/aweber_api/exceptions.php',
-    'AWeberServiceProvider' => $vendorDir . '/aweber/aweber/aweber_api/aweber.php',
     'CS_REST_Administrators' => $vendorDir . '/campaignmonitor/createsend-php/csrest_administrators.php',
     'CS_REST_Campaigns' => $vendorDir . '/campaignmonitor/createsend-php/csrest_campaigns.php',
     'CS_REST_Clients' => $vendorDir . '/campaignmonitor/createsend-php/csrest_clients.php',
@@ -34,10 +19,4 @@ return array(
     'CS_REST_Transactional_ClassicEmail' => $vendorDir . '/campaignmonitor/createsend-php/csrest_transactional_classicemail.php',
     'CS_REST_Transactional_SmartEmail' => $vendorDir . '/campaignmonitor/createsend-php/csrest_transactional_smartemail.php',
     'CS_REST_Transactional_Timeline' => $vendorDir . '/campaignmonitor/createsend-php/csrest_transactional_timeline.php',
-    'CurlInterface' => $vendorDir . '/aweber/aweber/aweber_api/curl_object.php',
-    'CurlObject' => $vendorDir . '/aweber/aweber/aweber_api/curl_object.php',
-    'CurlResponse' => $vendorDir . '/aweber/aweber/aweber_api/curl_response.php',
-    'OAuthApplication' => $vendorDir . '/aweber/aweber/aweber_api/oauth_application.php',
-    'OAuthServiceProvider' => $vendorDir . '/aweber/aweber/aweber_api/oauth_application.php',
-    'OAuthUser' => $vendorDir . '/aweber/aweber/aweber_api/oauth_application.php',
 );

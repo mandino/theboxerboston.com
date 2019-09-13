@@ -6,8 +6,8 @@ $roles = Opt_In_Utils::get_user_roles();
 <div class="sui-box-settings-row">
 
 	<div class="sui-box-settings-col-1">
-		<span class="sui-settings-label"><?php esc_html_e( 'User Role', Opt_In::TEXT_DOMAIN ); ?></span>
-		<span class="sui-description"><?php esc_html_e( 'Choose the user roles you want to make the analytics widget available to.', Opt_In::TEXT_DOMAIN ); ?></span>
+		<span class="sui-settings-label"><?php esc_html_e( 'User Role', 'wordpress-popup' ); ?></span>
+		<span class="sui-description"><?php esc_html_e( 'Choose the user roles you want to make the analytics widget available to.', 'wordpress-popup' ); ?></span>
 	</div>
 
 	<div class="sui-box-settings-col-2">

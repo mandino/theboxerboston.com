@@ -38,7 +38,7 @@ class Hustle_GHBlock_Embeds extends Hustle_GHBlock_Abstract {
 		$css_class = isset( $properties['css_class'] ) ? $properties['css_class'] : '';
 
 		if ( isset( $properties['id'] ) ) {
-			return '[wd_hustle id="' . $properties['id'] . '" type="embedded" css_class="' . $css_class . '"]';
+			return '[wd_hustle id="' . $properties['id'] . '" type="embedded" css_class="' . $css_class . '"/]';
 		}
 	}
 
@@ -102,14 +102,14 @@ class Hustle_GHBlock_Embeds extends Hustle_GHBlock_Abstract {
 
 	private function localize() {
 		return array(
-			'name' => esc_html__( 'Name', Opt_In::TEXT_DOMAIN ),
-			'additional_css_classes' => esc_html__( 'Additional CSS Classes', Opt_In::TEXT_DOMAIN ),
-			'advanced' => esc_html__( 'Advanced', Opt_In::TEXT_DOMAIN ),
-			'module' => esc_html__( 'Module', Opt_In::TEXT_DOMAIN ),
-			'customize_module' => esc_html__( 'Customize embed', Opt_In::TEXT_DOMAIN ),
-			'rendering' => esc_html__( 'Rendering...', Opt_In::TEXT_DOMAIN ),
-			'block_name' => esc_html__( 'Embeds', Opt_In::TEXT_DOMAIN ),
-			'block_description' => esc_html__( 'Display your Hustle Embed module in this block.', Opt_In::TEXT_DOMAIN ),
+			'name' => esc_html__( 'Name', 'wordpress-popup' ),
+			'additional_css_classes' => esc_html__( 'Additional CSS Classes', 'wordpress-popup' ),
+			'advanced' => esc_html__( 'Advanced', 'wordpress-popup' ),
+			'module' => esc_html__( 'Module', 'wordpress-popup' ),
+			'customize_module' => esc_html__( 'Customize embed', 'wordpress-popup' ),
+			'rendering' => esc_html__( 'Rendering...', 'wordpress-popup' ),
+			'block_name' => esc_html__( 'Embeds', 'wordpress-popup' ),
+			'block_description' => esc_html__( 'Display your Hustle Embed module in this block.', 'wordpress-popup' ),
 		);
 	}
 

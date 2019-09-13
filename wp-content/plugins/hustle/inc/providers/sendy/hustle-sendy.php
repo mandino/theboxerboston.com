@@ -112,7 +112,10 @@ class Hustle_Sendy extends Hustle_Provider_Abstract {
 		$is_submit = isset( $submitted_data['installation_url'] ) && isset( $submitted_data['api_key'] );
 		$global_multi_id = $this->get_global_multi_id( $submitted_data );
 
-		$installation_url_valid = $api_key_valid = $list_id_valid = true;
+		$installation_url_valid = true;
+		$api_key_valid = true;
+		$list_id_valid = true;
+
 		if ( $is_submit ) {
 
 			$installation_url_valid = ! empty( trim( $current_data['installation_url'] ) );
@@ -121,13 +124,36 @@ class Hustle_Sendy extends Hustle_Provider_Abstract {
 			$api_key_validated = $installation_url_valid
 			                     && $api_key_valid
 			                     && $list_id_valid;
+			
 			if ( $api_key_validated ) {
 				$api_key_validated = $this->validate_api_credentials( $current_data['installation_url'], $current_data['api_key'], $current_data['list_id'] );
 			}
 
-			if ( is_wp_error( $api_key_validated ) || empty( $api_key_validated ) ) {
+			if ( is_wp_error( $api_key_validated ) ) {
+
 				$error_message = $this->provider_connection_falied();
+				$error_code = $api_key_validated->get_error_code();
 				$has_errors = true;
+
+				switch( $error_code ) {
+					case 'remote_error':
+						$installation_url_valid = false;
+						break;
+						
+					case 'Invalid API key':
+						$api_key_valid = false;
+						break;
+
+					case 'List does not exist':
+						$list_id_valid = false;
+						break;
+
+					default:
+						// TODO: add info to the logs. Last request url, data, etc. to check what happens here.
+						$error_message = __( 'Something went wrong.', 'wordpress-popup' );
+						break;
+				}
+
 			}
 
 			if ( ! $has_errors ) {
@@ -137,13 +163,13 @@ class Hustle_Sendy extends Hustle_Provider_Abstract {
 					'list_id' => $current_data['list_id'],
 					'name' => $current_data['name'],
 				);
+
 				// If not active, activate it.
-				// TODO: Wrap this in a friendlier method
 				if ( Hustle_Provider_Utils::is_provider_active( $this->_slug )
 						|| Hustle_Providers::get_instance()->activate_addon( $this->_slug ) ) {
 					$this->save_multi_settings_values( $global_multi_id, $settings_to_save );
 				} else {
-					$error_message = __( "Provider couldn't be activated.", Opt_In::TEXT_DOMAIN );
+					$error_message = __( "Provider couldn't be activated.", 'wordpress-popup' );
 					$has_errors = true;
 				}
 			}
@@ -151,17 +177,17 @@ class Hustle_Sendy extends Hustle_Provider_Abstract {
 			if ( ! $has_errors ) {
 
 				return array(
-					'html'         => Hustle_Api_Utils::get_modal_title_markup( __( 'Sendy Added', Opt_In::TEXT_DOMAIN ), __( 'You can now go to your forms and assign them to this integration', Opt_In::TEXT_DOMAIN ) ),
+					'html'         => Hustle_Api_Utils::get_modal_title_markup( __( 'Sendy Added', 'wordpress-popup' ), __( 'You can now go to your forms and assign them to this integration', 'wordpress-popup' ) ),
 					'buttons'      => array(
 						'close' => array(
-							'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'close' ),
+							'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', 'wordpress-popup' ), 'sui-button-ghost', 'close' ),
 						),
 					),
 					'redirect'     => false,
 					'has_errors'   => false,
 					'notification' => array(
 						'type' => 'success',
-						'text' => '<strong>' . $this->get_title() . '</strong> ' . __( 'Successfully connected', Opt_In::TEXT_DOMAIN ),
+						'text' => '<strong>' . $this->get_title() . '</strong> ' . __( 'Successfully connected', 'wordpress-popup' ),
 					),
 				);
 
@@ -176,20 +202,20 @@ class Hustle_Sendy extends Hustle_Provider_Abstract {
 					'label' => array(
 						'type'  => 'label',
 						'for'   => 'installation_url',
-						'value' => __( 'Installation URL', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Installation URL', 'wordpress-popup' ),
 					),
 					'installation_url' => array(
 						'type'        => 'url',
 						'name'        => 'installation_url',
 						'value'       => $current_data['installation_url'],
-						'placeholder' => __( 'Enter URL', Opt_In::TEXT_DOMAIN ),
+						'placeholder' => __( 'Enter URL', 'wordpress-popup' ),
 						'id'          => 'installation_url',
 						'icon'        => 'web-globe-world',
 					),
 					'error' => array(
 						'type'  => 'error',
 						'class' => $installation_url_valid ? 'sui-hidden' : '',
-						'value' => __( 'Please, enter a valid Sendy installation URL.', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Please, enter a valid Sendy installation URL.', 'wordpress-popup' ),
 					),
 				),
 			),
@@ -200,20 +226,20 @@ class Hustle_Sendy extends Hustle_Provider_Abstract {
 					'label' => array(
 						'type'  => 'label',
 						'for'   => 'api_key',
-						'value' => __( 'API Key', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'API Key', 'wordpress-popup' ),
 					),
 					'api_key' => array(
 						'type'        => 'text',
 						'name'        => 'api_key',
 						'value'       => $current_data['api_key'],
-						'placeholder' => __( 'Enter Key', Opt_In::TEXT_DOMAIN ),
+						'placeholder' => __( 'Enter Key', 'wordpress-popup' ),
 						'id'          => 'api_key',
 						'icon'        => 'key',
 					),
 					'error' => array(
 						'type'  => 'error',
 						'class' => $api_key_valid ? 'sui-hidden' : '',
-						'value' => __( 'Please, enter a valid Sendy API key.', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Please, enter a valid Sendy API key.', 'wordpress-popup' ),
 					),
 				),
 			),
@@ -224,20 +250,20 @@ class Hustle_Sendy extends Hustle_Provider_Abstract {
 					'label' => array(
 						'type'  => 'label',
 						'for'   => 'list_id',
-						'value' => __( 'List ID', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'List ID', 'wordpress-popup' ),
 					),
 					'list_id' => array(
 						'type'        => 'text',
 						'name'        => 'list_id',
 						'value'       => $current_data['list_id'],
-						'placeholder' => __( 'Enter List ID', Opt_In::TEXT_DOMAIN ),
+						'placeholder' => __( 'Enter List ID', 'wordpress-popup' ),
 						'id'          => 'list_id',
 						'icon'        => 'target',
 					),
 					'error' => array(
 						'type'  => 'error',
 						'class' => $list_id_valid ? 'sui-hidden' : '',
-						'value' => __( 'Please, enter a valid Sendy list ID.', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Please, enter a valid Sendy list ID.', 'wordpress-popup' ),
 					),
 				),
 			),
@@ -248,25 +274,25 @@ class Hustle_Sendy extends Hustle_Provider_Abstract {
 					'label' => array(
 						'type'  => 'label',
 						'for'   => 'instance-name-input',
-						'value' => __( 'Identifier', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Identifier', 'wordpress-popup' ),
 					),
 					'name' => array(
 						'type'        => 'text',
 						'name'        => 'name',
 						'value'       => $current_data['name'],
-						'placeholder' => __( 'E.g. Business Account', Opt_In::TEXT_DOMAIN ),
+						'placeholder' => __( 'E.g. Business Account', 'wordpress-popup' ),
 						'id'          => 'instance-name-input',
 					),
 					'message' => array(
 						'type'  => 'description',
-						'value' => __( 'Helps to distinguish your integrations if you have connected to the multiple accounts of this integration.', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Helps to distinguish your integrations if you have connected to the multiple accounts of this integration.', 'wordpress-popup' ),
 					),
 				)
 			),
 		);
 
-		$step_html = Hustle_Api_Utils::get_modal_title_markup( __( 'Configure Sendy', Opt_In::TEXT_DOMAIN ),
-			__( 'Log in to your Sendy installation to get your API Key and list ID.', Opt_In::TEXT_DOMAIN ) );
+		$step_html = Hustle_Api_Utils::get_modal_title_markup( __( 'Configure Sendy', 'wordpress-popup' ),
+			__( 'Log in to your Sendy installation to get your API Key and list ID.', 'wordpress-popup' ) );
 		if ( $has_errors ) {
 			$step_html .= '<span class="sui-notice sui-notice-error"><p>' . esc_html( $error_message ) . '</p></span>';
 		}
@@ -276,16 +302,16 @@ class Hustle_Sendy extends Hustle_Provider_Abstract {
 		if ( $is_edit ) {
 			$buttons = array(
 				'disconnect' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'disconnect', true ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', 'wordpress-popup' ), 'sui-button-ghost', 'disconnect', true ),
 				),
 				'save' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', Opt_In::TEXT_DOMAIN ), '', 'connect', true ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', 'wordpress-popup' ), '', 'connect', true ),
 				),
 			);
 		} else {
 			$buttons = array(
 				'connect' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Connect', Opt_In::TEXT_DOMAIN ), '', 'connect', true ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Connect', 'wordpress-popup' ), '', 'connect', true ),
 				),
 			);
 

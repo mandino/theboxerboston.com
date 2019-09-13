@@ -74,7 +74,7 @@ abstract class Hustle_Provider_Form_Hooks_Abstract {
 		// get the form settings instance to be available throughout cycle
 		$this->form_settings_instance = $this->addon->get_provider_form_settings( $this->module_id );
 	}
-	
+
 	/**
 	 * Override this function to execute an action on form submit.
 	 *
@@ -188,7 +188,7 @@ abstract class Hustle_Provider_Form_Hooks_Abstract {
 
 			// TODO: make this a field in the integration's settings.
 			// This way users can edit it without having to touch .po files.
-			$error_message = __( 'This email address has already subscribed.', Opt_In::TEXT_DOMAIN );
+			$error_message = __( 'This email address has already subscribed.', 'wordpress-popup' );
 		}
 		/**
 		 * Filter the submit form error message.
@@ -233,7 +233,7 @@ abstract class Hustle_Provider_Form_Hooks_Abstract {
 	 */
 	public function add_entry_fields( $submitted_data ) {
 		$addon_slug             = $this->addon->get_slug();
-		$module_id                = $this->module_id;
+		$module_id              = $this->module_id;
 		$form_settings_instance = $this->form_settings_instance;
 
 		$entry_fields = array();
@@ -337,12 +337,13 @@ abstract class Hustle_Provider_Form_Hooks_Abstract {
 		);
 
 		$posible_data = array(
-			'account_name' => __( 'Account name', Opt_In::TEXT_DOMAIN ),
-			'description' => __( 'Info', Opt_In::TEXT_DOMAIN ),
-			'member_status' => __( 'Member status', Opt_In::TEXT_DOMAIN ),
-			'list_name' => __( 'List name', Opt_In::TEXT_DOMAIN ),
-			'form_name' => __( 'Form name', Opt_In::TEXT_DOMAIN ),
-			'confirmation_message_name' => __( 'Confirmation message', Opt_In::TEXT_DOMAIN ),
+			'account_name' => __( 'Account name', 'wordpress-popup' ),
+			'description' => __( 'Info', 'wordpress-popup' ),
+			'member_status' => __( 'Member status', 'wordpress-popup' ),
+			'list_name' => __( 'List name', 'wordpress-popup' ),
+			'form_name' => __( 'Form name', 'wordpress-popup' ),
+			'tags_names' 	=> __( 'Tags', 'wordpress-popup' ),
+			'confirmation_message_name' => __( 'Confirmation message', 'wordpress-popup' ),
 		);
 
 		$sub_entries = array();
@@ -393,7 +394,7 @@ abstract class Hustle_Provider_Form_Hooks_Abstract {
 
 	/**
 	 * Change legacy data
-	 * 
+	 *
 	 * NOTE: this has been changed during migration, so we shouldn't need this anymore.
 	 *
 	 * @param array $data
@@ -429,14 +430,33 @@ abstract class Hustle_Provider_Form_Hooks_Abstract {
 				'value' => array(
 					'is_sent'       => false,
 					'description'   => $method . 'Failed to add member - ' . $e->getMessage(),
-					'data_sent'     => 'nope',
-					'data_received' => 'nope',
-					'url_request'   => 'nope',
 				),
 			),
 		);
 
 		return $entry_fields;
+	}
+
+	/**
+	 * Get extra fields
+	 *
+	 * @param array $all_fields
+	 * @param array $default_fields
+	 * @return array
+	 */
+	protected function get_extra_fields( $all_fields, $default_fields = array() ) {
+		if ( empty( $default_fields ) ) {
+			$default_fields = array(
+				'email' => '',
+				'first_name' => '',
+				'last_name' => '',
+			);
+		}
+		// Extra fields
+		$additional_fields = array_diff_key( $all_fields, $default_fields );
+
+		return $additional_fields;
+
 	}
 
 }

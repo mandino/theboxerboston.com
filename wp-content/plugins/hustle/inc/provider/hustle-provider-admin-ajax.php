@@ -31,9 +31,12 @@ class Hustle_Provider_Admin_Ajax {
 			add_action( 'wp_ajax_hustle_provider_get_providers', array( $this, 'get_addons' ) );
 			add_action( 'wp_ajax_hustle_provider_get_form_providers', array( $this, 'get_form_addons' ) );
 			add_action( 'wp_ajax_hustle_provider_deactivate', array( $this, 'deactivate' ) );
+			add_action( 'wp_ajax_hustle_provider_is_on_module', array( $this, 'is_on_module' ) );
 			add_action( 'wp_ajax_hustle_provider_settings', array( $this, 'settings' ) );
-			add_action( "wp_ajax_hustle_provider_form_settings", array( $this , "form_settings" ) );
+			add_action( 'wp_ajax_hustle_provider_form_settings', array( $this , 'form_settings' ) );
 			add_action( 'wp_ajax_hustle_provider_form_deactivate', array( $this, 'form_deactivate' ) );
+			add_action( 'wp_ajax_hustle_provider_insert_local_list', array( $this, 'insert_local_list' ) );
+
 			self::$is_ajax_hooked = true;
 		}
 	}
@@ -55,7 +58,7 @@ class Hustle_Provider_Admin_Ajax {
 		$slug  = $data['slug'];
 		$addon = Hustle_Provider_Utils::get_provider_by_slug( $slug );
 
-		Hustle_Provider_Utils::maybe_attach_addon_hook( $addon );
+		//Hustle_Provider_Utils::maybe_attach_addon_hook( $addon );
 		$title = $addon->get_title();
 
 		// handling multi_id
@@ -96,7 +99,7 @@ class Hustle_Provider_Admin_Ajax {
 
 		wp_send_json_success(
 			array(
-				'message' => __( 'Addon Deactivated', Opt_In::TEXT_DOMAIN ),
+				'message' => __( 'Addon Deactivated', 'wordpress-popup' ),
 				'data'    => array(
 					'notification' => array(
 						'type' => 'success',
@@ -136,7 +139,7 @@ class Hustle_Provider_Admin_Ajax {
 		$this->validate_ajax();
 
 		$sanitized_data = Opt_In_Utils::validate_and_sanitize_fields( $_POST['data'], array( 'moduleId' => 'moduleId' ) ); // CSRF: ok.
-		$module_id = $sanitized_data['moduleId'];
+		$module_id = isset( $sanitized_data['moduleId'] ) ? $sanitized_data['moduleId'] : '' ;
 		$providers = Hustle_Provider_Utils::get_registered_addons_grouped_by_form_connected( $module_id );
 		$connected_html = Opt_In::static_render( 'admin/integrations/wizard-table-connected', array(
 			'providers' => $providers['connected'],
@@ -159,6 +162,7 @@ class Hustle_Provider_Admin_Ajax {
 			'connected' => $connected_html,
 			'not_connected' => $not_connected_html,
 			'list_connected'=> implode( ',', $list_connected ),
+			'list_connected_total'=> count( $list_connected ),
 		) );
 	}
 
@@ -174,7 +178,7 @@ class Hustle_Provider_Admin_Ajax {
 		if( isset( $sanitized_post_data['errors'] ) ){
 			wp_send_json_error(
 				array(
-					'message'	=> __( 'Please check the required fields.', Opt_In::TEXT_DOMAIN ),
+					'message'	=> __( 'Please check the required fields.', 'wordpress-popup' ),
 					'errors'	=> $sanitized_post_data['errors']
 				)
 			);
@@ -191,13 +195,13 @@ class Hustle_Provider_Admin_Ajax {
 		$provider = Hustle_Provider_Utils::get_provider_by_slug( $slug );
 
 		if ( ! $provider ) {
-			wp_send_json_error( __( 'Provider not found', Opt_In::TEXT_DOMAIN ) );
+			wp_send_json_error( __( 'Provider not found', 'wordpress-popup' ) );
 		}
 
 		if ( ! $provider->is_settings_available() ) {
 			wp_send_json_error(
 				array(
-					'data' =>  $provider->get_empty_wizard( __( 'This provider does not have settings available', Opt_In::TEXT_DOMAIN ) ),
+					'data' =>  $provider->get_empty_wizard( __( 'This provider does not have settings available', 'wordpress-popup' ) ),
 				)
 			);
 		}
@@ -232,7 +236,7 @@ class Hustle_Provider_Admin_Ajax {
 		if( isset( $sanitized_post_data['errors'] ) ){
 			wp_send_json_error(
 				array(
-					'message'	=> __( 'Please check the required fields.', Opt_In::TEXT_DOMAIN ),
+					'message'	=> __( 'Please check the required fields.', 'wordpress-popup' ),
 					'errors'	=> $sanitized_post_data['errors']
 				)
 			);
@@ -240,19 +244,18 @@ class Hustle_Provider_Admin_Ajax {
 		$slug                = $sanitized_post_data['slug'];
 		$step                = (int)$sanitized_post_data['step'];
 		$current_step        = (int)$sanitized_post_data['current_step'];
-		//$is_step			 = $sanitized_post_data['is_step'];
 		$module_id			 = $sanitized_post_data['module_id'];
 
 		$provider = Hustle_Provider_Utils::get_provider_by_slug( $slug );
 
 		if ( ! $provider ) {
-			wp_send_json_error( __( 'Provider not found', Opt_In::TEXT_DOMAIN ) );
+			wp_send_json_error( __( 'Provider not found', 'wordpress-popup' ) );
 		}
 
 		if ( ! $provider->is_form_settings_available( $module_id ) ) {
 			wp_send_json_success(
 				array(
-					'data' =>  $provider->get_empty_wizard( __( 'This provider does not have form settings available', Opt_In::TEXT_DOMAIN ) ),
+					'data' =>  $provider->get_empty_wizard( __( 'This provider does not have form settings available', 'wordpress-popup' ) ),
 				)
 			);
 		}
@@ -286,11 +289,11 @@ class Hustle_Provider_Admin_Ajax {
 
 		if ( ! $provider ) {
 			$response = array(
-				'message' => __( 'Addon not found', Opt_In::TEXT_DOMAIN ),
+				'message' => __( 'Addon not found', 'wordpress-popup' ),
 				'data' => array(
 					'notification' => array(
 						'type' => 'error',
-						'text' => '<strong>' . $slug . '</strong> ' . __( 'integration not found', Opt_In::TEXT_DOMAIN ),
+						'text' => '<strong>' . $slug . '</strong> ' . __( 'integration not found', 'wordpress-popup' ),
 					),
 				)
 			);
@@ -323,26 +326,96 @@ class Hustle_Provider_Admin_Ajax {
 			$form_settings->disconnect_form( $sanitized_data );
 
 			$response = array(
-				'message' => sprintf( __( 'Successfully disconnected $1$s from this form', Opt_In::TEXT_DOMAIN ), $provider_title ),
+				'message' => sprintf( __( 'Successfully disconnected $1$s from this form', 'wordpress-popup' ), $provider_title ),
 				'data' => array(
 					'notification' => array(
 						'type' => 'success',
-						'text' => '<strong>' . $provider_title . '</strong> ' . __( 'successfully disconnected from this form', Opt_In::TEXT_DOMAIN ),
+						'text' => '<strong>' . $provider_title . '</strong> ' . __( 'successfully disconnected from this form', 'wordpress-popup' ),
 					),
 				)
 			);
 			wp_send_json_success( $response );
 		} else {
 			$response = array(
-				'message' => sprintf( __( 'Failed to disconnect $1$s from this form', Opt_In::TEXT_DOMAIN ), $provider_title ),
+				'message' => sprintf( __( 'Failed to disconnect $1$s from this form', 'wordpress-popup' ), $provider_title ),
 				'data' => array(
 					'notification' => array(
 						'type' => 'error',
-						'text' => '<strong>' . $provider->get_title() . '</strong> ' . __( 'Failed to disconnected from this form', Opt_In::TEXT_DOMAIN ),
+						'text' => '<strong>' . $provider->get_title() . '</strong> ' . __( 'Failed to disconnected from this form', 'wordpress-popup' ),
 					),
 				)
 			);
 			wp_send_json_error( $response );
 		}
+	}
+
+	/**
+	 * Insert local list into module
+	 *
+	 * @since 4.0.1
+	 */
+	public function insert_local_list() {
+		$this->validate_ajax();
+
+		$id = filter_input( INPUT_POST, 'id', FILTER_VALIDATE_INT );
+		$module = Hustle_Module_Model::instance()->get( $id );
+
+		if ( 0 < $id && ! is_wp_error( $module ) ) {
+			$module->update_meta( 'local_list_provider_settings', array( 'local_list_name' => 'hustle-' . wp_rand() ) );
+
+			$integrations_settings = $module->get_integrations_settings()->to_array();
+			$integrations_settings['active_integrations'] = 'local_list';
+			$module->update_meta( Hustle_Module_Model::KEY_INTEGRATIONS_SETTINGS, $integrations_settings );
+
+			wp_send_json_success();
+		}
+
+		if ( is_wp_error( $module ) ) {
+			wp_send_json_error( sprintf( __( 'Invalid module!', 'wordpress-popup' ) ) );
+		}
+
+		wp_send_json_error();
+	}
+
+	/**
+	 * Check if is active on module
+	 *
+	 * @since 4.0.1
+	 */
+	public function is_on_module() {
+		$this->validate_ajax();
+
+		$data  		= Opt_In_Utils::validate_and_sanitize_fields( $_POST['data'], array( 'slug' ) ); // WPCS: CSRF ok.
+		$slug		= $data['slug'];
+
+		$provider	= Hustle_Provider_Utils::get_provider_by_slug( $slug );
+		$is_multi_on_global = $provider->is_allow_multi_on_global();
+		$is_multi_on_form 	= $provider->is_allow_multi_on_form();
+
+		$global_multi_id = filter_var( $_POST['data']['globalMultiId'], FILTER_SANITIZE_STRING );
+		$global_multi_id = ( $is_multi_on_global && ! $is_multi_on_form && ! empty( $global_multi_id ) ) ? $global_multi_id : false;
+
+		$modules = Hustle_Provider_Utils::get_modules_by_active_provider( $slug, $global_multi_id );
+
+		$module_data = array();
+		foreach( $modules as $module ) {
+
+			$meta 			= $module->get_meta( 'integrations_settings' );
+			$module_data[ $module->module_id ] = array(
+				'edit_url'	=> html_entity_decode( esc_url( $module->decorated->get_edit_url( 'integrations' ) ) ),
+				'name'		=> $module->module_name,
+				'type' 		=> $module->module_type,
+				'active' 	=> json_decode( $meta )
+			);
+		}
+		if ( ! empty( $module_data ) ) {
+			wp_send_json_success( $module_data );
+		}
+
+		if ( is_wp_error( $modules ) ) {
+			wp_send_json_error( sprintf( __( 'Invalid module!', 'wordpress-popup' ) ) );
+		}
+
+		wp_send_json_error();
 	}
 }

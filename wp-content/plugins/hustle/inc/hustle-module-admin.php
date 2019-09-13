@@ -32,6 +32,10 @@ if ( ! class_exists( 'Hustle_Module_Admin' ) ) :
 
 			add_action( 'wp_ajax_hustle_dismiss_notification', array( $this, 'dismiss_notification' ) );
 
+			if ( Opt_In_Utils::_is_free() && ! file_exists( WP_PLUGIN_DIR . '/hustle/opt-in.php' ) ) {
+				add_action( 'wp_ajax_hustle_dismiss_admin_notice', array( $this, 'dismiss_admin_notice' ) );
+			}
+
 			if ( $this->_is_admin_module() ) {
 				add_action( 'admin_enqueue_scripts', array( $this, 'sui_scripts' ), 99 );
 				add_action( 'admin_enqueue_scripts', array( $this, 'register_scripts' ), 99 );
@@ -47,6 +51,9 @@ if ( ! class_exists( 'Hustle_Module_Admin' ) ) :
 				$this->load_notices();
 
 				add_filter( 'removable_query_args', array( $this, 'maybe_remove_paged' ) );
+
+				//geodirectory plugin compatibility.
+				add_action( 'wp_super_duper_widget_init', array( $this, 'geo_directory_compat' ), 10, 2 );
 			}
 
 			add_filter( 'w3tc_save_options', array( $this, 'filter_w3tc_save_options' ), 10, 1 );
@@ -91,7 +98,7 @@ if ( ! class_exists( 'Hustle_Module_Admin' ) ) :
 			remove_all_filters( 'mce_external_plugins' );
 
 			$external_plugins = array();
-			$external_plugins['hustle'] = $this->_hustle->get_static_var( 'plugin_url' ) . 'assets/js/vendor/tiny-mce-button.js';
+			$external_plugins['hustle'] = Opt_In::$plugin_url . 'assets/js/vendor/tiny-mce-button.js';
 			add_action( 'admin_footer', array( $this, 'add_tinymce_variables' ) );
 
 			return $external_plugins;
@@ -133,11 +140,11 @@ if ( ! class_exists( 'Hustle_Module_Admin' ) ) :
 			<div class="hustle-notice notice notice-warning is-dismissible" data-name="40_custom_style_review" data-nonce="<?php echo esc_attr( wp_create_nonce( 'hustle_dismiss_notification' ) ); ?>">
 				<p>
 				<?php printf(
-					esc_html__( "Hey %s, we have improved Hustle’s front-end code in this update, which included modifying some CSS classes. Any custom CSS you were using may have been affected. We recommend reviewing the modules (which were using custom CSS) to ensure they don't need any adjustments.", Opt_In::TEXT_DOMAIN ),
+					esc_html__( "Hey %s, we have improved Hustle’s front-end code in this update, which included modifying some CSS classes. Any custom CSS you were using may have been affected. We recommend reviewing the modules (which were using custom CSS) to ensure they don't need any adjustments.", 'wordpress-popup' ),
 					esc_html( $username )
 				); ?>
 				</p>
-				<p><a href="#" class="dismiss-notice"><?php esc_html_e( 'Dismiss this notice', Opt_In::TEXT_DOMAIN ); ?></a></p>
+				<p><a href="#" class="dismiss-notice"><?php esc_html_e( 'Dismiss this notice', 'wordpress-popup' ); ?></a></p>
 			</div>
 			<?php
 		}
@@ -161,8 +168,8 @@ if ( ! class_exists( 'Hustle_Module_Admin' ) ) :
 			$username = ! empty( $current_user->user_firstname ) ? $current_user->user_firstname : $current_user->user_login;
 			?>
 			<div id="hustle-tracking-migration-notice" class="notice notice-warning">
-				<p><?php printf( esc_html__( 'Hey %s, nice work on updating the Hustle! However, you need to migrate the data of your existing modules such as tracking data and email list manually.', Opt_In::TEXT_DOMAIN ), esc_html( $username ) ); ?></p>
-				<p><a href="<?php echo esc_url( $migrate_url ); ?>" class="button-primary"><?php esc_html_e( 'Migrate Data', Opt_In::TEXT_DOMAIN ); ?></a><a href="#" class="hustle-notice-dismiss" style="margin-left:20px;">Dismiss</a></p>
+				<p><?php printf( esc_html__( 'Hey %s, nice work on updating the Hustle! However, you need to migrate the data of your existing modules such as tracking data and email list manually.', 'wordpress-popup' ), esc_html( $username ) ); ?></p>
+				<p><a href="<?php echo esc_url( $migrate_url ); ?>" class="button-primary"><?php esc_html_e( 'Migrate Data', 'wordpress-popup' ); ?></a><a href="#" class="hustle-notice-dismiss" style="margin-left:20px;">Dismiss</a></p>
 			</div>
 			<?php
 		}
@@ -232,7 +239,7 @@ if ( ! class_exists( 'Hustle_Module_Admin' ) ) :
 					 * @see assets/js/vendor/tiny-mce-button.js
 					 */
 					$var_button = array(
-						'button_title' => __( 'Add Hustle Fields', Opt_In::TEXT_DOMAIN ),
+						'button_title' => __( 'Add Hustle Fields', 'wordpress-popup' ),
 						'fields' => $fields,
 						'available_editors' => $available_editors,
 					);
@@ -251,9 +258,9 @@ if ( ! class_exists( 'Hustle_Module_Admin' ) ) :
 			// reject js
 			$defined_rejected_js = $config['new_config']->get( 'minify.reject.files.js' );
 			$reject_js = array(
-			$this->_hustle->get_static_var( 'plugin_url' ) . 'assets/js/admin.min.js',
-			$this->_hustle->get_static_var( 'plugin_url' ) . 'assets/js/ad.js',
-			$this->_hustle->get_static_var( 'plugin_url' ) . 'assets/js/front.min.js',
+				Opt_In::$plugin_url . 'assets/js/admin.min.js',
+				Opt_In::$plugin_url . 'assets/js/ad.js',
+				Opt_In::$plugin_url . 'assets/js/front.min.js',
 			);
 			foreach ( $reject_js as $r_js ) {
 				if ( ! in_array( $r_js, $defined_rejected_js, true ) ) {
@@ -265,7 +272,7 @@ if ( ! class_exists( 'Hustle_Module_Admin' ) ) :
 			// reject css
 			$defined_rejected_css = $config['new_config']->get( 'minify.reject.files.css' );
 			$reject_css = array(
-				$this->_hustle->get_static_var( 'plugin_url' ) . 'assets/css/front.min.css',
+				Opt_In::$plugin_url . 'assets/css/front.min.css',
 			);
 			foreach ( $reject_css as $r_css ) {
 				if ( ! in_array( $r_css, $defined_rejected_css, true ) ) {
@@ -367,16 +374,16 @@ if ( ! class_exists( 'Hustle_Module_Admin' ) ) :
 
 			wp_register_script(
 				'optin_admin_ace',
-				$this->_hustle->get_static_var( 'plugin_url' ) . 'assets/js/vendor/ace/ace.js',
+				Opt_In::$plugin_url . 'assets/js/vendor/ace/ace.js',
 				array(),
-				$this->_hustle->get_const_var( 'VERSION' ),
+				Opt_In::VERSION,
 				true
 			);
 			wp_register_script(
 				'optin_admin_fitie',
-				$this->_hustle->get_static_var( 'plugin_url' ) . 'assets/js/vendor/fitie/fitie.js',
+				Opt_In::$plugin_url . 'assets/js/vendor/fitie/fitie.js',
 				array(),
-				$this->_hustle->get_const_var( 'VERSION' ),
+				Opt_In::VERSION,
 				true
 			);
 
@@ -470,7 +477,7 @@ if ( ! class_exists( 'Hustle_Module_Admin' ) ) :
 				$all_cpt_posts = new stdClass();
 				$all_cpt_posts->id = 'all';
 				$all_cpt_posts->text = ! empty( $cpt->labels ) && ! empty( $cpt->labels->all_items )
-					? $cpt->labels->all_items : __( 'All Items', Opt_In::TEXT_DOMAIN );
+					? $cpt->labels->all_items : __( 'All Items', 'wordpress-popup' );
 				array_unshift( $cpt_array['data'], $all_cpt_posts );
 
 				$post_types[ $cpt->name ] = $cpt_array;
@@ -481,10 +488,10 @@ if ( ! class_exists( 'Hustle_Module_Admin' ) ) :
 				'social_platforms_with_endpoints' => Hustle_Sshare_Model::get_sharing_endpoints(),
 				'social_platforms_with_api' => Hustle_Sshare_Model::get_networks_counter_endpoint(),
 				'module_name' => array(
-					'popup'           => __( 'Popup', Opt_In::TEXT_DOMAIN ),
-					'slidein'         => __( 'Slide-in', Opt_In::TEXT_DOMAIN ),
-					'embedded'        => __( 'Embed', Opt_In::TEXT_DOMAIN ),
-					'social_sharing'  => __( 'Social Sharing', Opt_In::TEXT_DOMAIN ),
+					'popup'           => __( 'Popup', 'wordpress-popup' ),
+					'slidein'         => __( 'Slide-in', 'wordpress-popup' ),
+					'embedded'        => __( 'Embed', 'wordpress-popup' ),
+					'social_sharing'  => __( 'Social Sharing', 'wordpress-popup' ),
 				),
 				'module_page' => array(
 					'popup'           => self::POPUP_LISTING_PAGE,
@@ -493,173 +500,174 @@ if ( ! class_exists( 'Hustle_Module_Admin' ) ) :
 					'social_sharing'  => self::SOCIAL_SHARING_LISTING_PAGE,
 				),
 				'labels' => array(
-					'submissions' => __( '%d Conversions', Opt_In::TEXT_DOMAIN ),
-					'views' => __( '%d Views', Opt_In::TEXT_DOMAIN ),
+					'submissions' => __( '%d Conversions', 'wordpress-popup' ),
+					'views' => __( '%d Views', 'wordpress-popup' ),
 				),
 				'messages' => array(
-					'settings_rows_updated' => __( ' number of IPs removed from database successfully.', Opt_In::TEXT_DOMAIN ),
-					'settings_saved' => __( 'Settings saved.' , Opt_In::TEXT_DOMAIN ),
-					'dont_navigate_away' => __( 'Changes are not saved, are you sure you want to navigate away?', Opt_In::TEXT_DOMAIN ),
-					'ok' => __( 'Ok', Opt_In::TEXT_DOMAIN ),
-					'something_went_wrong' => '<label class="wpmudev-label--notice"><span>' . __( 'Something went wrong. Please try again.', Opt_In::TEXT_DOMAIN ) . '</span></label>',
+					'settings_rows_updated' => __( ' number of IPs removed from database successfully.', 'wordpress-popup' ),
+					'settings_saved' => __( 'Settings saved.' , 'wordpress-popup' ),
+					'dont_navigate_away' => __( 'Changes are not saved, are you sure you want to navigate away?', 'wordpress-popup' ),
+					'ok' => __( 'Ok', 'wordpress-popup' ),
+					'something_went_wrong' => '<label class="wpmudev-label--notice"><span>' . __( 'Something went wrong. Please try again.', 'wordpress-popup' ) . '</span></label>',
+					'integraiton_required' => '<label class="wpmudev-label--notice"><span>' . __( 'An integration is required on optin module.', 'wordpress-popup' ) . '</span></label>',
 					// Used in visibility condtitions. Maybe can be removed
 					// LEIGH: No we can't remove this because we need to show module type(name) :)
 					// Well, fine...
 					'settings' => array(
-						'popup'           => __( 'popup', Opt_In::TEXT_DOMAIN ),
-						'slide_in'        => __( 'slide in', Opt_In::TEXT_DOMAIN ),
-						'after_content'   => __( 'after content', Opt_In::TEXT_DOMAIN ),
-						'floating_social' => __( 'floating social', Opt_In::TEXT_DOMAIN ),
+						'popup'           => __( 'popup', 'wordpress-popup' ),
+						'slide_in'        => __( 'slide in', 'wordpress-popup' ),
+						'after_content'   => __( 'after content', 'wordpress-popup' ),
+						'floating_social' => __( 'floating social', 'wordpress-popup' ),
 					),
 					'conditions' => array(
-						'visitor_logged_in'           => __( "Visitor's logged in status", Opt_In::TEXT_DOMAIN ),
-						'shown_less_than'             => __( 'Number of times visitor has seen', Opt_In::TEXT_DOMAIN ),
-						'only_on_mobile'              => __( "Visitor's Device", Opt_In::TEXT_DOMAIN ),
-						'from_specific_ref'           => __( 'Referrer', Opt_In::TEXT_DOMAIN ),
-						'from_search_engine'          => __( 'Source of Arrival', Opt_In::TEXT_DOMAIN ),
-						'on_specific_url'             => __( 'Specific URL', Opt_In::TEXT_DOMAIN ),
-						'visitor_has_never_commented' => __( 'Visitor Commented Before', Opt_In::TEXT_DOMAIN ),
-						'not_in_a_country'            => __( "Visitor's Country", Opt_In::TEXT_DOMAIN ),
+						'visitor_logged_in'           => __( "Visitor's logged in status", 'wordpress-popup' ),
+						'shown_less_than'             => __( 'Number of times visitor has seen', 'wordpress-popup' ),
+						'only_on_mobile'              => __( "Visitor's Device", 'wordpress-popup' ),
+						'from_specific_ref'           => __( 'Referrer', 'wordpress-popup' ),
+						'from_search_engine'          => __( 'Source of Arrival', 'wordpress-popup' ),
+						'on_specific_url'             => __( 'Specific URL', 'wordpress-popup' ),
+						'visitor_has_never_commented' => __( 'Visitor Commented Before', 'wordpress-popup' ),
+						'not_in_a_country'            => __( "Visitor's Country", 'wordpress-popup' ),
 
 						// OLD
-						'only_on_not_found'      => __( '404 page', Opt_In::TEXT_DOMAIN ),
-						'visitor_not_logged_in'  => __( 'Visitor not logged in', Opt_In::TEXT_DOMAIN ),
-						'not_on_mobile'          => __( 'Not on mobile devices', Opt_In::TEXT_DOMAIN ),
-						'not_from_specific_ref'  => __( 'Not from a specific referrer', Opt_In::TEXT_DOMAIN ),
-						'not_from_internal_link' => __( 'Not from an internal link', Opt_In::TEXT_DOMAIN ),
-						'not_on_specific_url'    => __( 'Not on specific URL', Opt_In::TEXT_DOMAIN ),
-						'visitor_has_commented'  => __( 'Visitor has commented before', Opt_In::TEXT_DOMAIN ),
-						'in_a_country' => __( 'In a specific Country', Opt_In::TEXT_DOMAIN ),
-						'posts' => __( 'Posts', Opt_In::TEXT_DOMAIN ),
-						'pages' => __( 'Pages', Opt_In::TEXT_DOMAIN ),
-						'categories' => __( 'Categories', Opt_In::TEXT_DOMAIN ),
-						'tags' => __( 'Tags', Opt_In::TEXT_DOMAIN ),
+						'only_on_not_found'      => __( '404 page', 'wordpress-popup' ),
+						'visitor_not_logged_in'  => __( 'Visitor not logged in', 'wordpress-popup' ),
+						'not_on_mobile'          => __( 'Not on mobile devices', 'wordpress-popup' ),
+						'not_from_specific_ref'  => __( 'Not from a specific referrer', 'wordpress-popup' ),
+						'not_from_internal_link' => __( 'Not from an internal link', 'wordpress-popup' ),
+						'not_on_specific_url'    => __( 'Not on specific URL', 'wordpress-popup' ),
+						'visitor_has_commented'  => __( 'Visitor has commented before', 'wordpress-popup' ),
+						'in_a_country' => __( 'In a specific Country', 'wordpress-popup' ),
+						'posts' => __( 'Posts', 'wordpress-popup' ),
+						'pages' => __( 'Pages', 'wordpress-popup' ),
+						'categories' => __( 'Categories', 'wordpress-popup' ),
+						'tags' => __( 'Tags', 'wordpress-popup' ),
 					),
 					'condition_labels' => array(
-						'only_on_not_found' => __( 'Only on 404 page', Opt_In::TEXT_DOMAIN ),
-						'visitor_logged_in' => __( 'Only when visitor has logged in', Opt_In::TEXT_DOMAIN ),
-						'visitor_not_logged_in' => __( 'Only when visitor has not logged in', Opt_In::TEXT_DOMAIN ),
-						'shown_less_than' => __( '{type_name} shown less than a certain times', Opt_In::TEXT_DOMAIN ),
-						'mobile_only' => __( 'Mobile only', Opt_In::TEXT_DOMAIN ),
-						'desktop_only' => __( 'Desktop only', Opt_In::TEXT_DOMAIN ),
-						'from_specific_ref' => __( 'From a specific referrer', Opt_In::TEXT_DOMAIN ),
-						'not_from_specific_ref' => __( 'Not from a specific referrer', Opt_In::TEXT_DOMAIN ),
-						'not_from_internal_link' => __( 'Not from an internal link', Opt_In::TEXT_DOMAIN ),
-						'from_search_engine' => __( 'From a search engine', Opt_In::TEXT_DOMAIN ),
-						'any_conditions' => __( 'Any with {number} conditions', Opt_In::TEXT_DOMAIN ),
-						'on_specific_url' => __( 'On specific URLs', Opt_In::TEXT_DOMAIN ),
-						'not_on_specific_url' => __( 'Not on specific URLs', Opt_In::TEXT_DOMAIN ),
-						'visitor_has_commented' => __( 'Visitor has commented before', Opt_In::TEXT_DOMAIN ),
-						'visitor_has_never_commented' => __( 'Visitor has never commented', Opt_In::TEXT_DOMAIN ),
-						'in_a_country' => __( 'In specific countries', Opt_In::TEXT_DOMAIN ),
-						'not_in_a_country' => __( 'Not in specific countries', Opt_In::TEXT_DOMAIN ),
-						'posts' => __( 'On certain posts', Opt_In::TEXT_DOMAIN ),
-						'all_posts' => __( 'All posts', Opt_In::TEXT_DOMAIN ),
+						'only_on_not_found' => __( 'Only on 404 page', 'wordpress-popup' ),
+						'visitor_logged_in' => __( 'Only when visitor has logged in', 'wordpress-popup' ),
+						'visitor_not_logged_in' => __( 'Only when visitor has not logged in', 'wordpress-popup' ),
+						'shown_less_than' => __( '{type_name} shown less than a certain times', 'wordpress-popup' ),
+						'mobile_only' => __( 'Mobile only', 'wordpress-popup' ),
+						'desktop_only' => __( 'Desktop only', 'wordpress-popup' ),
+						'from_specific_ref' => __( 'From a specific referrer', 'wordpress-popup' ),
+						'not_from_specific_ref' => __( 'Not from a specific referrer', 'wordpress-popup' ),
+						'not_from_internal_link' => __( 'Not from an internal link', 'wordpress-popup' ),
+						'from_search_engine' => __( 'From a search engine', 'wordpress-popup' ),
+						'any_conditions' => __( 'Any with {number} conditions', 'wordpress-popup' ),
+						'on_specific_url' => __( 'On specific URLs', 'wordpress-popup' ),
+						'not_on_specific_url' => __( 'Not on specific URLs', 'wordpress-popup' ),
+						'visitor_has_commented' => __( 'Visitor has commented before', 'wordpress-popup' ),
+						'visitor_has_never_commented' => __( 'Visitor has never commented', 'wordpress-popup' ),
+						'in_a_country' => __( 'In specific countries', 'wordpress-popup' ),
+						'not_in_a_country' => __( 'Not in specific countries', 'wordpress-popup' ),
+						'posts' => __( 'On certain posts', 'wordpress-popup' ),
+						'all_posts' => __( 'All posts', 'wordpress-popup' ),
 						'number_views' => '< {number}',
-						'any' => __( 'Any', Opt_In::TEXT_DOMAIN ),
-						'all' => __( 'All', Opt_In::TEXT_DOMAIN ),
-						'no' => __( 'No', Opt_In::TEXT_DOMAIN ),
-						'none' => __( 'None', Opt_In::TEXT_DOMAIN ),
-						'true' => __( 'True', Opt_In::TEXT_DOMAIN ),
-						'false' => __( 'False', Opt_In::TEXT_DOMAIN ),
-						'logged_in' => __( 'Logged in', Opt_In::TEXT_DOMAIN ),
-						'logged_out' => __( 'Logged out', Opt_In::TEXT_DOMAIN ),
-						'only_these' => __( 'Only {number}', Opt_In::TEXT_DOMAIN ),
-						'except_these' => __( 'Any except {number}', Opt_In::TEXT_DOMAIN ),
-						'except_these_countries' => __( 'Any except {number}', Opt_In::TEXT_DOMAIN ),
-						'only_on_these_countries' => __( 'Only {number} countries', Opt_In::TEXT_DOMAIN ),
-						'except_these_refs' => __( 'Any except {number} referrer', Opt_In::TEXT_DOMAIN ),
-						'only_on_these_refs' => __( 'From {number} referrer', Opt_In::TEXT_DOMAIN ),
-						'all_urls' => __( 'All URLs', Opt_In::TEXT_DOMAIN ),
-						'except_these_urls' => __( 'All URLs except {number}', Opt_In::TEXT_DOMAIN ),
-						'only_on_these_urls' => __( 'Only {number} URLs', Opt_In::TEXT_DOMAIN ),
-						'no_posts' => __( 'No posts', Opt_In::TEXT_DOMAIN ),
-						'only_on_these_posts' => __( 'Only {number} posts', Opt_In::TEXT_DOMAIN ),
-						'number_posts' => __( '{number} posts', Opt_In::TEXT_DOMAIN ),
-						'except_these_posts' => __( 'All posts except {number}', Opt_In::TEXT_DOMAIN ),
-						'pages' => __( 'On certain pages', Opt_In::TEXT_DOMAIN ),
-						'all_pages' => __( 'All pages', Opt_In::TEXT_DOMAIN ),
-						'no_pages' => __( 'No pages', Opt_In::TEXT_DOMAIN ),
-						'only_on_these_pages' => __( 'Only {number} pages', Opt_In::TEXT_DOMAIN ),
-						'number_pages' => __( '{number} pages', Opt_In::TEXT_DOMAIN ),
-						'except_these_pages' => __( 'All pages except {number}', Opt_In::TEXT_DOMAIN ),
-						'categories' => __( 'On certain categories', Opt_In::TEXT_DOMAIN ),
-						'all_categories' => __( 'All categories', Opt_In::TEXT_DOMAIN ),
-						'no_categories' => __( 'No categories', Opt_In::TEXT_DOMAIN ),
-						'only_on_these_categories' => __( 'Only {number} categories', Opt_In::TEXT_DOMAIN ),
-						'number_categories' => __( '{number} categories', Opt_In::TEXT_DOMAIN ),
-						'except_these_categories' => __( 'All categories except {number}', Opt_In::TEXT_DOMAIN ),
-						'tags' => __( 'On certain tags', Opt_In::TEXT_DOMAIN ),
-						'all_tags' => __( 'All tags', Opt_In::TEXT_DOMAIN ),
-						'no_tags' => __( 'No tags', Opt_In::TEXT_DOMAIN ),
-						'only_on_these_tags' => __( 'Only {number} tags', Opt_In::TEXT_DOMAIN ),
-						'number_tags' => __( '{number} tags', Opt_In::TEXT_DOMAIN ),
-						'except_these_tags' => __( 'All tags except {number}', Opt_In::TEXT_DOMAIN ),
-						'everywhere' => __( 'Show everywhere', Opt_In::TEXT_DOMAIN ),
+						'any' => __( 'Any', 'wordpress-popup' ),
+						'all' => __( 'All', 'wordpress-popup' ),
+						'no' => __( 'No', 'wordpress-popup' ),
+						'none' => __( 'None', 'wordpress-popup' ),
+						'true' => __( 'True', 'wordpress-popup' ),
+						'false' => __( 'False', 'wordpress-popup' ),
+						'logged_in' => __( 'Logged in', 'wordpress-popup' ),
+						'logged_out' => __( 'Logged out', 'wordpress-popup' ),
+						'only_these' => __( 'Only {number}', 'wordpress-popup' ),
+						'except_these' => __( 'Any except {number}', 'wordpress-popup' ),
+						'except_these_countries' => __( 'Any except {number}', 'wordpress-popup' ),
+						'only_on_these_countries' => __( 'Only {number} countries', 'wordpress-popup' ),
+						'except_these_refs' => __( 'Any except {number} referrer', 'wordpress-popup' ),
+						'only_on_these_refs' => __( 'From {number} referrer', 'wordpress-popup' ),
+						'all_urls' => __( 'All URLs', 'wordpress-popup' ),
+						'except_these_urls' => __( 'All URLs except {number}', 'wordpress-popup' ),
+						'only_on_these_urls' => __( 'Only {number} URLs', 'wordpress-popup' ),
+						'no_posts' => __( 'No posts', 'wordpress-popup' ),
+						'only_on_these_posts' => __( 'Only {number} posts', 'wordpress-popup' ),
+						'number_posts' => __( '{number} posts', 'wordpress-popup' ),
+						'except_these_posts' => __( 'All posts except {number}', 'wordpress-popup' ),
+						'pages' => __( 'On certain pages', 'wordpress-popup' ),
+						'all_pages' => __( 'All pages', 'wordpress-popup' ),
+						'no_pages' => __( 'No pages', 'wordpress-popup' ),
+						'only_on_these_pages' => __( 'Only {number} pages', 'wordpress-popup' ),
+						'number_pages' => __( '{number} pages', 'wordpress-popup' ),
+						'except_these_pages' => __( 'All pages except {number}', 'wordpress-popup' ),
+						'categories' => __( 'On certain categories', 'wordpress-popup' ),
+						'all_categories' => __( 'All categories', 'wordpress-popup' ),
+						'no_categories' => __( 'No categories', 'wordpress-popup' ),
+						'only_on_these_categories' => __( 'Only {number} categories', 'wordpress-popup' ),
+						'number_categories' => __( '{number} categories', 'wordpress-popup' ),
+						'except_these_categories' => __( 'All categories except {number}', 'wordpress-popup' ),
+						'tags' => __( 'On certain tags', 'wordpress-popup' ),
+						'all_tags' => __( 'All tags', 'wordpress-popup' ),
+						'no_tags' => __( 'No tags', 'wordpress-popup' ),
+						'only_on_these_tags' => __( 'Only {number} tags', 'wordpress-popup' ),
+						'number_tags' => __( '{number} tags', 'wordpress-popup' ),
+						'except_these_tags' => __( 'All tags except {number}', 'wordpress-popup' ),
+						'everywhere' => __( 'Show everywhere', 'wordpress-popup' ),
 					),
 					'conditions_body' => array(
-						'only_on_not_found' => __( 'Shows the {type_name} on the 404 page.', Opt_In::TEXT_DOMAIN ),
-						'visitor_has_commented' => __( 'Shows the {type_name} if the user has already left a comment. You may want to combine this condition with either "Visitor is logged in" or "Visitor is not logged in".', Opt_In::TEXT_DOMAIN ),
-						'visitor_has_never_commented' => __( 'Shows the {type_name} if the user has never left a comment. You may want to combine this condition with either "Visitor is logged in" or "Visitor is not logged in".', Opt_In::TEXT_DOMAIN ),
-						'from_search_engine' => __( 'Shows the {type_name} if the user arrived via a search engine.', Opt_In::TEXT_DOMAIN ),
-						'not_from_internal_link' => __( 'Shows the {type_name} if the user did not arrive on this page via another page on your site.', Opt_In::TEXT_DOMAIN ),
-						'not_on_mobile' => __( 'Shows the {type_name} to visitors that are using a normal computer or laptop (i.e. not a Phone or Tablet).', Opt_In::TEXT_DOMAIN ),
-						'only_on_mobile' => __( '<label class="wph-label--alt">Shows the {type_name} to visitors that are using a mobile device (Phone or Tablet).</label>', Opt_In::TEXT_DOMAIN ),
-						'visitor_not_logged_in' => __( '<label class="wph-label--alt">Shows the {type_name} if the user is not logged in to your site.</label>', Opt_In::TEXT_DOMAIN ),
-						'visitor_logged_in' => __( '<label class="wph-label--alt">Shows the {type_name} if the user is logged in to your site.</label>', Opt_In::TEXT_DOMAIN ),
+						'only_on_not_found' => __( 'Shows the {type_name} on the 404 page.', 'wordpress-popup' ),
+						'visitor_has_commented' => __( 'Shows the {type_name} if the user has already left a comment. You may want to combine this condition with either "Visitor is logged in" or "Visitor is not logged in".', 'wordpress-popup' ),
+						'visitor_has_never_commented' => __( 'Shows the {type_name} if the user has never left a comment. You may want to combine this condition with either "Visitor is logged in" or "Visitor is not logged in".', 'wordpress-popup' ),
+						'from_search_engine' => __( 'Shows the {type_name} if the user arrived via a search engine.', 'wordpress-popup' ),
+						'not_from_internal_link' => __( 'Shows the {type_name} if the user did not arrive on this page via another page on your site.', 'wordpress-popup' ),
+						'not_on_mobile' => __( 'Shows the {type_name} to visitors that are using a normal computer or laptop (i.e. not a Phone or Tablet).', 'wordpress-popup' ),
+						'only_on_mobile' => __( '<label class="wph-label--alt">Shows the {type_name} to visitors that are using a mobile device (Phone or Tablet).</label>', 'wordpress-popup' ),
+						'visitor_not_logged_in' => __( '<label class="wph-label--alt">Shows the {type_name} if the user is not logged in to your site.</label>', 'wordpress-popup' ),
+						'visitor_logged_in' => __( '<label class="wph-label--alt">Shows the {type_name} if the user is logged in to your site.</label>', 'wordpress-popup' ),
 					),
 					'form_fields' => array(
 						'errors' => array(
-							'no_fileds_info' => '<div class="sui-notice"><p>' . __( 'You don\'t have any {field_type} field in your opt-in form.', Opt_In::TEXT_DOMAIN ) . '</p></div>',
-							'custom_field_not_supported' => __( 'Custom fields are not supported by the active provider', Opt_In::TEXT_DOMAIN ),
+							'no_fileds_info' => '<div class="sui-notice"><p>' . __( 'You don\'t have any {field_type} field in your opt-in form.', 'wordpress-popup' ) . '</p></div>',
+							'custom_field_not_supported' => __( 'Custom fields are not supported by the active provider', 'wordpress-popup' ),
 						),
 						'label' => array(
-							'placeholder' => __( 'Enter placeholder here', Opt_In::TEXT_DOMAIN ),
-							'name_label' => __( 'Name', Opt_In::TEXT_DOMAIN ),
-							'name_placeholder' => __( 'E.g. John', Opt_In::TEXT_DOMAIN ),
-							'email_label' => __( 'Email Address', Opt_In::TEXT_DOMAIN ),
-							'enail_placeholder' => __( 'E.g. john@doe.com', Opt_In::TEXT_DOMAIN ),
-							'phone_label' => __( 'Phone Number', Opt_In::TEXT_DOMAIN ),
-							'phone_placeholder' => __( 'E.g. +1 300 400 500', Opt_In::TEXT_DOMAIN ),
-							'address_label' => __( 'Address', Opt_In::TEXT_DOMAIN ),
+							'placeholder' => __( 'Enter placeholder here', 'wordpress-popup' ),
+							'name_label' => __( 'Name', 'wordpress-popup' ),
+							'name_placeholder' => __( 'E.g. John', 'wordpress-popup' ),
+							'email_label' => __( 'Email Address', 'wordpress-popup' ),
+							'enail_placeholder' => __( 'E.g. john@doe.com', 'wordpress-popup' ),
+							'phone_label' => __( 'Phone Number', 'wordpress-popup' ),
+							'phone_placeholder' => __( 'E.g. +1 300 400 500', 'wordpress-popup' ),
+							'address_label' => __( 'Address', 'wordpress-popup' ),
 							'address_placeholder' => '',
-							'url_label' => __( 'Website', Opt_In::TEXT_DOMAIN ),
-							'url_placeholder' => __( 'E.g. https://example.com', Opt_In::TEXT_DOMAIN ),
-							'text_label' => __( 'Text', Opt_In::TEXT_DOMAIN ),
-							'text_placeholder' => __( 'E.g. Enter your nick name', Opt_In::TEXT_DOMAIN ),
-							'number_label' => __( 'Number', Opt_In::TEXT_DOMAIN ),
-							'number_placeholder' => __( 'E.g. 1', Opt_In::TEXT_DOMAIN ),
-							'datepicker_label' => __( 'Date', Opt_In::TEXT_DOMAIN ),
-							'datepicker_placeholder' => __( 'Choose date', Opt_In::TEXT_DOMAIN ),
-							'timepicker_label' => __( 'Time', Opt_In::TEXT_DOMAIN ),
+							'url_label' => __( 'Website', 'wordpress-popup' ),
+							'url_placeholder' => __( 'E.g. https://example.com', 'wordpress-popup' ),
+							'text_label' => __( 'Text', 'wordpress-popup' ),
+							'text_placeholder' => __( 'E.g. Enter your nick name', 'wordpress-popup' ),
+							'number_label' => __( 'Number', 'wordpress-popup' ),
+							'number_placeholder' => __( 'E.g. 1', 'wordpress-popup' ),
+							'datepicker_label' => __( 'Date', 'wordpress-popup' ),
+							'datepicker_placeholder' => __( 'Choose date', 'wordpress-popup' ),
+							'timepicker_label' => __( 'Time', 'wordpress-popup' ),
 							'timepicker_placeholder' => '',
 							'recaptcha_label' => 'reCAPTCHA',
 							'recaptcha_placeholder' => '',
-							'gdpr_label' => __( 'GDPR', Opt_In::TEXT_DOMAIN ),
+							'gdpr_label' => __( 'GDPR', 'wordpress-popup' ),
 							'gdpr_placeholder' => '',
 						),
-						'gdpr_message' => sprintf( __( 'I\'ve read and accept the %1$sterms & conditions%2$s', Opt_In::TEXT_DOMAIN ), '<a href="#">', '</a>' ),
+						'gdpr_message' => sprintf( __( 'I\'ve read and accept the %1$sterms & conditions%2$s', 'wordpress-popup' ), '<a href="#">', '</a>' ),
 					),
 					'media_uploader' => array(
-						'select_or_upload' => __( 'Select or Upload Image', Opt_In::TEXT_DOMAIN ),
-						'use_this_image' => __( 'Use this image', Opt_In::TEXT_DOMAIN ),
+						'select_or_upload' => __( 'Select or Upload Image', 'wordpress-popup' ),
+						'use_this_image' => __( 'Use this image', 'wordpress-popup' ),
 					),
 					'dashboard' => array(
-						'not_enough_data' => __( 'There is no enough data yet, please try again later.', Opt_In::TEXT_DOMAIN ),
+						'not_enough_data' => __( 'There is no enough data yet, please try again later.', 'wordpress-popup' ),
 					),
 					'commons' => array(
-						'published' => __( 'Published', Opt_In::TEXT_DOMAIN ),
-						'draft' => __( 'Draft', Opt_In::TEXT_DOMAIN ),
-						'unpublish' => __( 'Unpublish', Opt_In::TEXT_DOMAIN ),
-						'save_changes' => __( 'Save changes', Opt_In::TEXT_DOMAIN ),
-						'save_draft' => __( 'Save draft', Opt_In::TEXT_DOMAIN ),
-						'publish' => __( 'Publish', Opt_In::TEXT_DOMAIN ),
-						'dismiss' => __( 'Dismiss', Opt_In::TEXT_DOMAIN ),
-						//'never_see_link_text' => __( 'Never see this message again.', Opt_In::TEXT_DOMAIN ),
-						'module_created' => __( '{type_name} created successfully. Get started by adding content to your new {type_name} below.', Opt_In::TEXT_DOMAIN ),
-						'new_integration' => __( "You're successfully connected your {provider} account and you need to Save this configuration.", Opt_In::TEXT_DOMAIN ),
-						'tracking_enabled' => sprintf( __( 'Tracking is enabled on %s', Opt_In::TEXT_DOMAIN ), '<strong>{module-name}</strong>' ),
-						'tracking_disabled' => sprintf( __( 'Tracking is disabled on %s', Opt_In::TEXT_DOMAIN ), '<strong>{module-name}</strong>' ),
+						'published' => __( 'Published', 'wordpress-popup' ),
+						'draft' => __( 'Draft', 'wordpress-popup' ),
+						'unpublish' => __( 'Unpublish', 'wordpress-popup' ),
+						'save_changes' => __( 'Save changes', 'wordpress-popup' ),
+						'save_draft' => __( 'Save draft', 'wordpress-popup' ),
+						'publish' => __( 'Publish', 'wordpress-popup' ),
+						'dismiss' => __( 'Dismiss', 'wordpress-popup' ),
+						//'never_see_link_text' => __( 'Never see this message again.', 'wordpress-popup' ),
+						'module_created' => __( '{type_name} created successfully. Get started by adding content to your new {type_name} below.', 'wordpress-popup' ),
+						'new_integration' => __( "You're successfully connected your {provider} account and you need to Save this configuration.", 'wordpress-popup' ),
+						'tracking_enabled' => sprintf( __( 'Tracking is enabled on %s', 'wordpress-popup' ), '<strong>{module-name}</strong>' ),
+						'tracking_disabled' => sprintf( __( 'Tracking is disabled on %s', 'wordpress-popup' ), '<strong>{module-name}</strong>' ),
 					),
 				),
 				'url' => get_home_url(),
@@ -677,7 +685,7 @@ if ( ! class_exists( 'Hustle_Module_Admin' ) ) :
 				'current' => array(),
 				'is_admin' => (int) is_admin(),
 				'providers_action_nonce' => wp_create_nonce( 'hustle_provider_action' ),
-				'fetching_list' => __( 'Fetching integration list…', Opt_In::TEXT_DOMAIN ),
+				'fetching_list' => __( 'Fetching integration list…', 'wordpress-popup' ),
 				'daterangepicker' => array(
 					'daysOfWeek' => Opt_In_Utils::get_short_days_names(),
 					'monthNames' => Opt_In_Utils::get_months_names(),
@@ -702,24 +710,30 @@ if ( ! class_exists( 'Hustle_Module_Admin' ) ) :
 				wp_enqueue_script( 'jquery-sortable' );
 			}
 			if ( !is_null( $page ) && 'hustle' !== $page ) {
-				wp_enqueue_script( 'wp-color-picker-alpha', $this->_hustle->get_static_var( 'plugin_url' ) . 'assets/js/vendor/wp-color-picker-alpha.min.js', array( 'wp-color-picker' ), '1.2.2', true );
+				wp_enqueue_script( 'wp-color-picker-alpha', Opt_In::$plugin_url . 'assets/js/vendor/wp-color-picker-alpha.min.js', array( 'wp-color-picker' ), '1.2.2', true );
 			}
 			if ( 'hustle_entries' === $page ) {
 				$this->enqueue_entries_scripts();
 			}
 			wp_register_script(
 				'optin_admin_scripts',
-				$this->_hustle->get_static_var( 'plugin_url' ) . 'assets/js/admin.min.js',
+				Opt_In::$plugin_url . 'assets/js/admin.min.js',
 				array( 'jquery', 'backbone', 'jquery-effects-core' ),
-				$this->_hustle->get_const_var( 'VERSION' ),
+				Opt_In::VERSION,
 				true
 			);
-			wp_localize_script( 'optin_admin_scripts', 'optin_vars', $optin_vars );
+			wp_localize_script( 'optin_admin_scripts', 'optinVars', $optin_vars );
 			wp_enqueue_script( 'optin_admin_scripts' );
 
 			$is_page_with_preview = ! preg_match( '/hustle_(integrations|entries|settings)/', $page_slug );
 			if ( $is_page_with_preview ) {
-				Hustle_Module_Front::maybe_add_recaptcha_script();
+				$module = Hustle_Module_Model::instance()->get( filter_input( INPUT_GET, 'id', FILTER_VALIDATE_INT ) );
+				$language = '';
+				if ( ! is_wp_error( $module ) ) {
+					$form_fields = $module->get_form_fields();
+					$language = !empty( $form_fields['recaptcha']['recaptcha_language'] ) ? $form_fields['recaptcha']['recaptcha_language'] : '';
+				}
+				Hustle_Module_Front::maybe_add_recaptcha_script( $language );
 				Hustle_Module_Front::add_hui_scripts( $this->_hustle );
 			}
 		}
@@ -731,19 +745,19 @@ if ( ! class_exists( 'Hustle_Module_Admin' ) ) :
 		 */
 		public function enqueue_entries_scripts() {
 			wp_enqueue_script( 'hustle-entries-moment',
-							   $this->_hustle->get_static_var( 'plugin_url' ) . 'assets/js/vendor/moment.min.js',
+							   Opt_In::$plugin_url . 'assets/js/vendor/moment.min.js',
 							   array( 'jquery' ),
-							   '4.0',
+							   Opt_In::VERSION,
 							   true );
 			wp_enqueue_script( 'hustle-entries-datepicker-range',
-							   $this->_hustle->get_static_var( 'plugin_url' ) . 'assets/js/vendor/daterangepicker.min.js',
+							   Opt_In::$plugin_url . 'assets/js/vendor/daterangepicker.min.js',
 							   array( 'hustle-entries-moment' ),
-							   '4.0',
+							   Opt_In::VERSION,
 							   true );
 			wp_enqueue_style( 'hustle-entries-datepicker-range',
-							  $this->_hustle->get_static_var( 'plugin_url' ) . 'assets/css/daterangepicker.min.css',
+							  Opt_In::$plugin_url . 'assets/css/daterangepicker.min.css',
 							  array(),
-							  '4.0' );
+							  Opt_In::VERSION );
 
 			// use inline script to allow hooking into this
 			$daterangepicker_ranges
@@ -757,12 +771,12 @@ if ( ! class_exists( 'Hustle_Module_Admin' ) ) :
 					'%s': [moment().startOf('month'), moment().endOf('month')],
 					'%s': [moment().subtract(1,'month').startOf('month'), moment().subtract(1,'month').endOf('month')]
 				};",
-				__( 'Today', Opt_In::TEXT_DOMAIN ),
-				__( 'Yesterday', Opt_In::TEXT_DOMAIN ),
-				__( 'Last 7 Days', Opt_In::TEXT_DOMAIN ),
-				__( 'Last 30 Days', Opt_In::TEXT_DOMAIN ),
-				__( 'This Month', Opt_In::TEXT_DOMAIN ),
-				__( 'Last Month', Opt_In::TEXT_DOMAIN )
+				__( 'Today', 'wordpress-popup' ),
+				__( 'Yesterday', 'wordpress-popup' ),
+				__( 'Last 7 Days', 'wordpress-popup' ),
+				__( 'Last 30 Days', 'wordpress-popup' ),
+				__( 'This Month', 'wordpress-popup' ),
+				__( 'Last Month', 'wordpress-popup' )
 			);
 
 			/**
@@ -790,7 +804,7 @@ if ( ! class_exists( 'Hustle_Module_Admin' ) ) :
 
 			wp_enqueue_script(
 				'sui-scripts',
-				$this->_hustle->get_static_var( 'plugin_url' ) . 'assets/js/shared-ui.min.js',
+				Opt_In::$plugin_url . 'assets/js/shared-ui.min.js',
 				array( 'jquery' ),
 				$sui_body_class,
 				true
@@ -798,7 +812,7 @@ if ( ! class_exists( 'Hustle_Module_Admin' ) ) :
 
 			wp_enqueue_script(
 				'chartjs',
-				$this->_hustle->get_static_var( 'plugin_url' ) . 'assets/js/vendor/chartjs/Chart.bundle.min.js',
+				Opt_In::$plugin_url . 'assets/js/vendor/chartjs/Chart.bundle.min.js',
 				'2.7.2',
 				true
 			);
@@ -836,7 +850,7 @@ if ( ! class_exists( 'Hustle_Module_Admin' ) ) :
 			$message = filter_input ( INPUT_GET, 'message', FILTER_SANITIZE_STRING );
 
 			if ( 'hubspot_new_integration' === $message ) {
-				$provider = 'Hubspot';
+				$provider = 'HubSpot';
 			} elseif ( 'constant_contact_new_integration' === $message ) {
 				$provider = 'ConstantContact';
 			}
@@ -905,19 +919,19 @@ if ( ! class_exists( 'Hustle_Module_Admin' ) ) :
 				'hstl-roboto',
 				'https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i',
 				array(),
-				$this->_hustle->get_const_var( 'VERSION' )
+				Opt_In::VERSION
 			);
 			wp_register_style(
 				'hstl-opensans',
 				'https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i',
 				array(),
-				$this->_hustle->get_const_var( 'VERSION' )
+				Opt_In::VERSION
 			);
 			wp_register_style(
 				'hstl-source',
 				'https://fonts.googleapis.com/css?family=Source+Code+Pro',
 				array(),
-				$this->_hustle->get_const_var( 'VERSION' )
+				Opt_In::VERSION
 			);
 
 			wp_enqueue_style( 'wp-color-picker' );
@@ -929,14 +943,15 @@ if ( ! class_exists( 'Hustle_Module_Admin' ) ) :
 
 			wp_enqueue_style(
 				'sui_styles',
-				$this->_hustle->get_static_var( 'plugin_url' ) . 'assets/css/shared-ui.min.css',
+				Opt_In::$plugin_url . 'assets/css/shared-ui.min.css',
 				array(),
 				$sui_body_class
 			);
 
 			$is_page_with_render = ! preg_match( '/hustle_(integrations|entries|settings)/', $page_slug );
 			if ( $is_page_with_render ) {
-				Hustle_Module_Front::print_front_styles( $this->_hustle );
+				// TODO: pass the array with the required module's types only.
+				Hustle_Module_Front::print_front_styles();
 			}
 
 		}
@@ -1032,6 +1047,27 @@ if ( ! class_exists( 'Hustle_Module_Admin' ) ) :
 		}
 
 		/**
+		 * Sets an user meta to prevent admin notice from showing up again after dismissed.
+		 *
+		 * @since 3.0.6
+		 */
+		public function dismiss_admin_notice() {
+			$user_id = get_current_user_id();
+			$notice = filter_input( INPUT_POST, 'dismissed_notice', FILTER_SANITIZE_STRING );
+
+			$dismissed_notices = get_user_meta( $user_id, 'hustle_dismissed_admin_notices', true );
+			$dismissed_notices = array_filter( explode( ',', (string) $dismissed_notices ) );
+
+			if ( $notice && ! in_array( $notice, $dismissed_notices, true ) ) {
+				$dismissed_notices[] = $notice;
+				$to_store = implode( ',', $dismissed_notices );
+				update_user_meta( $user_id, 'hustle_dismissed_admin_notices', $to_store );
+			}
+
+			wp_send_json_success();
+		}
+
+		/**
 	 * Modify admin body class to our own advantage!
 	 *
 	 * @param $classes
@@ -1102,7 +1138,7 @@ if ( ! class_exists( 'Hustle_Module_Admin' ) ) :
 				$settings = array();
 				if ( ! is_network_admin() ) {
 					$dashboard_url = 'admin.php?page=hustle';
-					$settings = array( 'settings' => '<a href="'. $dashboard_url .'">' . __( 'Settings', Opt_In::TEXT_DOMAIN ) . '</a>' );
+					$settings = array( 'settings' => '<a href="'. $dashboard_url .'">' . __( 'Settings', 'wordpress-popup' ) . '</a>' );
 				}
 				$actions = array_merge( $actions, $settings );
 
@@ -1114,7 +1150,7 @@ if ( ! class_exists( 'Hustle_Module_Admin' ) ) :
 						$url = lib3()->get_link( 'hustle', 'install_plugin', '' );
 					}
 					if ( is_network_admin() || ! is_multisite() ) {
-						$actions['upgrade'] = '<a href="' . esc_url( $url ) . '" aria-label="' . esc_attr( __( 'Upgrade to Hustle Pro', Opt_In::TEXT_DOMAIN ) ) . '" target="_blank" style="color: #1ABC9C;">' . esc_html__( 'Upgrade', Opt_In::TEXT_DOMAIN ) . '</a>';
+						$actions['upgrade'] = '<a href="' . esc_url( $url ) . '" aria-label="' . esc_attr( __( 'Upgrade to Hustle Pro', 'wordpress-popup' ) ) . '" target="_blank" style="color: #1ABC9C;">' . esc_html__( 'Upgrade', 'wordpress-popup' ) . '</a>';
 					}
 				}
 			}
@@ -1149,7 +1185,7 @@ if ( ! class_exists( 'Hustle_Module_Admin' ) ) :
 			$profile = get_option( 'wdp_un_profile_data', '' );
 			$name = ! empty( $profile ) ? $profile['profile']['name'] : 'Hey';
 
-			$message = esc_html( sprintf( __( '%s, it appears you have an active WPMU DEV membership but haven\'t upgraded Hustle to the pro version. You won\'t lose an any settings upgrading, go for it!', Opt_In::TEXT_DOMAIN ), $name ) );
+			$message = esc_html( sprintf( __( '%s, it appears you have an active WPMU DEV membership but haven\'t upgraded Hustle to the pro version. You won\'t lose an any settings upgrading, go for it!', 'wordpress-popup' ), $name ) );
 
 			$html = '<div id="hustle-notice-pro-is-available" class="notice notice-info is-dismissible"><p>' . $message . '</p><p>' . $link . '</p></div>';
 
@@ -1336,6 +1372,18 @@ if ( ! class_exists( 'Hustle_Module_Admin' ) ) :
 			} else {
 				return true;
 			}
+		}
+
+		/**
+		 * Geodirectory compatibility issues.
+		 *
+		 * @since 4.0.1
+		 *
+		 * @param array $options
+		 * @param object $class WP_Super_Duper class instance
+		 */
+		public function geo_directory_compat( $options, $class ){
+			remove_action( 'media_buttons', array( $class, 'shortcode_insert_button' ) );
 		}
 	}
 

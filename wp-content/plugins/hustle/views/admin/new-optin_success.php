@@ -15,7 +15,7 @@
 
                 <div class="box-title">
 
-                    <h3 class="title-alternative"><?php esc_attr_e('SUCCESS', Opt_In::TEXT_DOMAIN); ?></h3>
+                    <h3 class="title-alternative"><?php esc_attr_e('SUCCESS', 'wordpress-popup'); ?></h3>
 
                 </div>
 
@@ -23,7 +23,7 @@
 
                     <div class="wpoi-message">
 
-                        <p><?php esc_attr_e('Nice one, you’ve just created your first opt-in. Visitors will see it and start sending emails your way right after you activate it. You can check out your current opt-in and change its status from the Opt-ins menu. When you’re in Test Mode, only you will be able to see your opt-ins.', Opt_In::TEXT_DOMAIN); ?></p>
+                        <p><?php esc_attr_e('Nice one, you’ve just created your first opt-in. Visitors will see it and start sending emails your way right after you activate it. You can check out your current opt-in and change its status from the Opt-ins menu. When you’re in Test Mode, only you will be able to see your opt-ins.', 'wordpress-popup'); ?></p>
 
                     </div>
 
@@ -36,13 +36,13 @@
                             <th><?php echo esc_html( $new_optin->optin_name ); ?></th>
 
                             <th>
-                                <?php esc_attr_e('Admin Test', Opt_In::TEXT_DOMAIN); ?>
-                                <span class="wpoi-tooltip"  tooltip="<?php esc_attr_e('Allows logged-in admins to test Opt-in before Activating it.', Opt_In::TEXT_DOMAIN); ?>">
+                                <?php esc_attr_e('Admin Test', 'wordpress-popup'); ?>
+                                <span class="wpoi-tooltip"  tooltip="<?php esc_attr_e('Allows logged-in admins to test Opt-in before Activating it.', 'wordpress-popup'); ?>">
                                     <span class="dashicons dashicons-editor-help  wpoi-icon-info"></span>
                                 </span>
                             </th>
 
-                            <th><?php esc_attr_e('Active', Opt_In::TEXT_DOMAIN); ?></th>
+                            <th><?php esc_attr_e('Active', 'wordpress-popup'); ?></th>
 
                         </tr>
 
@@ -92,7 +92,7 @@
 
                     </table>
 
-                    <p class="next-button"><button class="button button-dark-blue" ><?php esc_attr_e('FINISH', Opt_In::TEXT_DOMAIN); ?></button></p>
+                    <p class="next-button"><button class="button button-dark-blue" ><?php esc_attr_e('FINISH', 'wordpress-popup'); ?></button></p>
 
                 </div>
 

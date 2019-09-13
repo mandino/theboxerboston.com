@@ -2,7 +2,7 @@
 
 	<div class="sui-box-header">
 
-		<h2 class="sui-box-title"><?php esc_html_e( 'Appearance', Opt_In::TEXT_DOMAIN ); ?></h2>
+		<h2 class="sui-box-title"><?php esc_html_e( 'Appearance', 'wordpress-popup' ); ?></h2>
 
 	</div>
 
@@ -11,7 +11,7 @@
 	<div class="sui-box-footer">
 
 		<button class="sui-button wpmudev-button-navigation" data-direction="prev">
-			<i class="sui-icon-arrow-left" aria-hidden="true"></i> <?php echo $is_optin ? esc_html__( 'Integrations', Opt_In::TEXT_DOMAIN ) : esc_html__( 'Content', Opt_In::TEXT_DOMAIN ); ?>
+			<i class="sui-icon-arrow-left" aria-hidden="true"></i> <?php echo $is_optin ? esc_html__( 'Integrations', 'wordpress-popup' ) : esc_html__( 'Content', 'wordpress-popup' ); ?>
 		</button>
 
 		<div class="sui-actions-right">
@@ -19,13 +19,13 @@
 			<?php if ( 'embedded' === $module_type ) { ?>
 
 				<button class="sui-button sui-button-icon-right wpmudev-button-navigation" data-direction="next">
-					<?php esc_html_e( 'Display Options', Opt_In::TEXT_DOMAIN ); ?> <i class="sui-icon-arrow-right" aria-hidden="true"></i>
+					<?php esc_html_e( 'Display Options', 'wordpress-popup' ); ?> <i class="sui-icon-arrow-right" aria-hidden="true"></i>
 				</button>
 
 			<?php } else { ?>
 
 				<button class="sui-button sui-button-icon-right wpmudev-button-navigation" data-direction="next">
-					<?php esc_html_e( 'Visibility', Opt_In::TEXT_DOMAIN ); ?> <i class="sui-icon-arrow-right" aria-hidden="true"></i>
+					<?php esc_html_e( 'Visibility', 'wordpress-popup' ); ?> <i class="sui-icon-arrow-right" aria-hidden="true"></i>
 				</button>
 
 			<?php } ?>
@@ -40,21 +40,21 @@
 
 	<?php
 	// SETTING: Layout
-	$this->render(
+	self::static_render(
 		'admin/commons/sui-wizard/tab-appearance/layout',
 		array(
 			'is_optin'           => $is_optin,
-			'smallcaps_singular' => isset( $smallcaps_singular ) ? $smallcaps_singular : esc_html__( 'module', Opt_In::TEXT_DOMAIN ),
+			'smallcaps_singular' => isset( $smallcaps_singular ) ? $smallcaps_singular : esc_html__( 'module', 'wordpress-popup' ),
 		)
 	); ?>
 
 	<?php
 	// SETTING: Feature Image
-	$this->render(
+	self::static_render(
 		'admin/commons/sui-wizard/tab-appearance/feature-image',
 		array(
 			'is_optin'           => $is_optin,
-			'smallcaps_singular' => isset( $smallcaps_singular ) ? $smallcaps_singular : esc_html__( 'module', Opt_In::TEXT_DOMAIN ),
+			'smallcaps_singular' => isset( $smallcaps_singular ) ? $smallcaps_singular : esc_html__( 'module', 'wordpress-popup' ),
 			'settings'			 => $settings,
 			'feature_image'		 => $feature_image,
 		)
@@ -63,7 +63,7 @@
 	<?php if ( $is_optin ) {
 
 		// SETTING: Form Design
-		$this->render(
+		self::static_render(
 			'admin/commons/sui-wizard/tab-appearance/form-design',
 			array()
 		);
@@ -72,48 +72,48 @@
 
 	<?php
 	// SETTING: Colors Palette
-	$this->render(
+	self::static_render(
 		'admin/commons/sui-wizard/tab-appearance/colors-palette',
 		array(
 			'is_optin'           => $is_optin,
 			'module_type'		 => $module_type,
-			'smallcaps_singular' => isset( $smallcaps_singular ) ? $smallcaps_singular : esc_html__( 'module', Opt_In::TEXT_DOMAIN ),
+			'smallcaps_singular' => isset( $smallcaps_singular ) ? $smallcaps_singular : esc_html__( 'module', 'wordpress-popup' ),
 		)
 	); ?>
 
 	<?php
 	// SETTING: Border
-	$this->render(
+	self::static_render(
 		'admin/commons/sui-wizard/tab-appearance/border',
 		array(
 			'module_type'        => $module_type,
-			'smallcaps_singular' => isset( $smallcaps_singular ) ? $smallcaps_singular : esc_html__( 'module', Opt_In::TEXT_DOMAIN ),
+			'smallcaps_singular' => isset( $smallcaps_singular ) ? $smallcaps_singular : esc_html__( 'module', 'wordpress-popup' ),
 		)
 	); ?>
 
 	<?php
 	// SETTING: Drop Shadow
-	$this->render(
+	self::static_render(
 		'admin/commons/sui-wizard/tab-appearance/drop-shadow',
 		array(
 			'module_type'        => $module_type,
-			'smallcaps_singular' => isset( $smallcaps_singular ) ? $smallcaps_singular : esc_html__( 'module', Opt_In::TEXT_DOMAIN ),
+			'smallcaps_singular' => isset( $smallcaps_singular ) ? $smallcaps_singular : esc_html__( 'module', 'wordpress-popup' ),
 		)
 	); ?>
 
 	<?php
 	// SETTING: Custom Size
-	$this->render(
+	self::static_render(
 		'admin/commons/sui-wizard/tab-appearance/custom-size',
 		array(
-			'capitalize_singular' => isset( $capitalize_singular ) ? $capitalize_singular : esc_html__( 'Module', Opt_In::TEXT_DOMAIN ),
-			'smallcaps_singular'  => isset( $smallcaps_singular ) ? $smallcaps_singular : esc_html__( 'module', Opt_In::TEXT_DOMAIN ),
+			'capitalize_singular' => isset( $capitalize_singular ) ? $capitalize_singular : esc_html__( 'Module', 'wordpress-popup' ),
+			'smallcaps_singular'  => isset( $smallcaps_singular ) ? $smallcaps_singular : esc_html__( 'module', 'wordpress-popup' ),
 		)
 	); ?>
 
 	<?php
 	// SETTING: Custom CSS
-	$this->render(
+	self::static_render(
 		'admin/commons/sui-wizard/tab-appearance/custom-css',
 		array( 'is_optin' => $is_optin )
 	); ?>

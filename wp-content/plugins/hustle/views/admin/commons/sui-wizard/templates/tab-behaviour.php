@@ -2,7 +2,7 @@
 
 	<div class="sui-box-header">
 
-		<h2 class="sui-box-title"><?php esc_html_e( 'Behavior', Opt_In::TEXT_DOMAIN ); ?></h2>
+		<h2 class="sui-box-title"><?php esc_html_e( 'Behavior', 'wordpress-popup' ); ?></h2>
 
 	</div>
 
@@ -10,7 +10,7 @@
 
 	<div class="sui-box-footer">
 
-		<button class="sui-button wpmudev-button-navigation" data-direction="prev"><i class="sui-icon-arrow-left" aria-hidden="true"></i> <?php esc_html_e( 'Visibility', Opt_In::TEXT_DOMAIN ); ?></button>
+		<button class="sui-button wpmudev-button-navigation" data-direction="prev"><i class="sui-icon-arrow-left" aria-hidden="true"></i> <?php esc_html_e( 'Visibility', 'wordpress-popup' ); ?></button>
 
 		<div class="sui-actions-right">
 
@@ -19,7 +19,7 @@
 				data-active="1">
 				<span class="sui-loading-text">
 					<i class="sui-icon-web-globe-world" aria-hidden="true"></i>
-					<span class="button-text"><?php $is_active ? esc_html_e( 'Save changes', Opt_In::TEXT_DOMAIN ) : esc_html_e( 'Publish', Opt_In::TEXT_DOMAIN ); ?></span>
+					<span class="button-text"><?php $is_active ? esc_html_e( 'Save changes', 'wordpress-popup' ) : esc_html_e( 'Publish', 'wordpress-popup' ); ?></span>
 				</span>
 				<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 			</button>
@@ -36,14 +36,14 @@
 	if ( isset( $setting_trigger ) && true === $setting_trigger ) {
 
 		// SETTING: Trigger
-		$this->render(
+		self::static_render(
 			'admin/commons/sui-wizard/tab-behaviour/trigger',
 			array(
 				'module_type'         => isset( $module_type ) ? $module_type : 'module',
 				//'module_name'         => $module_name,
-				'capitalize_singular' => isset( $capitalize_singular ) ? $capitalize_singular : esc_html__( 'Module', Opt_In::TEXT_DOMAIN ),
-				'capitalize_plural'   => isset( $capitalize_plural ) ? $capitalize_plural : esc_html__( 'Modules', Opt_In::TEXT_DOMAIN ),
-				'smallcaps_singular'  => isset( $smallcaps_singular ) ? $smallcaps_singular : esc_html__( 'module', Opt_In::TEXT_DOMAIN ),
+				'capitalize_singular' => isset( $capitalize_singular ) ? $capitalize_singular : esc_html__( 'Module', 'wordpress-popup' ),
+				'capitalize_plural'   => isset( $capitalize_plural ) ? $capitalize_plural : esc_html__( 'Modules', 'wordpress-popup' ),
+				'smallcaps_singular'  => isset( $smallcaps_singular ) ? $smallcaps_singular : esc_html__( 'module', 'wordpress-popup' ),
 				'shortcode_id'		  => $shortcode_id,
 			)
 		);
@@ -53,12 +53,12 @@
 	if ( isset( $setting_position ) && true === $setting_position ) {
 
 		// SETTING: Trigger
-		$this->render(
+		self::static_render(
 			'admin/commons/sui-wizard/tab-behaviour/position',
 			array(
 				'module_type'         => isset( $module_type ) ? $module_type : 'module',
-				'capitalize_singular' => isset( $capitalize_singular ) ? $capitalize_singular : esc_html__( 'Module', Opt_In::TEXT_DOMAIN ),
-				'smallcaps_singular'  => isset( $smallcaps_singular ) ? $smallcaps_singular : esc_html__( 'module', Opt_In::TEXT_DOMAIN ),
+				'capitalize_singular' => isset( $capitalize_singular ) ? $capitalize_singular : esc_html__( 'Module', 'wordpress-popup' ),
+				'smallcaps_singular'  => isset( $smallcaps_singular ) ? $smallcaps_singular : esc_html__( 'module', 'wordpress-popup' ),
 			)
 		);
 	} ?>
@@ -70,11 +70,11 @@
 	 ) {
 
 		// SETTING: Animation Settings
-		$this->render(
+		self::static_render(
 			'admin/commons/sui-wizard/tab-behaviour/animation-settings',
 			array(
-				'capitalize_singular' => isset( $capitalize_singular ) ? $capitalize_singular : esc_html__( 'Module', Opt_In::TEXT_DOMAIN ),
-				'smallcaps_singular'  => isset( $smallcaps_singular ) ? $smallcaps_singular : esc_html__( 'module', Opt_In::TEXT_DOMAIN ),
+				'capitalize_singular' => isset( $capitalize_singular ) ? $capitalize_singular : esc_html__( 'Module', 'wordpress-popup' ),
+				'smallcaps_singular'  => isset( $smallcaps_singular ) ? $smallcaps_singular : esc_html__( 'module', 'wordpress-popup' ),
 				'entrance_animation'  => isset( $setting_animation_entrance ) ? $setting_animation_entrance : false,
 				'exit_animation'      => isset( $setting_animation_exit ) ? $setting_animation_exit : false,
 			)
@@ -88,10 +88,10 @@
 	) {
 
 		// SETTING: Additional Closing Methods
-		$this->render(
+		self::static_render(
 			'admin/commons/sui-wizard/tab-behaviour/closing-methods',
 			array(
-				'smallcaps_singular' => isset( $smallcaps_singular ) ? $smallcaps_singular : esc_html__( 'module', Opt_In::TEXT_DOMAIN ),
+				'smallcaps_singular' => isset( $smallcaps_singular ) ? $smallcaps_singular : esc_html__( 'module', 'wordpress-popup' ),
 				'autoclose'          => isset( $setting_methods_autoclose ) ? $setting_methods_autoclose : false,
 				'onclick'            => isset( $setting_methods_onclick ) ? $setting_methods_onclick : false,
 				'module_type'		 => $module_type,
@@ -103,12 +103,12 @@
 	if ( isset( $setting_behaviour ) && true === $setting_behaviour ) {
 
 		// SETTING: Closing Behavior
-		$this->render(
+		self::static_render(
 			'admin/commons/sui-wizard/tab-behaviour/closing-behaviour',
 			array(
 				'module_type'         => isset( $module_type ) ? $module_type : 'module',
-				'capitalize_singular' => isset( $capitalize_singular ) ? $capitalize_singular : esc_html__( 'Module', Opt_In::TEXT_DOMAIN ),
-				'smallcaps_singular'  => isset( $smallcaps_singular ) ? $smallcaps_singular : esc_html__( 'module', Opt_In::TEXT_DOMAIN ),
+				'capitalize_singular' => isset( $capitalize_singular ) ? $capitalize_singular : esc_html__( 'Module', 'wordpress-popup' ),
+				'smallcaps_singular'  => isset( $smallcaps_singular ) ? $smallcaps_singular : esc_html__( 'module', 'wordpress-popup' ),
 				'module_type'		  => $module_type,
 			)
 		);
@@ -118,12 +118,12 @@
 	if ( isset( $setting_additional ) && true === $setting_additional ) {
 
 		// SETTING: Additional Settings
-		$this->render(
+		self::static_render(
 			'admin/commons/sui-wizard/tab-behaviour/additional-settings',
 			array(
 				'is_optin'           => $is_optin,
 				'module_type'        => isset( $module_type ) ? $module_type : 'module',
-				'smallcaps_singular' => isset( $smallcaps_singular ) ? $smallcaps_singular : esc_html__( 'module', Opt_In::TEXT_DOMAIN )
+				'smallcaps_singular' => isset( $smallcaps_singular ) ? $smallcaps_singular : esc_html__( 'module', 'wordpress-popup' )
 			)
 		);
 	} ?>

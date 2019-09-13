@@ -101,7 +101,7 @@ class Hustle_Mailchimp_Form_Settings extends Hustle_Provider_Form_Settings_Abstr
 
 		$is_submit = ! empty( $submitted_data['is_submit'] ) && empty( $submitted_data['page'] );
 		if ( $is_submit && empty( $submitted_data['list_id'] ) ) {
-			$error_message = __( 'The email list is required.', Opt_In::TEXT_DOMAIN );
+			$error_message = __( 'The email list is required.', 'wordpress-popup' );
 		}
 		if ( !$is_submit && ! empty( $submitted_data['page'] ) ) {
 			$settings = array();
@@ -121,10 +121,10 @@ class Hustle_Mailchimp_Form_Settings extends Hustle_Provider_Form_Settings_Abstr
 			// TODO: show "disconnect" only if it's connected alreay.
 			$buttons = array(
 				'disconnect' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'disconnect_form', true ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', 'wordpress-popup' ), 'sui-button-ghost', 'disconnect_form', true ),
 				),
 				'save' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Continue', Opt_In::TEXT_DOMAIN ), '', 'next', true ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Continue', 'wordpress-popup' ), '', 'next', true ),
 				),
 			);
 		}
@@ -141,8 +141,8 @@ class Hustle_Mailchimp_Form_Settings extends Hustle_Provider_Form_Settings_Abstr
 		}
 
 		$step_html = Hustle_Api_Utils::get_modal_title_markup(
-			__( 'Mailchimp List', Opt_In::TEXT_DOMAIN ),
-			__( 'Choose the list you want to send form data to.', Opt_In::TEXT_DOMAIN )
+			__( 'Mailchimp List', 'wordpress-popup' ),
+			__( 'Choose the list you want to send form data to.', 'wordpress-popup' )
 		);
 		$step_html .= Hustle_Api_Utils::get_html_for_options( $options );
 
@@ -163,8 +163,11 @@ class Hustle_Mailchimp_Form_Settings extends Hustle_Provider_Form_Settings_Abstr
 				$current_data['list_name'] = !empty( $this->lists[ $current_data['list_id'] ]['label'] )
 						? $this->lists[ $current_data['list_id'] ]['label'] . ' (' . $current_data['list_id'] . ')' : $current_data['list_id'];
 			}
-			if ( empty( $current_data['list_id'] ) || empty( $this->addon_form_settings['list_id'] )
-					|| $current_data['list_id'] !== $this->addon_form_settings['list_id'] ) {
+			if ( 
+				empty( $current_data['list_id'] ) || 
+				empty( $this->addon_form_settings['list_id'] ) ||
+				$current_data['list_id'] !== $this->addon_form_settings['list_id'] 
+			) {
 				$current_data['group'] = null;
 				$current_data['group_interest'] = null;
 			}
@@ -199,7 +202,7 @@ class Hustle_Mailchimp_Form_Settings extends Hustle_Provider_Form_Settings_Abstr
 				'html' => '',
 				'notification' => array(
 					'type' => 'success',
-					'text' => '<strong>' . $this->provider->get_title() . '</strong> ' . __( 'successfully connected to your form', Opt_In::TEXT_DOMAIN ),
+					'text' => '<strong>' . $this->provider->get_title() . '</strong> ' . __( 'successfully connected to your form', 'wordpress-popup' ),
 				),
 				'is_close' => true,
 			);
@@ -219,8 +222,8 @@ class Hustle_Mailchimp_Form_Settings extends Hustle_Provider_Form_Settings_Abstr
 		$options = $this->get_second_step_options( $groups, $group_id );
 
 		$html = Hustle_Api_Utils::get_modal_title_markup(
-			__( 'Mailchimp Group', Opt_In::TEXT_DOMAIN ),
-			__( 'The email list you chose allows you to group subscribers. Choose a category from the list below.', Opt_In::TEXT_DOMAIN )
+			__( 'Mailchimp Group', 'wordpress-popup' ),
+			__( 'The email list you chose allows you to group subscribers. Choose a category from the list below.', 'wordpress-popup' )
 		);
 		$html .= Hustle_Api_Utils::get_html_for_options( $options );
 
@@ -243,10 +246,10 @@ class Hustle_Mailchimp_Form_Settings extends Hustle_Provider_Form_Settings_Abstr
 
 		$buttons = array(
 			'cancel' => array(
-				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Back', Opt_In::TEXT_DOMAIN ), '', 'prev', true ),
+				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Back', 'wordpress-popup' ), '', 'prev', true ),
 			),
 			'save' => array(
-				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Continue', Opt_In::TEXT_DOMAIN ), '', 'next', true ),
+				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Continue', 'wordpress-popup' ), '', 'next', true ),
 			),
 		);
 		return array(
@@ -286,7 +289,7 @@ class Hustle_Mailchimp_Form_Settings extends Hustle_Provider_Form_Settings_Abstr
 				'html' => '',
 				'notification' => array(
 					'type' => 'success',
-					'text' => '<strong>' . $this->provider->get_title() . '</strong> ' . __( 'successfully connected to your form', Opt_In::TEXT_DOMAIN ),
+					'text' => '<strong>' . $this->provider->get_title() . '</strong> ' . __( 'successfully connected to your form', 'wordpress-popup' ),
 				),
 				'is_close' => true,
 			);
@@ -304,8 +307,8 @@ class Hustle_Mailchimp_Form_Settings extends Hustle_Provider_Form_Settings_Abstr
 
 		$options = $this->get_third_step_options( $interests, $interest_id );
 		$html = Hustle_Api_Utils::get_modal_title_markup(
-			__( 'Group Interest', Opt_In::TEXT_DOMAIN ),
-			__( 'Pre-select an option or leave it empty for users to pick one.', Opt_In::TEXT_DOMAIN )
+			__( 'Group Interest', 'wordpress-popup' ),
+			__( 'Pre-select an option or leave it empty for users to pick one.', 'wordpress-popup' )
 		);
 		$html .= Hustle_Api_Utils::get_html_for_options( $options );
 
@@ -322,10 +325,10 @@ class Hustle_Mailchimp_Form_Settings extends Hustle_Provider_Form_Settings_Abstr
 
 		$buttons = array(
 			'cancel' => array(
-				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Back', Opt_In::TEXT_DOMAIN ), '', 'prev', true ),
+				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Back', 'wordpress-popup' ), '', 'prev', true ),
 			),
 			'save' => array(
-				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', Opt_In::TEXT_DOMAIN ), '', 'next', true ),
+				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', 'wordpress-popup' ), '', 'next', true ),
 			),
 		);
 		return array(
@@ -371,7 +374,7 @@ class Hustle_Mailchimp_Form_Settings extends Hustle_Provider_Form_Settings_Abstr
 
 			if ( is_wp_error( $response ) ) {
 				$integrations_global_url = add_query_arg( 'page', Hustle_Module_Admin::INTEGRATIONS_PAGE, admin_url( 'admin.php' ) );
-				$message = sprintf( __( 'There was an error fetching the lists. Please make sure the %1$sselected account settings%2$s are correct.', Opt_In::TEXT_DOMAIN ), '<a href="' . $integrations_global_url . '" target="_blank">', '</a>' );
+				$message = sprintf( __( 'There was an error fetching the lists. Please make sure the %1$sselected account settings%2$s are correct.', 'wordpress-popup' ), '<a href="' . $integrations_global_url . '" target="_blank">', '</a>' );
 				throw new Exception( $message );
 			}
 
@@ -413,7 +416,7 @@ class Hustle_Mailchimp_Form_Settings extends Hustle_Provider_Form_Settings_Abstr
 					'label' => array(
 						'type'  => 'label',
 						'for'   => 'list_id',
-						'value' => __( 'Email List', Opt_In::TEXT_DOMAIN),
+						'value' => __( 'Email List', 'wordpress-popup'),
 					),
 					'select' => array(
 						'type'     => 'select',
@@ -430,7 +433,7 @@ class Hustle_Mailchimp_Form_Settings extends Hustle_Provider_Form_Settings_Abstr
 				'elements' => array(
 					'label' => array(
 						'type'  => 'label',
-						'value' => __( 'Extra Options', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Extra Options', 'wordpress-popup' ),
 					),
 					'new_users' => array(
 						'type'       => 'checkbox',
@@ -441,7 +444,7 @@ class Hustle_Mailchimp_Form_Settings extends Hustle_Provider_Form_Settings_Abstr
 						'attributes' => array(
 							'checked' => ( 'subscribed' === $checked || '1' === $checked ) ? 'checked' : ''
 						),
-						'label'      => __( 'Automatically opt-in new users to the mailing list', Opt_In::TEXT_DOMAIN ),
+						'label'      => __( 'Automatically opt-in new users to the mailing list', 'wordpress-popup' ),
 					),
 				),
 			),
@@ -487,7 +490,7 @@ class Hustle_Mailchimp_Form_Settings extends Hustle_Provider_Form_Settings_Abstr
 
 		$options = array(
 			'-1' => array(
-				'label' => __( 'No group', Opt_In::TEXT_DOMAIN ),
+				'label' => __( 'No group', 'wordpress-popup' ),
 				'value' => '-1',
 			)
 		);
@@ -522,7 +525,7 @@ class Hustle_Mailchimp_Form_Settings extends Hustle_Provider_Form_Settings_Abstr
 					'label' => array(
 						'type'  => 'label',
 						'for'   => 'group',
-						'value' => __( 'Group Category', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Group Category', 'wordpress-popup' ),
 					),
 					'group' => array(
 						'type'      => 'select',
@@ -553,7 +556,7 @@ class Hustle_Mailchimp_Form_Settings extends Hustle_Provider_Form_Settings_Abstr
 		$interests_options = array(
 			'-1' => array(
 				'value' 	=> -1,
-				'label' => __( 'No default choice', Opt_In::TEXT_DOMAIN )
+				'label' => __( 'No default choice', 'wordpress-popup' )
 			)
 		);
 
@@ -575,7 +578,7 @@ class Hustle_Mailchimp_Form_Settings extends Hustle_Provider_Form_Settings_Abstr
 		$first = current( $interests_options );
 
 		$field_type = $type;
-		$choose_prompt = __( 'Default Interest', Opt_In::TEXT_DOMAIN );
+		$choose_prompt = __( 'Default Interest', 'wordpress-popup' );
 		$input_name = 'group_interest';
 
 		switch ( $_type ) {
@@ -586,7 +589,7 @@ class Hustle_Mailchimp_Form_Settings extends Hustle_Provider_Form_Settings_Abstr
 				break;
 
 			case 'checkboxes' :
-				$choose_prompt = __( 'Default Interest(s)', Opt_In::TEXT_DOMAIN );
+				$choose_prompt = __( 'Default Interest(s)', 'wordpress-popup' );
 				$input_name    = 'group_interest[]';
 				$class         = 'sui-checkbox-sm sui-checkbox-stacked';
 				break;
@@ -595,7 +598,7 @@ class Hustle_Mailchimp_Form_Settings extends Hustle_Provider_Form_Settings_Abstr
 				$field_type    = 'radios';
 				$class         = 'sui-radio-sm sui-radio-stacked';
 				$choose_prompt = sprintf(
-					__( 'Default Interest %1$s(clear selection)%2$s', Opt_In::TEXT_DOMAIN ),
+					__( 'Default Interest %1$s(clear selection)%2$s', 'wordpress-popup' ),
 					'<a href="#" class="hustle-provider-clear-radio-options" style="margin-left: 5px;" data-name="group_interest">',
 					'</a>'
 				);
@@ -603,7 +606,7 @@ class Hustle_Mailchimp_Form_Settings extends Hustle_Provider_Form_Settings_Abstr
 
 			case 'hidden' :
 				$class = '';
-				$choose_prompt = __( 'Default Interest', Opt_In::TEXT_DOMAIN );
+				$choose_prompt = __( 'Default Interest', 'wordpress-popup' );
 				break;
 		}
 
@@ -671,7 +674,7 @@ class Hustle_Mailchimp_Form_Settings extends Hustle_Provider_Form_Settings_Abstr
 				return array();
 				/*return array(
 					array(
-						"value" => "<label class='wpmudev-label--notice'><span>" . __( 'There was an error fetching the data. Please review your settings and try again.', Opt_In::TEXT_DOMAIN ) . "</span></label>",
+						"value" => "<label class='wpmudev-label--notice'><span>" . __( 'There was an error fetching the data. Please review your settings and try again.', 'wordpress-popup' ) . "</span></label>",
 						"type"  => "label",
 					)
 				);*/

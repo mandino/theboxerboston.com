@@ -39,12 +39,12 @@ $slide_two_2x = self::$plugin_url . 'assets/images/onboard-welcome@2x.png';
 
 						<div class="sui-box-header sui-lg sui-block-content-center">
 
-							<h2 id="dialogTitle" class="sui-box-title"><?php printf( esc_html__( 'Hey, %s', Opt_In::TEXT_DOMAIN ), esc_html( $username ) ); ?></h2>
+							<h2 id="dialogTitle" class="sui-box-title"><?php printf( esc_html__( 'Hey, %s', 'wordpress-popup' ), esc_html( $username ) ); ?></h2>
 
-							<span id="dialogDescription" class="sui-description"><?php esc_html_e( "Welcome to Hustle, the only plugin you'll ever need to turn your visitors into loyal subscribers, leads and customers.", Opt_In::TEXT_DOMAIN ); ?></span>
+							<span id="dialogDescription" class="sui-description"><?php esc_html_e( "Welcome to Hustle, the only plugin you'll ever need to turn your visitors into loyal subscribers, leads and customers.", 'wordpress-popup' ); ?></span>
 
 							<button class="sui-dialog-close" data-a11y-dialog-hide="hustle-dialog--welcome">
-								<span class="sui-screen-reader-text"><?php esc_html_e( 'Close this dialog window', Opt_In::TEXT_DOMAIN ); ?></span>
+								<span class="sui-screen-reader-text"><?php esc_html_e( 'Close this dialog window', 'wordpress-popup' ); ?></span>
 							</button>
 
 						</div>
@@ -56,7 +56,7 @@ $slide_two_2x = self::$plugin_url . 'assets/images/onboard-welcome@2x.png';
 								class="sui-button sui-button-blue sui-button-icon-right"
 								data-a11y-dialog-tour-next
 							>
-								<?php esc_html_e( 'Get Started', Opt_In::TEXT_DOMAIN ); ?>
+								<?php esc_html_e( 'Get Started', 'wordpress-popup' ); ?>
 								<i class="sui-icon-chevron-right" aria-hidden="true"></i>
 							</button>
 
@@ -64,7 +64,7 @@ $slide_two_2x = self::$plugin_url . 'assets/images/onboard-welcome@2x.png';
 
 					</div>
 
-					<p class="sui-onboard-skip"><a href="#" data-a11y-dialog-hide="hustle-dialog--welcome"><?php esc_html_e( 'Skip this, I know my way around', Opt_In::TEXT_DOMAIN ); ?></a></p>
+					<p class="sui-onboard-skip"><a href="#" data-a11y-dialog-hide="hustle-dialog--welcome"><?php esc_html_e( 'Skip this, I know my way around', 'wordpress-popup' ); ?></a></p>
 
 				</li>
 
@@ -80,16 +80,16 @@ $slide_two_2x = self::$plugin_url . 'assets/images/onboard-welcome@2x.png';
 
 						<div class="sui-box-header sui-lg sui-block-content-center">
 
-							<h2 id="dialogTitle" class="sui-box-title"><?php esc_html_e( 'Create Module', Opt_In::TEXT_DOMAIN ); ?></h2>
+							<h2 id="dialogTitle" class="sui-box-title"><?php esc_html_e( 'Create Module', 'wordpress-popup' ); ?></h2>
 
-							<span id="dialogDescription" class="sui-description"><?php esc_html_e( 'Choose a module to get started on converting your visitors into subscribers, generate more leads and grow your social following.', Opt_In::TEXT_DOMAIN ); ?></span>
+							<span id="dialogDescription" class="sui-description"><?php esc_html_e( 'Choose a module to get started on converting your visitors into subscribers, generate more leads and grow your social following.', 'wordpress-popup' ); ?></span>
 
 							<button class="sui-dialog-back" data-a11y-dialog-tour-back>
-								<span class="sui-screen-reader-text"><?php esc_html_e( 'Return to previous slide', Opt_In::TEXT_DOMAIN ); ?></span>
+								<span class="sui-screen-reader-text"><?php esc_html_e( 'Return to previous slide', 'wordpress-popup' ); ?></span>
 							</button>
 
 							<button class="sui-dialog-close" data-a11y-dialog-hide="hustle-dialog--welcome">
-								<span class="sui-screen-reader-text"><?php esc_html_e( 'Close this dialog window', Opt_In::TEXT_DOMAIN ); ?></span>
+								<span class="sui-screen-reader-text"><?php esc_html_e( 'Close this dialog window', 'wordpress-popup' ); ?></span>
 							</button>
 
 						</div>
@@ -100,19 +100,19 @@ $slide_two_2x = self::$plugin_url . 'assets/images/onboard-welcome@2x.png';
 								<?php
 									$module_types = array(
 										'popup' => array(
-											'name' => __( 'Pop-up', Opt_In::TEXT_DOMAIN ),
+											'name' => __( 'Pop-up', 'wordpress-popup' ),
 											'icon' => 'popup',
 										),
 										'slidein'         => array(
-											'name' => __( 'Slide-in', Opt_In::TEXT_DOMAIN ),
+											'name' => __( 'Slide-in', 'wordpress-popup' ),
 											'icon' => 'slide-in',
 										),
 										'embedded'        => array(
-											'name' => __( 'Embed', Opt_In::TEXT_DOMAIN ),
+											'name' => __( 'Embed', 'wordpress-popup' ),
 											'icon' => 'embed',
 										),
 										'social_sharing'  => array(
-											'name' => __( 'Social Share', Opt_In::TEXT_DOMAIN ),
+											'name' => __( 'Social Share', 'wordpress-popup' ),
 											'icon' => 'share',
 										),
 									);
@@ -139,7 +139,7 @@ $slide_two_2x = self::$plugin_url . 'assets/images/onboard-welcome@2x.png';
 						<div class="sui-box-body sui-lg sui-block-content-center">
 
 							<button id="hustle-new-create-module" class="sui-button sui-button-blue sui-button-icon-right" disabled="disabled">
-								<span class="sui-loading-text"><?php esc_html_e( 'Create', Opt_In::TEXT_DOMAIN ); ?></span>
+								<span class="sui-loading-text"><?php esc_html_e( 'Create', 'wordpress-popup' ); ?></span>
 								<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 							</button>
 
@@ -147,7 +147,7 @@ $slide_two_2x = self::$plugin_url . 'assets/images/onboard-welcome@2x.png';
 
 					</div>
 
-					<p class="sui-onboard-skip"><a href="#" data-a11y-dialog-hide="hustle-dialog--welcome"><?php esc_html_e( "Skip this, I'll create a module later", Opt_In::TEXT_DOMAIN ); ?></a></p>
+					<p class="sui-onboard-skip"><a href="#" data-a11y-dialog-hide="hustle-dialog--welcome"><?php esc_html_e( "Skip this, I'll create a module later", 'wordpress-popup' ); ?></a></p>
 
 				</li>
 

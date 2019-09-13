@@ -60,12 +60,12 @@ class Hustle_Zapier_Form_Settings extends Hustle_Provider_Form_Settings_Abstract
 		$is_submit = ! empty( $submitted_data['hustle_is_submit'] );
 
 		if ( $is_submit && ! $this->first_step_is_completed( $submitted_data ) ) {
-			$error_message = __( 'Please add a valid Webhook.', Opt_In::TEXT_DOMAIN );
+			$error_message = __( 'Please add a valid Webhook.', 'wordpress-popup' );
 		}
 
 		$options = $this->get_first_step_options( $current_data );
 
-		$step_html = Hustle_Api_Utils::get_modal_title_markup( __( 'Setup Webhook', Opt_In::TEXT_DOMAIN ), __( 'Put your ZAP Webhook URL below.', Opt_In::TEXT_DOMAIN ) );
+		$step_html = Hustle_Api_Utils::get_modal_title_markup( __( 'Setup Webhook', 'wordpress-popup' ), __( 'Put your ZAP Webhook URL below.', 'wordpress-popup' ) );
 		$step_html .= Hustle_Api_Utils::get_html_for_options( $options );
 
 		if( ! isset( $error_message ) ) {
@@ -78,12 +78,12 @@ class Hustle_Zapier_Form_Settings extends Hustle_Provider_Form_Settings_Abstract
 		$buttons = array();
 		if ( $this->first_step_is_completed( $current_data ) ) {
 			$buttons['disconnect'] = array(
-				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'disconnect_form', true ),
+				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', 'wordpress-popup' ), 'sui-button-ghost', 'disconnect_form', true ),
 			);
 		}
 
 		$buttons['save'] = array(
-			'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', Opt_In::TEXT_DOMAIN ), '', 'next', true ),
+			'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', 'wordpress-popup' ), '', 'next', true ),
 		);
 
 		$response = array(
@@ -119,13 +119,13 @@ class Hustle_Zapier_Form_Settings extends Hustle_Provider_Form_Settings_Abstract
 					'label'   => array(
 						'for'   => 'friendly-name',
 						'type'  => 'label',
-						'value' => __( 'Integration Name', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Integration Name', 'wordpress-popup' ),
 					),
 					'webhook' => array(
 						'type'        => 'text',
 						'name'        => 'name',
 						'value'       => $name,
-						'placeholder' => __( 'Friendly Name', Opt_In::TEXT_DOMAIN ),
+						'placeholder' => __( 'Friendly Name', 'wordpress-popup' ),
 						'id'          => 'friendly-name',
 						'icon'        => 'web-globe-world',
 					),
@@ -138,13 +138,13 @@ class Hustle_Zapier_Form_Settings extends Hustle_Provider_Form_Settings_Abstract
 					'label'   => array(
 						'for'   => 'webhook',
 						'type'  => 'label',
-						'value' => __( 'Webhook URL', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Webhook URL', 'wordpress-popup' ),
 					),
 					'webhook' => array(
 						'type'        => 'url',
 						'name'        => 'api_key',
 						'value'       => $webhook,
-						'placeholder' => __( 'Webhook URL', Opt_In::TEXT_DOMAIN ),
+						'placeholder' => __( 'Webhook URL', 'wordpress-popup' ),
 						'id'          => 'webhook',
 						'icon'        => 'link',
 					),

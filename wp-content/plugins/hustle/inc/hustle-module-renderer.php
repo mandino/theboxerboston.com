@@ -1249,6 +1249,7 @@ class Hustle_Module_Renderer extends Hustle_Renderer_Abstract {
 		$label = ( '' !== $field['placeholder'] ) ? $field['placeholder'] : $field['label'];
 		$required = isset( $field['required'] ) && 'true' === $field['required'] ? true : false;
 		$module = $this->module;
+		$module_type = $module->module_type;
 		$module_id = $module->module_id;
 		$design = $module->design;
 		$icon = $type;
@@ -1301,12 +1302,20 @@ class Hustle_Module_Renderer extends Hustle_Renderer_Abstract {
 				break;
 
 			case 'datepicker':
+
+				$date_format = $field['date_format'];
+
+				// These formats come from 4.0, so we keep the same display as in there, even though it was a bug.
+				if ( in_array( $field['date_format'], array('m/d/Y', 'Y/m/d', 'd/m/Y' ), true ) ) {
+					$date_format = 'MM d, yy';
+				}
+
 				$class_input = 'hustle-date';
-				$data_attributes = 'data-min-date="null" data-rtl-support="false"';
+				$data_attributes = 'data-min-date="null" data-rtl-support="false" data-format="' . $date_format . '" readonly="readonly"';
 				break;
 
 			default:
-				$data_attributes = ''; // Useless. Added to shut up a warning for not having a default case.
+				break;
 		}
 
 		if ( 'none' !== $design->form_fields_icon ) {
@@ -1368,8 +1377,8 @@ class Hustle_Module_Renderer extends Hustle_Renderer_Abstract {
 		$module = $this->module;
 		$fields = $module->emails->form_elements;
 
-		$label = esc_html__( 'Submit', Opt_In::TEXT_DOMAIN );
-		$loading = esc_html__( 'Form is being submitted, please wait a bit.', Opt_In::TEXT_DOMAIN );
+		$label = esc_html__( 'Submit', 'wordpress-popup' );
+		$loading = esc_html__( 'Form is being submitted, please wait a bit.', 'wordpress-popup' );
 
 		if ( isset( $fields['submit'] ) && isset( $fields['submit']['label'] ) ) {
 			$label = $fields['submit']['label'];
@@ -1457,17 +1466,20 @@ class Hustle_Module_Renderer extends Hustle_Renderer_Abstract {
 		$module = $this->module;
 		$module_id = $module->module_id;
 		$fields = $module->emails->form_elements;
+		$render_id = self::$render_ids[ $this->module->module_id ];
 
 		if ( isset( $fields['gdpr'] ) ) {
 
 			$html .= sprintf(
-				'<label for="hustle-gdpr-module-%s" class="hustle-checkbox hustle-gdpr">',
-				$module_id
+				'<label for="hustle-gdpr-module-%d-%d" class="hustle-checkbox hustle-gdpr">',
+				$module_id,
+				$render_id
 			);
 
 				$html .= sprintf(
-					'<input type="checkbox" name="gdpr" id="hustle-gdpr-module-%s" />',
-					$module_id
+					'<input type="checkbox" name="gdpr" id="hustle-gdpr-module-%d-%d" />',
+					$module_id,
+					$render_id
 				);
 
 				$html .= '<span aria-hidden="true"></span>';
@@ -1493,6 +1505,7 @@ class Hustle_Module_Renderer extends Hustle_Renderer_Abstract {
 	 * @return string
 	 */
 	private function get_module_main_content( $content ) {
+
 		$allowed_html = wp_kses_allowed_html( 'post' );
 
 		// iframe.
@@ -1565,13 +1578,13 @@ class Hustle_Module_Renderer extends Hustle_Renderer_Abstract {
 		if ( isset( $fields['submit'] ) && isset( $fields['submit']['error_message'] ) && ! empty( $fields['submit']['error_message'] ) ) {
 			$message = $fields['submit']['error_message'];
 		} else {
-			$message = __( 'There was an error submitting the form', Opt_In::TEXT_DOMAIN );
+			$message = __( 'There was an error submitting the form', 'wordpress-popup' );
 		}
 
-		$default_error = __( 'Something went wrong, please try again.', Opt_In::TEXT_DOMAIN );
+		$default_error = __( 'Something went wrong, please try again.', 'wordpress-popup' );
 
-		$html = sprintf( 
-			'<div class="hustle-error-message" style="display: none;" data-default-error="%1$s" data-required-error="%2$s">', 
+		$html = sprintf(
+			'<div class="hustle-error-message" style="display: none;" data-default-error="%1$s" data-required-error="%2$s">',
 			esc_attr( $default_error ),
 			esc_attr( $message )
 		);
@@ -1597,7 +1610,7 @@ class Hustle_Module_Renderer extends Hustle_Renderer_Abstract {
 
 			$module = $this->module;
 			$content = $module->content;
-			$message = ( '' !== $content->never_see_link_text ) ? $content->never_see_link_text : esc_html__( 'Never see this message again', Opt_In::TEXT_DOMAIN );
+			$message = ( '' !== $content->never_see_link_text ) ? $content->never_see_link_text : esc_html__( 'Never see this message again', 'wordpress-popup' );
 
 			if ( (int) $content->show_never_see_link ) {
 				$html .= ( true === $wrapper ) ? '<div class="hustle-layout-footer">' : '';

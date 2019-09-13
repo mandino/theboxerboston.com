@@ -1,7 +1,7 @@
 <?php if ( 0 === count( $providers ) ) : ?>
 
 <div class="sui-notice sui-notice-error">
-	<p><?php esc_html_e( "You need at least one active app to send your opt-in's submissions to. If you don't want to use any 3rd party app, you can always use the Local Hustle List to save the submissions.", Opt_In::TEXT_DOMAIN ); ?></p>
+	<p><?php esc_html_e( "You need at least one active app to send your opt-in's submissions to. If you don't want to use any 3rd party app, you can always use the Local Hustle List to save the submissions.", 'wordpress-popup' ); ?></p>
 </div>
 
 <?php else : ?>
@@ -12,7 +12,7 @@
 
 		<?php foreach ( $providers as $provider ) : ?>
 
-			<?php Opt_In::static_render(
+			<?php self::static_render(
 				'admin/integrations/integration-row',
 				array(
 					'provider' => $provider,
@@ -26,6 +26,6 @@
 
 </table>
 
-<span class="sui-description"><?php esc_html_e( 'These applications are collecting data of your popup.', Opt_In::TEXT_DOMAIN ); ?></span>
+<span class="sui-description"><?php esc_html_e( 'These applications are collecting data of your popup.', 'wordpress-popup' ); ?></span>
 
 <?php endif; ?>

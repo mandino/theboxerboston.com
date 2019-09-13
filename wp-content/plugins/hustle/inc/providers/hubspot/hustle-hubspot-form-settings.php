@@ -49,7 +49,7 @@ class Hustle_HubSpot_Form_Settings extends Hustle_Provider_Form_Settings_Abstrac
 	}
 
 	/**
-	 * Returns all settings and conditions for 1st step of Hubspot settings
+	 * Returns all settings and conditions for 1st step of HubSpot settings
 	 *
 	 * @since 3.0.5
 	 * @since 4.0 param $validate removed.
@@ -66,12 +66,12 @@ class Hustle_HubSpot_Form_Settings extends Hustle_Provider_Form_Settings_Abstrac
 		$is_submit = ! empty( $submitted_data['is_submit'] );
 
 		if ( $is_submit && empty( $submitted_data['list_id'] ) ) {
-			$error_message = __( 'The email list is required.', Opt_In::TEXT_DOMAIN );
+			$error_message = __( 'The email list is required.', 'wordpress-popup' );
 		}
 
 		$options = $this->get_first_step_options( $current_data );
 
-		$step_html = Hustle_Api_Utils::get_modal_title_markup( __( 'Choose your list', Opt_In::TEXT_DOMAIN ), __( 'Choose the list you want to send form data to.', Opt_In::TEXT_DOMAIN ) );
+		$step_html = Hustle_Api_Utils::get_modal_title_markup( __( 'Choose your list', 'wordpress-popup' ), __( 'Choose the list you want to send form data to.', 'wordpress-popup' ) );
 		$step_html .= Hustle_Api_Utils::get_html_for_options( $options );
 
 		if( ! isset( $error_message ) ) {
@@ -84,10 +84,10 @@ class Hustle_HubSpot_Form_Settings extends Hustle_Provider_Form_Settings_Abstrac
 
 		$buttons = array(
 			'disconnect' => array(
-				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'disconnect_form', true ),
+				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', 'wordpress-popup' ), 'sui-button-ghost', 'disconnect_form', true ),
 			),
 			'save' => array(
-				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', Opt_In::TEXT_DOMAIN ), '', 'next', true ),
+				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', 'wordpress-popup' ), '', 'next', true ),
 			),
 		);
 
@@ -153,7 +153,7 @@ class Hustle_HubSpot_Form_Settings extends Hustle_Provider_Form_Settings_Abstrac
 					array(
 						'type'  => 'label',
 						'for'   => 'list_id',
-						'value' => __( 'Choose email list (Static list only):', Opt_In::TEXT_DOMAIN),
+						'value' => __( 'Choose email list (Static list only):', 'wordpress-popup'),
 					),
 					array(
 						'type'     => 'select',

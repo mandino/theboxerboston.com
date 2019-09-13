@@ -24,8 +24,8 @@ class Hustle_Module_Widget_Legacy extends WP_Widget {
 	public function __construct() {
 		parent::__construct(
 			self::WIDGET_ID,
-			__( 'Hustle Legacy', Opt_In::TEXT_DOMAIN ),
-			array( 'description' => __( 'A legacy widget to add Opt-ins', Opt_In::TEXT_DOMAIN ) )
+			__( 'Hustle Legacy', 'wordpress-popup' ),
+			array( 'description' => __( 'A legacy widget to add Opt-ins', 'wordpress-popup' ) )
 		);
 	}
 
@@ -77,7 +77,7 @@ class Hustle_Module_Widget_Legacy extends WP_Widget {
 			if ( ! empty( $instance['title'] ) ) {
 				echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
 			}
-			esc_attr_e( 'Select Module', Opt_In::TEXT_DOMAIN );
+			esc_attr_e( 'Select Module', 'wordpress-popup' );
 			echo $args['after_widget'];
 			return;
 		}
@@ -126,13 +126,13 @@ class Hustle_Module_Widget_Legacy extends WP_Widget {
 			$instance['module_id'] = -1; }
 		?>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_attr_e( 'Title:', Opt_In::TEXT_DOMAIN ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_attr_e( 'Title:', 'wordpress-popup' ); ?></label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'module_id' ) ); ?>"><?php esc_attr_e( 'Select Module:', Opt_In::TEXT_DOMAIN ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'module_id' ) ); ?>"><?php esc_attr_e( 'Select Module:', 'wordpress-popup' ); ?></label>
 			<select name="<?php echo esc_attr( $this->get_field_name( 'module_id' ) ); ?>" id="hustle_module_id">
-				<option value=""><?php esc_attr_e( 'Select Module', Opt_In::TEXT_DOMAIN ); ?></option>
+				<option value=""><?php esc_attr_e( 'Select Module', 'wordpress-popup' ); ?></option>
 				<?php
 					$types = array( 'embedded', 'social_sharing' );
 				foreach ( Hustle_Module_Collection::instance()->get_embed_id_names( $types ) as $mod ) :

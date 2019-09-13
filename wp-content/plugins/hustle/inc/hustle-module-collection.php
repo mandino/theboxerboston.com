@@ -245,17 +245,25 @@ class Hustle_Module_Collection extends Hustle_Collection {
 	/**
 	 * TODO: no need for this to be a method of this class. Make it a regular function instead.
 	 */
-	public function return_model_from_id( $id ){
-		if( empty( $id )) {
+	public function return_model_from_id( $id ) {
+
+		if ( empty( $id ) ) {
 			return array();
 		}
-		$module = Hustle_Module_Model::instance()->get( $id );
-		if ( !is_wp_error( $module ) ) {
-			if ( 'social_sharing' === $module->module_type ) {
-				return Hustle_SShare_Model::instance()->get( $id );
-			}
-			return $module;
+
+		$module = Hustle_Module_Model::instance();
+		$module_type = $module->get_module_type_by_module_id( $id );
+
+		if ( 'social_sharing' === $module_type ) {
+			$model_instance = Hustle_SShare_Model::instance()->get( $id );
+		} else {
+			$model_instance = $module->get( $id );
 		}
+
+		if ( ! is_wp_error( $model_instance ) ) {
+			return $model_instance;
+		}
+
 		return array();
 	}
 
@@ -286,7 +294,7 @@ class Hustle_Module_Collection extends Hustle_Collection {
 	// TODO: fix this. This might timeout in sites with a lot of data or small limits.
 	public function get_hustle_30_modules( $blog_id = null ) {
 		$db = self::$_db;
-		$sql = $db->prepare( 
+		$sql = $db->prepare(
 			"SELECT * FROM `". $db->base_prefix ."hustle_modules` WHERE `blog_id` > 0 AND `blog_id` = %d",
 			get_current_blog_id()
 		);
@@ -338,7 +346,7 @@ class Hustle_Module_Collection extends Hustle_Collection {
 	/**
 	 * Get the id of the modules that belong to a blog.
 	 * Used to migrate tracking data.
-	 * 
+	 *
 	 * @since 4.0
 	 * @return array
 	 */
@@ -365,6 +373,28 @@ class Hustle_Module_Collection extends Hustle_Collection {
 		);
 		$filters = wp_parse_args( $filters, $defaults );
 		return $filters;
+	}
+
+	/**
+	 * Get active providers on modules
+	 *
+	 * @since 4.0.1
+	 */
+	public static function get_active_providers_module( $slug ) {
+		global $wpdb;
+		$modules_meta_table = Hustle_Db::modules_meta_table();
+
+		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
+		$query = $wpdb->prepare(
+			"SELECT `module_id`
+			FROM {$modules_meta_table}
+			WHERE `meta_value`
+			LIKE %s
+			AND `meta_key` = 'integrations_settings'",
+			"%". $slug . "%"
+		);
+		return $wpdb->get_col( $query );
+		// phpcs:enable
 	}
 
 }

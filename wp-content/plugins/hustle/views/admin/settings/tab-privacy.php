@@ -1,7 +1,7 @@
 <div id="privacy-box" class="sui-box" data-tab="privacy" <?php if ( 'privacy' !== $section ) echo 'style="display: none;"'; ?>>
 
 	<div class="sui-box-header">
-		<h2 class="sui-box-title"><?php esc_html_e( "Viewer's Privacy", Opt_In::TEXT_DOMAIN ); ?></h2>
+		<h2 class="sui-box-title"><?php esc_html_e( "Viewer's Privacy", 'wordpress-popup' ); ?></h2>
 	</div>
 
 	<div class="sui-box-body">
@@ -27,7 +27,7 @@
 		<div class="sui-actions-right">
 
 			<button class="sui-button sui-button-blue hustle-settings-save" data-nonce="<?php echo esc_attr( wp_create_nonce( 'hustle-settings' ) ); ?>">
-				<span class="sui-loading-text"><?php esc_html_e( 'Save Settings', Opt_In::TEXT_DOMAIN ); ?></span>
+				<span class="sui-loading-text"><?php esc_html_e( 'Save Settings', 'wordpress-popup' ); ?></span>
 				<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 			</button>
 

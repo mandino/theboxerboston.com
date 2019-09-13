@@ -8,9 +8,9 @@
 
 	<div class="sui-message-content">
 
-		<h2><?php esc_html_e( 'No Display Option Enabled', Opt_In::TEXT_DOMAIN ); ?></h2>
+		<h2><?php esc_html_e( 'No Display Option Enabled', 'wordpress-popup' ); ?></h2>
 
-		<p><?php printf( esc_html__( 'Whoops, you need to choose where you want the social widget to show up first. Jump back to %1$sDisplay Options%2$s and enable a module.', Opt_In::TEXT_DOMAIN ), '<a href="#" data-tab="display" class="hustle-go-to-tab">', '</a>' ); ?></p>
+		<p><?php printf( esc_html__( 'Whoops, you need to choose where you want the social widget to show up first. Jump back to %1$sDisplay Options%2$s and enable a module.', 'wordpress-popup' ), '<a href="#" data-tab="display" class="hustle-go-to-tab">', '</a>' ); ?></p>
 
 	</div>
 

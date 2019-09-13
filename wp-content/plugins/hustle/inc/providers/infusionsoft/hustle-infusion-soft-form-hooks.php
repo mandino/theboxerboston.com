@@ -37,6 +37,8 @@ class Hustle_InfusionSoft_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract
 		$submitted_data = apply_filters( 'hustle_provider_' . $this->addon->get_slug() . '_form_submitted_data', $submitted_data, $module_id, $form_settings_instance );
 
 		$addon_setting_values = $form_settings_instance->get_form_settings_values();
+		
+		$tags = $addon_setting_values['list_name'];
 
 		try {
 			$addon = $this->addon;
@@ -46,7 +48,7 @@ class Hustle_InfusionSoft_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract
 			$api = Hustle_Infusion_Soft::api( $api_key, $account_name );
 
 			if ( empty( $submitted_data['email'] ) ) {
-				throw new Exception( __( 'Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN ) );
+				throw new Exception( __( 'Required Field "email" was not filled by the user.', 'wordpress-popup' ) );
 			}
 
 			$submitted_data = $this->check_legacy( $submitted_data );
@@ -68,7 +70,7 @@ class Hustle_InfusionSoft_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract
 
 			$module = Hustle_Module_Model::instance()->get( $module_id );
 			if ( is_wp_error( $module ) ) {
-				return $module;
+				throw new Exception( $module->get_error_message() );
 			}
 
 			$utils = Hustle_Provider_Utils::get_instance();
@@ -89,36 +91,40 @@ class Hustle_InfusionSoft_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract
  
 				$extra_custom_fields = array_diff_key( $submitted_data, array_fill_keys( $custom_fields, 1 ) );
 				$found_extra = array();
-	
+
 				if ( ! empty( $extra_custom_fields ) ) {
-	
+
 					foreach ( $extra_custom_fields as $key => $value ) {
-	
-						$label = str_replace( ' ', '', ucwords( $key ) );
-	
-						// Attempt to check the label
-						if ( in_array( $label, $custom_fields, true ) ) {
-							$submitted_data[ $label ] = $value;
+
+						// Remove underscores since this is how Infusionsoft stores custom fields.
+						$name_from_key = str_replace( '_', '', $key );
+
+						if ( in_array( $name_from_key, $custom_fields, true ) ) {
+							$submitted_data[ $name_from_key ] = $value;
+							
 						} else {
-							$found_extra[ $key ] = $value;
+							$found_extra[ $name_from_key ] = $value;
 						}
 						unset( $submitted_data[ $key ] );
 					}
 				}
-	
+
+				// Add new custom fields.
 				if ( ! empty( $found_extra ) ) {
-	
-					$response = array(
-						'is_sent'       => false,
-						'description'   => __( 'Some fields are not successfully added.', Opt_In::TEXT_DOMAIN ),
-						'data_sent'     => $utils->get_last_data_sent(),
-						'data_received' => $utils->get_last_data_received(),
-						'url_request'   =>  $utils->get_last_url_request(),
-					);
+					// DON'T ADD CUSTOM FIELD SUPPORT YET.
+					// We weren't supporting it before, so let's do the upgrade to REST and then
+					// add the support once it's implemented on Infusionsoft's REST side.
+
+					//foreach( $found_extra as $name => $value ) {
+					//	$api->add_custom_field( $name );
+					//}
+
+					$message = __( "The contact was subscribed but these custom fields couldn't be added: ", 'wordpress-popup' ) . implode( ', ', array_keys( $found_extra ) );
+					throw new Exception( $message );
 				}
 
 				$email_exists = $api->email_exist( $submitted_data['Email'] );
-	
+
 				if ( $email_exists ) {
 					$contact_id = $api->update_contact( $submitted_data );
 				} else {
@@ -126,24 +132,29 @@ class Hustle_InfusionSoft_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract
 				}
 	
 				if ( is_wp_error( $contact_id ) ) {
-					$response = array(
-						'is_sent'       => false,
-						'description'   => $contact_id->get_error_message(),
-						'data_sent'     => $utils->get_last_data_sent(),
-						'data_received' => $utils->get_last_data_received(),
-						'url_request'   => $utils->get_last_url_request(),
-					);
-	
-				} else {
-	
-					$response = array(
-						'is_sent'       => true,
-						'description'   => __( 'Successfully added or updated member on InfusionSoft list', Opt_In::TEXT_DOMAIN ),
-						'data_sent'     => $utils->get_last_data_sent(),
-						'data_received' => $utils->get_last_data_received(),
-						'url_request'   => $utils->get_last_url_request(),
-					);
+					throw new Exception( $contact_id->get_error_message() );
 				}
+
+				$tag_id = ! empty( $addon_setting_values['list_id'] ) ? $addon_setting_values['list_id'] : null;
+				$tag_res = $api->add_tag_to_contact( $contact_id, $tag_id );
+
+				if ( is_wp_error( $tag_res ) ) {
+					// The tag id isn't selected, its value type isn't the correct type, or other errors.
+					throw new Exception( $tag_res->get_error_message() );
+
+				} elseif ( '0' === $tag_res ) {
+					// The contact was added but couldn't be tagged. Happens when the selected tag doesn't exist in IS, for example.
+					throw new Exception( __( "The contact was subscribed but it couldn't be tagged. Please make sure the selected tag exists.", 'wordpress-popup' ) );
+				}
+
+				$response = array(
+					'is_sent'       => true,
+					'description'   => __( 'Successfully added or updated member on Infusionsoft list', 'wordpress-popup' ),
+					'tags_names'	=> $tags,
+					'data_sent'     => $utils->get_last_data_sent(),
+					'data_received' => $utils->get_last_data_received(),
+					'url_request'   => $utils->get_last_url_request(),
+				);
 
 			}
 
@@ -185,7 +196,7 @@ class Hustle_InfusionSoft_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract
 		$addon_setting_values 		= $form_settings_instance->get_form_settings_values();
 
 		if ( empty( $submitted_data['email'] ) ) {
-			return __( 'Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN );
+			return __( 'Required Field "email" was not filled by the user.', 'wordpress-popup' );
 		}
 
 

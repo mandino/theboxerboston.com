@@ -85,6 +85,17 @@ class Hustle_Mailchimp_Api {
 	}
 
 	/**
+	 * Sends rest GET request
+	 *
+	 * @param $action
+	 * @param array $args
+	 * @return array|mixed|object|WP_Error
+	 */
+	private function _delete( $action, $args = array() ){
+		return $this->_request( "DELETE", $action, $args );
+	}
+
+	/**
 	 * Sends rest POST request
 	 *
 	 * @param $action
@@ -192,6 +203,21 @@ class Hustle_Mailchimp_Api {
 	}
 
 	/**
+	 * Delete detail of member
+	 *
+	 * @param $list_id
+	 * @param $email
+	 *
+	 * @return array|mixed|object|WP_Error
+	 */
+
+	public function delete_email( $list_id, $email ) {
+		$md5_email = md5( strtolower( $email ) );
+		$this->update_subscription_patch( $list_id, $email, array( 'status' => 'unsubscribed' ) );
+		return $this->_delete( 'lists/' . $list_id . '/members/' . $md5_email );
+	}
+
+	/**
 	 * Add custom field for list
 	 * @param $list_id
 	 * @param $field_data
@@ -201,6 +227,22 @@ class Hustle_Mailchimp_Api {
 	public function add_custom_field( $list_id, $field_data ) {
 		return $this->_post( 'lists/'. $list_id .'/merge-fields', array(
 			"body" =>  $field_data
+		) );
+	}
+
+	/**
+	 * Get custom fields for list
+	 * @param $list_id
+	 * @param $count
+	 * @param $offset
+	 *
+	 * @return array|mixed|object|WP_Error
+	 */
+	public function get_custom_fields( $list_id, $count = PHP_INT_MAX, $offset = 0 ) {
+		return $this->_get( 'lists/'. $list_id .'/merge-fields', array(
+			'user' => $this->_user . ':' . $this->_api_key,
+			'offset' => $offset,
+			'count' => $count,
 		) );
 	}
 
@@ -218,14 +260,14 @@ class Hustle_Mailchimp_Api {
 
 		if ( ! is_wp_error( $res ) ) {
 			return $res;
-			//return __("Successful subscription", Opt_In::TEXT_DOMAIN);
+			//return __("Successful subscription", 'wordpress-popup');
 		} else {
 			if ( strpos( $res->get_error_data(), '"Forgotten Email Not Subscribed"' ) ) {
-				$error = __("This contact was previously removed from this list via MailChimp dashboard. To rejoin, they'll need to sign up using a MailChimp native form.", Opt_In::TEXT_DOMAIN);
-				$error .= ' ' . __( 'Subscriber email: ', Opt_In::TEXT_DOMAIN ) . $data['email_address'];
+				$error = __("This contact was previously removed from this list via MailChimp dashboard. To rejoin, they'll need to sign up using a MailChimp native form.", 'wordpress-popup');
+				$error .= ' ' . __( 'Subscriber email: ', 'wordpress-popup' ) . $data['email_address'];
 			} else {
 				$error = implode( ', ', $res->get_error_messages() );
-				$error .= __( "Something went wrong.", Opt_In::TEXT_DOMAIN);
+				$error .= __( "Something went wrong.", 'wordpress-popup');
 				$error_data = $res->get_error_data();
 				if ( !empty( $error_data ) ) {
 					$error .= ' ' . $error_data;
@@ -249,10 +291,10 @@ class Hustle_Mailchimp_Api {
 		$res = $this->_put( 'lists/' . $list_id . '/members/' . $md5_email, array(
 			"body" =>  $data
 		) );
-		$error = __( "This email address has already subscribed", Opt_In::TEXT_DOMAIN );
+		$error = __( "This email address has already subscribed", 'wordpress-popup' );
 
 		if ( !is_wp_error( $res ) ) {
-			return __( "You have been added to the new group", Opt_In::TEXT_DOMAIN );
+			return __( "You have been added to the new group", 'wordpress-popup' );
 		} else {
 			throw new Exception( $error );
 		}
@@ -273,9 +315,9 @@ class Hustle_Mailchimp_Api {
 			"body" =>  $data
 		) );
 
-		$error = __( "Couldn't update the user", Opt_In::TEXT_DOMAIN );
+		$error = __( "Couldn't update the user", 'wordpress-popup' );
 		if ( ! is_wp_error( $res ) ) {
-			return __( "User updated", Opt_In::TEXT_DOMAIN );
+			return __( "User updated", 'wordpress-popup' );
 		} else {
 			throw new Exception( $error );
 		}

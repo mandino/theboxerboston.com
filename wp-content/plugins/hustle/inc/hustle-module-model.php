@@ -29,10 +29,10 @@ class Hustle_Module_Model extends Hustle_Model {
 			return array( Hustle_Sshare_Model::FLOAT_MODULE, 'inline', 'widget', 'shortcode' );
 		} else {
 			return array(
-				Hustle_Sshare_Model::FLOAT_MODULE => __( 'Floating', Opt_In::TEXT_DOMAIN ),
-				'inline' => __( 'Inline', Opt_In::TEXT_DOMAIN ),
-				'widget' => __( 'Widget', Opt_In::TEXT_DOMAIN ),
-				'shortcode' => __( 'Shortcode', Opt_In::TEXT_DOMAIN ),
+				Hustle_Sshare_Model::FLOAT_MODULE => __( 'Floating', 'wordpress-popup' ),
+				'inline' => __( 'Inline', 'wordpress-popup' ),
+				'widget' => __( 'Widget', 'wordpress-popup' ),
+				'shortcode' => __( 'Shortcode', 'wordpress-popup' ),
 			);
 		}
 	}
@@ -50,9 +50,9 @@ class Hustle_Module_Model extends Hustle_Model {
 			return array( 'inline', 'widget', 'shortcode' );
 		} else {
 			return array(
-				'inline' => __( 'Inline', Opt_In::TEXT_DOMAIN ),
-				'widget' => __( 'Widget', Opt_In::TEXT_DOMAIN ),
-				'shortcode' => __( 'Shortcode', Opt_In::TEXT_DOMAIN ),
+				'inline' => __( 'Inline', 'wordpress-popup' ),
+				'widget' => __( 'Widget', 'wordpress-popup' ),
+				'shortcode' => __( 'Shortcode', 'wordpress-popup' ),
 			);
 		}
 	}
@@ -158,7 +158,7 @@ class Hustle_Module_Model extends Hustle_Model {
 	 * that are applied to all the active providers of this module.
 	 *
 	 * @since 4.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function get_integrations_settings() {
@@ -559,6 +559,7 @@ class Hustle_Module_Model extends Hustle_Model {
 				'design' => $this->get_design()->to_array(),
 				'settings' => $this->get_settings()->to_array(),
 				'visibility' => $this->get_visibility()->to_array(),
+				self::KEY_INTEGRATIONS_SETTINGS	=> $this->get_integrations_settings()->to_array(),
 			);
 
 			if ( self::EMBEDDED_MODULE === $this->module_type ) {
@@ -594,7 +595,7 @@ class Hustle_Module_Model extends Hustle_Model {
 		unset( $this->id );
 
 		//rename
-		$this->module_name .= __( ' (copy)', Opt_In::TEXT_DOMAIN );
+		$this->module_name .= __( ' (copy)', 'wordpress-popup' );
 
 		//turn status off
 		$this->active = 0;
@@ -615,7 +616,7 @@ class Hustle_Module_Model extends Hustle_Model {
 		return false;
 	}
 
-	public function get_tracking_data( $hustle ) {
+	public function get_tracking_data() {
 		if ( ! $this->id ) {
 			return '';
 		}
@@ -646,7 +647,7 @@ class Hustle_Module_Model extends Hustle_Model {
 
 		ob_start();
 		// ELEMENT: Tracking data
-		$hustle->render(
+		Opt_In::static_render(
 			'admin/commons/sui-listing/elements/tracking-data',
 			array(
 				'module' => $this,
@@ -836,11 +837,11 @@ class Hustle_Module_Model extends Hustle_Model {
 	}
 
 	/**
-	 * Get the module type by module id 
+	 * Get the module type by module id
 	 * without the overhead of populating the model.
 	 *
 	 * @since 4.0
-	 * 
+	 *
 	 * @param integer $module_id
 	 * @return string|null
 	 */
@@ -848,10 +849,10 @@ class Hustle_Module_Model extends Hustle_Model {
 
 		$query = $this->_wpdb->prepare( "
 			SELECT module_type FROM `" . Hustle_Db::modules_table() . "`
-			WHERE `module_id`=%s", 
+			WHERE `module_id`=%s",
 			$module_id
 		);
-		
+
 		return $this->_wpdb->get_var( $query );
 	}
 

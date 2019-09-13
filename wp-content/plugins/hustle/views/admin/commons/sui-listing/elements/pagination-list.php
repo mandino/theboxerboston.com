@@ -24,7 +24,7 @@ if ( 1 < $paged ) {
 	<li class="sui-pagination--start">
 		<a href="<?php echo esc_url( $url ); ?>">
 			<i class="sui-icon-arrow-skip-start" aria-hidden="true"></i>
-			<span class="sui-screen-reader-text"><?php esc_html_e( 'Go to first page', Opt_In::TEXT_DOMAIN ); ?></span>
+			<span class="sui-screen-reader-text"><?php esc_html_e( 'Go to first page', 'wordpress-popup' ); ?></span>
 		</a>
 	</li>
 
@@ -42,7 +42,7 @@ if ( 1 < $paged ) {
 	<li class="sui-pagination--next">
 		<a href="<?php echo esc_url( $u ); ?>">
 			<i class="sui-icon-chevron-left" aria-hidden="true"></i>
-			<span class="sui-screen-reader-text"><?php esc_html_e( 'Go to previous page', Opt_In::TEXT_DOMAIN ); ?></span>
+			<span class="sui-screen-reader-text"><?php esc_html_e( 'Go to previous page', 'wordpress-popup' ); ?></span>
 		</a>
 	</li>
 <?php
@@ -84,7 +84,7 @@ if ( $paged < $total / $entries_per_page ) {
 	<li class="sui-pagination--next">
 		<a href="<?php echo esc_url( $u ); ?>">
 			<i class="sui-icon-chevron-right" aria-hidden="true"></i>
-			<span class="sui-screen-reader-text"><?php esc_html_e( 'Go to next page', Opt_In::TEXT_DOMAIN ); ?></span>
+			<span class="sui-screen-reader-text"><?php esc_html_e( 'Go to next page', 'wordpress-popup' ); ?></span>
 		</a>
 	</li>
 <?php
@@ -102,7 +102,7 @@ if ( $paged < $total / $entries_per_page ) {
 	<li class="sui-pagination--end">
 		<a href="<?php echo esc_url( $u ); ?>">
 			<i class="sui-icon-arrow-skip-end" aria-hidden="true"></i>
-			<span class="sui-screen-reader-text"><?php esc_html_e( 'Go to last page', Opt_In::TEXT_DOMAIN ); ?></span>
+			<span class="sui-screen-reader-text"><?php esc_html_e( 'Go to last page', 'wordpress-popup' ); ?></span>
 		</a>
 	</li>
 <?php

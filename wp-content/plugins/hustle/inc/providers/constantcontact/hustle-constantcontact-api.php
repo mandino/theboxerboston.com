@@ -78,7 +78,7 @@ if ( version_compare( PHP_VERSION, '5.3', '>=' ) ) {
 					// Allow retry but don't log referrer
 					$authorization_uri = $this->get_authorization_uri( false, false, $current_page );
 
-					$this->wp_die( esc_attr__( 'Constant Contact integration failed!', Opt_In::TEXT_DOMAIN ), esc_url( $authorization_uri ), esc_url( $referer ) );
+					$this->wp_die( esc_attr__( 'Constant Contact integration failed!', 'wordpress-popup' ), esc_url( $authorization_uri ), esc_url( $referer ) );
 				}
 			}
 

@@ -13,7 +13,7 @@ class Opt_In_Condition_Shown_Less_Than extends Opt_In_Condition_Abstract {
 	}
 
 	public function label() {
-		return isset( $this->args->less_than ) ? __("Shown less than specific number of times", Opt_In::TEXT_DOMAIN) : null;
+		return isset( $this->args->less_than ) ? __("Shown less than specific number of times", 'wordpress-popup') : null;
 	}
 
 	public function get_cookie_key( $module_type ) {

@@ -3,7 +3,7 @@ $entries_per_page = 20;
 if ( isset( $page_title ) ) {
 	$page_title = $page_title;
 } else {
-	$page_title = esc_html__( 'Module', Opt_In::TEXT_DOMAIN );
+	$page_title = esc_html__( 'Module', 'wordpress-popup' );
 }
 $sql_month_start_date = date( 'Y-m-d H:i:s', strtotime( '-30 days midnight' ) );
 $tracking_model = Hustle_Tracking_Model::get_instance();
@@ -25,14 +25,14 @@ $can_create = Hustle_Module_Admin::can_create_new_module( $module_type );
 					class="sui-button sui-button-blue hustle-create-module"
 					<?php if ( ! $can_create ) echo 'data-enabled="false"'; ?>
 				>
-					<i class="sui-icon-plus" aria-hidden="true"></i> <?php esc_html_e( 'Create', Opt_In::TEXT_DOMAIN ); ?>
+					<i class="sui-icon-plus" aria-hidden="true"></i> <?php esc_html_e( 'Create', 'wordpress-popup' ); ?>
 				</button>
 
 				<button
 					class="sui-button hustle-import-new-module"
 					<?php if ( ! $can_create ) echo 'data-enabled="false"'; ?>
 				>
-					<i class="sui-icon-upload-cloud" aria-hidden="true"></i> <?php esc_html_e( 'Import', Opt_In::TEXT_DOMAIN ); ?>
+					<i class="sui-icon-upload-cloud" aria-hidden="true"></i> <?php esc_html_e( 'Import', 'wordpress-popup' ); ?>
 				</button>
 
 			</div>
@@ -45,12 +45,12 @@ $can_create = Hustle_Module_Admin::can_create_new_module( $module_type );
 
 				<div class="hui-reporting-period">
 
-					<label><?php esc_html_e( 'Reporting Period', Opt_In::TEXT_DOMAIN ); ?></label>
+					<label><?php esc_html_e( 'Reporting Period', 'wordpress-popup' ); ?></label>
 
 					<select>
-						<option value="7"><?php esc_html_e( 'Last 7 days', Opt_In::TEXT_DOMAIN ); ?></option>
-						<option value="15"><?php esc_html_e( 'Last 15 days', Opt_In::TEXT_DOMAIN ); ?></option>
-						<option value="30" selected><?php esc_html_e( 'Last 30 days', Opt_In::TEXT_DOMAIN ); ?></option>
+						<option value="7"><?php esc_html_e( 'Last 7 days', 'wordpress-popup' ); ?></option>
+						<option value="15"><?php esc_html_e( 'Last 15 days', 'wordpress-popup' ); ?></option>
+						<option value="30" selected><?php esc_html_e( 'Last 30 days', 'wordpress-popup' ); ?></option>
 					</select>
 
 				</div>
@@ -63,7 +63,7 @@ $can_create = Hustle_Module_Admin::can_create_new_module( $module_type );
 			if ( ! $hide ) {
 			?>
 					<button class="sui-button sui-button-ghost">
-						<i class="sui-icon-academy" aria-hidden="true"></i> <?php esc_html_e( 'View Documentation', Opt_In::TEXT_DOMAIN ); ?>
+						<i class="sui-icon-academy" aria-hidden="true"></i> <?php esc_html_e( 'View Documentation', 'wordpress-popup' ); ?>
 					</button>
 			<?php } ?>
 
@@ -73,7 +73,7 @@ $can_create = Hustle_Module_Admin::can_create_new_module( $module_type );
 
 	<?php
 	if ( 'module-does-not-exists' === $message ) {
-		$this->render(
+		self::static_render(
 			'admin/notices/notice-non-exists',
 			array(
 				'total' => $total,
@@ -87,7 +87,7 @@ $can_create = Hustle_Module_Admin::can_create_new_module( $module_type );
 
 		<?php
 		// ELEMENT: Summary
-		$this->render(
+		self::static_render(
 			'admin/commons/sui-listing/elements/summary',
 			array(
 				'active_modules_count' => $active,
@@ -101,7 +101,7 @@ $can_create = Hustle_Module_Admin::can_create_new_module( $module_type );
 
 		<?php
 		// ELEMENT: Pagination
-		$this->render(
+		self::static_render(
 			'admin/commons/sui-listing/elements/pagination',
 			array(
 				'module_type'      => $module_type,
@@ -121,7 +121,7 @@ $can_create = Hustle_Module_Admin::can_create_new_module( $module_type );
 
 				<?php
 				// ELEMENT: Modules
-				$this->render(
+				self::static_render(
 					'admin/commons/sui-listing/elements/module',
 					array(
 						'module'               => $module,
@@ -141,7 +141,7 @@ $can_create = Hustle_Module_Admin::can_create_new_module( $module_type );
 
 		<?php
 		// ELEMENT: Empty Message
-		$this->render(
+		self::static_render(
 			'admin/commons/sui-listing/elements/empty-message',
 			array(
 				'count'            => $total,
@@ -150,12 +150,13 @@ $can_create = Hustle_Module_Admin::can_create_new_module( $module_type );
 				'message'          => $page_message,
 			)
 		);
-}
+	}
+
 	// ELEMENT: Footer
-	$this->render( 'admin/footer/footer-simple', array() );
+	self::static_render( 'admin/footer/footer' );
 
 	// DIALOG: Create module
-	$this->render(
+	self::static_render(
 		'admin/commons/sui-listing/dialogs/create-module',
 		array(
 			'module_type'         => $module_type,
@@ -165,7 +166,7 @@ $can_create = Hustle_Module_Admin::can_create_new_module( $module_type );
 	);
 
 	// DIALOG: Import module
-	$this->render(
+	self::static_render(
 		'admin/commons/sui-listing/dialogs/import-module',
 		array(
 			'capitalize_singular' => $capitalize_singular,
@@ -175,7 +176,7 @@ $can_create = Hustle_Module_Admin::can_create_new_module( $module_type );
 	);
 
 	// DIALOG: Delete module
-	$this->render(
+	self::static_render(
 		'admin/commons/sui-listing/dialogs/delete-module',
 		array()
 	);
@@ -183,7 +184,7 @@ $can_create = Hustle_Module_Admin::can_create_new_module( $module_type );
 	// DIALOG: Manage tracking
 	if ( isset( $multiple_charts ) ) {
 
-		$this->render(
+		self::static_render(
 			'admin/commons/sui-listing/dialogs/manage-tracking',
 			array(
 				'multiple_charts' => isset( $multiple_charts ) ? $multiple_charts : false,
@@ -194,22 +195,22 @@ $can_create = Hustle_Module_Admin::can_create_new_module( $module_type );
 	/**
 	 * DIALOG: Reset Tracking Data Confirmation
 	 */
-	$this->render( 'admin/commons/sui-listing/dialogs/tracking-reset-data' );
+	self::static_render( 'admin/commons/sui-listing/dialogs/tracking-reset-data' );
 
 	// DIALOG: Ugrade to pro.
 	if ( Opt_In_Utils::_is_free() ) {
-		$this->render( 'admin/commons/sui-listing/dialogs/pro-upgrade' );
+		self::static_render( 'admin/commons/sui-listing/dialogs/pro-upgrade' );
 	}
 
 	// DIALOG: Preview
 	// If embedded, show the preview dialog to embed the module into.
 	if ( Hustle_Module_Model::EMBEDDED_MODULE === $module_type ) {
-		$this->render( 'admin/dialogs/preview-dialog' );
+		self::static_render( 'admin/dialogs/preview-dialog' );
 	}
 
 	// DIALOG: Dissmiss migrate tracking notice modal confirmation.
 	if ( Hustle_Module_Admin::is_show_migrate_tracking_notice() ) {
-		$this->render( 'admin/dashboard/dialogs/migrate-dismiss-confirmation' );
+		self::static_render( 'admin/dashboard/dialogs/migrate-dismiss-confirmation' );
 	}
 ?>
 </main>

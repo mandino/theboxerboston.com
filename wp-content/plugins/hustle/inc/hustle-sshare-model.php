@@ -41,10 +41,6 @@ class Hustle_SShare_Model extends Hustle_Module_Model {
 		return new Hustle_SShare_Display( $this->get_settings_meta( self::KEY_DISPLAY_OPTIONS, '{}', true ), $this );
 	}
 
-	//public function get_sshare_display_types() {
-	//	return new Hustle_SShare_Types( $this->get_settings_meta( self::KEY_TYPES, '{}', true ), $this );
-	//}
-
 	/**
 	 * Return whether or not the requested counter type is enabled
 	 *
@@ -296,11 +292,13 @@ class Hustle_SShare_Model extends Hustle_Module_Model {
 			);
 		}
 
+		$current_link = rawurlencode( $current_link );
+
 		return apply_filters(
 			'hustle_native_share_counter_enpoints',
 			array( 
-				'facebook' => 'https://graph.facebook.com/?fields=og_object{likes.summary(true).limit(0)},share&id=' . $current_link,
-				// There's no official twitter api for doing this. This alternative also requires signing in https://opensharecount.com/
+				'facebook' => 'https://graph.facebook.com/?fields=og_object{engagement{count}}&id=' . $current_link,
+				// There's no official twitter api for doing this. This alternative requires signing in.
 				'twitter' => 'https://counts.twitcount.com/counts.php?url=' . $current_link,
 				'pinterest' => 'https://api.pinterest.com/v1/urls/count.json?url=' . $current_link,
 				'reddit' => 'https://www.reddit.com/api/info.json?url=' . $current_link,
@@ -353,9 +351,9 @@ class Hustle_SShare_Model extends Hustle_Module_Model {
 		if ( $count < 1000 ) {
 			return $count;
 		} elseif ( $count < 1000000 ) {
-			return round( $count/1000, 1, PHP_ROUND_HALF_DOWN ) . __(" K", Opt_In::TEXT_DOMAIN);
+			return round( $count/1000, 1, PHP_ROUND_HALF_DOWN ) . __(" K", 'wordpress-popup');
 		} else {
-			return round( $count/1000000, 1, PHP_ROUND_HALF_DOWN ) . __(" M", Opt_In::TEXT_DOMAIN);
+			return round( $count/1000000, 1, PHP_ROUND_HALF_DOWN ) . __(" M", 'wordpress-popup');
 		}
 	}
 
@@ -378,17 +376,9 @@ class Hustle_SShare_Model extends Hustle_Module_Model {
 	 */
 	private function format_facebook_api_response( $response ) {
 		$response = json_decode( $response , true);
-		$likes = !empty( $response['og_object'] ) ? intval( $response['og_object']['likes']['summary']['total_count'] ) : 0;
+		$engagement = ! empty( $response['og_object'] ) && ! empty( $response['og_object']['engagement']['count'] ) ? intval( $response['og_object']['engagement']['count'] ) : 0;
 
-		if( !empty( $response['share'] ) ){
-			$comments = intval( $response['share']['comment_count'] );
-			$shares = intval( $response['share']['share_count'] );
-		} else {
-			$comments = 0;
-			$shares = 0;
-		}
-		$total = $likes + $comments + $shares;
-		return $total;
+		return $engagement;
 	}
 
 	private function format_twitter_api_response( $response ) {

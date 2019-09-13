@@ -12,8 +12,8 @@
 
     <div class="wpmudev-box-head">
 
-        <h2 class="{{ ( _.isFalse(is_new) ) ? 'wpmudev-hidden' : '' }}" ><?php esc_attr_e( "Add Email Service", Opt_In::TEXT_DOMAIN ); ?></h2>
-        <h2 class="{{ ( _.isTrue(is_new) ) ? 'wpmudev-hidden' : '' }}" ><?php esc_attr_e( "Update Email Service", Opt_In::TEXT_DOMAIN ); ?></h2>
+        <h2 class="{{ ( _.isFalse(is_new) ) ? 'wpmudev-hidden' : '' }}" ><?php esc_attr_e( "Add Email Service", 'wordpress-popup' ); ?></h2>
+        <h2 class="{{ ( _.isTrue(is_new) ) ? 'wpmudev-hidden' : '' }}" ><?php esc_attr_e( "Update Email Service", 'wordpress-popup' ); ?></h2>
 
         <?php $this->render("general/icons/icon-close" ); ?>
 
@@ -23,7 +23,7 @@
 
         <form id="wph-optin-service-details-form">
             <div id="wph-provider-select" class="wpmudev-provider-block">
-                <label><?php esc_attr_e('Choose email service provider:', Opt_In::TEXT_DOMAIN); ?></label>
+                <label><?php esc_attr_e('Choose email service provider:', 'wordpress-popup'); ?></label>
 
                 <select name="optin_provider_name" class="wpmudev-select" data-nonce="<?php echo esc_attr( wp_create_nonce('change_provider_name') ); ?>" value="{{service}}">
 
@@ -45,7 +45,7 @@
 
                 <label class="wpmudev-label--loading">
 
-                    <span><?php esc_attr_e('Wait a bit, content is being loaded...', Opt_In::TEXT_DOMAIN); ?></span>
+                    <span><?php esc_attr_e('Wait a bit, content is being loaded...', 'wordpress-popup'); ?></span>
 
                 </label>
 
@@ -70,9 +70,9 @@
 			}
 			#>
 			<tr>
-				<td {{{required}}} data-text="<?php esc_attr_e( "Form Element", Opt_In::TEXT_DOMAIN ); ?>">{{{asterisk}}} {{ 'recaptcha' === form_field.type ? '' : form_field.label }}</td>
-				<td data-text="<?php esc_attr_e( "Form Type", Opt_In::TEXT_DOMAIN ); ?>">{{form_field.type}}</td>
-				<td data-text="<?php esc_attr_e( "Default Text", Opt_In::TEXT_DOMAIN ); ?>">{{ 'recaptcha' === form_field.type ? '' : form_field.placeholder }}</td>
+				<td {{{required}}} data-text="<?php esc_attr_e( "Form Element", 'wordpress-popup' ); ?>">{{{asterisk}}} {{ 'recaptcha' === form_field.type ? '' : form_field.label }}</td>
+				<td data-text="<?php esc_attr_e( "Form Type", 'wordpress-popup' ); ?>">{{form_field.type}}</td>
+				<td data-text="<?php esc_attr_e( "Default Text", 'wordpress-popup' ); ?>">{{ 'recaptcha' === form_field.type ? '' : form_field.placeholder }}</td>
 			</tr>
 			<#
 		});

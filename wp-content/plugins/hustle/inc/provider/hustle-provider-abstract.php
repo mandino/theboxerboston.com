@@ -148,6 +148,43 @@ abstract class Hustle_Provider_Abstract implements Hustle_Provider_Interface{
 	protected $_logo_2x;
 
 	/**
+	 * Regular banner for promoting the provider.
+	 * Used in the not-connected column of the global integrations page.
+	 * -Optional.
+	 * 
+	 * @since 4.0.1
+	 * @var string
+	 */
+	protected $_banner_1x;
+
+	/**
+	 * Retina banner for promoting the provider.
+	 * Should be retina ready.
+	 * Used in the not-connected column of the global integrations page.
+	 * -Optional.
+	 * 
+	 * @since 4.0.1
+	 * @var string
+	 */
+	protected $_banner_2x;
+
+	/**
+	 * Provider's documentation URL.
+	 * 
+	 * @since 4.0.1
+	 * @var string
+	 */
+	protected $_documentation_url;
+
+	/**
+	 * Short description to be used in the non-connected integrations column.
+	 * 
+	 * @since 4.0.1
+	 * @var string
+	 */
+	protected $_short_description;
+	
+	/**
 	 * Whether the provider supports having multiple instances in the modules.
 	 * Override if required.
 	 *
@@ -377,6 +414,46 @@ abstract class Hustle_Provider_Abstract implements Hustle_Provider_Interface{
 	}
 
 	/**
+	 * Get retina ready promotion banner.
+	 * 
+	 * @since 4.0.1
+	 * @return string
+	 */
+	final public function get_banner_1x() {
+		return $this->_banner_1x;
+	}
+	
+	/**
+	 * Get retina ready banner
+	 * 
+	 * @since 4.0.1
+	 * @return string
+	 */
+	final public function get_banner_2x() {
+		return $this->_banner_2x;
+	}
+
+	/**
+	 * Get the documentation url.
+	 * 
+	 * @since 4.0.1
+	 * @return string
+	 */
+	final public function get_documentation_url() {
+		return $this->_documentation_url;
+	}
+
+	/**
+	 * Get the short description.
+	 * 
+	 * @since 4.0.1
+	 * @return string
+	 */
+	final public function get_short_description() {
+		return $this->_short_description;
+	}
+
+	/**
 	 * Get whether the provider allows having multiple instances on a form.
 	 *
 	 * @return bool
@@ -405,6 +482,16 @@ abstract class Hustle_Provider_Abstract implements Hustle_Provider_Interface{
 		$addon                 = $this;
 		$settings_options_name = 'hustle_provider_' . $this->get_slug() . '_settings';
 
+		/**
+		 * Filter wp options name for saving addon settings
+		 *
+		 * @since 4.0.1
+		 *
+		 * @param string $settings_options_name
+		 * @param Hustle_Provider_Abstract $addon provider instance
+		 */
+		$settings_options_name = apply_filters( 'hustle_provider_' . $addon_slug . '_settings_options_name', $settings_options_name, $addon );
+
 		return $settings_options_name;
 	}
 
@@ -418,6 +505,16 @@ abstract class Hustle_Provider_Abstract implements Hustle_Provider_Interface{
 		$addon_slug           = $this->get_slug();
 		$addon                = $this;
 		$version_options_name = 'hustle_provider_' . $this->get_slug() . '_version';
+		
+		/**
+		 * Filter wp options name for saving addon settings
+		 *
+		 * @since 4.0.1
+		 *
+		 * @param string $version_options_name
+		 * @param Hustle_Provider_Abstract $addon provider instance
+		 */
+		$version_options_name = apply_filters( 'hustle_provider_' . $addon_slug . '_version_options_name', $version_options_name, $addon );
 
 		return $version_options_name;
 	}
@@ -437,6 +534,10 @@ abstract class Hustle_Provider_Abstract implements Hustle_Provider_Interface{
 			'title'                  => $this->get_title(),
 			'icon_2x'                => $this->get_icon_2x(),
 			'logo_2x'				 => $this->get_logo_2x(),
+			'banner_1x'				 => $this->get_banner_1x(),
+			'banner_2x'				 => $this->get_banner_2x(),
+			'documentation_url'		 => $this->get_documentation_url(),
+			'short_description'		 => $this->get_short_description(),
 			'version'                => $this->get_version(),
 			'class'                  => $this->get_class(),
 			'supports_fields'		 => $this->get_supports_fields(), // To be removed.
@@ -552,33 +653,17 @@ abstract class Hustle_Provider_Abstract implements Hustle_Provider_Interface{
 	}
 
 	/**
-	 * Deactivate the global multi-instance of an integration.
+	 * Override this method to add an action when the user deactivates the addon.
+	 *
+	 * @example DROP table
+	 * return true when succes
+	 * return false on failure, it will stop the deactivate process
 	 *
 	 * @since 4.0
-	 *
-	 * @param array $data
-	 * @return boolean
+	 * @return bool
 	 */
 	public function deactivate( $data = array() ) {
-
-		// If the provider allows having multiple instances globally, remove that instance only.
-		if ( $this->is_allow_multi_on_global() ) {
-			if ( isset( $data['global_multi_id'] ) && ! empty( $data['global_multi_id'] ) ) {
-				$settings_values = $this->get_settings_values();
-				unset( $settings_values[ $data['global_multi_id'] ] );
-
-				if ( ! empty( $settings_values ) ) {
-					$this->save_settings_values( $settings_values );
-				} else {
-					Hustle_Providers::get_instance()->force_remove_activated_addons( $data['slug'] );
-				}
-				return true;
-			}
-		} else {
-			Hustle_Providers::get_instance()->force_remove_activated_addons( $data['slug'] );
-			return true;
-		}
-		return false;
+		return true;
 	}
 
 	/**
@@ -635,12 +720,12 @@ abstract class Hustle_Provider_Abstract implements Hustle_Provider_Interface{
 		$steps = $this->settings_wizards();
 
 		if ( ! is_array( $steps ) ) {
-			return $this->get_empty_wizard( sprintf( __( 'No settings available for %1$s', Opt_In::TEXT_DOMAIN ), $this->get_title() ) );
+			return $this->get_empty_wizard( sprintf( __( 'No settings available for %1$s', 'wordpress-popup' ), $this->get_title() ) );
 		}
 
 		$total_steps = count( $steps );
 		if ( $total_steps < 1 ) {
-			return $this->get_empty_wizard( sprintf( __( 'No settings available for %1$s', Opt_In::TEXT_DOMAIN ), $this->get_title() ) );
+			return $this->get_empty_wizard( sprintf( __( 'No settings available for %1$s', 'wordpress-popup' ), $this->get_title() ) );
 		}
 
 		if ( ! isset( $steps[ $step ] ) ) {
@@ -718,11 +803,11 @@ abstract class Hustle_Provider_Abstract implements Hustle_Provider_Interface{
 		$steps = array_merge( $settings_steps, $form_settings_steps );
 
 		if ( ! is_array( $steps ) ) {
-			return $this->get_empty_wizard( sprintf( __( 'No Form Settings available for %1$s', Opt_In::TEXT_DOMAIN ), $this->get_title() ) );
+			return $this->get_empty_wizard( sprintf( __( 'No Form Settings available for %1$s', 'wordpress-popup' ), $this->get_title() ) );
 		}
 		$total_steps = count( $steps );
 		if ( $total_steps < 1 ) {
-			return $this->get_empty_wizard( sprintf( __( 'No Form Settings available for %1$s', Opt_In::TEXT_DOMAIN ), $this->get_title() ) );
+			return $this->get_empty_wizard( sprintf( __( 'No Form Settings available for %1$s', 'wordpress-popup' ), $this->get_title() ) );
 		}
 
 		if ( ! isset( $steps[ $step ] ) ) {
@@ -1082,13 +1167,13 @@ abstract class Hustle_Provider_Abstract implements Hustle_Provider_Interface{
 
 		// validate callback, when its empty or not callable, mark as no wizard
 		if ( ! isset( $steps[ $step ]['callback'] ) || ! is_callable( $steps[ $step ]['callback'] ) ) {
-			return $this->get_empty_wizard( sprintf( __( 'No Settings available for %1$s', Opt_In::TEXT_DOMAIN ), $this->get_title() ) );
+			return $this->get_empty_wizard( sprintf( __( 'No Settings available for %1$s', 'wordpress-popup' ), $this->get_title() ) );
 		}
 
 		$wizard = call_user_func( $steps[ $step ]['callback'], $submitted_data, $is_submit, $module_id );
 		// a wizard to be able to processed by our application need to has at least `html` which will be rendered or `redirect` which will be the url for redirect user to go to
 		if ( ! isset( $wizard['html'] ) && ! isset( $wizard['redirect'] ) ) {
-			return $this->get_empty_wizard( sprintf( __( 'No Settings available for %1$s', Opt_In::TEXT_DOMAIN ), $this->get_title() ) );
+			return $this->get_empty_wizard( sprintf( __( 'No Settings available for %1$s', 'wordpress-popup' ), $this->get_title() ) );
 		}
 
 		// Add 'hustle_is_submit' hidden input at the end.
@@ -1157,7 +1242,7 @@ abstract class Hustle_Provider_Abstract implements Hustle_Provider_Interface{
 				'close' => array(
 					'action' => 'close',
 					'data'   => array(),
-					'markup' => '<a href="" class="hustle-provider-next wpmudev-button wpmudev-button-ghost">' . __( 'Close', Opt_In::TEXT_DOMAIN ) . '</a>',
+					'markup' => '<a href="" class="hustle-provider-next wpmudev-button wpmudev-button-ghost">' . __( 'Close', 'wordpress-popup' ) . '</a>',
 				),
 			),
 		);
@@ -1704,7 +1789,7 @@ abstract class Hustle_Provider_Abstract implements Hustle_Provider_Interface{
 	 * @return string error message
 	 */
 	protected function provider_connection_falied(){
-		$error_message = sprintf( __( "We couldn't connect to your %s account. Please resolve the errors below and try again.", Opt_In::TEXT_DOMAIN ), $this->_title );
+		$error_message = sprintf( __( "We couldn't connect to your %s account. Please resolve the errors below and try again.", 'wordpress-popup' ), $this->_title );
 		return $error_message;
 	} 
 }

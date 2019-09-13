@@ -35,7 +35,7 @@
 					<label class="sui-checkbox sui-checkbox-sm">
 						<input type="checkbox" id="hustle-check-all">
 						<span aria-hidden="true"></span>
-						<span><?php esc_html_e( 'Id', Opt_In::TEXT_DOMAIN ); ?></span>
+						<span><?php esc_html_e( 'Id', 'wordpress-popup' ); ?></span>
 					</label>
 				</th>
 
@@ -108,7 +108,7 @@
 										<?php echo esc_html( $summary_item['value'] ); ?>
 										<span class="sui-accordion-open-indicator" aria-hidden="true">
 											<i class="sui-icon-chevron-down" aria-hidden="true"></i>
-											<span class="sui-screen-reader-text"><?php esc_html_e( 'Click to open', Opt_In::TEXT_DOMAIN ); ?></span>
+											<span class="sui-screen-reader-text"><?php esc_html_e( 'Click to open', 'wordpress-popup' ); ?></span>
 										</span>
 									</td>
 								<?php } else { ?>
@@ -121,7 +121,7 @@
 
 								<td><span class="hui-entry-button sui-accordion-open-indicator">
 									<i class="sui-icon-chevron-down"></i>
-									<span class="sui-screen-reader-text"><?php esc_html_e( 'Click to open', Opt_In::TEXT_DOMAIN ); ?></span>
+									<span class="sui-screen-reader-text"><?php esc_html_e( 'Click to open', 'wordpress-popup' ); ?></span>
 								</span></td>
 
 							<?php endif; ?>
@@ -130,10 +130,10 @@
 
 						<?php if ( $summary['num_fields_left'] ) : ?>
 
-							<td><?php printf( esc_html__( "+ %s other fields", Opt_In::TEXT_DOMAIN ), esc_html( $summary['num_fields_left'] ) ); ?>
+							<td><?php printf( esc_html__( "+ %s other fields", 'wordpress-popup' ), esc_html( $summary['num_fields_left'] ) ); ?>
 							<span class="sui-accordion-open-indicator">
 								<i class="sui-icon-chevron-down" aria-hidden="true"></i>
-								<span class="sui-screen-reader-text"><?php esc_html_e( 'Click to open', Opt_In::TEXT_DOMAIN ); ?></span>
+								<span class="sui-screen-reader-text"><?php esc_html_e( 'Click to open', 'wordpress-popup' ); ?></span>
 							</span></td>
 
 						<?php endif; ?>
@@ -194,9 +194,9 @@
 
 											<div class="sui-box-settings-col-2">
 
-												<h3><?php esc_html_e( 'Active Integrations', Opt_In::TEXT_DOMAIN ); ?></h3>
+												<h3><?php esc_html_e( 'Active Integrations', 'wordpress-popup' ); ?></h3>
 
-												<p><?php esc_html_e( 'You can check if the data is submitted to your active integrations and the information returned by the integrations if any.', Opt_In::TEXT_DOMAIN ); ?></p>
+												<p><?php esc_html_e( 'You can check if the data is submitted to your active integrations and the information returned by the integrations if any.', 'wordpress-popup' ); ?></p>
 
 												<table class="sui-table sui-accordion hui-table-entries-app">
 
@@ -204,8 +204,8 @@
 
 														<tr>
 
-															<th class="hui-column-name"><?php esc_html_e( 'Integration Name', Opt_In::TEXT_DOMAIN ); ?></th>
-															<th class="hui-column-data"><?php esc_html_e( 'Data sent to integration', Opt_In::TEXT_DOMAIN ); ?></th>
+															<th class="hui-column-name"><?php esc_html_e( 'Integration Name', 'wordpress-popup' ); ?></th>
+															<th class="hui-column-data"><?php esc_html_e( 'Data sent to integration', 'wordpress-popup' ); ?></th>
 
 														</tr>
 
@@ -221,7 +221,7 @@
 
 															<tr class="sui-accordion-item<?php echo ( ++$num === $num_addons ) ? ' sui-table-item-last' : ''; ?> <?php echo ( $addon['summary']['data_sent'] ) ? 'sui-success' : 'sui-error'; ?>">
 
-																<td class="hui-column-name sui-accordion-item-title">
+																<td class="hui-column-name sui-accordion-item-title" style="padding-bottom: 5px;">
 
 																	<img
 																		src="<?php echo esc_attr( $addon['summary']['icon'] ); ?>"
@@ -232,22 +232,22 @@
 
 																</td>
 
-																<td class="hui-column-data">
+																<td class="hui-column-data" style="padding-bottom: 5px;">
 
 																	<div class="hui-column-data--alignment">
 
-																		<div class="hui-column-data--left"><?php $addon['summary']['data_sent'] ? esc_html_e( 'Yes', Opt_In::TEXT_DOMAIN ) : esc_html_e( 'No', Opt_In::TEXT_DOMAIN ); ?></div>
+																		<div class="hui-column-data--left"><?php $addon['summary']['data_sent'] ? esc_html_e( 'Yes', 'wordpress-popup' ) : esc_html_e( 'No', 'wordpress-popup' ); ?></div>
 
 																		<div class="hui-column-data--right">
 
 																			<a href="<?php echo esc_url( $wizard_page ); ?>" class="sui-button sui-button-ghost sui-accordion-item-action">
 																				<i class="sui-icon-wrench-tool" aria-hidden="true"></i>
-																				<?php esc_html_e( 'Configure', Opt_In::TEXT_DOMAIN ); ?>
+																				<?php esc_html_e( 'Configure', 'wordpress-popup' ); ?>
 																			</a>
 
 																			<button class="sui-button-icon sui-accordion-open-indicator">
 																				<i class="sui-icon-chevron-down" aria-hidden="true"></i>
-																				<span class="sui-screen-reader-text"><?php esc_html_e( 'Click to open', Opt_In::TEXT_DOMAIN ); ?></span>
+																				<span class="sui-screen-reader-text"><?php esc_html_e( 'Click to open', 'wordpress-popup' ); ?></span>
 																			</button>
 
 																		</div>
@@ -285,7 +285,7 @@
 
 																			<a href="<?php echo esc_url( $wizard_page ); ?>" class="sui-button sui-button-ghost sui-accordion-item-action">
 																				<i class="sui-icon-wrench-tool" aria-hidden="true"></i>
-																				<?php esc_html_e( 'Configure', Opt_In::TEXT_DOMAIN ); ?>
+																				<?php esc_html_e( 'Configure', 'wordpress-popup' ); ?>
 																			</a>
 
 																		</div>
@@ -316,7 +316,7 @@
 										data-id="<?php echo esc_attr( $db_entry_id ); ?>"
 										data-nonce=<?php echo esc_attr( wp_create_nonce( 'hustle_entries_request' ) ); ?>>
 										<i class="sui-icon-trash" aria-hidden="true"></i>
-										<?php esc_html_e( 'Delete', Opt_In::TEXT_DOMAIN ); ?>
+										<?php esc_html_e( 'Delete', 'wordpress-popup' ); ?>
 									</button>
 
 								</div>
@@ -334,7 +334,7 @@
 				<tr>
 					<td class="hui-column-notice" colspan="<?php echo count( $fields_headers ) + 2; ?>">
 						<div class="sui-notice sui-notice-error">
-							<p><?php esc_html_e( 'No entries were found.', Opt_In::TEXT_DOMAIN ); ?></p>
+							<p><?php esc_html_e( 'No entries were found.', 'wordpress-popup' ); ?></p>
 						</div>
 					</td>
 				</tr>

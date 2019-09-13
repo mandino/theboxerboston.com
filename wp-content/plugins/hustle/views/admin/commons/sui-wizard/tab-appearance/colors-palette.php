@@ -1,46 +1,46 @@
 <div class="sui-box-settings-row">
 
 	<div class="sui-box-settings-col-1">
-		<span class="sui-settings-label"><?php esc_html_e( 'Colors Palette', Opt_In::TEXT_DOMAIN ); ?></span>
-		<span class="sui-description"><?php printf( esc_html__( 'Choose a pre-made palette for your %s and further customize it’s appearance.', Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?></span>
+		<span class="sui-settings-label"><?php esc_html_e( 'Colors Palette', 'wordpress-popup' ); ?></span>
+		<span class="sui-description"><?php printf( esc_html__( 'Choose a pre-made palette for your %s and further customize it’s appearance.', 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?></span>
 	</div>
 
 	<div class="sui-box-settings-col-2">
 
 		<div class="sui-form-field">
 
-			<label class="sui-label"><?php esc_html_e( 'Select a color palette', Opt_In::TEXT_DOMAIN ); ?></label>
+			<label class="sui-label"><?php esc_html_e( 'Select a color palette', 'wordpress-popup' ); ?></label>
 
 			<select name="color_palette" data-attribute="color_palette">
 
 				<option value="gray_slate"
 					{{ ( 'gray_slate' === color_palette ) ? 'selected' : '' }}>
-					<?php esc_html_e( 'Gray Slate', Opt_In::TEXT_DOMAIN ); ?>
+					<?php esc_html_e( 'Gray Slate', 'wordpress-popup' ); ?>
 				</option>
 
 				<option value="coffee"
 					{{ ( 'coffee' === color_palette ) ? 'selected' : '' }}>
-					<?php esc_html_e( 'Coffee', Opt_In::TEXT_DOMAIN ); ?>
+					<?php esc_html_e( 'Coffee', 'wordpress-popup' ); ?>
 				</option>
 
 				<option value="ectoplasm"
 					{{ ( 'ectoplasm' === color_palette ) ? 'selected' : '' }}>
-					<?php esc_html_e( 'Ectoplasm', Opt_In::TEXT_DOMAIN ); ?>
+					<?php esc_html_e( 'Ectoplasm', 'wordpress-popup' ); ?>
 				</option>
 
 				<option value="blue"
 					{{ ( 'blue' === color_palette ) ? 'selected' : '' }}>
-					<?php esc_html_e( 'Blue', Opt_In::TEXT_DOMAIN ); ?>
+					<?php esc_html_e( 'Blue', 'wordpress-popup' ); ?>
 				</option>
 
 				<option value="sunrise"
 					{{ ( 'sunrise' === color_palette ) ? 'selected' : '' }}>
-					<?php esc_html_e( 'Sunrise', Opt_In::TEXT_DOMAIN ); ?>
+					<?php esc_html_e( 'Sunrise', 'wordpress-popup' ); ?>
 				</option>
 
 				<option value="midnight"
 					{{ ( 'midnight' === color_palette ) ? 'selected' : '' }}>
-					<?php esc_html_e( 'Midnight', Opt_In::TEXT_DOMAIN ); ?>
+					<?php esc_html_e( 'Midnight', 'wordpress-popup' ); ?>
 				</option>
 
 			</select>
@@ -49,7 +49,7 @@
 
 		<div id="hustle-palette-colors" class="sui-form-field">
 
-			<label class="sui-label"><?php esc_html_e( 'Customize the color palette', Opt_In::TEXT_DOMAIN ); ?></label>
+			<label class="sui-label"><?php esc_html_e( 'Customize the color palette', 'wordpress-popup' ); ?></label>
 
 			<div class="sui-side-tabs" style="margin-top: 5px;">
 
@@ -67,7 +67,7 @@
 							data-tab-menu="hustle-custom-palette"
 							{{ _.checked( ( _.isTrue( customize_colors ) ), true ) }}
 						/>
-						<?php esc_html_e( 'Customize', Opt_In::TEXT_DOMAIN ); ?>
+						<?php esc_html_e( 'Customize', 'wordpress-popup' ); ?>
 					</label>
 
 					<label
@@ -82,7 +82,7 @@
 							data-tab-menu="none"
 							{{ _.checked( ( _.isFalse( customize_colors ) ), true ) }}
 						/>
-						<?php esc_html_e( 'Use Default Colors', Opt_In::TEXT_DOMAIN ); ?>
+						<?php esc_html_e( 'Use Default Colors', 'wordpress-popup' ); ?>
 					</label>
 
 				</div>
@@ -95,9 +95,9 @@
 					>
 
 						<?php if ( $is_optin ) {
-							$this->render( 'admin/commons/sui-wizard/elements/palette-optin', array( 'module_type' => $module_type ) );
+							self::static_render( 'admin/commons/sui-wizard/elements/palette-optin', array( 'module_type' => $module_type ) );
 						} else {
-							$this->render( 'admin/commons/sui-wizard/elements/palette-informational', array( 'module_type' => $module_type ) );
+							self::static_render( 'admin/commons/sui-wizard/elements/palette-informational', array( 'module_type' => $module_type ) );
 						} ?>
 
 					</div>

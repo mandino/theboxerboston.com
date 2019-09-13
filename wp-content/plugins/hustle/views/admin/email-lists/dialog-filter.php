@@ -13,8 +13,8 @@ $search_email = isset( $admin->filters['search_email'] ) ? $admin->filters['sear
 $order_by = isset( $admin->order['order_by'] ) ? $admin->order['order_by'] : '';
 
 $order_by_array = array(
-	'entries.entry_id' => esc_html__( 'Id', Opt_In::TEXT_DOMAIN ),
-	'entries.date_created' => esc_html__( 'Date submitted', Opt_In::TEXT_DOMAIN ),
+	'entries.entry_id' => esc_html__( 'Id', 'wordpress-popup' ),
+	'entries.date_created' => esc_html__( 'Date submitted', 'wordpress-popup' ),
 );
 ?>
 
@@ -45,10 +45,10 @@ $order_by_array = array(
 
 			<div class="sui-box-header sui-block-content-center">
 
-				<h3 id="dialogTitle" class="sui-box-title"><?php esc_html_e( 'Filters', Opt_In::TEXT_DOMAIN ); ?></h3>
+				<h3 id="dialogTitle" class="sui-box-title"><?php esc_html_e( 'Filters', 'wordpress-popup' ); ?></h3>
 
 				<button class="sui-dialog-close hustle-dialog-close">
-					<span class="sui-screen-reader-text"><?php esc_html_e( 'Close this dialog window', Opt_In::TEXT_DOMAIN ); ?></span>
+					<span class="sui-screen-reader-text"><?php esc_html_e( 'Close this dialog window', 'wordpress-popup' ); ?></span>
 				</button>
 
 			</div>
@@ -59,7 +59,7 @@ $order_by_array = array(
 				// FIELD: Keyword ?>
 				<div class="sui-form-field">
 
-					<label for="hustle-dialog-filter--keyword" class="sui-label"><?php esc_html_e( 'Email id has keyword', Opt_In::TEXT_DOMAIN ); ?></label>
+					<label for="hustle-dialog-filter--keyword" class="sui-label"><?php esc_html_e( 'Email id has keyword', 'wordpress-popup' ); ?></label>
 
 					<div class="sui-control-with-icon">
 
@@ -67,7 +67,7 @@ $order_by_array = array(
 							type="text"
 							name="search_email"
 							value="<?php echo esc_attr( $search_email ); ?>"
-							placeholder="<?php esc_html_e( 'E.g. gmail', Opt_In::TEXT_DOMAIN ); ?>"
+							placeholder="<?php esc_html_e( 'E.g. gmail', 'wordpress-popup' ); ?>"
 							id="hustle-dialog-filter--keyword"
 							class="sui-form-control"
 						/>
@@ -82,7 +82,7 @@ $order_by_array = array(
 				// FIELD: Sort by ?>
 				<div class="sui-form-field">
 
-					<label for="hustle-dialog-filter--sortby" class="sui-label"><?php esc_html_e( 'Sort by', Opt_In::TEXT_DOMAIN ); ?></label>
+					<label for="hustle-dialog-filter--sortby" class="sui-label"><?php esc_html_e( 'Sort by', 'wordpress-popup' ); ?></label>
 
 					<select name="order_by" id="hustle-dialog-filter--sortby">
 						<?php foreach ( $order_by_array as $key => $name ) { ?>
@@ -96,7 +96,7 @@ $order_by_array = array(
 				// FIELD: Date Range ?>
 				<div class="sui-form-field">
 
-					<label for="hustle-dialog-filter--date" class="sui-label"><?php esc_html_e( 'Submission date range', Opt_In::TEXT_DOMAIN ); ?></label>
+					<label for="hustle-dialog-filter--date" class="sui-label"><?php esc_html_e( 'Submission date range', 'wordpress-popup' ); ?></label>
 
 					<div id="hustle-dialog-filter--date" class="sui-date">
 
@@ -106,7 +106,7 @@ $order_by_array = array(
 							type="text"
 							name="date_range"
 							value="<?php echo esc_attr( $date_range ); ?>"
-							placeholder="<?php esc_html_e( 'Pick a date range', Opt_In::TEXT_DOMAIN ); ?>"
+							placeholder="<?php esc_html_e( 'Pick a date range', 'wordpress-popup' ); ?>"
 							class="hustle-entries-filter-date sui-form-control"
 						/>
 
@@ -119,11 +119,11 @@ $order_by_array = array(
 			<div class="sui-box-footer">
 
 				<button type="button" class="sui-button sui-button-ghost hustle-entries-clear-filter">
-					<?php esc_html_e( 'Clear Filters', Opt_In::TEXT_DOMAIN ); ?>
+					<?php esc_html_e( 'Clear Filters', 'wordpress-popup' ); ?>
 				</button>
 
 				<button class="sui-button">
-					<?php esc_html_e( 'Apply', Opt_In::TEXT_DOMAIN ); ?>
+					<?php esc_html_e( 'Apply', 'wordpress-popup' ); ?>
 				</button>
 
 			</div>

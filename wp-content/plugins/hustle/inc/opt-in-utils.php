@@ -224,7 +224,7 @@ class Opt_In_Utils {
 		$allowed = self::is_user_allowed( $capability, $module_id );
 
 		if ( ! $allowed ) {
-			wp_send_json_error( __( 'Invalid request, you are not allowed to make this request', Opt_In::TEXT_DOMAIN ) );
+			wp_send_json_error( __( 'Invalid request, you are not allowed to make this request', 'wordpress-popup' ) );
 		}
 	}
 
@@ -236,13 +236,13 @@ class Opt_In_Utils {
 	 */
 	public static function get_short_days_names() {
 		return array(
-			esc_html__( 'Su', Opt_In::TEXT_DOMAIN ),
-			esc_html__( 'Mo', Opt_In::TEXT_DOMAIN ),
-			esc_html__( 'Tu', Opt_In::TEXT_DOMAIN ),
-			esc_html__( 'We', Opt_In::TEXT_DOMAIN ),
-			esc_html__( 'Th', Opt_In::TEXT_DOMAIN ),
-			esc_html__( 'Fr', Opt_In::TEXT_DOMAIN ),
-			esc_html__( 'Sa', Opt_In::TEXT_DOMAIN ),
+			esc_html__( 'Su', 'wordpress-popup' ),
+			esc_html__( 'Mo', 'wordpress-popup' ),
+			esc_html__( 'Tu', 'wordpress-popup' ),
+			esc_html__( 'We', 'wordpress-popup' ),
+			esc_html__( 'Th', 'wordpress-popup' ),
+			esc_html__( 'Fr', 'wordpress-popup' ),
+			esc_html__( 'Sa', 'wordpress-popup' ),
 		);
 	}
 
@@ -254,18 +254,18 @@ class Opt_In_Utils {
 	 */
 	public static function get_months_names() {
 		return array(
-			esc_html__( 'January', Opt_In::TEXT_DOMAIN ),
-			esc_html__( 'February', Opt_In::TEXT_DOMAIN ),
-			esc_html__( 'March', Opt_In::TEXT_DOMAIN ),
-			esc_html__( 'April', Opt_In::TEXT_DOMAIN ),
-			esc_html__( 'May', Opt_In::TEXT_DOMAIN ),
-			esc_html__( 'June', Opt_In::TEXT_DOMAIN ),
-			esc_html__( 'July', Opt_In::TEXT_DOMAIN ),
-			esc_html__( 'August', Opt_In::TEXT_DOMAIN ),
-			esc_html__( 'September', Opt_In::TEXT_DOMAIN ),
-			esc_html__( 'October', Opt_In::TEXT_DOMAIN ),
-			esc_html__( 'November', Opt_In::TEXT_DOMAIN ),
-			esc_html__( 'December', Opt_In::TEXT_DOMAIN ),
+			esc_html__( 'January', 'wordpress-popup' ),
+			esc_html__( 'February', 'wordpress-popup' ),
+			esc_html__( 'March', 'wordpress-popup' ),
+			esc_html__( 'April', 'wordpress-popup' ),
+			esc_html__( 'May', 'wordpress-popup' ),
+			esc_html__( 'June', 'wordpress-popup' ),
+			esc_html__( 'July', 'wordpress-popup' ),
+			esc_html__( 'August', 'wordpress-popup' ),
+			esc_html__( 'September', 'wordpress-popup' ),
+			esc_html__( 'October', 'wordpress-popup' ),
+			esc_html__( 'November', 'wordpress-popup' ),
+			esc_html__( 'December', 'wordpress-popup' ),
 		);
 	}
 
@@ -313,7 +313,7 @@ class Opt_In_Utils {
 	 */
 	public static function validate_ajax_call( $action ) {
 		if ( ! check_ajax_referer( $action, false, false ) ) {
-			wp_send_json_error( __( 'Invalid request, you are not allowed to make this request', Opt_In::TEXT_DOMAIN ) ); }
+			wp_send_json_error( __( 'Invalid request, you are not allowed to make this request', 'wordpress-popup' ) ); }
 	}
 
 	/**
@@ -408,7 +408,7 @@ class Opt_In_Utils {
 		foreach ( $required_fields as $key => $required_field ) {
 			if ( ! isset( $post_data[ $required_field ] ) || ( empty( trim( $post_data[ $required_field ] ) ) && '0' !== $post_data[ $required_field ] ) ) {
 				/* translators: ... */
-				$errors[ $required_field ] = sprintf( __( 'Field %s is required.', Opt_In::TEXT_DOMAIN ), $required_field );
+				$errors[ $required_field ] = sprintf( __( 'Field %s is required.', 'wordpress-popup' ), $required_field );
 				continue;
 			}
 		}
@@ -459,7 +459,7 @@ class Opt_In_Utils {
 
 		$wp_debug_enabled = ( defined( 'WP_DEBUG' ) && WP_DEBUG );
 
-		$enabled = ( defined( 'HUSTLE_DEBUG' ) && HUSTLE_DEBUG );
+		$enabled = ( ! defined( 'HUSTLE_DEBUG' ) || HUSTLE_DEBUG );
 
 		$enabled = ( $wp_debug_enabled && $enabled );
 
@@ -504,7 +504,7 @@ class Opt_In_Utils {
 		if ( $hide_branding ) {
 			return $image;
 		}
-		$image_name   = esc_html__( 'Hustle image', Opt_In::TEXT_DOMAIN );
+		$image_name   = esc_html__( 'Hustle image', 'wordpress-popup' );
 		if ( ( true === $support ) || ( '2x' === $support ) ) {
 			if ( '' !== $image_class ) {
 				$image = '<img src="' . $image_path . '.' . $image_suffix . '" srcset="' . $image_path . '.' . $image_suffix . ' 1x, ' . $image_path . '@2x' . '.' . $image_suffix . ' 2x" alt="' . $image_name . '" class="' . $image_class . '" aria-hidden="true">';
@@ -546,7 +546,7 @@ class Opt_In_Utils {
 						readonly="readonly" />
 					<button><i class="sui-icon-close" aria-hidden="true"></i></button>
 				</div>
-				<button class="sui-button">' . esc_html__( 'Select', Opt_In::TEXT_DOMAIN ) . '</button>
+				<button class="sui-button">' . esc_html__( 'Select', 'wordpress-popup' ) . '</button>
 			</div>
 
 			<input type="text"
@@ -582,7 +582,7 @@ class Opt_In_Utils {
 		if ( $hide_branding ) {
 			return $image;
 		}
-		$image_name = esc_html__( 'Hustle image', Opt_In::TEXT_DOMAIN );
+		$image_name = esc_html__( 'Hustle image', 'wordpress-popup' );
 		$image_path = esc_url( $image_path );
 		$retina_image_path = esc_url( $retina_image_path );
 		$styles = '';
@@ -648,7 +648,7 @@ class Opt_In_Utils {
 				// all posts under this custom post type
 				$all_cpt_posts = new stdClass();
 				$all_cpt_posts->id = 'all';
-				$all_cpt_posts->text = __( 'ALL ', Opt_In::TEXT_DOMAIN ) . $cpt->label;
+				$all_cpt_posts->text = __( 'ALL ', 'wordpress-popup' ) . $cpt->label;
 				array_unshift( $cpt_array['data'], $all_cpt_posts );
 
 				$post_types[ $cpt->name ] = $cpt_array;
@@ -682,8 +682,8 @@ class Opt_In_Utils {
 	*/
 	public static function get_time_periods() {
 		$periods = array(
-			'am' => __( 'AM', Opt_In::TEXT_DOMAIN ),
-			'pm' => __( 'PM', Opt_In::TEXT_DOMAIN ),
+			'am' => __( 'AM', 'wordpress-popup' ),
+			'pm' => __( 'PM', 'wordpress-popup' ),
 			);
 
 		return $periods;
@@ -698,9 +698,12 @@ class Opt_In_Utils {
 	*/
 	public static function get_date_formats() {
 		$formats = array(
-			'Y/m/d' => __( 'Y/m/d', Opt_In::TEXT_DOMAIN ),
-			'm/d/Y' => __( 'm/d/Y', Opt_In::TEXT_DOMAIN ),
-			'd/m/Y' => __( 'd/m/Y', Opt_In::TEXT_DOMAIN ),
+			'yy/mm/dd' => __( '2012/07/31', 'wordpress-popup' ),
+			'mm/dd/yy' => __( '07/31/2012', 'wordpress-popup' ),
+			'dd/mm/yy' => __( '31/07/2012', 'wordpress-popup' ),
+			//'yy, MM d' => __( '2012, July 31', 'wordpress-popup' ),
+			//'d MM, yy' => __( '31 July, 2012', 'wordpress-popup' ),
+			'MM d, yy' => __( 'July 31, 2012', 'wordpress-popup' ),
 			);
 
 		$formats = apply_filters( 'hustle_date_formats', $formats );
@@ -737,19 +740,19 @@ class Opt_In_Utils {
 	 */
 	public static function get_social_platform_names() {
 		$social_platform_names = array(
-			'facebook' => esc_html__( 'Facebook', Opt_In::TEXT_DOMAIN ),
-			'twitter' => esc_html__( 'Twitter', Opt_In::TEXT_DOMAIN ),
-			'pinterest' => esc_html__( 'Pinterest', Opt_In::TEXT_DOMAIN ),
-			'reddit' => esc_html__( 'Reddit', Opt_In::TEXT_DOMAIN ),
-			'linkedin' => esc_html__( 'LinkedIn', Opt_In::TEXT_DOMAIN ),
-			'vkontakte' => esc_html__( 'Vkontakte', Opt_In::TEXT_DOMAIN ),
-			'fivehundredpx' => esc_html__( '500px', Opt_In::TEXT_DOMAIN ),
-			'houzz' => esc_html__( 'Houzz', Opt_In::TEXT_DOMAIN ),
-			'instagram' => esc_html__( 'Instagram', Opt_In::TEXT_DOMAIN ),
-			'twitch' => esc_html__( 'Twitch', Opt_In::TEXT_DOMAIN ),
-			'youtube' => esc_html__( 'YouTube', Opt_In::TEXT_DOMAIN ),
-			'telegram' => esc_html__( 'Telegram', Opt_In::TEXT_DOMAIN ),
-			'whatsapp' => esc_html__( 'WhatsApp', Opt_In::TEXT_DOMAIN ),
+			'facebook' => esc_html__( 'Facebook', 'wordpress-popup' ),
+			'twitter' => esc_html__( 'Twitter', 'wordpress-popup' ),
+			'pinterest' => esc_html__( 'Pinterest', 'wordpress-popup' ),
+			'reddit' => esc_html__( 'Reddit', 'wordpress-popup' ),
+			'linkedin' => esc_html__( 'LinkedIn', 'wordpress-popup' ),
+			'vkontakte' => esc_html__( 'Vkontakte', 'wordpress-popup' ),
+			'fivehundredpx' => esc_html__( '500px', 'wordpress-popup' ),
+			'houzz' => esc_html__( 'Houzz', 'wordpress-popup' ),
+			'instagram' => esc_html__( 'Instagram', 'wordpress-popup' ),
+			'twitch' => esc_html__( 'Twitch', 'wordpress-popup' ),
+			'youtube' => esc_html__( 'YouTube', 'wordpress-popup' ),
+			'telegram' => esc_html__( 'Telegram', 'wordpress-popup' ),
+			'whatsapp' => esc_html__( 'WhatsApp', 'wordpress-popup' ),
 		);
 
 		return $social_platform_names;
@@ -765,76 +768,76 @@ class Opt_In_Utils {
 		return apply_filters(
 			'hustle_captcha_languages',
 			array(
-				'ar' => esc_html__( 'Arabic', Opt_In::TEXT_DOMAIN ),
-				'af' => esc_html__( 'Afrikaans', Opt_In::TEXT_DOMAIN ),
-				'am' => esc_html__( 'Amharic', Opt_In::TEXT_DOMAIN ),
-				'hy' => esc_html__( 'Armenian', Opt_In::TEXT_DOMAIN ),
-				'az' => esc_html__( 'Azerbaijani', Opt_In::TEXT_DOMAIN ),
-				'eu' => esc_html__( 'Basque', Opt_In::TEXT_DOMAIN ),
-				'bn' => esc_html__( 'Bengali', Opt_In::TEXT_DOMAIN ),
-				'bg' => esc_html__( 'Bulgarian', Opt_In::TEXT_DOMAIN ),
-				'ca' => esc_html__( 'Catalan', Opt_In::TEXT_DOMAIN ),
-				'zh-HK' => esc_html__( 'Chinese (Hong Kong)', Opt_In::TEXT_DOMAIN ),
-				'zh-CN' => esc_html__( 'Chinese (Simplified)', Opt_In::TEXT_DOMAIN ),
-				'zh-TW' => esc_html__( 'Chinese (Traditional)', Opt_In::TEXT_DOMAIN ),
-				'hr' => esc_html__( 'Croatian', Opt_In::TEXT_DOMAIN ),
-				'cs' => esc_html__( 'Czech', Opt_In::TEXT_DOMAIN ),
-				'da' => esc_html__( 'Danish', Opt_In::TEXT_DOMAIN ),
-				'nl' => esc_html__( 'Dutch', Opt_In::TEXT_DOMAIN ),
-				'en-GB' => esc_html__( 'English (UK)', Opt_In::TEXT_DOMAIN ),
-				'en' => esc_html__( 'English (US)', Opt_In::TEXT_DOMAIN ),
-				'et' => esc_html__( 'Estonian', Opt_In::TEXT_DOMAIN ),
-				'fil' => esc_html__( 'Filipino', Opt_In::TEXT_DOMAIN ),
-				'fi' => esc_html__( 'Finnish', Opt_In::TEXT_DOMAIN ),
-				'fr' => esc_html__( 'French', Opt_In::TEXT_DOMAIN ),
-				'fr-CA' => esc_html__( 'French (Canadian)', Opt_In::TEXT_DOMAIN ),
-				'gl' => esc_html__( 'Galician', Opt_In::TEXT_DOMAIN ),
-				'ka' => esc_html__( 'Georgian', Opt_In::TEXT_DOMAIN ),
-				'de' => esc_html__( 'German', Opt_In::TEXT_DOMAIN ),
-				'de-AT' => esc_html__( 'German (Austria)', Opt_In::TEXT_DOMAIN ),
-				'de-CH' => esc_html__( 'German (Switzerland)', Opt_In::TEXT_DOMAIN ),
-				'el' => esc_html__( 'Greek', Opt_In::TEXT_DOMAIN ),
-				'gu' => esc_html__( 'Gujarati', Opt_In::TEXT_DOMAIN ),
-				'iw' => esc_html__( 'Hebrew', Opt_In::TEXT_DOMAIN ),
-				'hi' => esc_html__( 'Hindi', Opt_In::TEXT_DOMAIN ),
-				'hu' => esc_html__( 'Hungarain', Opt_In::TEXT_DOMAIN ),
-				'is' => esc_html__( 'Icelandic', Opt_In::TEXT_DOMAIN ),
-				'id' => esc_html__( 'Indonesian', Opt_In::TEXT_DOMAIN ),
-				'it' => esc_html__( 'Italian', Opt_In::TEXT_DOMAIN ),
-				'ja' => esc_html__( 'Japanese', Opt_In::TEXT_DOMAIN ),
-				'kn' => esc_html__( 'Kannada', Opt_In::TEXT_DOMAIN ),
-				'ko' => esc_html__( 'Korean', Opt_In::TEXT_DOMAIN ),
-				'lo' => esc_html__( 'Laothian', Opt_In::TEXT_DOMAIN ),
-				'lv' => esc_html__( 'Latvian', Opt_In::TEXT_DOMAIN ),
-				'lt' => esc_html__( 'Lithuanian', Opt_In::TEXT_DOMAIN ),
-				'ms' => esc_html__( 'Malay', Opt_In::TEXT_DOMAIN ),
-				'ml' => esc_html__( 'Malayalam', Opt_In::TEXT_DOMAIN ),
-				'mr' => esc_html__( 'Marathi', Opt_In::TEXT_DOMAIN ),
-				'mn' => esc_html__( 'Mongolian', Opt_In::TEXT_DOMAIN ),
-				'no' => esc_html__( 'Norwegian', Opt_In::TEXT_DOMAIN ),
-				'fa' => esc_html__( 'Persian', Opt_In::TEXT_DOMAIN ),
-				'pl' => esc_html__( 'Polish', Opt_In::TEXT_DOMAIN ),
-				'pt' => esc_html__( 'Portuguese', Opt_In::TEXT_DOMAIN ),
-				'pt-BR' => esc_html__( 'Portuguese (Brazil)', Opt_In::TEXT_DOMAIN ),
-				'pt-PT' => esc_html__( 'Portuguese (Portugal)', Opt_In::TEXT_DOMAIN ),
-				'ro' => esc_html__( 'Romanian', Opt_In::TEXT_DOMAIN ),
-				'ru' => esc_html__( 'Russian', Opt_In::TEXT_DOMAIN ),
-				'sr' => esc_html__( 'Serbian', Opt_In::TEXT_DOMAIN ),
-				'si' => esc_html__( 'Sinhalese', Opt_In::TEXT_DOMAIN ),
-				'sk' => esc_html__( 'Slovak', Opt_In::TEXT_DOMAIN ),
-				'sl' => esc_html__( 'Slovenian', Opt_In::TEXT_DOMAIN ),
-				'es' => esc_html__( 'Spanish', Opt_In::TEXT_DOMAIN ),
-				'es-419' => esc_html__( 'Spanish (Latin America)', Opt_In::TEXT_DOMAIN ),
-				'sw' => esc_html__( 'Swahili', Opt_In::TEXT_DOMAIN ),
-				'sv' => esc_html__( 'Swedish', Opt_In::TEXT_DOMAIN ),
-				'ta' => esc_html__( 'Tamil', Opt_In::TEXT_DOMAIN ),
-				'te' => esc_html__( 'Telugu', Opt_In::TEXT_DOMAIN ),
-				'th' => esc_html__( 'Thai', Opt_In::TEXT_DOMAIN ),
-				'tr' => esc_html__( 'Turkish', Opt_In::TEXT_DOMAIN ),
-				'uk' => esc_html__( 'Ukrainian', Opt_In::TEXT_DOMAIN ),
-				'ur' => esc_html__( 'Urdu', Opt_In::TEXT_DOMAIN ),
-				'vi' => esc_html__( 'Vietnamese', Opt_In::TEXT_DOMAIN ),
-				'zu' => esc_html__( 'Zulu', Opt_In::TEXT_DOMAIN ),
+				'ar' => esc_html__( 'Arabic', 'wordpress-popup' ),
+				'af' => esc_html__( 'Afrikaans', 'wordpress-popup' ),
+				'am' => esc_html__( 'Amharic', 'wordpress-popup' ),
+				'hy' => esc_html__( 'Armenian', 'wordpress-popup' ),
+				'az' => esc_html__( 'Azerbaijani', 'wordpress-popup' ),
+				'eu' => esc_html__( 'Basque', 'wordpress-popup' ),
+				'bn' => esc_html__( 'Bengali', 'wordpress-popup' ),
+				'bg' => esc_html__( 'Bulgarian', 'wordpress-popup' ),
+				'ca' => esc_html__( 'Catalan', 'wordpress-popup' ),
+				'zh-HK' => esc_html__( 'Chinese (Hong Kong)', 'wordpress-popup' ),
+				'zh-CN' => esc_html__( 'Chinese (Simplified)', 'wordpress-popup' ),
+				'zh-TW' => esc_html__( 'Chinese (Traditional)', 'wordpress-popup' ),
+				'hr' => esc_html__( 'Croatian', 'wordpress-popup' ),
+				'cs' => esc_html__( 'Czech', 'wordpress-popup' ),
+				'da' => esc_html__( 'Danish', 'wordpress-popup' ),
+				'nl' => esc_html__( 'Dutch', 'wordpress-popup' ),
+				'en-GB' => esc_html__( 'English (UK)', 'wordpress-popup' ),
+				'en' => esc_html__( 'English (US)', 'wordpress-popup' ),
+				'et' => esc_html__( 'Estonian', 'wordpress-popup' ),
+				'fil' => esc_html__( 'Filipino', 'wordpress-popup' ),
+				'fi' => esc_html__( 'Finnish', 'wordpress-popup' ),
+				'fr' => esc_html__( 'French', 'wordpress-popup' ),
+				'fr-CA' => esc_html__( 'French (Canadian)', 'wordpress-popup' ),
+				'gl' => esc_html__( 'Galician', 'wordpress-popup' ),
+				'ka' => esc_html__( 'Georgian', 'wordpress-popup' ),
+				'de' => esc_html__( 'German', 'wordpress-popup' ),
+				'de-AT' => esc_html__( 'German (Austria)', 'wordpress-popup' ),
+				'de-CH' => esc_html__( 'German (Switzerland)', 'wordpress-popup' ),
+				'el' => esc_html__( 'Greek', 'wordpress-popup' ),
+				'gu' => esc_html__( 'Gujarati', 'wordpress-popup' ),
+				'iw' => esc_html__( 'Hebrew', 'wordpress-popup' ),
+				'hi' => esc_html__( 'Hindi', 'wordpress-popup' ),
+				'hu' => esc_html__( 'Hungarain', 'wordpress-popup' ),
+				'is' => esc_html__( 'Icelandic', 'wordpress-popup' ),
+				'id' => esc_html__( 'Indonesian', 'wordpress-popup' ),
+				'it' => esc_html__( 'Italian', 'wordpress-popup' ),
+				'ja' => esc_html__( 'Japanese', 'wordpress-popup' ),
+				'kn' => esc_html__( 'Kannada', 'wordpress-popup' ),
+				'ko' => esc_html__( 'Korean', 'wordpress-popup' ),
+				'lo' => esc_html__( 'Laothian', 'wordpress-popup' ),
+				'lv' => esc_html__( 'Latvian', 'wordpress-popup' ),
+				'lt' => esc_html__( 'Lithuanian', 'wordpress-popup' ),
+				'ms' => esc_html__( 'Malay', 'wordpress-popup' ),
+				'ml' => esc_html__( 'Malayalam', 'wordpress-popup' ),
+				'mr' => esc_html__( 'Marathi', 'wordpress-popup' ),
+				'mn' => esc_html__( 'Mongolian', 'wordpress-popup' ),
+				'no' => esc_html__( 'Norwegian', 'wordpress-popup' ),
+				'fa' => esc_html__( 'Persian', 'wordpress-popup' ),
+				'pl' => esc_html__( 'Polish', 'wordpress-popup' ),
+				'pt' => esc_html__( 'Portuguese', 'wordpress-popup' ),
+				'pt-BR' => esc_html__( 'Portuguese (Brazil)', 'wordpress-popup' ),
+				'pt-PT' => esc_html__( 'Portuguese (Portugal)', 'wordpress-popup' ),
+				'ro' => esc_html__( 'Romanian', 'wordpress-popup' ),
+				'ru' => esc_html__( 'Russian', 'wordpress-popup' ),
+				'sr' => esc_html__( 'Serbian', 'wordpress-popup' ),
+				'si' => esc_html__( 'Sinhalese', 'wordpress-popup' ),
+				'sk' => esc_html__( 'Slovak', 'wordpress-popup' ),
+				'sl' => esc_html__( 'Slovenian', 'wordpress-popup' ),
+				'es' => esc_html__( 'Spanish', 'wordpress-popup' ),
+				'es-419' => esc_html__( 'Spanish (Latin America)', 'wordpress-popup' ),
+				'sw' => esc_html__( 'Swahili', 'wordpress-popup' ),
+				'sv' => esc_html__( 'Swedish', 'wordpress-popup' ),
+				'ta' => esc_html__( 'Tamil', 'wordpress-popup' ),
+				'te' => esc_html__( 'Telugu', 'wordpress-popup' ),
+				'th' => esc_html__( 'Thai', 'wordpress-popup' ),
+				'tr' => esc_html__( 'Turkish', 'wordpress-popup' ),
+				'uk' => esc_html__( 'Ukrainian', 'wordpress-popup' ),
+				'ur' => esc_html__( 'Urdu', 'wordpress-popup' ),
+				'vi' => esc_html__( 'Vietnamese', 'wordpress-popup' ),
+				'zu' => esc_html__( 'Zulu', 'wordpress-popup' ),
 			)
 		);
 	}
@@ -860,7 +863,7 @@ class Opt_In_Utils {
 			$entry_date = date_i18n( 'j M Y @ H:i A', strtotime( $latest_entry ) );
 			return $entry_date;
 		} else {
-			return esc_html__( 'Never', Opt_In::TEXT_DOMAIN );
+			return esc_html__( 'Never', 'wordpress-popup' );
 		}
 	}
 
@@ -880,11 +883,11 @@ class Opt_In_Utils {
 		if ( $date ) {
 			$last_entry_time = mysql2date( 'U', $date );
 			$time_diff       = human_time_diff( current_time( 'timestamp' ), $last_entry_time );
-			$last_entry_time = sprintf( __( '%s ago', Opt_In::TEXT_DOMAIN ), $time_diff );
+			$last_entry_time = sprintf( __( '%s ago', 'wordpress-popup' ), $time_diff );
 
 			return $last_entry_time;
 		} else {
-			return __( 'Never', Opt_In::TEXT_DOMAIN );
+			return __( 'Never', 'wordpress-popup' );
 		}
 	}
 
@@ -901,7 +904,7 @@ class Opt_In_Utils {
 		if ( $latest_entry instanceof Hustle_Entry_Model ) {
 			return $latest_entry->time_created;
 		} else {
-			return esc_html__( 'Never', Opt_In::TEXT_DOMAIN );
+			return esc_html__( 'Never', 'wordpress-popup' );
 		}
 	}
 
@@ -919,11 +922,11 @@ class Opt_In_Utils {
 		if ( $latest_entry instanceof Hustle_Entry_Model ) {
 			$last_entry_time = mysql2date( 'U', $latest_entry->date_created_sql );
 			$time_diff       = human_time_diff( current_time( 'timestamp' ), $last_entry_time );
-			$last_entry_time = sprintf( __( '%s ago', Opt_In::TEXT_DOMAIN ), $time_diff );
+			$last_entry_time = sprintf( __( '%s ago', 'wordpress-popup' ), $time_diff );
 
 			return $last_entry_time;
 		} else {
-			return __( 'Never', Opt_In::TEXT_DOMAIN );
+			return __( 'Never', 'wordpress-popup' );
 		}
 	}
 
@@ -993,36 +996,36 @@ class Opt_In_Utils {
 
 		if ( Hustle_Module_Model::POPUP_MODULE === $module_type ) {
 			if ( ! $plural ) {
-				$display_name = __( 'pop-up', Opt_In::TEXT_DOMAIN );
+				$display_name = __( 'pop-up', 'wordpress-popup' );
 			} else {
-				$display_name = __( 'pop-ups', Opt_In::TEXT_DOMAIN );
+				$display_name = __( 'pop-ups', 'wordpress-popup' );
 			}
 
 		} elseif ( Hustle_Module_Model::SLIDEIN_MODULE === $module_type ) {
 			if ( ! $plural ) {
-				$display_name = __( 'slide-in', Opt_In::TEXT_DOMAIN );
+				$display_name = __( 'slide-in', 'wordpress-popup' );
 			} else {
-				$display_name = __( 'slide-ins', Opt_In::TEXT_DOMAIN );
+				$display_name = __( 'slide-ins', 'wordpress-popup' );
 			}
 
 		} elseif ( Hustle_Module_Model::EMBEDDED_MODULE === $module_type ) {
 			if ( ! $plural ) {
-				$display_name = __( 'embed', Opt_In::TEXT_DOMAIN );
+				$display_name = __( 'embed', 'wordpress-popup' );
 			} else {
-				$display_name = __( 'embeds', Opt_In::TEXT_DOMAIN );
+				$display_name = __( 'embeds', 'wordpress-popup' );
 			}
 
 		} elseif ( Hustle_Module_Model::SOCIAL_SHARING_MODULE === $module_type ) {
 			if ( ! $plural ) {
-				$display_name = __( 'social sharing', Opt_In::TEXT_DOMAIN );
+				$display_name = __( 'social sharing', 'wordpress-popup' );
 			} else {
-				$display_name = __( 'social shares', Opt_In::TEXT_DOMAIN );
+				$display_name = __( 'social shares', 'wordpress-popup' );
 			}
 
 		}
 
 		if ( $capitalized ) {
-			$display_name = ucfirst( $display_name );
+			$display_name = ucwords( $display_name );
 		}
 
 		return $display_name;

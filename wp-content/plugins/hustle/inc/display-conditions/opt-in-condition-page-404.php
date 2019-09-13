@@ -11,6 +11,6 @@ class Opt_In_Condition_Page_404 extends Opt_In_Condition_Abstract {
 	}
 
 	public function label() {
-		return __( '404 page', Opt_In::TEXT_DOMAIN);
+		return __( '404 page', 'wordpress-popup');
 	}
 }

@@ -4,7 +4,48 @@ Author: Danae Millan (Incsub), Daniel Shepard (Incsub), Paul Kevin (Incsub), Lei
 Change Log:
 ----------------------------------------------------------------------
 
-4.0.0.1 - 2019-07-01
+4.0.2 - 2019-08-20
+----------------------------------------------------------------------
+- Fix forminator scripts being enqueued in the wrong pages
+
+4.0.1 - 2019-08-13
+----------------------------------------------------------------------
+- Add a "time" fields in forms
+- Add language options for reCAPTCHA fields
+- Update Facebook's native counter endpoint
+- Fix iframes and forms being removed from the main content
+- Improve accessibility in wizard's custom colors
+- Fix stats at the top of the page not updating in Embeds and Social sharing listings
+- Improve compatibility with Forminator and Gravity Forms on preview
+- Improve compatibility with HubSpot Marketing plugin
+- Fix Automated emails not being sent
+- Make the "embed" shortcode work in the main content
+- Load the stylesheets related to the displayed module types only in frontend
+- Update the existing subscription when an email is added again
+- Improve compatibility between the Aweber library and PHP 7
+- Improve UI/UX details in backend and frontend
+- Improve date formats for the datepicker field
+- Fix Aweber not updating already subscribed users
+- Fix Sendy error when selecting a list with no subscribers
+- Fix Infusionsoft not assigning the selected tag to the added subscriber.
+- Fix shortcodes not displaying when adding multiple in certain order
+- Improve compatibility with Firefox in form fields in frontend
+- Fix unsubscribe functionality not displaying the lists
+- Fix custom styling not being applied for informational modules
+- Update user capabilities when updating the plugin via FTP
+- Fix emails list exporting the displayed entries only
+- Improve compatibility with other plugins requiring wp-color-picker script
+- Fix social sharing modules ignoring the default number when using "Native" counters
+- Fix whitelabel not working for the footer in wizard pages
+- Improve compatibility with GeoDirectory plugin
+- Make embeds follow the settings from "Custom size"
+- Fix embed staying hidden if added via AJAX right after load.
+- Improve custom fields integration for Aweber and ActiveCampaign
+- Fix PHP message when an Embed is removed while being selected in widgets
+- Make the "closing behavior" work on the homepage
+- Fix border color for errors not being applied to inputs
+
+4.0.0.1 - 2019-06-28
 ----------------------------------------------------------------------
 - Fix iframes and forms being removed from the main content
 - Stop embedded videos when closing the module
@@ -43,9 +84,9 @@ Change Log:
 3.0.8 - 2019-02-23
 ----------------------------------------------------------------------
 - Fix Constant Contact check so the email is searched in the current list only.
-- Accept active lists besides the static ones in Constant Contact. 
+- Accept active lists besides the static ones in Constant Contact.
 - Fix InfusionSoft status being saved as "Non Marketable".
-- Improve process to connect to Hubspot.
+- Improve process to connect to HubSpot.
 - Load more than 20 lists in Mailchimp.
 - Allow removing the module's styles via hooks.
 - GDPR checkbox not working properly if there's more than one instance of the module.
@@ -126,7 +167,7 @@ Change Log:
 - Fix Sendgrid library conflict.
 - Fix Custom fields behavior on some providers.
 - Fix PHP error when using category conditions in multiple modules.
-- Fix checkboxes and radios issue when the same embed is twice in the same page. 
+- Fix checkboxes and radios issue when the same embed is twice in the same page.
 - Fix various UI details in dashboard and frontend.
 - Add "upgrade" link on plugins page for Free version.
 
@@ -160,7 +201,7 @@ Change Log:
 - Improve email providers process of subscription and saving settings.
 - Make Youtube video stop when closing popup.
 - Fix stats from all sub-sites modules showing up on multisite.
-- Fix connection issue with Hubspot.
+- Fix connection issue with HubSpot.
 - Serve resources from a consistent URL in GTmetrix.
 - Fix Mautic URL saving issue.
 - Improve the way modules are prioritized to show up.
@@ -352,8 +393,8 @@ and Social Sharing)
 
 - Fix: Default overlay background not transparent on opt-in modules.
 - Fix: The lines overlap chart on dashboard page.
-- Fix: Border picking up the hover property from links. 
-- Fix: No Way to Change Featured Image  
+- Fix: Border picking up the hover property from links.
+- Fix: No Way to Change Featured Image
 - Fix: Typo in Custom Content Display Setting panel
 - Fix: Typo in Opt In Editor in test mode
 - Fix: Initial welcome message should only be displayed once in dashboard page.

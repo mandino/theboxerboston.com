@@ -10,7 +10,7 @@ $editor_css = '<style>' . $editor_css. '</style>';
 
 	<div class="sui-box-settings-col-2">
 
-		<span class="sui-settings-label sui-dark"><?php esc_html_e( 'Main Content', Opt_In::TEXT_DOMAIN ); ?></span>
+		<span class="sui-settings-label sui-dark"><?php esc_html_e( 'Main Content', 'wordpress-popup' ); ?></span>
 
 		<?php wp_editor(
 			'{{ main_content }}',

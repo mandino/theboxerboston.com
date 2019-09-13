@@ -153,7 +153,7 @@ class Hustle_ConvertKit_Api {
 		$utils->_last_url_request = trailingslashit( $this->_endpoint ) . $url;
 		$utils->_last_data_sent = $args;
 
-		return empty( $res ) ? __("Successfully added custom field", Opt_In::TEXT_DOMAIN) : $res;
+		return empty( $res ) ? __("Successfully added custom field", 'wordpress-popup') : $res;
 	}
 
 	/**
@@ -175,7 +175,7 @@ class Hustle_ConvertKit_Api {
 		$utils->_last_url_request = trailingslashit( $this->_endpoint ) . $url;
 		$utils->_last_data_sent = $args;
 
-		return empty( $res ) ? __("Successful subscription", Opt_In::TEXT_DOMAIN) : $res;
+		return empty( $res ) ? __("Successful subscription", 'wordpress-popup') : $res;
 	}
 
 	/**
@@ -200,7 +200,7 @@ class Hustle_ConvertKit_Api {
 		$utils->_last_url_request = trailingslashit( $this->_endpoint ) . $url;
 		$utils->_last_data_sent = $args;
 
-		return empty( $res ) ? __("Successful subscription", Opt_In::TEXT_DOMAIN) : $res;
+		return empty( $res ) ? __("Successful subscription", 'wordpress-popup') : $res;
 	}
 
 	/**

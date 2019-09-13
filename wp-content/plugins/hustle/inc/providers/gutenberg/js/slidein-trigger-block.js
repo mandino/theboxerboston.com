@@ -2,15 +2,15 @@ const { registerBlockType, createBlock } = wp.blocks,
 	{ createElement:el, Component, RawHTML } = wp.element,
 	{ string: shortcodeToString, next } = wp.shortcode,
 
-	hustleSlideinTriggerIconEl = 
-		el('svg', { 
-			class: 'dashicon', viewBox: '0 0 24 24',  width: 20, height: 20, xmlns: 'http://www.w3.org/2000/svg', preserveAspectRatio: 'xMidYMid meet', 'aria-hidden': 'true', role: 'img' 
+	hustleSlideinTriggerIconEl =
+		el('svg', {
+			class: 'dashicon', viewBox: '0 0 24 24',  width: 20, height: 20, xmlns: 'http://www.w3.org/2000/svg', preserveAspectRatio: 'xMidYMid meet', 'aria-hidden': 'true', role: 'img'
 		},
 			el (
-				'path', { 
-					d: 'M24 6H10.5a1.45 1.45 0 0 0-1.066.434A1.45 1.45 0 0 0 9 7.5v9c0 .422.145.777.434 1.066.289.29.644.434 1.066.434H24v4.5c0 .422-.145.777-.434 1.066A1.45 1.45 0 0 1 22.5 24h-21a1.45 1.45 0 0 1-1.066-.434A1.45 1.45 0 0 1 0 22.5v-21C0 1.078.145.723.434.434A1.45 1.45 0 0 1 1.5 0h21c.422 0 .777.145 1.066.434.29.289.434.644.434 1.066V6z' 
+				'path', {
+					d: 'M24 6H10.5a1.45 1.45 0 0 0-1.066.434A1.45 1.45 0 0 0 9 7.5v9c0 .422.145.777.434 1.066.289.29.644.434 1.066.434H24v4.5c0 .422-.145.777-.434 1.066A1.45 1.45 0 0 1 22.5 24h-21a1.45 1.45 0 0 1-1.066-.434A1.45 1.45 0 0 1 0 22.5v-21C0 1.078.145.723.434.434A1.45 1.45 0 0 1 1.5 0h21c.422 0 .777.145 1.066.434.29.289.434.644.434 1.066V6z'
 				}
-			), 
+			),
 			el (
 				'path', {
 					d: 'M21.5 7c.422 0 .777.145 1.066.434.29.289.434.644.434 1.066 0 .422-.145.777-.434 1.066A1.45 1.45 0 0 1 21.5 10a1.45 1.45 0 0 1-1.066-.434A1.45 1.45 0 0 1 20 8.5c0-.422.145-.777.434-1.066A1.45 1.45 0 0 1 21.5 7z'
@@ -36,7 +36,7 @@ class Hustle_Slidein_Trigger_BlockEdit extends Component {
 			loading: false,     // Set to true while loading preview markup
 		};
 	}
-	
+
 	/**
 	 * Update module id
 	 */
@@ -61,7 +61,7 @@ class Hustle_Slidein_Trigger_BlockEdit extends Component {
 
 	/**
 	 * Set the module_id to this block by the shortcode_id provided.
-	 * @param string id 
+	 * @param string id
 	 */
 	set_module_id_from_shortcode_id ( id ) {
 
@@ -78,7 +78,7 @@ class Hustle_Slidein_Trigger_BlockEdit extends Component {
 		window.fetch( ajax_url )
 		.then( response => response.json() )
 		.then( data => {
-			
+
 			if ( data.success && data.data.module_id ) {
 				this.update_module_id( data.data.module_id );
 			}
@@ -87,7 +87,7 @@ class Hustle_Slidein_Trigger_BlockEdit extends Component {
 			this.setState({ loading: false });
 
 		});
-	
+
 	}
 
 	/**
@@ -101,7 +101,7 @@ class Hustle_Slidein_Trigger_BlockEdit extends Component {
 		if( prevProps.attributes.id === id ) {
 			return;
 		}
-		
+
 		if ( ! id ) {
 			// No shortcode_id provided to get the module_id.
 			return;
@@ -110,7 +110,7 @@ class Hustle_Slidein_Trigger_BlockEdit extends Component {
 		// Set the module_id to this block.
 		this.set_module_id_from_shortcode_id( id );
 	}
-	
+
 
 	/**
 	 * React method called when block is initialized.
@@ -118,7 +118,7 @@ class Hustle_Slidein_Trigger_BlockEdit extends Component {
 	 */
 	componentDidMount() {
 		const { attributes: { module_id, id } } = this.props;
-		
+
 		if ( ! id || module_id ) {
 			// No shortcode_id provided to get the module_id.
 			return;
@@ -140,7 +140,7 @@ class Hustle_Slidein_Trigger_BlockEdit extends Component {
 	 * Render
 	 */
 	render() {
-	
+
 		const
 			{ loading } = this.state,
 			{ attributes, isSelected } = this.props,
@@ -226,7 +226,7 @@ class Hustle_Slidein_Trigger_BlockEdit extends Component {
 			return [
 				controls, el (
 					wp.editor.RichText, {
-						tagName: 'p',
+						tagName: 'a',
 						multiline: false,
 						formattingControls: [],
 						value: content,
@@ -306,7 +306,7 @@ registerBlockType( 'hustle/slidein-trigger', {
 				type: 'block',
 				blocks: [ 'core/shortcode' ],
 				transform: ( { id, content, css_class } ) => {
-					
+
 					let options = {
 						tag: hustle_slidein_trigger_data.shortcode_tag,
 						attrs: {
@@ -317,7 +317,7 @@ registerBlockType( 'hustle/slidein-trigger', {
 						content,
 						type: 'closed'
 					};
-					
+
 					let text = shortcodeToString( options );
 					return createBlock( 'core/shortcode', {
 						text,
@@ -343,14 +343,14 @@ registerBlockType( 'hustle/slidein-trigger', {
 					if ( 'slidein' !== shortcode.attrs.named.type ) {
 						return false;
 					}
-	
+
 					return true;
 				},
 				transform( { text } ) {
-					
+
 					let { shortcode } = next( 'wd_hustle', text ),
 					{ content, attrs: { named: { id, type, css_class } } } = shortcode;
-					
+
 					return createBlock( 'hustle/slidein-trigger', {
 						id,
 						type,
@@ -362,7 +362,7 @@ registerBlockType( 'hustle/slidein-trigger', {
 		]
 	},
 	edit: Hustle_Slidein_Trigger_BlockEdit,
-	
+
 	// This is rendered server-side.
 	save() {
 

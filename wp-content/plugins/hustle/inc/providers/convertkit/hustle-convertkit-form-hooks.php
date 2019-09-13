@@ -42,14 +42,14 @@ class Hustle_ConvertKit_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 			$api = $addon::api( $api_key, $api_secret );
 
 			if ( empty( $submitted_data['email'] ) ) {
-				throw new Exception( __( 'Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN ) );
+				throw new Exception( __( 'Required Field "email" was not filled by the user.', 'wordpress-popup' ) );
 			}
 
 			$list_id = $addon_setting_values['list_id'];
 			$submitted_data = $this->check_legacy( $submitted_data );
 			$existing_member = $api->is_form_subscriber( $submitted_data['email'], $list_id );
 			$is_sent = false;
-			$member_status = __( 'Member could not be subscribed.', Opt_In::TEXT_DOMAIN );
+			$member_status = __( 'Member could not be subscribed.', 'wordpress-popup' );
 
 			// deal with custom fields first
 			$custom_fields = array(
@@ -83,7 +83,7 @@ class Hustle_ConvertKit_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 			}
 
 			if ( ! $addon->maybe_create_custom_fields( $global_multi_id, $custom_fields ) ) {
-				$details = __( 'Unable to add custom field.', Opt_In::TEXT_DOMAIN );
+				$details = __( 'Unable to add custom field.', 'wordpress-popup' );
 			} else {
 				// subscription
 				$name = isset( $submitted_data['first_name'] ) ? $submitted_data['first_name'] : '';
@@ -107,7 +107,7 @@ class Hustle_ConvertKit_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 					$details = $res->get_error_message();
 				} else {
 					$is_sent = true;
-					$details = __( 'Successfully added or updated member on ConvertKit list', Opt_In::TEXT_DOMAIN );
+					$details = __( 'Successfully added or updated member on ConvertKit list', 'wordpress-popup' );
 
 				}
 
@@ -166,7 +166,7 @@ class Hustle_ConvertKit_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 		$addon_setting_values 		= $form_settings_instance->get_form_settings_values();
 
 		if ( empty( $submitted_data['email'] ) ) {
-			return __( 'Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN );
+			return __( 'Required Field "email" was not filled by the user.', 'wordpress-popup' );
 		}
 
 		if ( ! $allow_subscribed ) {

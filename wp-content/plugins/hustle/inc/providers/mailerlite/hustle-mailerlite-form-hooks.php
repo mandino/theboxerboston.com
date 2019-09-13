@@ -32,7 +32,7 @@ class Hustle_MailerLite_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 
 		try {
 			if ( empty( $submitted_data['email'] ) ) {
-				throw new Exception( __('Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN ) );
+				throw new Exception( __('Required Field "email" was not filled by the user.', 'wordpress-popup' ) );
 			}
 
 			$global_multi_id = $addon_setting_values['selected_global_multi_id'];
@@ -76,7 +76,7 @@ class Hustle_MailerLite_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 			$existing_member = $addon->_email_exists( $list_id, $email, $api );
 
 			$is_sent = false;
-			$member_status = __( 'Member could not be subscribed.', Opt_In::TEXT_DOMAIN );
+			$member_status = __( 'Member could not be subscribed.', 'wordpress-popup' );
 
 
 			$subscriber_data = array(
@@ -97,7 +97,7 @@ class Hustle_MailerLite_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 			} else {
 				$is_sent = true;
 				$member_status = $res['type'];
-				$details = __( 'Successfully added or updated member on MailerLite list', Opt_In::TEXT_DOMAIN );
+				$details = __( 'Successfully added or updated member on MailerLite list', 'wordpress-popup' );
 			}
 
 			$utils = Hustle_Provider_Utils::get_instance();
@@ -149,7 +149,7 @@ class Hustle_MailerLite_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 		$addon_setting_values 		= $form_settings_instance->get_form_settings_values();
 
 		if ( empty( $submitted_data['email'] ) ) {
-			return __( 'Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN );
+			return __( 'Required Field "email" was not filled by the user.', 'wordpress-popup' );
 		}
 
 		if ( ! $allow_subscribed ) {

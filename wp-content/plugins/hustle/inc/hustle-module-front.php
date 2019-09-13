@@ -4,6 +4,14 @@ class Hustle_Module_Front {
 	private $_hustle;
 
 	private $_modules = array();
+
+	/**
+	 * Contains the queued modules types as keys, 1 as the value.
+	 * Used to queue the required styles only.
+	 * @since 4.0.1
+	 * @var array
+	 */
+	private $_module_types_to_display = array();
 	private $_non_inline_modules = array();
 	private $_inline_modules = array();
 
@@ -112,33 +120,37 @@ class Hustle_Module_Front {
 		//Register popup requirements
 		wp_register_script(
 			'hustle_front',
-			$this->_hustle->get_static_var( 'plugin_url' ) . 'assets/js/front.min.js',
+			Opt_In::$plugin_url . 'assets/js/front.min.js',
 			array( 'jquery', 'underscore' ),
 			'1.1',
-			$this->_hustle->get_const_var( 'VERSION' ),
+			Opt_In::VERSION,
 			false
 		);
 
 		wp_register_script(
 			'hustle_front_fitie',
-			$this->_hustle->get_static_var( 'plugin_url' ) . 'assets/js/vendor/fitie/fitie.js',
+			Opt_In::$plugin_url . 'assets/js/vendor/fitie/fitie.js',
 			array(),
-			$this->_hustle->get_const_var( 'VERSION' ),
+			Opt_In::VERSION,
 			false
 		);
 		$modules = apply_filters( 'hustle_front_modules', $this->_modules );
 		wp_localize_script( 'hustle_front', 'Modules', $modules );
 
+		//force set archive page slug
+		global $wp;
+		$slug = is_home() && is_front_page() ? 'hustle-front-blog-page' : sanitize_title( $wp->request );
+
 		$vars = apply_filters('hustle_front_vars', array(
 			'is_admin' => is_admin(),
 			'native_share_enpoints' => Hustle_Sshare_Model::get_sharing_endpoints( false ),
 			'ajaxurl' => admin_url( 'admin-ajax.php', is_ssl() ? 'https' : 'http' ),
-			'page_id' => get_queried_object_id(), // Used in many places to decide whether to show the module and cookies.
+			'page_id' => get_queried_object_id() , // Used in many places to decide whether to show the module and cookies.
+			'page_slug' => $slug, // Used in many places to decide whether to show the module and cookies on archive pages.
 			'is_upfront' => class_exists( 'Upfront' ) && isset( $_GET['editmode'] ) && 'true' === $_GET['editmode'], // Used.
+			'script_delay' => apply_filters( 'hustle_lazy_load_script_delay', 3000 ), //to lazyload script for later on added elements
 		) );
-		wp_localize_script( 'hustle_front', 'inc_opt', $vars );
-
-		self::maybe_add_recaptcha_script();
+		wp_localize_script( 'hustle_front', 'incOpt', $vars );
 
 		do_action( 'hustle_register_scripts' );
 
@@ -196,16 +208,19 @@ class Hustle_Module_Front {
 	/**
 	 * Enqueue the recaptcha script if recaptcha is globally configured.
 	 * @since 4.0
+	 * @param string $language reCAPTCHA language
 	 */
-	public static function maybe_add_recaptcha_script() {
+	public static function maybe_add_recaptcha_script( $language = '' ) {
 
 		$recaptcha_settings = Hustle_Settings_Admin::get_recaptcha_settings();
 		if ( ! empty( $recaptcha_settings['sitekey'] ) ) {
-			$language = ! empty( $recaptcha_settings['language'] ) && 'automatic' !== $recaptcha_settings['language']
-					? '&hl=' . $recaptcha_settings['language'] : '&hl=' . determine_locale();
+			if ( empty( $language ) || 'automatic' === $language ) {
+				$language = ! empty( $recaptcha_settings['language'] ) && 'automatic' !== $recaptcha_settings['language']
+						? $recaptcha_settings['language'] : determine_locale();
+			}
 			wp_enqueue_script(
 				'recaptcha',
-				'https://www.google.com/recaptcha/api.js?render=explicit' . $language
+				'https://www.google.com/recaptcha/api.js?render=explicit&hl=' . $language
 			);
 		}
 	}
@@ -221,7 +236,7 @@ class Hustle_Module_Front {
 			} else {
 				return $tag;
 			}
-			
+
 			$is_ie = (
 				// IE 10 or older
 				false !== stripos( $user_agent, 'MSIE' ) ||
@@ -259,6 +274,9 @@ class Hustle_Module_Front {
 		return $tag;
 	}
 
+	/**
+	 * Registeres front styles and fonts
+	 */
 	public function register_styles() {
 		$is_on_upfront_builder = class_exists( 'UpfrontThemeExporter' ) && function_exists( 'upfront_exporter_is_running' ) && upfront_exporter_is_running();
 
@@ -268,76 +286,303 @@ class Hustle_Module_Front {
 			}
 		}
 
-		self::print_front_styles( $this->_hustle );
+		$module_types_to_display = array_keys( $this->_module_types_to_display );
+
+		self::print_front_styles( $module_types_to_display );
 		self::print_front_fonts( $this->_hustle );
 	}
 
-	public static function print_front_styles( Opt_In $hustle ) {
+	/**
+	 * Register and enqueue the required styles according to the given module's types.
+	 * The accepted module's types are:
+	 * popup, slidein, embedded, social_sharing, optin, informational, floating (ssharing), inline (ssharing).
+	 *
+	 * @since 4.0
+	 * @since 4.0.1 enequeues only the given module's types.
+	 *
+	 * @param array $module_types_to_display Array with the module's type to be displayed.
+	 */
+	public static function print_front_styles( $module_types_to_display = array() ) {
 
 		wp_register_style(
 			'hustle_icons',
-			$hustle->get_static_var( 'plugin_url' )  . 'assets/hustle-ui/css/hustle-icons.min.css',
+			Opt_In::$plugin_url . 'assets/hustle-ui/css/hustle-icons.min.css',
 			array(),
-			$hustle->get_const_var( 'VERSION' )
+			Opt_In::VERSION
 		);
-
-		wp_register_style(
-			'hustle_popup',
-			$hustle->get_static_var( 'plugin_url' )  . 'assets/hustle-ui/css/hustle-popup.min.css',
-			array(),
-			$hustle->get_const_var( 'VERSION' )
-		);
-
-		wp_register_style(
-			'hustle_slidein',
-			$hustle->get_static_var( 'plugin_url' )  . 'assets/hustle-ui/css/hustle-slidein.min.css',
-			array(),
-			$hustle->get_const_var( 'VERSION' )
-		);
-
-		wp_register_style(
-			'hustle_inline',
-			$hustle->get_static_var( 'plugin_url' )  . 'assets/hustle-ui/css/hustle-inline.min.css',
-			array(),
-			$hustle->get_const_var( 'VERSION' )
-		);
-
-		wp_register_style(
-			'hustle_float',
-			$hustle->get_static_var( 'plugin_url' )  . 'assets/hustle-ui/css/hustle-float.min.css',
-			array(),
-			$hustle->get_const_var( 'VERSION' )
-		);
-
-		wp_register_style(
-			'hustle_optin',
-			$hustle->get_static_var( 'plugin_url' )  . 'assets/hustle-ui/css/hustle-optin.min.css',
-			array(),
-			$hustle->get_const_var( 'VERSION' )
-		);
-
-		wp_register_style(
-			'hustle_info',
-			$hustle->get_static_var( 'plugin_url' )  . 'assets/hustle-ui/css/hustle-info.min.css',
-			array(),
-			$hustle->get_const_var( 'VERSION' )
-		);
-
-		wp_register_style(
-			'hustle_social',
-			$hustle->get_static_var( 'plugin_url' )  . 'assets/hustle-ui/css/hustle-social.min.css',
-			array(),
-			$hustle->get_const_var( 'VERSION' )
-		);
-
 		wp_enqueue_style( 'hustle_icons' );
-		wp_enqueue_style( 'hustle_popup' );
-		wp_enqueue_style( 'hustle_slidein' );
-		wp_enqueue_style( 'hustle_inline' );
-		wp_enqueue_style( 'hustle_float' );
-		wp_enqueue_style( 'hustle_optin' );
-		wp_enqueue_style( 'hustle_info' );
-		wp_enqueue_style( 'hustle_social' );
+
+		wp_register_style(
+			'hustle_global',
+			Opt_In::$plugin_url . 'assets/hustle-ui/css/hustle-global.min.css',
+			array(),
+			Opt_In::VERSION
+		);
+		wp_enqueue_style( 'hustle_global' );
+
+		// Informational mode.
+		if ( ! $module_types_to_display || in_array( Hustle_Module_Model::INFORMATIONAL_MODE, $module_types_to_display, true ) ) {
+
+			wp_register_style(
+				'hustle_info',
+				Opt_In::$plugin_url . 'assets/hustle-ui/css/hustle-info.min.css',
+				array(),
+				Opt_In::VERSION
+			);
+			wp_enqueue_style( 'hustle_info' );
+		}
+
+		// Optin mode.
+		if ( ! $module_types_to_display || in_array( Hustle_Module_Model::OPTIN_MODE, $module_types_to_display, true ) ) {
+
+			wp_register_style(
+				'hustle_optin',
+				Opt_In::$plugin_url . 'assets/hustle-ui/css/hustle-optin.min.css',
+				array(),
+				Opt_In::VERSION
+			);
+			wp_enqueue_style( 'hustle_optin' );
+		}
+
+		// Popup type.
+		if ( ! $module_types_to_display || in_array( Hustle_Module_Model::POPUP_MODULE, $module_types_to_display, true ) ) {
+
+			wp_register_style(
+				'hustle_popup',
+				Opt_In::$plugin_url . 'assets/hustle-ui/css/hustle-popup.min.css',
+				array(),
+				Opt_In::VERSION
+			);
+			wp_enqueue_style( 'hustle_popup' );
+		}
+
+
+		// Slidein type.
+		if ( ! $module_types_to_display || in_array( Hustle_Module_Model::SLIDEIN_MODULE, $module_types_to_display, true ) ) {
+
+			wp_register_style(
+				'hustle_slidein',
+				Opt_In::$plugin_url . 'assets/hustle-ui/css/hustle-slidein.min.css',
+				array(),
+				Opt_In::VERSION
+			);
+			wp_enqueue_style( 'hustle_slidein' );
+		}
+
+		// SSharing type.
+		if ( ! $module_types_to_display || in_array( Hustle_Module_Model::SOCIAL_SHARING_MODULE, $module_types_to_display, true ) ) {
+
+			wp_register_style(
+				'hustle_social',
+				Opt_In::$plugin_url . 'assets/hustle-ui/css/hustle-social.min.css',
+				array(),
+				Opt_In::VERSION
+			);
+			wp_enqueue_style( 'hustle_social' );
+
+			// Inline display.
+			if ( ! $module_types_to_display || in_array( Hustle_SShare_Model::INLINE_MODULE, $module_types_to_display, true ) ) {
+
+				wp_register_style(
+					'hustle_inline',
+					Opt_In::$plugin_url . 'assets/hustle-ui/css/hustle-inline.min.css',
+					array(),
+					Opt_In::VERSION
+				);
+				wp_enqueue_style( 'hustle_inline' );
+			}
+
+			// Floating display.
+			if ( ! $module_types_to_display || in_array( Hustle_SShare_Model::FLOAT_MODULE, $module_types_to_display, true ) ) {
+
+				wp_register_style(
+					'hustle_float',
+					Opt_In::$plugin_url . 'assets/hustle-ui/css/hustle-float.min.css',
+					array(),
+					Opt_In::VERSION
+				);
+				wp_enqueue_style( 'hustle_float' );
+			}
+
+		}
+	}
+
+	/**
+	 * Handles Preview Enqueue for module styles
+	 *
+	 * @since 4.0.1
+	 *
+	 * @param string $url 		Assets url
+	 * @param string $version 	Asset version
+	 * @param string $screen  	Admin screen
+	 */
+	public static function print_preview_styles( $url, $version, $screen ){
+
+		//switch case for module type
+		switch ( $screen ) {
+			case 'hustle_page_hustle_popup':
+
+				//enqueue popupcss once
+				if( ! wp_script_is( 'hustle_popup', 'enqueued' ) ){
+					wp_register_style(
+						'hustle_popup',
+						$url . 'assets/hustle-ui/css/hustle-popup.min.css',
+						array(),
+						$version
+					);
+
+					wp_enqueue_style( 'hustle_popup' );
+				}
+
+				//check for module mode
+				if( ! wp_script_is( 'hustle_optin', 'enqueued' ) ){
+					// load only if optin module exists
+					wp_register_style(
+						'hustle_optin',
+						$url . 'assets/hustle-ui/css/hustle-optin.min.css',
+						array(),
+						$version
+					);
+
+					wp_enqueue_style( 'hustle_optin' );
+
+
+				}
+
+				if( ! wp_script_is( 'hustle_info', 'enqueued' ) ){
+					// load only if info module exists
+					wp_register_style(
+						'hustle_info',
+						$url . 'assets/hustle-ui/css/hustle-info.min.css',
+						array(),
+						$version
+					);
+
+					wp_enqueue_style( 'hustle_info' );
+
+				}
+
+				break;
+
+			case 'hustle_page_hustle_slidein':
+
+				//enqueue slidein css once
+				if( ! wp_script_is( 'hustle_slidein', 'enqueued' ) ){
+					wp_register_style(
+						'hustle_slidein',
+						$url . 'assets/hustle-ui/css/hustle-slidein.min.css',
+						array(),
+						$version
+					);
+
+					wp_enqueue_style( 'hustle_slidein' );
+				}
+
+				//check for module mode
+				if( ! wp_script_is( 'hustle_optin', 'enqueued' ) ){
+					// load only if optin module exists
+					wp_register_style(
+						'hustle_optin',
+						$url . 'assets/hustle-ui/css/hustle-optin.min.css',
+						array(),
+						$version
+					);
+
+					wp_enqueue_style( 'hustle_optin' );
+
+
+				}
+
+				if( ! wp_script_is( 'hustle_info', 'enqueued' ) ){
+					// load only if info module exists
+					wp_register_style(
+						'hustle_info',
+						$url . 'assets/hustle-ui/css/hustle-info.min.css',
+						array(),
+						$version
+					);
+
+					wp_enqueue_style( 'hustle_info' );
+
+				}
+				break;
+
+			case 'hustle_page_hustle_embedded':
+
+				//check for module mode
+				if( ! wp_script_is( 'hustle_optin', 'enqueued' ) ){
+					// load only if optin module exists
+					wp_register_style(
+						'hustle_optin',
+						$url . 'assets/hustle-ui/css/hustle-optin.min.css',
+						array(),
+						$version
+					);
+
+					wp_enqueue_style( 'hustle_optin' );
+
+
+				}
+
+				if( ! wp_script_is( 'hustle_info', 'enqueued' ) ){
+					// load only if info module exists
+					wp_register_style(
+						'hustle_info',
+						$url . 'assets/hustle-ui/css/hustle-info.min.css',
+						array(),
+						$version
+					);
+
+					wp_enqueue_style( 'hustle_info' );
+
+				}
+				break;
+
+			case 'hustle_page_hustle_sshare':
+
+				//enqueue social_sharing css once
+				if( ! wp_script_is( 'hustle_social', 'enqueued' ) ){
+
+					wp_register_style(
+						'hustle_social',
+						$url . 'assets/hustle-ui/css/hustle-social.min.css',
+						array(),
+						$version
+					);
+
+					wp_enqueue_style( 'hustle_social' );
+				}
+
+
+				if( ! wp_script_is( 'hustle_inline', 'enqueued' ) ){
+					// load only if inline module exists
+					wp_register_style(
+						'hustle_inline',
+						$url . 'assets/hustle-ui/css/hustle-inline.min.css',
+						array(),
+						$version
+					);
+					wp_enqueue_style( 'hustle_inline' );
+				}
+
+				if( ! wp_script_is( 'hustle_float', 'enqueued' ) ){
+
+					// load only if floating module exists
+					wp_register_style(
+						'hustle_float',
+						$url . 'assets/hustle-ui/css/hustle-float.min.css',
+						array(),
+						$version
+					);
+					wp_enqueue_style( 'hustle_float' );
+
+				}
+
+				break;
+
+			default:
+				break;
+		}
 
 	}
 
@@ -351,19 +596,19 @@ class Hustle_Module_Front {
 			'hstl-roboto',
 			'https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i',
 			array(),
-			$hustle->get_const_var( 'VERSION' )
+			Opt_In::VERSION
 		);
 		wp_register_style(
 			'hstl-opensans',
 			'https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i',
 			array(),
-			$hustle->get_const_var( 'VERSION' )
+			Opt_In::VERSION
 		);
 		wp_register_style(
 			'hstl-source-code-pro',
 			'https://fonts.googleapis.com/css?family=Source+Code+Pro',
 			array(),
-			$hustle->get_const_var( 'VERSION' )
+			Opt_In::VERSION
 		);
 
 		wp_enqueue_style( 'hstl-roboto' );
@@ -379,6 +624,8 @@ class Hustle_Module_Front {
 
 		// Retrieve all active modules.
 		$modules = apply_filters( 'hustle_sort_modules', Hustle_Module_Collection::instance()->get_all( true ) );
+		$recaptcha = false;
+		$recaptcha_language = '';
 		$enqueue_adblock = false;
 
 		foreach ( $modules as $module ) {
@@ -386,11 +633,11 @@ class Hustle_Module_Front {
 			if ( ! $module instanceof Hustle_Module_Model ) {
 				continue;
 			}
-			
+
 			$is_non_inline_module = ( Hustle_Module_Model::POPUP_MODULE === $module->module_type || Hustle_Module_Model::SLIDEIN_MODULE === $module->module_type );
-			
+
 			if ( ! $module->is_allowed_to_display( $module->module_type ) ) {
-				
+
 				// If shortcode is enabled for inline modules, don't abort.
 				// Shortcodes shouldn't follow the visibility conditions.
 				if ( ! $is_non_inline_module ) {
@@ -404,44 +651,108 @@ class Hustle_Module_Front {
 				}
 			}
 
-			if ( $is_non_inline_module ) {
-				$this->_non_inline_modules[] = $module;
+			// Setting up stuff for all modules except social sharing.
+			if ( Hustle_Module_Model::SOCIAL_SHARING_MODULE !== $module->module_type ) {
 
-				if ( ! $enqueue_adblock ) {
-
-					$settings = $module->get_settings()->to_array();
-					if (
-						// If Trigger exists.
-						! empty( $settings['triggers']['trigger'] )
-						// If trigger is adblock.
-						&& 'adblock' === $settings['triggers']['trigger']
-						// If on_adblock toggle is enabled.
-						&& ! empty( $settings['triggers']['on_adblock'] )
-					) {
-						$enqueue_adblock = true;
+				// Get only first recaptcha language.
+				if ( ! $recaptcha_language ) {
+					$form_fields = $module->get_form_fields();
+					if ( ! $recaptcha ) {
+						$recaptcha = ! empty( $form_fields['recaptcha'] );
+					}
+					if ( ! empty( $form_fields['recaptcha']['recaptcha_language'] ) ) {
+						$recaptcha_language = $form_fields['recaptcha']['recaptcha_language'];
 					}
 				}
-			
-			} elseif ( Hustle_Module_Model::EMBEDDED_MODULE === $module->module_type ) {
-				$this->_inline_modules[] = $module;
+
+				// For popups and slideins.
+				if ( $is_non_inline_module ) {
+					$this->_non_inline_modules[] = $module;
+
+					if ( ! $enqueue_adblock ) {
+
+						$settings = $module->get_settings()->to_array();
+						if (
+							// If Trigger exists.
+							! empty( $settings['triggers']['trigger'] )
+							// If trigger is adblock.
+							&& 'adblock' === $settings['triggers']['trigger']
+							// If on_adblock toggle is enabled.
+							&& ! empty( $settings['triggers']['on_adblock'] )
+						) {
+							$enqueue_adblock = true;
+						}
+					}
+
+				} elseif ( Hustle_Module_Model::EMBEDDED_MODULE === $module->module_type ) {
+					$this->_inline_modules[] = $module;
+
+				}
 
 			} else { // Social sharing modules.
 				$this->_inline_modules[] = $module;
 				$this->_non_inline_modules[] = $module;
 			}
 
+			$this->log_module_type_to_load_styles( $module );
+
 			$this->_modules[] = $module->get_module_data_to_display();
 		}
 
-		// Look for adblocker.
+		// Enqueue adblocker.
 		if ( $enqueue_adblock ) {
 			wp_enqueue_script(
 				'hustle_front_ads',
-				$this->_hustle->get_static_var( 'plugin_url' ) . 'assets/js/ads.js',
+				Opt_In::$plugin_url . 'assets/js/ads.js',
 				array(),
-				$this->_hustle->get_const_var( 'VERSION' ),
+				Opt_In::VERSION,
 				true
 			);
+		}
+
+		// Maybe enqueue reCAPTCHA.
+		if ( $recaptcha ) {
+			$this->maybe_add_recaptcha_script( $recaptcha_language );
+		}
+	}
+
+	/**
+	 * Store the modules' types to be displayed in order to enqueue
+	 * their required styles.
+	 * Called within self::create_modules() method.
+	 *
+	 * @since 4.0.1
+	 *
+	 * @param Hustle_Module_Model $module
+	 */
+	private function log_module_type_to_load_styles( Hustle_Module_Model $module ) {
+
+		// Keep track of the of the modules types and modes to display
+		// in order to queue the required styles only.
+		$this->_module_types_to_display[ $module->module_type ] = 1;
+
+		// Register the module mode for non SSharing modules.
+		if ( Hustle_Module_Model::SOCIAL_SHARING_MODULE !== $module->module_type ) {
+			$this->_module_types_to_display[ $module->module_mode ] = 1;
+
+		} else { // Register the module display type for SSharing modules.
+
+			// Floating display.
+			if (
+				$module->is_display_type_active( Hustle_SShare_Model::FLOAT_MOBILE ) ||
+				$module->is_display_type_active( Hustle_SShare_Model::FLOAT_DESKTOP )
+			) {
+				$this->_module_types_to_display[ Hustle_SShare_Model::FLOAT_MODULE ] = 1;
+			}
+
+			// Inline display.
+			if (
+				$module->is_display_type_active( Hustle_SShare_Model::INLINE_MODULE ) ||
+				$module->is_display_type_active( Hustle_SShare_Model::WIDGET_MODULE ) ||
+				$module->is_display_type_active( Hustle_SShare_Model::SHORTCODE_MODULE )
+			) {
+				$this->_module_types_to_display[ Hustle_SShare_Model::INLINE_MODULE ] = 1;
+			}
 		}
 	}
 

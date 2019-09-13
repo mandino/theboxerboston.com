@@ -3,7 +3,7 @@
  * Class Hustle_Settings_Admin
  *
  */
-class Hustle_Settings_Admin {
+class Hustle_Settings_Admin extends Hustle_Admin_Page_Abstract {
 
 	/**
 	 * Key of the Hustle's settings in wp_options.
@@ -13,45 +13,30 @@ class Hustle_Settings_Admin {
 
 	const DISMISSED_USER_META = 'hustle_dismissed_notifications';
 
-	/**
-	 * @var Opt_In$_hustle
-	 */
-	private $_hustle;
+	public function init() {
 
-	/**
-	 * Hustle_Settings_Admin constructor.
-	 * @param Opt_In $hustle
-	 */
-	public function __construct( Opt_In $hustle ) {
-		$this->_hustle = $hustle;
-		add_action( 'admin_menu', array( $this, 'register_menu' ), 99 );
-        add_action( 'current_screen', array( $this, 'set_proper_current_screen' ) );
+		$this->page = 'hustle_settings';
+
+		$this->page_title = __( 'Hustle Settings', 'wordpress-popup' );
+
+		$this->page_menu_title = __( 'Settings', 'wordpress-popup' );
+
+		$this->page_capability = 'hustle_edit_settings';
+
+		$this->page_template_path = 'admin/settings';
+
         /**
          * Add visual settings classes
          */
         add_filter( 'hustle_sui_wrap_class', array( $this, 'sui_wrap_class' ) );
 	}
 
-	/**
-	 * Register settings menu page
-	 *
-	 * @since 2.0
-	 */
-	public function register_menu() {
-		add_submenu_page( 'hustle', __( 'Hustle Settings', Opt_In::TEXT_DOMAIN ) , __( 'Settings', Opt_In::TEXT_DOMAIN ) , 'hustle_edit_settings', 'hustle_settings',  array( $this, 'render_page' ) );
-	}
-
-	/**
-	 * Renders Hustle Settings page
-	 *
-	 * @since 2.0
-	 */
-	public function render_page() {
+	public function get_page_template_args() {
 		$current_user = wp_get_current_user();
 		$email_settings = self::get_email_settings();
 		$modules = Hustle_Module_Collection::instance()->get_all_paginated();
 		$accessibility = self::get_hustle_settings( 'accessibility' );
-		$this->_hustle->render('admin/settings', array(
+		return array(
 			'user_name' => ucfirst( $current_user->display_name ),
 			'filter' => $modules['filter'],
 			'modules' => $modules['modules'],
@@ -60,7 +45,6 @@ class Hustle_Settings_Admin {
 			'modules_limit' => $modules['limit'],
 			'modules_show_pager' => $modules['show_pager'],
 			'modules_edit_roles' => $modules['edit_roles'],
-			'modules_state_toggle_nonce' => wp_create_nonce( 'hustle_modules_toggle' ), // Unused in 4.0
 			'email_name' => $email_settings['sender_email_name'],
 			'email_address' => $email_settings['sender_email_address'],
 			'unsubscription_messages' => self::get_unsubscribe_messages(),
@@ -69,14 +53,7 @@ class Hustle_Settings_Admin {
 			'section' => Hustle_Module_Admin::get_current_section( 'emails' ),
 			'accessibility' => $accessibility,
 			'migrate' => apply_filters( 'hustle_settings_migrate_data', array() ),
-		));
-	}
-
-	public function set_proper_current_screen( $current ) {
-		global $current_screen;
-		if ( ! Opt_In_Utils::_is_free() ) {
-			$current_screen->id = Opt_In_Utils::clean_current_screen( $current_screen->id );
-		}
+		);
 	}
 
 	/**
@@ -92,14 +69,14 @@ class Hustle_Settings_Admin {
 		// Default unsubscription messages
 		$default = array(
 			'enabled' => '0',
-			'get_lists_button_text' => __( 'Get Lists', Opt_In::TEXT_DOMAIN ),
-			'submit_button_text' => __( 'Unsubscribe!', Opt_In::TEXT_DOMAIN ),
-			'invalid_email' => __( 'Please enter a valid email address.', Opt_In::TEXT_DOMAIN ),
-			'email_not_found' => __( "Looks like you're not in our list!", Opt_In::TEXT_DOMAIN ),
-			'invalid_data' => __( "The unsubscription data doesn't seem to be correct.", Opt_In::TEXT_DOMAIN ),
-			'email_submitted' => __( 'Please check your email to confirm your unsubscription.', Opt_In::TEXT_DOMAIN ),
-			'successful_unsubscription' => __( "You've been successfully unsubscribed.", Opt_In::TEXT_DOMAIN ),
-			'email_not_processed' => __( 'Something went wrong submitting the email. Please make sure a list is selected.', Opt_In::TEXT_DOMAIN ),
+			'get_lists_button_text' => __( 'Get Lists', 'wordpress-popup' ),
+			'submit_button_text' => __( 'Unsubscribe!', 'wordpress-popup' ),
+			'invalid_email' => __( 'Please enter a valid email address.', 'wordpress-popup' ),
+			'email_not_found' => __( "Looks like you're not in our list!", 'wordpress-popup' ),
+			'invalid_data' => __( "The unsubscription data doesn't seem to be correct.", 'wordpress-popup' ),
+			'email_submitted' => __( 'Please check your email to confirm your unsubscription.', 'wordpress-popup' ),
+			'successful_unsubscription' => __( "You've been successfully unsubscribed.", 'wordpress-popup' ),
+			'email_not_processed' => __( 'Something went wrong submitting the email. Please make sure a list is selected.', 'wordpress-popup' ),
 		);
 
 		$messages = $default;
@@ -134,7 +111,7 @@ class Hustle_Settings_Admin {
 				%3$sWe\'re sorry to see you go!%4$s
 				%5$sClick on the link below to unsubscribe:%6$s
 				{hustle_unsubscribe_link}%7$s',
-				Opt_In::TEXT_DOMAIN
+				'wordpress-popup'
 			),
 			'<p><strong>',
 			'</strong></p>',
@@ -147,7 +124,7 @@ class Hustle_Settings_Admin {
 
 		$default_email_settings = array(
 			'enabled' => '0',
-			'email_subject' => __( 'Unsubscribe', Opt_In::TEXT_DOMAIN ),
+			'email_subject' => __( 'Unsubscribe', 'wordpress-popup' ),
 			'email_body' => $default_email_body,
 		);
 

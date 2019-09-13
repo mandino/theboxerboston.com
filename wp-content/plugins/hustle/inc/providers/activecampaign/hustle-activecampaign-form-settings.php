@@ -91,15 +91,15 @@ class Hustle_Activecampaign_Form_Settings extends Hustle_Provider_Form_Settings_
 		$is_submit = ! empty( $submitted_data['is_submit'] );
 		$options = $this->get_first_step_options( $current_data );
 
-		$step_html = Hustle_Api_Utils::get_modal_title_markup( __( 'ActiveCampaign Forms or Lists', Opt_In::TEXT_DOMAIN ), '' );
+		$step_html = Hustle_Api_Utils::get_modal_title_markup( __( 'ActiveCampaign Forms or Lists', 'wordpress-popup' ), '' );
 		$step_html .= Hustle_Api_Utils::get_html_for_options( $options );
 
 		$buttons = array(
 			'disconnect' => array(
-				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'disconnect_form', true ),
+				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', 'wordpress-popup' ), 'sui-button-ghost', 'disconnect_form', true ),
 			),
 			'save' => array(
-				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Continue', Opt_In::TEXT_DOMAIN ), '', 'next', true ),
+				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Continue', 'wordpress-popup' ), '', 'next', true ),
 			),
 		);
 
@@ -142,7 +142,7 @@ class Hustle_Activecampaign_Form_Settings extends Hustle_Provider_Form_Settings_
 						'attributes'  => array(
 							'checked' => 'form' === $sign_up_to ? 'checked' : '',
 						),
-						'label'       => __( 'Enable to choose from your existing forms instead of your existing lists.', Opt_In::TEXT_DOMAIN ),
+						'label'       => __( 'Enable to choose from your existing forms instead of your existing lists.', 'wordpress-popup' ),
 					),
 				),
 			),
@@ -152,7 +152,7 @@ class Hustle_Activecampaign_Form_Settings extends Hustle_Provider_Form_Settings_
 				'elements' => array(
 					array(
 						'type' => 'notice',
-						'value' => __( 'Double opt-in is only available when using forms.', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Double opt-in is only available when using forms.', 'wordpress-popup' ),
 						'class' => 'sui-notice-warning',
 					),
 				),
@@ -191,14 +191,14 @@ class Hustle_Activecampaign_Form_Settings extends Hustle_Provider_Form_Settings_
 		$is_submit = ! empty( $submitted_data['is_submit'] );
 
 		if ( $is_submit && empty( $submitted_data[ $list_id ] ) ) {
-			$error_message = $form ? __( 'The form is required.', Opt_In::TEXT_DOMAIN ) : __( 'The email list is required.', Opt_In::TEXT_DOMAIN );
+			$error_message = $form ? __( 'The form is required.', 'wordpress-popup' ) : __( 'The email list is required.', 'wordpress-popup' );
 		}
 
 		$options = $this->get_second_step_options( $current_data, $form );
 
 		$step_html = $form
-			? Hustle_Api_Utils::get_modal_title_markup( __( 'Choose your form', Opt_In::TEXT_DOMAIN ), __( 'Choose the form you want to send form data to.', Opt_In::TEXT_DOMAIN ) )
-			: Hustle_Api_Utils::get_modal_title_markup( __( 'Choose your list', Opt_In::TEXT_DOMAIN ), __( 'Choose the list you want to send form data to.', Opt_In::TEXT_DOMAIN ) );
+			? Hustle_Api_Utils::get_modal_title_markup( __( 'Choose your form', 'wordpress-popup' ), __( 'Choose the form you want to send form data to.', 'wordpress-popup' ) )
+			: Hustle_Api_Utils::get_modal_title_markup( __( 'Choose your list', 'wordpress-popup' ), __( 'Choose the list you want to send form data to.', 'wordpress-popup' ) );
 		$step_html .= Hustle_Api_Utils::get_html_for_options( $options );
 
 		if( ! isset( $error_message ) ) {
@@ -211,10 +211,10 @@ class Hustle_Activecampaign_Form_Settings extends Hustle_Provider_Form_Settings_
 
 		$buttons = array(
 			'cancel' => array(
-				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Back', Opt_In::TEXT_DOMAIN ), '', 'prev', true ),
+				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Back', 'wordpress-popup' ), '', 'prev', true ),
 			),
 			'save' => array(
-				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', Opt_In::TEXT_DOMAIN ), '', 'next', true, $this->is_empty_lists ),
+				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', 'wordpress-popup' ), '', 'next', true, $this->is_empty_lists ),
 			),
 		);
 
@@ -330,7 +330,7 @@ class Hustle_Activecampaign_Form_Settings extends Hustle_Provider_Form_Settings_
 							'options' => array(
 								'type'  => 'notice',
 								'class' => 'sui-notice-error',
-								'value' => __( "You can't sync this provider because your account doesn't have any email list added. Please, go to your ActiveCampaign account to add one before retrying.", Opt_In::TEXT_DOMAIN ),
+								'value' => __( "You can't sync this provider because your account doesn't have any email list added. Please, go to your ActiveCampaign account to add one before retrying.", 'wordpress-popup' ),
 							),
 						),
 					),
@@ -345,7 +345,7 @@ class Hustle_Activecampaign_Form_Settings extends Hustle_Provider_Form_Settings_
 							'label'   => array(
 								'type'  => 'label',
 								'for'   => 'list_id',
-								'value' => __( 'Email List', Opt_In::TEXT_DOMAIN ),
+								'value' => __( 'Email List', 'wordpress-popup' ),
 							),
 							'options' => array(
 								'type'     => 'select',
@@ -376,7 +376,7 @@ class Hustle_Activecampaign_Form_Settings extends Hustle_Provider_Form_Settings_
 							'options' => array(
 								'type'  => 'notice',
 								'class' => 'sui-notice-error',
-								'value' => __( "You don't have any form added to your account to sync here.", Opt_In::TEXT_DOMAIN ),
+								'value' => __( "You don't have any form added to your account to sync here.", 'wordpress-popup' ),
 							),
 						),
 					),
@@ -391,7 +391,7 @@ class Hustle_Activecampaign_Form_Settings extends Hustle_Provider_Form_Settings_
 							'label'   => array(
 								'type'  => 'label',
 								'for'   => 'form_id',
-								'value' => __( 'Choose Form', Opt_In::TEXT_DOMAIN ),
+								'value' => __( 'Choose Form', 'wordpress-popup' ),
 							),
 							'options' => array(
 								'type'     => 'select',

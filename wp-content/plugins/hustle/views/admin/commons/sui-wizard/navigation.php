@@ -45,7 +45,7 @@
 				<button id="hustle-preview-module" class="sui-button sui-sidenav-hide-md">
 					<span class="sui-loading-text">
 						<i class="sui-icon-eye" aria-hidden="true"></i>
-						<span class="button-text"><?php esc_html_e( 'Preview', Opt_In::TEXT_DOMAIN ); ?></span>
+						<span class="button-text"><?php esc_html_e( 'Preview', 'wordpress-popup' ); ?></span>
 					</span>
 					<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 				</button>
@@ -65,10 +65,10 @@
 				name="module_name"
 				data-attribute="module_name"
 				value="<?php echo esc_attr( $module_name ); ?>"
-				placeholder="<?php esc_html_e( 'E.g. Newsletter', Opt_In::TEXT_DOMAIN ); ?>"
+				placeholder="<?php esc_html_e( 'E.g. Newsletter', 'wordpress-popup' ); ?>"
 				class="sui-form-control" />
 
-			<span id="hustle-module-name-error" class="sui-error-message" style="display: none;"><?php esc_html_e( 'This field is required.', Opt_In::TEXT_DOMAIN ); ?></span>
+			<span id="hustle-module-name-error" class="sui-error-message" style="display: none;"><?php esc_html_e( 'This field is required.', 'wordpress-popup' ); ?></span>
 
 		</div>
 
@@ -79,7 +79,7 @@
 				<button id="hustle-preview-module" class="sui-button">
 					<span class="sui-loading-text">
 						<i class="sui-icon-eye" aria-hidden="true"></i>
-						<span class="button-text"><?php esc_html_e( 'Preview', Opt_In::TEXT_DOMAIN ); ?></span>
+						<span class="button-text"><?php esc_html_e( 'Preview', 'wordpress-popup' ); ?></span>
 					</span>
 					<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 				</button>

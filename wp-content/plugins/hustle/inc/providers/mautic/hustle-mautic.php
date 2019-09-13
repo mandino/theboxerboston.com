@@ -181,7 +181,7 @@ if ( ! class_exists( 'Hustle_Mautic' ) ) :
 							|| Hustle_Providers::get_instance()->activate_addon( $this->_slug ) ) {
 						$this->save_multi_settings_values( $global_multi_id, $settings_to_save );
 					} else {
-						$error_message = __( "Provider couldn't be activated.", Opt_In::TEXT_DOMAIN );
+						$error_message = __( "Provider couldn't be activated.", 'wordpress-popup' );
 						$has_errors = true;
 					}
 				}
@@ -189,17 +189,17 @@ if ( ! class_exists( 'Hustle_Mautic' ) ) :
 				if ( ! $has_errors ) {
 
 					return array(
-						'html'         => Hustle_Api_Utils::get_modal_title_markup( __( 'Mautic Added', Opt_In::TEXT_DOMAIN ), __( 'You can now go to your forms and assign them to this integration', Opt_In::TEXT_DOMAIN ) ),
+						'html'         => Hustle_Api_Utils::get_modal_title_markup( __( 'Mautic Added', 'wordpress-popup' ), __( 'You can now go to your forms and assign them to this integration', 'wordpress-popup' ) ),
 						'buttons'      => array(
 							'close' => array(
-								'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'close' ),
+								'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', 'wordpress-popup' ), 'sui-button-ghost', 'close' ),
 							),
 						),
 						'redirect'     => false,
 						'has_errors'   => false,
 						'notification' => array(
 							'type' => 'success',
-							'text' => '<strong>' . $this->get_title() . '</strong> ' . __( 'Successfully connected', Opt_In::TEXT_DOMAIN ),
+							'text' => '<strong>' . $this->get_title() . '</strong> ' . __( 'Successfully connected', 'wordpress-popup' ),
 						),
 					);
 
@@ -214,20 +214,20 @@ if ( ! class_exists( 'Hustle_Mautic' ) ) :
 						'label' => array(
 							'type'  => 'label',
 							'for'   => 'url',
-							'value' => __( 'Installation URL', Opt_In::TEXT_DOMAIN ),
+							'value' => __( 'Installation URL', 'wordpress-popup' ),
 						),
 						'url' => array(
 							'type'        => 'url',
 							'name'        => 'url',
 							'value'       => $current_data['url'],
-							'placeholder' => __( 'Enter URL', Opt_In::TEXT_DOMAIN ),
+							'placeholder' => __( 'Enter URL', 'wordpress-popup' ),
 							'id'          => 'url',
 							'icon'        => 'web-globe-world',
 						),
 						'error' => array(
 							'type'  => 'error',
 							'class' => $app_url_valid ? 'sui-hidden' : '',
-							'value' => __( 'Please enter a valid Mautic installation URL', Opt_In::TEXT_DOMAIN ),
+							'value' => __( 'Please enter a valid Mautic installation URL', 'wordpress-popup' ),
 						),
 					),
 				),
@@ -238,20 +238,20 @@ if ( ! class_exists( 'Hustle_Mautic' ) ) :
 						'label' => array(
 							'type'  => 'label',
 							'for'   => 'username',
-							'value' => __( 'Login Email', Opt_In::TEXT_DOMAIN ),
+							'value' => __( 'Login Email', 'wordpress-popup' ),
 						),
 						'username' => array(
 							'type'        => 'text',
 							'name'        => 'username',
 							'value'       => $current_data['username'],
-							'placeholder' => __( 'Enter Email', Opt_In::TEXT_DOMAIN ),
+							'placeholder' => __( 'Enter Email', 'wordpress-popup' ),
 							'id'          => 'username',
 							'icon'        => 'mail',
 						),
 						'error' => array(
 							'type'  => 'error',
 							'class' => $api_username_valid ? 'sui-hidden' : '',
-							'value' => __( 'Please enter a valid Mautic login email', Opt_In::TEXT_DOMAIN ),
+							'value' => __( 'Please enter a valid Mautic login email', 'wordpress-popup' ),
 						),
 					),
 				),
@@ -262,20 +262,20 @@ if ( ! class_exists( 'Hustle_Mautic' ) ) :
 						'label' => array(
 							'type'  => 'label',
 							'for'   => 'password',
-							'value' => __( 'Login Password', Opt_In::TEXT_DOMAIN ),
+							'value' => __( 'Login Password', 'wordpress-popup' ),
 						),
 						'password' => array(
 							'type'        => 'password',
 							'name'        => 'password',
 							'value'       => $current_data['password'],
-							'placeholder' => __( 'Enter Password', Opt_In::TEXT_DOMAIN ),
+							'placeholder' => __( 'Enter Password', 'wordpress-popup' ),
 							'id'          => 'password',
 							'icon'        => 'eye-hide',
 						),
 						'error' => array(
 							'type'  => 'error',
 							'class' => $api_password_valid ? 'sui-hidden' : '',
-							'value' => __( 'Please enter a valid Mautic login password', Opt_In::TEXT_DOMAIN ),
+							'value' => __( 'Please enter a valid Mautic login password', 'wordpress-popup' ),
 						),
 					),
 				),
@@ -286,27 +286,27 @@ if ( ! class_exists( 'Hustle_Mautic' ) ) :
 						'label' => array(
 							'type'  => 'label',
 							'for'   => 'instance-name-input',
-							'value' => __( 'Identifier', Opt_In::TEXT_DOMAIN ),
+							'value' => __( 'Identifier', 'wordpress-popup' ),
 						),
 						'name' => array(
 							'type'        => 'text',
 							'name'        => 'name',
 							'value'       => $current_data['name'],
-							'placeholder' => __( 'E.g. Business Account', Opt_In::TEXT_DOMAIN ),
+							'placeholder' => __( 'E.g. Business Account', 'wordpress-popup' ),
 							'id'          => 'instance-name-input',
 						),
 						'message' => array(
 							'type'  => 'description',
-							'value' => __( 'Helps to distinguish your integrations if you have connected to the multiple accounts of this integration.', Opt_In::TEXT_DOMAIN ),
+							'value' => __( 'Helps to distinguish your integrations if you have connected to the multiple accounts of this integration.', 'wordpress-popup' ),
 						),
 					)
 				),
 			);
 
 			$step_html = Hustle_Api_Utils::get_modal_title_markup(
-				__( 'Configure Mautic', Opt_In::TEXT_DOMAIN ),
+				__( 'Configure Mautic', 'wordpress-popup' ),
 				sprintf(
-					__( 'Enable API and HTTP Basic Auth in your Mautic configuration API settings. %1$sRemember:%2$s Your Mautic installation URL must start with either http or https.', Opt_In::TEXT_DOMAIN ),
+					__( 'Enable API and HTTP Basic Auth in your Mautic configuration API settings. %1$sRemember:%2$s Your Mautic installation URL must start with either http or https.', 'wordpress-popup' ),
 					'<strong>',
 					'</strong>'
 				)
@@ -320,16 +320,16 @@ if ( ! class_exists( 'Hustle_Mautic' ) ) :
 			if ( $is_edit ) {
 				$buttons = array(
 					'disconnect' => array(
-						'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'disconnect', true ),
+						'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', 'wordpress-popup' ), 'sui-button-ghost', 'disconnect', true ),
 					),
 					'save' => array(
-						'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', Opt_In::TEXT_DOMAIN ), '', 'connect', true ),
+						'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', 'wordpress-popup' ), '', 'connect', true ),
 					),
 				);
 			} else {
 				$buttons = array(
 					'connect' => array(
-						'markup' => Hustle_Api_Utils::get_button_markup( __( 'Connect', Opt_In::TEXT_DOMAIN ), '', 'connect', true ),
+						'markup' => Hustle_Api_Utils::get_button_markup( __( 'Connect', 'wordpress-popup' ), '', 'connect', true ),
 					),
 				);
 
@@ -366,7 +366,7 @@ if ( ! class_exists( 'Hustle_Mautic' ) ) :
 				$_lists = $api->get_segments();
 
 				if ( is_wp_error( $_lists ) || empty( $_lists ) ) {
-					Hustle_Api_Utils::maybe_log( __METHOD__, __( 'Invalid Mautic API credentials.', Opt_In::TEXT_DOMAIN ) );
+					Hustle_Api_Utils::maybe_log( __METHOD__, __( 'Invalid Mautic API credentials.', 'wordpress-popup' ) );
 					return false;
 				}
 
@@ -390,7 +390,7 @@ if ( ! class_exists( 'Hustle_Mautic' ) ) :
 			$custom_fields = $api->get_custom_fields();
 			foreach ( $fields as $field ) {
 				$label = $field['label'];
-				$alias = $field['name'];
+				$alias = strtolower( $field['name'] );
 				$exist = false;
 
 				if ( is_array( $custom_fields ) ) {

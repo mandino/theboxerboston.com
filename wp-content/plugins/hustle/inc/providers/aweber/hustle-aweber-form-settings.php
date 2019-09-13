@@ -66,7 +66,7 @@ class Hustle_Aweber_Form_Settings extends Hustle_Provider_Form_Settings_Abstract
 		$is_submit = ! empty( $submitted_data['is_submit'] ) && empty( $submitted_data['page'] );
 
 		if ( $is_submit && empty( $submitted_data['list_id'] ) ) {
-			$error_message = __( 'The email list is required.', Opt_In::TEXT_DOMAIN );
+			$error_message = __( 'The email list is required.', 'wordpress-popup' );
 		}
 		if ( !$is_submit && ! empty( $submitted_data['page'] ) ) {
 			$settings = array();
@@ -76,7 +76,7 @@ class Hustle_Aweber_Form_Settings extends Hustle_Provider_Form_Settings_Abstract
 
 		$options = $this->get_first_step_options( $current_data );
 
-		$step_html = Hustle_Api_Utils::get_modal_title_markup( __( 'Choose your list', Opt_In::TEXT_DOMAIN ), __( 'Choose the list you want to send form data to.', Opt_In::TEXT_DOMAIN ) );
+		$step_html = Hustle_Api_Utils::get_modal_title_markup( __( 'Choose your list', 'wordpress-popup' ), __( 'Choose the list you want to send form data to.', 'wordpress-popup' ) );
 		$step_html .= Hustle_Api_Utils::get_html_for_options( $options );
 
 		if( ! isset( $error_message ) ) {
@@ -89,10 +89,10 @@ class Hustle_Aweber_Form_Settings extends Hustle_Provider_Form_Settings_Abstract
 
 		$buttons = array(
 			'disconnect' => array(
-				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'disconnect_form', true ),
+				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', 'wordpress-popup' ), 'sui-button-ghost', 'disconnect_form', true ),
 			),
 			'save' => array(
-				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', Opt_In::TEXT_DOMAIN ), '', 'next', true ),
+				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', 'wordpress-popup' ), '', 'next', true ),
 			),
 		);
 
@@ -138,22 +138,27 @@ class Hustle_Aweber_Form_Settings extends Hustle_Provider_Form_Settings_Abstract
 		$lists = array();
 
 		try {
-			$account = $this->provider->get_account( $api_key );
-			$url = $account->url . '/lists?ws.start=' . $offset . '&ws.size=' . $page_limit;
-			$response = $account->loadFromUrl( $url )->data;
+			$args = array(
+				'ws.start'	=> $offset,
+				'ws.size'	=> $page_limit,
+			);
 
-			$_lists   = $response['entries'];
-			$total    = $response['total_size'];
+			$account_id = $this->provider->get_account_id( $global_multi_id );
+			
+			$api = $this->provider->get_api( $global_multi_id );
+			$response = $api->get_account_lists( $account_id, $args );
+
+			$_lists   = $response->entries;
+			$total    = $response->total_size;
 			if( is_array( $_lists ) ) {
 				foreach( $_lists as $list ) {
-					$list = (array) $list;
-					$lists[ $list['id'] ]['value'] = $list['id'];
-					$lists[ $list['id'] ]['label'] = $list['name'];
+					
+					$lists[ $list->id ]['value'] 	= $list->id;
+					$lists[ $list->id ]['label'] 	= $list->name;
 				}
-				//delete_site_transient( Hustle_Mailchimp::LIST_PAGES );
 			}
 		} catch ( Exception $e ) {
-			// TODO: handle this properly
+			Hustle_Api_Utils::maybe_log( __METHOD__, $e->getMessage() );
 			return array();
 		}
 
@@ -178,7 +183,7 @@ class Hustle_Aweber_Form_Settings extends Hustle_Provider_Form_Settings_Abstract
 					'label' => array(
 						'type'  => 'label',
 						'for'   => 'list_id',
-						'value' => __( 'Email List', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Email List', 'wordpress-popup' ),
 					),
 					'choose_email_list' => array(
 						'type'     => 'select',

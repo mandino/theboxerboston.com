@@ -1,16 +1,16 @@
 <main class="<?php echo implode( ' ', apply_filters( 'hustle_sui_wrap_class', null ) ); ?>">
 	<div class="sui-header">
-		<h1 class="sui-header-title"><?php esc_html_e( 'Dashboard', Opt_In::TEXT_DOMAIN ); ?></h1>
-		<?php $this->render( 'admin/commons/view-documentation' ); ?>
+		<h1 class="sui-header-title"><?php esc_html_e( 'Dashboard', 'wordpress-popup' ); ?></h1>
+		<?php self::static_render( 'admin/commons/view-documentation' ); ?>
 	</div>
 	<div class="<?php echo esc_attr( implode( ' ', $sui['summary']['classes'] ) ); ?>">
 		<div class="sui-summary-image-space" aria-hidden="true" style="<?php echo esc_attr( $sui['summary']['style'] ); ?>"></div>
 		<div class="sui-summary-segment">
 			<div class="sui-summary-details">
 				<span class="sui-summary-large"><?php echo esc_html( $active_modules ); ?></span>
-				<span class="sui-summary-sub"><?php esc_html_e( 'Active Modules', Opt_In::TEXT_DOMAIN ); ?></span>
+				<span class="sui-summary-sub"><?php esc_html_e( 'Active Modules', 'wordpress-popup' ); ?></span>
 				<span class="sui-summary-detail"><?php echo esc_html( $last_conversion ); ?></span>
-				<span class="sui-summary-sub"><?php esc_html_e( 'Last Conversion', Opt_In::TEXT_DOMAIN ); ?></span>
+				<span class="sui-summary-sub"><?php esc_html_e( 'Last Conversion', 'wordpress-popup' ); ?></span>
 
 			</div>
 
@@ -28,7 +28,7 @@
 				}
 				echo '</ul>';
 			} else {
-				esc_html_e( 'No data to display.', Opt_In::TEXT_DOMAIN );
+				esc_html_e( 'No data to display.', 'wordpress-popup' );
 			}
 			?>
 		</div>
@@ -41,7 +41,7 @@
 
 			<?php
 			// WIDGET: Pop-ups
-			$this->render(
+			self::static_render(
 				'admin/popup/dashboard',
 				array(
 					'capability' => $capability,
@@ -51,7 +51,7 @@
 
 			<?php
 			// WIDGET: Embeds
-			$this->render(
+			self::static_render(
 				'admin/embedded/dashboard',
 				array(
 					'capability' => $capability,
@@ -65,7 +65,7 @@
 
 			<?php
 			// WIDGET: Slide-ins
-			$this->render(
+			self::static_render(
 				'admin/slidein/dashboard',
 				array(
 					'capability' => $capability,
@@ -75,7 +75,7 @@
 
 			<?php
 			// WIDGET: Social Shares
-			$this->render(
+			self::static_render(
 				'admin/sshare/dashboard',
 				array(
 					'sshares'       => $social_shares,
@@ -88,9 +88,9 @@
 
 	</div>
 
-	<?php
-	// ELEMENT: Footer
-	$this->render( 'admin/footer/footer-large' ); ?>
+	<?php 
+	// Global Footer
+	$this->render( 'admin/footer/footer', array( 'is_large' => true ) ); ?>
 
 	<?php
 	// DIALOG: On Boarding (Welcome)
@@ -100,7 +100,7 @@
 	) {
 		$current_user = wp_get_current_user();
 		$username = ! empty( $current_user->user_firstname ) ? $current_user->user_firstname : $current_user->user_login;
-		$this->render( 'admin/dashboard/dialogs/fresh-install', array( 'username' => $username ) );
+		self::static_render( 'admin/dashboard/dialogs/fresh-install', array( 'username' => $username ) );
 	}
 
 	// DIALOG: On Boarding (Migrate)
@@ -109,21 +109,21 @@
 	) {
 		$current_user = wp_get_current_user();
 		$username = ! empty( $current_user->user_firstname ) ? $current_user->user_firstname : $current_user->user_login;
-		$this->render( 'admin/dashboard/dialogs/migrate-data', array( 'username' => $username ) );
+		self::static_render( 'admin/dashboard/dialogs/migrate-data', array( 'username' => $username ) );
 	}
 
 	// DIALOG: Delete
-	$this->render(
+	self::static_render(
 		'admin/commons/sui-listing/dialogs/delete-module',
 		array()
 	);
 
 	// DIALOG: Preview
-	$this->render( 'admin/dialogs/preview-dialog' );
+	self::static_render( 'admin/dialogs/preview-dialog' );
 
 	// DIALOG: Dissmiss migrate tracking notice modal confirmation.
 	if ( Hustle_Module_Admin::is_show_migrate_tracking_notice() ) {
-		$this->render( 'admin/dashboard/dialogs/migrate-dismiss-confirmation' );
+		self::static_render( 'admin/dashboard/dialogs/migrate-dismiss-confirmation' );
 	}
 ?>
 </main>

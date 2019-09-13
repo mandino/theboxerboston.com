@@ -41,7 +41,7 @@ class Hustle_Mailchimp_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 			$api = $addon->get_api( $api_key );
 
 			if ( empty( $submitted_data['email'] ) ) {
-				throw new Exception( __('Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN ) );
+				throw new Exception( __('Required Field "email" was not filled by the user.', 'wordpress-popup' ) );
 			}
 
 			$list_id = $addon_setting_values['list_id'];
@@ -75,8 +75,34 @@ class Hustle_Mailchimp_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 				'mailchimp_group_id' => '',
 				'mailchimp_group_interest' => '',
 			) );
-			$merge_data = array_filter( $merge_data );
 
+			// Array containing the shortened keys.
+			$shortened_keys = array();
+			foreach ( $merge_data as $key => $val ) {
+
+				// Remove empty fields.
+				if ( empty( $val ) ) {
+					unset( $merge_data[ $key ] );
+					continue;
+				}
+
+				// Shorten fields keys longer than what's accepted by Mailchimp.
+				if ( 10 < strlen( $key ) ) {
+					$shortened_key = substr( $key, 0, 10 );
+					unset( $merge_data[ $key ] );
+					$merge_data[ $shortened_key ] = $val;
+
+					$shortened_keys[] = $key . " ($shortened_key)";
+				}
+			}
+
+			// Add a warning in the entry letting the admin know how we're handling their keys.
+			if ( ! empty( $shortened_keys ) ) {
+				$success_message_extra = sprintf( 
+					__( " These fields' names are being truncated to have a max length of 10. In parenthesis is the name currently used by Mailchimp: %s", 'wordpress-popup' ),
+					implode( ', ', $shortened_keys )
+				);
+			}
 
 			if ( ! empty( $merge_data ) ) {
 				$merge_vals = array_merge( $merge_vals, $merge_data );
@@ -104,8 +130,15 @@ class Hustle_Mailchimp_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 				$subscribe_data['interests'] = $interests;
 			}
 
-			$error_detail = __( 'Something went wrong.', Opt_In::TEXT_DOMAIN );
+			$error_detail = __( 'Something went wrong.', 'wordpress-popup' );
 			try {
+				// Add custom fields
+				$add_cf_result = $addon->maybe_add_custom_fields( $api, $list_id, $merge_data, $module_id );
+				if ( is_wp_error( $add_cf_result ) ) {
+					$error_message = $add_cf_result->get_error_message();
+					throw new Exception( $error_message );
+				}
+
 				$existing_member = $addon->get_member( $email, $list_id, $submitted_data, $api_key );
 				if ( ! is_wp_error( $existing_member ) && $existing_member ) {
 					$member_interests = isset($existing_member->interests) ? (array) $existing_member->interests : array();
@@ -125,10 +158,10 @@ class Hustle_Mailchimp_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 					}
 
 					if ( 'pending' === $existing_member->status ) {
+						$delete = $addon->delete_member( $email, $list_id, $submitted_data, $api_key );
+						$subscribe_data['status'] = 'pending';
 						$can_subscribe = true;
-					}
-
-					if ( 'unsubscribed' === $existing_member->status ) {
+					} elseif ( 'unsubscribed' === $existing_member->status ) {
 						// Resend Confirm Subscription Email even if `Automatically opt-in new users to the mailing list` is set
 						$subscribe_data['status'] = 'pending';
 						$can_subscribe = true;
@@ -159,7 +192,7 @@ class Hustle_Mailchimp_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 
 						$response = $api->update_subscription_patch( $list_id, $email, $subscribe_data );
 					} else {
-						$error_message = __( 'This email address has already subscribed', Opt_In::TEXT_DOMAIN );
+						$error_message = __( 'This email address has already subscribed', 'wordpress-popup' );
 						throw new Exception( $error_message );
 					}
 
@@ -168,7 +201,7 @@ class Hustle_Mailchimp_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 
 				} elseif ( is_wp_error( $existing_member ) ) {
 					$error_data = json_decode( $existing_member->get_error_data(), true );
-					$error_message = __( 'Error', Opt_In::TEXT_DOMAIN ) . ': ' . $error_data['status'] . ' - ' . $error_data['title'] . '. ' . $error_data['detail'];
+					$error_message = __( 'Error', 'wordpress-popup' ) . ': ' . $error_data['status'] . ' - ' . $error_data['title'] . '. ' . $error_data['detail'];
 					throw new Exception( $error_message );
 
 				} else {
@@ -198,18 +231,24 @@ class Hustle_Mailchimp_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 
 			} catch( Exception $e ) {
 				$is_sent = false;
-				$member_status = __( 'Member could not be subscribed.', Opt_In::TEXT_DOMAIN );
+				$member_status = __( 'Member could not be subscribed.', 'wordpress-popup' );
 				$error_detail = $e->getMessage();
 			}
 
 			$utils = Hustle_Provider_Utils::get_instance();
+
+			// If there's extra information to display in the success entry description, add it.
+			$success_message = __( 'Successfully added or updated member on MailChimp list.', 'wordpress-popup' );
+			if ( ! empty( $success_message_extra ) ) {
+				$success_message = $success_message . $success_message_extra;
+			}
 
 			$entry_fields = array(
 				array(
 					'name'  => 'status',
 					'value' => array(
 						'is_sent'       => $is_sent,
-						'description'   => $is_sent ? __( 'Successfully added or updated member on MailChimp list', Opt_In::TEXT_DOMAIN ) : $error_detail,
+						'description'   => $is_sent ? $success_message : $error_detail,
 						'member_status' => $member_status,
 						'data_sent'     => $utils->get_last_data_sent(),
 						'data_received' => $utils->get_last_data_received(),
@@ -234,7 +273,7 @@ class Hustle_Mailchimp_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 			$interest_name = array();
 			foreach( $interests as $key => $interest ) {
 				$interest_name[] = !empty( $addon_setting_values['interest_options'][ $key ] )
-					? $addon_setting_values['interest_options'][ $key ] : __( 'Noname', Opt_In::TEXT_DOMAIN );
+					? $addon_setting_values['interest_options'][ $key ] : __( 'Noname', 'wordpress-popup' );
 			}
 			$entry_fields[0]['value']['group_interest_name'] = implode( ', ', $interest_name );
 		}
@@ -300,7 +339,7 @@ class Hustle_Mailchimp_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 		$api 						= $addon->get_api( $addon->get_setting( 'api_key', '', $global_multi_id ) );
 
 		if ( empty( $submitted_data['email'] ) ) {
-			return __( 'Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN );
+			return __( 'Required Field "email" was not filled by the user.', 'wordpress-popup' );
 		}
 
 		if ( ! $allow_subscribed ) {

@@ -5,7 +5,7 @@
 		<header id="header">
 
 			<h1 class="main-title-alternative">
-				<?php esc_attr_e('NEW SOCIAL GROUP', Opt_In::TEXT_DOMAIN); ?>
+				<?php esc_attr_e('NEW SOCIAL GROUP', 'wordpress-popup'); ?>
 			</h1>
 
 		</header>

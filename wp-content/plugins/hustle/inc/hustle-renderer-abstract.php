@@ -162,27 +162,35 @@ abstract class Hustle_Renderer_Abstract {
 	public static function ajax_load_module() {
 
 		// TODO: check nonce.
-		// TODO: maybe we don't need to pass "type" in the request if we always pass the id.
 
 		$data = $_REQUEST; // phpcs:ignore
 		$id = filter_input( INPUT_POST, 'id', FILTER_VALIDATE_INT );
 		$preview_data = filter_input( INPUT_POST, 'previewData', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
-		$type = isset( $data['type'] ) ? $data['type'] : 0;
 
 		if ( ! $id && empty( $preview_data ) ) {
-			wp_send_json_error( __( 'Invalid data', Opt_In::TEXT_DOMAIN ) );
-		}
-
-		if ( empty( $type ) ) {
-			wp_send_json_error( __( 'Invalid module type', Opt_In::TEXT_DOMAIN ) );
+			wp_send_json_error( __( 'Invalid data', 'wordpress-popup' ) );
 		}
 
 		$module = Hustle_Module_Collection::instance()->return_model_from_id( $id );
+
+		if ( is_wp_error( $module ) ) {
+			wp_send_json_error( __( 'Invalid module.'), 'wordpress-popup' );
+		}
 
 		$view = $module->get_renderer();
 
 		// This might change later on. We're only using the ajax for preview at the moment.
 		$is_preview = true;
+
+		// Add filter for Forminator to load as a preview.
+		add_filter( 'forminator_render_shortcode_is_preview', function() {
+			return true;
+		});
+
+		// Define constant for other plugins to hook in preview.
+		if ( ! defined( 'HUSTLE_RENDER_PREVIEW' ) || ! HUSTLE_RENDER_PREVIEW ) {
+			define( 'HUSTLE_RENDER_PREVIEW', $is_preview );
+		}
 
 		do_action( 'hustle_before_ajax_display', $module, $is_preview );
 

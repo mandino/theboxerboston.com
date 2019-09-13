@@ -4,8 +4,8 @@
 <div id="customize-row" class="sui-box-settings-row">
 
 	<div class="sui-box-settings-col-1">
-		<span class="sui-settings-label"><?php esc_html_e( 'Customize Unsubscribe Form', Opt_In::TEXT_DOMAIN ); ?></span>
-		<span class="sui-description"><?php esc_html_e( 'Choose the copy of the unsubscribe form along with the success and error messages to be displayed.', Opt_In::TEXT_DOMAIN ); ?></span>
+		<span class="sui-settings-label"><?php esc_html_e( 'Customize Unsubscribe Form', 'wordpress-popup' ); ?></span>
+		<span class="sui-description"><?php esc_html_e( 'Choose the copy of the unsubscribe form along with the success and error messages to be displayed.', 'wordpress-popup' ); ?></span>
 	</div>
 
 	<div class="sui-box-settings-col-2">
@@ -19,7 +19,7 @@
 				>
 			<label for="wph-unsub-edit-message" class="sui-toggle-slider"></label>
 		</label>
-		<label class="sui-toggle-label" for="wph-unsub-edit-message"><?php esc_html_e( 'Enable form customization', Opt_In::TEXT_DOMAIN ); ?></label>
+		<label class="sui-toggle-label" for="wph-unsub-edit-message"><?php esc_html_e( 'Enable form customization', 'wordpress-popup' ); ?></label>
 
 		<div class="sui-border-frame sui-toggle-content<?php echo $messages_enabled ? '' : ' sui-hidden'; ?>">
 
@@ -32,7 +32,7 @@
 						'id'    => 'submit-button-text-label',
 						'for'   => 'submit-button-text',
 						'type'  => 'label',
-						'value' => __( 'Submit button text', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Submit button text', 'wordpress-popup' ),
 					),
 					'button_text'       => array(
 						'id'          => 'submit-button-text',
@@ -58,7 +58,7 @@
 						'id'    => 'lists-button-text-label',
 						'for'   => 'lists-button-text',
 						'type'  => 'label',
-						'value' => __( 'Search lists button text', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Search lists button text', 'wordpress-popup' ),
 					),
 					'get_lists_button_text'       => array(
 						'id'          => 'lists-button-text',
@@ -84,7 +84,7 @@
 						'id'    => 'invalid-email-message-label',
 						'for'   => 'invalid-email',
 						'type'  => 'label',
-						'value' => __( 'Invalid email error message', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Invalid email error message', 'wordpress-popup' ),
 					),
 					'invalid_email_message'       => array(
 						'id'    => 'invalid-email-message',
@@ -109,7 +109,7 @@
 						'id'    => 'iemail-not-found-message-label',
 						'for'   => 'email-not-found-message',
 						'type'  => 'label',
-						'value' => __( 'Email not found message', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Email not found message', 'wordpress-popup' ),
 					),
 					'email_not_found_message'       => array(
 						'id'    => 'email-not-found-message',
@@ -134,7 +134,7 @@
 						'id'    => 'invalid-data-message-label',
 						'for'   => 'invalid-data-message',
 						'type'  => 'label',
-						'value' => __( 'Data not valid message', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Data not valid message', 'wordpress-popup' ),
 					),
 					'invalid_data_message'       => array(
 						'id'    => 'invalid-data-message',
@@ -159,7 +159,7 @@
 						'id'    => 'email-not-submitted-message-label',
 						'for'   => 'email-not-submitted-message',
 						'type'  => 'label',
-						'value' => __( 'Email couldn\'t be submitted message', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Email couldn\'t be submitted message', 'wordpress-popup' ),
 					),
 					'email_not_submitted_message'       => array(
 						'id'    => 'email-not-submitted-message',
@@ -184,7 +184,7 @@
 						'id'    => 'email-submitted-message-label',
 						'for'   => 'email-submitted-message',
 						'type'  => 'label',
-						'value' => __( 'Check your email for confirmation message', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Check your email for confirmation message', 'wordpress-popup' ),
 					),
 					'email_submitted_message'           => array(
 						'id'    => 'email-submitted-message',
@@ -209,7 +209,7 @@
 						'id'    => 'successful-unsubscription-message-label',
 						'for'   => 'successful-unsubscription-message',
 						'type'  => 'label',
-						'value' => __( 'Successful unsubscription message', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Successful unsubscription message', 'wordpress-popup' ),
 					),
 					'successful_unsubscription_message' => array(
 						'id'    => 'successful-unsubscription-message',

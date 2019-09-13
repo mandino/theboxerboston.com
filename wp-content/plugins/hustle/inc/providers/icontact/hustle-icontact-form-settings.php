@@ -71,7 +71,7 @@ class Hustle_Icontact_Form_Settings extends Hustle_Provider_Form_Settings_Abstra
 		$is_submit = ! empty( $submitted_data['is_submit'] ) && empty( $submitted_data['page'] );
 
 		if ( $is_submit && empty( $submitted_data['list_id'] ) ) {
-			$error_message = __( 'The list is required.', Opt_In::TEXT_DOMAIN );
+			$error_message = __( 'The list is required.', 'wordpress-popup' );
 		}
 		if ( !$is_submit && ! empty( $submitted_data['page'] ) ) {
 			$settings = array();
@@ -81,7 +81,7 @@ class Hustle_Icontact_Form_Settings extends Hustle_Provider_Form_Settings_Abstra
 
 		$options = $this->get_first_step_options( $current_data );
 
-		$step_html = Hustle_Api_Utils::get_modal_title_markup( __( 'Choose list', Opt_In::TEXT_DOMAIN ), __( 'Choose the list you want to send form data to.', Opt_In::TEXT_DOMAIN ) );
+		$step_html = Hustle_Api_Utils::get_modal_title_markup( __( 'Choose list', 'wordpress-popup' ), __( 'Choose the list you want to send form data to.', 'wordpress-popup' ) );
 		$step_html .= Hustle_Api_Utils::get_html_for_options( $options );
 
 		if( ! isset( $error_message ) ) {
@@ -94,10 +94,10 @@ class Hustle_Icontact_Form_Settings extends Hustle_Provider_Form_Settings_Abstra
 
 		$buttons = array(
 			'disconnect' => array(
-				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'disconnect_form', true ),
+				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', 'wordpress-popup' ), 'sui-button-ghost', 'disconnect_form', true ),
 			),
 			'save' => array(
-				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Continue', Opt_In::TEXT_DOMAIN ), '', 'next', true ),
+				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Continue', 'wordpress-popup' ), '', 'next', true ),
 			),
 		);
 
@@ -188,7 +188,7 @@ class Hustle_Icontact_Form_Settings extends Hustle_Provider_Form_Settings_Abstra
 					'label' => array(
 						'type'  => 'label',
 						'for'   => 'list_id',
-						'value' => __( 'Email List', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Email List', 'wordpress-popup' ),
 					),
 					'list'  => array(
 						'type'     => 'select',
@@ -209,7 +209,7 @@ class Hustle_Icontact_Form_Settings extends Hustle_Provider_Form_Settings_Abstra
 					array(
 						'type'  => 'label',
 						'for'   => 'list_id',
-						'value' => __( 'Double Opt-in', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Double Opt-in', 'wordpress-popup' ),
 					),
 					array(
 						'type'       => 'checkbox',
@@ -220,7 +220,7 @@ class Hustle_Icontact_Form_Settings extends Hustle_Provider_Form_Settings_Abstra
 						'attributes' => array(
 							'checked' => $is_double_optin_enabled ? 'checked' : '',
 						),
-						'label'      => __( 'Enable double opt-in for this list.', Opt_In::TEXT_DOMAIN ),
+						'label'      => __( 'Enable double opt-in for this list.', 'wordpress-popup' ),
 					),
 				),
 			),
@@ -270,7 +270,7 @@ class Hustle_Icontact_Form_Settings extends Hustle_Provider_Form_Settings_Abstra
 				'html' => '',
 				'notification' => array(
 					'type' => 'success',
-					'text' => '<strong>' . $this->provider->get_title() . '</strong> ' . __( 'successfully connected to your form', Opt_In::TEXT_DOMAIN ),
+					'text' => '<strong>' . $this->provider->get_title() . '</strong> ' . __( 'successfully connected to your form', 'wordpress-popup' ),
 				),
 				'is_close' => true,
 			);
@@ -283,12 +283,12 @@ class Hustle_Icontact_Form_Settings extends Hustle_Provider_Form_Settings_Abstra
 		$is_submit = ! empty( $submitted_data['is_submit'] );
 
 		if ( $is_submit && empty( $submitted_data['confirmation_message_id'] ) ) {
-			$error_message = __( 'The confirmation message is required when double opt-in is enabled.', Opt_In::TEXT_DOMAIN );
+			$error_message = __( 'The confirmation message is required when double opt-in is enabled.', 'wordpress-popup' );
 		}
 
 		$options = $this->get_second_step_options( $current_data );
 
-		$step_html = Hustle_Api_Utils::get_modal_title_markup( __( 'Choose confirmation message', Opt_In::TEXT_DOMAIN ), '' );
+		$step_html = Hustle_Api_Utils::get_modal_title_markup( __( 'Choose confirmation message', 'wordpress-popup' ), '' );
 		$step_html .= Hustle_Api_Utils::get_html_for_options( $options );
 
 		if( ! isset( $error_message ) ) {
@@ -301,10 +301,10 @@ class Hustle_Icontact_Form_Settings extends Hustle_Provider_Form_Settings_Abstra
 
 		$buttons = array(
 			'cancel' => array(
-				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Back', Opt_In::TEXT_DOMAIN ), '', 'prev', true ),
+				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Back', 'wordpress-popup' ), '', 'prev', true ),
 			),
 			'save' => array(
-				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', Opt_In::TEXT_DOMAIN ), '', 'next', true ),
+				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', 'wordpress-popup' ), '', 'next', true ),
 			),
 		);
 
@@ -385,7 +385,7 @@ class Hustle_Icontact_Form_Settings extends Hustle_Provider_Form_Settings_Abstra
 					"label" => array(
 						"id"    => "list_id_label",
 						"for"   => "confirmation_message_id",
-						"value" => __("Choose message:", Opt_In::TEXT_DOMAIN),
+						"value" => __("Choose message:", 'wordpress-popup'),
 						"type"  => "label",
 					),
 					"choose_email_list" => array(

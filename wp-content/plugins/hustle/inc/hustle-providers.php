@@ -92,10 +92,10 @@ class Hustle_Providers {
 		 * Initiate standard default error messages
 		 */
 		$this->default_addon_error_messages = array(
-			'activate'             => __( 'Failed to activate addon', Opt_In::TEXT_DOMAIN ),
-			'deactivate'           => __( 'Failed to deactivate addon', Opt_In::TEXT_DOMAIN ),
-			'update_settings'      => __( 'Failed to update settings', Opt_In::TEXT_DOMAIN ),
-			'update_form_settings' => __( 'Failed to update form settings', Opt_In::TEXT_DOMAIN ),
+			'activate'             => __( 'Failed to activate addon', 'wordpress-popup' ),
+			'deactivate'           => __( 'Failed to deactivate addon', 'wordpress-popup' ),
+			'update_settings'      => __( 'Failed to update settings', 'wordpress-popup' ),
+			'update_form_settings' => __( 'Failed to update form settings', 'wordpress-popup' ),
 		);
 
 		// Only enable wp_ajax hooks
@@ -296,17 +296,17 @@ class Hustle_Providers {
 		$addon = $this->get_provider( $slug );
 
 		if ( is_null( $addon ) ) {
-			$this->last_error_message = __( 'Provider not found', Opt_In::TEXT_DOMAIN );
+			$this->last_error_message = __( 'Provider not found', 'wordpress-popup' );
 			return false;
 		}
 
 		if ( $this->addon_is_active( $slug ) ) {
-			$this->last_error_message = __( 'The provider is already active', Opt_In::TEXT_DOMAIN );
+			$this->last_error_message = __( 'The provider is already active', 'wordpress-popup' );
 			return false;
 		}
 
 		if ( ! $addon->is_activable() ) {
-			$this->last_error_message = __( 'The provider is not activable', Opt_In::TEXT_DOMAIN );
+			$this->last_error_message = __( 'The provider is not activable', 'wordpress-popup' );
 			return false;
 		}
 
@@ -364,12 +364,12 @@ class Hustle_Providers {
 	public function deactivate_addon( $slug, $submitted_data = array() ) {
 		$addon = $this->get_provider( $slug );
 		if ( is_null( $addon ) ) {
-			$this->last_error_message = __( 'Provider not found', Opt_In::TEXT_DOMAIN );
+			$this->last_error_message = __( 'Provider not found', 'wordpress-popup' );
 			return false;
 		}
 
 		if ( ! $this->addon_is_active( $slug ) ) {
-			$this->last_error_message = __( 'Provider is not activated before', Opt_In::TEXT_DOMAIN );
+			$this->last_error_message = __( 'Provider is not activated before', 'wordpress-popup' );
 			return false;
 		}
 
@@ -383,12 +383,57 @@ class Hustle_Providers {
 			return false;
 		}
 
-		// Do this only if global_multi_id is disabled.
-		if ( ! $addon->is_allow_multi_on_global() ) {
+		// If the provider allows having multiple instances globally, remove that instance only.
+		if ( $addon->is_allow_multi_on_global() ) {
+			if ( ! empty( $submitted_data['global_multi_id'] ) ) {
+				$settings_values = $addon->get_settings_values();
+				unset( $settings_values[ $submitted_data['global_multi_id'] ] );
+
+				if ( ! empty( $settings_values ) ) {
+					// Simply remove this instance from the global ones if there are other instances connected.
+					$addon->save_settings_values( $settings_values );
+				} else {
+					// Remove the global provider's settings if there aren't more global instances of this one.
+					$this->force_remove_activated_addons( $slug );
+				}
+
+			}
+		} else {
+			// Do this only if global_multi_id is disabled.
 			$this->force_remove_activated_addons( $slug );
 		}
+		
+		// Remove the provider from the modules.
+		$this->disconnect_provider_instance_from_modules( $addon, $submitted_data );
 
 		return true;
+	}
+
+	/**
+	 * Disconnect the given provider from all the modules.
+	 * 
+	 * @since 4.0.1
+	 *
+	 * @param Hustle_Provider_Abstract $provider
+	 * @param array $submitted_data
+	 */
+	private function disconnect_provider_instance_from_modules( Hustle_Provider_Abstract $provider, $submitted_data ) {
+
+		$is_multi_on_global = $provider->is_allow_multi_on_global();
+		$is_multi_on_form 	= $provider->is_allow_multi_on_form();
+
+		$global_multi_id = ( $is_multi_on_global && ! $is_multi_on_form && ! empty( $submitted_data['global_multi_id'] ) ) ? $submitted_data['global_multi_id'] : false;
+
+		$modules = Hustle_Provider_Utils::get_modules_by_active_provider( $provider->get_slug(), $global_multi_id );
+
+		foreach ( $modules as $module ) {
+
+			$form_settings = $provider->get_provider_form_settings( $module->module_id );
+
+			if ( $form_settings instanceof Hustle_Provider_Form_Settings_Abstract ) {
+				$form_settings->disconnect_form( $submitted_data );
+			}
+		}
 	}
 
 	/**

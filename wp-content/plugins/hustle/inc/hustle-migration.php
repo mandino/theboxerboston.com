@@ -564,7 +564,7 @@ class Hustle_Migration {
 
 		// Use the 4.0 error message.
 		if ( isset( $old_form_fields['submit'] ) ) {
-			$old_form_fields['submit']['error_message'] = __( 'Please fill out all required fields.', Opt_In::TEXT_DOMAIN );
+			$old_form_fields['submit']['error_message'] = __( 'Please fill out all required fields.', 'wordpress-popup' );
 		}
 
 		// Make gdpr a form field for optins.
@@ -742,7 +742,7 @@ class Hustle_Migration {
 			if ( isset( $old_content['local_list_name'] ) && ! empty( $old_content['local_list_name'] ) ) {
 				$list_name = $old_content['local_list_name'];
 			} else {
-				$list_name = __( 'List', Opt_In::TEXT_DOMAIN ) . ' ' . $module->module_id;
+				$list_name = __( 'List', 'wordpress-popup' ) . ' ' . $module->module_id;
 			}
 
 			$local_list_form_settings = $local_list->get_provider_form_settings( $module->module_id );

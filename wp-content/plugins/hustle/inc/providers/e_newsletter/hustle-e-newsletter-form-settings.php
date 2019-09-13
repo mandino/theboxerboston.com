@@ -66,14 +66,14 @@ if ( ! class_exists( 'Hustle_E_Newsletter_Form_Settings' ) ) :
 			$current_data = $this->get_current_data( $current_data, $submitted_data );
 			$is_submit = ! empty( $submitted_data['is_submit'] );
 			if ( $is_submit && empty( $submitted_data['list_id'] ) ) {
-				$error_message = __( 'The email list is required.', Opt_In::TEXT_DOMAIN );
+				$error_message = __( 'The email list is required.', 'wordpress-popup' );
 			}
 
 			$options = $this->get_first_step_options( $current_data, $is_submit );
 
 			$step_html = Hustle_Api_Utils::get_modal_title_markup(
-				__( 'e-Newsletter List', Opt_In::TEXT_DOMAIN ),
-				__( 'Choose the list you want to send form data to.', Opt_In::TEXT_DOMAIN )
+				__( 'e-Newsletter List', 'wordpress-popup' ),
+				__( 'Choose the list you want to send form data to.', 'wordpress-popup' )
 			);
 
 			$step_html .= Hustle_Api_Utils::get_html_for_options( $options );
@@ -87,10 +87,10 @@ if ( ! class_exists( 'Hustle_E_Newsletter_Form_Settings' ) ) :
 
 			$buttons = array(
 			'disconnect' => array(
-				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'disconnect_form', true ),
+				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', 'wordpress-popup' ), 'sui-button-ghost', 'disconnect_form', true ),
 			),
 			'save' => array(
-				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', Opt_In::TEXT_DOMAIN ), '', 'next', true ),
+				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', 'wordpress-popup' ), '', 'next', true ),
 			),
 			);
 
@@ -200,7 +200,7 @@ if ( ! class_exists( 'Hustle_E_Newsletter_Form_Settings' ) ) :
 					'elements' => array(
 						array(
 							'type'  => 'label',
-							'value' => __( 'Email List(s)', Opt_In::TEXT_DOMAIN ),
+							'value' => __( 'Email List(s)', 'wordpress-popup' ),
 						),
 						array(
 							'type'     => 'checkboxes',
@@ -218,13 +218,13 @@ if ( ! class_exists( 'Hustle_E_Newsletter_Form_Settings' ) ) :
 					'elements' => array(
 						array(
 							'type'  => 'label',
-							'value' => __( 'Extra Settings', Opt_In::TEXT_DOMAIN ),
+							'value' => __( 'Extra Settings', 'wordpress-popup' ),
 						),
 						array(
 							'type'       => 'checkbox',
 							'name'       => 'auto_optin',
 							'value'      => 'subscribed',
-							'label'      => __( 'Automatically opt-in new users to the mailing list.', Opt_In::TEXT_DOMAIN ),
+							'label'      => __( 'Automatically opt-in new users to the mailing list.', 'wordpress-popup' ),
 							'attributes' => array(
 								'checked' => ( 'subscribed' === $checked || '1' === $checked ) ? 'checked' : '',
 							),

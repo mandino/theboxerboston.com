@@ -128,7 +128,7 @@ if ( ! class_exists( 'Hustle_Icontact_Api' ) ) :
                     if ( !is_wp_error( $account_data ) ) {
                         if ( is_array( $account_data ) && count( $account_data ) > 0 ){
                             if ( isset( $account_data['errors'] ) &&  $account_data['errors'] ) {
-                                throw new Exception( __( 'Please check your API Credentials.', Opt_In::TEXT_DOMAIN ) );
+                                throw new Exception( __( 'Please check your API Credentials.', 'wordpress-popup' ) );
                             } else {
                                 if ( isset ( $account_data['accounts'] ) && is_array( $account_data['accounts'] ) ) {
                                     $account = $account_data['accounts'][0];
@@ -136,15 +136,15 @@ if ( ! class_exists( 'Hustle_Icontact_Api' ) ) :
                                         $this->account_id = (integer) $account['accountId'];
                                         wp_cache_set( 'hustle_icontact_account_id', $this->account_id, self::API_CACHE_KEY );
                                     } else {
-                                        throw new Exception( __( 'Your account has been disabled.', Opt_In::TEXT_DOMAIN ) );
+                                        throw new Exception( __( 'Your account has been disabled.', 'wordpress-popup' ) );
                                     }
                                 } else {
-                                    throw new Exception( __( 'Your have no accounts. Please check your credentials', Opt_In::TEXT_DOMAIN ) );
+                                    throw new Exception( __( 'Your have no accounts. Please check your credentials', 'wordpress-popup' ) );
                                 }
                             }
 
                         } else {
-                            throw new Exception( __( 'Your have no accounts. Please check your credentials', Opt_In::TEXT_DOMAIN ) );
+                            throw new Exception( __( 'Your have no accounts. Please check your credentials', 'wordpress-popup' ) );
                         }
                     } else {
                         throw new Exception( $account_data->get_error_message() );
@@ -176,7 +176,7 @@ if ( ! class_exists( 'Hustle_Icontact_Api' ) ) :
                             $this->folder_id = (integer) $folder['clientFolderId'];
                             wp_cache_set( 'hustle_icontact_client_folder_id', $this->folder_id, self::API_CACHE_KEY );
                         } else {
-                            throw new Exception( __( 'No client folders were found for this account', Opt_In::TEXT_DOMAIN ) );
+                            throw new Exception( __( 'No client folders were found for this account', 'wordpress-popup' ) );
                         }
                     } else {
                         throw new Exception( $account_data->get_error_message() );
@@ -276,7 +276,7 @@ if ( ! class_exists( 'Hustle_Icontact_Api' ) ) :
             //Save contact
             $contact = $this->_save_contact( $contact_details );
 
-            $error_message = __( 'Something went wrong, please compare your Opt-in fields with IContact fields and add any missing fields', Opt_In::TEXT_DOMAIN );
+            $error_message = __( 'Something went wrong, please compare your Opt-in fields with IContact fields and add any missing fields', 'wordpress-popup' );
 
             if ( is_wp_error( $contact ) ) {
                 $this->error = $contact;
@@ -292,7 +292,7 @@ if ( ! class_exists( 'Hustle_Icontact_Api' ) ) :
 					);
 
 					if( 'pending' === $status && empty( $confirmation_message_id ) ) {
-						$error_message = __( 'Something went wrong, please select your confirmation message to enable double-optin.', Opt_In::TEXT_DOMAIN );
+						$error_message = __( 'Something went wrong, please select your confirmation message to enable double-optin.', 'wordpress-popup' );
 						$this->error = new WP_Error( 'missing_confirmation_message_id', $error_message );
 						throw new Exception( $error_message );
 					} elseif ( 'pending' === $status ) {
@@ -304,11 +304,11 @@ if ( ! class_exists( 'Hustle_Icontact_Api' ) ) :
                     if ( is_wp_error( $subscriptions ) ) {
                         return $subscriptions;
                     } else {
-                        return __( "Successful subscription", Opt_In::TEXT_DOMAIN );
+                        return __( "Successful subscription", 'wordpress-popup' );
                     }
                 } else {
                     $this->_set_error( 'contact_error', 'Something went wrong. Please try again' );
-                    throw new Exception( __( 'Something went wrong, please try again', Opt_In::TEXT_DOMAIN ) );
+                    throw new Exception( __( 'Something went wrong, please try again', 'wordpress-popup' ) );
                 }
             }
         }

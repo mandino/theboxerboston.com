@@ -23,8 +23,8 @@
 
 					<tr>
 
-						<th><?php esc_html_e( 'Page Name', Opt_In::TEXT_DOMAIN ); ?></th>
-						<th><?php esc_html_e( 'Total Shares', Opt_In::TEXT_DOMAIN ); ?></th>
+						<th><?php esc_html_e( 'Page Name', 'wordpress-popup' ); ?></th>
+						<th><?php esc_html_e( 'Total Shares', 'wordpress-popup' ); ?></th>
 
 					</tr>
 
@@ -71,7 +71,7 @@
 				class="sui-button sui-button-blue"
 			>
 				<i class="sui-icon-plus" aria-hidden="true"></i>
-				<?php esc_html_e( 'Create', Opt_In::TEXT_DOMAIN ); ?>
+				<?php esc_html_e( 'Create', 'wordpress-popup' ); ?>
 			</a>
 		<?php } ?>
 

@@ -15,7 +15,7 @@ $image_2x = self::$plugin_url . 'assets/images/hustle-welcome@2x.png';
 
 		<?php } else { ?>
 
-			<p><?php esc_html_e( "You don't have any module yet. Click on create button to start.", Opt_In::TEXT_DOMAIN ); ?></p>
+			<p><?php esc_html_e( "You don't have any module yet. Click on create button to start.", 'wordpress-popup' ); ?></p>
 
 		<?php } ?>
 
@@ -25,13 +25,13 @@ $image_2x = self::$plugin_url . 'assets/images/hustle-welcome@2x.png';
 				<button
 					class="sui-button sui-button-blue hustle-create-module"
 				>
-					<i class="sui-icon-plus" aria-hidden="true"></i> <?php esc_html_e( 'Create', Opt_In::TEXT_DOMAIN ); ?>
+					<i class="sui-icon-plus" aria-hidden="true"></i> <?php esc_html_e( 'Create', 'wordpress-popup' ); ?>
 				</button>
 
 				<button
 					class="sui-button hustle-import-new-module"
 				>
-					<i class="sui-icon-upload-cloud" aria-hidden="true"></i> <?php esc_html_e( 'Import', Opt_In::TEXT_DOMAIN ); ?>
+					<i class="sui-icon-upload-cloud" aria-hidden="true"></i> <?php esc_html_e( 'Import', 'wordpress-popup' ); ?>
 				</button>
 			</p>
 

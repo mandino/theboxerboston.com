@@ -15,7 +15,7 @@
 	</div>
 
 	<button class="sui-upload-button wpmudev-feature-image-browse">
-		<i class="sui-icon-upload-cloud" aria-hidden="true"></i> <?php esc_html_e( 'Upload image', Opt_In::TEXT_DOMAIN ); ?>
+		<i class="sui-icon-upload-cloud" aria-hidden="true"></i> <?php esc_html_e( 'Upload image', 'wordpress-popup' ); ?>
 	</button>
 
 	<div class="sui-upload-file">
@@ -23,7 +23,7 @@
 		<span>{{ feature_image }}</span>
 
 		<button id="wpmudev-feature-image-clear"
-			aria-label="<?php esc_attr_e( 'Clear', Opt_In::TEXT_DOMAIN ); ?>">
+			aria-label="<?php esc_attr_e( 'Clear', 'wordpress-popup' ); ?>">
 			<i class="sui-icon-close" aria-hidden="true"></i>
 		</button>
 

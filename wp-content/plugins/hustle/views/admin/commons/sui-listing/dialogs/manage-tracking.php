@@ -13,17 +13,17 @@
 
 			<div class="sui-box-header sui-block-content-center">
 
-				<h3 id="dialogTitle" class="sui-box-title"><?php esc_html_e( 'Manage Tracking', Opt_In::TEXT_DOMAIN ); ?></h3>
+				<h3 id="dialogTitle" class="sui-box-title"><?php esc_html_e( 'Manage Tracking', 'wordpress-popup' ); ?></h3>
 
 				<button class="sui-dialog-close" data-a11y-dialog-hide="hustle-dialog--manage-tracking">
-					<span class="sui-screen-reader-text"><?php esc_html_e( 'Close this dialog window', Opt_In::TEXT_DOMAIN ); ?></span>
+					<span class="sui-screen-reader-text"><?php esc_html_e( 'Close this dialog window', 'wordpress-popup' ); ?></span>
 				</button>
 
 			</div>
 
 			<div class="sui-box-body sui-box-body-slim sui-block-content-center">
 
-				<p id="dialogDescription"><?php esc_html_e( 'Manage the conversion tracking for all the display options of this module.', Opt_In::TEXT_DOMAIN ); ?></p>
+				<p id="dialogDescription"><?php esc_html_e( 'Manage the conversion tracking for all the display options of this module.', 'wordpress-popup' ); ?></p>
 
 
 				<form method="post" id="hustle-manage-tracking-form">
@@ -37,7 +37,7 @@
 			<div class="sui-box-footer" style="padding-top: 0;">
 
 				<button type="button" class="sui-button sui-button-ghost" data-a11y-dialog-hide="hustle-dialog--manage-tracking">
-					<?php esc_attr_e( 'Cancel', Opt_In::TEXT_DOMAIN ); ?>
+					<?php esc_attr_e( 'Cancel', 'wordpress-popup' ); ?>
 				</button>
 
 				<button id="hustle-manage-tracking-types"
@@ -45,7 +45,7 @@
 					data-nonce="<?php echo esc_attr( wp_create_nonce( 'hustle_toggle_tracking' ) ); ?>"
 				>
 					<span class="sui-loading-text">
-						<?php esc_attr_e( 'Update', Opt_In::TEXT_DOMAIN ); ?>
+						<?php esc_attr_e( 'Update', 'wordpress-popup' ); ?>
 					</span>
 					<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 				</button>
@@ -85,7 +85,7 @@
 								{{ _.checked( _.contains( enabledTrackings, '<?php echo esc_attr( $chart_key ); ?>' ), true ) }}
 							/>
 							<span aria-hidden="true" class="sui-toggle-slider"></span>
-							<span class="sui-screen-reader-text"><?php printf( esc_html__( 'Enable %s tracking', Opt_In::TEXT_DOMAIN ), esc_html( $chart ) ); ?></span>
+							<span class="sui-screen-reader-text"><?php printf( esc_html__( 'Enable %s tracking', 'wordpress-popup' ), esc_html( $chart ) ); ?></span>
 						</label>
 
 					</td>

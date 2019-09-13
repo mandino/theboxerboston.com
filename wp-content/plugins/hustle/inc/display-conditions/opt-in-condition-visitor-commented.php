@@ -11,6 +11,6 @@ class Opt_In_Condition_Visitor_Commented extends Opt_In_Condition_Abstract {
 	}
 
 	public function label() {
-		return __( 'Only if user has never commented', Opt_In::TEXT_DOMAIN );
+		return __( 'Only if user has never commented', 'wordpress-popup' );
 	}
 }

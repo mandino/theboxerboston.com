@@ -26,7 +26,7 @@
 					class="hustle-listing-checkbox"
 				/>
 				<span aria-hidden="true"></span>
-				<span class="sui-screen-reader-text"><?php esc_html_e( 'Select this module', Opt_In::TEXT_DOMAIN ); ?></span>
+				<span class="sui-screen-reader-text"><?php esc_html_e( 'Select this module', 'wordpress-popup' ); ?></span>
 			</label>
 
 			<span class="sui-trim-text"><?php echo esc_html( $module->module_name ); ?></span>
@@ -34,16 +34,16 @@
 			<span
 				class="sui-tag<?php echo $module->active ? ' sui-tag-blue' : ''; ?>"
 				data-status="<?php echo $module->active ? 'published' : 'draft'; ?>"
-				data-draft="<?php esc_html_e( 'Draft', Opt_In::TEXT_DOMAIN ); ?>"
-				data-publish="<?php esc_html_e( 'Published', Opt_In::TEXT_DOMAIN ); ?>"
+				data-draft="<?php esc_html_e( 'Draft', 'wordpress-popup' ); ?>"
+				data-publish="<?php esc_html_e( 'Published', 'wordpress-popup' ); ?>"
 			>
-				<?php $module->active ? esc_html_e( 'Published', Opt_In::TEXT_DOMAIN ) : esc_html_e( 'Draft', Opt_In::TEXT_DOMAIN ); ?>
+				<?php $module->active ? esc_html_e( 'Published', 'wordpress-popup' ) : esc_html_e( 'Draft', 'wordpress-popup' ); ?>
 			</span>
 
 		</div>
 
 		<div class="sui-accordion-item-date">
-			<strong><?php esc_html_e( 'Last conversion', Opt_In::TEXT_DOMAIN ); ?></strong>
+			<strong><?php esc_html_e( 'Last conversion', 'wordpress-popup' ); ?></strong>
 			<?php echo esc_html( $last_entry_time ); ?>
 		</div>
 
@@ -53,7 +53,7 @@
 				href="<?php echo esc_url( $module->decorated->get_edit_url() ); ?>"
 				class="sui-button sui-button-ghost sui-accordion-item-action sui-desktop-visible"
 			>
-				<i class="sui-icon-pencil" aria-hidden="true"></i> <?php esc_attr_e( 'Edit', Opt_In::TEXT_DOMAIN ); ?>
+				<i class="sui-icon-pencil" aria-hidden="true"></i> <?php esc_attr_e( 'Edit', 'wordpress-popup' ); ?>
 			</a>
 
 			<a
@@ -61,14 +61,14 @@
 				class="sui-button-icon sui-accordion-item-action sui-mobile-visible"
 			>
 				<i class="sui-icon-pencil" aria-hidden="true"></i>
-				<span class="sui-screen-reader-text"><?php esc_attr_e( 'Edit', Opt_In::TEXT_DOMAIN ); ?></span>
+				<span class="sui-screen-reader-text"><?php esc_attr_e( 'Edit', 'wordpress-popup' ); ?></span>
 			</a>
 
 			<div class="sui-dropdown sui-accordion-item-action">
 
 				<?php
 				// ELEMENT: Actions
-				$this->render(
+				self::static_render(
 					'admin/commons/sui-listing/elements/actions',
 					array(
 						'module' => $module,
@@ -81,7 +81,7 @@
 
 			<button class="sui-button-icon sui-accordion-open-indicator">
 				<i class="sui-icon-chevron-down" aria-hidden="true"></i>
-				<span class="sui-screen-reader-text"><?php esc_html_e( 'View module stats', Opt_In::TEXT_DOMAIN ); ?></span>
+				<span class="sui-screen-reader-text"><?php esc_html_e( 'View module stats', 'wordpress-popup' ); ?></span>
 			</button>
 
 		</div>
@@ -94,12 +94,12 @@
 
 		<?php
 			// ELEMENT: Tracking data
-			$this->render(
+			self::static_render(
 				'admin/commons/sui-listing/elements/tracking-data',
 				array(
 					'module' => $module,
 					'multiple_charts' => false,
-					'last_entry_time' => esc_html__( 'Never', Opt_In::TEXT_DOMAIN ),
+					'last_entry_time' => esc_html__( 'Never', 'wordpress-popup' ),
 					'total_module_views' => 0,
 					'total_module_conversions' => 0,
 					'rate' => 0,

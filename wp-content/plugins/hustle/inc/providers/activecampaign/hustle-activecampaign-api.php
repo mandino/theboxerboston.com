@@ -184,9 +184,9 @@ class Hustle_Activecampaign_Api {
 			}
 
 			if ( is_array( $res ) && isset( $res['result_code'] ) && 'SUCCESS' === $res['result_code'] ){
-				return __( 'Successful subscription', Opt_In::TEXT_DOMAIN );
+				return __( 'Successful subscription', 'wordpress-popup' );
 			} else if ( empty( $res ) ) {
-				return __( 'Successful subscription', Opt_In::TEXT_DOMAIN );
+				return __( 'Successful subscription', 'wordpress-popup' );
 			}
 
 		} else {
@@ -195,7 +195,7 @@ class Hustle_Activecampaign_Api {
 
 		if ( is_array( $res ) && isset( $res['result_code'] ) ){
 			if( 'FAILED' === $res['result_code'] ){
-				$orig_data['error'] = ! empty( $res['result_message'] ) ? $res['result_message'] : __( 'Unexpected error occurred.', Opt_In::TEXT_DOMAIN );
+				$orig_data['error'] = ! empty( $res['result_message'] ) ? $res['result_message'] : __( 'Unexpected error occurred.', 'wordpress-popup' );
 				$module->log_error( $orig_data );
 				return $orig_data['error'];
 			}
@@ -239,11 +239,13 @@ class Hustle_Activecampaign_Api {
 	public function add_custom_fields( $custom_fields, $list, Hustle_Module_Model $module ) {
 		if ( ! empty( $custom_fields ) ) {
 			foreach ( $custom_fields as $key => $label ) {
+				$key = strtoupper( $key );
 				$field_data = array(
 					'title' => $label,
 					'type' => 1, // We only support text type for now,
 					'perstag' => $key,
 					'p[' . (int) $list . ']' => (int) $list,
+					'req' => 0,
 				);
 				$res = $this->_post( 'list_field_add', $field_data );
 			}

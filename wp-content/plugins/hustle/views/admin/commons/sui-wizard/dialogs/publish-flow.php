@@ -23,11 +23,11 @@ $image_2x = self::$plugin_url . 'assets/images/hustle-summary@2x.png';
 			class="sui-box"
 			role="document"
 			data-loading-icon="loader"
-			data-loading-title="<?php printf( esc_html__( 'Publishing %s', Opt_In::TEXT_DOMAIN ), esc_html( $capitalize_singular ) ); ?>"
-			data-loading-desc="<?php printf( esc_html__( 'Great work! Please hold tight a few moments while we publish your %s to the world.', Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?>"
+			data-loading-title="<?php printf( esc_html__( 'Publishing %s', 'wordpress-popup' ), esc_html( $capitalize_singular ) ); ?>"
+			data-loading-desc="<?php printf( esc_html__( 'Great work! Please hold tight a few moments while we publish your %s to the world.', 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?>"
 			data-ready-icon="check"
-			data-ready-title="<?php esc_html_e( 'Ready to go!', Opt_In::TEXT_DOMAIN ); ?>"
-			data-ready-desc="<?php printf( esc_html__( 'Your %s is now published and will start appearing on your site based on the visibility conditions you’ve defined.', Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?>"
+			data-ready-title="<?php esc_html_e( 'Ready to go!', 'wordpress-popup' ); ?>"
+			data-ready-desc="<?php printf( esc_html__( 'Your %s is now published and will start appearing on your site based on the visibility conditions you’ve defined.', 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?>"
 		>
 
 			<div class="sui-box-header sui-block-content-center">
@@ -40,7 +40,7 @@ $image_2x = self::$plugin_url . 'assets/images/hustle-summary@2x.png';
 					class="sui-dialog-close"
 					style="display: none;"
 				>
-					<span class="sui-screen-reader-text"><?php esc_html_e( 'Close this dialog window', Opt_In::TEXT_DOMAIN ); ?></span>
+					<span class="sui-screen-reader-text"><?php esc_html_e( 'Close this dialog window', 'wordpress-popup' ); ?></span>
 				</button>
 
 			</div>

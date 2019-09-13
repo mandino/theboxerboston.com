@@ -169,6 +169,31 @@ if( !class_exists("Hustle_Mailchimp") ):
 		}
 
 		/**
+		 * @param string $email
+		 * @param string $list_id
+		 * @param array $data
+		 * @param string $api_key
+		 *
+		 * @return NULL if the member is deleted otherwise false.
+		 */
+		public function delete_member( $email, $list_id, $data, $api_key ) {
+			try {
+				$api = $this->get_api( $api_key );
+
+				$delete_status = $api->delete_email( $list_id, $email);
+				// Mailchimp returns WP error if can't find member on a list
+				if ( is_wp_error( $member_info ) &&  404 === $delete_status->get_error_code() ) {
+					return false;
+				}
+				return $delete_status;
+			} catch( Exception $e ) {
+				Hustle_Api_Utils::maybe_log( __METHOD__, 'Failed to delete member from MailChimp list.', $e->getMessage() );
+
+				return false;
+			}
+		}
+
+		/**
 		 * Get the wizard callbacks for the global settings.
 		 *
 		 * @since 4.0
@@ -223,7 +248,7 @@ if( !class_exists("Hustle_Mailchimp") ):
 							|| Hustle_Providers::get_instance()->activate_addon( $this->_slug ) ) {
 						$this->save_multi_settings_values( $global_multi_id, $settings_to_save );
 					} else {
-						$error_message = __( "Provider couldn't be activated.", Opt_In::TEXT_DOMAIN );
+						$error_message = __( "Provider couldn't be activated.", 'wordpress-popup' );
 						$has_errors = true;
 					}
 				}
@@ -231,17 +256,17 @@ if( !class_exists("Hustle_Mailchimp") ):
 				if ( ! $has_errors ) {
 
 					return array(
-						'html'         => Hustle_Api_Utils::get_modal_title_markup( __( 'Mailchimp Added', Opt_In::TEXT_DOMAIN ), __( 'You can now go to your forms and assign them to this integration', Opt_In::TEXT_DOMAIN ) ),
+						'html'         => Hustle_Api_Utils::get_modal_title_markup( __( 'Mailchimp Added', 'wordpress-popup' ), __( 'You can now go to your forms and assign them to this integration', 'wordpress-popup' ) ),
 						'buttons'      => array(
 							'close' => array(
-								'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'close' ),
+								'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', 'wordpress-popup' ), 'sui-button-ghost', 'close' ),
 							),
 						),
 						'redirect'     => false,
 						'has_errors'   => false,
 						'notification' => array(
 							'type' => 'success',
-							'text' => '<strong>' . $this->get_title() . '</strong> ' . __( 'Successfully connected', Opt_In::TEXT_DOMAIN ),
+							'text' => '<strong>' . $this->get_title() . '</strong> ' . __( 'Successfully connected', 'wordpress-popup' ),
 						),
 					);
 
@@ -257,20 +282,20 @@ if( !class_exists("Hustle_Mailchimp") ):
 						'label' => array(
 							'type'  => 'label',
 							'for'   => 'api_key',
-							'value' => __( 'API Key', Opt_In::TEXT_DOMAIN ),
+							'value' => __( 'API Key', 'wordpress-popup' ),
 						),
 						'api_key' => array(
 							'type'        => 'text',
 							'name'        => 'api_key',
 							'value'       => $current_data['api_key'],
-							'placeholder' => __( 'Enter Key', Opt_In::TEXT_DOMAIN ),
+							'placeholder' => __( 'Enter Key', 'wordpress-popup' ),
 							'id'          => 'api_key',
 							'icon'        => 'key',
 						),
 						'error' => array(
 							'type'  => 'error',
 							'class' => $api_key_validated ? 'sui-hidden' : '',
-							'value' => __( 'Please enter a valid MailChimp API key', Opt_In::TEXT_DOMAIN ),
+							'value' => __( 'Please enter a valid MailChimp API key', 'wordpress-popup' ),
 						),
 					)
 				),
@@ -281,18 +306,18 @@ if( !class_exists("Hustle_Mailchimp") ):
 						'label' => array(
 							'type'  => 'label',
 							'for'   => 'mailchimp-name-input',
-							'value' => __( 'Identifier', Opt_In::TEXT_DOMAIN ),
+							'value' => __( 'Identifier', 'wordpress-popup' ),
 						),
 						'name' => array(
 							'type'        => 'text',
 							'name'        => 'name',
 							'value'       => $current_data['name'],
-							'placeholder' => __( 'E.g. Business Account', Opt_In::TEXT_DOMAIN ),
+							'placeholder' => __( 'E.g. Business Account', 'wordpress-popup' ),
 							'id'          => 'mailchimp-name-input',
 						),
 						'message' => array(
 							'type'  => 'description',
-							'value' => __( 'Helps to distinguish your integrations if you have connected to the multiple accounts of this integration.', Opt_In::TEXT_DOMAIN ),
+							'value' => __( 'Helps to distinguish your integrations if you have connected to the multiple accounts of this integration.', 'wordpress-popup' ),
 						),
 					),
 				),
@@ -303,7 +328,7 @@ if( !class_exists("Hustle_Mailchimp") ):
 				),
 			);
 
-			$step_html = Hustle_Api_Utils::get_modal_title_markup( __( 'Configure MailChimp', Opt_In::TEXT_DOMAIN ), sprintf( __("Log in to your %1\$sMailChimp account%2\$s to get your API Key.", Opt_In::TEXT_DOMAIN), '<a href="https://admin.mailchimp.com/account/api/" target="_blank">', '</a>' ) );
+			$step_html = Hustle_Api_Utils::get_modal_title_markup( __( 'Configure MailChimp', 'wordpress-popup' ), sprintf( __("Log in to your %1\$sMailChimp account%2\$s to get your API Key.", 'wordpress-popup'), '<a href="https://admin.mailchimp.com/account/api/" target="_blank">', '</a>' ) );
 			if ( $has_errors ) {
 				$step_html .= '<span class="sui-notice sui-notice-error"><p>' . esc_html( $error_message ) . '</p></span>';
 			}
@@ -313,16 +338,16 @@ if( !class_exists("Hustle_Mailchimp") ):
 			if ( $is_edit ) {
 				$buttons = array(
 					'disconnect' => array(
-						'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'disconnect', true ),
+						'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', 'wordpress-popup' ), 'sui-button-ghost', 'disconnect', true ),
 					),
 					'save' => array(
-						'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', Opt_In::TEXT_DOMAIN ), '', 'connect', true ),
+						'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', 'wordpress-popup' ), '', 'connect', true ),
 					),
 				);
 			} else {
 				$buttons = array(
 					'connect' => array(
-						'markup' => Hustle_Api_Utils::get_button_markup( __( 'Connect', Opt_In::TEXT_DOMAIN ), '', 'connect', true ),
+						'markup' => Hustle_Api_Utils::get_button_markup( __( 'Connect', 'wordpress-popup' ), '', 'connect', true ),
 					),
 				);
 
@@ -515,6 +540,50 @@ if( !class_exists("Hustle_Mailchimp") ):
 			}
 
 			return $interests;
+		}
+
+		public function maybe_add_custom_fields( $api, $list_id, $merge_data, $module_id ) {
+
+			$existed_custom_fields = $api->get_custom_fields( $list_id );
+			$existed_keys = !empty( $existed_custom_fields->merge_fields ) ? wp_list_pluck( $existed_custom_fields->merge_fields, 'tag' ) : array();
+			$new_fields = array();
+			foreach ( $merge_data as $k => $v ) {
+				if ( !in_array( strtoupper( $k ), $existed_keys, true ) ) {
+					$new_fields[] = $k;
+				}
+			}
+			if ( !empty( $new_fields ) ) {
+				$module = Hustle_Module_Model::instance()->get( $module_id );
+				if ( is_wp_error( $module ) ) {
+					return $module;
+				}
+				$form_fields = $module->get_form_fields();
+				$possible_types = array(
+					'text',
+					'number',
+					'phone',
+					'date',
+					'url',
+					'imageurl',
+					'radio',
+					'dropdown',
+					'birthday',
+					'zip',
+				);
+
+				foreach ( $new_fields as $field ) {
+					$tag = strtoupper( $field );
+					$name = !empty( $form_fields[ $field ]['label'] ) ? $form_fields[ $field ]['label'] : $field;
+					$type = !empty( $form_fields[ $field ]['type'] ) ? $form_fields[ $field ]['type'] : '';
+					$api->add_custom_field( $list_id, array(
+						'tag'   => $tag,
+						'name'  => $name,
+						'type'  => in_array( $type,  $possible_types, true ) ? $type : 'text',
+					) );
+				}
+			}
+
+			return true;
 		}
 
 		private function array_has_items( $array, $keys ) {

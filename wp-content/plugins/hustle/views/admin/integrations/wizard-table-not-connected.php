@@ -8,7 +8,7 @@
 		<p>
 		<?php 
 			$integrations_url = add_query_arg( 'page', Hustle_Module_Admin::INTEGRATIONS_PAGE, 'admin.php' );
-			printf( esc_html__( 'Connect to more third party apps via %1$sIntegrations%2$s page and activate them to collect the data of this %3$s here.', Opt_In::TEXT_DOMAIN ), 
+			printf( esc_html__( 'Connect to more third party apps via %1$sIntegrations%2$s page and activate them to collect the data of this %3$s here.', 'wordpress-popup' ), 
 				'<a href="' . esc_url( $integrations_url ) . '">',
 				'</a>', 
 				esc_html( $display_type_name )
@@ -25,7 +25,7 @@
 
 			<?php foreach ( $providers as $provider ) : ?>
 
-				<?php Opt_In::static_render(
+				<?php self::static_render(
 					'admin/integrations/integration-row',
 					array(
 						'provider' => $provider,
@@ -39,7 +39,7 @@
 
 	</table>
 
-	<span class="sui-description"><?php esc_html_e( 'You are connected to these applications via their APIs.', Opt_In::TEXT_DOMAIN ); ?></span>
+	<span class="sui-description"><?php esc_html_e( 'You are connected to these applications via their APIs.', 'wordpress-popup' ); ?></span>
 
 <?php endif; ?>
 

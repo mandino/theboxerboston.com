@@ -6,13 +6,7 @@
  * @since 4.0
  *
  */
-class Hustle_Entries_Admin {
-
-	/**
-	 * @since 4.0
-	 * @var Opt_In $_hustle
-	 */
-	private $_hustle;
+class Hustle_Entries_Admin extends Hustle_Admin_Page_Abstract {
 
 	/**
 	 * Merged default parameter with $_REQUEST
@@ -29,10 +23,6 @@ class Hustle_Entries_Admin {
 	 * @var null|Hustle_Module_Model
 	 */
 	private $module = null;
-
-	//=================
-
-	// $module
 
 	/**
 	 * Current module_id
@@ -108,39 +98,28 @@ class Hustle_Entries_Admin {
 	 * @var array
 	 */
 	protected $fields_mappers = array();
-	//=================
 
-	/**
-	 * Hustle_Entries_Admin constructor.
-	 *
-	 * @since 4.0
-	 * @param Opt_In $hustle
-	 */
-	public function __construct( Opt_In $hustle ) {
-		$this->_hustle = $hustle;
-		add_action( 'admin_menu', array( $this, 'register_menu' ), 99 );
-		add_action( 'current_screen', array( $this, 'set_proper_current_screen' ) );
+	public function init() {
 
-		add_action( 'load-hustle-pro_page_hustle_entries', array( $this, 'before_render' ) );
-		add_action( 'load-hustle_page_hustle_entries', array( $this, 'before_render' ) );
+		$this->page = 'hustle_entries';
+
+		$this->page_title = __( 'Hustle Email Lists', 'wordpress-popup' );
+
+		$this->page_menu_title = __( 'Email Lists', 'wordpress-popup' );
+
+		$this->page_capability = 'hustle_access_emails';
+
+		$this->page_template_path = 'admin/entries';
 	}
 
 	/**
-	 * Register "Email lists" menu page
-	 *
-	 * @since 4.0
+	 * Get the arguments used when rendering the main page.
+	 * 
+	 * @since 4.0.1
+	 * @return array
 	 */
-	public function register_menu() {
-		add_submenu_page( 'hustle', __( 'Hustle Email Lists', Opt_In::TEXT_DOMAIN ) , __( 'Email Lists', Opt_In::TEXT_DOMAIN ) , 'hustle_access_emails', 'hustle_entries',  array( $this, 'render_page' ) );
-	}
-
-
-	/**
-	 * Renders Hustle Email Lists page
-	 *
-	 * @since 4.0
-	 */
-	public function render_page() {
+	public function get_page_template_args() {
+		
 		$accessibility = Hustle_Settings_Admin::get_hustle_settings( 'accessibility' );
 		$types = $this->get_module_types();
 		$module = $this->get_module_model();
@@ -150,41 +129,32 @@ class Hustle_Entries_Admin {
 			'order_by',
 			'date_range',
 		);
+
 		$is_filtered = false;
 		foreach ( $filter_types as $type ) {
-			$is_filtered = $is_filtered || filter_input(INPUT_GET, $type );
+			$is_filtered = $is_filtered || filter_input( INPUT_GET, $type );
 		}
 
-		$this->_hustle->render(
-			'admin/entries',
-			array(
-				'admin'              => $this,
-				'module'             => $module,
-				'entries'            => $this->get_entries(),
-				'global_entries'     => Hustle_Entry_Model::global_count_entries(),
-				'module_name'        => !empty( $module->module_type ) && isset( $types[ $module->module_type ] ) ? $types[ $module->module_type ] : '',
-				'is_module_selected' => (bool) $this->get_current_module_id(),
-				'accessibility'      => $accessibility,
-				'is_filtered'        => $is_filtered,
-			)
+		return array(
+			'admin'              => $this,
+			'module'             => $module,
+			'entries'            => $this->get_entries(),
+			'global_entries'     => Hustle_Entry_Model::global_count_entries(),
+			'module_name'        => !empty( $module->module_type ) && isset( $types[ $module->module_type ] ) ? $types[ $module->module_type ] : '',
+			'is_module_selected' => (bool) $this->get_current_module_id(),
+			'accessibility'      => $accessibility,
+			'is_filtered'        => $is_filtered,
 		);
 	}
 
-	/**
-	 *
-	 * @since 4.0
-	 */
-	public function set_proper_current_screen( $current ) {
-		global $current_screen;
-		if ( ! Opt_In_Utils::_is_free() ) {
-			$current_screen->id = Opt_In_Utils::clean_current_screen( $current_screen->id );
-		}
+	public function run_action_on_page_load() {
+		$this->before_render();
 	}
 
 	/**
 	 * Populating the current page parameters
 	 *
-	 * @since 1.0.5
+	 * @since 4.0.0
 	 */
 	public function populate_screen_params() {
 		$screen_params = array(
@@ -202,9 +172,7 @@ class Hustle_Entries_Admin {
 	 */
 	public function before_render() {
 		$this->populate_screen_params();
-		//$this->populate_modules();
 		$this->prepare_entries_page();
-		//$this->enqueue_entries_scripts();
 		$this->export();
 	}
 
@@ -218,9 +186,9 @@ class Hustle_Entries_Admin {
 	 */
 	public function get_module_types() {
 		$module_types = array(
-			'popup' => __( 'Pop-up', Opt_In::TEXT_DOMAIN ),
-			'embedded' => __( 'Embed', Opt_In::TEXT_DOMAIN ),
-			'slidein' => __( 'Slide-in', Opt_In::TEXT_DOMAIN ),
+			'popup' => __( 'Pop-up', 'wordpress-popup' ),
+			'embedded' => __( 'Embed', 'wordpress-popup' ),
+			'slidein' => __( 'Slide-in', 'wordpress-popup' ),
 		);
 
 		return $module_types;
@@ -266,7 +234,7 @@ class Hustle_Entries_Admin {
 		$current_type = $this->get_current_module_type();
 		$empty_option = isset( $module_types[ $current_type ] ) ? $module_types[ $current_type ] : $module_types['popup'];
 
-		$html .= '<option value="" ' . selected( 0, $this->get_current_module_id(), false ) . '>'. __( 'Choose', Opt_In::TEXT_DOMAIN ) . ' ' . $empty_option . '</option>';
+		$html .= '<option value="" ' . selected( 0, $this->get_current_module_id(), false ) . '>'. __( 'Choose', 'wordpress-popup' ) . ' ' . $empty_option . '</option>';
 
 		foreach ( $modules as $module ) {
 
@@ -684,27 +652,27 @@ class Hustle_Entries_Admin {
 			array(
 				// read model's property
 				'property' => 'entry_id', // must be on entries
-				'label'    => __( 'ID', Opt_In::TEXT_DOMAIN ),
+				'label'    => __( 'ID', 'wordpress-popup' ),
 				'type'     => 'entry_entry_id',
 			),
 			array(
 				// read model's property
 				'property' => 'time_created', // must be on entries
-				'label'    => __( 'Date Submitted', Opt_In::TEXT_DOMAIN ),
+				'label'    => __( 'Date Submitted', 'wordpress-popup' ),
 				'type'     => 'entry_time_created',
 				'class'    => 'hui-column-date',
 			),
 			array(
 				// read entry meta
 				'meta_key' => 'active_integrations',
-				'label'    => __( 'Active Integrations', Opt_In::TEXT_DOMAIN ),
+				'label'    => __( 'Active Integrations', 'wordpress-popup' ),
 				'type'     => 'entry_integrations',
 				'class'	   => 'hui-column-apps',
 			),
 			array(
 				// required meta key
 				'meta_key' => 'email', // must be on entries
-				'label'    => __( 'Email', Opt_In::TEXT_DOMAIN ),
+				'label'    => __( 'Email', 'wordpress-popup' ),
 				'type'     => 'email',
 			),
 		);
@@ -1065,8 +1033,10 @@ class Hustle_Entries_Admin {
 		$header_labels = wp_list_pluck( $headers, 'label' );
 		$entries = array( $header_labels );
 
+		$all_entries = Hustle_Entry_Model::get_entries( $this->module_id );
+
 		// Get all entries.
-		foreach ( $this->entries as $entry ) {
+		foreach ( $all_entries as $entry ) {
 
 			$row = array();
 

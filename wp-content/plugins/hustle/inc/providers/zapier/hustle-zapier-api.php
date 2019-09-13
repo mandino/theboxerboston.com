@@ -38,7 +38,7 @@ class Hustle_Zapier_API {
 	private static function error() {
 		return new WP_Error(
 			'remote_zapier_error',
-			esc_html__( 'Call to Zapier hook failed', Opt_In::TEXT_DOMAIN )
+			esc_html__( 'Call to Zapier hook failed', 'wordpress-popup' )
 		);
 	}
 }

@@ -4,7 +4,7 @@
 
 		<?php foreach ( $providers as $provider ) : ?>
 
-			<?php Opt_In::static_render(
+			<?php self::static_render(
 				'admin/integrations/integration-row',
 				array(
 					'provider' => $provider

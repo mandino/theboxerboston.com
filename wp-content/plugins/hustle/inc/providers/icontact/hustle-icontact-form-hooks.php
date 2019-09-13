@@ -33,7 +33,7 @@ class Hustle_Icontact_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 		try {
 
 			if ( empty( $submitted_data['email'] ) ) {
-				throw new Exception( __('Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN ) );
+				throw new Exception( __('Required Field "email" was not filled by the user.', 'wordpress-popup' ) );
 			}
 
 			$list_id = $addon_setting_values['list_id'];
@@ -48,11 +48,11 @@ class Hustle_Icontact_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 			$password = $addon->get_setting( 'password', '', $global_multi_id );
 
 			$is_sent = false;
-			$member_status = __( 'Member could not be subscribed.', Opt_In::TEXT_DOMAIN );
+			$member_status = __( 'Member could not be subscribed.', 'wordpress-popup' );
 
 			$api = $addon::api( $app_id, $password, $username );
 			if ( is_wp_error( $api ) ) {
-				$details = __( 'There was an error connecting to your account. Please make sure your credentials are correct.', Opt_In::TEXT_DOMAIN );
+				$details = __( 'There was an error connecting to your account. Please make sure your credentials are correct.', 'wordpress-popup' );
 			} else {
 				$email = $submitted_data['email'];
 				$merge_vals = array();
@@ -98,7 +98,7 @@ class Hustle_Icontact_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 					# This also means that we show a "Data not sent" message on the
 					# email list's log for icontact integration.
 
- 					$details = __( 'This email address has already subscribed.', Opt_In::TEXT_DOMAIN );
+ 					$details = __( 'This email address has already subscribed.', 'wordpress-popup' );
 
 				} else {
 					$subscribe_data = array(
@@ -112,7 +112,7 @@ class Hustle_Icontact_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 						$details = $response->get_error_message();
 					} else {
 						$is_sent = true;
-						$details = __( 'Successfully added or updated member on iContact list', Opt_In::TEXT_DOMAIN );
+						$details = __( 'Successfully added or updated member on iContact list', 'wordpress-popup' );
 					}
 				}
 			}
@@ -171,7 +171,7 @@ class Hustle_Icontact_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 		$addon_setting_values 		= $form_settings_instance->get_form_settings_values();
 
 		if ( empty( $submitted_data['email'] ) ) {
-			return __( 'Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN );
+			return __( 'Required Field "email" was not filled by the user.', 'wordpress-popup' );
 		}
 
 		if ( ! $allow_subscribed ) {

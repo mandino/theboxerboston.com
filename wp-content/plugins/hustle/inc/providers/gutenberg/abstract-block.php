@@ -94,7 +94,7 @@ abstract class Hustle_GHBlock_Abstract {
 		$module_list = array(
 			array(
 				'value' => '',
-				'label' => esc_html__( 'Choose module name', Opt_In::TEXT_DOMAIN ),
+				'label' => esc_html__( 'Choose module name', 'wordpress-popup' ),
 			),
 		);
 		if ( is_array( $modules ) ) {

@@ -7,7 +7,7 @@ $choose_image = self::$plugin_url . 'assets/images/hustle-email-lists';
 <div class="sui-wrap<?php echo ! empty( $accessibility['accessibility_color'] ) ? ' sui-color-accessible' : ''; ?>">
 
 	<div class="sui-header">
-		<h1 class="sui-header-title"><?php esc_html_e( 'Email Lists', Opt_In::TEXT_DOMAIN ); ?></h1>
+		<h1 class="sui-header-title"><?php esc_html_e( 'Email Lists', 'wordpress-popup' ); ?></h1>
 		<?php $this->render( 'admin/commons/view-documentation' ); ?>
 	</div>
 
@@ -30,9 +30,9 @@ $choose_image = self::$plugin_url . 'assets/images/hustle-email-lists';
 
 			<div class="sui-message-content">
 
-				<h2><?php esc_html_e( 'Email Lists', Opt_In::TEXT_DOMAIN ); ?></h2>
+				<h2><?php esc_html_e( 'Email Lists', 'wordpress-popup' ); ?></h2>
 
-				<p><?php esc_html_e( "You haven't yet collected emails through email opt-ins inside any of your popup, slide-in or embed. When you do, you'll be able to view the email list here.", Opt_In::TEXT_DOMAIN ); ?></p>
+				<p><?php esc_html_e( "You haven't yet collected emails through email opt-ins inside any of your popup, slide-in or embed. When you do, you'll be able to view the email list here.", 'wordpress-popup' ); ?></p>
 
 			</div>
 
@@ -76,9 +76,9 @@ $choose_image = self::$plugin_url . 'assets/images/hustle-email-lists';
 
 					<div class="sui-message-content">
 
-						<h2><?php esc_html_e( 'No Emails Collected!', Opt_In::TEXT_DOMAIN ); ?></h2>
+						<h2><?php esc_html_e( 'No Emails Collected!', 'wordpress-popup' ); ?></h2>
 
-						<p><?php printf( esc_html__( "Your %s hasn't collected any emails yet. When it starts converting, you'll be able to view the collected emails here.", Opt_In::TEXT_DOMAIN ), esc_html( $module_name ) ); ?></p>
+						<p><?php printf( esc_html__( "Your %s hasn't collected any emails yet. When it starts converting, you'll be able to view the collected emails here.", 'wordpress-popup' ), esc_html( $module_name ) ); ?></p>
 
 					</div>
 
@@ -94,9 +94,9 @@ $choose_image = self::$plugin_url . 'assets/images/hustle-email-lists';
 
 				<div class="sui-message-content">
 
-					<h2><?php esc_html_e( 'Almost there!', Opt_In::TEXT_DOMAIN ); ?></h2>
+					<h2><?php esc_html_e( 'Almost there!', 'wordpress-popup' ); ?></h2>
 
-					<p><?php esc_html_e( 'Select the popup, slide-in or embed to view the corresponding email list.', Opt_In::TEXT_DOMAIN ); ?></p>
+					<p><?php esc_html_e( 'Select the popup, slide-in or embed to view the corresponding email list.', 'wordpress-popup' ); ?></p>
 
 				</div>
 
@@ -106,9 +106,9 @@ $choose_image = self::$plugin_url . 'assets/images/hustle-email-lists';
 
 	<?php } ?>
 
-	<?php
+	<?php 
 	// Global Footer
-	$this->render( 'admin/footer/footer-simple' ); ?>
+	$this->render( 'admin/footer/footer' ); ?>
 
 	<?php
 	// DIALOG: Dialog Filter for MOBILE

@@ -33,7 +33,7 @@ class Hustle_Mautic_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 		try {
 
 			if ( empty( $submitted_data['email'] ) ) {
-				throw new Exception( __( 'Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN ) );
+				throw new Exception( __( 'Required Field "email" was not filled by the user.', 'wordpress-popup' ) );
 			}
 
 			$list_id = $addon_setting_values['list_id'];
@@ -54,12 +54,10 @@ class Hustle_Mautic_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 				unset( $submitted_data['last_name'] );
 			}
 
-			$submitted_data['ipAddress'] = Opt_In_Geo::get_user_ip();
-
 			$is_sent = false;
 			$updated = false;
 
-			$member_status = __( 'Member could not be subscribed.', Opt_In::TEXT_DOMAIN );
+			$member_status = __( 'Member could not be subscribed.', 'wordpress-popup' );
 
 			$api = $addon::api( $url, $username, $password );
 
@@ -83,9 +81,16 @@ class Hustle_Mautic_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 						'type' => 'text',
 					);
 
+					// Make the fields' names lowercase so they match the "alias" from Mautic's side.
+					if ( strtolower( $key ) !== $key ) {
+						$submitted_data[ strtolower( $key ) ] = $submitted_data[ $key ];
+						unset( $submitted_data[ $key ] );
+					}
 				}
 				$addon->add_custom_fields( $custom_fields, $api );
 			}
+
+			$submitted_data['ipAddress'] = Opt_In_Geo::get_user_ip();
 
 			if ( false !== $existing_member && ! is_wp_error( $existing_member ) ) {
 				$contact_id = $api->update_contact( $existing_member, $submitted_data );
@@ -105,13 +110,13 @@ class Hustle_Mautic_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 				$api->add_contact_to_segment( $list_id, $contact_id );
 
 				$is_sent = true;
-				$details = __( 'Successfully added member on Mautic list', Opt_In::TEXT_DOMAIN );
-				$member_status = __( 'Added', Opt_In::TEXT_DOMAIN );
+				$details = __( 'Successfully added member on Mautic list', 'wordpress-popup' );
+				$member_status = __( 'Added', 'wordpress-popup' );
 			} else {
 
 				$is_sent = true;
-				$details = __( 'Successfully updated member on Mautic list', Opt_In::TEXT_DOMAIN );
-				$member_status = __( 'Updated', Opt_In::TEXT_DOMAIN );
+				$details = __( 'Successfully updated member on Mautic list', 'wordpress-popup' );
+				$member_status = __( 'Updated', 'wordpress-popup' );
 			}
 
 			$utils = Hustle_Provider_Utils::get_instance();
@@ -163,7 +168,7 @@ class Hustle_Mautic_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 		$addon_setting_values 		= $form_settings_instance->get_form_settings_values();
 
 		if ( empty( $submitted_data['email'] ) ) {
-			return __( 'Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN );
+			return __( 'Required Field "email" was not filled by the user.', 'wordpress-popup' );
 		}
 
 		if ( ! $allow_subscribed ) {

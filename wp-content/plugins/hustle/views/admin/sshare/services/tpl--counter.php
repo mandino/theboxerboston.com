@@ -1,8 +1,8 @@
 <div class="sui-box-settings-row">
 
 	<div class="sui-box-settings-col-1">
-		<span class="sui-settings-label"><?php esc_html_e( 'Counter', Opt_In::TEXT_DOMAIN ); ?></span>
-		<span class="sui-description"><?php esc_html_e( 'Display the number of clicks or shares on the social plaforms.', Opt_In::TEXT_DOMAIN ); ?></span>
+		<span class="sui-settings-label"><?php esc_html_e( 'Counter', 'wordpress-popup' ); ?></span>
+		<span class="sui-description"><?php esc_html_e( 'Display the number of clicks or shares on the social plaforms.', 'wordpress-popup' ); ?></span>
 	</div>
 
 	<div class="sui-box-settings-col-2">
@@ -18,9 +18,9 @@
 			<span class="sui-toggle-slider"></span>
 		</label>
 
-		<label for="hustle-settings--counter-enable"><?php esc_html_e( 'Enable counter', Opt_In::TEXT_DOMAIN ); ?></label>
+		<label for="hustle-settings--counter-enable"><?php esc_html_e( 'Enable counter', 'wordpress-popup' ); ?></label>
 
-		<span class="sui-description sui-toggle-description"><?php esc_html_e( "You can either show the number of times a social icon has been clicked or retrieve the number of shares from each network's API when available.", Opt_In::TEXT_DOMAIN ); ?></span>
+		<span class="sui-description sui-toggle-description"><?php esc_html_e( "You can either show the number of times a social icon has been clicked or retrieve the number of shares from each network's API when available.", 'wordpress-popup' ); ?></span>
 
 	</div>
 

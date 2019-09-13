@@ -1,10 +1,10 @@
 <?php if ( ! $ajax_step ) : ?>
 	<form class="hustle-unsubscribe-form">
 
-		<span 
-			class="wpoi-submit-failure" 
+		<span
+			class="wpoi-submit-failure"
 			style="display:none;"
-			data-default-error="<?php esc_html_e( 'There was an error submitting the form', Opt_In::TEXT_DOMAIN ); ?>"
+			data-default-error="<?php esc_html_e( 'There was an error submitting the form', 'wordpress-popup' ); ?>"
 		></span>
 
 		<div class="hustle-form-body">
@@ -33,10 +33,20 @@
 
 	<div class="hustle-email-lists">
 
-	<?php foreach( $modules_id as $id ) : ?>	
+	<?php foreach( $modules_id as $id ) : ?>
+		<?php
+			$current_module = $module->get( $id );
+			$list_name = __( 'Undefined', 'wordpress-popup' );
+			if ( ! is_wp_error($current_module ) ) {
+				$local_list = $current_module->get_provider_settings( 'local_list' );
+				if ( !empty( $local_list['local_list_name'] ) ) {
+					$list_name = $local_list['local_list_name'];
+				}
+			}
+		?>
 		<label for="hustle-list-<?php echo esc_attr( $id ); ?>">
 			<input type="checkbox" name="lists_id[]" value="<?php echo esc_attr( $id ); ?>" id="hustle-list-<?php echo esc_attr( $id ); ?>">
-			<span><?php echo esc_html( $module->get( $id )->content->local_list_name ); ?></span>
+			<span><?php echo esc_html( $list_name ); ?></span>
 		</label>
 
 	<?php endforeach; ?>

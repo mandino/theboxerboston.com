@@ -110,7 +110,7 @@ class Hustle_Local_List_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 
 	//	try {
 	//		if ( empty( $submitted_data['email'] ) ) {
-	//			throw new Exception( __('Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN ) );
+	//			throw new Exception( __('Required Field "email" was not filled by the user.', 'wordpress-popup' ) );
 	//		}
 
 	//		$submitted_data = $this->check_legacy( $submitted_data );
@@ -144,7 +144,7 @@ class Hustle_Local_List_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 	//					'name'  => 'status',
 	//					'value' => array(
 	//						'is_sent'       => true,
-	//						'description'   => __( 'Successfully added or updated member on Local list', Opt_In::TEXT_DOMAIN ),
+	//						'description'   => __( 'Successfully added or updated member on Local list', 'wordpress-popup' ),
 	//						'data_sent'     => 'yap',
 	//						'data_received' => 'yap',
 	//						'url_request'   => 'yap',

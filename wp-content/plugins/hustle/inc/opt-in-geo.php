@@ -171,7 +171,7 @@ class Opt_In_Geo {
 		} else if ( 'geo_db' === $type ) {
 			$service = (object) array(
 				'url' => 'db',
-				'label' => __( 'Local IP Lookup Table', Opt_In::TEXT_DOMAIN ),
+				'label' => __( 'Local IP Lookup Table', 'wordpress-popup' ),
 				'type' => 'text',
 			);
 		} else {

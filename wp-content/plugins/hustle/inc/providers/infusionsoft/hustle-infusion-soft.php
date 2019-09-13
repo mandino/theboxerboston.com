@@ -10,10 +10,6 @@ if ( ! class_exists( 'Hustle_Infusion_Soft' ) ) :
 
 		const CLIENT_ID = 'inc_opt_infusionsoft_clientid';
 		const CLIENT_SECRET = 'inc_opt_infusionsoft_clientsecret';
-		const API_CODE = 'inc_opt_infusionsoft_api_code';
-		const API_SCOPE = 'inc_opt_infusionsoft_api_scope';
-		const ACCESS_TOKEN_RES = 'inc_opt_infusionsoft_access_token';
-		const CURRENT_PAGE_URL = 'inc_opt_infusionsoft_current_page_url';
 
 		/**
 	 * @var Opt_In_Infusionsoft_Api $api
@@ -185,7 +181,7 @@ if ( ! class_exists( 'Hustle_Infusion_Soft' ) ) :
 							|| Hustle_Providers::get_instance()->activate_addon( $this->_slug ) ) {
 						$this->save_multi_settings_values( $global_multi_id, $settings_to_save );
 					} else {
-						$error_message = __( "Provider couldn't be activated.", Opt_In::TEXT_DOMAIN );
+						$error_message = __( "Provider couldn't be activated.", 'wordpress-popup' );
 						$has_errors = true;
 					}
 				}
@@ -193,17 +189,17 @@ if ( ! class_exists( 'Hustle_Infusion_Soft' ) ) :
 				if ( ! $has_errors ) {
 
 					return array(
-						'html'         => Hustle_Api_Utils::get_modal_title_markup( __( 'InfusionSoft Added', Opt_In::TEXT_DOMAIN ), __( 'You can now go to your forms and assign them to this integration', Opt_In::TEXT_DOMAIN ) ),
+						'html'         => Hustle_Api_Utils::get_modal_title_markup( __( 'InfusionSoft Added', 'wordpress-popup' ), __( 'You can now go to your forms and assign them to this integration', 'wordpress-popup' ) ),
 						'buttons'      => array(
 							'close' => array(
-								'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'close' ),
+								'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', 'wordpress-popup' ), 'sui-button-ghost', 'close' ),
 							),
 						),
 						'redirect'     => false,
 						'has_errors'   => false,
 						'notification' => array(
 							'type' => 'success',
-							'text' => '<strong>' . $this->get_title() . '</strong> ' . __( 'Successfully connected', Opt_In::TEXT_DOMAIN ),
+							'text' => '<strong>' . $this->get_title() . '</strong> ' . __( 'Successfully connected', 'wordpress-popup' ),
 						),
 					);
 
@@ -218,20 +214,20 @@ if ( ! class_exists( 'Hustle_Infusion_Soft' ) ) :
 						'label' => array(
 							'type'  => 'label',
 							'for'   => 'api_key',
-							'value' => __( 'API Key (Encrypted)', Opt_In::TEXT_DOMAIN ),
+							'value' => __( 'API Key (Encrypted)', 'wordpress-popup' ),
 						),
 						'api_key' => array(
 							'type'        => 'text',
 							'name'        => 'api_key',
 							'value'       => $current_data['api_key'],
-							'placeholder' => __( 'Enter API Key', Opt_In::TEXT_DOMAIN ),
+							'placeholder' => __( 'Enter API Key', 'wordpress-popup' ),
 							'id'          => 'api_key',
 							'icon'        => 'key',
 						),
 						'error' => array(
 							'type'  => 'error',
 							'class' => $api_key_valid ? 'sui-hidden' : '',
-							'value' => __( 'Please enter a valid InfusionSoft encrypted API key', Opt_In::TEXT_DOMAIN ),
+							'value' => __( 'Please enter a valid InfusionSoft encrypted API key', 'wordpress-popup' ),
 						),
 					),
 				),
@@ -242,20 +238,20 @@ if ( ! class_exists( 'Hustle_Infusion_Soft' ) ) :
 						'label' => array(
 							'type'  => 'label',
 							'for'   => 'account_name',
-							'value' => __( 'Account Name', Opt_In::TEXT_DOMAIN ),
+							'value' => __( 'Account Name', 'wordpress-popup' ),
 						),
 						'account_name' => array(
 							'type'        => 'text',
 							'name'        => 'account_name',
 							'value'       => $current_data['account_name'],
-							'placeholder' => __( 'Enter Account Name', Opt_In::TEXT_DOMAIN ),
+							'placeholder' => __( 'Enter Account Name', 'wordpress-popup' ),
 							'id'          => 'account_name',
 							'icon'        => 'style-type',
 						),
 						'error' => array(
 							'type'  => 'error',
 							'class' => $api_account_name_valid ? 'sui-hidden' : '',
-							'value' => __( 'Please enter a valid InfusionSoft account name', Opt_In::TEXT_DOMAIN ),
+							'value' => __( 'Please enter a valid InfusionSoft account name', 'wordpress-popup' ),
 						),
 					),
 				),
@@ -266,27 +262,27 @@ if ( ! class_exists( 'Hustle_Infusion_Soft' ) ) :
 						'label' => array(
 							'type'  => 'label',
 							'for'   => 'instance-name-input',
-							'value' => __( 'Identifier', Opt_In::TEXT_DOMAIN ),
+							'value' => __( 'Identifier', 'wordpress-popup' ),
 						),
 						'name' => array(
 							'type'        => 'text',
 							'name'        => 'name',
 							'value'       => $current_data['name'],
-							'placeholder' => __( 'E.g. Business Account', Opt_In::TEXT_DOMAIN ),
+							'placeholder' => __( 'E.g. Business Account', 'wordpress-popup' ),
 							'id'          => 'instance-name-input',
 						),
 						'message' => array(
 							'type'  => 'description',
-							'value' => __( 'Helps to distinguish your integrations if you have connected to the multiple accounts of this integration.', Opt_In::TEXT_DOMAIN ),
+							'value' => __( 'Helps to distinguish your integrations if you have connected to the multiple accounts of this integration.', 'wordpress-popup' ),
 						),
 					)
 				),
 			);
 
 			$step_html = Hustle_Api_Utils::get_modal_title_markup(
-				__( 'Configure InfusionSoft', Opt_In::TEXT_DOMAIN ),
+				__( 'Configure InfusionSoft', 'wordpress-popup' ),
 				sprintf(
-					__( 'Log in to your account to get your %1$sAPI key (encrypted)%2$s and %3$saccount name%2$s.', Opt_In::TEXT_DOMAIN ),
+					__( 'Log in to your account to get your %1$sAPI key (encrypted)%2$s and %3$saccount name%2$s.', 'wordpress-popup' ),
 					'<a target="_blank" href="http://help.infusionsoft.com/userguides/get-started/tips-and-tricks/api-key">',
 					'</a>',
 					'<a target="_blank" href="http://help.mobit.com/infusionsoft-integration/how-to-find-your-infusionsoft-account-name" >'
@@ -301,16 +297,16 @@ if ( ! class_exists( 'Hustle_Infusion_Soft' ) ) :
 			if ( $is_edit ) {
 				$buttons = array(
 					'disconnect' => array(
-						'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'disconnect', true ),
+						'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', 'wordpress-popup' ), 'sui-button-ghost', 'disconnect', true ),
 					),
 					'save' => array(
-						'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', Opt_In::TEXT_DOMAIN ), '', 'connect', true ),
+						'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', 'wordpress-popup' ), '', 'connect', true ),
 					),
 				);
 			} else {
 				$buttons = array(
 					'connect' => array(
-						'markup' => Hustle_Api_Utils::get_button_markup( __( 'Connect', Opt_In::TEXT_DOMAIN ), '', 'connect', true ),
+						'markup' => Hustle_Api_Utils::get_button_markup( __( 'Connect', 'wordpress-popup' ), '', 'connect', true ),
 					),
 				);
 
@@ -344,7 +340,7 @@ if ( ! class_exists( 'Hustle_Infusion_Soft' ) ) :
 				$_lists = self::api( $api_key, $account_name )->get_lists();
 
 				if ( is_wp_error( $_lists ) && ! empty( $_lists ) ) {
-					Hustle_Api_Utils::maybe_log( __METHOD__, __( 'Invalid InfusionSoft credentials.', Opt_In::TEXT_DOMAIN ) );
+					Hustle_Api_Utils::maybe_log( __METHOD__, __( 'Invalid InfusionSoft credentials.', 'wordpress-popup' ) );
 					return false;
 				}
 

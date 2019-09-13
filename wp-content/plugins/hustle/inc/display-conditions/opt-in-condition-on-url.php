@@ -16,6 +16,6 @@ class Opt_In_Condition_On_Url extends Opt_In_Condition_Abstract {
 	}
 
 	public function label() {
-		return __( 'Not on specific URLs', Opt_In::TEXT_DOMAIN );
+		return __( 'Not on specific URLs', 'wordpress-popup' );
 	}
 }

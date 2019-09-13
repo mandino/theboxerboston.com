@@ -44,7 +44,7 @@ class Hustle_Module_Front_Ajax {
 	 * @return string final value
 	 */
 	private function maybe_replace_to_field( $value, $form_data ) {
-		if ( '{' === $value[0] && '}' === substr( $value, -1 ) ) {
+		if ( !empty( $value ) && '{' === $value[0] && '}' === substr( $value, -1 ) ) {
 			$field = trim( $value, '{}' );
 			$value = !empty( $form_data[ $field ] ) ? $form_data[ $field ] : $value;
 		}
@@ -182,7 +182,7 @@ class Hustle_Module_Front_Ajax {
 
 		// Default error message response.
 		$response = array(
-			'message' => __( 'Error saving form', Opt_In::TEXT_DOMAIN ),
+			'message' => __( 'Error saving form', 'wordpress-popup' ),
 			'errors'  => array(),
 			'success' => false,
 			'behavior' => array(),
@@ -262,19 +262,56 @@ class Hustle_Module_Front_Ajax {
 				return $response;
 			}
 
-			if ( $entry->save() ) {
+			$user_exists = Hustle_Entry_Model::is_email_subscribed_to_module_id( $module_id, $submitted_data['email'] );
+			if( $user_exists ){
+				$entry_id 	= Hustle_Entry_Model::get_email_subscribed_to_module_id( $module_id, $submitted_data['email'] );
+				$entry 		= new Hustle_Entry_Model( $entry_id );
+				$entry->entry_type = $module->module_type;
+				$entry->module_id = $module_id;
+			}
 
-				/**
-				 * Check is tracking allowed
-				 */
-				$settings = Hustle_Settings_Admin::get_hustle_settings( 'privacy' );
-				$ip_tracking = !isset( $settings['ip_tracking'] ) || 'on' === $settings['ip_tracking'];
-				if ( $ip_tracking ) {
+			$active_integrations = array();
+
+			if( isset( $integrations_settings['active_integrations'] ) && ! empty( $integrations_settings['active_integrations'] ) ){
+				$active_integrations = explode( ',', $integrations_settings['active_integrations'] );
+			}
+
+			if ( in_array( 'local_list', $active_integrations, true ) ) {
+
+				if ( $user_exists || $entry->save() ) {
+
+					/**
+					 * Check is tracking allowed
+					 */
+					$settings = Hustle_Settings_Admin::get_hustle_settings( 'privacy' );
+					$ip_tracking = !isset( $settings['ip_tracking'] ) || 'on' === $settings['ip_tracking'];
+					if ( $ip_tracking ) {
+						$field_data_array[] = array(
+							'name'  => 'hustle_ip',
+							'value' => Opt_In_Geo::get_user_ip(),
+						);
+					}
+
+					$active_integrations = $this->get_module_active_integrations_to_store( $module_id );
 					$field_data_array[] = array(
-						'name'  => 'hustle_ip',
-						'value' => Opt_In_Geo::get_user_ip(),
+						'name'  => 'active_integrations',
+						'value' => $active_integrations,
 					);
+
+					// Filter data before saving to db.
+					$field_data_array = apply_filters( 'hustle_form_submit_field_data', $field_data_array, $module_id );
+
+					// Action before saving to db.
+					do_action( 'hustle_form_submit_before_set_fields', $entry, $module_id, $field_data_array );
+
+					$added_data_array = $this->attach_addons_add_entry_fields( $module_id, $module, $formatted_submitted_data, $field_data_array );
+					$added_data_array = array_merge( $field_data_array, $added_data_array );
+
+					$entry->set_fields( $added_data_array );
+
 				}
+
+			} else {
 
 				$active_integrations = $this->get_module_active_integrations_to_store( $module_id );
 				$field_data_array[] = array(
@@ -288,10 +325,8 @@ class Hustle_Module_Front_Ajax {
 				// Action before saving to db.
 				do_action( 'hustle_form_submit_before_set_fields', $entry, $module_id, $field_data_array );
 
-				$added_data_array = $this->attach_addons_add_entry_fields( $module_id, $module, $formatted_submitted_data, $field_data_array );
-				$added_data_array = array_merge( $field_data_array, $added_data_array );
+				$this->attach_addons_add_entry_fields( $module_id, $module, $formatted_submitted_data, $field_data_array );
 
-				$entry->set_fields( $added_data_array );
 			}
 
 			$post_id = sanitize_text_field( $form_data['post_id'] );
@@ -308,7 +343,7 @@ class Hustle_Module_Front_Ajax {
 				'errors' => array(),
 				'behavior' => array(
 					'after_submit' => $emails_settings['after_successful_submission'],
-					'url' => esc_url( $emails_settings['redirect_url'] ),
+					'url' => esc_url_raw( $emails_settings['redirect_url'] ), //using raw here to honor url params
 				),
 			);
 		}
@@ -339,7 +374,7 @@ class Hustle_Module_Front_Ajax {
 
 		if ( $recaptcha_secret ) {
 			if ( empty( $data['recaptcha'] ) ) {
-				$submit_errors[]['recaptcha'] = esc_html__( 'reCAPTCHA must be verified to submit the form.', Opt_In::TEXT_DOMAIN );
+				$submit_errors[]['recaptcha'] = esc_html__( 'reCAPTCHA must be verified to submit the form.', 'wordpress-popup' );
 			} else {
 				$response = wp_remote_get( add_query_arg( array(
 					'secret'   => $recaptcha_secret,
@@ -349,7 +384,7 @@ class Hustle_Module_Front_Ajax {
 
 				$json = ! empty( $response['body'] ) ? json_decode( $response['body'] ) : '';
 				if ( is_wp_error( $response ) || ! $json  || ! $json->success ) {
-					$submit_errors[]['recaptcha'] = esc_html__( 'reCAPTCHA validation failed. Please try again.', Opt_In::TEXT_DOMAIN );
+					$submit_errors[]['recaptcha'] = esc_html__( 'reCAPTCHA validation failed. Please try again.', 'wordpress-popup' );
 				}
 			}
 		}
@@ -374,9 +409,9 @@ class Hustle_Module_Front_Ajax {
 		foreach ( $required_fields as $slug ) {
 
 			if ( ! isset( $form_data[ $slug ] ) || empty( $form_data[ $slug ] ) ) {
-				$submit_errors[][ $slug ] = sprintf( esc_html__( '%s is required.', Opt_In::TEXT_DOMAIN ), $fields[ $slug ]['label'] );
+				$submit_errors[][ $slug ] = sprintf( esc_html__( '%s is required.', 'wordpress-popup' ), $fields[ $slug ]['label'] );
 			} elseif ( 'email' === $fields[ $slug ]['type'] && ! is_email( $form_data[ $slug ] ) ) {
-				$submit_errors[][ $slug ] = sprintf( esc_html__( '%s is not a valid email.', Opt_In::TEXT_DOMAIN ), $fields[ $slug ]['label'] );
+				$submit_errors[][ $slug ] = sprintf( esc_html__( '%s is not a valid email.', 'wordpress-popup' ), $fields[ $slug ]['label'] );
 			}
 		}
 
@@ -476,6 +511,8 @@ class Hustle_Module_Front_Ajax {
 		// Find is_form_connected
 		$connected_addons = Hustle_Provider_Utils::get_addons_instance_connected_with_module( $module_id );
 
+		$submitted_data = Opt_In_Utils::validate_and_sanitize_fields( $submitted_data );
+
 		foreach ( $connected_addons as $connected_addon ) {
 			try {
 				$slug = $connected_addon->get_slug();
@@ -517,13 +554,21 @@ class Hustle_Module_Front_Ajax {
 				$slug = $connected_addon->get_slug();
 				$formatted_submitted_data = apply_filters( 'hustle_format_submitted_data', $submitted_data, $slug );
 				$form_hooks = $connected_addon->get_addon_form_hooks( $module_id );
+
 				if ( $form_hooks instanceof Hustle_Provider_Form_Hooks_Abstract ) {
+
 					$addon_fields = $form_hooks->add_entry_fields( $formatted_submitted_data );
+
 					//log errors
-					if ( ! empty( $addon_fields[0] ) && ! empty( $addon_fields[0]['value'] ) && isset( $addon_fields[0]['value']['is_sent'] )
-							&& false === $addon_fields[0]['value']['is_sent'] ) {
-						$error = ! empty( $addon_fields[0]['value']['description'] ) ? $addon_fields[0]['value']['description']
-								: __( 'Something went wrong.', Opt_In::TEXT_DOMAIN );
+					if ( 
+						! empty( $addon_fields[0] ) && ! empty( $addon_fields[0]['value'] ) && 
+						isset( $addon_fields[0]['value']['is_sent'] ) && 
+						false === $addon_fields[0]['value']['is_sent'] 
+					) {
+						$error = ! empty( $addon_fields[0]['value']['description'] ) ? 
+							$addon_fields[0]['value']['description']
+							: __( 'Something went wrong.', 'wordpress-popup' );
+
 						$error = $connected_addon->get_title() . ' ' . $error;
 
 						Hustle_Api_Utils::maybe_log( $error );
@@ -691,8 +736,8 @@ class Hustle_Module_Front_Ajax {
 		wp_send_json_success( array(
 			'networks' => $networks_shares,
 			'shorten' => array(
-				'thousand' => esc_html__( 'K', Opt_In::TEXT_DOMAIN ),
-				'million' => esc_html__( 'M', Opt_In::TEXT_DOMAIN ),
+				'thousand' => esc_html__( 'K', 'wordpress-popup' ),
+				'million' => esc_html__( 'M', 'wordpress-popup' ),
 			),
 		) );
 	}
@@ -707,12 +752,12 @@ class Hustle_Module_Front_Ajax {
 		$module_id = $data['module_id'];
 
 		if ( empty( $module_id ) ) {
-			wp_send_json_error( __( 'Invalid Request!', Opt_In::TEXT_DOMAIN ) . $module_id );
+			wp_send_json_error( __( 'Invalid Request!', 'wordpress-popup' ) . $module_id );
 		}
 
 		$module = Hustle_Module_Collection::instance()->return_model_from_id( $module_id );
 		if ( is_wp_error( $module ) ) {
-			wp_send_json_error( __( 'Invalid module!', Opt_In::TEXT_DOMAIN ) );
+			wp_send_json_error( __( 'Invalid module!', 'wordpress-popup' ) );
 		}
 
 		if ( $module->id ) {
@@ -728,9 +773,9 @@ class Hustle_Module_Front_Ajax {
 		}
 
 		if ( ! $res ) {
-			wp_send_json_error( __( 'Error saving stats', Opt_In::TEXT_DOMAIN ) );
+			wp_send_json_error( __( 'Error saving stats', 'wordpress-popup' ) );
 		} else {
-			wp_send_json_success( __( 'Stats Successfully saved', Opt_In::TEXT_DOMAIN ));
+			wp_send_json_success( __( 'Stats Successfully saved', 'wordpress-popup' ));
 		}
 	}
 
@@ -745,12 +790,12 @@ class Hustle_Module_Front_Ajax {
 		$module_id = $data['module_id'];
 
 		if ( empty( $module_id ) ) {
-			wp_send_json_error( __( 'Invalid Request: Module id invalid', Opt_In::TEXT_DOMAIN ) );
+			wp_send_json_error( __( 'Invalid Request: Module id invalid', 'wordpress-popup' ) );
 		}
 
 		$module = Hustle_Module_Model::instance()->get( $module_id );
 		if ( is_wp_error( $module ) ) {
-			wp_send_json_error( __( 'Invalid module!', Opt_In::TEXT_DOMAIN ) );
+			wp_send_json_error( __( 'Invalid module!', 'wordpress-popup' ) );
 		}
 
 		if ( $module->id ) {
@@ -767,9 +812,9 @@ class Hustle_Module_Front_Ajax {
 		}
 
 		if ( ! $res ) {
-			wp_send_json_error( __( 'Error saving stats', Opt_In::TEXT_DOMAIN ) );
+			wp_send_json_error( __( 'Error saving stats', 'wordpress-popup' ) );
 		} else {
-			wp_send_json_success( __( 'Stats Successfully saved', Opt_In::TEXT_DOMAIN ) );
+			wp_send_json_success( __( 'Stats Successfully saved', 'wordpress-popup' ) );
 		}
 
 	}
@@ -795,7 +840,6 @@ class Hustle_Module_Front_Ajax {
 
 				$content['social_icons'][ $network ]['counter'] = intval( $content['social_icons'][ $network ]['counter'] ) + 1;
 				$module->update_meta( Hustle_Module_Model::KEY_CONTENT , $content );
-				$module->clean_module_cache();
 
 				wp_send_json_success();
 			}
