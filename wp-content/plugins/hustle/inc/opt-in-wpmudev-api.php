@@ -80,13 +80,13 @@ class Opt_In_WPMUDEV_API {
 		$html .= sprintf( '<p>%s</p>', $message );
 
 		if ( ! empty( $retry_url ) ) {
-			$html .= sprintf( '<a href="%s" class="button button-large">%s</a>', esc_url( $retry_url ), __( 'Retry', Opt_In::TEXT_DOMAIN ) ); }
+			$html .= sprintf( '<a href="%s" class="button button-large">%s</a>', esc_url( $retry_url ), __( 'Retry', 'wordpress-popup' ) ); }
 
 		if ( ! empty( $cancel_url ) ) {
-			$html .= sprintf( ' <a href="%s" class="button button-large">%s</a>', esc_url( $cancel_url ), __( 'Cancel', Opt_In::TEXT_DOMAIN ) ); }
+			$html .= sprintf( ' <a href="%s" class="button button-large">%s</a>', esc_url( $cancel_url ), __( 'Cancel', 'wordpress-popup' ) ); }
 
 		$html = sprintf( '<div style="text-align: center;">%s</div>', $html );
 
-		wp_die( esc_html( $html ), esc_html__( 'Hustle failure notice.', Opt_In::TEXT_DOMAIN ), 403 );
+		wp_die( esc_html( $html ), esc_html__( 'Hustle failure notice.', 'wordpress-popup' ), 403 );
 	}
 }

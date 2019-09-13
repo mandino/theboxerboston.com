@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Class Hustle_Hubspot_Form_Hooks
- * Define the form hooks that are used by Hubspot
+ * Class Hustle_HubSpot_Form_Hooks
+ * Define the form hooks that are used by HubSpot
  *
  * @since 4.0
  */
-class Hustle_Hubspot_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
+class Hustle_HubSpot_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 
 
 	/**
-	 * Add Hubspot data to entry.
+	 * Add HubSpot data to entry.
 	 *
 	 * @since 4.0
 	 *
@@ -32,7 +32,7 @@ class Hustle_Hubspot_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 
 		try {
 			if ( empty( $submitted_data['email'] ) ) {
-				throw new Exception( __('Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN ) );
+				throw new Exception( __('Required Field "email" was not filled by the user.', 'wordpress-popup' ) );
 			}
 
 			$api = $addon->api();
@@ -40,11 +40,11 @@ class Hustle_Hubspot_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 			$submitted_data = $this->check_legacy( $submitted_data );
 
 			$is_sent = false;
-			$member_status = __( 'Member could not be subscribed.', Opt_In::TEXT_DOMAIN );
-			$details = __( 'Unable to add this subscriber', Opt_In::TEXT_DOMAIN );
+			$member_status = __( 'Member could not be subscribed.', 'wordpress-popup' );
+			$details = __( 'Unable to add this subscriber', 'wordpress-popup' );
 
 			if ( !$api || $api->is_error ) {
-				throw new Exception( __( 'Wrong API credentials', Opt_In::TEXT_DOMAIN ) );
+				throw new Exception( __( 'Wrong API credentials', 'wordpress-popup' ) );
 			}
 
 			// Extra fields
@@ -68,7 +68,7 @@ class Hustle_Hubspot_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 			}
 
 			$email_exist = $api->email_exists( $submitted_data['email'] );
-			
+
 			if ( $email_exist && ! empty( $email_exist->vid ) ) {
 				//Add to list
 				$contact_id = '';
@@ -81,15 +81,15 @@ class Hustle_Hubspot_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 				}
 
 				$res = $api->update_contact( $email_exist->vid, $submitted_data );
-				
+
 				if ( is_wp_error( $res ) ) {
 					$details = $res->get_error_message();
 				} else if ( true !== $res ) {
-					$details = __( 'Unable to update this contact to contact list.', Opt_In::TEXT_DOMAIN );
+					$details = __( 'Unable to update this contact to contact list.', 'wordpress-popup' );
 				} else {
 					$is_sent = true;
-					$member_status = __( 'OK', Opt_In::TEXT_DOMAIN );
-					$details = __( 'Successfully updated member on Hubspot list', Opt_In::TEXT_DOMAIN );
+					$member_status = __( 'OK', 'wordpress-popup' );
+					$details = __( 'Successfully updated member on HubSpot list', 'wordpress-popup' );
 				}
 
 			} else {
@@ -109,11 +109,11 @@ class Hustle_Hubspot_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 				if ( is_wp_error( $res ) ) {
 					$details = $res->get_error_message();
 				} else if ( true !== $res ) {
-					$details = __( 'Unable to add this contact to contact list.', Opt_In::TEXT_DOMAIN );
+					$details = __( 'Unable to add this contact to contact list.', 'wordpress-popup' );
 				} else {
 					$is_sent = true;
-					$member_status = __( 'OK', Opt_In::TEXT_DOMAIN );
-					$details = __( 'Successfully added or updated member on Hubspot list', Opt_In::TEXT_DOMAIN );
+					$member_status = __( 'OK', 'wordpress-popup' );
+					$details = __( 'Successfully added or updated member on HubSpot list', 'wordpress-popup' );
 				}
 			}
 
@@ -152,7 +152,7 @@ class Hustle_Hubspot_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 
 	/**
 	 * Check whether the email is already subscribed.
-	 * 
+	 *
 	 * @since 4.0
 	 *
 	 * @param $submitted_data
@@ -168,7 +168,7 @@ class Hustle_Hubspot_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 		$addon_setting_values 		= $form_settings_instance->get_form_settings_values();
 
 		if ( empty( $submitted_data['email'] ) ) {
-			return __( 'Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN );
+			return __( 'Required Field "email" was not filled by the user.', 'wordpress-popup' );
 		}
 
 		if ( ! $allow_subscribed ) {
@@ -180,7 +180,7 @@ class Hustle_Hubspot_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 			 *
 			 * @param array                                    $submitted_data
 			 * @param int                                      $module_id                current module_id
-			 * @param Hustle_Hubspot_Form_Settings $form_settings_instance
+			 * @param Hustle_HubSpot_Form_Settings $form_settings_instance
 			 */
 			$submitted_data = apply_filters(
 				'hustle_provider_hubspot_form_submitted_data_before_validation',
@@ -193,11 +193,11 @@ class Hustle_Hubspot_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 			$api 				= $addon->api();
 			$list_id 			= $addon_setting_values['list_id'];
 			$existing_member 	= $this->_email_exists( $api, $submitted_data['email'], $list_id );
-		
+
 			if ( false !== $existing_member )
 				$is_success = self::ALREADY_SUBSCRIBED_ERROR;
 		}
-	
+
 		/**
 		 * Return `true` if success, or **(string) error message** on fail
 		 *
@@ -206,7 +206,7 @@ class Hustle_Hubspot_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 		 * @param bool                                     $is_success
 		 * @param int                                      $module_id                current module_id
 		 * @param array                                    $submitted_data
-		 * @param Hustle_Hubspot_Form_Settings $form_settings_instance
+		 * @param Hustle_HubSpot_Form_Settings $form_settings_instance
 		 */
 		$is_success = apply_filters(
 			'hustle_provider_hubspot_form_submitted_data_after_validation',
@@ -230,7 +230,7 @@ class Hustle_Hubspot_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 
 	/**
 	 * Check if the email is present on the current list
-	 * 
+	 *
 	 * @since 4.0
 	 *
 	 * @param $api
@@ -245,7 +245,7 @@ class Hustle_Hubspot_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 
 		if ( $member && ! empty( $member->vid ) && ! empty( $member->{'list-memberships'} ) ) {
 			$lists = wp_list_pluck( $member->{'list-memberships'}, 'static-list-id' );
-			
+
 			return in_array( absint( $list_id ), $lists, true);
 		}
 

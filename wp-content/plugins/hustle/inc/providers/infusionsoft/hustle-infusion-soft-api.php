@@ -143,19 +143,67 @@ class Opt_In_Infusionsoft_Api {
 			return $res;
 		}
 
-		$custom_fields = $this->builtin_custom_fields();
-		$extra_custom_fields = $res->get_value( 'data.value.struct.member' );
-
-		if ( ! empty( $extra_custom_fields ) ) {
-			foreach ( $extra_custom_fields as $custom_field ) {
-				if ( is_object( $custom_field ) && ! empty( $custom_field->name ) && 'Name' === $custom_field->name ) {
-					$name = (string) $custom_field->value->asXML();
-					array_push( $custom_fields, $name );
+		$builtin_custom_fields = $this->builtin_custom_fields();
+		$extra_custom_fields = array();
+		foreach ( $res->get_value()->data->value as $custom_field ) {
+			foreach ( $custom_field->struct->member as $info ) {
+				if ( 'Name' === (string)$info->name ) {
+					$extra_custom_fields[] = (string)$info->value;
 				}
 			}
 		}
+		$custom_fields = array_merge( $builtin_custom_fields, $extra_custom_fields );
 
 		return $custom_fields;
+	}
+
+	/**
+	 * Get Custom Field Groups for getting HeaderId for creating new Custom Field
+	 *
+	 * @return type
+	 */
+	private function get_custom_field_groups() {
+		$this->set_method( 'DataService.query' );
+		$this->set_param( 'DataFormGroup' );
+		$this->set_param( 1000, 'int' );
+		$this->set_param( 0, 'int' );
+
+		$this->set_member( 'Id', '%' );
+
+		$data = $this->params->addChild( 'param' )->addChild( 'value' )->addChild( 'array' )->addChild( 'data' );
+		$data->addChild( 'value' )->addChild( 'string', 'Id' );
+		$data->addChild( 'value' )->addChild( 'string', 'Name' );
+
+		$res = $this->_request( $this->xml->asXML() );
+		if ( is_wp_error( $res ) ) {
+			return $res;
+		}
+
+		return $res->response_to_array();
+	}
+
+	/**
+	 * Create custom field at InfusionSoft account.
+	 **/
+	public function add_custom_field( $name ) {
+		$headers = $this->get_custom_field_groups();
+		if ( is_wp_error( $headers ) ) {
+			return $headers;
+		}
+		$cf_group_id = array_search( 'Custom Fields', $headers );
+		$header_id = false !== $cf_group_id ? $cf_group_id : array_keys( $headers )[0];
+		$this->set_method( 'DataService.addCustomField' );
+		$this->set_param( 'Contact' );
+		$this->set_param( $name );
+		$this->set_param( 'Text' );
+		$this->set_param( $header_id, 'int' );
+
+		$res = $this->_request( $this->xml->asXML() );
+		if ( is_wp_error( $res ) ) {
+			return $res;
+		}
+
+		return $res->get_value();
 	}
 
 	/**
@@ -187,20 +235,19 @@ class Opt_In_Infusionsoft_Api {
 
 			return $res->get_value( 'i4' );
 		} else {
-			$err = new WP_Error();
-			$err->add( 'email_exist', __( 'This email address has already subscribed.', Opt_In::TEXT_DOMAIN ) );
+			$err->add( 'email_exist', __( 'This email address has already subscribed.', 'wordpress-popup' ) );
 			return $err;
 		}
 	}
 
 	/**
 	 * Updates an existing contact.
-	 * 
+	 *
 	 * @since 3.0.7
 	 *
 	 * @param array $contact Array of contact details to be updated.
 	 * @return integer|WP_Error Contact ID if everything went well, WP_Error otherwise.
-	 * 
+	 *
 	 */
 	public function update_contact( $contact ) {
 
@@ -209,7 +256,7 @@ class Opt_In_Infusionsoft_Api {
 		$contact_id = $this->get_contact_id( $contact['Email'] );
 
 		if ( ! $contact_id ) {
-			return new WP_Error( 'contact_not_found', __( 'The existing contact could not be updated.', Opt_In::TEXT_DOMAIN ) );
+			return new WP_Error( 'contact_not_found', __( 'The existing contact could not be updated.', 'wordpress-popup' ) );
 		}
 
 		$this->set_method( 'ContactService.update' );
@@ -413,13 +460,12 @@ class Opt_In_Infusionsoft_Api {
 			$xml = simplexml_load_string( wp_remote_retrieve_body( $res ), "Opt_In_Infusionsoft_XML_Res" );
 
 			if( empty( $xml ) ){
-				$err->add("Invalid_app_name", __("Invalid app name, please check app name and try again", Opt_In::TEXT_DOMAIN) );
+				$err->add("Invalid_app_name", __("Invalid app name, please check app name and try again", 'wordpress-popup') );
 				return $err;
 			}
 
 			if( $xml->is_faulty() ) {
-				$err->add( "Something_went_wrong", $xml->get_fault() );
-				return $err;
+				return $xml->get_fault();
 			}
 
 			return $xml;
@@ -474,13 +520,34 @@ class Opt_In_Infusionsoft_XML_Res extends  SimpleXMLElement{
 			$list = $this->get_value()->data->value[$i];
 			$label = (string) $list->struct->member[0]->value; 
 			if ( !empty( $label ) ) {
-				$lists[ $i ]["label"] = $label;
-				$lists[ $i ]["value"] = (int) reset( $list->struct->member[1]->value );
+				$id = (int) reset( $list->struct->member[1]->value );
+				$lists[ $id ] = $label;
 			}
 			
 		}
 
 		return $lists;
+	}
+
+	public function response_to_array(){
+		$array = array();
+
+		foreach( $this->get_value()->data->value as $list ) {
+			foreach( $list->struct->member as $info ) {
+				if ( 'Name' === (string)$info->name ) {
+					$label = (string)$info->value;
+				} else if ( 'Id' === (string)$info->name ) {
+					$id = (int) reset( $info->value );
+				}
+				if ( isset( $label ) && isset( $id ) ) {
+					$array[ $id ] = $label;
+					unset( $label, $id );
+				}
+			}
+			unset( $label, $id );
+		}
+
+		return $array;
 	}
 
 	/**

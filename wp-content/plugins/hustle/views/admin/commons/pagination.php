@@ -4,12 +4,12 @@ if ( ! $show ) {
 	if ( isset( $filterclass ) && ! empty( $filterclass ) ) {
 
 		$filterbtn_icon = '<i class="sui-icon-filter" aria-hidden="true"></i>';
-		$filterbtn_aria = '<span class="sui-screen-reader-text">' . esc_html__( 'Filter results', Opt_In::TEXT_DOMAIN ) . '</span>';
+		$filterbtn_aria = '<span class="sui-screen-reader-text">' . esc_html__( 'Filter results', 'wordpress-popup' ) . '</span>';
 
 		echo '<div class="sui-pagination-wrap">';
 
 			echo '<span class="sui-pagination-results">';
-				printf( _n( '%d result', '%d results', esc_attr( $count ), Opt_In::TEXT_DOMAIN ), esc_attr( $count ) ); // phpcs:ignore
+				printf( _n( '%d result', '%d results', esc_attr( $count ), 'wordpress-popup' ), esc_attr( $count ) ); // phpcs:ignore
 			echo '</span>';
 
 			printf(
@@ -117,7 +117,7 @@ $url = $base_url; ?>
 
 <div class="sui-pagination-wrap">
 
-	<span class="sui-pagination-results"><?php printf( _n( '%d result', '%d results', esc_attr( $count ), Opt_In::TEXT_DOMAIN ), esc_attr( $count ) ); // phpcs:ignore ?></span>
+	<span class="sui-pagination-results"><?php printf( _n( '%d result', '%d results', esc_attr( $count ), 'wordpress-popup' ), esc_attr( $count ) ); // phpcs:ignore ?></span>
 
     <ul class="sui-pagination">
 

@@ -1,8 +1,8 @@
 <div class="sui-box-settings-row">
 
 	<div class="sui-box-settings-col-1">
-		<span class="sui-settings-label"><?php printf( esc_html__( '%s Trigger', Opt_In::TEXT_DOMAIN ), esc_html( $capitalize_singular ) ); ?></span>
-		<span class="sui-description"><?php printf( esc_html__( '%s can be triggered after a certain amount of Time, when the user Scrolls past an element, on Click, if the user tries to Leave or if we detect AdBlock.', Opt_In::TEXT_DOMAIN ), esc_html( $capitalize_plural ) ); ?></span>
+		<span class="sui-settings-label"><?php printf( esc_html__( '%s Trigger', 'wordpress-popup' ), esc_html( $capitalize_singular ) ); ?></span>
+		<span class="sui-description"><?php printf( esc_html__( '%s can be triggered after a certain amount of Time, when the user Scrolls past an element, on Click, if the user tries to Leave or if we detect AdBlock.', 'wordpress-popup' ), esc_html( $capitalize_plural ) ); ?></span>
 	</div>
 
 	<div class="sui-box-settings-col-2">
@@ -19,7 +19,7 @@
 						value="time"
 						id="hustle-trigger--time"
 						data-tab-menu="trigger-time" />
-					<?php esc_html_e( 'Time', Opt_In::TEXT_DOMAIN ); ?>
+					<?php esc_html_e( 'Time', 'wordpress-popup' ); ?>
 				</label>
 
 				<label for="hustle-trigger--scroll"
@@ -30,7 +30,7 @@
 						value="scroll"
 						id="hustle-trigger--scroll"
 						data-tab-menu="trigger-scroll" />
-					<?php esc_html_e( 'Scroll', Opt_In::TEXT_DOMAIN ); ?>
+					<?php esc_html_e( 'Scroll', 'wordpress-popup' ); ?>
 				</label>
 
 				<label for="hustle-trigger--click"
@@ -41,7 +41,7 @@
 						value="click"
 						id="hustle-trigger--click"
 						data-tab-menu="trigger-click" />
-					<?php esc_html_e( 'Click', Opt_In::TEXT_DOMAIN ); ?>
+					<?php esc_html_e( 'Click', 'wordpress-popup' ); ?>
 				</label>
 
 				<label for="hustle-trigger--exit"
@@ -52,7 +52,7 @@
 						value="exit_intent"
 						id="hustle-trigger--exit"
 						data-tab-menu="trigger-exit" />
-					<?php esc_html_e( 'Exit intent', Opt_In::TEXT_DOMAIN ); ?>
+					<?php esc_html_e( 'Exit intent', 'wordpress-popup' ); ?>
 				</label>
 
 				<label for="hustle-trigger--adblock"
@@ -63,7 +63,7 @@
 						value="adblock"
 						id="hustle-trigger--adblock"
 						data-tab-menu="trigger-adblock" />
-					<?php esc_html_e( 'AdBlock', Opt_In::TEXT_DOMAIN ); ?>
+					<?php esc_html_e( 'AdBlock', 'wordpress-popup' ); ?>
 				</label>
 
 			</div>
@@ -75,12 +75,12 @@
 				<div class="sui-tab-content{{ ( 'time' === triggers.trigger ) ? ' active' : '' }}"
 					data-tab-content="trigger-time">
 
-					<label class="sui-settings-label"><?php printf( esc_html__( 'Show %s on page load', Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?></label>
-					<span class="sui-description"><?php printf( esc_html__( '%s will be shown as soon as page is loaded. If you want to add some delay, use the option below:', Opt_In::TEXT_DOMAIN ), esc_html( $capitalize_singular ) ); ?></span>
+					<label class="sui-settings-label"><?php printf( esc_html__( 'Show %s on page load', 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?></label>
+					<span class="sui-description"><?php printf( esc_html__( '%s will be shown as soon as page is loaded. If you want to add some delay, use the option below:', 'wordpress-popup' ), esc_html( $capitalize_singular ) ); ?></span>
 
 					<div class="sui-border-frame">
 
-						<label class="sui-label"><?php esc_html_e( 'Add delay', Opt_In::TEXT_DOMAIN ); ?></label>
+						<label class="sui-label"><?php esc_html_e( 'Add delay', 'wordpress-popup' ); ?></label>
 
 						<div class="sui-row">
 
@@ -101,17 +101,17 @@
 
 									<option value="seconds"
 										{{ _.selected( ( 'seconds' === triggers.on_time_unit ), true) }}>
-										<?php esc_html_e( "seconds", Opt_In::TEXT_DOMAIN ); ?>
+										<?php esc_html_e( "seconds", 'wordpress-popup' ); ?>
 									</option>
 
 									<option value="minutes"
 										{{ _.selected( ( 'minutes' === triggers.on_time_unit ), true) }}>
-										<?php esc_html_e( "minutes", Opt_In::TEXT_DOMAIN ); ?>
+										<?php esc_html_e( "minutes", 'wordpress-popup' ); ?>
 									</option>
 
 									<option value="hours"
 										{{ _.selected( ( 'hours' === triggers.on_time_unit ), true) }}>
-										<?php esc_html_e( "hours", Opt_In::TEXT_DOMAIN ); ?>
+										<?php esc_html_e( "hours", 'wordpress-popup' ); ?>
 									</option>
 
 								</select>
@@ -143,15 +143,15 @@
 								data-attribute="triggers.on_scroll"
 								{{ _.checked( ( 'scrolled' === triggers.on_scroll ), true ) }} />
 							<span aria-hidden="true"></span>
-							<span><?php esc_html_e( 'After the amount of page scroll', Opt_In::TEXT_DOMAIN ); ?></span>
+							<span><?php esc_html_e( 'After the amount of page scroll', 'wordpress-popup' ); ?></span>
 						</label>
 
-						<span class="sui-description sui-checkbox-description"><?php printf( esc_html__( '%s will be shown as the page has been scrolled by certain percentage.', Opt_In::TEXT_DOMAIN ), esc_html( $capitalize_singular ) ); ?></span>
+						<span class="sui-description sui-checkbox-description"><?php printf( esc_html__( '%s will be shown as the page has been scrolled by certain percentage.', 'wordpress-popup' ), esc_html( $capitalize_singular ) ); ?></span>
 
 						<div id="hustle-on-scroll--scrolled-toggle-wrapper" class="sui-border-frame{{ ( 'scrolled' !== triggers.on_scroll ) ? ' sui-hidden' : '' }}"
 							style="margin-left: 26px;">
 
-							<label class="sui-label"><?php printf( esc_html__( 'Scroll &#37; to trigger the %s (anything between 0 - 100&#37;)', Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?></label>
+							<label class="sui-label"><?php printf( esc_html__( 'Scroll &#37; to trigger the %s (anything between 0 - 100&#37;)', 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?></label>
 
 							<input type="number"
 								value="{{ triggers.on_scroll_page_percent }}"
@@ -179,25 +179,25 @@
 								data-attribute="triggers.on_scroll"
 								{{ _.checked( ( 'selector' === triggers.on_scroll ), true ) }} />
 							<span aria-hidden="true"></span>
-							<span><?php esc_html_e( 'After the passed selector', Opt_In::TEXT_DOMAIN ); ?></span>
+							<span><?php esc_html_e( 'After the passed selector', 'wordpress-popup' ); ?></span>
 						</label>
 
-						<span class="sui-description sui-checkbox-description"><?php printf( esc_html__( '%s will be shown as the user has passed a CSS selector', Opt_In::TEXT_DOMAIN ), esc_html( $capitalize_singular ) ); ?></span>
+						<span class="sui-description sui-checkbox-description"><?php printf( esc_html__( '%s will be shown as the user has passed a CSS selector', 'wordpress-popup' ), esc_html( $capitalize_singular ) ); ?></span>
 
 						<div id="hustle-on-scroll--selector-toggle-wrapper" class="sui-border-frame{{ ( 'selector' !== triggers.on_scroll ) ? ' sui-hidden' : '' }}"
 							style="margin-left: 26px;">
 
-							<label for="hustle-trigger-scroll--selector-name" class="sui-label"><?php esc_html_e( 'CSS selector', Opt_In::TEXT_DOMAIN ); ?></label>
+							<label for="hustle-trigger-scroll--selector-name" class="sui-label"><?php esc_html_e( 'CSS selector', 'wordpress-popup' ); ?></label>
 
 							<input type="text"
-								placeholder="<?php esc_html_e( 'Enter selector Class or Id', Opt_In::TEXT_DOMAIN ); ?>"
+								placeholder="<?php esc_html_e( 'Enter selector Class or Id', 'wordpress-popup' ); ?>"
 								value="{{ triggers.on_scroll_css_selector }}"
 								id="hustle-trigger-scroll--selector-name"
 								class="sui-form-control"
 								name="trigger_on_scroll_css_selector"
 								data-attribute="triggers.on_scroll_css_selector" />
 
-							<span class="sui-description"><?php esc_html_e( 'You can enter the class as .css-class and id as #css-id', Opt_In::TEXT_DOMAIN ); ?></span>
+							<span class="sui-description"><?php esc_html_e( 'You can enter the class as .css-class and id as #css-id', 'wordpress-popup' ); ?></span>
 
 						</div>
 
@@ -223,16 +223,16 @@
 							<span class="sui-toggle-slider"></span>
 						</label>
 
-						<label for="hustle-trigger-click--selector"><?php esc_html_e( 'Click on existing element', Opt_In::TEXT_DOMAIN ); ?></label>
+						<label for="hustle-trigger-click--selector"><?php esc_html_e( 'Click on existing element', 'wordpress-popup' ); ?></label>
 
-						<span class="sui-description sui-toggle-description" style="margin-top: 0;"><?php printf( esc_html__( '%s will be shown when a user clicks on an existing HTML element.', Opt_In::TEXT_DOMAIN ), esc_html( $capitalize_singular ) ); ?></span>
+						<span class="sui-description sui-toggle-description" style="margin-top: 0;"><?php printf( esc_html__( '%s will be shown when a user clicks on an existing HTML element.', 'wordpress-popup' ), esc_html( $capitalize_singular ) ); ?></span>
 
 						<div id="hustle-enable-on-click-element-toggle-wrapper" class="sui-border-frame sui-toggle-content{{ _.isFalse( triggers.enable_on_click_element ) ? ' sui-hidden' : '' }}">
 
-							<label class="sui-label"><?php esc_html_e( 'CSS selector', Opt_In::TEXT_DOMAIN ); ?></label>
+							<label class="sui-label"><?php esc_html_e( 'CSS selector', 'wordpress-popup' ); ?></label>
 
 							<input type="text"
-								placeholder="<?php esc_attr_e( 'Enter selector Class or Id', Opt_In::TEXT_DOMAIN ); ?>"
+								placeholder="<?php esc_attr_e( 'Enter selector Class or Id', 'wordpress-popup' ); ?>"
 								value="{{ triggers.on_click_element }}"
 								class="sui-form-control"
 								name="trigger_on_click_element"
@@ -255,22 +255,22 @@
 							<span class="sui-toggle-slider"></span>
 						</label>
 
-						<label for="hustle-trigger-click--shortcode"><?php esc_html_e( 'Render a new button', Opt_In::TEXT_DOMAIN ); ?></label>
+						<label for="hustle-trigger-click--shortcode"><?php esc_html_e( 'Render a new button', 'wordpress-popup' ); ?></label>
 
-						<span class="sui-description sui-toggle-description" style="margin-top: 0;"><?php printf( esc_html__( 'You can render a new button which will tigger the %s using the shortcode.', Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?></span>
+						<span class="sui-description sui-toggle-description" style="margin-top: 0;"><?php printf( esc_html__( 'You can render a new button which will tigger the %s using the shortcode.', 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?></span>
 
 						<div id="hustle-enable-on-click-shortcode-toggle-wrapper" class="sui-border-frame sui-toggle-content{{ _.isFalse( triggers.enable_on_click_shortcode ) ? ' sui-hidden' : '' }}">
 
-							<label class="sui-label"><?php esc_html_e( 'Shortcode to render the trigger element', Opt_In::TEXT_DOMAIN ); ?></label>
+							<label class="sui-label"><?php esc_html_e( 'Shortcode to render the trigger element', 'wordpress-popup' ); ?></label>
 
 							<div class="sui-with-button sui-with-button-inside">
 								<input type="text"
 									class="sui-form-control"
-									value='[wd_hustle id="<?php echo esc_attr( $shortcode_id ); ?>" type="<?php echo esc_attr( $module_type ); ?>"]<?php esc_attr_e( 'Click', Opt_In::TEXT_DOMAIN ); ?>[/wd_hustle]'
+									value='[wd_hustle id="<?php echo esc_attr( $shortcode_id ); ?>" type="<?php echo esc_attr( $module_type ); ?>"]<?php esc_attr_e( 'Click', 'wordpress-popup' ); ?>[/wd_hustle]'
 									readonly="readonly">
 								<button class="sui-button-icon hustle-copy-shortcode-button">
 									<i aria-hidden="true" class="sui-icon-copy"></i>
-									<span class="sui-screen-reader-text"><?php esc_html_e( 'Copy shortcode', Opt_In::TEXT_DOMAIN ); ?></span>
+									<span class="sui-screen-reader-text"><?php esc_html_e( 'Copy shortcode', 'wordpress-popup' ); ?></span>
 								</button>
 							</div>
 
@@ -298,9 +298,9 @@
 							<span class="sui-toggle-slider"></span>
 						</label>
 
-						<label for="hustle-trigger-exit--session"><?php esc_html_e( 'Trigger once per session', Opt_In::TEXT_DOMAIN ); ?></label>
+						<label for="hustle-trigger-exit--session"><?php esc_html_e( 'Trigger once per session', 'wordpress-popup' ); ?></label>
 
-						<span class="sui-description sui-toggle-description" style="margin-top: 0;"><?php printf( esc_html__( 'Enabling this will trigger the %s only for the first time user tries to leave your website in a session.', Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?></span>
+						<span class="sui-description sui-toggle-description" style="margin-top: 0;"><?php printf( esc_html__( 'Enabling this will trigger the %s only for the first time user tries to leave your website in a session.', 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?></span>
 
 					</div>
 
@@ -317,13 +317,13 @@
 							<span class="sui-toggle-slider"></span>
 						</label>
 
-						<label for="hustle-trigger-exit--delay"><?php esc_html_e( 'Add delay', Opt_In::TEXT_DOMAIN ); ?></label>
+						<label for="hustle-trigger-exit--delay"><?php esc_html_e( 'Add delay', 'wordpress-popup' ); ?></label>
 
-						<span class="sui-description sui-toggle-description" style="margin-top: 0;"><?php printf( esc_html__( 'This will delay the appearance of %s after the user attemps to exit.', Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?></span>
+						<span class="sui-description sui-toggle-description" style="margin-top: 0;"><?php printf( esc_html__( 'This will delay the appearance of %s after the user attemps to exit.', 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?></span>
 
 						<div id="hustle-trigger-exit--delay-toggle-wrapper" class="sui-border-frame sui-toggle-content{{ ( _.isTrue( triggers.on_exit_intent_delayed ) ) ? '' : ' sui-hidden' }}">
 
-							<label class="sui-label"><?php esc_html_e( 'Delay time', Opt_In::TEXT_DOMAIN ); ?></label>
+							<label class="sui-label"><?php esc_html_e( 'Delay time', 'wordpress-popup' ); ?></label>
 
 							<div class="sui-row">
 
@@ -344,17 +344,17 @@
 
 										<option value="seconds"
 											{{ _.selected( ( 'seconds' === triggers.on_exit_intent_delayed_unit ), true) }}>
-											<?php esc_html_e( 'seconds', Opt_In::TEXT_DOMAIN ); ?>
+											<?php esc_html_e( 'seconds', 'wordpress-popup' ); ?>
 										</option>
 
 										<option value="minutes"
 											{{ _.selected( ( 'minutes' === triggers.on_exit_intent_delayed_unit ), true) }}>
-											<?php esc_html_e( 'minutes', Opt_In::TEXT_DOMAIN ); ?>
+											<?php esc_html_e( 'minutes', 'wordpress-popup' ); ?>
 										</option>
 
 										<option value="hours"
 											{{ _.selected( ( 'hours' === triggers.on_exit_intent_delayed_unit ), true) }}>
-											<?php esc_html_e( 'hours', Opt_In::TEXT_DOMAIN ); ?>
+											<?php esc_html_e( 'hours', 'wordpress-popup' ); ?>
 										</option>
 
 									</select>
@@ -385,9 +385,9 @@
 							<span class="sui-toggle-slider"></span>
 						</label>
 
-						<label for="hustle-trigger-adblock"><?php esc_html_e( 'Trigger when adblock is detected', Opt_In::TEXT_DOMAIN ); ?></label>
+						<label for="hustle-trigger-adblock"><?php esc_html_e( 'Trigger when adblock is detected', 'wordpress-popup' ); ?></label>
 
-						<span class="sui-description sui-toggle-description" style="margin-top: 0;"><?php printf( esc_html__( 'Enabling this will trigger the %s everytime an AdBlock is detected in your visitor’s browser.', Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?></span>
+						<span class="sui-description sui-toggle-description" style="margin-top: 0;"><?php printf( esc_html__( 'Enabling this will trigger the %s everytime an AdBlock is detected in your visitor’s browser.', 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?></span>
 
 					</div>
 

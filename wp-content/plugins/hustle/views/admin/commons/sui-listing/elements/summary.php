@@ -4,20 +4,20 @@
 		<div class="sui-summary-details">
 			<span class="sui-summary-large"><?php echo esc_attr( $active_modules_count ); ?></span>
 			<?php if ( 1 === $active_modules_count ) { ?>
-				<span class="sui-summary-sub"><?php printf( esc_html__( 'Active %s', Opt_In::TEXT_DOMAIN ), esc_html( $singular ) ); ?></span>
+				<span class="sui-summary-sub"><?php printf( esc_html__( 'Active %s', 'wordpress-popup' ), esc_html( $singular ) ); ?></span>
 			<?php } else { ?>
-				<span class="sui-summary-sub"><?php printf( esc_html__( 'Active %s', Opt_In::TEXT_DOMAIN ), esc_html( $plural ) ); ?></span>
+				<span class="sui-summary-sub"><?php printf( esc_html__( 'Active %s', 'wordpress-popup' ), esc_html( $plural ) ); ?></span>
 			<?php } ?>
 		</div>
 	</div>
 	<div class="sui-summary-segment">
 		<ul class="sui-list">
 			<li>
-				<span class="sui-list-label"><?php esc_html_e( 'Last Conversion', Opt_In::TEXT_DOMAIN ); ?></span>
+				<span class="sui-list-label"><?php esc_html_e( 'Last Conversion', 'wordpress-popup' ); ?></span>
 				<span class="sui-list-detail"><?php echo esc_html( $latest_entry_time ); ?></span>
 			</li>
 			<li>
-				<span class="sui-list-label"><?php esc_html_e( 'Conversions in the last 30 days', Opt_In::TEXT_DOMAIN ); ?></span>
+				<span class="sui-list-label"><?php esc_html_e( 'Conversions in the last 30 days', 'wordpress-popup' ); ?></span>
 				<span class="sui-list-detail"><?php echo esc_html( $latest_entries_count ); ?></span>
 			</li>
 		</ul>

@@ -1,16 +1,16 @@
 <?php
 $module_type         = Hustle_Module_Model::SOCIAL_SHARING_MODULE;
 $multiple_charts     = Hustle_Module_Model::get_sshare_types( true );
-$capitalize_singular = esc_html__( 'Social Sharing', Opt_In::TEXT_DOMAIN );
-$capitalize_plural   = esc_html__( 'Social Shares', Opt_In::TEXT_DOMAIN );
+$capitalize_singular = esc_html__( 'Social Sharing', 'wordpress-popup' );
+$capitalize_plural   = esc_html__( 'Social Shares', 'wordpress-popup' );
 $smallcaps_singular  = self::get_smallcaps_singular( $module_type );
-$smallcaps_plural    = esc_html__( 'social shares', Opt_In::TEXT_DOMAIN );
+$smallcaps_plural    = esc_html__( 'social shares', 'wordpress-popup' );
 
-$this->render(
+self::static_render(
 	'admin/commons/sui-listing/listing',
 	array(
 		'page_title'          => $capitalize_singular,
-		'page_message'        => esc_html__( 'Make it easy for your visitors to share your content by adding floating or inline social sharing prompts.', Opt_In::TEXT_DOMAIN ),
+		'page_message'        => esc_html__( 'Make it easy for your visitors to share your content by adding floating or inline social sharing prompts.', 'wordpress-popup' ),
 		'total'               => $total,
 		'active'              => $active,
 		'modules'             => $modules,

@@ -12,8 +12,8 @@ $email_body = isset( $email['email_body'] ) ? $email['email_body'] : '';
 <div id="email-copy-row" class="sui-box-settings-row">
 
 	<div class="sui-box-settings-col-1">
-		<span class="sui-settings-label"><?php esc_html_e( 'Unsubscribe Email Copy', Opt_In::TEXT_DOMAIN ); ?></span>
-		<span class="sui-description"><?php esc_html_e( 'Customize the copy of the email that will be recived  by the visitors with the unsubscribe link.', Opt_In::TEXT_DOMAIN ); ?></span>
+		<span class="sui-settings-label"><?php esc_html_e( 'Unsubscribe Email Copy', 'wordpress-popup' ); ?></span>
+		<span class="sui-description"><?php esc_html_e( 'Customize the copy of the email that will be recived  by the visitors with the unsubscribe link.', 'wordpress-popup' ); ?></span>
 	</div>
 
 	<div class="sui-box-settings-col-2">
@@ -27,7 +27,7 @@ $email_body = isset( $email['email_body'] ) ? $email['email_body'] : '';
 				>
 			<label for="wph-unsub-edit-email" class="sui-toggle-slider"></label>
 		</label>
-		<label class="sui-toggle-label" for="wph-unsub-edit-email"><?php esc_html_e( 'Enable custom email copy', Opt_In::TEXT_DOMAIN ); ?></label>
+		<label class="sui-toggle-label" for="wph-unsub-edit-email"><?php esc_html_e( 'Enable custom email copy', 'wordpress-popup' ); ?></label>
 
 		<div class="sui-border-frame sui-toggle-content<?php echo $email_enabled ? '' : ' sui-hidden'; ?>">
 
@@ -40,7 +40,7 @@ $email_body = isset( $email['email_body'] ) ? $email['email_body'] : '';
 						'id' 	=> 'email-subject-label',
 						'for' 	=> 'email-subject',
 						'type' 	=> 'label',
-						'value' => __( 'Email subject', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Email subject', 'wordpress-popup' ),
 					),
 					'email_subject'       => array(
 						'id' 			=> 'email-subject',
@@ -60,7 +60,7 @@ $email_body = isset( $email['email_body'] ) ? $email['email_body'] : '';
 			<!-- Email body -->
 			<div class="sui-form-field">
 
-				<label class="sui-label sui-label-editor" for="emailmessage"><?php esc_html_e( 'Email body', Opt_In::TEXT_DOMAIN ); ?></label>
+				<label class="sui-label sui-label-editor" for="emailmessage"><?php esc_html_e( 'Email body', 'wordpress-popup' ); ?></label>
 
 				<?php wp_editor(
 					$email_body,
@@ -77,7 +77,7 @@ $email_body = isset( $email['email_body'] ) ? $email['email_body'] : '';
 					)
 				); ?>
 
-				<span class="sui-description"><?php printf( esc_html__( 'Use the placeholder %1$s{hustle_unsubscribe_link}%2$s to insert the unsubscription link.', Opt_In::TEXT_DOMAIN ), '<strong>', '</strong>' ); ?></span>
+				<span class="sui-description"><?php printf( esc_html__( 'Use the placeholder %1$s{hustle_unsubscribe_link}%2$s to insert the unsubscription link.', 'wordpress-popup' ), '<strong>', '</strong>' ); ?></span>
 
 			</div>
 

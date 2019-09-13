@@ -166,7 +166,7 @@ if ( ! class_exists( 'Hustle_ConvertKit' ) ) :
 							|| Hustle_Providers::get_instance()->activate_addon( $this->_slug ) ) {
 						$this->save_multi_settings_values( $global_multi_id, $settings_to_save );
 					} else {
-						$error_message = __( "Provider couldn't be activated.", Opt_In::TEXT_DOMAIN );
+						$error_message = __( "Provider couldn't be activated.", 'wordpress-popup' );
 						$has_errors = true;
 					}
 				}
@@ -174,17 +174,17 @@ if ( ! class_exists( 'Hustle_ConvertKit' ) ) :
 				if ( ! $has_errors ) {
 
 					return array(
-						'html'         => Hustle_Api_Utils::get_modal_title_markup( __( 'ConvertKit Added', Opt_In::TEXT_DOMAIN ), __( 'You can now go to your forms and assign them to this integration', Opt_In::TEXT_DOMAIN ) ),
+						'html'         => Hustle_Api_Utils::get_modal_title_markup( __( 'ConvertKit Added', 'wordpress-popup' ), __( 'You can now go to your forms and assign them to this integration', 'wordpress-popup' ) ),
 						'buttons'      => array(
 							'close' => array(
-								'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'close' ),
+								'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', 'wordpress-popup' ), 'sui-button-ghost', 'close' ),
 							),
 						),
 						'redirect'     => false,
 						'has_errors'   => false,
 						'notification' => array(
 							'type' => 'success',
-							'text' => '<strong>' . $this->get_title() . '</strong> ' . __( 'Successfully connected', Opt_In::TEXT_DOMAIN ),
+							'text' => '<strong>' . $this->get_title() . '</strong> ' . __( 'Successfully connected', 'wordpress-popup' ),
 						),
 					);
 
@@ -199,20 +199,20 @@ if ( ! class_exists( 'Hustle_ConvertKit' ) ) :
 						'label' => array(
 							'type'  => 'label',
 							'for'   => 'api_key',
-							'value' => __( 'API Key', Opt_In::TEXT_DOMAIN ),
+							'value' => __( 'API Key', 'wordpress-popup' ),
 						),
 						'api_key' => array(
 							'type'        => 'text',
 							'name'        => 'api_key',
 							'value'       => $current_data['api_key'],
-							'placeholder' => __( 'Enter API Key', Opt_In::TEXT_DOMAIN ),
+							'placeholder' => __( 'Enter API Key', 'wordpress-popup' ),
 							'id'          => 'api_key',
 							'icon'        => 'key',
 						),
 						'error' => array(
 							'type'  => 'error',
 							'class' => $api_key_valid ? 'sui-hidden' : '',
-							'value' => __( 'Please enter a valid ConvertKit API key', Opt_In::TEXT_DOMAIN ),
+							'value' => __( 'Please enter a valid ConvertKit API key', 'wordpress-popup' ),
 						),
 					),
 				),
@@ -223,20 +223,20 @@ if ( ! class_exists( 'Hustle_ConvertKit' ) ) :
 						'label' => array(
 							'type'  => 'label',
 							'for'   => 'api_secret',
-							'value' => __( 'API Secret', Opt_In::TEXT_DOMAIN ),
+							'value' => __( 'API Secret', 'wordpress-popup' ),
 						),
 						'api_secret' => array(
 							'type'        => 'text',
 							'name'        => 'api_secret',
 							'value'       => $current_data['api_secret'],
-							'placeholder' => __( 'Enter API Secret', Opt_In::TEXT_DOMAIN ),
+							'placeholder' => __( 'Enter API Secret', 'wordpress-popup' ),
 							'id'          => 'api_secret',
 							'icon'        => 'key',
 						),
 						'error' => array(
 							'type'  => 'error',
 							'class' => $api_secret_valid ? 'sui-hidden' : '',
-							'value' => __( 'Please enter a valid ConvertKit API secret', Opt_In::TEXT_DOMAIN ),
+							'value' => __( 'Please enter a valid ConvertKit API secret', 'wordpress-popup' ),
 						),
 					),
 				),
@@ -247,24 +247,24 @@ if ( ! class_exists( 'Hustle_ConvertKit' ) ) :
 						'label' => array(
 							'type'  => 'label',
 							'for'   => 'instance-name-input',
-							'value' => __( 'Identifier', Opt_In::TEXT_DOMAIN ),
+							'value' => __( 'Identifier', 'wordpress-popup' ),
 						),
 						'name' => array(
 							'type'        => 'text',
 							'name'        => 'name',
 							'value'       => $current_data['name'],
-							'placeholder' => __( 'E.g. Business Account', Opt_In::TEXT_DOMAIN ),
+							'placeholder' => __( 'E.g. Business Account', 'wordpress-popup' ),
 							'id'          => 'instance-name-input',
 						),
 						'message' => array(
 							'type'  => 'description',
-							'value' => __( 'Helps to distinguish your integrations if you have connected to the multiple accounts of this integration.', Opt_In::TEXT_DOMAIN ),
+							'value' => __( 'Helps to distinguish your integrations if you have connected to the multiple accounts of this integration.', 'wordpress-popup' ),
 						),
 					)
 				),
 			);
 
-			$step_html = Hustle_Api_Utils::get_modal_title_markup( __( 'Configure ConvertKit', Opt_In::TEXT_DOMAIN ), sprintf( __( 'Log in to your %1$sConvertKit%2$s account to get your API Key.', Opt_In::TEXT_DOMAIN ), '<a href="https://app.convertkit.com/account/edit" target="_blank">', '</a>' ) );
+			$step_html = Hustle_Api_Utils::get_modal_title_markup( __( 'Configure ConvertKit', 'wordpress-popup' ), sprintf( __( 'Log in to your %1$sConvertKit%2$s account to get your API Key.', 'wordpress-popup' ), '<a href="https://app.convertkit.com/account/edit" target="_blank">', '</a>' ) );
 			if ( $has_errors ) {
 				$step_html .= '<span class="sui-notice sui-notice-error"><p>' . esc_html( $error_message ) . '</p></span>';
 			}
@@ -274,16 +274,16 @@ if ( ! class_exists( 'Hustle_ConvertKit' ) ) :
 			if ( $is_edit ) {
 				$buttons = array(
 					'disconnect' => array(
-						'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'disconnect', true ),
+						'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', 'wordpress-popup' ), 'sui-button-ghost', 'disconnect', true ),
 					),
 					'save' => array(
-						'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', Opt_In::TEXT_DOMAIN ), '', 'connect', true ),
+						'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', 'wordpress-popup' ), '', 'connect', true ),
 					),
 				);
 			} else {
 				$buttons = array(
 					'connect' => array(
-						'markup' => Hustle_Api_Utils::get_button_markup( __( 'Connect', Opt_In::TEXT_DOMAIN ), '', 'connect', true ),
+						'markup' => Hustle_Api_Utils::get_button_markup( __( 'Connect', 'wordpress-popup' ), '', 'connect', true ),
 					),
 				);
 
@@ -319,7 +319,7 @@ if ( ! class_exists( 'Hustle_ConvertKit' ) ) :
 				$forms = $api->get_forms(); //check API key
 
 				if ( is_wp_error( $subscribers ) || is_wp_error( $forms ) ) {
-					Hustle_Api_Utils::maybe_log( __METHOD__, __( 'Invalid ConvertKit API key ore API secret.', Opt_In::TEXT_DOMAIN ) );
+					Hustle_Api_Utils::maybe_log( __METHOD__, __( 'Invalid ConvertKit API key ore API secret.', 'wordpress-popup' ) );
 					return false;
 				}
 

@@ -1,8 +1,8 @@
 <div class="sui-box-settings-row">
 
 	<div class="sui-box-settings-col-1">
-		<span class="sui-settings-label"><?php printf( esc_html__( 'Custom %s Size', Opt_In::TEXT_DOMAIN ), esc_html( $capitalize_singular ) ); ?></span>
-		<span class="sui-description"><?php printf( esc_html__( 'Choose a custom size for your %s.', Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?></span>
+		<span class="sui-settings-label"><?php printf( esc_html__( 'Custom %s Size', 'wordpress-popup' ), esc_html( $capitalize_singular ) ); ?></span>
+		<span class="sui-description"><?php printf( esc_html__( 'Choose a custom size for your %s.', 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?></span>
 	</div>
 
 	<div class="sui-box-settings-col-2">
@@ -16,7 +16,7 @@
 			<span class="sui-toggle-slider"></span>
 		</label>
 
-		<label for="hustle-customize-size"><?php esc_html_e( 'Enable custom size', Opt_In::TEXT_DOMAIN ); ?></label>
+		<label for="hustle-customize-size"><?php esc_html_e( 'Enable custom size', 'wordpress-popup' ); ?></label>
 
 		<div id="hustle-customize-size-toggle-wrapper" class="sui-toggle-content{{ ( _.isTrue( customize_size ) ) ? '' : ' sui-hidden' }}">
 
@@ -24,7 +24,7 @@
 
 				<div class="sui-form-field">
 
-					<label class="sui-label"><?php esc_html_e( 'Apply to', Opt_In::TEXT_DOMAIN ); ?></label>
+					<label class="sui-label"><?php esc_html_e( 'Apply to', 'wordpress-popup' ); ?></label>
 
 					<div class="sui-side-tabs" style="margin-bottom: 10px;">
 
@@ -37,7 +37,7 @@
 									value="desktop"
 									id="hustle-module--desktop-custom-size"
 									{{ _.checked( ( 'desktop' === apply_custom_size_to ), true ) }} />
-								<?php esc_html_e( 'Desktop Only', Opt_In::TEXT_DOMAIN ); ?>
+								<?php esc_html_e( 'Desktop Only', 'wordpress-popup' ); ?>
 							</label>
 
 							<label for="hustle-module--all-custom-size" class="sui-tab-item{{ ( 'all' === apply_custom_size_to ) ? ' active' : '' }}">
@@ -47,14 +47,14 @@
 									value="all"
 									id="hustle-module--all-custom-size"
 									{{ _.checked( ( 'all' === apply_custom_size_to ), true ) }} />
-								<?php esc_html_e( 'All Devices', Opt_In::TEXT_DOMAIN ); ?>
+								<?php esc_html_e( 'All Devices', 'wordpress-popup' ); ?>
 							</label>
 
 						</div>
 
 					</div>
 
-					<span class="sui-description"><?php printf( esc_html__( "We recommend applying the custom size to Desktop only. We'll resize the %s on the smaller devices and keep it responsive.", Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?></span>
+					<span class="sui-description"><?php printf( esc_html__( "We recommend applying the custom size to Desktop only. We'll resize the %s on the smaller devices and keep it responsive.", 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?></span>
 
 				</div>
 
@@ -64,7 +64,7 @@
 
 						<div class="sui-form-field">
 
-							<label class="sui-label"><?php esc_html_e( 'Width', Opt_In::TEXT_DOMAIN ); ?> (px)</label>
+							<label class="sui-label"><?php esc_html_e( 'Width', 'wordpress-popup' ); ?> (px)</label>
 
 							<input type="number"
 								value="{{ custom_width }}"
@@ -79,7 +79,7 @@
 
 						<div class="sui-form-field">
 
-							<label class="sui-label"><?php esc_html_e( 'Height', Opt_In::TEXT_DOMAIN ); ?> (px)</label>
+							<label class="sui-label"><?php esc_html_e( 'Height', 'wordpress-popup' ); ?> (px)</label>
 
 							<input type="number"
 								value="{{ custom_height }}"
@@ -94,7 +94,7 @@
 
 			</div>
 
-			<span class="sui-description"><?php printf( esc_html__( 'Use Preview to ensure your %s looks good on the choosen custom size.', Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?></span>
+			<span class="sui-description"><?php printf( esc_html__( 'Use Preview to ensure your %s looks good on the choosen custom size.', 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?></span>
 
 		</div>
 

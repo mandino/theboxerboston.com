@@ -179,7 +179,7 @@ class Hustle_Icontact extends Hustle_Provider_Abstract {
 						|| Hustle_Providers::get_instance()->activate_addon( $this->_slug ) ) {
 					$this->save_multi_settings_values( $global_multi_id, $settings_to_save );
 				} else {
-					$error_message = __( "Provider couldn't be activated.", Opt_In::TEXT_DOMAIN );
+					$error_message = __( "Provider couldn't be activated.", 'wordpress-popup' );
 					$has_errors = true;
 				}
 			}
@@ -187,17 +187,17 @@ class Hustle_Icontact extends Hustle_Provider_Abstract {
 			if ( ! $has_errors ) {
 
 				return array(
-					'html'         => Hustle_Api_Utils::get_modal_title_markup( __( 'iContact Added', Opt_In::TEXT_DOMAIN ), __( 'You can now go to your forms and assign them to this integration', Opt_In::TEXT_DOMAIN ) ),
+					'html'         => Hustle_Api_Utils::get_modal_title_markup( __( 'iContact Added', 'wordpress-popup' ), __( 'You can now go to your forms and assign them to this integration', 'wordpress-popup' ) ),
 					'buttons'      => array(
 						'close' => array(
-							'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'close' ),
+							'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', 'wordpress-popup' ), 'sui-button-ghost', 'close' ),
 						),
 					),
 					'redirect'     => false,
 					'has_errors'   => false,
 					'notification' => array(
 						'type' => 'success',
-						'text' => '<strong>' . $this->get_title() . '</strong> ' . __( 'Successfully connected', Opt_In::TEXT_DOMAIN ),
+						'text' => '<strong>' . $this->get_title() . '</strong> ' . __( 'Successfully connected', 'wordpress-popup' ),
 					),
 				);
 
@@ -213,20 +213,20 @@ class Hustle_Icontact extends Hustle_Provider_Abstract {
 					'label' => array(
 						'type'  => 'label',
 						'for'   => 'username',
-						'value' => __( 'Email', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Email', 'wordpress-popup' ),
 					),
 					'app_id' => array(
 						'type'          => 'text',
 						'name'          => 'username',
 						'value'         => $current_data['username'],
-						'placeholder'   => __( 'Enter Email', Opt_In::TEXT_DOMAIN ),
+						'placeholder'   => __( 'Enter Email', 'wordpress-popup' ),
 						'id'            => 'username',
 						'icon'          => 'mail',
 					),
 					'error' => array(
 						'type'  => 'error',
 						'class' => $api_username_valid ? 'sui-hidden' : '',
-						'value' => __( 'Please enter a valid iContact email', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Please enter a valid iContact email', 'wordpress-popup' ),
 					),
 				)
 			),
@@ -237,20 +237,20 @@ class Hustle_Icontact extends Hustle_Provider_Abstract {
 					'label' => array(
 						'type'  => 'label',
 						'for'   => 'app_id',
-						'value' => __( 'Application ID', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Application ID', 'wordpress-popup' ),
 					),
 					'app_id' => array(
 						'type'          => 'text',
 						'name'          => 'app_id',
 						'value'         => $current_data['app_id'],
-						'placeholder'   => __( 'Enter Application ID', Opt_In::TEXT_DOMAIN ),
+						'placeholder'   => __( 'Enter Application ID', 'wordpress-popup' ),
 						'id'            => 'app_id',
 						'icon'          => 'key',
 					),
 					'error' => array(
 						'type'  => 'error',
 						'class' => $app_id_valid ? 'sui-hidden' : '',
-						'value' => __( 'Please enter a valid iContact API Application ID (API-AppId)', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Please enter a valid iContact API Application ID (API-AppId)', 'wordpress-popup' ),
 					),
 				)
 			),
@@ -261,20 +261,20 @@ class Hustle_Icontact extends Hustle_Provider_Abstract {
 					'label' => array(
 						'type'  => 'label',
 						'for'   => 'password',
-						'value' => __( 'Application Password', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Application Password', 'wordpress-popup' ),
 					),
 					'app_id' => array(
 						'type'          => 'password',
 						'name'          => 'password',
 						'value'         => $current_data['password'],
-						'placeholder'   => __( 'Enter Application Password', Opt_In::TEXT_DOMAIN ),
+						'placeholder'   => __( 'Enter Application Password', 'wordpress-popup' ),
 						'id'            => 'password',
 						'icon'          => 'eye-hide',
 					),
 					'error' => array(
 						'type'  => 'error',
 						'class' => $api_password_valid ? 'sui-hidden' : '',
-						'value' => __( 'Please make sure the password you entered is the same you created for your Application ID (API-AppId)', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Please make sure the password you entered is the same you created for your Application ID (API-AppId)', 'wordpress-popup' ),
 					),
 				)
 			),
@@ -285,27 +285,27 @@ class Hustle_Icontact extends Hustle_Provider_Abstract {
 					'label' => array(
 						'type'  => 'label',
 						'for'   => 'instance-name-input',
-						'value' => __( 'Identifier', Opt_In::TEXT_DOMAIN),
+						'value' => __( 'Identifier', 'wordpress-popup'),
 					),
 					'name' => array(
 						'type'        => 'text',
 						'name'        => 'name',
 						'value'       => $current_data['name'],
-						'placeholder' => __( 'E.g. Business Account', Opt_In::TEXT_DOMAIN ),
+						'placeholder' => __( 'E.g. Business Account', 'wordpress-popup' ),
 						'id'          => 'instance-name-input',
 					),
 					'message' => array(
 						'type'  => 'description',
-						'value' => __( 'Helps to distinguish your integrations if you have connected to the multiple accounts of this integration.', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Helps to distinguish your integrations if you have connected to the multiple accounts of this integration.', 'wordpress-popup' ),
 					),
 				)
 			),
 		);
 
 		$step_html = Hustle_Api_Utils::get_modal_title_markup(
-			__( 'Configure iContact', Opt_In::TEXT_DOMAIN ),
+			__( 'Configure iContact', 'wordpress-popup' ),
 			sprintf(
-				__( 'Set up a new application in your %1$siContact account%2$s to get your credentials. Make sure your credentials have API 2.0 enabled', Opt_In::TEXT_DOMAIN ),
+				__( 'Set up a new application in your %1$siContact account%2$s to get your credentials. Make sure your credentials have API 2.0 enabled', 'wordpress-popup' ),
 				'<a href="https://app.icontact.com/icp/core/registerapp/" target="_blank">',
 				'</a>'
 			)
@@ -319,16 +319,16 @@ class Hustle_Icontact extends Hustle_Provider_Abstract {
 		if ( $is_edit ) {
 			$buttons = array(
 				'disconnect' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'disconnect', true ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', 'wordpress-popup' ), 'sui-button-ghost', 'disconnect', true ),
 				),
 				'save' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', Opt_In::TEXT_DOMAIN ), '', 'connect', true ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', 'wordpress-popup' ), '', 'connect', true ),
 				),
 			);
 		} else {
 			$buttons = array(
 				'connect' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Connect', Opt_In::TEXT_DOMAIN ), '', 'connect', true ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Connect', 'wordpress-popup' ), '', 'connect', true ),
 				),
 			);
 
@@ -363,7 +363,7 @@ class Hustle_Icontact extends Hustle_Provider_Abstract {
 			$api = self::api( $app_id, $password, $username );
 
 			if ( is_wp_error( $api ) ) {
-				Hustle_Api_Utils::maybe_log( __METHOD__, __( 'Invalid iContact API credentials.', Opt_In::TEXT_DOMAIN ) );
+				Hustle_Api_Utils::maybe_log( __METHOD__, __( 'Invalid iContact API credentials.', 'wordpress-popup' ) );
 				return false;
 			}
 

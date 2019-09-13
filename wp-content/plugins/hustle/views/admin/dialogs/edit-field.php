@@ -11,7 +11,7 @@
 
 			<div class="sui-box-header sui-block-content-center">
 
-				<h3 id="dialogTitle" class="sui-box-title"><?php esc_html_e( 'Edit Field', Opt_In::TEXT_DOMAIN ); ?></h3>
+				<h3 id="dialogTitle" class="sui-box-title"><?php esc_html_e( 'Edit Field', 'wordpress-popup' ); ?></h3>
 
 				<div class="sui-actions-left">
 
@@ -22,7 +22,7 @@
 				<div class="sui-actions-right">
 
 					<button class="hustle-discard-changes sui-dialog-close">
-						<span class="sui-screen-reader-text"><?php esc_html_e( 'Close this dialog window', Opt_In::TEXT_DOMAIN ); ?></span>
+						<span class="sui-screen-reader-text"><?php esc_html_e( 'Close this dialog window', 'wordpress-popup' ); ?></span>
 					</button>
 
 				</div>
@@ -35,8 +35,8 @@
 
 					<div data-tabs>
 
-						<div id="hustle-data-tab--settings" class="active"><?php esc_html_e( 'Settings', Opt_In::TEXT_DOMAIN ); ?></div>
-						<div id="hustle-data-tab--styling"><?php esc_html_e( 'Styling', Opt_In::TEXT_DOMAIN ); ?></div>
+						<div id="hustle-data-tab--settings" class="active"><?php esc_html_e( 'Settings', 'wordpress-popup' ); ?></div>
+						<div id="hustle-data-tab--styling"><?php esc_html_e( 'Styling', 'wordpress-popup' ); ?></div>
 
 					</div>
 
@@ -59,14 +59,14 @@
 			<div class="sui-box-footer">
 
 				<button class="sui-button sui-button-ghost hustle-discard-changes">
-					<i class="sui-icon-undo" aria-hidden="true"></i> <?php esc_attr_e( 'Discard Changes', Opt_In::TEXT_DOMAIN); ?>
+					<i class="sui-icon-undo" aria-hidden="true"></i> <?php esc_attr_e( 'Discard Changes', 'wordpress-popup'); ?>
 				</button>
 
 				<div class="sui-actions-right">
 
 					<button id="hustle-apply-changes" class="sui-button">
 						<span class="sui-loading-text">
-							<i class="sui-icon-check" aria-hidden="true"></i> <?php esc_attr_e( 'Apply', Opt_In::TEXT_DOMAIN); ?>
+							<i class="sui-icon-check" aria-hidden="true"></i> <?php esc_attr_e( 'Apply', 'wordpress-popup'); ?>
 						</span>
 						<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 					</button>
@@ -91,7 +91,7 @@
 
 			<div class="sui-form-field">
 
-				<label class="sui-label"><?php esc_html_e( 'Label', Opt_In::TEXT_DOMAIN ); ?></label>
+				<label class="sui-label"><?php esc_html_e( 'Label', 'wordpress-popup' ); ?></label>
 
 				<input type="text"
 					name="label"
@@ -107,7 +107,7 @@
 
 			<div class="sui-form-field">
 
-				<label class="sui-label"><?php esc_html_e( 'Name', Opt_In::TEXT_DOMAIN ); ?></label>
+				<label class="sui-label"><?php esc_html_e( 'Name', 'wordpress-popup' ); ?></label>
 
 				<input type="text"
 					name="name"
@@ -117,7 +117,7 @@
 					class="sui-form-control" />
 
 				<span class="sui-description">
-					<?php esc_html_e( 'Do not use any spaces in the name to ensure this field is submitted successfully.', Opt_In::TEXT_DOMAIN ); ?>
+					<?php esc_html_e( 'Do not use any spaces in the name to ensure this field is submitted successfully.', 'wordpress-popup' ); ?>
 				</span>
 
 			</div>
@@ -128,7 +128,7 @@
 
 	<div class="sui-form-field">
 
-		<label class="sui-label"><?php esc_html_e( 'Placeholder (optional)', Opt_In::TEXT_DOMAIN ); ?></label>
+		<label class="sui-label"><?php esc_html_e( 'Placeholder (optional)', 'wordpress-popup' ); ?></label>
 
 		<input type="text"
 			name="placeholder"
@@ -150,12 +150,12 @@
 			<span class="sui-toggle-slider"></span>
 		</label>
 
-		<label for="hustle-optin-field--required"><?php esc_html_e( 'Require this field', Opt_In::TEXT_DOMAIN ); ?></label>
-		<span class="sui-description sui-toggle-description"><?php esc_html_e( 'Force the user to fill out this field, otherwise it will be optional.', Opt_In::TEXT_DOMAIN ); ?></span>
+		<label for="hustle-optin-field--required"><?php esc_html_e( 'Require this field', 'wordpress-popup' ); ?></label>
+		<span class="sui-description sui-toggle-description"><?php esc_html_e( 'Force the user to fill out this field, otherwise it will be optional.', 'wordpress-popup' ); ?></span>
 
 		<# if ( 'email' === type && 'email' === name ) { #>
 			<div class="sui-notice" style="margin-top: 10px; margin-left: 48px;">
-				<p><?php esc_html_e( "The default email field can't be made optional to ensure there is always a required email field in your opt-in form.", Opt_In::TEXT_DOMAIN ); ?></p>
+				<p><?php esc_html_e( "The default email field can't be made optional to ensure there is always a required email field in your opt-in form.", 'wordpress-popup' ); ?></p>
 			</div>
 		<# } #>
 
@@ -168,8 +168,8 @@
 					{{ _.checked( _.isTrue( validated ), true ) }} />
 				<span class="sui-toggle-slider"></span>
 			</label>
-			<label for="hustle-optin-field--validated"><?php esc_html_e( 'Validate this field', Opt_In::TEXT_DOMAIN ); ?></label>
-			<span class="sui-description sui-toggle-description"><?php esc_html_e( 'Make sure the user has filled out this field correctly and warn them when they haven\'t.', Opt_In::TEXT_DOMAIN ); ?></span>
+			<label for="hustle-optin-field--validated"><?php esc_html_e( 'Validate this field', 'wordpress-popup' ); ?></label>
+			<span class="sui-description sui-toggle-description"><?php esc_html_e( 'Make sure the user has filled out this field correctly and warn them when they haven\'t.', 'wordpress-popup' ); ?></span>
 		<# } #>
 
 	</div>
@@ -183,17 +183,17 @@
 	<div class="sui-box-settings-row">
 
 		<div class="sui-box-settings-col-1">
-			<span class="sui-settings-label"><?php esc_html_e('Additional CSS Classes', Opt_In::TEXT_DOMAIN ); ?></span>
-			<span class="sui-description"><?php esc_html_e('Add classes that will be output on this field’s container to aid your theme’s default styling.', Opt_In::TEXT_DOMAIN ); ?></span>
+			<span class="sui-settings-label"><?php esc_html_e('Additional CSS Classes', 'wordpress-popup' ); ?></span>
+			<span class="sui-description"><?php esc_html_e('Add classes that will be output on this field’s container to aid your theme’s default styling.', 'wordpress-popup' ); ?></span>
 		</div>
 
 		<div class="sui-box-settings-col-2">
 			<input type="text"
 				name="css_classes"
 				value="{{ css_classes }}"
-				placeholder="<?php esc_html_e('E.g. form-field', Opt_In::TEXT_DOMAIN ); ?>"
+				placeholder="<?php esc_html_e('E.g. form-field', 'wordpress-popup' ); ?>"
 				class="sui-form-control" >
-			<span class="sui-description"><?php esc_html_e('These will be output as you see them here.', Opt_In::TEXT_DOMAIN ); ?></span>
+			<span class="sui-description"><?php esc_html_e('These will be output as you see them here.', 'wordpress-popup' ); ?></span>
 		</div>
 
 	</div>
@@ -206,14 +206,14 @@
 
 	<div class="sui-form-field">
 
-		<label><b><?php esc_html_e( 'Display', Opt_In::TEXT_DOMAIN ); ?></b></label>
+		<label><b><?php esc_html_e( 'Display', 'wordpress-popup' ); ?></b></label>
 		<span class="sui-description">
-			<?php esc_html_e( 'Choose how you want to display the reCAPTCHA widget to your visitors.', Opt_In::TEXT_DOMAIN ); ?>
+			<?php esc_html_e( 'Choose how you want to display the reCAPTCHA widget to your visitors.', 'wordpress-popup' ); ?>
 		</span>
 
 	</div>
 
-	<label class="sui-label"><?php esc_html_e( 'Type', Opt_In::TEXT_DOMAIN ); ?></label>
+	<label class="sui-label"><?php esc_html_e( 'Type', 'wordpress-popup' ); ?></label>
 
 	<div class="sui-side-tabs">
 
@@ -227,7 +227,7 @@
 					id="hustle-recaptcha-type--compact"
 					data-tab-menu="hustle-theme-recaptcha-tab"
 					{{ _.checked( 'compact' === recaptcha_type, true ) }} />
-				<?php esc_html_e( 'Compact', Opt_In::TEXT_DOMAIN ); ?>
+				<?php esc_html_e( 'Compact', 'wordpress-popup' ); ?>
 			</label>
 
 			<label for="hustle-recaptcha-type--full" class="sui-tab-item{{ ( 'full' === recaptcha_type ) ? ' active' : '' }}">
@@ -238,7 +238,7 @@
 					data-tab-menu="hustle-theme-recaptcha-tab"
 					id="hustle-recaptcha-type--full"
 					{{ _.checked( 'full' === recaptcha_type, true ) }} />
-				<?php esc_html_e( 'Full size', Opt_In::TEXT_DOMAIN ); ?>
+				<?php esc_html_e( 'Full size', 'wordpress-popup' ); ?>
 			</label>
 
 		</div>
@@ -253,11 +253,11 @@
 
 						<div class="sui-col-md-6">
 
-							<label for="hustle-recaptcha-theme" class="sui-label"><?php esc_html_e( 'Theme', Opt_In::TEXT_DOMAIN ); ?></label>
+							<label for="hustle-recaptcha-theme" class="sui-label"><?php esc_html_e( 'Theme', 'wordpress-popup' ); ?></label>
 
 							<select id="hustle-recaptcha-theme" data-attribute="recaptcha_theme" class="sui-select-sm" name="recaptcha_theme">
-								<option value="dark" {{ _.selected( 'dark' === recaptcha_theme, true ) }} ><?php esc_attr_e( "Dark", Opt_In::TEXT_DOMAIN ); ?></option>
-								<option value="light" {{ _.selected( 'light' === recaptcha_theme, true ) }} ><?php esc_attr_e( "Light", Opt_In::TEXT_DOMAIN ); ?></option>
+								<option value="dark" {{ _.selected( 'dark' === recaptcha_theme, true ) }} ><?php esc_attr_e( "Dark", 'wordpress-popup' ); ?></option>
+								<option value="light" {{ _.selected( 'light' === recaptcha_theme, true ) }} ><?php esc_attr_e( "Light", 'wordpress-popup' ); ?></option>
 							</select>
 
 						</div>
@@ -274,6 +274,32 @@
 
 	</div>
 
+	<label><?php esc_html_e( 'Language', 'wordpress-popup' ); ?></label>
+
+	<span class="sui-description">
+		<?php esc_html_e( "By default, we'll show the reCAPTCHA in the language which set on the global reCAPTCHA settings. However, you can choose a different language for your reCAPTCHA below.", 'wordpress-popup' ); ?>
+	</span>
+
+	<div class="sui-row">
+
+		<div class="sui-col-md-6">
+
+			<select id="hustle-recaptcha-language" data-attribute="recaptcha_language" class="sui-select" name="recaptcha_language">
+				<option value="automatic" {{ _.selected( 'automatic' === recaptcha_language, true ) }} ><?php esc_attr_e( "Automatic", 'wordpress-popup' ); ?></option>
+				<?php
+					$languages = Opt_In_Utils::get_captcha_languages();
+					foreach ( $languages as $key => $language ) {
+				?>
+						<option value="<?php echo esc_attr( $key ); ?>" {{ _.selected( '<?php echo esc_attr( $key ); ?>' === recaptcha_language, true ) }} ><?php echo esc_attr( $language ); ?></option>
+				<?php } ?>
+			</select>
+
+		</div>
+
+		<div class="sui-col-md-6"></div>
+
+	</div>
+
 </script>
 
 <script id="hustle-gdpr-field-settings-tpl" type="text/template">
@@ -283,7 +309,7 @@
 
 	<div class="sui-form-field">
 
-		<label class="sui-label"><?php esc_html_e( 'Label', Opt_In::TEXT_DOMAIN ); ?></label>
+		<label class="sui-label"><?php esc_html_e( 'Label', 'wordpress-popup' ); ?></label>
 
 		<input type="text"
 			name="label"
@@ -298,7 +324,7 @@
 		<textarea name="gdpr_message" id="gdpr_message">{{gdpr_message}}</textarea>
 
 		<span class="sui-description">
-			<?php esc_html_e( 'Note, the form will not submit until the user has accepted the terms.', Opt_In::TEXT_DOMAIN ); ?>
+			<?php esc_html_e( 'Note, the form will not submit until the user has accepted the terms.', 'wordpress-popup' ); ?>
 		</span>
 
 	</div>
@@ -316,7 +342,7 @@
 
 			<div class="sui-form-field">
 
-				<label class="sui-label"><?php esc_html_e( 'Label', Opt_In::TEXT_DOMAIN ); ?></label>
+				<label class="sui-label"><?php esc_html_e( 'Label', 'wordpress-popup' ); ?></label>
 
 				<input type="text"
 					name="label"
@@ -332,7 +358,7 @@
 
 			<div class="sui-form-field">
 
-				<label class="sui-label"><?php esc_html_e( 'Name', Opt_In::TEXT_DOMAIN ); ?></label>
+				<label class="sui-label"><?php esc_html_e( 'Name', 'wordpress-popup' ); ?></label>
 
 				<input type="text"
 					name="name"
@@ -352,7 +378,7 @@
 
 			<div class="sui-form-field">
 
-				<label class="sui-label"><?php esc_html_e( 'Placeholder (optional)', Opt_In::TEXT_DOMAIN ); ?></label>
+				<label class="sui-label"><?php esc_html_e( 'Placeholder (optional)', 'wordpress-popup' ); ?></label>
 
 				<input type="text"
 					name="placeholder"
@@ -368,7 +394,7 @@
 
 			<div class="sui-form-field">
 
-				<label class="sui-label"><?php esc_html_e( 'Format', Opt_In::TEXT_DOMAIN ); ?></label>
+				<label class="sui-label"><?php esc_html_e( 'Format', 'wordpress-popup' ); ?></label>
 
 				<select id="hustle-date-format" data-attribute="date_format" name="date_format">
 					<?php
@@ -396,8 +422,8 @@
 			<span class="sui-toggle-slider"></span>
 		</label>
 
-		<label for="hustle-optin-field--required"><?php esc_html_e( 'Require this field', Opt_In::TEXT_DOMAIN ); ?></label>
-		<span class="sui-description sui-toggle-description"><?php esc_html_e( 'Force the user to fill out this field, otherwise it will be optional.', Opt_In::TEXT_DOMAIN ); ?></span>
+		<label for="hustle-optin-field--required"><?php esc_html_e( 'Require this field', 'wordpress-popup' ); ?></label>
+		<span class="sui-description sui-toggle-description"><?php esc_html_e( 'Force the user to fill out this field, otherwise it will be optional.', 'wordpress-popup' ); ?></span>
 
 		<# if ( 'email' === type || 'url' === type ) { #>
 			<label for="hustle-optin-field--validated" class="sui-toggle">
@@ -408,8 +434,8 @@
 					{{ _.checked( _.isTrue( validated ), true ) }} />
 				<span class="sui-toggle-slider"></span>
 			</label>
-			<label for="hustle-optin-field--validated"><?php esc_html_e( 'Validate this field', Opt_In::TEXT_DOMAIN ); ?></label>
-			<span class="sui-description sui-toggle-description"><?php esc_html_e( 'Make sure the user has filled out this field correctly and warn them when they haven\'t.', Opt_In::TEXT_DOMAIN ); ?></span>
+			<label for="hustle-optin-field--validated"><?php esc_html_e( 'Validate this field', 'wordpress-popup' ); ?></label>
+			<span class="sui-description sui-toggle-description"><?php esc_html_e( 'Make sure the user has filled out this field correctly and warn them when they haven\'t.', 'wordpress-popup' ); ?></span>
 		<# } #>
 
 	</div>
@@ -424,7 +450,7 @@
 
 		<div class="sui-col-md-12">
 
-			<label class="sui-label"><?php esc_html_e( 'Format', Opt_In::TEXT_DOMAIN ); ?></label>
+			<label class="sui-label"><?php esc_html_e( 'Format', 'wordpress-popup' ); ?></label>
 
 			<div class="sui-side-tabs">
 
@@ -437,7 +463,7 @@
 							value="12"
 							id="hustle-time-format--12"
 							{{ _.checked( '12' === time_format, true ) }} />
-						<?php esc_html_e( '12 hour', Opt_In::TEXT_DOMAIN ); ?>
+						<?php esc_html_e( '12 hour', 'wordpress-popup' ); ?>
 					</label>
 
 					<label for="hustle-time-format--24" class="sui-tab-item{{ ( '24' === time_format ) ? ' active' : '' }}">
@@ -447,7 +473,7 @@
 							value="24"
 							id="hustle-time-format--24"
 							{{ _.checked( '24' === time_format, true ) }} />
-						<?php esc_html_e( '24 hour', Opt_In::TEXT_DOMAIN ); ?>
+						<?php esc_html_e( '24 hour', 'wordpress-popup' ); ?>
 					</label>
 
 				</div>
@@ -467,7 +493,7 @@
 
 			<div class="sui-form-field">
 
-				<label class="sui-label"><?php esc_html_e( 'Label', Opt_In::TEXT_DOMAIN ); ?></label>
+				<label class="sui-label"><?php esc_html_e( 'Label', 'wordpress-popup' ); ?></label>
 
 				<input type="text"
 					name="label"
@@ -483,7 +509,7 @@
 
 			<div class="sui-form-field">
 
-				<label class="sui-label"><?php esc_html_e( 'Name', Opt_In::TEXT_DOMAIN ); ?></label>
+				<label class="sui-label"><?php esc_html_e( 'Name', 'wordpress-popup' ); ?></label>
 
 				<input type="text"
 					name="name"
@@ -497,7 +523,7 @@
 
 	</div>
 
-	<label class="sui-label"><?php esc_html_e( 'Default time', Opt_In::TEXT_DOMAIN ); ?></label>
+	<label class="sui-label"><?php esc_html_e( 'Default time', 'wordpress-popup' ); ?></label>
 	<div class="sui-row">
 
 		<div class="sui-col-md-2">
@@ -551,8 +577,8 @@
 			<span class="sui-toggle-slider"></span>
 		</label>
 
-		<label for="hustle-optin-field--required"><?php esc_html_e( 'Require this field', Opt_In::TEXT_DOMAIN ); ?></label>
-		<span class="sui-description sui-toggle-description"><?php esc_html_e( 'Force the user to fill out this field, otherwise it will be optional.', Opt_In::TEXT_DOMAIN ); ?></span>
+		<label for="hustle-optin-field--required"><?php esc_html_e( 'Require this field', 'wordpress-popup' ); ?></label>
+		<span class="sui-description sui-toggle-description"><?php esc_html_e( 'Force the user to fill out this field, otherwise it will be optional.', 'wordpress-popup' ); ?></span>
 
 		<# if ( 'email' === type || 'url' === type ) { #>
 			<label for="hustle-optin-field--validated" class="sui-toggle">
@@ -563,8 +589,8 @@
 					{{ _.checked( _.isTrue( validated ), true ) }} />
 				<span class="sui-toggle-slider"></span>
 			</label>
-			<label for="hustle-optin-field--validated"><?php esc_html_e( 'Validate this field', Opt_In::TEXT_DOMAIN ); ?></label>
-			<span class="sui-description sui-toggle-description"><?php esc_html_e( 'Make sure the user has filled out this field correctly and warn them when they haven\'t.', Opt_In::TEXT_DOMAIN ); ?></span>
+			<label for="hustle-optin-field--validated"><?php esc_html_e( 'Validate this field', 'wordpress-popup' ); ?></label>
+			<span class="sui-description sui-toggle-description"><?php esc_html_e( 'Make sure the user has filled out this field correctly and warn them when they haven\'t.', 'wordpress-popup' ); ?></span>
 		<# } #>
 
 	</div>
@@ -581,7 +607,7 @@
 
 			<div class="sui-form-field">
 
-				<label class="sui-label"><?php esc_html_e( 'Button Text', Opt_In::TEXT_DOMAIN ); ?></label>
+				<label class="sui-label"><?php esc_html_e( 'Button Text', 'wordpress-popup' ); ?></label>
 
 				<input type="text"
 					name="label"
@@ -600,7 +626,7 @@
 
 			<div class="sui-form-field">
 
-				<label class="sui-label"><?php esc_html_e( 'Error Message', Opt_In::TEXT_DOMAIN ); ?></label>
+				<label class="sui-label"><?php esc_html_e( 'Error Message', 'wordpress-popup' ); ?></label>
 
 				<input type="text"
 					name="error_message"

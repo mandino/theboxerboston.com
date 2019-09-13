@@ -502,6 +502,29 @@ class Hustle_Entry_Model {
 		return apply_filters( 'hustle_entry_ignored_fields', array( 'recaptcha', 'submit' ) );
 	}
 
+	/**
+	 * Get all entries from a module.
+	 *
+	 * @since 4.0.1
+	 *
+	 * @param int $module_id
+	 * @return Hustle_Entry_Model[]
+	 */
+	public static function get_entries( $module_id ) {
+		global $wpdb;
+		$entries    = array();
+		$table_name =  Hustle_Db::entries_table();
+		$sql        = "SELECT `entry_id` FROM {$table_name} WHERE `module_id` = %d ORDER BY `entry_id` DESC";
+		$results    = $wpdb->get_results( $wpdb->prepare( $sql, $module_id ) ); // WPCS: unprepared SQL ok. false positive
+
+		if ( ! empty( $results ) ) {
+			foreach ( $results as $result ) {
+				$entries[] = new Hustle_Entry_Model( $result->entry_id );
+			}
+		}
+
+		return $entries;
+	}
 
 	/**
 	 * Delete entries by a string of comma separated entres ids
@@ -628,6 +651,19 @@ class Hustle_Entry_Model {
 					'%d'
 				)
 			);
+
+			wp_cache_delete( $module_id, 'hustle_total_entries' );
+			wp_cache_delete( 'all_module_types', 'hustle_total_entries' );
+
+			$available_entry_types = self::available_entry_types();
+			foreach ( $available_entry_types as $type ) {
+				wp_cache_delete( $type . '_module_type', 'hustle_total_entries' );
+			}
+
+			$cache_key = __CLASS__;
+			foreach ( $entires as $entry_id ) {
+				wp_cache_delete( $entry_id, $cache_key );
+			}
 		}
 	}
 
@@ -658,7 +694,7 @@ class Hustle_Entry_Model {
 						if ( strlen( $email ) > $truncate ) {
 							$email = substr( $email, 0, $truncate ) . '...';
 						}
-						$string_value = '<a href="mailto:' . $email . '" target="_blank" title="' . __( 'Send Email', Opt_In::TEXT_DOMAIN ) . '">' . $email . '</a>';
+						$string_value = '<a href="mailto:' . $email . '" target="_blank" title="' . __( 'Send Email', 'wordpress-popup' ) . '">' . $email . '</a>';
 					} else {
 						//truncate url
 						if ( strlen( $string_value ) > $truncate ) {
@@ -681,7 +717,7 @@ class Hustle_Entry_Model {
 						if ( strlen( $website ) > $truncate ) {
 							$website = substr( $website, 0, $truncate ) . '...';
 						}
-						$string_value = '<a href="' . $website . '" target="_blank" title="' . __( 'View Website', Opt_In::TEXT_DOMAIN ) . '">' . $website . '</a>';
+						$string_value = '<a href="' . $website . '" target="_blank" title="' . __( 'View Website', 'wordpress-popup' ) . '">' . $website . '</a>';
 					} else {
 						//truncate url
 						if ( strlen( $string_value ) > $truncate ) {
@@ -728,6 +764,17 @@ class Hustle_Entry_Model {
 		return $wpdb->get_var( $sql );
 	}
 
+	private static function available_entry_types() {
+		$available_entry_types = array(
+			'popup',
+			'slidein',
+			'embedded',
+			'all',
+		);
+
+		return $available_entry_types;
+	}
+
 	/**
 	 * Get latest entry
 	 *
@@ -737,12 +784,7 @@ class Hustle_Entry_Model {
 	 * @return Hustle_Entry_Model|null
 	 */
 	public static function get_latest_entry( $entry_type = 'popup' ) {
-		$available_entry_types = array(
-			'popup',
-			'slidein',
-			'embedded',
-			'all',
-		);
+		$available_entry_types = self::available_entry_types();
 
 		if ( ! in_array( $entry_type, $available_entry_types, true ) ) {
 			return null;
@@ -837,6 +879,37 @@ class Hustle_Entry_Model {
 		$count = $wpdb->get_var( $query ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 		$is_subscribed = apply_filters( 'hustle_is_email_in_module_local_list', ! empty( $count ), $module_id, $email );
+
+		return $is_subscribed;
+	}
+
+	/**
+	 * Get email if there's a subscription with in this module.
+	 *
+	 * @since 4.0
+	 *
+	 * @param int $module_id
+	 * @param string $email
+	 * @return bool
+	 */
+	public static function get_email_subscribed_to_module_id( $module_id, $email ) {
+		global $wpdb;
+
+		$entries_table = Hustle_Db::entries_table();
+		$entries_meta_table = Hustle_Db::entries_meta_table();
+		$query =
+			"SELECT e.entry_id
+			FROM {$entries_table} e
+			INNER JOIN {$entries_meta_table} m
+			ON e.entry_id = m.entry_id
+			AND e.module_id = %d
+			AND m.meta_key = 'email'
+			AND m.meta_value = %s";
+
+		$query 	= $wpdb->prepare( $query, $module_id, $email ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$id 	= $wpdb->get_var( $query ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+
+		$is_subscribed = apply_filters( 'hustle_email_entry_id_in_module_local_list', $id );
 
 		return $is_subscribed;
 	}

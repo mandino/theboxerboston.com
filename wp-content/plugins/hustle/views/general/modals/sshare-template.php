@@ -19,12 +19,12 @@
 				href="<?php echo $counter_enabled ? '#' : esc_url( $data['link'] ); ?>" 
 				<?php if ( ! $counter_enabled ) echo 'target="_blank"'; ?> 
 				class="<?php echo esc_attr( $class ); ?>" 
-				aria-label="<?php printf( esc_attr__( 'Share on %s', Opt_In::TEXT_DOMAIN ), esc_attr( $data['label'] ) ); ?>"
+				aria-label="<?php printf( esc_attr__( 'Share on %s', 'wordpress-popup' ), esc_attr( $data['label'] ) ); ?>"
 			>
 
 				<div class="hustle-icon-container" aria-hidden="true">
 
-					<?php Opt_In::static_render( 'general/icons/social/' . $name ); ?>
+					<?php self::static_render( 'general/icons/social/' . $name ); ?>
 
 				</div>
 

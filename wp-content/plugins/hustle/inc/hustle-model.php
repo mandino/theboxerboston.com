@@ -16,11 +16,12 @@ abstract class Hustle_Model extends Hustle_Data {
 	const SLIDEIN_MODULE = 'slidein';
 	const EMBEDDED_MODULE = 'embedded';
 	const SOCIAL_SHARING_MODULE = 'social_sharing';
+	const OPTIN_MODE = 'optin';
+	const INFORMATIONAL_MODE = 'informational';
 	const INLINE_MODULE = 'inline';
 	const WIDGET_MODULE = 'widget';
 	const SHORTCODE_MODULE = 'shortcode';
 	const SUBSCRIPTION  = 'subscription';
-	const ERROR_LOG = 'error_logs'; //phpcs:ignore
 	const ENTRIES_PER_PAGE = 20;
 
 	/**
@@ -32,13 +33,7 @@ abstract class Hustle_Model extends Hustle_Data {
 	 */
 	public $id;
 
-	/**
-	 * @var array
-	 */
-	protected $_test_types = array();
 	protected $_track_types = array();
-
-	protected $_stats = array();
 
 	protected $_decorator = false;
 
@@ -71,7 +66,7 @@ abstract class Hustle_Model extends Hustle_Data {
 		if( false === $this->_data ){
             $data = $this->_wpdb->get_row( $this->_wpdb->prepare( "SELECT * FROM  " . Hustle_Db::modules_table() . " WHERE `module_id`=%d", $this->id ), OBJECT );
             if ( empty( $data ) ) {
-                return new WP_Error( 'hustle-module', __( 'Module does not exist!', Opt_In::TEXT_DOMAIN ) );
+                return new WP_Error( 'hustle-module', __( 'Module does not exist!', 'wordpress-popup' ) );
             }
             $this->_data = $data;
 			wp_cache_set( $id, $this->_data, $cache_group );
@@ -140,7 +135,6 @@ abstract class Hustle_Model extends Hustle_Data {
 		$cache_group = 'hustle_shortcode_data';
 		//$key = "hustle_shortcode_data_" . $shortcode_id;
 		$this->_data = wp_cache_get( $shortcode_id, $cache_group );
-		$prefix = $this->_wpdb->prefix;
 
 		// If not cached.
 		if( false === $this->_data ) {
@@ -218,7 +212,7 @@ abstract class Hustle_Model extends Hustle_Data {
 		}
 
 		// Clear cache as well.
-		$this->clean_module_cache();
+		$this->clean_module_cache( 'data' );
 
 		return $this->id;
 	}
@@ -331,25 +325,32 @@ abstract class Hustle_Model extends Hustle_Data {
 	}
 
 	/**
-	 * Clean all the cache related to a module.
+	 * Clean all (or certain) the cache related to a module.
 	 *
 	 * @since 3.0.7
 	 *
-	 * @todo check where it's used, and where cache can be cleared more specifically than clearing all this.
+	 * @param string $type Optional. Type of cache which should be removed ( data | meta | shortcode )
 	 * @return void
 	 */
-	public function clean_module_cache() {
+	public function clean_module_cache( $type = '' ) {
 
 		$id = $this->id;
-		$shortcode_id = $this->get_shortcode_id();
-		$shortcode_group = 'hustle_shortcode_data';
-		wp_cache_delete( $shortcode_id, $shortcode_group );
 
-		$module_group = 'hustle_model_data';
-		wp_cache_delete( $id, $module_group );
+		if ( empty( $type ) || in_array( $type, array( 'shortcode', 'data' ), true ) ) {
+			$shortcode_id = $this->get_shortcode_id();
+			$shortcode_group = 'hustle_shortcode_data';
+			wp_cache_delete( $shortcode_id, $shortcode_group );
+		}
 
-		$module_meta_group = 'hustle_module_meta';
-		wp_cache_delete( $id, $module_meta_group );
+		if ( empty( $type ) || 'data' === $type ) {
+			$module_group = 'hustle_model_data';
+			wp_cache_delete( $id, $module_group );
+		}
+
+		if ( empty( $type ) || 'meta' === $type ) {
+			$module_meta_group = 'hustle_module_meta';
+			wp_cache_delete( $id, $module_meta_group );
+		}
 
 	}
 
@@ -386,6 +387,8 @@ abstract class Hustle_Model extends Hustle_Data {
 	 * @return false|int
 	 */
 	public function add_meta( $meta_key, $meta_value ){
+		$this->clean_module_cache( 'meta' );
+
 		return $this->_wpdb->insert( Hustle_Db::modules_meta_table(), array(
 			"module_id" => $this->id,
 			"meta_key" => $meta_key,
@@ -423,6 +426,11 @@ abstract class Hustle_Model extends Hustle_Data {
 					"%s"
 				)
 			);
+
+			$this->clean_module_cache( 'meta' );
+			if ( self::KEY_SHORTCODE_ID === $meta_key ) {
+				$this->clean_module_cache( 'shortcode' );
+			}
 
 			return false !== $res;
 
@@ -490,7 +498,7 @@ abstract class Hustle_Model extends Hustle_Data {
 	 */
 	public function toggle_state( $environment = null ){
 		// Clear cache.
-		$this->clean_module_cache(); // TODO: maybe remove just what's related.
+		$this->clean_module_cache( 'data' );
 
 		if( is_null( $environment ) ){ // so we are toggling state of the optin
 			return $this->_wpdb->update( Hustle_Db::modules_table(), array(
@@ -510,7 +518,8 @@ abstract class Hustle_Model extends Hustle_Data {
 	 */
 	public function deactivate( $environment = null ) {
 		// Clear cache.
-		$this->clean_module_cache(); // TODO: maybe remove just what's related.
+		$this->clean_module_cache( 'data' );
+
 		if( is_null( $environment ) ){ // so we are toggling state of the optin
 			return $this->_wpdb->update(
 				Hustle_Db::modules_table(),
@@ -528,7 +537,8 @@ abstract class Hustle_Model extends Hustle_Data {
 	 */
 	public function activate( $environment = null ) {
 		// Clear cache.
-		$this->clean_module_cache(); // TODO: maybe remove just what's related.
+		$this->clean_module_cache( 'data' );
+
 		if( is_null( $environment ) ){ // so we are toggling state of the optin
 			return $this->_wpdb->update(
 				Hustle_Db::modules_table(),
@@ -540,83 +550,13 @@ abstract class Hustle_Model extends Hustle_Data {
 	}
 
 	/**
-	 * Toggles state of display type (popup, slide-in, floating_social etc) for each module
-	 *
-	 * @param null $environment
-	 * @return false|int|WP_Error
-	 */
-	public function toggle_display_type_state( $environment = null, $settings = false ){
-		if( is_null( $environment ) ) {
-			return $this->toggle_state( $environment );
-		}
-
-		if ( $settings ) {
-			$obj_settings = json_decode($this->settings);
-			$prev_value = $obj_settings->$environment;
-			$prev_value->enabled = !isset( $prev_value->enabled ) || "false" === $prev_value->enabled ? "true": "false";
-			$new_value = array_merge( (array) $obj_settings, array( $environment => $prev_value ));
-			return $this->update_meta( self::KEY_SETTINGS,  wp_json_encode( $new_value ) );
-		} else {
-			if( in_array( $environment, $this->types, true ) ) { // we are toggling state of a specific environment
-				$prev_value = $this->{$environment}->to_object();
-				$prev_value->enabled = !isset( $prev_value->enabled ) || "false" === $prev_value->enabled ? "true": "false";
-				return $this->update_meta( $environment,  wp_json_encode( $prev_value ) );
-			} else{
-				return new WP_Error("Invalid_env", "Invalid environment . " . $environment);
-			}
-		}
-	}
-
-	/**
-	 * Logs interactions done on the optin
-	 *
-	 * @param $data
-	 * @param string $type
-	 * @return false|int
-	 */
-	private function _log($data, $type = self::KEY_VIEW){
-
-		$data = wp_parse_args($data, array(
-			"date"      => current_time('timestamp'),
-			'ip'        => Opt_In_Geo::get_user_ip(),
-			'deleted'   => 0,
-			'page_type' => "",
-			'page_id'   => 0
-		));
-
-		/**
-		 * Filter Hustle tracking data
-		 *
-		 * @since 3.0.7
-		 *
-		 * @param array $data current tracking data
-		 */
-		$data = apply_filters( 'hustle_tracking_data', $data );
-
-		return $this->add_meta( $type, $data );
-	}
-
-	/**
-	 * Converts the model to json
-	 *
-	 * @since 1.0.0
-	 * @return string json
-	 */
-	public function to_json(){
-		$model_data = array_merge(
-			$this->_sanitize_model_data( get_object_vars( $this ) ),
-			array("id" => $this->id)//,
-			//array( "save_to_local" => $this->save_to_collection )
-		);
-		return wp_json_encode( $model_data );
-	}
-
-	/**
 	 * Deletes optin from optin table and optin meta table
 	 *
 	 * @return bool
 	 */
 	public function delete() {
+
+		$this->clean_module_cache();
 
 		// delete optin
 		$result = $this->_wpdb->delete( Hustle_Db::modules_table(), array(
@@ -627,7 +567,7 @@ abstract class Hustle_Model extends Hustle_Data {
 			)
 		);
 
-		$roles = $this->get_meta( self::KEY_MODULE_META_PERMISSIONS );
+		//$roles = $this->get_meta( self::KEY_MODULE_META_PERMISSIONS );
 
 		//delete metas
 		$result = $result && $this->_wpdb->delete( Hustle_Db::modules_meta_table(), array(
@@ -651,13 +591,10 @@ abstract class Hustle_Model extends Hustle_Data {
 		//delete entries
 		Hustle_Entry_Model::delete_entries( $this->id );
 
-		if ( $roles ) {
-			$roles = json_decode($roles);
-			Opt_In_Utils::update_hustle_edit_module_capability( $roles );
-		}
-
-		// TODO: maybe use something more specific for what's deleted.
-		$this->clean_module_cache();
+		//if ( $roles ) {
+		//	$roles = json_decode($roles);
+		//	Opt_In_Utils::update_hustle_edit_module_capability( $roles );
+		//}
 
 		return $result;
 	}
@@ -766,9 +703,6 @@ abstract class Hustle_Model extends Hustle_Data {
 		}
 		$res = $this->update_meta( self::TRACK_TYPES, $this->_track_types );
 
-		// TODO: maybe use something more specific.
-		$this->clean_module_cache();
-
 		return $res;
     }
 
@@ -789,8 +723,6 @@ abstract class Hustle_Model extends Hustle_Data {
 		}
 		if ( !empty( $updated ) ) {
 			$res = $this->update_meta( self::TRACK_TYPES, $this->_track_types );
-			// TODO: maybe use something more specific.
-			$this->clean_module_cache();
 		}
 	}
 
@@ -816,8 +748,6 @@ abstract class Hustle_Model extends Hustle_Data {
 		}
 		if ( !empty( $updated ) ) {
 			$res = $this->update_meta( self::TRACK_TYPES, $this->_track_types );
-			// TODO: maybe use something more specific.
-			$this->clean_module_cache();
 		}
 	}
 
@@ -846,8 +776,6 @@ abstract class Hustle_Model extends Hustle_Data {
 		}
 
 		$res = $this->update_meta( self::TRACK_TYPES, $this->_track_types );
-
-		$this->clean_module_cache();
 
 		return $res;
 	}
@@ -907,7 +835,7 @@ abstract class Hustle_Model extends Hustle_Data {
 	public function toggle_activity_for_user( $user_type ){
 
 		if( !in_array( $user_type, array( "admin", "logged_in" ), true ) ) {
-			return new WP_Error("invalid arg", __("Invalid user type provided", Opt_In::TEXT_DOMAIN), $user_type);
+			return new WP_Error("invalid arg", __("Invalid user type provided", 'wordpress-popup'), $user_type);
 		}
 
 		$key = "admin" === $user_type ? self::ACTIVE_FOR_ADMIN : self::ACTIVE_FOR_LOGGED_IN;
@@ -953,39 +881,6 @@ abstract class Hustle_Model extends Hustle_Data {
 
 
 		return true;
-	}
-
-	/**
-	 * @param $type
-	 * @return null|Hustle_Model_Stats
-	 */
-	public function get_statistics( $type ){
-
-		if( !isset( $this->_stats[ $type ] ) ) {
-			$this->_stats[ $type ] = new Hustle_Model_Stats($this, $type);
-		}
-
-		return $this->_stats[ $type ];
-	}
-
-
-	/**
-	 * Get all module conversion base on the given dates
-	 * @param $starting_date
-	 * @param $ending_date
-	 * @return (array|object|null) Database query results
-	 */
-	public function get_module_conversion( $starting_date, $ending_date, $is_array ){
-		$date_format = '%Y%m%d';
-		$conversion_query = '%_conversion';
-		$date_condition = ( !is_null($starting_date) && !is_null($ending_date) && !empty($starting_date) && !empty($ending_date) )
-			? "WHERE c.dates >= '". $starting_date ."' AND c.dates <= '". $ending_date ."' "
-			: "";
-
-		$return_type = ( $is_array ) ? ARRAY_A : OBJECT;
-
-		return $this->_wpdb->get_results( $this->_wpdb->prepare( "
-			SELECT c.dates, COUNT(c.dates) AS conversions FROM (SELECT DATE_FORMAT(FROM_UNIXTIME(SUBSTRING(meta_value,9,10)), '%s') AS dates FROM `". Hustle_Db::modules_meta_table() ."` WHERE module_id = %d AND meta_key LIKE '%s') AS c ". $date_condition ."GROUP BY c.dates", $date_format, $this->id, $conversion_query ), $return_type );
 	}
 
 	/**
@@ -1189,6 +1084,27 @@ abstract class Hustle_Model extends Hustle_Data {
 	}
 
 	/**
+	 * Retrieve the module's metas as an array.
+	 *
+	 * @since 4.0.1
+	 * @return array
+	 */
+	public function get_module_metas_as_array() {
+
+		$metas_array = array();
+		$module_metas = $this->get_module_meta_names();
+
+		foreach( $module_metas as $meta ) {
+			$method =  "get_" . $meta;
+			$value =  method_exists( $this, $method ) ? $this->{$method}()->to_array() : array();
+			$metas_array[ $meta ] = $value;
+
+		}
+
+		return $metas_array;
+	}
+
+	/**
      * Special save used in migration.
 	 * It keeps the passed module id when saving a new module.
 	 * It's useful when adding old modules in new tables in MU.
@@ -1221,7 +1137,7 @@ abstract class Hustle_Model extends Hustle_Data {
         do_action( 'hustle_after_migrate_module', $this->module_type, $module_data, $this->id );
 
         // Clear cache as well.
-        $this->clean_module_cache();
+        $this->clean_module_cache( 'data' );
         return $this->id;
     }
 }

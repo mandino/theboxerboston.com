@@ -313,12 +313,13 @@ class Hustle_Renderer_Sshare extends Hustle_Renderer_Abstract {
 						$html .= '<li>';
 
 							$html .= sprintf(
-								'<a %1$s class="hustle-share-icon hustle-share--%2$s" data-network="%3$s" data-counter="%4$s" data-link="%5$s">',
+								'<a %1$s class="hustle-share-icon hustle-share--%2$s" data-network="%3$s" data-counter="%4$s" data-link="%5$s" data-count="%6$s">',
 								$href_value,
 								esc_attr( $icon ),
 								esc_attr( $icon ),
 								'0' === $content->counter_enabled ? 'none' : esc_attr( $type ),
-								$link_type
+								$link_type,
+								esc_attr( $data['counter'] )
 							);
 
 								$html .= sprintf(
@@ -328,9 +329,16 @@ class Hustle_Renderer_Sshare extends Hustle_Renderer_Abstract {
 
 								if ( '1' === $content->counter_enabled ) {
 
+									if ( 'native' === $data['type'] && ! self::$is_preview ) {
+										$counter_content  = '<i class="hustle-icon-loader hustle-loading-icon" aria-hidden="true"></i>';
+
+									} else {
+										$counter_content    = ( '' !== $data['counter'] ) ? esc_attr( $data['counter'] ) : '0';
+									}
+
 									$html .= sprintf(
 										'<span class="hustle-counter" aria-hidden="true">%s</span>',
-										( '' !== $data['counter'] ) ? esc_attr( $data['counter'] ) : '0'
+										$counter_content
 									);
 								}
 

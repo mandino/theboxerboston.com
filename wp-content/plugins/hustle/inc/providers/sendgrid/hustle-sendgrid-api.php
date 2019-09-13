@@ -215,21 +215,21 @@ if ( ! class_exists( 'Hustle_SendGrid_Api' ) ) :
 		 */
 		public function create_and_add_recipient_to_list( $list_id, $data ) {
 			if ( empty( $list_id ) ) {
-				return new WP_Error( 'subscribe_error', __( 'The list ID is not defined.', Opt_In::TEXT_DOMAIN ) );
+				return new WP_Error( 'subscribe_error', __( 'The list ID is not defined.', 'wordpress-popup' ) );
 			}
 
 			$recipient_id = $this->add_recipient( $data );
 			if ( ! $recipient_id ) {
 				$missing_fields = $this->get_non_existent_fields( $data );
 				$error_message = empty( $missing_fields ) ?
-					__( 'The recipient could not be created. Check if your settings are correct.', Opt_In::TEXT_DOMAIN ) :
-					sprintf( __( 'The recipient could not be created. Please make sure these fields exist in your Sendgrid account: %s.', Opt_In::TEXT_DOMAIN ), implode( ', ', $missing_fields ) );
+					__( 'The recipient could not be created. Check if your settings are correct.', 'wordpress-popup' ) :
+					sprintf( __( 'The recipient could not be created. Please make sure these fields exist in your Sendgrid account: %s.', 'wordpress-popup' ), implode( ', ', $missing_fields ) );
 				return new WP_Error( 'subscribe_error', $error_message );
 			}
 
 			$recipient_added = $this->add_recipient_to_list( $recipient_id, $list_id );
 			if ( ! $recipient_added ) {
-				return new WP_Error( 'subscribe_error', __( 'The recipient could not be added to a list. Check if your settings are correct.', Opt_In::TEXT_DOMAIN ) );
+				return new WP_Error( 'subscribe_error', __( 'The recipient could not be added to a list. Check if your settings are correct.', 'wordpress-popup' ) );
 			}
 
 			return true;

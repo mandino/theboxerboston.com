@@ -16,6 +16,6 @@ class Opt_In_Condition_Visitor_Country extends Opt_In_Condition_Abstract {
 	}
 
 	public function label() {
-		return isset( $this->args->countries ) ? __( 'From specific countrie', Opt_In::TEXT_DOMAIN) : "";
+		return isset( $this->args->countries ) ? __( 'From specific countrie', 'wordpress-popup') : "";
 	}
 }

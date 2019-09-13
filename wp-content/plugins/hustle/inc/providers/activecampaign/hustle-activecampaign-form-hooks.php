@@ -38,7 +38,7 @@ class Hustle_ActiveCampaign_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstra
 			$api = $addon::api( $api_url, $api_key );
 
 			if ( empty( $submitted_data['email'] ) ) {
-				throw new Exception( __( 'Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN ) );
+				throw new Exception( __( 'Required Field "email" was not filled by the user.', 'wordpress-popup' ) );
 			}
 
 			$submitted_data = $this->check_legacy( $submitted_data );
@@ -82,7 +82,7 @@ class Hustle_ActiveCampaign_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstra
 
 			if ( ! empty( $custom_fields ) ) {
 				foreach ( $custom_fields as $key => $value ) {
-					if( ! in_array( strtoupper( $key ), $reserved_fields, true ) ){
+					if( ! in_array( strtoupper( $key ), $reserved_fields, true ) ) {
 						$key = 'field[%' . $key . '%,0]';
 						$submitted_data[ $key ] = $value;
 					}
@@ -93,7 +93,7 @@ class Hustle_ActiveCampaign_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstra
 
 			if ( is_wp_error( $res ) ) {
 				$is_sent = false;
-				$member_status = __( 'Member could not be subscribed.', Opt_In::TEXT_DOMAIN );
+				$member_status = __( 'Member could not be subscribed.', 'wordpress-popup' );
 				$error_detail = $res->get_error_message();
 			} else {
 				$member_status = $res['result_message'];
@@ -106,7 +106,7 @@ class Hustle_ActiveCampaign_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstra
 					'name'  => 'status',
 					'value' => array(
 						'is_sent'       => $is_sent,
-						'description'   => $is_sent ? __( 'Successfully added or updated member on ActiveCampaign list', Opt_In::TEXT_DOMAIN ) : $error_detail,
+						'description'   => $is_sent ? __( 'Successfully added or updated member on ActiveCampaign list', 'wordpress-popup' ) : $error_detail,
 						'member_status' => $member_status,
 						'data_sent'     => $utils->get_last_data_sent(),
 						'data_received' => $utils->get_last_data_received(),
@@ -157,7 +157,7 @@ class Hustle_ActiveCampaign_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstra
 		$api = $addon::api( $api_url, $api_key );
 
 		if ( empty( $submitted_data['email'] ) ) {
-			return __( 'Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN );
+			return __( 'Required Field "email" was not filled by the user.', 'wordpress-popup' );
 		}
 
 		if ( ! $allow_subscribed ) {

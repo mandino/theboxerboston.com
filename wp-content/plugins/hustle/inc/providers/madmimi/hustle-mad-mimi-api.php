@@ -142,7 +142,7 @@ class Hustle_Mad_Mimi_Api {
 		$utils->_last_url_request = trailingslashit( $this->_endpoint ) . $action;
 		$utils->_last_data_sent = $data;
 
-		return empty( $res ) ? __("Successful subscription", Opt_In::TEXT_DOMAIN) : $res;
+		return empty( $res ) ? __("Successful subscription", 'wordpress-popup') : $res;
 	}
 
 	/**
@@ -167,7 +167,7 @@ class Hustle_Mad_Mimi_Api {
 		$utils->_last_url_request = trailingslashit( $this->_endpoint ) . $action;
 		$utils->_last_data_sent = $data;
 
-		return empty( $res ) ? __("Successful subscription", Opt_In::TEXT_DOMAIN) : $res;
+		return empty( $res ) ? __("Successful subscription", 'wordpress-popup') : $res;
 	}
 
 	/**

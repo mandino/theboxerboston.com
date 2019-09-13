@@ -171,7 +171,7 @@ class Hustle_Get_Response extends Hustle_Provider_Abstract {
 						|| Hustle_Providers::get_instance()->activate_addon( $this->_slug ) ) {
 					$this->save_multi_settings_values( $global_multi_id, $settings_to_save );
 				} else {
-					$error_message = __( "Provider couldn't be activated.", Opt_In::TEXT_DOMAIN );
+					$error_message = __( "Provider couldn't be activated.", 'wordpress-popup' );
 					$has_errors = true;
 				}
 
@@ -180,17 +180,17 @@ class Hustle_Get_Response extends Hustle_Provider_Abstract {
 			if ( ! $has_errors ) {
 
 				return array(
-					'html'         => Hustle_Api_Utils::get_modal_title_markup( __( 'GetResponse Added', Opt_In::TEXT_DOMAIN ), __( 'You can now go to your forms and assign them to this integration', Opt_In::TEXT_DOMAIN ) ),
+					'html'         => Hustle_Api_Utils::get_modal_title_markup( __( 'GetResponse Added', 'wordpress-popup' ), __( 'You can now go to your forms and assign them to this integration', 'wordpress-popup' ) ),
 					'buttons'      => array(
 						'close' => array(
-							'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'close' ),
+							'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', 'wordpress-popup' ), 'sui-button-ghost', 'close' ),
 						),
 					),
 					'redirect'     => false,
 					'has_errors'   => false,
 					'notification' => array(
 						'type' => 'success',
-						'text' => '<strong>' . $this->get_title() . '</strong> ' . __( 'Successfully connected', Opt_In::TEXT_DOMAIN ),
+						'text' => '<strong>' . $this->get_title() . '</strong> ' . __( 'Successfully connected', 'wordpress-popup' ),
 					),
 				);
 
@@ -206,20 +206,20 @@ class Hustle_Get_Response extends Hustle_Provider_Abstract {
 					'label' => array(
 						'type'  => 'label',
 						'for'   => 'api_key',
-						'value' => __( 'API Key', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'API Key', 'wordpress-popup' ),
 					),
 					'api_key' => array(
 						'type'        => 'text',
 						'name'        => 'api_key',
 						'value'       => $current_data['api_key'],
-						'placeholder' => __( 'Enter Key', Opt_In::TEXT_DOMAIN ),
+						'placeholder' => __( 'Enter Key', 'wordpress-popup' ),
 						'id'          => 'api_key',
 						'icon'        => 'key',
 					),
 					'error' => array(
 						'type'  => 'error',
 						'class' => $api_key_validated ? 'sui-hidden' : '',
-						'value' => __( 'Please enter a valid GetResponse API key', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Please enter a valid GetResponse API key', 'wordpress-popup' ),
 					),
 				)
 			),
@@ -230,27 +230,27 @@ class Hustle_Get_Response extends Hustle_Provider_Abstract {
 					'label' => array(
 						'type'  => 'label',
 						'for'   => 'instance-name-input',
-						'value' => __( 'Identifier', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Identifier', 'wordpress-popup' ),
 					),
 					'name' => array(
 						'type'        => 'text',
 						'name'        => 'name',
 						'value'       => $current_data['name'],
-						'placeholder' => __( 'E.g. Business Account', Opt_In::TEXT_DOMAIN ),
+						'placeholder' => __( 'E.g. Business Account', 'wordpress-popup' ),
 						'id'          => 'instance-name-input',
 					),
 					'message' => array(
 						'type'  => 'description',
-						'value' => __( 'Helps to distinguish your integrations if you have connected to the multiple accounts of this integration.', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Helps to distinguish your integrations if you have connected to the multiple accounts of this integration.', 'wordpress-popup' ),
 					),
 				)
 			),
 		);
 
 		$step_html = Hustle_Api_Utils::get_modal_title_markup(
-			__( 'Configure GetResponse', Opt_In::TEXT_DOMAIN ),
+			__( 'Configure GetResponse', 'wordpress-popup' ),
 			sprintf(
-				__( 'Log in to your %1$sGetResponse account%2$s to get your API Key v3.', Opt_In::TEXT_DOMAIN ),
+				__( 'Log in to your %1$sGetResponse account%2$s to get your API Key v3.', 'wordpress-popup' ),
 				'<a href="https://app.getresponse.com/manage_api.html" target="_blank">',
 				'</a>'
 			)
@@ -265,16 +265,16 @@ class Hustle_Get_Response extends Hustle_Provider_Abstract {
 		if ( $is_edit ) {
 			$buttons = array(
 				'disconnect' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'disconnect', true ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', 'wordpress-popup' ), 'sui-button-ghost', 'disconnect', true ),
 				),
 				'save' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', Opt_In::TEXT_DOMAIN ), '', 'connect', true ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', 'wordpress-popup' ), '', 'connect', true ),
 				),
 			);
 		} else {
 			$buttons = array(
 				'connect' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Connect', Opt_In::TEXT_DOMAIN ), '', 'connect', true ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Connect', 'wordpress-popup' ), '', 'connect', true ),
 				),
 			);
 
@@ -310,7 +310,7 @@ class Hustle_Get_Response extends Hustle_Provider_Abstract {
 			$campaigns = $api->get_campaigns();
 
 			if ( is_wp_error( $campaigns ) ) {
-				Hustle_Api_Utils::maybe_log( __METHOD__, __( 'Invalid GetResponse API key.', Opt_In::TEXT_DOMAIN ) );
+				Hustle_Api_Utils::maybe_log( __METHOD__, __( 'Invalid GetResponse API key.', 'wordpress-popup' ) );
 				return false;
 			}
 

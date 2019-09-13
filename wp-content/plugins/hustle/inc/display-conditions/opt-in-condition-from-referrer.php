@@ -15,6 +15,6 @@ class Opt_In_Condition_From_Referrer extends Opt_In_Condition_Abstract {
 	}
 
 	public function label() {
-		return __( 'Not from specific referrers', Opt_In::TEXT_DOMAIN);
+		return __( 'Not from specific referrers', 'wordpress-popup');
 	}
 }

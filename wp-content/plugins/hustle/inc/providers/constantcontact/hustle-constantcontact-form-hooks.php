@@ -34,7 +34,7 @@ class Hustle_ConstantContact_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstr
 			$api = $addon->api();
 
 			if ( empty( $submitted_data['email'] ) ) {
-				throw new Exception( __('Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN ) );
+				throw new Exception( __('Required Field "email" was not filled by the user.', 'wordpress-popup' ) );
 			}
 
 			$list_id = $addon_setting_values['list_id'];
@@ -44,36 +44,30 @@ class Hustle_ConstantContact_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstr
 			$is_authorize = (bool) $api->get_token( 'access_token' );
 
 			if ( ! $is_authorize ) {
-				throw new Exception( __( 'Wrong API credentials', Opt_In::TEXT_DOMAIN ) );
+				throw new Exception( __( 'Wrong API credentials', 'wordpress-popup' ) );
 			}
 
 			$existing_contact = $api->get_contact( $submitted_data['email'] );
 			$exists = $api->contact_exist( $existing_contact, $list_id );
 			$is_sent = false;
-			$details = __( 'Something went wrong.', Opt_In::TEXT_DOMAIN );
+			$details = __( 'Something went wrong.', 'wordpress-popup' );
+			$first_name = isset( $submitted_data['first_name'] ) ? $submitted_data['first_name'] : '';
+			$last_name = isset( $submitted_data['last_name'] ) ? $submitted_data['last_name'] : '';
+			$custom_fields = array_diff_key( $submitted_data, array(
+				'email' => '',
+				'first_name' => '',
+				'last_name' => '',
+			) );
+			$custom_fields = array_filter( $custom_fields );
 			if ( $exists ) {
-				$details = __( 'This email address has already subscribed.', Opt_In::TEXT_DOMAIN );
+				$response = $api->updateSubscription( $existing_contact, $first_name, $last_name, $list_id, $custom_fields );
 			} else {
-				$first_name = isset( $submitted_data['first_name'] ) ? $submitted_data['first_name'] : '';
-				$last_name = isset( $submitted_data['last_name'] ) ? $submitted_data['last_name'] : '';
+				$response = $api->subscribe( $submitted_data['email'], $first_name, $last_name, $list_id, $custom_fields );
+			}
 
-				$custom_fields = array_diff_key( $submitted_data, array(
-					'email' => '',
-					'first_name' => '',
-					'last_name' => '',
-				) );
-				$custom_fields = array_filter( $custom_fields );
-
-				if ( is_object( $existing_contact ) ) {
-					$response = $api->updateSubscription( $existing_contact, $first_name, $last_name, $list_id, $custom_fields );
-				} else {
-					$response = $api->subscribe( $submitted_data['email'], $first_name, $last_name, $list_id, $custom_fields );
-				}
-
-				if ( isset( $response ) ) {
-					$is_sent = true;
-					$details = __( 'Successfully added or updated member on Constant Contact list', Opt_In::TEXT_DOMAIN );
-				}
+			if ( isset( $response ) ) {
+				$is_sent = true;
+				$details = __( 'Successfully added or updated member on Constant Contact list', 'wordpress-popup' );
 			}
 
 			$utils = Hustle_Provider_Utils::get_instance();
@@ -128,7 +122,7 @@ class Hustle_ConstantContact_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstr
 		$addon_setting_values 		= $form_settings_instance->get_form_settings_values();
 
 		if ( empty( $submitted_data['email'] ) ) {
-			return __( 'Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN );
+			return __( 'Required Field "email" was not filled by the user.', 'wordpress-popup' );
 		}
 
 		if ( ! $allow_subscribed ) {

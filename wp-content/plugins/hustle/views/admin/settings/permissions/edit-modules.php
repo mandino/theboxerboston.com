@@ -1,8 +1,8 @@
 <div class="sui-box-settings-row">
 
 	<div class="sui-box-settings-col-1">
-		<span class="sui-settings-label"><?php esc_html_e( 'Edit Existing Modules', Opt_In::TEXT_DOMAIN ); ?></span>
-		<span class="sui-description"><?php esc_html_e( 'Choose the user roles which can edit the existing modules.', Opt_In::TEXT_DOMAIN ); ?></span>
+		<span class="sui-settings-label"><?php esc_html_e( 'Edit Existing Modules', 'wordpress-popup' ); ?></span>
+		<span class="sui-description"><?php esc_html_e( 'Choose the user roles which can edit the existing modules.', 'wordpress-popup' ); ?></span>
 	</div>
 
 	<div class="sui-box-settings-col-2">
@@ -14,7 +14,7 @@
 		
 		if ( 0 === count( $modules ) && !$filtered ) { ?>
 				<div class="sui-notice">
-					<p><?php esc_html_e( "You haven't created any module yet.", Opt_In::TEXT_DOMAIN ); ?></p>
+					<p><?php esc_html_e( "You haven't created any module yet.", 'wordpress-popup' ); ?></p>
 				</div>
 
 		<?php } else {
@@ -36,10 +36,10 @@
 
 				// PAGINATION: Filter
 				$values = array(
-					'popup' => __( 'Pop-up', Opt_In::TEXT_DOMAIN ),
-					'slidein' => __( 'Slide-in', Opt_In::TEXT_DOMAIN ),
-					'embedded' => __( 'Embed', Opt_In::TEXT_DOMAIN ),
-					'social_sharing' => __( 'Share', Opt_In::TEXT_DOMAIN ),
+					'popup' => __( 'Pop-up', 'wordpress-popup' ),
+					'slidein' => __( 'Slide-in', 'wordpress-popup' ),
+					'embedded' => __( 'Embed', 'wordpress-popup' ),
+					'social_sharing' => __( 'Share', 'wordpress-popup' ),
 				); ?>
 
 				<form method="get" class="sui-pagination-filter">
@@ -55,7 +55,7 @@
 
 							<div class="sui-form-field">
 
-								<label class="sui-label"><?php esc_html_e( 'Module type', Opt_In::TEXT_DOMAIN ); ?></label>
+								<label class="sui-label"><?php esc_html_e( 'Module type', 'wordpress-popup' ); ?></label>
 
 								<?php foreach ( $values as $value => $module ) { ?>
 
@@ -85,13 +85,13 @@
 
 							<div class="sui-form-field">
 
-								<label for="forminator-filter-keyword" class="sui-label"><?php esc_html_e( 'Module name has keyword', Opt_In::TEXT_DOMAIN ); ?></label>
+								<label for="forminator-filter-keyword" class="sui-label"><?php esc_html_e( 'Module name has keyword', 'wordpress-popup' ); ?></label>
 
 								<div class="sui-control-with-icon">
 
 									<input type="text"
 										name="filter[q]"
-										placeholder="<?php esc_html_e( 'E.g. Discount', Opt_In::TEXT_DOMAIN ); ?>"
+										placeholder="<?php esc_html_e( 'E.g. Discount', 'wordpress-popup' ); ?>"
 										value="<?php echo esc_attr( isset( $filter['q'] )? esc_attr( $filter['q'] ) : '' ); ?>"
 										id="forminator-filter-keyword"
 										class="sui-form-control" />
@@ -116,10 +116,10 @@
 
 							<div class="sui-form-field">
 
-								<label class="sui-label"><?php esc_html_e( 'Use role assigned for editing', Opt_In::TEXT_DOMAIN ); ?></label>
+								<label class="sui-label"><?php esc_html_e( 'Use role assigned for editing', 'wordpress-popup' ); ?></label>
 
 								<select name="filter[role]">
-									<option value="any"><?php esc_html_e( 'Any', Opt_In::TEXT_DOMAIN ); ?></option>
+									<option value="any"><?php esc_html_e( 'Any', 'wordpress-popup' ); ?></option>
 									<?php foreach ( $roles as $value => $label ) {
 										if ( 'administrator' === $value ) {
 											continue;
@@ -143,14 +143,14 @@
 
 							<div class="sui-form-field">
 
-								<label class="sui-label"><?php esc_html_e( 'Sort by', Opt_In::TEXT_DOMAIN ); ?></label>
+								<label class="sui-label"><?php esc_html_e( 'Sort by', 'wordpress-popup' ); ?></label>
 
 								<select name="filter[sort]">
 									<?php
 									$values = array(
-										'module_name' => __( 'Name', Opt_In::TEXT_DOMAIN ),
-										'module_id' => __( 'Id', Opt_In::TEXT_DOMAIN ),
-										'module_type' => __( 'Type', Opt_In::TEXT_DOMAIN ),
+										'module_name' => __( 'Name', 'wordpress-popup' ),
+										'module_id' => __( 'Id', 'wordpress-popup' ),
+										'module_type' => __( 'Type', 'wordpress-popup' ),
 									);
 
 									foreach ( $values as $value => $label ) {
@@ -176,7 +176,7 @@
 						<div class="sui-actions-right">
 
 							<input type="submit"
-								value="<?php esc_attr_e( 'Apply', Opt_In::TEXT_DOMAIN ); ?>"
+								value="<?php esc_attr_e( 'Apply', 'wordpress-popup' ); ?>"
 								class="sui-button" />
 
 						</div>
@@ -190,7 +190,7 @@
 			<?php if ( 0 === count( $modules ) && $filtered ) { ?>
 
 				<div class="sui-notice sui-notice-info">
-					<p><?php esc_html_e( "You don't have any module corresponding to these filter parameters.", Opt_In::TEXT_DOMAIN ); ?></p>
+					<p><?php esc_html_e( "You don't have any module corresponding to these filter parameters.", 'wordpress-popup' ); ?></p>
 				</div>
 
 			<?php } else { ?>
@@ -198,8 +198,8 @@
 
 					<thead>
 						<tr>
-							<th><?php esc_html_e( 'Module', Opt_In::TEXT_DOMAIN ); ?></th>
-							<th><?php esc_html_e( 'User Role', Opt_In::TEXT_DOMAIN ); ?></th>
+							<th><?php esc_html_e( 'Module', 'wordpress-popup' ); ?></th>
+							<th><?php esc_html_e( 'User Role', 'wordpress-popup' ); ?></th>
 						</tr>
 					</thead>
 

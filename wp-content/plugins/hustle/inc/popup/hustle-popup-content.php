@@ -16,7 +16,7 @@ class Hustle_Popup_Content extends Hustle_Meta {
 			'main_content' => '',
 			'feature_image' => '',
 			'show_never_see_link' => '0',
-			'never_see_link_text' => __( 'Never see this message again.', Opt_In::TEXT_DOMAIN ),
+			'never_see_link_text' => __( 'Never see this message again.', 'wordpress-popup' ),
 			'show_cta' => '0',
 			'cta_label' => '',
 			'cta_url' => '',

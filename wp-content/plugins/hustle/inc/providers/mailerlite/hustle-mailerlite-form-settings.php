@@ -66,7 +66,7 @@ class Hustle_MailerLite_Form_Settings extends Hustle_Provider_Form_Settings_Abst
 
 		$is_submit = ! empty( $submitted_data['is_submit'] ) && empty( $submitted_data['page'] );
 		if ( $is_submit && empty( $submitted_data['list_id'] ) ) {
-			$error_message = __( 'The email list is required.', Opt_In::TEXT_DOMAIN );
+			$error_message = __( 'The email list is required.', 'wordpress-popup' );
 		}
 		if ( !$is_submit && ! empty( $submitted_data['page'] ) ) {
 			$settings = array();
@@ -77,8 +77,8 @@ class Hustle_MailerLite_Form_Settings extends Hustle_Provider_Form_Settings_Abst
 		$options = $this->get_first_step_options( $current_data );
 
 		$step_html = Hustle_Api_Utils::get_modal_title_markup(
-			__( 'MailerLite List', Opt_In::TEXT_DOMAIN ),
-			__( 'Choose the list you want to send form data to.', Opt_In::TEXT_DOMAIN )
+			__( 'MailerLite List', 'wordpress-popup' ),
+			__( 'Choose the list you want to send form data to.', 'wordpress-popup' )
 		);
 		$step_html .= Hustle_Api_Utils::get_html_for_options( $options );
 
@@ -92,10 +92,10 @@ class Hustle_MailerLite_Form_Settings extends Hustle_Provider_Form_Settings_Abst
 
 		$buttons = array(
 			'disconnect' => array(
-				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'disconnect_form', true ),
+				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', 'wordpress-popup' ), 'sui-button-ghost', 'disconnect_form', true ),
 			),
 			'save' => array(
-				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', Opt_In::TEXT_DOMAIN ), '', 'next', true ),
+				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', 'wordpress-popup' ), '', 'next', true ),
 			),
 		);
 
@@ -183,7 +183,7 @@ class Hustle_MailerLite_Form_Settings extends Hustle_Provider_Form_Settings_Abst
 					'label' => array(
 						'type'  => 'label',
 						'for'   => 'list_id',
-						'value' => __( 'Email List', Opt_In::TEXT_DOMAIN),
+						'value' => __( 'Email List', 'wordpress-popup'),
 					),
 					'choose_email_list' => array(
 						'type'          => 'select',

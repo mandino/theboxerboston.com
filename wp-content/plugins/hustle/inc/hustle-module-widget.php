@@ -17,8 +17,8 @@ class Hustle_Module_Widget extends WP_Widget {
 	public function __construct() {
 		parent::__construct(
 			self::WIDGET_ID,
-			__( 'Hustle', Opt_In::TEXT_DOMAIN ),
-			array( 'description' => __( 'A widget to add Hustle Embeds and Social Sharing.', Opt_In::TEXT_DOMAIN ) )
+			__( 'Hustle', 'wordpress-popup' ),
+			array( 'description' => __( 'A widget to add Hustle Embeds and Social Sharing.', 'wordpress-popup' ) )
 		);
 	}
 
@@ -41,7 +41,7 @@ class Hustle_Module_Widget extends WP_Widget {
 			if ( ! empty( $instance['title'] ) ) {
 				echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ). $args['after_title'];
 			}
-			echo esc_attr__( 'Select Module', Opt_In::TEXT_DOMAIN );
+			echo esc_attr__( 'Select Module', 'wordpress-popup' );
 
 			echo $args['after_widget'];
 
@@ -50,7 +50,7 @@ class Hustle_Module_Widget extends WP_Widget {
 
 		$module = Hustle_Module_Collection::instance()->return_model_from_id( $instance['module_id'] );
 
-		if ( ! $module->active || ! $module->is_display_type_active( Hustle_Module_Model::WIDGET_MODULE ) ) {
+		if ( ! $module || ! $module->active || ! $module->is_display_type_active( Hustle_Module_Model::WIDGET_MODULE ) ) {
 			return;
 		}
 
@@ -83,13 +83,13 @@ class Hustle_Module_Widget extends WP_Widget {
 			$instance['module_id'] = -1; }
 		?>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php echo esc_attr__( 'Title:', Opt_In::TEXT_DOMAIN ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php echo esc_attr__( 'Title:', 'wordpress-popup' ); ?></label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'module_id' ) ); ?>"><?php echo esc_attr__( 'Select Module:', Opt_In::TEXT_DOMAIN ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'module_id' ) ); ?>"><?php echo esc_attr__( 'Select Module:', 'wordpress-popup' ); ?></label>
 			<select name="<?php echo esc_attr( $this->get_field_name( 'module_id' ) ); ?>" id="hustle_module_id">
-				<option value=""><?php echo esc_attr__( 'Select Module', Opt_In::TEXT_DOMAIN ); ?></option>
+				<option value=""><?php echo esc_attr__( 'Select Module', 'wordpress-popup' ); ?></option>
 				<?php
 					$types = array( 'embedded', 'social_sharing' );
 				foreach ( Hustle_Module_Collection::instance()->get_embed_id_names( $types ) as $mod ) :

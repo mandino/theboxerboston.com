@@ -71,10 +71,6 @@ abstract class Hustle_Meta {
 		return false;
 	}
 
-	public function to_json(){
-		return wp_json_encode( $this->to_array() );
-	}
-	
 	protected function get_emails_base_defaults() {
 		return array(
 			'form_elements' => Opt_In::default_form_fields(),

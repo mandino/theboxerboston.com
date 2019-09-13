@@ -8,7 +8,7 @@ $unsubscription_messages = Hustle_Settings_Admin::get_unsubscribe_messages();
 	<form id="unsubscribe-settings-form" data-nonce="<?php echo esc_attr( wp_create_nonce( 'hustle-settings' ) ); ?>">
 
 		<div class="sui-box-header">
-			<h2 class="sui-box-title"><?php esc_html_e( 'Unsubscribe', Opt_In::TEXT_DOMAIN ); ?></h2>
+			<h2 class="sui-box-title"><?php esc_html_e( 'Unsubscribe', 'wordpress-popup' ); ?></h2>
 		</div>
 
 		<div class="sui-box-body">
@@ -40,7 +40,7 @@ $unsubscription_messages = Hustle_Settings_Admin::get_unsubscribe_messages();
 		<div class="sui-box-footer">
 			<div class="sui-actions-right">
 				<button type="submit" class="sui-button sui-button-blue">
-					<span class="sui-loading-text"><?php esc_html_e( 'Save Settings', Opt_In::TEXT_DOMAIN ); ?></span>
+					<span class="sui-loading-text"><?php esc_html_e( 'Save Settings', 'wordpress-popup' ); ?></span>
 					<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 				</button>
 			</div>

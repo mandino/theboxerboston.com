@@ -102,11 +102,6 @@ class Hustle_Mail{
 	public function set_headers( $headers = array() ) {
 		if ( !empty( $headers ) ) {
 			$this->headers = $headers;
-		} else {
-			$this->headers = array(
-				'From: ' . $this->sender_name . ' <' . $this->sender_email . '>',
-				'Content-Type: text/html; charset=UTF-8'
-			);
 		}
 	}
 

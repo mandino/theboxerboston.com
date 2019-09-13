@@ -9,7 +9,7 @@ if ( ! class_exists( 'Hustle_HubSpot' ) ) :
  */
 	class Hustle_HubSpot extends Hustle_Provider_Abstract {
 		const SLUG = 'hubspot';
-		//const NAME = "Hubspot";
+		//const NAME = "HubSpot";
 
 		/**
 	 * Provider Instance
@@ -42,7 +42,7 @@ if ( ! class_exists( 'Hustle_HubSpot' ) ) :
 	 * @since 3.0.5
 	 * @var string
 	 */
-		protected $_title                  = 'Hubspot';
+		protected $_title                  = 'HubSpot';
 
 	/**
 	 * @since 4.0
@@ -163,17 +163,17 @@ if ( ! class_exists( 'Hustle_HubSpot' ) ) :
 
 				if ( ! $has_errors ) {
 					return array(
-					'html'         => Hustle_Api_Utils::get_modal_title_markup( __( 'Hubspot Added', Opt_In::TEXT_DOMAIN ), __( 'You can now go to your forms and assign them to this integration', Opt_In::TEXT_DOMAIN ) ),
+					'html'         => Hustle_Api_Utils::get_modal_title_markup( __( 'HubSpot Added', 'wordpress-popup' ), __( 'You can now go to your forms and assign them to this integration', 'wordpress-popup' ) ),
 					'buttons'      => array(
 						'close' => array(
-							'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'close' ),
+							'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', 'wordpress-popup' ), 'sui-button-ghost', 'close' ),
 						),
 					),
 					'redirect'     => false,
 					'has_errors'   => false,
 					'notification' => array(
 						'type' => 'success',
-						'text' => '<strong>' . $this->get_title() . '</strong> ' . __( 'Successfully connected', Opt_In::TEXT_DOMAIN ),
+						'text' => '<strong>' . $this->get_title() . '</strong> ' . __( 'Successfully connected', 'wordpress-popup' ),
 					),
 					);
 				}
@@ -189,12 +189,12 @@ if ( ! class_exists( 'Hustle_HubSpot' ) ) :
 			$link = '<a href="' . esc_url( $url ) . '">';
 
 			if ( $is_authorize ) {
-				$info = sprintf( __( 'You\'re successfully connected your Hubspot account. Please, save this configuration or %1$sclick here%2$s to reconnect another Hubspot account.', Opt_In::TEXT_DOMAIN ), $link, '</a>' );
+				$info = sprintf( __( 'You\'re successfully connected your HubSpot account. Please, save this configuration or %1$sclick here%2$s to reconnect another HubSpot account.', 'wordpress-popup' ), $link, '</a>' );
 			} else {
-				$info = sprintf( __( 'Please %1$sclick here%2$s to connect your Hubspot account.', Opt_In::TEXT_DOMAIN ), $link, '</a>' );
+				$info = sprintf( __( 'Please %1$sclick here%2$s to connect your HubSpot account.', 'wordpress-popup' ), $link, '</a>' );
 			}
 
-			$info .= ' ' . __( 'You will be asked to give us access to your selected account and will be redirected back to this page.', Opt_In::TEXT_DOMAIN );
+			$info .= ' ' . __( 'You will be asked to give us access to your selected account and will be redirected back to this page.', 'wordpress-popup' );
 
 			$options = array(
 				array(
@@ -204,7 +204,7 @@ if ( ! class_exists( 'Hustle_HubSpot' ) ) :
 				),
 			);
 
-			$step_html = Hustle_Api_Utils::get_modal_title_markup( __( 'Configure Hubspot', Opt_In::TEXT_DOMAIN ), $info );
+			$step_html = Hustle_Api_Utils::get_modal_title_markup( __( 'Configure HubSpot', 'wordpress-popup' ), $info );
 			$step_html .= Hustle_Api_Utils::get_html_for_options( $options );
 
 			if ( $has_errors ) {
@@ -215,25 +215,25 @@ if ( ! class_exists( 'Hustle_HubSpot' ) ) :
 			if ( $is_edit ) {
 				$buttons = array(
 				'disconnect' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'disconnect', true ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', 'wordpress-popup' ), 'sui-button-ghost', 'disconnect', true ),
 				),
 				'save' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', Opt_In::TEXT_DOMAIN ), '', 'connect', true ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', 'wordpress-popup' ), '', 'connect', true ),
 				),
 				);
 			} else if ( $is_authorize ) {
 				$buttons = array(
 				'close' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'close' ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', 'wordpress-popup' ), 'sui-button-ghost', 'close' ),
 				),
 				'save' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', Opt_In::TEXT_DOMAIN ), '', 'connect', true ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', 'wordpress-popup' ), '', 'connect', true ),
 				),
 				);
 			} else {
 				$buttons = array(
 				'close' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'close' ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', 'wordpress-popup' ), 'sui-button-ghost', 'close' ),
 				),
 				);
 
@@ -256,7 +256,7 @@ if ( ! class_exists( 'Hustle_HubSpot' ) ) :
 
 			/*
 			 * Our regular migration would've saved the provider settings in a format that's incorrect for HubSpot
-			 * 
+			 *
 			 * Let's fix that now.
 			 */
 			$module_provider_settings = $module->get_provider_settings( $this->get_slug() );
@@ -278,7 +278,7 @@ if ( ! class_exists( 'Hustle_HubSpot' ) ) :
 
 		public function add_custom_fields( $fields ) {
 			$api 	= $this->api();
-			$exist 	= false;
+			$error 	= false;
 
 			if ( $api && ! $api->is_error ) {
 				// Get the existing fields
@@ -301,13 +301,13 @@ if ( ! class_exists( 'Hustle_HubSpot' ) ) :
 						'groupName' => 'contactinformation',
 					);
 
-					if ( $api->add_property( $property ) ) {
-						$exist = true;
+					if ( !$api->add_property( $property ) ) {
+						$error = true;
 					}
 				}
 			}
 
-			if ( $exist ) {
+			if ( !$error ) {
 				return array(
 					'success' => true,
 					'field' => $fields,

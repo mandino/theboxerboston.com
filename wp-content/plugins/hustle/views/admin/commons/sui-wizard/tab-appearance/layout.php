@@ -12,12 +12,12 @@ $content_focus = self::$plugin_url . 'assets/images/layouts/layout-content-focus
 <div class="sui-box-settings-row">
 
 	<div class="sui-box-settings-col-1">
-		<span class="sui-settings-label"><?php esc_html_e( 'Layout', Opt_In::TEXT_DOMAIN ); ?></span>
+		<span class="sui-settings-label"><?php esc_html_e( 'Layout', 'wordpress-popup' ); ?></span>
 
 		<?php if ( $is_optin ) { ?>
-			<span class="sui-description"><?php printf( esc_html__( 'Select from one of the pre-built layouts for your %s as per your liking.', Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?></span>
+			<span class="sui-description"><?php printf( esc_html__( 'Select from one of the pre-built layouts for your %s as per your liking.', 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?></span>
 		<?php } else { ?>
-			<span class="sui-description"><?php printf( esc_html__( 'Choose one of the pre-built layouts for your %s content.', Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?></span>
+			<span class="sui-description"><?php printf( esc_html__( 'Choose one of the pre-built layouts for your %s content.', 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?></span>
 		<?php } ?>
 	</div>
 
@@ -37,7 +37,7 @@ $content_focus = self::$plugin_url . 'assets/images/layouts/layout-content-focus
 						data-attribute="form_layout"
 						{{_.checked( ( 'one' === form_layout ) , true)}} />
 					<span aria-hidden="true"></span>
-					<span><?php esc_html_e( 'Default', Opt_In::TEXT_DOMAIN ); ?></span>
+					<span><?php esc_html_e( 'Default', 'wordpress-popup' ); ?></span>
 				</span>
 
 			</label>
@@ -54,7 +54,7 @@ $content_focus = self::$plugin_url . 'assets/images/layouts/layout-content-focus
 						data-attribute="form_layout"
 						{{_.checked( ( 'two' === form_layout ) , true)}} />
 					<span aria-hidden="true"></span>
-					<span><?php esc_html_e( 'Compact', Opt_In::TEXT_DOMAIN ); ?></span>
+					<span><?php esc_html_e( 'Compact', 'wordpress-popup' ); ?></span>
 				</span>
 
 			</label>
@@ -71,7 +71,7 @@ $content_focus = self::$plugin_url . 'assets/images/layouts/layout-content-focus
 						data-attribute="form_layout"
 						{{_.checked( ( 'three' === form_layout ) , true)}} />
 					<span aria-hidden="true"></span>
-					<span><?php esc_html_e( 'Opt-in Focus', Opt_In::TEXT_DOMAIN ); ?></span>
+					<span><?php esc_html_e( 'Opt-in Focus', 'wordpress-popup' ); ?></span>
 				</span>
 
 			</label>
@@ -88,7 +88,7 @@ $content_focus = self::$plugin_url . 'assets/images/layouts/layout-content-focus
 						data-attribute="form_layout"
 						{{_.checked( ( 'four' === form_layout ) , true)}} />
 					<span aria-hidden="true"></span>
-					<span><?php esc_html_e( 'Content Focus', Opt_In::TEXT_DOMAIN ); ?></span>
+					<span><?php esc_html_e( 'Content Focus', 'wordpress-popup' ); ?></span>
 				</span>
 
 			</label>
@@ -107,7 +107,7 @@ $content_focus = self::$plugin_url . 'assets/images/layouts/layout-content-focus
 						data-attribute="style"
 						{{ _.checked( ( 'minimal' === style ), true ) }} />
 					<span aria-hidden="true"></span>
-					<span><?php esc_html_e( 'Default', Opt_In::TEXT_DOMAIN ); ?></span>
+					<span><?php esc_html_e( 'Default', 'wordpress-popup' ); ?></span>
 				</span>
 
 			</label>
@@ -124,7 +124,7 @@ $content_focus = self::$plugin_url . 'assets/images/layouts/layout-content-focus
 						data-attribute="style"
 						{{_.checked( ( 'simple' === style ) , true)}} />
 					<span aria-hidden="true"></span>
-					<span><?php esc_html_e( 'Compact', Opt_In::TEXT_DOMAIN ); ?></span>
+					<span><?php esc_html_e( 'Compact', 'wordpress-popup' ); ?></span>
 				</span>
 
 			</label>
@@ -141,7 +141,7 @@ $content_focus = self::$plugin_url . 'assets/images/layouts/layout-content-focus
 						data-attribute="style"
 						{{_.checked( ( 'cabriolet' === style ) , true)}} />
 					<span aria-hidden="true"></span>
-					<span><?php esc_html_e( 'Stacked', Opt_In::TEXT_DOMAIN ); ?></span>
+					<span><?php esc_html_e( 'Stacked', 'wordpress-popup' ); ?></span>
 				</span>
 
 			</label>

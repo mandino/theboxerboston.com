@@ -23,8 +23,8 @@
 
 					<tr>
 
-						<th><?php esc_html_e( 'Name', Opt_In::TEXT_DOMAIN ); ?></th>
-						<th class="hui-status"><?php esc_html_e( 'Status', Opt_In::TEXT_DOMAIN ); ?></th>
+						<th><?php esc_html_e( 'Name', 'wordpress-popup' ); ?></th>
+						<th class="hui-status"><?php esc_html_e( 'Status', 'wordpress-popup' ); ?></th>
 
 					</tr>
 
@@ -35,11 +35,11 @@
 					<?php foreach ( $modules as $module ) {
 
 						$status_class = 'draft';
-						$status_name  = esc_html__( 'Draft', Opt_In::TEXT_DOMAIN );
+						$status_name  = esc_html__( 'Draft', 'wordpress-popup' );
 
 						if ( $module->active ) {
 							$status_class = 'published';
-							$status_name  = esc_html__( 'Published', Opt_In::TEXT_DOMAIN );
+							$status_name  = esc_html__( 'Published', 'wordpress-popup' );
 						} ?>
 
 						<tr>
@@ -61,14 +61,14 @@
 											'view-stats' => $module->module_id,
 										) ), 'admin.php' ); ?>
 										" class="sui-button-icon sui-tooltip"
-										data-tooltip="<?php esc_html_e( 'View Stats', Opt_In::TEXT_DOMAIN ); ?>">
+										data-tooltip="<?php esc_html_e( 'View Stats', 'wordpress-popup' ); ?>">
 										<i class="sui-icon-graph-line" aria-hidden="true"></i>
 									</a>
 
 									<div class="sui-dropdown">
 										<?php
 										// Actions
-										$this->render(
+										self::static_render(
 											'admin/commons/sui-listing/elements/actions',
 											array(
 												'module' => $module,
@@ -110,7 +110,7 @@
 				class="sui-button sui-button-blue"
 			>
 				<i class="sui-icon-plus" aria-hidden="true"></i>
-				<?php esc_html_e( 'Create', Opt_In::TEXT_DOMAIN ); ?>
+				<?php esc_html_e( 'Create', 'wordpress-popup' ); ?>
 			</a>
 		<?php } ?>
 

@@ -1,5 +1,6 @@
-( function() {
+( function( $ ) {
     tinymce.PluginManager.add( 'hustle', function( editor, url ) {
+
 		if ( -1 === $.inArray( editor.id, hustleData.available_editors ) ) {
 			return;
 		}
@@ -14,7 +15,7 @@
 			<i class="sui-icon-layout" aria-hidden="true"></i>
 			<span class="sui-screen-reader-text">Opt-in options</span>
 		</button>
-		<ul class="hustle-button-options hustle-fields-placeholders-options">${options}</ul></div>`.trim();
+		<ul class="hustle-button-options hustle-fields-placeholders-options" data-mce-id="${editor.id}">${options}</ul></div>`.trim();
 
 		// Add the custom button to the editor.
         editor.addButton( 'hustlefields', {
@@ -26,11 +27,12 @@
 			}
         });
 
-		$( 'body' ).on( 'click', '.hustle-button-options', function( e ) {
-			var $this = $( e.target );
-			editor.insertContent( $this.val() );
-		});
-
     });
 
-} () );
+    $( 'body' ).on( 'click', '.hustle-button-options', function( e ) {
+		var $this = $( e.target ),
+			$mce  = $( this ).data('mce-id');
+		tinymce.get( $mce ).insertContent( $this.val() );
+	});
+
+} (jQuery) );

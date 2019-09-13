@@ -9,12 +9,10 @@ if ( ! class_exists( 'Hustle_Modules_Common_Admin_Ajax' ) ) :
  */
 	class Hustle_Modules_Common_Admin_Ajax {
 
-		private $_hustle;
 		private $_admin;
 
-		public function __construct( Opt_In $hustle, Hustle_Modules_Common_Admin $admin ) {
+		public function __construct( Hustle_Modules_Common_Admin $admin ) {
 
-			$this->_hustle = $hustle;
 			$this->_admin = $admin;
 
 			add_action( 'wp_ajax_hustle_save_module', array( $this, 'save_module' ) );
@@ -30,6 +28,9 @@ if ( ! class_exists( 'Hustle_Modules_Common_Admin_Ajax' ) ) :
 			// Used for Gutenberg.
 			add_action( 'wp_ajax_hustle_render_module', array( $this, 'render_module' ) );
 			add_action( 'wp_ajax_hustle_get_module_id_by_shortcode', array( $this, 'get_module_id_by_shortcode' ) );
+
+			// Ajax search for posts/pages/categories/tags visibility conditions.
+			add_action( 'wp_ajax_get_new_condition_ids', array( $this, 'get_new_condition_ids' ) );
 		}
 
 		/**
@@ -123,8 +124,9 @@ if ( ! class_exists( 'Hustle_Modules_Common_Admin_Ajax' ) ) :
 		public function import_module() {
 
 			$module_type = trim( filter_input( INPUT_POST, 'type', FILTER_SANITIZE_STRING ) );
+
 			if ( ! $module_type ) {
-				wp_send_json_error( __( 'Invalid Request', Opt_In::TEXT_DOMAIN ) );
+				wp_send_json_error( __( 'Invalid Request', 'wordpress-popup' ) );
 			}
 
 			Opt_In_Utils::validate_ajax_call( 'hustle_module_import' . $module_type );
@@ -143,10 +145,10 @@ if ( ! class_exists( 'Hustle_Modules_Common_Admin_Ajax' ) ) :
 			// Get the file containing the module data.
 			$file = isset( $_FILES['file'] ) ? $_FILES['file'] : false;
 			if ( ! $file ) {
-				wp_send_json_error( array( 'error_message' => __( 'The file is required', Opt_In::TEXT_DOMAIN ) ) );
+				wp_send_json_error( array( 'error_message' => __( 'The file is required', 'wordpress-popup' ) ) );
 
 			} else if ( ! empty( $file['error'] ) ) {
-				wp_send_json_error( array( 'error_message' => sprintf( __( 'Error: %s', Opt_In::TEXT_DOMAIN ), esc_html( $file['error'] ) ) ) );
+				wp_send_json_error( array( 'error_message' => sprintf( __( 'Error: %s', 'wordpress-popup' ), esc_html( $file['error'] ) ) ) );
 			}
 			$overrides = array(
 				'test_form' => false,
@@ -161,7 +163,8 @@ if ( ! class_exists( 'Hustle_Modules_Common_Admin_Ajax' ) ) :
 			if ( strpos( $filename, '.json' ) || strpos( $filename, '.JSON' ) ) {
 				$data = json_decode( $file_content, true );
 			}
-			$version = $this->_hustle->get_const_var( 'VERSION' );
+
+			$version = Opt_In::VERSION;
 			$type_from_file = 'unknown';
 
 			// Check data
@@ -170,7 +173,7 @@ if ( ! class_exists( 'Hustle_Modules_Common_Admin_Ajax' ) ) :
 				// Import from 4.0.0
 				$compare = version_compare( $data['plugin']['version'], '4.0', '>=' );
 				if ( ! $compare ) {
-					wp_send_json_error( array( 'error_message' => __( 'The module must come from a Hustle 4.0 or newer version.', Opt_In::TEXT_DOMAIN ) ) );
+					wp_send_json_error( array( 'error_message' => __( 'The module must come from a Hustle 4.0 or newer version.', 'wordpress-popup' ) ) );
 				}
 
 				// Get imported module type
@@ -184,22 +187,22 @@ if ( ! class_exists( 'Hustle_Modules_Common_Admin_Ajax' ) ) :
 				// Get imported module type.
 				if ( isset( $data['module_type'] ) ) {
 					$type_from_file = $data['module_type'];
-				} else {
+				} elseif( isset( $data['type'] ) ) {
 					$type_from_file = $data['type'];
 				}
 			}
 
 			// Check module type.
-			if ( $type_from_file !== $module_type ) {
-				wp_send_json_error( array( 'error_message' => sprintf( __( 'Invalid environment: %s', Opt_In::TEXT_DOMAIN ), $type_from_file ) ) );
+			if ( $type_from_file !== $module_type && ! $module_id && empty( $data ) ) {
+				wp_send_json_error( array( 'error_message' => sprintf( __( 'Invalid environment: %s', 'wordpress-popup' ), $type_from_file ) ) );
 			}
-
-			// Store the module as 'draft'.
-			$data['attributes']['active'] = '0';
-			$data['data']['active'] = '0';
 
 			// Import a new module.
 			if ( ! $module_id ) {
+				// Store the module as 'draft' only for new entry.
+				$data['attributes']['active'] = '0';
+				$data['data']['active'] = '0';
+
 				$this->import_new_module( $module_type, $data );
 
 			} else {
@@ -215,15 +218,16 @@ if ( ! class_exists( 'Hustle_Modules_Common_Admin_Ajax' ) ) :
 			 */
 			$module = Hustle_Module_Model::instance()->get( $module_id );
 			if ( is_wp_error( $module ) ) {
-				wp_send_json_error( sprintf( __( 'Invalid module!', Opt_In::TEXT_DOMAIN ) ) );
+				wp_send_json_error( sprintf( __( 'Invalid module!', 'wordpress-popup' ) ) );
 			}
 			/**
 			 * Check permissions
 			 */
 			$is_allowed = $module->is_allowed_for_current_user();
 			if ( ! $is_allowed ) {
-				wp_send_json_error( sprintf( __( 'Access denied. You do not have permission to perform this action.', Opt_In::TEXT_DOMAIN ) ) );
+				wp_send_json_error( sprintf( __( 'Access denied. You do not have permission to perform this action.', 'wordpress-popup' ) ) );
 			}
+
 			/**
 			 * Import from 3.x export
 			 */
@@ -252,6 +256,7 @@ if ( ! class_exists( 'Hustle_Modules_Common_Admin_Ajax' ) ) :
 					$module->$key = $value;
 				}
 			}
+
 			$module->save();
 			$module->clean_module_cache();
 			wp_send_json_success();
@@ -268,11 +273,11 @@ if ( ! class_exists( 'Hustle_Modules_Common_Admin_Ajax' ) ) :
 			if ( ! empty( $module_id ) ) {
 				$module = Hustle_Module_Model::instance()->get( $module_id );
 				$module->clean_module_cache();
-				wp_send_json_success( __( 'Successful', Opt_In::TEXT_DOMAIN ) );
+				wp_send_json_success( __( 'Successful', 'wordpress-popup' ) );
 			}
 
 
-			wp_send_json_error( __( 'Creating a new module went wrong', Opt_In::TEXT_DOMAIN ) );
+			wp_send_json_error( __( 'Creating a new module went wrong', 'wordpress-popup' ) );
 		}
 
 		/**
@@ -285,14 +290,14 @@ if ( ! class_exists( 'Hustle_Modules_Common_Admin_Ajax' ) ) :
 			$type = trim( filter_input( INPUT_POST, 'type', FILTER_SANITIZE_STRING ) );
 			$enabled = trim( filter_input( INPUT_POST, 'enabled', FILTER_VALIDATE_INT ) );
 			if ( ! $id || ! $type ) {
-				wp_send_json_error( __( 'Invalid Request', Opt_In::TEXT_DOMAIN ) );
+				wp_send_json_error( __( 'Invalid Request', 'wordpress-popup' ) );
 			}
 			$module = Hustle_Module_Model::instance()->get( $id );
 			if ( is_wp_error( $module ) ) {
-				wp_send_json_error( __( 'Invalid module', Opt_In::TEXT_DOMAIN ) );
+				wp_send_json_error( __( 'Invalid module', 'wordpress-popup' ) );
 			}
 			if ( $module->module_type !== $type && in_array( $type, array( 'popup', 'embedded', 'slidein' ), true ) ) {
-				wp_send_json_error( __( 'Invalid environment: %s', Opt_In::TEXT_DOMAIN ), $type );
+				wp_send_json_error( __( 'Invalid environment: %s', 'wordpress-popup' ), $type );
 			}
 			$current_state = $module->active;
 
@@ -303,9 +308,9 @@ if ( ! class_exists( 'Hustle_Modules_Common_Admin_Ajax' ) ) :
 			}
 
 			if ( $result ) {
-				wp_send_json_success( __( 'Successful', Opt_In::TEXT_DOMAIN ) );
+				wp_send_json_success( __( 'Successful', 'wordpress-popup' ) );
 			} else {
-				wp_send_json_error( __( 'Failed', Opt_In::TEXT_DOMAIN ) );
+				wp_send_json_error( __( 'Failed', 'wordpress-popup' ) );
 			}
 		}
 
@@ -319,11 +324,11 @@ if ( ! class_exists( 'Hustle_Modules_Common_Admin_Ajax' ) ) :
 			$enabled = (bool)filter_input( INPUT_POST, 'enabled', FILTER_VALIDATE_INT );
 			$types = filter_input( INPUT_POST, 'types', FILTER_SANITIZE_STRING );
 			if ( ! $id ) {
-				wp_send_json_error( __( 'Invalid Request', Opt_In::TEXT_DOMAIN ) );
+				wp_send_json_error( __( 'Invalid Request', 'wordpress-popup' ) );
 			}
 			$module = Hustle_Module_Model::instance()->get( $id );
 			if ( is_wp_error( $module ) ) {
-				wp_send_json_error( __( 'Invalid module', Opt_In::TEXT_DOMAIN ) );
+				wp_send_json_error( __( 'Invalid module', 'wordpress-popup' ) );
 			}
 			$current_tracking = $module->get_tracking_types();
 
@@ -339,9 +344,9 @@ if ( ! class_exists( 'Hustle_Modules_Common_Admin_Ajax' ) ) :
 			}
 
 			if ( $result ) {
-				wp_send_json_success( __( 'Successful', Opt_In::TEXT_DOMAIN ) );
+				wp_send_json_success( __( 'Successful', 'wordpress-popup' ) );
 			} else {
-				wp_send_json_error( __( 'Failed', Opt_In::TEXT_DOMAIN ) );
+				wp_send_json_error( __( 'Failed', 'wordpress-popup' ) );
 			}
 		}
 
@@ -351,7 +356,7 @@ if ( ! class_exists( 'Hustle_Modules_Common_Admin_Ajax' ) ) :
 
 			Hustle_Renderer_Abstract::ajax_load_module();
 
-			wp_send_json_error( __( 'Invalid module type', Opt_In::TEXT_DOMAIN ) );
+			wp_send_json_error( __( 'Invalid module type', 'wordpress-popup' ) );
 		}
 
 		/**
@@ -361,7 +366,7 @@ if ( ! class_exists( 'Hustle_Modules_Common_Admin_Ajax' ) ) :
 			$id = filter_input( INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT );
 			Opt_In_Utils::validate_ajax_call( 'module_get_tracking_data' . $id );
 			$module = Hustle_Module_Model::instance()->get( $id );
-			$data = $module->get_tracking_data( $this->_hustle );
+			$data = $module->get_tracking_data();
 
 			wp_send_json_success( $data );
 		}
@@ -375,7 +380,7 @@ if ( ! class_exists( 'Hustle_Modules_Common_Admin_Ajax' ) ) :
 			$hustle = filter_input( INPUT_POST, 'hustle', FILTER_SANITIZE_STRING );
 			$ids = isset( $_POST['ids'] )? $_POST['ids']:array();
 			if ( ! is_array( $ids ) || empty( $ids ) ) {
-				wp_send_json_error( __( 'Failed', Opt_In::TEXT_DOMAIN ) );
+				wp_send_json_error( __( 'Failed', 'wordpress-popup' ) );
 			}
 			foreach ( $ids as $id ) {
 				$id = intval( $id );
@@ -417,7 +422,7 @@ if ( ! class_exists( 'Hustle_Modules_Common_Admin_Ajax' ) ) :
 					break;
 
 					default:
-						wp_send_json_error( __( 'Failed', Opt_In::TEXT_DOMAIN ) );
+						wp_send_json_error( __( 'Failed', 'wordpress-popup' ) );
 				}
 			}
 			wp_send_json_success();
@@ -507,6 +512,54 @@ if ( ! class_exists( 'Hustle_Modules_Common_Admin_Ajax' ) ) :
 				wp_send_json_error();
 			}
 			wp_send_json_success( array( 'module_id' => $module->id ) );
+		}
+
+
+		/**
+		 * Get posts/pages/tags/categories for visibility options via ajax.
+		 * Finds and repares select2 options.
+		 *
+		 * @global type $wpdb
+		 * @since 3.0.7
+		 */
+		public function get_new_condition_ids() {
+			$post_type = filter_input( INPUT_POST, 'postType', FILTER_SANITIZE_STRING );
+			$search = filter_input( INPUT_POST, 'search' );
+			$result = array();
+			$limit = 30;
+
+			if ( ! empty( $post_type ) ) {
+				if ( in_array( $post_type, array( 'tag', 'category' ), true ) ) {
+					$args = array(
+					'hide_empty' => false,
+					'search' => $search,
+					'number' => $limit,
+					);
+					if ( 'tag' === $post_type ) {
+						$args['taxonomy'] = 'post_tag';
+					}
+					$result = array_map( array( 'Hustle_Module_Admin', 'terms_to_select2_data' ), get_categories( $args ) );
+				} else {
+					global $wpdb;
+					$result = $wpdb->get_results( $wpdb->prepare( "SELECT ID as id, post_title as text FROM {$wpdb->posts} "
+					. "WHERE post_type = %s AND post_status = 'publish' AND post_title LIKE %s LIMIT " . intval( $limit ), $post_type, '%'. $search . '%' ) );
+
+					$obj = get_post_type_object( $post_type );
+					$all_items = ! empty( $obj ) && ! empty( $obj->labels->all_items )
+						? $obj->labels->all_items : __( 'All Items', 'wordpress-popup' );
+					/**
+				 * Add ALL Items option
+				 */
+					$all = new stdClass();
+					$all->id = 'all';
+					$all->text = $all_items;
+					if ( empty( $search ) || false !== stripos( $all_items, $search ) ) {
+						array_unshift( $result, $all );
+					}
+				}
+			}
+
+			wp_send_json_success( $result );
 		}
 
 	}

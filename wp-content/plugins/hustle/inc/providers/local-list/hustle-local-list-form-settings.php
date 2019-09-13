@@ -52,20 +52,20 @@ class Hustle_Local_List_Form_Settings extends Hustle_Provider_Form_Settings_Abst
 		$this->addon_form_settings = $this->get_form_settings_values();
 
 		$current_data = array(
-			'local_list_name' => '',
+			'local_list_name' 	=> '',
 		);
 
 		$is_submit = ! empty( $submitted_data['is_submit'] );
-
+		
 		$current_data = $this->get_current_data( $current_data, $submitted_data );
 
 		if ( $is_submit && empty( $submitted_data['local_list_name'] ) ) {
-			$error_message = __( 'Please add a valid list name.', Opt_In::TEXT_DOMAIN );
+			$error_message = __( 'Please add a valid list name.', 'wordpress-popup' );
 		}
 
 		$options = $this->get_first_step_options( $current_data );
 
-		$step_html = Hustle_Api_Utils::get_modal_title_markup( __( 'Setup your list', Opt_In::TEXT_DOMAIN ), __( 'Will save email addresses to an exportable CSV list.', Opt_In::TEXT_DOMAIN ) );
+		$step_html = Hustle_Api_Utils::get_modal_title_markup( __( 'Setup your list', 'wordpress-popup' ), __( 'Will save email addresses to an exportable CSV list.', 'wordpress-popup' ) );
 
 		$step_html .= Hustle_Api_Utils::get_html_for_options( $options );
 
@@ -78,10 +78,10 @@ class Hustle_Local_List_Form_Settings extends Hustle_Provider_Form_Settings_Abst
 
 		$buttons = array(
 			'disconnect' => array(
-				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'disconnect_form', true ),
+				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', 'wordpress-popup' ), 'sui-button-ghost', 'disconnect_form', true ),
 			),
 			'save' => array(
-				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', Opt_In::TEXT_DOMAIN ), '', 'connect', true ),
+				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', 'wordpress-popup' ), '', 'connect', true ),
 			),
 		);
 
@@ -108,8 +108,8 @@ class Hustle_Local_List_Form_Settings extends Hustle_Provider_Form_Settings_Abst
 	 * @return array
 	 */
 	private function get_first_step_options( $submitted_data ) {
-		$name = !empty( $submitted_data['local_list_name'] ) ? $submitted_data['local_list_name'] : '' ;
-
+		$name 		= !empty( $submitted_data['local_list_name'] ) ? $submitted_data['local_list_name'] : '' ;
+	
 		$options =  array(
 			'list_id_setup' => array(
 				'type'  => 'wrapper',
@@ -118,7 +118,7 @@ class Hustle_Local_List_Form_Settings extends Hustle_Provider_Form_Settings_Abst
 					'label' => array(
 						'type'  => 'label',
 						'for'   => 'local_list_name',
-						'value' => __( 'List name', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'List name', 'wordpress-popup' ),
 					),
 					'local_list_name' => array(
 						'type'  => 'text',
@@ -128,7 +128,7 @@ class Hustle_Local_List_Form_Settings extends Hustle_Provider_Form_Settings_Abst
 					),
 					'description' => array(
 						'type'  => 'description',
-						'value' => __( 'This will be visible to the visitors while unsubscribing.', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'This will be visible to the visitors while unsubscribing.', 'wordpress-popup' ),
 					),
 				),
 			),

@@ -1,19 +1,19 @@
 <div class="sui-box-settings-row">
 
 	<div class="sui-box-settings-col-1">
-		<span class="sui-settings-label"><?php esc_html_e( 'Modules', Opt_In::TEXT_DOMAIN ); ?></span>
-		<span class="sui-description"><?php esc_html_e( 'Select the Hustle modules for which the selected User Roles will see analytics in their WordPress Admin area.', Opt_In::TEXT_DOMAIN ); ?></span>
+		<span class="sui-settings-label"><?php esc_html_e( 'Modules', 'wordpress-popup' ); ?></span>
+		<span class="sui-description"><?php esc_html_e( 'Select the Hustle modules for which the selected User Roles will see analytics in their WordPress Admin area.', 'wordpress-popup' ); ?></span>
 	</div>
 
 	<div class="sui-box-settings-col-2">
 	
 		<?php
 		$checkboxes = array(
-			'overall'        => __( 'Overall Analytics', Opt_In::TEXT_DOMAIN ),
-			'popup'          => __( 'Pop-ups', Opt_In::TEXT_DOMAIN ),
-			'slidein'        => __( 'Slide-ins', Opt_In::TEXT_DOMAIN ),
-			'embedded'       => __( 'Embeds', Opt_In::TEXT_DOMAIN ),
-			'social_sharing' => __( 'Social Share', Opt_In::TEXT_DOMAIN ),
+			'overall'        => __( 'Overall Analytics', 'wordpress-popup' ),
+			'popup'          => __( 'Pop-ups', 'wordpress-popup' ),
+			'slidein'        => __( 'Slide-ins', 'wordpress-popup' ),
+			'embedded'       => __( 'Embeds', 'wordpress-popup' ),
+			'social_sharing' => __( 'Social Share', 'wordpress-popup' ),
 		);
 
 		foreach ( $checkboxes as $value => $label ) { ?>

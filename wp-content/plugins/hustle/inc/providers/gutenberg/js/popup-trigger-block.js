@@ -2,13 +2,13 @@ const { registerBlockType, createBlock } = wp.blocks,
 	{ createElement:el, Component, RawHTML } = wp.element,
 	{ string: shortcodeToString, next } = wp.shortcode,
 
-	hustlePopupTriggerIconEl = 
-		el('svg', { 
+	hustlePopupTriggerIconEl =
+		el('svg', {
 			class: 'dashicon', viewBox: '0 0 24 24',  width: 20, height: 20, xmlns: 'http://www.w3.org/2000/svg', preserveAspectRatio: 'xMidYMid meet', 'aria-hidden': 'true', role: 'img'
 		},
 			el (
-				'path', { 
-					d: 'M1.5 0h21c.422 0 .777.145 1.066.434.29.289.434.644.434 1.066v21c0 .422-.145.777-.434 1.066A1.45 1.45 0 0 1 22.5 24h-21a1.45 1.45 0 0 1-1.066-.434A1.45 1.45 0 0 1 0 22.5v-21C0 1.078.145.723.434.434A1.45 1.45 0 0 1 1.5 0zM6 6a1.45 1.45 0 0 0-1.066.434A1.45 1.45 0 0 0 4.5 7.5v9c0 .422.145.777.434 1.066.289.29.644.434 1.066.434h12a1.45 1.45 0 0 0 1.066-.434c.29-.289.434-.644.434-1.066v-9a1.45 1.45 0 0 0-.434-1.066A1.45 1.45 0 0 0 18 6H6zm10.5 1.5c.422 0 .777.145 1.066.434.29.289.434.644.434 1.066 0 .422-.145.777-.434 1.066a1.45 1.45 0 0 1-1.066.434 1.45 1.45 0 0 1-1.066-.434A1.45 1.45 0 0 1 15 9c0-.422.145-.777.434-1.066A1.45 1.45 0 0 1 16.5 7.5z' 
+				'path', {
+					d: 'M1.5 0h21c.422 0 .777.145 1.066.434.29.289.434.644.434 1.066v21c0 .422-.145.777-.434 1.066A1.45 1.45 0 0 1 22.5 24h-21a1.45 1.45 0 0 1-1.066-.434A1.45 1.45 0 0 1 0 22.5v-21C0 1.078.145.723.434.434A1.45 1.45 0 0 1 1.5 0zM6 6a1.45 1.45 0 0 0-1.066.434A1.45 1.45 0 0 0 4.5 7.5v9c0 .422.145.777.434 1.066.289.29.644.434 1.066.434h12a1.45 1.45 0 0 0 1.066-.434c.29-.289.434-.644.434-1.066v-9a1.45 1.45 0 0 0-.434-1.066A1.45 1.45 0 0 0 18 6H6zm10.5 1.5c.422 0 .777.145 1.066.434.29.289.434.644.434 1.066 0 .422-.145.777-.434 1.066a1.45 1.45 0 0 1-1.066.434 1.45 1.45 0 0 1-1.066-.434A1.45 1.45 0 0 1 15 9c0-.422.145-.777.434-1.066A1.45 1.45 0 0 1 16.5 7.5z'
 				}
 			)
 		);
@@ -56,7 +56,7 @@ class Hustle_Popup_Trigger_BlockEdit extends Component {
 
 	/**
 	 * Set the module_id to this block by the shortcode_id provided.
-	 * @param string id 
+	 * @param string id
 	 */
 	set_module_id_from_shortcode_id ( id ) {
 
@@ -73,7 +73,7 @@ class Hustle_Popup_Trigger_BlockEdit extends Component {
 		window.fetch( ajax_url )
 		.then( response => response.json() )
 		.then( data => {
-			
+
 			if ( data.success && data.data.module_id ) {
 				this.update_module_id( data.data.module_id );
 			}
@@ -82,7 +82,7 @@ class Hustle_Popup_Trigger_BlockEdit extends Component {
 			this.setState({ loading: false });
 
 		});
-	
+
 	}
 
 	/**
@@ -96,7 +96,7 @@ class Hustle_Popup_Trigger_BlockEdit extends Component {
 		if( prevProps.attributes.id === id ) {
 			return;
 		}
-		
+
 		if ( ! id ) {
 			// No shortcode_id provided to get the module_id.
 			return;
@@ -112,7 +112,7 @@ class Hustle_Popup_Trigger_BlockEdit extends Component {
 	 */
 	componentDidMount() {
 		const { attributes: { module_id, id } } = this.props;
-		
+
 		if ( ! id || module_id ) {
 			// No shortcode_id provided to get the module_id.
 			return;
@@ -134,7 +134,7 @@ class Hustle_Popup_Trigger_BlockEdit extends Component {
 	 * Render
 	 */
 	render() {
-	
+
 		const
 			{ loading } = this.state,
 			{ attributes, isSelected } = this.props,
@@ -220,7 +220,7 @@ class Hustle_Popup_Trigger_BlockEdit extends Component {
 			return [
 				controls, el (
 					wp.editor.RichText, {
-						tagName: 'p',
+						tagName: 'a',
 						multiline: false,
 						formattingControls: [],
 						value: content,
@@ -300,7 +300,7 @@ registerBlockType( 'hustle/popup-trigger', {
 				type: 'block',
 				blocks: [ 'core/shortcode' ],
 				transform: ( { id, content, css_class } ) => {
-					
+
 					let options = {
 						tag: hustle_popup_trigger_data.shortcode_tag,
 						attrs: {
@@ -311,7 +311,7 @@ registerBlockType( 'hustle/popup-trigger', {
 						content,
 						type: 'closed'
 					};
-					
+
 					let text = shortcodeToString( options );
 					return createBlock( 'core/shortcode', {
 						text,
@@ -337,14 +337,14 @@ registerBlockType( 'hustle/popup-trigger', {
 					if ( 'popup' !== shortcode.attrs.named.type ) {
 						return false;
 					}
-	
+
 					return true;
 				},
 				transform( { text } ) {
-					
+
 					let { shortcode } = next( 'wd_hustle', text ),
 					{ content, attrs: { named: { id, type, css_class } } } = shortcode;
-					
+
 					return createBlock( 'hustle/popup-trigger', {
 						id,
 						type,
@@ -356,7 +356,7 @@ registerBlockType( 'hustle/popup-trigger', {
 		]
 	},
 	edit: Hustle_Popup_Trigger_BlockEdit,
-	
+
 	// This is rendered server-side.
 	save() {
 

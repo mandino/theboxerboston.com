@@ -1,16 +1,16 @@
 <?php
 $module_type         = Hustle_Module_Model::EMBEDDED_MODULE;
 $multiple_charts     = Hustle_Module_Model::get_embedded_types( true );
-$capitalize_singular = esc_html__( 'Embed', Opt_In::TEXT_DOMAIN );
-$capitalize_plural   = esc_html__( 'Embeds', Opt_In::TEXT_DOMAIN );
+$capitalize_singular = esc_html__( 'Embed', 'wordpress-popup' );
+$capitalize_plural   = esc_html__( 'Embeds', 'wordpress-popup' );
 $smallcaps_singular  = self::get_smallcaps_singular( $module_type );
-$smallcaps_plural    = esc_html__( 'embeds', Opt_In::TEXT_DOMAIN );
+$smallcaps_plural    = esc_html__( 'embeds', 'wordpress-popup' );
 
 $this->render(
 	'admin/commons/sui-listing/listing',
 	array(
 		'page_title'          => $capitalize_plural,
-		'page_message'        => esc_html__( 'Embeds allow you to insert promotions or newsletter signups directly into your content automatically or with shortcodes.', Opt_In::TEXT_DOMAIN ),
+		'page_message'        => esc_html__( 'Embeds allow you to insert promotions or newsletter signups directly into your content automatically or with shortcodes.', 'wordpress-popup' ),
 		'total'               => $total,
 		'active'              => $active,
 		'modules'             => $modules,

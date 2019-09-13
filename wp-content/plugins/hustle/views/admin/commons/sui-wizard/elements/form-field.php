@@ -20,22 +20,22 @@
 
 			<button class="sui-button-icon sui-dropdown-anchor">
 				<i class="sui-icon-widget-settings-config" aria-hidden="true"></i>
-				<span class="sui-screen-reader-text">{{ label }} <?php esc_html_e( 'field settings', Opt_In::TEXT_DOMAIN ); ?></span>
+				<span class="sui-screen-reader-text">{{ label }} <?php esc_html_e( 'field settings', 'wordpress-popup' ); ?></span>
 			</button>
 
 			<ul>
 
 				<li><button class="hustle-optin-field--edit">
-					<i class="sui-icon-pencil" aria-hidden="true"></i> <?php esc_html_e( 'Edit Field', Opt_In::TEXT_DOMAIN ); ?>
+					<i class="sui-icon-pencil" aria-hidden="true"></i> <?php esc_html_e( 'Edit Field', 'wordpress-popup' ); ?>
 				</button></li>
 
 				<li><button class="hustle-optin-field--copy">
-					<i class="sui-icon-copy" aria-hidden="true"></i> <?php esc_html_e( 'Duplicate', Opt_In::TEXT_DOMAIN ); ?>
+					<i class="sui-icon-copy" aria-hidden="true"></i> <?php esc_html_e( 'Duplicate', 'wordpress-popup' ); ?>
 				</button></li>
 
 				<# if ( 'undefined' !== typeof can_delete && _.isTrue( can_delete ) ) { #>
 					<li><button class="hustle-optin-field--delete">
-						<i class="sui-icon-trash" aria-hidden="true"></i> <?php esc_html_e( 'Delete', Opt_In::TEXT_DOMAIN ); ?>
+						<i class="sui-icon-trash" aria-hidden="true"></i> <?php esc_html_e( 'Delete', 'wordpress-popup' ); ?>
 					</button></li>
 				<# } #>
 

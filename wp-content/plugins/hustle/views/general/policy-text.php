@@ -1,47 +1,47 @@
 <div class="wp-suggested-text">
-	<h2><?php esc_html_e( 'Which modules collect personal data?', Opt_In::TEXT_DOMAIN ); ?></h2>
+	<h2><?php esc_html_e( 'Which modules collect personal data?', 'wordpress-popup' ); ?></h2>
 	<p class="privacy-policy-tutorial">
 		<?php esc_html_e( 'If you use Hustle to create and embed any Pop-up, Embed, Slide-in, or Social share module, you may need to mention it here to properly distinguish it from other plugins.',
-		                  Opt_In::TEXT_DOMAIN ); ?>
+		                  'wordpress-popup' ); ?>
 	</p>
 
-	<h2><?php esc_html_e( 'What personal data do we collect and why?', Opt_In::TEXT_DOMAIN ); ?></h2>
+	<h2><?php esc_html_e( 'What personal data do we collect and why?', 'wordpress-popup' ); ?></h2>
 	<p class="privacy-policy-tutorial">
 		<?php _e( 'By default, Hustle captures the <strong>IP Address</strong> for each conversion and for each view only if the "tracking" functionality is enabled. Other personal data such as your <strong>name</strong> and <strong>email address</strong> may also be captured,
 depending on the form fields.',
-		          Opt_In::TEXT_DOMAIN );//wpcs : xss ok ?>
+		          'wordpress-popup' );//wpcs : xss ok ?>
 	</p>
 	<p class="privacy-policy-tutorial">
 		<i>
 			<?php esc_html_e( 'Note: In this section you should include any personal data you collected and which form captures personal data to give users more relevant information. You should also include an explanation of why this data is needed. The explanation must note either the legal basis for your data collection and retention of the active consent the user has given.',
-			                  Opt_In::TEXT_DOMAIN ); ?></i>
+			                  'wordpress-popup' ); ?></i>
 	</p>
 	<p>
-		<strong class="privacy-policy-tutorial"><?php esc_html_e( 'Suggested text: ', Opt_In::TEXT_DOMAIN ); ?></strong>
+		<strong class="privacy-policy-tutorial"><?php esc_html_e( 'Suggested text: ', 'wordpress-popup' ); ?></strong>
 		<?php _e( 'When visitors or users submit a form or view a module, we capture the <strong>IP Address</strong> for analyisis purposes. We also capture the <strong>email address</strong> and might capture other personal data included in the form fields.',
-		          Opt_In::TEXT_DOMAIN );//wpcs : xss ok ?>
+		          'wordpress-popup' );//wpcs : xss ok ?>
 	</p>
 
-	<h2><?php esc_html_e( 'How long we retain your data', Opt_In::TEXT_DOMAIN ); ?></h2>
+	<h2><?php esc_html_e( 'How long we retain your data', 'wordpress-popup' ); ?></h2>
 	<p class="privacy-policy-tutorial">
 		<?php _e( 'By default Hustle retains all form submissions and tracking data <strong>forever</strong>. You can delete the stored data in <strong>Hustle</strong> &raquo; <strong>Settings</strong> &raquo;
 		<strong>Privacy Settings</strong>, and under each module\'s settings.',
-		          Opt_In::TEXT_DOMAIN );//wpcs : xss ok ?>
+		          'wordpress-popup' );//wpcs : xss ok ?>
 	</p>
 
 	<p>
-		<strong class="privacy-policy-tutorial"><?php esc_html_e( 'Suggested text: ', Opt_In::TEXT_DOMAIN ); ?></strong>
-		<?php esc_html_e( 'When visitors or users submit a form or view a module we retain the data for 30 days.', Opt_In::TEXT_DOMAIN ); ?>
+		<strong class="privacy-policy-tutorial"><?php esc_html_e( 'Suggested text: ', 'wordpress-popup' ); ?></strong>
+		<?php esc_html_e( 'When visitors or users submit a form or view a module we retain the data for 30 days.', 'wordpress-popup' ); ?>
 	</p>
-	<h2><?php esc_html_e( 'Where we send your data', Opt_In::TEXT_DOMAIN ); ?></h2>
+	<h2><?php esc_html_e( 'Where we send your data', 'wordpress-popup' ); ?></h2>
 	<p>
-		<strong class="privacy-policy-tutorial"><?php esc_html_e( 'Suggested text: ', Opt_In::TEXT_DOMAIN ); ?></strong>
-		<?php esc_html_e( 'All collected data might be shown publicly and we send it to our workers or contractors to perform necessary actions based on the form submission.', Opt_In::TEXT_DOMAIN ); ?>
+		<strong class="privacy-policy-tutorial"><?php esc_html_e( 'Suggested text: ', 'wordpress-popup' ); ?></strong>
+		<?php esc_html_e( 'All collected data might be shown publicly and we send it to our workers or contractors to perform necessary actions based on the form submission.', 'wordpress-popup' ); ?>
 	</p>
-	<h2><?php esc_html_e( 'Third Parties', Opt_In::TEXT_DOMAIN ); ?></h2>
+	<h2><?php esc_html_e( 'Third Parties', 'wordpress-popup' ); ?></h2>
 	<p class="privacy-policy-tutorial">
 		<?php esc_html_e( 'If your forms use either built-in or external third party services, in this section you should mention any third parties and its privacy policy.',
-		                  Opt_In::TEXT_DOMAIN ); ?>
+		                  'wordpress-popup' ); ?>
 	</p>
 	<p class="privacy-policy-tutorial">
 		<?php esc_html_e( 'By default Hustle optionally use these third party integrations:' ); ?>
@@ -68,33 +68,33 @@ depending on the form fields.',
 		<?php echo esc_html( $external_integrations_list ); ?>
 	</ul>
 	<p>
-		<strong class="privacy-policy-tutorial"><?php esc_html_e( 'Suggested text: ', Opt_In::TEXT_DOMAIN ); ?></strong>
-	<p><?php esc_html_e( 'We use ActiveCampaign to manage our subscriber lists. Their privacy policy can be found here : https://www.activecampaign.com/privacy-policy/.', Opt_In::TEXT_DOMAIN ); ?></p>
-	<p><?php esc_html_e( 'We use Aweber to manage our subscriber. Their privacy policy can be found here : https://www.aweber.com/privacy.htm.', Opt_In::TEXT_DOMAIN ); ?></p>
-	<p><?php esc_html_e( 'We use Campaign Monitor to manage our subscriber. Their privacy policy can be found here : https://www.campaignmonitor.com/policies/#privacy-policy.', Opt_In::TEXT_DOMAIN ); ?></p>
-	<p><?php esc_html_e( 'We use Constant Contact to manage our subscriber. Their privacy policy can be found here : https://www.endurance.com/privacy.', Opt_In::TEXT_DOMAIN ); ?></p>
-	<p><?php esc_html_e( 'We use ConvertKit to manage our subscriber. Their privacy policy can be found here : https://convertkit.com/privacy/.', Opt_In::TEXT_DOMAIN ); ?></p>
-	<p><?php esc_html_e( 'We use e-Newsletter to manage our subscriber. You can learn more about it here https://premium.wpmudev.org/project/e-newsletter/.', Opt_In::TEXT_DOMAIN ); ?></p>
-	<p><?php esc_html_e( 'We use GetResponse to manage our subscriber lists. Their privacy policy can be found here : https://www.getresponse.com/legal/privacy.html?lang=en.', Opt_In::TEXT_DOMAIN ); ?></p>
-	<p><?php esc_html_e( 'We use HubSpot to manage our subscriber. Their privacy policy can be found here : https://legal.hubspot.com/legal-stuff.', Opt_In::TEXT_DOMAIN ); ?></p>
-	<p><?php esc_html_e( 'We use iContact to manage our subscriber. Their privacy policy can be found here : https://www.icontact.com/legal/privacy.', Opt_In::TEXT_DOMAIN ); ?></p>
-	<p><?php esc_html_e( 'We use Infusionsoft to manage our subscriber. Their privacy policy can be found here : https://www.infusionsoft.com/legal/privacy-policy.', Opt_In::TEXT_DOMAIN ); ?></p>
-	<p><?php esc_html_e( 'We use Mad Mimi to manage our subscriber. Their privacy policy can be found here : https://madmimi.com/legal/terms.', Opt_In::TEXT_DOMAIN ); ?></p>
-	<p><?php esc_html_e( 'We use MailChimp to manage our subscriber list. Their privacy policy can be found here : https://mailchimp.com/legal/privacy/.', Opt_In::TEXT_DOMAIN ); ?></p>
-	<p><?php esc_html_e( 'We use MailerLite to manage our subscriber. Their privacy policy can be found here : https://www.mailerlite.com/privacy-policy.', Opt_In::TEXT_DOMAIN ); ?></p>
-	<p><?php esc_html_e( 'We use Mautic to manage our subscriber. Their privacy policy can be found here : https://www.mautic.org/privacy-policy/.', Opt_In::TEXT_DOMAIN ); ?></p>
-	<p><?php esc_html_e( 'We use SendGrid to manage our subscriber. Their privacy policy can be found here : https://sendgrid.com/policies/privacy/.', Opt_In::TEXT_DOMAIN ); ?></p>
-	<p><?php esc_html_e( 'We use SendinBlue to manage our subscriber. Their privacy policy can be found here : https://www.sendinblue.com/legal/privacypolicy/.', Opt_In::TEXT_DOMAIN ); ?></p>
-	<p><?php esc_html_e( 'We use Sendy to manage our subscriber. Their privacy policy can be found here : https://sendy.co/privacy-policy.', Opt_In::TEXT_DOMAIN ); ?></p>
-	<p><?php esc_html_e( 'We use MailChimp to manage our subscriber list. Their privacy policy can be found here : https://mailchimp.com/legal/privacy/.', Opt_In::TEXT_DOMAIN ); ?></p>
-	<p><?php esc_html_e( 'We use Zapier to manage our integration data. Their privacy policy can be found here : https://zapier.com/privacy/.', Opt_In::TEXT_DOMAIN ); ?></p>
+		<strong class="privacy-policy-tutorial"><?php esc_html_e( 'Suggested text: ', 'wordpress-popup' ); ?></strong>
+	<p><?php esc_html_e( 'We use ActiveCampaign to manage our subscriber lists. Their privacy policy can be found here : https://www.activecampaign.com/privacy-policy/.', 'wordpress-popup' ); ?></p>
+	<p><?php esc_html_e( 'We use Aweber to manage our subscriber. Their privacy policy can be found here : https://www.aweber.com/privacy.htm.', 'wordpress-popup' ); ?></p>
+	<p><?php esc_html_e( 'We use Campaign Monitor to manage our subscriber. Their privacy policy can be found here : https://www.campaignmonitor.com/policies/#privacy-policy.', 'wordpress-popup' ); ?></p>
+	<p><?php esc_html_e( 'We use Constant Contact to manage our subscriber. Their privacy policy can be found here : https://www.endurance.com/privacy.', 'wordpress-popup' ); ?></p>
+	<p><?php esc_html_e( 'We use ConvertKit to manage our subscriber. Their privacy policy can be found here : https://convertkit.com/privacy/.', 'wordpress-popup' ); ?></p>
+	<p><?php esc_html_e( 'We use e-Newsletter to manage our subscriber. You can learn more about it here https://premium.wpmudev.org/project/e-newsletter/.', 'wordpress-popup' ); ?></p>
+	<p><?php esc_html_e( 'We use GetResponse to manage our subscriber lists. Their privacy policy can be found here : https://www.getresponse.com/legal/privacy.html?lang=en.', 'wordpress-popup' ); ?></p>
+	<p><?php esc_html_e( 'We use HubSpot to manage our subscriber. Their privacy policy can be found here : https://legal.hubspot.com/legal-stuff.', 'wordpress-popup' ); ?></p>
+	<p><?php esc_html_e( 'We use iContact to manage our subscriber. Their privacy policy can be found here : https://www.icontact.com/legal/privacy.', 'wordpress-popup' ); ?></p>
+	<p><?php esc_html_e( 'We use Infusionsoft to manage our subscriber. Their privacy policy can be found here : https://www.infusionsoft.com/legal/privacy-policy.', 'wordpress-popup' ); ?></p>
+	<p><?php esc_html_e( 'We use Mad Mimi to manage our subscriber. Their privacy policy can be found here : https://madmimi.com/legal/terms.', 'wordpress-popup' ); ?></p>
+	<p><?php esc_html_e( 'We use MailChimp to manage our subscriber list. Their privacy policy can be found here : https://mailchimp.com/legal/privacy/.', 'wordpress-popup' ); ?></p>
+	<p><?php esc_html_e( 'We use MailerLite to manage our subscriber. Their privacy policy can be found here : https://www.mailerlite.com/privacy-policy.', 'wordpress-popup' ); ?></p>
+	<p><?php esc_html_e( 'We use Mautic to manage our subscriber. Their privacy policy can be found here : https://www.mautic.org/privacy-policy/.', 'wordpress-popup' ); ?></p>
+	<p><?php esc_html_e( 'We use SendGrid to manage our subscriber. Their privacy policy can be found here : https://sendgrid.com/policies/privacy/.', 'wordpress-popup' ); ?></p>
+	<p><?php esc_html_e( 'We use SendinBlue to manage our subscriber. Their privacy policy can be found here : https://www.sendinblue.com/legal/privacypolicy/.', 'wordpress-popup' ); ?></p>
+	<p><?php esc_html_e( 'We use Sendy to manage our subscriber. Their privacy policy can be found here : https://sendy.co/privacy-policy.', 'wordpress-popup' ); ?></p>
+	<p><?php esc_html_e( 'We use MailChimp to manage our subscriber list. Their privacy policy can be found here : https://mailchimp.com/legal/privacy/.', 'wordpress-popup' ); ?></p>
+	<p><?php esc_html_e( 'We use Zapier to manage our integration data. Their privacy policy can be found here : https://zapier.com/privacy/.', 'wordpress-popup' ); ?></p>
 	<?php echo esc_html( $external_integrations_privacy_url_list ); ?>
 
-	<h2><?php esc_html_e( 'Cookies', Opt_In::TEXT_DOMAIN ); ?></h2>
+	<h2><?php esc_html_e( 'Cookies', 'wordpress-popup' ); ?></h2>
 	<p class="privacy-policy-tutorial">
 		<?php _e( 'By default Hustle uses cookies to count how many times each module is visualized. Cookies might be used to handle other features such as display settings, used when a module should not be displayed for a certain time,
 		whether the user commented before, whether the user has subscribed, among others, if their related settings are enabled.',
-		          Opt_In::TEXT_DOMAIN );//wpcs : xss ok ?>
+		          'wordpress-popup' );//wpcs : xss ok ?>
 	</p>
 
 

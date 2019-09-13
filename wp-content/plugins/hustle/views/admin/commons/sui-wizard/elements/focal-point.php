@@ -2,13 +2,13 @@
 
 	<div class="hustle-focal-point-position-item">
 
-		<span class="sui-description"><?php esc_html_e( 'Adjust the position of your feature image within the image container.', Opt_In::TEXT_DOMAIN ); ?></span>
+		<span class="sui-description"><?php esc_html_e( 'Adjust the position of your feature image within the image container.', 'wordpress-popup' ); ?></span>
 
 		<div class="sui-focal-position-x">
 
 			<div class="sui-form-field">
 
-				<label class="sui-label"><?php esc_html_e( 'Horizontal', Opt_In::TEXT_DOMAIN ); ?></label>
+				<label class="sui-label"><?php esc_html_e( 'Horizontal', 'wordpress-popup' ); ?></label>
 
 				<div class="sui-side-tabs" style="margin-top: 5px;">
 
@@ -27,7 +27,7 @@
 								{{ _.checked( ( 'left' === feature_image_horizontal ), true ) }}
 							/>
 							<span class="hui-position-icon-left" aria-hidden="true"></span>
-							<span class="sui-screen-reader-text"><?php esc_html_e( 'Left', Opt_In::TEXT_DOMAIN ); ?></span>
+							<span class="sui-screen-reader-text"><?php esc_html_e( 'Left', 'wordpress-popup' ); ?></span>
 						</label>
 
 						<label
@@ -42,7 +42,7 @@
 								{{ _.checked( ( 'center' === feature_image_horizontal ), true ) }}
 							/>
 							<span class="hui-position-icon-center" aria-hidden="true"></span>
-							<span class="sui-screen-reader-text"><?php esc_html_e( 'Center', Opt_In::TEXT_DOMAIN ); ?></span>
+							<span class="sui-screen-reader-text"><?php esc_html_e( 'Center', 'wordpress-popup' ); ?></span>
 						</label>
 
 						<label
@@ -57,7 +57,7 @@
 								{{ _.checked( ( 'right' === feature_image_horizontal ), true ) }}
 							/>
 							<span class="hui-position-icon-right" aria-hidden="true"></span>
-							<span class="sui-screen-reader-text"><?php esc_html_e( 'Right', Opt_In::TEXT_DOMAIN ); ?></span>
+							<span class="sui-screen-reader-text"><?php esc_html_e( 'Right', 'wordpress-popup' ); ?></span>
 						</label>
 
 						<label
@@ -71,7 +71,7 @@
 								id="hustle-in-container-image-positionX--custom"
 								{{ _.checked( ( 'custom' === feature_image_horizontal ), true ) }}
 							/>
-							<?php esc_html_e( 'Custom', Opt_In::TEXT_DOMAIN ); ?>
+							<?php esc_html_e( 'Custom', 'wordpress-popup' ); ?>
 						</label>
 
 					</div>
@@ -83,7 +83,7 @@
 			<div class="sui-form-field">
 
 				<label class="sui-label" for="hustle-image-custom-position-horizontal">
-					<span class="sui-label-note"><?php esc_html_e( 'In px', Opt_In::TEXT_DOMAIN ); ?></span>
+					<span class="sui-label-note"><?php esc_html_e( 'In px', 'wordpress-popup' ); ?></span>
 				</label>
 
 				<input
@@ -96,7 +96,7 @@
 					{{ 'custom' !== feature_image_horizontal ? 'disabled=disabled' : '' }}
 				/>
 
-				<span class="sui-error-message" style="display: none;"><?php esc_html_e( 'Invalid', Opt_In::TEXT_DOMAIN ); ?></span>
+				<span class="sui-error-message" style="display: none;"><?php esc_html_e( 'Invalid', 'wordpress-popup' ); ?></span>
 
 			</div>
 
@@ -106,7 +106,7 @@
 
 			<div class="sui-form-field">
 
-				<label class="sui-label"><?php esc_html_e( 'Vertical', Opt_In::TEXT_DOMAIN ); ?></label>
+				<label class="sui-label"><?php esc_html_e( 'Vertical', 'wordpress-popup' ); ?></label>
 
 				<div class="sui-side-tabs" style="margin-top: 5px;">
 
@@ -124,7 +124,7 @@
 								{{ _.checked( ( 'top' === feature_image_vertical ), true ) }}
 							/>
 							<span class="hui-position-icon-top" aria-hidden="true"></span>
-							<span class="sui-screen-reader-text"><?php esc_html_e( 'Top', Opt_In::TEXT_DOMAIN ); ?></span>
+							<span class="sui-screen-reader-text"><?php esc_html_e( 'Top', 'wordpress-popup' ); ?></span>
 						</label>
 
 						<label
@@ -139,7 +139,7 @@
 								{{ _.checked( ( 'center' === feature_image_vertical ), true ) }}
 							/>
 							<span class="hui-position-icon-middle" aria-hidden="true"></span>
-							<span class="sui-screen-reader-text"><?php esc_html_e( 'Middle', Opt_In::TEXT_DOMAIN ); ?></span>
+							<span class="sui-screen-reader-text"><?php esc_html_e( 'Middle', 'wordpress-popup' ); ?></span>
 						</label>
 
 						<label
@@ -154,7 +154,7 @@
 								{{ _.checked( ( 'bottom' === feature_image_vertical ), true ) }}
 							/>
 							<span class="hui-position-icon-bottom" aria-hidden="true"></span>
-							<span class="sui-screen-reader-text"><?php esc_html_e( 'Bottom', Opt_In::TEXT_DOMAIN ); ?></span>
+							<span class="sui-screen-reader-text"><?php esc_html_e( 'Bottom', 'wordpress-popup' ); ?></span>
 						</label>
 
 						<label
@@ -168,7 +168,7 @@
 								id="hustle-in-container-image-positionY--custom"
 								{{ _.checked( ( 'custom' === feature_image_vertical ), true ) }}
 							/>
-							<?php esc_html_e( 'Custom', Opt_In::TEXT_DOMAIN ); ?>
+							<?php esc_html_e( 'Custom', 'wordpress-popup' ); ?>
 						</label>
 
 					</div>
@@ -180,7 +180,7 @@
 			<div class="sui-form-field">
 
 				<label class="sui-label" for="hustle-image-custom-position-vertical">
-					<span class="sui-label-note"><?php esc_html_e( 'In px', Opt_In::TEXT_DOMAIN ); ?></span>
+					<span class="sui-label-note"><?php esc_html_e( 'In px', 'wordpress-popup' ); ?></span>
 				</label>
 
 				<input
@@ -193,7 +193,7 @@
 					{{ 'custom' !== feature_image_vertical ? 'disabled=disabled' : '' }}
 				/>
 
-				<span class="sui-error-message" style="display: none;"><?php esc_html_e( 'Invalid', Opt_In::TEXT_DOMAIN ); ?></span>
+				<span class="sui-error-message" style="display: none;"><?php esc_html_e( 'Invalid', 'wordpress-popup' ); ?></span>
 
 			</div>
 

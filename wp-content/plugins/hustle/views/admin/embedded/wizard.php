@@ -10,10 +10,10 @@ $content_settings = $module->get_content()->to_array();
 $email_settings = $module->get_emails()->to_array();
 $form_elements = !empty( $email_settings['form_elements'] ) ? $email_settings['form_elements'] : array();
 
-$capitalize_singular = esc_html__( 'Embed', Opt_In::TEXT_DOMAIN );
-$capitalize_plural   = esc_html__( 'Embeds', Opt_In::TEXT_DOMAIN );
-$smallcaps_singular  = esc_html__( 'embed', Opt_In::TEXT_DOMAIN );
-$smallcaps_plural    = esc_html__( 'embeds', Opt_In::TEXT_DOMAIN );
+$capitalize_singular = esc_html__( 'Embed', 'wordpress-popup' );
+$capitalize_plural   = esc_html__( 'Embeds', 'wordpress-popup' );
+$smallcaps_singular  = esc_html__( 'embed', 'wordpress-popup' );
+$smallcaps_plural    = esc_html__( 'embeds', 'wordpress-popup' );
 
 $this->render(
 	'admin/commons/sui-wizard/wizard',
@@ -32,7 +32,7 @@ $this->render(
 		'is_recaptcha_available' => $is_recaptcha_available,
 		'wizard_tabs'            => array(
 			'content'      => array(
-				'name'     => esc_html__( 'Content', Opt_In::TEXT_DOMAIN ),
+				'name'     => esc_html__( 'Content', 'wordpress-popup' ),
 				'template' => 'admin/commons/sui-wizard/templates/tab-content',
 				'support'  => array(
 					'section'            => $section,
@@ -42,7 +42,7 @@ $this->render(
 				),
 			),
 			'emails'       => array(
-				'name'     => esc_html__( 'Emails', Opt_In::TEXT_DOMAIN ),
+				'name'     => esc_html__( 'Emails', 'wordpress-popup' ),
 				'template' => 'admin/commons/sui-wizard/templates/tab-emails',
 				'support'  => array(
 					'module'  => $module,
@@ -51,7 +51,7 @@ $this->render(
 				'is_optin' => true,
 			),
 			'integrations' => array(
-				'name'     => esc_html__( 'Integrations', Opt_In::TEXT_DOMAIN ),
+				'name'     => esc_html__( 'Integrations', 'wordpress-popup' ),
 				'template' => 'admin/commons/sui-wizard/templates/tab-integrations',
 				'support'  => array(
 					'section'            => $section,
@@ -61,7 +61,7 @@ $this->render(
 				'is_optin' => true,
 			),
 			'appearance'   => array(
-				'name'     => esc_html__( 'Appearance', Opt_In::TEXT_DOMAIN ),
+				'name'     => esc_html__( 'Appearance', 'wordpress-popup' ),
 				'template' => 'admin/commons/sui-wizard/templates/tab-appearance',
 				'support'  => array(
 					'section'             => $section,
@@ -74,7 +74,7 @@ $this->render(
 				),
 			),
 			'display'      => array(
-				'name'     => esc_html__( 'Display Options', Opt_In::TEXT_DOMAIN ),
+				'name'     => esc_html__( 'Display Options', 'wordpress-popup' ),
 				'template' => 'admin/commons/sui-wizard/templates/tab-display',
 				'support'  => array(
 					'section'      => $section,
@@ -82,7 +82,7 @@ $this->render(
 				),
 			),
 			'visibility'   => array(
-				'name'     => esc_html__( 'Visibility', Opt_In::TEXT_DOMAIN ),
+				'name'     => esc_html__( 'Visibility', 'wordpress-popup' ),
 				'template' => 'admin/commons/sui-wizard/templates/tab-visibility',
 				'support'  => array(
 					'section'             => $section,
@@ -92,7 +92,7 @@ $this->render(
 				),
 			),
 			'behavior'    => array(
-				'name'     => esc_html__( 'Behavior', Opt_In::TEXT_DOMAIN ),
+				'name'     => esc_html__( 'Behavior', 'wordpress-popup' ),
 				'template' => 'admin/commons/sui-wizard/templates/tab-behaviour',
 				'support'  => array(
 					'section'                    => $section,

@@ -1,8 +1,8 @@
 <div class="sui-box-settings-row">
 
 	<div class="sui-box-settings-col-1">
-		<span class="sui-settings-label"><?php esc_html_e( 'Feature Image', Opt_In::TEXT_DOMAIN ); ?></span>
-		<span class="sui-description"><?php esc_html_e( 'Choose the feature image settings as per your liking.', Opt_In::TEXT_DOMAIN ); ?></span>
+		<span class="sui-settings-label"><?php esc_html_e( 'Feature Image', 'wordpress-popup' ); ?></span>
+		<span class="sui-description"><?php esc_html_e( 'Choose the feature image settings as per your liking.', 'wordpress-popup' ); ?></span>
 	</div>
 
 	<div class="sui-box-settings-col-2">
@@ -12,8 +12,8 @@
 		// SETTING: Position ?>
 		<div id="hustle-feature-image-position-option" class="sui-form-field">
 
-			<span class="sui-settings-label"><?php esc_html_e( 'Position', Opt_In::TEXT_DOMAIN ); ?></span>
-			<span class="sui-description"><?php printf( esc_html__( 'Choose the position of your feature image relative to the content of the %s in your chosen layout.', Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?></span>
+			<span class="sui-settings-label"><?php esc_html_e( 'Position', 'wordpress-popup' ); ?></span>
+			<span class="sui-description"><?php printf( esc_html__( 'Choose the position of your feature image relative to the content of the %s in your chosen layout.', 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?></span>
 
 			<div class="sui-side-tabs"
 				style="margin-top: 10px;">
@@ -27,7 +27,7 @@
 							data-attribute="feature_image_position"
 							id="hustle-feature-image-left"
 							{{ _.checked( ( 'left' === feature_image_position ), true) }} />
-						<?php esc_attr_e( "Left", Opt_In::TEXT_DOMAIN ); ?>
+						<?php esc_attr_e( "Left", 'wordpress-popup' ); ?>
 					</label>
 
 					<?php if ( $is_optin ) { ?>
@@ -39,7 +39,7 @@
 								data-attribute="feature_image_position"
 								id="hustle-feature-image-above"
 								{{ _.checked( ( 'above' === feature_image_position ), true) }} />
-							<?php esc_attr_e( "Above Content", Opt_In::TEXT_DOMAIN ); ?>
+							<?php esc_attr_e( "Above Content", 'wordpress-popup' ); ?>
 						</label>
 
 						<label id="hustle-feature-image-below-label" for="hustle-feature-image-below" class="sui-tab-item{{ _.class( 'below' === feature_image_position,' active' ) }}{{ _.class( 'one' !== form_layout, ' sui-hidden' ) }}">
@@ -49,7 +49,7 @@
 								data-attribute="feature_image_position"
 								id="hustle-feature-image-below"
 								{{ _.checked( ( 'below' === feature_image_position ), true) }} />
-							<?php esc_attr_e( "Below Content", Opt_In::TEXT_DOMAIN ); ?>
+							<?php esc_attr_e( "Below Content", 'wordpress-popup' ); ?>
 						</label>
 
 					<?php } ?>
@@ -61,7 +61,7 @@
 							data-attribute="feature_image_position"
 							id="hustle-feature-image-right"
 							{{ _.checked( ( 'right' === feature_image_position ), true) }} />
-						<?php esc_attr_e( "Right", Opt_In::TEXT_DOMAIN ); ?>
+						<?php esc_attr_e( "Right", 'wordpress-popup' ); ?>
 					</label>
 
 				</div>
@@ -76,8 +76,8 @@
 			// SETTING: Fitting ?>
 			<div class="sui-form-field">
 
-				<span class="sui-settings-label"><?php esc_html_e( 'Fitting', Opt_In::TEXT_DOMAIN ); ?></span>
-				<span class="sui-description"><?php printf( esc_html__( 'Choose the feature image fitting type. You can preview the %s to check how each option affects the feature image.', Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?></span>
+				<span class="sui-settings-label"><?php esc_html_e( 'Fitting', 'wordpress-popup' ); ?></span>
+				<span class="sui-description"><?php printf( esc_html__( 'Choose the feature image fitting type. You can preview the %s to check how each option affects the feature image.', 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?></span>
 
 				<div class="sui-side-tabs"
 					style="margin-top: 10px;">
@@ -92,7 +92,7 @@
 								id="hustle-feature-image-cover"
 								data-tab-menu="hustle-focus-image"
 								{{ _.checked( ( 'cover' === feature_image_fit ), true) }} />
-							<?php esc_attr_e( "Cover", Opt_In::TEXT_DOMAIN ); ?>
+							<?php esc_attr_e( "Cover", 'wordpress-popup' ); ?>
 						</label>
 
 						<label for="hustle-feature-image-fill" class="sui-tab-item{{ ( 'fill' === feature_image_fit ) ? ' active' : '' }}">
@@ -102,7 +102,7 @@
 								value="fill"
 								id="hustle-feature-image-fill"
 								{{ _.checked( ( 'fill' === feature_image_fit ), true) }} />
-							<?php esc_attr_e( "Fill", Opt_In::TEXT_DOMAIN ); ?>
+							<?php esc_attr_e( "Fill", 'wordpress-popup' ); ?>
 						</label>
 
 						<label for="hustle-feature-image-contain" class="sui-tab-item{{ ( 'contain' === feature_image_fit ) ? ' active' : '' }}">
@@ -113,7 +113,7 @@
 								id="hustle-feature-image-contain"
 								data-tab-menu="hustle-focus-image"
 								{{ _.checked( ( 'contain' === feature_image_fit ), true) }} />
-							<?php esc_attr_e( "Contain", Opt_In::TEXT_DOMAIN ); ?>
+							<?php esc_attr_e( "Contain", 'wordpress-popup' ); ?>
 						</label>
 
 						<label for="hustle-feature-image-none" class="sui-tab-item{{ ( 'none' === feature_image_fit ) ? ' active' : '' }}">
@@ -123,7 +123,7 @@
 								value="none"
 								id="hustle-feature-image-none"
 								{{ _.checked( ( 'none' === feature_image_fit ), true) }} />
-							<?php esc_attr_e( "None", Opt_In::TEXT_DOMAIN ); ?>
+							<?php esc_attr_e( "None", 'wordpress-popup' ); ?>
 						</label>
 
 					</div>
@@ -132,7 +132,7 @@
 
 						<div class="sui-tab-content sui-tab-boxed {{ _.class( ( 'contain' === feature_image_fit || 'cover' === feature_image_fit), 'active' ) }}" data-tab-content="hustle-focus-image">
 
-							<?php $this->render( 'admin/commons/sui-wizard/elements/focal-point', array( 'feature_image' => $feature_image ) ); ?>
+							<?php self::static_render( 'admin/commons/sui-wizard/elements/focal-point', array( 'feature_image' => $feature_image ) ); ?>
 
 						</div>
 
@@ -146,8 +146,8 @@
 			// OPTION: Visibility on mobile ?>
 			<div class="sui-form-field">
 
-				<span class="sui-settings-label"><?php esc_html_e( 'Visibility on mobile', Opt_In::TEXT_DOMAIN ); ?></span>
-				<span class="sui-description"><?php esc_html_e( 'Make the feature image visibile or hidden on mobile devices.', Opt_In::TEXT_DOMAIN ); ?></span>
+				<span class="sui-settings-label"><?php esc_html_e( 'Visibility on mobile', 'wordpress-popup' ); ?></span>
+				<span class="sui-description"><?php esc_html_e( 'Make the feature image visibile or hidden on mobile devices.', 'wordpress-popup' ); ?></span>
 
 				<div class="sui-side-tabs"
 					style="margin-top: 10px;">
@@ -161,7 +161,7 @@
 								value="0"
 								id="hustle-feature-image-visible"
 								{{ _.checked( ! _.isTrue( feature_image_hide_on_mobile ), true) }} />
-							<?php esc_attr_e( "Visible", Opt_In::TEXT_DOMAIN ); ?>
+							<?php esc_attr_e( "Visible", 'wordpress-popup' ); ?>
 						</label>
 
 						<label for="hustle-feature-image-hidden" class="sui-tab-item {{ _.isTrue( feature_image_hide_on_mobile ) ? 'active' : '' }}">
@@ -171,7 +171,7 @@
 								value="1"
 								id="hustle-feature-image-hidden"
 								{{ _.checked( _.isTrue( feature_image_hide_on_mobile ), true) }} />
-							<?php esc_attr_e( "Hidden", Opt_In::TEXT_DOMAIN ); ?>
+							<?php esc_attr_e( "Hidden", 'wordpress-popup' ); ?>
 						</label>
 
 					</div>

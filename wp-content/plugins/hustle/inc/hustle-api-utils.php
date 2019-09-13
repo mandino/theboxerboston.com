@@ -68,7 +68,7 @@ class Hustle_Api_Utils {
 	 */
 	public static function check_for_required_fields( $submitted_data, $required_fields, $error_message = '' ) {
 		$errors = array();
-		$error_message = empty( $error_message ) ? __( '%s is required.', Opt_In::TEXT_DOMAIN ) : $error_message;
+		$error_message = empty( $error_message ) ? __( '%s is required.', 'wordpress-popup' ) : $error_message;
 		foreach ( $required_fields as $key => $required_field ) {
 			if ( ! isset( $submitted_data[ $key ] ) || ( empty( $submitted_data[ $key ] ) && '0' !== $submitted_data[ $key ] ) ) {
 				$errors[ $key ] = sprintf( $error_message, $required_field );

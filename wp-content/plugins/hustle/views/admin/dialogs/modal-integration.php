@@ -16,7 +16,7 @@
 
 						<button class="sui-dialog-back hustle-provider-back" aria-label="Back" style="display: none;"></button>
 
-						<button class="sui-dialog-close hustle-provider-close" aria-label="<?php esc_html_e( 'Close', Opt_In::TEXT_DOMAIN ); ?>"></button>
+						<button class="sui-dialog-close hustle-provider-close" aria-label="<?php esc_html_e( 'Close', 'wordpress-popup' ); ?>"></button>
 
 						<div class="sui-dialog-image" aria-hidden="true">
 							<img
@@ -59,7 +59,7 @@
 
 		</div>
 
-		<button class="sui-dialog-close hustle-provider-close" aria-label="<?php esc_html_e( 'Close', Opt_In::TEXT_DOMAIN ); ?>"></button>
+		<button class="sui-dialog-close hustle-provider-close" aria-label="<?php esc_html_e( 'Close', 'wordpress-popup' ); ?>"></button>
 
 		<div class="sui-box-content integration-header"></div>
 

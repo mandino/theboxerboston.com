@@ -62,7 +62,7 @@ if ( ! class_exists( 'Hustle_HubSpot_Api' ) ) :
 				// Allow retry but don't log referrer
 				$authorization_uri = $this->get_authorization_uri( false, false, $current_page );
 
-				$this->wp_die( esc_attr__( 'Hubspot integration failed!', Opt_In::TEXT_DOMAIN ), esc_url( $authorization_uri ), esc_url( $referer ) );
+				$this->wp_die( esc_attr__( 'HubSpot integration failed!', 'wordpress-popup' ), esc_url( $authorization_uri ), esc_url( $referer ) );
 			}
 		}
 
@@ -104,7 +104,7 @@ if ( ! class_exists( 'Hustle_HubSpot_Api' ) ) :
 		}
 
 		/**
-		* Get or retrieve access token from Hubspot.
+		* Get or retrieve access token from HubSpot.
 		*
 		* @param array $args
 		* @return bool
@@ -289,7 +289,7 @@ if ( ! class_exists( 'Hustle_HubSpot_Api' ) ) :
 		}
 
 		/**
-		* Retrieve contact lists from Hubspot
+		* Retrieve contact lists from HubSpot
 		*
 		* @return array
 		*/
@@ -338,7 +338,7 @@ if ( ! class_exists( 'Hustle_HubSpot_Api' ) ) :
 		}
 
 		/**
-		* Get the list of existing properties from Hubspot account.
+		* Get the list of existing properties from HubSpot account.
 		*
 		* @return array
 		*/
@@ -354,7 +354,7 @@ if ( ! class_exists( 'Hustle_HubSpot_Api' ) ) :
 		}
 
 		/**
-		* Add new field contact property to Hubspot.
+		* Add new field contact property to HubSpot.
 		*
 		* @param array $property
 		*
@@ -367,7 +367,7 @@ if ( ! class_exists( 'Hustle_HubSpot_Api' ) ) :
 		}
 
 		/**
-		* Add contact subscriber to Hubspot.
+		* Add contact subscriber to HubSpot.
 		*
 		* @param array $data
 		*
@@ -376,14 +376,14 @@ if ( ! class_exists( 'Hustle_HubSpot_Api' ) ) :
 		public function add_contact( $data ) {
 			$props = array();
 
-			// Add error log entries for subscription errors caused by custom fields not registered in Hubspot.
+			// Add error log entries for subscription errors caused by custom fields not registered in HubSpot.
 			$default_data = array( 'first_name', 'last_name' );
 			$existing_properties = array_merge( $this->get_properties(), array_flip( $default_data ) );
 			$filtered_data = array_intersect_key( $data, $existing_properties );
 
 			$difference = array_diff_key( $data, $filtered_data );
 			if ( ! empty( $difference ) ) {
-				$message = 'These fields are preventing your users from subscribing because they do not exist in your Hubspot account: ' . implode( ', ', array_keys( $difference ) );
+				$message = 'These fields are preventing your users from subscribing because they do not exist in your HubSpot account: ' . implode( ', ', array_keys( $difference ) );
 				Hustle_Api_Utils::maybe_log( $message );
 			}
 
@@ -416,7 +416,7 @@ if ( ! class_exists( 'Hustle_HubSpot_Api' ) ) :
 		}
 
 		/**
-		* Add contact subscriber to Hubspot.
+		* Add contact subscriber to HubSpot.
 		*
 		* @param array $data
 		*
@@ -425,14 +425,14 @@ if ( ! class_exists( 'Hustle_HubSpot_Api' ) ) :
 		public function update_contact( $id, $data ) {
 			$props = array();
 
-			// Add error log entries for subscription errors caused by custom fields not registered in Hubspot.
+			// Add error log entries for subscription errors caused by custom fields not registered in HubSpot.
 			$default_data = array( 'first_name', 'last_name' );
 			$existing_properties = array_merge( $this->get_properties(), array_flip( $default_data ) );
 			$filtered_data = array_intersect_key( $data, $existing_properties );
 
 			$difference = array_diff_key( $data, $filtered_data );
 			if ( ! empty( $difference ) ) {
-				$message = 'These fields are preventing your users from subscribing because they do not exist in your Hubspot account: ' . implode( ', ', array_keys( $difference ) );
+				$message = 'These fields are preventing your users from subscribing because they do not exist in your HubSpot account: ' . implode( ', ', array_keys( $difference ) );
 				Hustle_Api_Utils::maybe_log( $message );
 			}
 

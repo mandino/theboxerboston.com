@@ -18,23 +18,23 @@
 
 			<div class="sui-box-header sui-block-content-center">
 
-				<h3 id="dialogTitle" class="sui-box-title"><?php esc_html_e( 'Dismiss Migrate Data Notice', Opt_In::TEXT_DOMAIN ); ?></h3>
+				<h3 id="dialogTitle" class="sui-box-title"><?php esc_html_e( 'Dismiss Migrate Data Notice', 'wordpress-popup' ); ?></h3>
 
 				<button class="sui-dialog-close" data-a11y-dialog-hide="hustle-dialog--migrate-dismiss-confirmation">
-					<span class="sui-screen-reader-text"><?php esc_html_e( 'Close this dialog window', Opt_In::TEXT_DOMAIN ); ?></span>
+					<span class="sui-screen-reader-text"><?php esc_html_e( 'Close this dialog window', 'wordpress-popup' ); ?></span>
 				</button>
 
 			</div>
 
 			<div class="sui-box-body sui-box-body-slim sui-block-content-center">
 
-				<p class="sui-description"><?php esc_html_e( "Are you sure you wish to dismiss this notice? Make sure you've already migrated data of your existing modules, and you don't need to migrate data anymore.", Opt_In::TEXT_DOMAIN ); ?></p>
+				<p class="sui-description"><?php esc_html_e( "Are you sure you wish to dismiss this notice? Make sure you've already migrated data of your existing modules, and you don't need to migrate data anymore.", 'wordpress-popup' ); ?></p>
 
 			</div>
 
 			<div class="sui-box-footer sui-box-footer-center">
 
-				<button class="sui-button sui-button-ghost" data-a11y-dialog-hide="hustle-dialog--migrate-dismiss-confirmation"><?php esc_html_e( 'Cancel', Opt_In::TEXT_DOMAIN ); ?></button>
+				<button class="sui-button sui-button-ghost" data-a11y-dialog-hide="hustle-dialog--migrate-dismiss-confirmation"><?php esc_html_e( 'Cancel', 'wordpress-popup' ); ?></button>
 
 				<button 
 					id="hustle-dismiss-modal-button" 
@@ -43,7 +43,7 @@
 					data-name="<?php echo esc_attr( Hustle_Dashboard_Admin::MIGRATE_NOTICE_NAME ); ?>"
 					data-a11y-dialog-hide="hustle-dialog--migrate-dismiss-confirmation"
 				>
-					<?php esc_html_e( 'Dismiss Forever', Opt_In::TEXT_DOMAIN ); ?>
+					<?php esc_html_e( 'Dismiss Forever', 'wordpress-popup' ); ?>
 				</button>
 
 			</div>

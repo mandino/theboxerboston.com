@@ -10,9 +10,9 @@ $editor_css = '<style>' . $editor_css. '</style>';
 
 	<div class="sui-box-settings-col-1">
 
-		<span class="sui-settings-label"><?php esc_html_e( 'Automated Email', Opt_In::TEXT_DOMAIN ); ?></span>
+		<span class="sui-settings-label"><?php esc_html_e( 'Automated Email', 'wordpress-popup' ); ?></span>
 
-		<span class="sui-description"><?php esc_html_e( "Send an automated email to the subscribers after they've subscribed.", Opt_In::TEXT_DOMAIN ); ?></span>
+		<span class="sui-description"><?php esc_html_e( "Send an automated email to the subscribers after they've subscribed.", 'wordpress-popup' ); ?></span>
 
 	</div>
 
@@ -26,7 +26,7 @@ $editor_css = '<style>' . $editor_css. '</style>';
 			<span class="sui-toggle-slider"></span>
 		</label>
 
-		<label for="hustle-automated-email"><?php esc_html_e( 'Send an automated email to the user', Opt_In::TEXT_DOMAIN ); ?></label>
+		<label for="hustle-automated-email"><?php esc_html_e( 'Send an automated email to the user', 'wordpress-popup' ); ?></label>
 
 		<div id="hustle-automated-email-toggle-wrapper" class="sui-border-frame sui-toggle-content{{ ( _.isTrue( automated_email ) ) ? '' : ' sui-hidden' }}">
 
@@ -34,7 +34,7 @@ $editor_css = '<style>' . $editor_css. '</style>';
 
 				<div class="sui-form-field">
 
-					<label class="sui-label"><?php esc_html_e( 'Email time', Opt_In::TEXT_DOMAIN ); ?></label>
+					<label class="sui-label"><?php esc_html_e( 'Email time', 'wordpress-popup' ); ?></label>
 
 
 					<div class="sui-side-tabs">
@@ -47,7 +47,7 @@ $editor_css = '<style>' . $editor_css. '</style>';
 									data-attribute="email_time"
 									value="instant"
 									{{ _.checked( ( 'instant' === email_time ), true) }}/>
-								<?php esc_html_e( 'Instant', Opt_In::TEXT_DOMAIN ); ?>
+								<?php esc_html_e( 'Instant', 'wordpress-popup' ); ?>
 							</label>
 							<label class="sui-tab-item {{ 'delay' === email_time ? 'active' : '' }}">
 								<input type="radio"
@@ -56,7 +56,7 @@ $editor_css = '<style>' . $editor_css. '</style>';
 									data-tab-menu="delay"
 									value="delay"
 									{{ _.checked( ( 'redirect' === email_time ), true) }}/>
-								<?php esc_html_e( 'Delay', Opt_In::TEXT_DOMAIN ); ?>
+								<?php esc_html_e( 'Delay', 'wordpress-popup' ); ?>
 							</label>
 							<label class="sui-tab-item {{ 'schedule' === email_time ? 'active' : '' }}">
 								<input type="radio"
@@ -65,7 +65,7 @@ $editor_css = '<style>' . $editor_css. '</style>';
 									data-tab-menu="schedule"
 									value="schedule"
 									{{ _.checked( ( 'redirect' === email_time ), true) }}/>
-								<?php esc_html_e( 'Schedule', Opt_In::TEXT_DOMAIN ); ?>
+								<?php esc_html_e( 'Schedule', 'wordpress-popup' ); ?>
 							</label>
 
 						</div>
@@ -82,15 +82,16 @@ $editor_css = '<style>' . $editor_css. '</style>';
 											data-attribute="auto_email_time"
 											value="{{ auto_email_time }}"
 											placeholder="0"
+											min="0"
 											class="sui-form-control" />
 									</div>
 
 									<div class="sui-col-md-6">
 										<select name="auto_email_unit" data-attribute="auto_email_unit">
-											<option value="seconds" {{ _.selected( ('seconds' === auto_email_unit), true) }}><?php esc_html_e( 'seconds', Opt_In::TEXT_DOMAIN ); ?></option>
-											<option value="minutes" {{ _.selected( ('minutes' === auto_email_unit), true) }}><?php esc_html_e( 'minutes', Opt_In::TEXT_DOMAIN ); ?></option>
-											<option value="hours" {{ _.selected( ('hours' === auto_email_unit), true) }}><?php esc_html_e( 'hours', Opt_In::TEXT_DOMAIN ); ?></option>
-											<option value="days" {{ _.selected( ('days' === auto_email_unit), true) }}><?php esc_html_e( 'days', Opt_In::TEXT_DOMAIN ); ?></option>
+											<option value="seconds" {{ _.selected( ('seconds' === auto_email_unit), true) }}><?php esc_html_e( 'seconds', 'wordpress-popup' ); ?></option>
+											<option value="minutes" {{ _.selected( ('minutes' === auto_email_unit), true) }}><?php esc_html_e( 'minutes', 'wordpress-popup' ); ?></option>
+											<option value="hours" {{ _.selected( ('hours' === auto_email_unit), true) }}><?php esc_html_e( 'hours', 'wordpress-popup' ); ?></option>
+											<option value="days" {{ _.selected( ('days' === auto_email_unit), true) }}><?php esc_html_e( 'days', 'wordpress-popup' ); ?></option>
 										</select>
 									</div>
 
@@ -100,11 +101,11 @@ $editor_css = '<style>' . $editor_css. '</style>';
 
 							<div class="sui-tab-content sui-tab-boxed {{ 'schedule' === email_time ? 'active' : '' }}" data-tab-content="schedule">
 
-								<label class="sui-description"><?php printf( esc_html__( 'Choose a fixed date and time for your email or select a %1$sDatepicker%2$s field of your form to schedule this email dynamically based on user input.', Opt_In::TEXT_DOMAIN ), '<b>', '</b>' ); ?></label>
+								<label class="sui-description"><?php printf( esc_html__( 'Choose a fixed date and time for your email or select %1$sDatepicker and Timepicker%2$s fields of your form to schedule this email dynamically based on user input.', 'wordpress-popup' ), '<b>', '</b>' ); ?></label>
 
 								<div class="sui-form-field">
 
-									<label for="hustle-email-day" class="sui-label"><?php esc_html_e( 'Day', Opt_In::TEXT_DOMAIN ); ?></label>
+									<label for="hustle-email-day" class="sui-label"><?php esc_html_e( 'Day', 'wordpress-popup' ); ?></label>
 
 									<div class="sui-insert-variables">
 
@@ -131,7 +132,7 @@ $editor_css = '<style>' . $editor_css. '</style>';
 
 								<div class="sui-form-field">
 
-									<label for="hustle-email-time" class="sui-label"><?php esc_html_e( 'Time of Day', Opt_In::TEXT_DOMAIN ); ?></label>
+									<label for="hustle-email-time" class="sui-label"><?php esc_html_e( 'Time of Day', 'wordpress-popup' ); ?></label>
 
 									<div class="sui-insert-variables hustle-field">
 
@@ -140,7 +141,7 @@ $editor_css = '<style>' . $editor_css. '</style>';
 											<input type="text"
 												name="time"
 												value="{{ time }}"
-												placeholder="10:30 AM"
+												placeholder="<?php printf( esc_attr__( 'Timepicker %s', 'wordpress-popup' ), '{time-1}' ); ?>"
 												id="hustle-email-time"
 												class="sui-form-control"
 												data-attribute="time"
@@ -150,7 +151,7 @@ $editor_css = '<style>' . $editor_css. '</style>';
 
 										</div>
 
-										<!--<select class="hustle-field-options" data-type="timepicker"></select>-->
+										<select class="hustle-field-options" data-type="timepicker"></select>
 
 									</div>
 
@@ -166,7 +167,7 @@ $editor_css = '<style>' . $editor_css. '</style>';
 
 				<div class="sui-form-field">
 
-					<label for="hustle-email-recipient" class="sui-label"><?php esc_html_e( 'Recipient', Opt_In::TEXT_DOMAIN ); ?></label>
+					<label for="hustle-email-recipient" class="sui-label"><?php esc_html_e( 'Recipient', 'wordpress-popup' ); ?></label>
 
 					<div class="sui-insert-variables">
 
@@ -187,10 +188,10 @@ $editor_css = '<style>' . $editor_css. '</style>';
 
 				<div class="sui-form-field">
 
-					<label for="hustle-email-copy-subject" class="sui-label"><?php esc_html_e( 'Subject', Opt_In::TEXT_DOMAIN ); ?></label>
+					<label for="hustle-email-copy-subject" class="sui-label"><?php esc_html_e( 'Subject', 'wordpress-popup' ); ?></label>
 
 					<input type="text"
-						placeholder="<?php esc_html_e( 'Email copy subject', Opt_In::TEXT_DOMAIN ); ?>"
+						placeholder="<?php esc_html_e( 'Email copy subject', 'wordpress-popup' ); ?>"
 						name="email_subject"
 						data-attribute="email_subject"
 						value="{{ email_subject }}"
@@ -201,7 +202,7 @@ $editor_css = '<style>' . $editor_css. '</style>';
 
 				<div class="sui-form-field">
 
-					<label class="sui-label sui-label-editor"><?php esc_html_e( 'Email body', Opt_In::TEXT_DOMAIN ); ?></label>
+					<label class="sui-label sui-label-editor"><?php esc_html_e( 'Email body', 'wordpress-popup' ); ?></label>
 
 					<?php wp_editor(
 						'{{ email_body }}',

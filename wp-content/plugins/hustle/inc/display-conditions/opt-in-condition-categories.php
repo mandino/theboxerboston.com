@@ -58,20 +58,20 @@ class Opt_In_Condition_Categories extends Opt_In_Condition_Abstract {
 			switch( $this->args->filter_type ){
 				case "only":
 					return ( in_array("all", $this->args->categories, true) )
-						? __("All categories", Opt_In::TEXT_DOMAIN)
-						: sprintf( __("%d categories", Opt_In::TEXT_DOMAIN), $total );
+						? __("All categories", 'wordpress-popup')
+						: sprintf( __("%d categories", 'wordpress-popup'), $total );
 				case "except":
 					return ( in_array("all", $this->args->categories, true) )
-						? __("No categories", Opt_In::TEXT_DOMAIN)
-						: sprintf( __("All categories except %d", Opt_In::TEXT_DOMAIN), $total );
+						? __("No categories", 'wordpress-popup')
+						: sprintf( __("All categories except %d", 'wordpress-popup'), $total );
 
 				default:
 					return null;
 			}
 		} else {
 			return ( !isset($this->args->filter_type) || "except" === $this->args->filter_type )
-				? __("All categories", Opt_In::TEXT_DOMAIN)
-				: __("No categories", Opt_In::TEXT_DOMAIN);
+				? __("All categories", 'wordpress-popup')
+				: __("No categories", 'wordpress-popup');
 		}
 	}
 }

@@ -65,7 +65,7 @@ class Hustle_ConstantContact_Form_Settings extends Hustle_Provider_Form_Settings
 		$is_submit = ! empty( $submitted_data['is_submit'] );
 
 		if ( $is_submit && empty( $submitted_data['list_id'] ) ) {
-			$error_message = __( 'The email list is required.', Opt_In::TEXT_DOMAIN );
+			$error_message = __( 'The email list is required.', 'wordpress-popup' );
 		} else {
 			$error_message = '';
 		}
@@ -73,14 +73,14 @@ class Hustle_ConstantContact_Form_Settings extends Hustle_Provider_Form_Settings
 		$options = $this->get_first_step_options( $current_data );
 
 		$step_html = Hustle_Api_Utils::get_modal_title_markup(
-			__( 'Choose your list', Opt_In::TEXT_DOMAIN ),
-			__( 'Choose the list you want to send form data to.', Opt_In::TEXT_DOMAIN )
+			__( 'Choose your list', 'wordpress-popup' ),
+			__( 'Choose the list you want to send form data to.', 'wordpress-popup' )
 		);
 
 		$step_html .= Hustle_Api_Utils::get_html_for_options( $options );
 
 		if ( ! is_ssl() ) {
-			$error_message .= __( 'Constant Contact requires your site to have SSL certificate.', Opt_In::TEXT_DOMAIN );
+			$error_message .= __( 'Constant Contact requires your site to have SSL certificate.', 'wordpress-popup' );
 		}
 
 		if ( empty( $error_message ) ) {
@@ -94,10 +94,10 @@ class Hustle_ConstantContact_Form_Settings extends Hustle_Provider_Form_Settings
 		$disabled = !is_ssl();
 		$buttons = array(
 			'disconnect' => array(
-				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'disconnect_form', true ),
+				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', 'wordpress-popup' ), 'sui-button-ghost', 'disconnect_form', true ),
 			),
 			'save' => array(
-				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', Opt_In::TEXT_DOMAIN ), '', 'next', true, $disabled ),
+				'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', 'wordpress-popup' ), '', 'next', true, $disabled ),
 			),
 		);
 
@@ -170,7 +170,7 @@ class Hustle_ConstantContact_Form_Settings extends Hustle_Provider_Form_Settings
 					'label' => array(
 						'type'  => 'label',
 						'for'   => 'list_id',
-						'value' => __( 'Email List', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Email List', 'wordpress-popup' ),
 					),
 					'choose_email_list' => array(
 						'type'     => 'select',

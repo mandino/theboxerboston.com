@@ -37,7 +37,7 @@ class Hustle_Sendy_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 			$addon = $this->addon;
 
 			if ( empty( $submitted_data['email'] ) ) {
-				throw new Exception( __( 'Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN ) );
+				throw new Exception( __( 'Required Field "email" was not filled by the user.', 'wordpress-popup' ) );
 			}
 
 			$submitted_data = $this->check_legacy( $submitted_data );
@@ -68,13 +68,13 @@ class Hustle_Sendy_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 			if ( is_wp_error( $api_response ) ) {
 				$entry_fields = $this->get_status( false, $api_response->get_error_message() );
 			} else {
-				$entry_fields = $this->get_status( true, __( 'Successfully added or updated member on Sendy list', Opt_In::TEXT_DOMAIN ) );
+				$entry_fields = $this->get_status( true, __( 'Successfully added or updated member on Sendy list', 'wordpress-popup' ) );
 			}
 		} catch ( Exception $e ) {
 			$entry_fields = $this->exception( $e );
 		}
 
-		return $entry_fields = apply_filters( 'hustle_provider_' . $addon->get_slug() . '_entry_fields',
+		return apply_filters( 'hustle_provider_' . $addon->get_slug() . '_entry_fields',
 			$entry_fields,
 			$module_id,
 			$submitted_data,
@@ -130,7 +130,7 @@ class Hustle_Sendy_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 		$addon_setting_values 		= $form_settings_instance->get_form_settings_values();
 
 		if ( empty( $submitted_data['email'] ) ) {
-			return __( 'Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN );
+			return __( 'Required Field "email" was not filled by the user.', 'wordpress-popup' );
 		}
 
 		if ( ! $allow_subscribed ) {

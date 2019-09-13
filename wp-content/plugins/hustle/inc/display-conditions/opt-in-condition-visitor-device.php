@@ -11,6 +11,6 @@ class Opt_In_Condition_Visitor_Device extends Opt_In_Condition_Abstract {
 	}
 
 	public function label() {
-		return __("Not on mobile", Opt_In::TEXT_DOMAIN);
+		return __("Not on mobile", 'wordpress-popup');
 	}
 }

@@ -10,14 +10,6 @@ if ( ! class_exists( 'Hustle_Modules_Common_Admin' ) ) :
 	 */
 	class Hustle_Modules_Common_Admin {
 
-		protected $_hustle;
-
-		public function __construct( Opt_In $hustle ) {
-
-			$this->_hustle = $hustle;
-
-		}
-
 		/**
 		 * Process the current request
 		 * Used in:
@@ -153,11 +145,11 @@ if ( ! class_exists( 'Hustle_Modules_Common_Admin' ) ) :
 				$settings_data = empty( $data['settings'] ) ? $def_settings : array_merge( $def_settings, $data['settings'] );
 
 				// save to meta table
-				$module->update_meta( $this->_hustle->get_const_var( 'KEY_CONTENT', $module ), $content_data );
-				$module->update_meta( $this->_hustle->get_const_var( 'KEY_EMAILS', $module ), $emails_data );
-				$module->update_meta( $this->_hustle->get_const_var( 'KEY_INTEGRATIONS_SETTINGS', $module ), $integrations_settings_data );
-				$module->update_meta( $this->_hustle->get_const_var( 'KEY_DESIGN', $module ), $design_data );
-				$module->update_meta( $this->_hustle->get_const_var( 'KEY_SETTINGS', $module ), $settings_data );
+				$module->update_meta( Hustle_Module_Model::KEY_CONTENT, $content_data );
+				$module->update_meta( Hustle_Module_Model::KEY_EMAILS, $emails_data );
+				$module->update_meta( Hustle_Module_Model::KEY_INTEGRATIONS_SETTINGS, $integrations_settings_data );
+				$module->update_meta( Hustle_Module_Model::KEY_DESIGN, $design_data );
+				$module->update_meta( Hustle_Module_Model::KEY_SETTINGS, $settings_data );
 
 			} else {
 
@@ -169,8 +161,8 @@ if ( ! class_exists( 'Hustle_Modules_Common_Admin' ) ) :
 				$design_data = empty( $data['design'] ) ? $def_design : array_merge( $def_design, $data['design'] );
 
 				// save to meta table
-				$module->update_meta( $this->_hustle->get_const_var( 'KEY_CONTENT', $module ), $content_data );
-				$module->update_meta( $this->_hustle->get_const_var( 'KEY_DESIGN', $module ), $design_data );
+				$module->update_meta( Hustle_Module_Model::KEY_CONTENT, $content_data );
+				$module->update_meta( Hustle_Module_Model::KEY_DESIGN, $design_data );
 			}
 
 			// Embedded and Social sharing only. //
@@ -181,7 +173,7 @@ if ( ! class_exists( 'Hustle_Modules_Common_Admin' ) ) :
 				$display_data = empty( $data['display'] ) ? $def_display : array_merge( $def_display, $data['display'] );
 				
 				// Save Display to meta table.
-				$module->update_meta( $this->_hustle->get_const_var( 'KEY_DISPLAY_OPTIONS', $module ), $display_data );
+				$module->update_meta( Hustle_Module_Model::KEY_DISPLAY_OPTIONS, $display_data );
 			}
 
 			// For all module types. //
@@ -189,14 +181,14 @@ if ( ! class_exists( 'Hustle_Modules_Common_Admin' ) ) :
 			// Visibility settings.
 			$def_visibility = apply_filters( 'hustle_module_get_' . Hustle_Module_Model::KEY_VISIBILITY . '_defaults', $module->get_visibility()->to_array(), $module, $data );
 			$visibility_data = empty( $data['visibility'] ) ? $def_visibility : array_merge( $def_visibility, $data['visibility'] );
-			$module->update_meta( $this->_hustle->get_const_var( 'KEY_VISIBILITY', $module ), $visibility_data );
+			$module->update_meta( Hustle_Module_Model::KEY_VISIBILITY, $visibility_data );
 
 			// Shortcode ID. Get a new and unique id.
 			$shortcode_id = $module->get_new_shortcode_id( $module->module_name );
-			$module->update_meta( $this->_hustle->get_const_var( 'KEY_SHORTCODE_ID', $module ), $shortcode_id );
+			$module->update_meta( Hustle_Module_Model::KEY_SHORTCODE_ID, $shortcode_id );
 
 			// Module's permissions.
-			$module->update_meta( $this->_hustle->get_const_var( 'KEY_MODULE_META_PERMISSIONS', $module ), $this->get_new_edit_roles() );
+			$module->update_meta( Hustle_Module_Model::KEY_MODULE_META_PERMISSIONS, $this->get_new_edit_roles() );
 		}
 
 		/**

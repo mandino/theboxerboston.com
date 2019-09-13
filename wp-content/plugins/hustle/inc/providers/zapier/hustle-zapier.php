@@ -84,8 +84,18 @@ class Hustle_Zapier extends Hustle_Provider_Abstract {
 	 * Provider constructor.
 	 */
 	public function __construct() {
-		$this->_icon_2x = plugin_dir_url( __FILE__ ) . 'images/icon.png';
-		$this->_logo_2x = plugin_dir_url( __FILE__ ) . 'images/logo.png';
+		$this->_icon_2x   = plugin_dir_url( __FILE__ ) . 'images/icon.png';
+		$this->_logo_2x   = plugin_dir_url( __FILE__ ) . 'images/logo.png';
+		$this->_banner_1x = plugin_dir_url( __FILE__ ) . 'images/banner.png';
+		$this->_banner_2x = plugin_dir_url( __FILE__ ) . 'images/banner@2x.png';
+		$this->_documentation_url = 'https://premium.wpmudev.org/docs/wpmu-dev-plugins/forminator/#zapier';
+		$this->_short_description = sprintf(
+			esc_html__( 'Zapier connects Hustle with %1$s1000+ apps%2$s. You can use it to send your leads to third party apps not natively supported in Hustle and automate your after-submission workflows. Refer to this %3$sarticle%4$s for tips and tricks on using Zapier integration and creating automated workflows. Happy automating!', 'wordpress-popup' ),
+			'<a href="https://zapier.com/apps" target="_blank">',
+			'</a>',
+			'<a href="https://premium.wpmudev.org/blog/zapier-wordpress-form-integrations/" target="_blank">',
+			'</a>'
+		);
 	}
 
 	/**
@@ -145,7 +155,7 @@ class Hustle_Zapier extends Hustle_Provider_Abstract {
 				// TODO: Wrap this in a friendlier method
 				$activated = Hustle_Providers::get_instance()->activate_addon( $this->_slug );
 				if ( ! $activated ) {
-					$error_message = __( "Provider couldn't be activated.", Opt_In::TEXT_DOMAIN );
+					$error_message = __( "Provider couldn't be activated.", 'wordpress-popup' );
 					$has_errors = true;
 				} else {
 					$this->save_settings_values( array( 'active' => $active ) );
@@ -157,17 +167,17 @@ class Hustle_Zapier extends Hustle_Provider_Abstract {
 			if ( ! $has_errors ) {
 
 				return array(
-					'html'         => Hustle_Api_Utils::get_modal_title_markup( __( 'Zapier Added', Opt_In::TEXT_DOMAIN ), __( 'You can now go to your forms and assign them to this integration', Opt_In::TEXT_DOMAIN ) ),
+					'html'         => Hustle_Api_Utils::get_modal_title_markup( __( 'Zapier Added', 'wordpress-popup' ), __( 'You can now go to your forms and assign them to this integration', 'wordpress-popup' ) ),
 					'buttons'      => array(
 						'close' => array(
-							'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'close' ),
+							'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', 'wordpress-popup' ), 'sui-button-ghost', 'close' ),
 						),
 					),
 					'redirect'     => false,
 					'has_errors'   => false,
 					'notification' => array(
 						'type' => 'success',
-						'text' => '<strong>' . $this->get_title() . '</strong> ' . __( 'Successfully connected', Opt_In::TEXT_DOMAIN ),
+						'text' => '<strong>' . $this->get_title() . '</strong> ' . __( 'Successfully connected', 'wordpress-popup' ),
 					),
 				);
 
@@ -188,7 +198,7 @@ class Hustle_Zapier extends Hustle_Provider_Abstract {
 			),
 		);
 
-		$step_html = Hustle_Api_Utils::get_modal_title_markup( __( 'Configure Zapier', Opt_In::TEXT_DOMAIN ), __("Activate Zapier to start using it on your forms.", Opt_In::TEXT_DOMAIN) );
+		$step_html = Hustle_Api_Utils::get_modal_title_markup( __( 'Configure Zapier', 'wordpress-popup' ), __("Activate Zapier to start using it on your forms.", 'wordpress-popup') );
 		$step_html .= Hustle_Api_Utils::get_html_for_options( $options );
 
 		if ( $has_errors ) {
@@ -199,16 +209,16 @@ class Hustle_Zapier extends Hustle_Provider_Abstract {
 		if ( $is_edit ) {
 			$buttons = array(
 				'disconnect' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'disconnect', true ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', 'wordpress-popup' ), 'sui-button-ghost', 'disconnect', true ),
 				),
 				'close' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', Opt_In::TEXT_DOMAIN ), '', 'close' ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', 'wordpress-popup' ), '', 'close' ),
 				),
 			);
 		} else {
 			$buttons = array(
 				'connect' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Activate', Opt_In::TEXT_DOMAIN ), '', 'connect', true ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Activate', 'wordpress-popup' ), '', 'connect', true ),
 				),
 			);
 
@@ -246,9 +256,9 @@ class Hustle_Zapier extends Hustle_Provider_Abstract {
 
 	/**
 	 * Multiple Zapier hooks can be added to a single module which doesn't happen in any other module.
-	 * 
+	 *
 	 * Zapier data is structured differently so a custom implementation is necessary.
-	 * 
+	 *
 	 * @param Hustle_Module_Model $module
 	 * @param $old_module
 	 *
@@ -273,7 +283,7 @@ class Hustle_Zapier extends Hustle_Provider_Abstract {
 		// Activate the addon
 		Hustle_Providers::get_instance()->activate_addon( $this->get_slug() );
 
-		// At module level 
+		// At module level
 		$module->set_provider_settings( $this->get_slug(), array(
 			$this->generate_multi_id() => array(
 				'name'    => '',

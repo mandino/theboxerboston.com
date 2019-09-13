@@ -6,7 +6,7 @@ $is_embedded_or_social = Hustle_Module_Model::EMBEDDED_MODULE === $module->modul
 	<span class="sui-loading-text">
 		<i class="sui-icon-widget-settings-config" aria-hidden="true"></i>
 	</span>
-	<span class="sui-screen-reader-text"><?php esc_html_e( 'More options', Opt_In::TEXT_DOMAIN ); ?></span>
+	<span class="sui-screen-reader-text"><?php esc_html_e( 'More options', 'wordpress-popup' ); ?></span>
 	<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 </button>
 
@@ -17,7 +17,7 @@ $is_embedded_or_social = Hustle_Module_Model::EMBEDDED_MODULE === $module->modul
 		?>
 		<li><a href="<?php echo esc_url( $url ); ?>" class="hustle-onload-icon-action">
 			<i class="sui-icon-pencil" aria-hidden="true"></i>
-			<?php esc_html_e( 'Edit', Opt_In::TEXT_DOMAIN ); ?>
+			<?php esc_html_e( 'Edit', 'wordpress-popup' ); ?>
 		</a></li>
 	<?php endif; ?>
 
@@ -28,7 +28,7 @@ $is_embedded_or_social = Hustle_Module_Model::EMBEDDED_MODULE === $module->modul
 			data-id="<?php echo esc_attr( $module->id ); ?>"
 			data-type="<?php echo esc_attr( $module->module_type ); ?>">
 			<i class="sui-icon-eye" aria-hidden="true"></i>
-			<?php esc_html_e( 'Preview', Opt_In::TEXT_DOMAIN ); ?>
+			<?php esc_html_e( 'Preview', 'wordpress-popup' ); ?>
 		</button></li>
 	<?php endif; ?>
 
@@ -36,9 +36,9 @@ $is_embedded_or_social = Hustle_Module_Model::EMBEDDED_MODULE === $module->modul
 	if ( $is_embedded_or_social ) : ?>
 		<li><button
 			class="hustle-copy-shortcode-button"
-			data-shortcode='[wd_hustle id="<?php echo esc_attr( $module->get_shortcode_id() ); ?>" type="<?php echo esc_attr( $module->module_type ); ?>"]'>
+			data-shortcode='[wd_hustle id="<?php echo esc_attr( $module->get_shortcode_id() ); ?>" type="<?php echo esc_attr( $module->module_type ); ?>"/]'>
 			<i class="sui-icon-code" aria-hidden="true"></i>
-			<?php esc_html_e( 'Copy Shortcode', Opt_In::TEXT_DOMAIN ); ?>
+			<?php esc_html_e( 'Copy Shortcode', 'wordpress-popup' ); ?>
 		</button></li>
 	<?php endif; ?>
 
@@ -54,11 +54,11 @@ $is_embedded_or_social = Hustle_Module_Model::EMBEDDED_MODULE === $module->modul
 	>
 		<span class="<?php echo $published ? '' : 'sui-hidden'; ?>">
 			<i class="sui-icon-unpublish" aria-hidden="true"></i>
-			<?php esc_html_e( 'Unpublish', Opt_In::TEXT_DOMAIN ); ?>
+			<?php esc_html_e( 'Unpublish', 'wordpress-popup' ); ?>
 		</span>
 		<span class="<?php echo $published ? ' sui-hidden' : ''; ?>">
 			<i class="sui-icon-web-globe-world" aria-hidden="true"></i>
-			<?php esc_html_e( 'Publish', Opt_In::TEXT_DOMAIN ); ?>
+			<?php esc_html_e( 'Publish', 'wordpress-popup' ); ?>
 		</span>
 	</button></li>
 
@@ -78,8 +78,8 @@ if (
 		admin_url( 'admin.php' )
 	);
 	printf( '<li><a href="%s" class="hustle-onload-icon-action">', esc_url( $url ) );
-	echo '<i class="sui-icon-community-people" aria-hidden="true"></i>';
-	esc_html_e( 'View Email List', Opt_In::TEXT_DOMAIN );
+	echo '<i class="sui-icon-community-people" aria-hidden="true"></i> ';
+	esc_html_e( 'View Email List', 'wordpress-popup' );
 	echo '</a></li>';
 }
 ?>
@@ -93,7 +93,7 @@ if (
 			<input type="hidden" name="hustle_nonce" value="<?php echo esc_attr( wp_create_nonce( 'hustle_listing_request' ) ); ?>">
 			<button class="<?php echo $can_create ? 'hustle-onload-icon-action' : 'hustle-upgrade-modal-button'; ?>">
 				<i class="sui-icon-copy" aria-hidden="true"></i>
-				<?php esc_html_e( 'Duplicate', Opt_In::TEXT_DOMAIN ); ?>
+				<?php esc_html_e( 'Duplicate', 'wordpress-popup' ); ?>
 			</button>
 		</form>
 	</li>
@@ -113,11 +113,11 @@ if (
 			>
 				<span class="<?php echo $is_tracking_enabled ? '' : 'sui-hidden'; ?>">
 					<i class="sui-icon-tracking-disabled" aria-hidden="true"></i>
-					<?php esc_html_e( 'Disable Tracking', Opt_In::TEXT_DOMAIN ); ?>
+					<?php esc_html_e( 'Disable Tracking', 'wordpress-popup' ); ?>
 				</span>
 				<span class="<?php echo $is_tracking_enabled ? ' sui-hidden' : ''; ?>">
 					<i class="sui-icon-graph-line" aria-hidden="true"></i>
-					<?php esc_html_e( 'Enable Tracking', Opt_In::TEXT_DOMAIN ); ?>
+					<?php esc_html_e( 'Enable Tracking', 'wordpress-popup' ); ?>
 				</span>
 			</button>
 		<?php
@@ -132,7 +132,7 @@ if (
 				data-tracking-types="<?php echo esc_attr( $enabled_trackings ); ?>"
 			>
 				<i class="sui-icon-graph-line" aria-hidden="true"></i>
-				<?php esc_html_e( 'Manage Tracking', Opt_In::TEXT_DOMAIN ); ?>
+				<?php esc_html_e( 'Manage Tracking', 'wordpress-popup' ); ?>
 			</button>
 		<?php endif; ?>
 	</li>
@@ -143,7 +143,7 @@ if (
 				data-id="<?php echo esc_attr( $module->id ); ?>"
 				data-dialog-id="hustle-dialog--tracking-reset-data"
 			>
-			<i class="sui-icon-undo" aria-hidden="true"></i> <?php esc_html_e( 'Reset Tracking Data', Opt_In::TEXT_DOMAIN ); ?>
+			<i class="sui-icon-undo" aria-hidden="true"></i> <?php esc_html_e( 'Reset Tracking Data', 'wordpress-popup' ); ?>
 		</button>
 	</li>
 
@@ -157,7 +157,7 @@ if (
 			<?php wp_nonce_field( 'hustle_module_export' ); ?>
 			<button>
 				<i class="sui-icon-cloud-migration" aria-hidden="true"></i>
-				<?php esc_html_e( 'Export', Opt_In::TEXT_DOMAIN ); ?>
+				<?php esc_html_e( 'Export', 'wordpress-popup' ); ?>
 			</button>
 		</form>
 	</li>
@@ -171,7 +171,7 @@ if (
 		>
 			<span>
 				<i class="sui-icon-upload-cloud" aria-hidden="true"></i>
-				<?php esc_html_e( 'Import', Opt_In::TEXT_DOMAIN ); ?>
+				<?php esc_html_e( 'Import', 'wordpress-popup' ); ?>
 			</span>
 		</button></li>
 	<?php endif; ?>
@@ -182,7 +182,7 @@ if (
 		data-nonce="<?php echo esc_attr( wp_create_nonce( 'hustle_listing_request' ) ); ?>"
 		data-type="<?php echo esc_attr( $module->module_type ); ?>"
 		data-id="<?php echo esc_attr( $module->id ); ?>">
-			<i class="sui-icon-trash" aria-hidden="true"></i> <?php esc_html_e( 'Delete', Opt_In::TEXT_DOMAIN ); ?>
+			<i class="sui-icon-trash" aria-hidden="true"></i> <?php esc_html_e( 'Delete', 'wordpress-popup' ); ?>
 		</button>
 	</li>
 

@@ -84,7 +84,7 @@ if ( ! class_exists( 'Hustle_Mautic_Api' ) ) :
 		public function add_contact( $data ) {
 			$err = new WP_Error();
 			if ( ! $this->api ) {
-				$err->add( 'subscribe_error', __( 'The API is not properly configured. Please contact the admin.', Opt_In::TEXT_DOMAIN ) );
+				$err->add( 'subscribe_error', __( 'The API is not properly configured. Please contact the admin.', 'wordpress-popup' ) );
 				return $err;
 			}
 			$path = 'contacts';
@@ -116,14 +116,14 @@ if ( ! class_exists( 'Hustle_Mautic_Api' ) ) :
 						}
 
 						if ( $found_missing > 0 ) {
-							$data['error'] = __( 'Some fields are not added.', Opt_In::TEXT_DOMAIN );
+							$data['error'] = __( 'Some fields are not added.', 'wordpress-popup' );
 							unset( $data['ipAddress'] );
 						}
 					}
 
 					return $contact_id;
 				} else {
-					$err->add( 'subscribe_error', __( 'Something went wrong. Please try again', Opt_In::TEXT_DOMAIN ) );
+					$err->add( 'subscribe_error', __( 'Something went wrong. Please try again', 'wordpress-popup' ) );
 				}
 			} catch( Exception $e ) {
 				$error = $e->getMessage();
@@ -142,7 +142,7 @@ if ( ! class_exists( 'Hustle_Mautic_Api' ) ) :
 		public function update_contact( $id, $data ) {
 			$err = new WP_Error();
 			if ( ! $this->api ) {
-				$err->add( 'subscribe_error', __( 'The API is not properly configured. Please contact the admin.', Opt_In::TEXT_DOMAIN ) );
+				$err->add( 'subscribe_error', __( 'The API is not properly configured. Please contact the admin.', 'wordpress-popup' ) );
 				return $err;
 			}
 			$path = 'contacts';
@@ -174,14 +174,14 @@ if ( ! class_exists( 'Hustle_Mautic_Api' ) ) :
 						}
 
 						if ( $found_missing > 0 ) {
-							$data['error'] = __( 'Some fields are not added.', Opt_In::TEXT_DOMAIN );
+							$data['error'] = __( 'Some fields are not added.', 'wordpress-popup' );
 							unset( $data['ipAddress'] );
 						}
 					}
 
 					return $contact_id;
 				} else {
-					$err->add( 'subscribe_error', __( 'Something went wrong. Please try again', Opt_In::TEXT_DOMAIN ) );
+					$err->add( 'subscribe_error', __( 'Something went wrong. Please try again', 'wordpress-popup' ) );
 				}
 			} catch( Exception $e ) {
 				$error = $e->getMessage();
@@ -200,7 +200,7 @@ if ( ! class_exists( 'Hustle_Mautic_Api' ) ) :
 		public function email_exist( $email ) {
 			$err = new WP_Error();
 			if ( ! $this->api ) {
-				$err->add( 'subscribe_error', __( 'The API is not properly configured. Please contact the admin.', Opt_In::TEXT_DOMAIN ) );
+				$err->add( 'subscribe_error', __( 'The API is not properly configured. Please contact the admin.', 'wordpress-popup' ) );
 				return $err;
 			}
 			$path = 'contacts';
@@ -234,7 +234,7 @@ if ( ! class_exists( 'Hustle_Mautic_Api' ) ) :
 		public function add_contact_to_segment( $segment_id, $contact_id ) {
 			$err = new WP_Error();
 			if ( ! $this->api ) {
-				$err->add( 'subscribe_error', __( 'The API is not properly configured. Please contact the admin.', Opt_In::TEXT_DOMAIN ) );
+				$err->add( 'subscribe_error', __( 'The API is not properly configured. Please contact the admin.', 'wordpress-popup' ) );
 				return $err;
 			}
 			$path = 'segments';

@@ -12,14 +12,14 @@
 
 			<div class="sui-box-header">
 				<h3 class="sui-box-title" id="dialogTitle">
-					<?php esc_html_e( 'Preview', Opt_In::TEXT_DOMAIN ); ?>
+					<?php esc_html_e( 'Preview', 'wordpress-popup' ); ?>
 				</h3>
 
 				<div class="sui-actions-right">
 					<button
 						data-a11y-dialog-hide
 						class="sui-dialog-close"
-						aria-label="<?php esc_html_e( 'Close this dialog window', Opt_In::TEXT_DOMAIN ); ?>">
+						aria-label="<?php esc_html_e( 'Close this dialog window', 'wordpress-popup' ); ?>">
 					</button>
 				</div>
 			</div>

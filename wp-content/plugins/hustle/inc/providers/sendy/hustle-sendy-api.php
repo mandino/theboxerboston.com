@@ -59,7 +59,7 @@ class Hustle_Sendy_API {
 		) {
 			return new WP_Error(
 				'remote_error',
-				esc_html__( 'Could not talk to your Sendy installation. Please check the installation URL!', Opt_In::TEXT_DOMAIN )
+				esc_html__( 'Could not talk to your Sendy installation. Please check the installation URL!', 'wordpress-popup' )
 			);
 		}
 
@@ -73,7 +73,8 @@ class Hustle_Sendy_API {
 		}
 
 		if ( ! is_numeric( $response ) ) {
-			return new WP_Error( 'remote_subscriber_count_error', $this->error_string( $response ) );
+			$error = $this->error_string( $response, true );
+			return new WP_Error( $error['code'], $error['message'] );
 		}
 
 		return intval( $response );
@@ -108,24 +109,31 @@ class Hustle_Sendy_API {
 		return new WP_Error( 'remote_user_status', $response );
 	}
 
-	private function error_string( $string ) {
+	private function error_string( $string, $return_with_code = false ) {
 		$strings = array(
 			// Subscribe
-			'Some fields are missing.' => esc_html__( 'Some fields are missing.', Opt_In::TEXT_DOMAIN ),
-			'Invalid email address.'   => esc_html__( 'Invalid email address.', Opt_In::TEXT_DOMAIN ),
-			'Invalid list ID.'         => esc_html__( 'Invalid list ID.', Opt_In::TEXT_DOMAIN ),
-			'Already subscribed.'      => esc_html__( 'This email address has already subscribed.', Opt_In::TEXT_DOMAIN ),
+			'Some fields are missing.' => esc_html__( 'Some fields are missing.', 'wordpress-popup' ),
+			'Invalid email address.'   => esc_html__( 'Invalid email address.', 'wordpress-popup' ),
+			'Invalid list ID.'         => esc_html__( 'Invalid list ID.', 'wordpress-popup' ),
+			'Already subscribed.'      => esc_html__( 'This email address has already subscribed.', 'wordpress-popup' ),
 			// Subscriber count
-			'No data passed'           => esc_html__( 'No data passed', Opt_In::TEXT_DOMAIN ),
-			'API key not passed'       => esc_html__( 'API key not passed', Opt_In::TEXT_DOMAIN ),
-			'Invalid API key'          => esc_html__( 'Invalid API key', Opt_In::TEXT_DOMAIN ),
-			'List ID not passed'       => esc_html__( 'List ID not passed', Opt_In::TEXT_DOMAIN ),
-			'List does not exist'      => esc_html__( 'List does not exist', Opt_In::TEXT_DOMAIN ),
-			'List does not exist'      => esc_html__( 'List does not exist', Opt_In::TEXT_DOMAIN ),
+			'No data passed'           => esc_html__( 'No data passed', 'wordpress-popup' ),
+			'API key not passed'       => esc_html__( 'API key not passed', 'wordpress-popup' ),
+			'Invalid API key'          => esc_html__( 'Invalid API key', 'wordpress-popup' ),
+			'List ID not passed'       => esc_html__( 'List ID not passed', 'wordpress-popup' ),
+			'List does not exist'      => esc_html__( 'List does not exist', 'wordpress-popup' ),
 		);
 
-		return empty( $strings[ $string ] )
-			? $string
-			: $strings[ $string ];
+		$message = empty( $strings[ $string ] ) ? $string : $strings[ $string ];
+
+		if ( ! $return_with_code ) {
+			return $message;
+		}
+
+		// We need the non-translated code sometimes.
+		return array(
+			'code' => $string, 
+			'message' => $message,
+		);
 	}
 }

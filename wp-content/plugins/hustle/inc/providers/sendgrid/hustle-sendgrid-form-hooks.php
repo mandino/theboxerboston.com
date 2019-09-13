@@ -32,7 +32,7 @@ class Hustle_Sendgrid_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 
 		try {
 			if ( empty( $submitted_data['email'] ) ) {
-				throw new Exception( __('Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN ) );
+				throw new Exception( __('Required Field "email" was not filled by the user.', 'wordpress-popup' ) );
 			}
 
 			$global_multi_id = $addon_setting_values['selected_global_multi_id'];
@@ -43,7 +43,7 @@ class Hustle_Sendgrid_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 
 			$submitted_data = $this->check_legacy( $submitted_data );
 			$is_sent = false;
-			$member_status = __( 'Member could not be subscribed.', Opt_In::TEXT_DOMAIN );
+			$member_status = __( 'Member could not be subscribed.', 'wordpress-popup' );
 
 			$existing_member = $api->email_exists( $submitted_data['email'], $list_id );
 
@@ -79,8 +79,8 @@ class Hustle_Sendgrid_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 				$details = $res->get_error_message();
 			} else {
 				$is_sent = true;
-				$details = __( 'Successfully added or updated member on SendGrid list', Opt_In::TEXT_DOMAIN );
-				$member_status = __( 'OK', Opt_In::TEXT_DOMAIN );
+				$details = __( 'Successfully added or updated member on SendGrid list', 'wordpress-popup' );
+				$member_status = __( 'OK', 'wordpress-popup' );
 			}
 
 			$utils = Hustle_Provider_Utils::get_instance();
@@ -132,7 +132,7 @@ class Hustle_Sendgrid_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 		$addon_setting_values 		= $form_settings_instance->get_form_settings_values();
 
 		if ( empty( $submitted_data['email'] ) ) {
-			return __( 'Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN );
+			return __( 'Required Field "email" was not filled by the user.', 'wordpress-popup' );
 		}
 
 		if ( ! $allow_subscribed ) {

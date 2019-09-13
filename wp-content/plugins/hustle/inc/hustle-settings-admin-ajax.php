@@ -5,8 +5,7 @@ class Hustle_Settings_Admin_Ajax {
 
 	private $_admin;
 
-	public function __construct( Opt_In $hustle, Hustle_Settings_Admin $admin ) {
-		$this->_hustle = $hustle;
+	public function __construct( Hustle_Settings_Admin $admin ) {
 		$this->_admin = $admin;
 
 		add_action( 'wp_ajax_hustle_remove_ips', array( $this, 'remove_ip_from_tracking_data' ) );
@@ -211,7 +210,7 @@ class Hustle_Settings_Admin_Ajax {
 		if ( is_wp_error( $result ) ) {
 			wp_send_json_error( $result->get_error_messages() );
 		}
-		wp_send_json_success( sprintf( __( 'Successfully toggled for user type %s', Opt_In::TEXT_DOMAIN ), $user_type ) );
+		wp_send_json_success( sprintf( __( 'Successfully toggled for user type %s', 'wordpress-popup' ), $user_type ) );
 	}
 
 	/**
@@ -259,24 +258,18 @@ class Hustle_Settings_Admin_Ajax {
 	 * @since 3.0.5
 	 */
 	public function save_global_email_settings() {
-		if (
-			! isset( $_POST['data'] )
-			|| ! isset( $_POST['data']['email'] )
-		) {
+		$default = [
+			'sender_email_name' => '',
+			'sender_email_address' => '',
+		];
+		$old_value = Hustle_Settings_Admin::get_hustle_settings( 'emails' );
+		$new_value = filter_input( INPUT_POST, 'data', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+
+		$value = array_merge( $old_value, $new_value );
+		$value = shortcode_atts( $default, $value );
+		if ( !empty( $value['sender_email_address'] ) && !is_email( $value['sender_email_address'] ) ) {
 			wp_send_json_error();
 		}
-		$name = '';
-		if ( isset( $_POST['data']['title'] ) ) {
-			$name = filter_var( $_POST['data']['title'], FILTER_SANITIZE_STRING );
-		}
-		$email = filter_var( $_POST['data']['email'], FILTER_SANITIZE_EMAIL );
-		if ( ! is_email( $email ) ) {
-			wp_send_json_error();
-		}
-		$value = array(
-			'sender_email_name' => $name,
-			'sender_email_address' => $email,
-		);
 		Hustle_Settings_Admin::update_hustle_settings( $value, 'emails' );
 	}
 
@@ -553,7 +546,7 @@ class Hustle_Settings_Admin_Ajax {
 			case 'recaptcha':
 				$data = isset( $_POST['data'] ) ? $_POST['data'] : array(); // WPCS: CSRF ok.
 				$this->save_recaptcha_settings( $data );
-				$success_message = __( "reCAPTCHA configured successfully. You can now add reCAPTCHA field to your opt-in forms where you want the reCAPTCHA to appear.", Opt_In::TEXT_DOMAIN );
+				$success_message = __( "reCAPTCHA configured successfully. You can now add reCAPTCHA field to your opt-in forms where you want the reCAPTCHA to appear.", 'wordpress-popup' );
 				$this->send_success_notification( $success_message );
 				break;
 
@@ -596,7 +589,7 @@ class Hustle_Settings_Admin_Ajax {
 	 */
 	private function send_success_notification( $message = '', $reload = false ) {
 		$response = array(
-			'message' => $message, //if it's empty - use optin_vars.messages.settings_saved
+			'message' => $message, //if it's empty - use optinVars.messages.settings_saved
 			'reload'  => $reload,
 		);
 		wp_send_json_success( $response );

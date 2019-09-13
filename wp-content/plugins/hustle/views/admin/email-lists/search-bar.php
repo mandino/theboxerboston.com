@@ -27,7 +27,7 @@
 			</div>
 
 			<button class="sui-button sui-button-blue" onclick="submit()">
-				<?php esc_html_e( 'Show Email List', Opt_In::TEXT_DOMAIN ); ?>
+				<?php esc_html_e( 'Show Email List', 'wordpress-popup' ); ?>
 			</button>
 
 		</form>
@@ -42,7 +42,7 @@
 					<?php wp_nonce_field( 'hustle_module_export_listing' ); ?>
 					<button class="sui-button sui-button-ghost">
 						<i class="sui-icon-paperclip" aria-hidden="true"></i>
-						<?php esc_html_e( 'Export CSV', Opt_In::TEXT_DOMAIN ); ?>
+						<?php esc_html_e( 'Export CSV', 'wordpress-popup' ); ?>
 					</button>
 				</form>
 

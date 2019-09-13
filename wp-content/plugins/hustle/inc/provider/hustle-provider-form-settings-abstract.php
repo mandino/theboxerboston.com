@@ -474,7 +474,7 @@ abstract class Hustle_Provider_Form_Settings_Abstract {
 					array(
 						'type' => 'label',
 						'for'  => 'select-email-list',
-						'value' => __( 'Choose Account', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Choose Account', 'wordpress-popup' ),
 					),
 					array(
 						'type'     => 'select',
@@ -487,8 +487,8 @@ abstract class Hustle_Provider_Form_Settings_Abstract {
 			),
 		);
 		$step_html = hustle_get_integration_modal_title_markup(
-			__( 'Connect Account', Opt_In::TEXT_DOMAIN ),
-			__( 'Select the integration account you want to connect your module to.', Opt_In::TEXT_DOMAIN )
+			__( 'Connect Account', 'wordpress-popup' ),
+			__( 'Select the integration account you want to connect your module to.', 'wordpress-popup' )
 		);
 		$step_html .= hustle_get_html_for_options( $options );
 
@@ -502,7 +502,7 @@ abstract class Hustle_Provider_Form_Settings_Abstract {
 					$this->save_form_multi_id_settings_values( $submitted_data );
 				}
 			} else {
-				$error_message = esc_html__( 'Please select an account.', Opt_In::TEXT_DOMAIN );
+				$error_message = esc_html__( 'Please select an account.', 'wordpress-popup' );
 				$step_html .= '<span class="sui-error-message">' . $error_message . '</span>';
 				$has_errors = true;
 			}
@@ -512,7 +512,7 @@ abstract class Hustle_Provider_Form_Settings_Abstract {
 			'html'       => $step_html,
 			'buttons'    => array(
 				'save' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Continue', Opt_In::TEXT_DOMAIN ), '', 'next', true ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Continue', 'wordpress-popup' ), '', 'next', true ),
 				),
 			),
 			'has_errors' => $has_errors,
@@ -561,7 +561,7 @@ abstract class Hustle_Provider_Form_Settings_Abstract {
 		$options = array(
 			'type'  => 'link',
 			'href'  => '#',
-			'text' => __( 'Previous', Opt_In::TEXT_DOMAIN ),
+			'text' => __( 'Previous', 'wordpress-popup' ),
 			'class' => 'hustle-provider-load-more',
 			'attributes' => array(
 				'data-page' => $current_page - 1,
@@ -581,7 +581,7 @@ abstract class Hustle_Provider_Form_Settings_Abstract {
 		$options = array(
 			'type'  => 'link',
 			'href'  => '#',
-			'text' => __( 'Next', Opt_In::TEXT_DOMAIN ),
+			'text' => __( 'Next', 'wordpress-popup' ),
 			'class' => 'hustle-provider-load-more pull-right',
 			'attributes' => array(
 				'data-page' => $current_page + 1,

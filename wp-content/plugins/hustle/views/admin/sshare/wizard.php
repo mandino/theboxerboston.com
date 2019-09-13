@@ -5,16 +5,16 @@
 
 $module_type = $module->module_type;
 $module_name = $module->module_name;
-//$appearance_settings = $module->get_design()->to_array();
+$appearance_settings = $module->get_design()->to_array();
 $display_settings = $module->get_display()->to_array();
 $content_settings = $module->get_content()->to_array();
 
-$capitalize_singular = esc_html__( 'Social Share', Opt_In::TEXT_DOMAIN );
-$capitalize_plural   = esc_html__( 'Social Shares', Opt_In::TEXT_DOMAIN );
-$smallcaps_singular  = esc_html__( 'social share', Opt_In::TEXT_DOMAIN );
-$smallcaps_plural    = esc_html__( 'social shares', Opt_In::TEXT_DOMAIN );
+$capitalize_singular = esc_html__( 'Social Share', 'wordpress-popup' );
+$capitalize_plural   = esc_html__( 'Social Shares', 'wordpress-popup' );
+$smallcaps_singular  = esc_html__( 'social share', 'wordpress-popup' );
+$smallcaps_plural    = esc_html__( 'social shares', 'wordpress-popup' );
 
-$this->render(
+self::static_render(
 	'admin/commons/sui-wizard/wizard',
 	array(
 		'page_id'                => 'hustle-module-wizard-view',
@@ -26,10 +26,9 @@ $this->render(
 		'module_type'            => $module_type,
 		'capitalize_singular'    => $capitalize_singular,
 		'smallcaps_singular'     => $smallcaps_singular,
-		'is_recaptcha_available' => $is_recaptcha_available,
 		'wizard_tabs'            => array(
 			'services'     => array(
-				'name'     => esc_html__( 'Services', Opt_In::TEXT_DOMAIN ),
+				'name'     => esc_html__( 'Services', 'wordpress-popup' ),
 				'template' => 'admin/sshare/services/template',
 				'support'  => array(
 					'section' => $section,
@@ -37,7 +36,7 @@ $this->render(
 				),
 			),
 			'display'     => array(
-				'name'     => esc_html__( 'Display Options', Opt_In::TEXT_DOMAIN ),
+				'name'     => esc_html__( 'Display Options', 'wordpress-popup' ),
 				'template' => 'admin/sshare/display-options/template',
 				'support'  => array(
 					'section' => $section,
@@ -46,19 +45,21 @@ $this->render(
 				),
 			),
 			'appearance'   => array(
-				'name'     => esc_html__( 'Appearance', Opt_In::TEXT_DOMAIN ),
+				'name'     => esc_html__( 'Appearance', 'wordpress-popup' ),
 				'template' => 'admin/sshare/appearance/template',
 				'support'  => array(
 					'section'             => $section,
 					'module_type'         => $module_type,
 					'capitalize_singular' => $capitalize_singular,
 					'smallcaps_singular'  => $smallcaps_singular,
+					'content_settings'    => $content_settings,
 					'display_settings'    => $display_settings,
+					'appearance_settings' => $appearance_settings,
 					'module'			  => $module,
 				),
 			),
 			'visibility'   => array(
-				'name'     => esc_html__( 'Visibility', Opt_In::TEXT_DOMAIN ),
+				'name'     => esc_html__( 'Visibility', 'wordpress-popup' ),
 				'template' => 'admin/commons/sui-wizard/templates/tab-visibility',
 				'support'  => array(
 					'section'     => $section,
@@ -73,7 +74,7 @@ $this->render(
 );
 
 // Row: Platform Row template
-$this->render( 'admin/sshare/services/platform-row', array() );
+self::static_render( 'admin/sshare/services/platform-row', array() );
 
 // Row: Platform Row template
-$this->render( 'admin/commons/sui-wizard/dialogs/add-platform-li', array() );
+self::static_render( 'admin/commons/sui-wizard/dialogs/add-platform-li', array() );

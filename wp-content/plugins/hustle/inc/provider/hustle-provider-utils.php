@@ -129,7 +129,13 @@ class Hustle_Provider_Utils {
 				if ( $addon['is_connected'] ) {
 					$connected_addons[] = $addon;
 				} else {
-					$not_connected_addons[] = $addon;
+					if ( 'zapier' !== $key ) {
+						$not_connected_addons[] = $addon;
+					} else {
+						// Add Zapier at the top of the non-connected providers
+						// in order to promote it in a more noticeable way.
+						array_unshift( $not_connected_addons, $addon );
+					}
 				}
 			}
 		}
@@ -302,6 +308,45 @@ class Hustle_Provider_Utils {
 	 */
 	public static function is_provider_active( $slug ) {
 		return Hustle_Providers::get_instance()->addon_is_active( $slug );
+	}
+
+	/**
+	 * Get the modules that are connected to the given provider.
+	 * Optionally, check that the given global multi id is in use.
+	 * 
+	 * @since 4.0.1
+	 *
+	 * @param string $slug
+	 * @param boolean $global_multi_id
+	 * @return array Hustle_Module_Model[]
+	 */
+	public static function get_modules_by_active_provider( $slug, $global_multi_id = false ) {
+
+		$modules_ids = Hustle_Module_Collection::get_active_providers_module( $slug );
+		$modules = array();
+	
+		foreach( $modules_ids as $id ) {
+
+			$module = Hustle_Module_Model::instance()->get( $id );
+			
+			if ( is_wp_error( $module ) ) {
+				continue;
+			}
+
+			if ( $global_multi_id ) {
+
+				$provider_settings = $module->get_provider_settings( $slug );
+				
+				// If the provider in this module isn't connected to the instance being disconnected, skip.
+				if ( ! isset( $provider_settings['selected_global_multi_id'] ) || $provider_settings['selected_global_multi_id'] !== $global_multi_id ) {
+					continue;
+				}
+			}
+
+			$modules[] = $module;
+		}
+
+		return $modules;
 	}
 
 	/**

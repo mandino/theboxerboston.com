@@ -65,7 +65,7 @@
 		<div class="sui-actions-right">
 
         	<button class="sui-button sui-button-blue hustle-settings-save" data-nonce="<?php echo esc_attr( wp_create_nonce( 'hustle-settings' ) ); ?>">
-				<span class="sui-loading-text"><?php esc_html_e( 'Save Settings', Opt_In::TEXT_DOMAIN ); ?></span>
+				<span class="sui-loading-text"><?php esc_html_e( 'Save Settings', 'wordpress-popup' ); ?></span>
 				<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 			</button>
 

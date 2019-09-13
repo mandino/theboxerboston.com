@@ -45,19 +45,19 @@ class Opt_In_Condition_Pages extends Opt_In_Condition_Abstract {
 			switch( $this->args->filter_type ){
 				case "only":
 					return ( in_array("all", $this->args->pages, true) )
-						? __("All pages", Opt_In::TEXT_DOMAIN)
-						: sprintf( __("%d pages", Opt_In::TEXT_DOMAIN), $total );
+						? __("All pages", 'wordpress-popup')
+						: sprintf( __("%d pages", 'wordpress-popup'), $total );
 				case "except":
 					return ( in_array("all", $this->args->pages, true) )
-						? __("No pages", Opt_In::TEXT_DOMAIN)
-						: sprintf( __("All pages except %d", Opt_In::TEXT_DOMAIN), $total );
+						? __("No pages", 'wordpress-popup')
+						: sprintf( __("All pages except %d", 'wordpress-popup'), $total );
 				default:
 					return null;
 			}
 		} else {
 			return ( !isset($this->args->filter_type) || "except" === $this->args->filter_type )
-				? __("All pages", Opt_In::TEXT_DOMAIN)
-				: __("No pages", Opt_In::TEXT_DOMAIN);
+				? __("All pages", 'wordpress-popup')
+				: __("No pages", 'wordpress-popup');
 		}
 	}
 }

@@ -101,20 +101,20 @@ class Opt_In_Condition_Cpt extends Opt_In_Condition_Abstract {
 			switch( $this->args->filter_type ){
 				case "only":
 					return ( in_array("all", $this->args->selected_cpts, true) )
-						? __("All ", Opt_In::TEXT_DOMAIN) . $post_type_label
-						: sprintf( __('%1$d %2$s', Opt_In::TEXT_DOMAIN), $total, $post_type_label );
+						? __("All ", 'wordpress-popup') . $post_type_label
+						: sprintf( __('%1$d %2$s', 'wordpress-popup'), $total, $post_type_label );
 				case "except":
 					return ( in_array("all", $this->args->selected_cpts, true) )
-						? __("No ", Opt_In::TEXT_DOMAIN) . $post_type_label
-						: sprintf( __('All %1$s except %2$d', Opt_In::TEXT_DOMAIN), $total, $post_type_label );
+						? __("No ", 'wordpress-popup') . $post_type_label
+						: sprintf( __('All %1$s except %2$d', 'wordpress-popup'), $total, $post_type_label );
 
 				default:
 					return null;
 			}
 		} else {
 			return ( !isset($this->args->filter_type) || "except" === $this->args->filter_type )
-				? __("All ", Opt_In::TEXT_DOMAIN) . $post_type_label
-				: __("No ", Opt_In::TEXT_DOMAIN) . $post_type_label;
+				? __("All ", 'wordpress-popup') . $post_type_label
+				: __("No ", 'wordpress-popup') . $post_type_label;
 		}
 	}
 }

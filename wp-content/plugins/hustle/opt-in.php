@@ -3,9 +3,10 @@
 Plugin Name: Hustle Pro
 Plugin URI: https://premium.wpmudev.org/project/hustle/
 Description: Start collecting email addresses and quickly grow your mailing list with big bold pop-ups, slide-ins, widgets, or in post opt-in forms.
-Version: 4.0.0.1
+Version: 4.0.2
 Author: WPMU DEV
 Author URI: https://premium.wpmudev.org
+Text Domain: wordpress-popup
 WDP ID: 1107020
  */
 
@@ -37,16 +38,16 @@ if ( ! function_exists( 'hustle_activated_deactivated' ) ) {
             <div class="notice notice-success is-dismissible">
                 <p><?php esc_html_e( 'Congratulations! You have activated Hustle Pro! We have automatically deactivated the free version.', 'hustle' ); ?></p>
             </div>
-<?php
+		<?php
 			delete_site_option( 'hustle_free_deactivated' );
 		}
 		// for Free
 		if ( get_site_option( 'hustle_free_activated' ) && is_super_admin() ) {
-?>
+		?>
             <div class="notice notice-error is-dismissible">
                 <p><?php esc_html_e( 'You already have Hustle Pro activated. If you really wish to go back to the free version of Hustle, please deactivate the Pro version first.', 'hustle' ); ?></p>
             </div>
-<?php
+		<?php
 			delete_site_option( 'hustle_free_activated' );
 		}
 	}
@@ -88,16 +89,20 @@ require_once 'opt-in-static.php';
 //require_once 'assets/shared-ui/plugin-ui.php';
 
 if ( ! defined( 'HUSTLE_SUI_VERSION' ) ) {
-	define( 'HUSTLE_SUI_VERSION', '2.3.21' );
+	define( 'HUSTLE_SUI_VERSION', '2.3.29' );
 }
 
 if ( ! class_exists( 'Opt_In' ) ) :
 
 	class Opt_In extends Opt_In_Static{
 
-		const VERSION = '4.0.0.1';
+		const VERSION = '4.0.2';
 
-		const TEXT_DOMAIN = 'hustle';
+		/**
+		 * Text domain for translation.
+		 * We're replacing this string via Gulp when compiling.
+		 */
+		const TEXT_DOMAIN = 'wordpress-popup';
 
 		const VIEWS_FOLDER = 'views';
 		const EXPORT_MODULE_ACTION = 'module_export';
@@ -134,72 +139,13 @@ if ( ! class_exists( 'Opt_In' ) ) :
 			// Register text domain
 			add_action( 'plugins_loaded', array( $this, 'load_text_domain' ) );
 
-			// Add custom capabilities
-			add_action( 'init', array( $this, 'add_custom_capabilities' ) );
+			//check caps
+			add_action( 'admin_init', array( $this, 'hustle_check_caps' ), 999 );
 
 			/**
 			 * Boot up and instantiate core classes
 			 */
 			$this->_boot();
-		}
-
-
-		/**
-		 * Add custom capabilities to administrator
-		 *
-		 * @since 4.0
-		 */
-		public function add_custom_capabilities() {
-			$hustle_capabilities = array(
-				'hustle_menu',
-				'hustle_edit_module',
-				'hustle_create',
-				'hustle_edit_integrations',
-				'hustle_access_emails',
-				'hustle_edit_settings',
-			);
-
-			$admin = get_role( 'administrator' );
-			foreach ( $hustle_capabilities as $cap ) {
-				$admin->add_cap( $cap );
-			}
-		}
-
-
-		/**
-		 * Returns static variable from class instance
-		 *
-		 * @since 2.0
-		 *
-		 * @param $var_name
-		 * @return mixed
-		 */
-		public function get_static_var( $var_name ) {
-			static $static = array();
-			if ( ! isset( $static[  $var_name ] ) ) {
-				$class = new ReflectionClass( $this );
-				$static[  $var_name ]  = $class->getStaticPropertyValue( $var_name );
-			}
-			return $static[  $var_name ];
-		}
-
-		/**
-		 * Returns constant variable from class instance
-		 *
-		 * @since 2.0
-		 * @param $var_name
-		 * @param $class_instance
-		 * @return mixed
-		 */
-		public function get_const_var( $var_name, $class_instance = null ) {
-			static $const = array();
-
-			if ( ! isset( $const[ $var_name ] ) ) {
-				$r = new ReflectionObject( is_null( $class_instance ) ? $this : $class_instance );
-				$const[ $var_name  ] = $r->getConstant( $var_name );
-			}
-
-			return $const[ $var_name ];
 		}
 
 		/**
@@ -220,7 +166,7 @@ if ( ! class_exists( 'Opt_In' ) ) :
 		 * @since 1.0.0
 		 */
 		public function load_text_domain() {
-			load_plugin_textdomain( self::TEXT_DOMAIN, false, dirname( plugin_basename( self::$plugin_base_file ) ) . '/languages/' );
+			load_plugin_textdomain( 'wordpress-popup', false, dirname( plugin_basename( self::$plugin_base_file ) ) . '/languages/' );
 		}
 
 		/**
@@ -285,7 +231,7 @@ if ( ! class_exists( 'Opt_In' ) ) :
 		 * @todo move it somewhere else. No need to have this in this file. It's used in wizard's trigger sections.
 		 */
 		public function get_exitintent_description() {
-			printf( esc_html__( '%1$sNote:%2$s Exit-intent will show only by detecting mouse movement and not with finger scroll.', self::TEXT_DOMAIN ), '<b>', '</b>' );
+			printf( esc_html__( '%1$sNote:%2$s Exit-intent will show only by detecting mouse movement and not with finger scroll.', 'wordpress-popup' ), '<b>', '</b>' );
 		}
 
 		/**
@@ -298,13 +244,13 @@ if ( ! class_exists( 'Opt_In' ) ) :
 			$smallcaps_singular = '';
 
 			if ( Hustle_Module_Model::POPUP_MODULE === $module_type ) {
-				$smallcaps_singular = esc_html__( 'pop-up', self::TEXT_DOMAIN );
+				$smallcaps_singular = esc_html__( 'pop-up', 'wordpress-popup' );
 			} elseif ( Hustle_Module_Model::SLIDEIN_MODULE === $module_type ) {
-				$smallcaps_singular = esc_html__( 'slide-in', self::TEXT_DOMAIN );
+				$smallcaps_singular = esc_html__( 'slide-in', 'wordpress-popup' );
 			} elseif ( Hustle_Module_Model::EMBEDDED_MODULE === $module_type ) {
-				$smallcaps_singular = esc_html__( 'embed', self::TEXT_DOMAIN );
+				$smallcaps_singular = esc_html__( 'embed', 'wordpress-popup' );
 			} elseif ( Hustle_Module_Model::SOCIAL_SHARING_MODULE === $module_type ) {
-				$smallcaps_singular = esc_html__( 'social sharing', self::TEXT_DOMAIN );
+				$smallcaps_singular = esc_html__( 'social sharing', 'wordpress-popup' );
 			}
 
 			return $smallcaps_singular;
@@ -469,8 +415,10 @@ if ( ! class_exists( 'Opt_In' ) ) :
 		 * @return array|string
 		 */
 		public static function prepare_css( $css_string, $prefix, $as_array = false, $separate_prefix = true, $wildcard = '' ) {
+
 			$css_array = array(); // master array to hold all values
 			$elements = explode( '}', $css_string );
+
 			// Output is the final processed CSS string.
 			$output = '';
 			$prepared = '';
@@ -478,12 +426,13 @@ if ( ! class_exists( 'Opt_In' ) ) :
 			$media_names = array();
 			$media_names_key = 0;
 			$index = 0;
+
 			foreach ( $elements as $element ) {
 
 				$check_element = trim( $element );
+
 				if ( empty( $check_element ) ) {
-					// Still increment $index even if empty.
-					$index++;
+					$index++; // Still increment $index even if empty.
 					continue;
 				}
 
@@ -493,7 +442,9 @@ if ( ! class_exists( 'Opt_In' ) ) :
 
 				// check if @media is  present
 				$media_name = '';
+
 				if ( strpos( $name, '@media' ) !== false && isset( $a_name[1] ) ) {
+
 					$have_media = true;
 					$media_name = $name;
 					$media_names[ $media_names_key ] = array(
@@ -501,6 +452,7 @@ if ( ! class_exists( 'Opt_In' ) ) :
 					);
 					$name = $a_name[1];
 					$media_names_key++;
+
 				}
 
 				if ( $have_media ) {
@@ -509,14 +461,18 @@ if ( ! class_exists( 'Opt_In' ) ) :
 
 				// get all the key:value pair styles
 				$a_styles = explode( ';', $element );
+
 				// remove element name from first property element
 				$remove_element_name = ( ! empty( $media_name ) ) ? $media_name . '{' . $name : $name;
 				$a_styles[0] = str_replace( $remove_element_name . '{', '', $a_styles[0] );
 				$names = explode( ',', $name );
+
 				foreach ( $names as $name ) {
+
 					if ( $separate_prefix && empty( $wildcard ) ) {
 						$space_needed = true;
 					} elseif ( $separate_prefix && ! empty( $wildcard ) ) {
+
 						// wildcard is the sibling class of target selector e.g. "wph-modal"
 						if ( strpos( $name, $wildcard ) ) {
 							$space_needed = false;
@@ -526,39 +482,59 @@ if ( ! class_exists( 'Opt_In' ) ) :
 					} else {
 						$space_needed = false;
 					}
+
 					$maybe_put_space = ( $space_needed ) ? ' ' : '';
+
 					$prepared .= ( $prefix . $maybe_put_space . trim( $name ).',' );
+
 				}
+
 				$prepared = trim( $prepared, ',' );
 				$prepared .= '{';
+
 				// loop through each style and split apart the key from the value
 				$count = count( $a_styles );
-				for ( $a = 0;$a < $count;$a++ ) {
+
+				for ( $a = 0;$a < $count; $a++ ) {
+
 					if ( trim( $a_styles[ $a ] ) ) {
+
 						$a_key_value = explode( ':', $a_styles[ $a ] );
+
 						// build the master css array
 						if ( count( $a_key_value ) > 2 ) {
 							$a_key_value_to_join = array_slice( $a_key_value, 1 );
 							$a_key_value[1] = implode( ':', $a_key_value_to_join );
 						}
+
 						if ( ! isset( $a_key_value[1] ) ) {
 							continue;
 						}
+
 						$css_array[ $name ][ $a_key_value[0] ] = $a_key_value[1];
-						$prepared .= ($a_key_value[0] . ': ' . $a_key_value[1]);// . strpos($a_key_value[1], "!important") === false ? " !important;": ";";
-						if ( strpos( $a_key_value[1], '!important' ) === false ) { $prepared .= ' !important'; }
+						$prepared .= ($a_key_value[0] . ': ' . $a_key_value[1]); // . strpos($a_key_value[1], "!important") === false ? " !important;": ";";
+
+						if ( '' === $a_key_value[1] ) {
+							$prepared .= '';
+						}
+
 						$prepared .= ';';
 					}
 				}
+
 				$prepared .= '}';
 
 				// if have @media earlier, append these styles
 				$prev_media_names_key = $media_names_key - 1;
+
 				if ( isset( $media_names[ $prev_media_names_key ] ) ) {
+
 					if ( isset( $media_names[ $prev_media_names_key ]['styles'] ) ) {
+
 						// See if there were two closing '}' or just one.
 						// (each element is exploded/split on '}' symbol, so having two empty strings afterward in the elements array means two '}'s.
 						$next_element = isset( $elements[ $index + 2 ] ) ? trim( $elements[ $index + 2 ] ) : false;
+
 						// If inside @media block.
 						if ( ! empty( $next_element ) ) {
 							$media_names[ $prev_media_names_key ]['styles'] .= $prepared;
@@ -570,38 +546,31 @@ if ( ! class_exists( 'Opt_In' ) ) :
 						$media_names[ $prev_media_names_key ]['styles'] = $prepared;
 					}
 				} else {
+
 					// If no @media, add styles to $output outside @media.
 					$output .= $prepared;
 				}
+
 				// Increase index.
 				$index++;
 			}
 
 			// if have @media, populate styles using $media_names
 			if ( $have_media ) {
+
 				// reset first $prepared styles
 				$prepared = '';
+
 				foreach ( $media_names as $media ) {
 					$prepared .= $media['name'] . '{ ' . $media['styles'] . ' }';
 				}
+
 				// Add @media styles to output.
 				$output .= $prepared;
 			}
 
 			return $as_array ? $css_array : $output;
-		}
 
-		/**
-		 * Returns constant value from the provided $class_name
-		 * this method is to provide compatibility to php versions less than 5.3
-		 *
-		 * @param $class_name
-		 * @param $const_name
-		 * @return mixed
-		 */
-		public static function get_const( $class_name, $const_name ) {
-			$reflection = new ReflectionClass( $class_name );
-			return $reflection->getConstant( $const_name );
 		}
 
 		public static function render_attributes( $html_options, $echo = true ) {
@@ -664,7 +633,7 @@ if ( ! class_exists( 'Opt_In' ) ) :
 		 *
 		 * @since 4.0.0
 		 */
-		public function get_sui_summary_config( $class = null ) {
+		public static function get_sui_summary_config( $class = null ) {
 			$style = '';
 			$image_url = apply_filters( 'wpmudev_branding_hero_image', null );
 			if ( ! empty( $image_url ) ) {
@@ -695,6 +664,16 @@ if ( ! class_exists( 'Opt_In' ) ) :
 				$sui['summary']['classes'][] = 'sui-unbranded';
 			}
 			return $sui;
+		}
+
+		//a callback function when user migrates from 3x to 4x from ftp
+		//since the activation hook won't run we'd have to check it in init.
+		public function hustle_check_caps(){
+			$admin = get_role( 'administrator' );
+			$roles = get_editable_roles();
+			if( ( $admin && ! $admin->has_cap( 'hustle_menu' ) ) || ( ! $admin  && ! empty( $roles ) ) ) {
+				hustle_activation();
+			}
 		}
 	}
 
@@ -728,7 +707,7 @@ if ( is_admin() && Opt_In_Utils::_is_free() ) {
 		plugin_basename( __FILE__ ), 			 // 1. Plugin ID
 		'Hustle', 								 // 2. Plugin Title
 		'/plugins/wordpress-popup/', 			 // 3. https://wordpress.org
-		__( 'Sign Me Up', Opt_In::TEXT_DOMAIN ), // 4. Email Button CTA
+		__( 'Sign Me Up', 'wordpress-popup' ), // 4. Email Button CTA
 		'f68d9fbc51'							 // 5. Mailchimp List id
 	);
 }
@@ -737,6 +716,47 @@ if ( ! function_exists( 'hustle_activation' ) ) {
 	function hustle_activation() {
 		update_option( 'hustle_activated_flag', 1 );
 		delete_option( Hustle_Db::DB_VERSION_KEY );
+
+		/**
+		 * Add Hustle's custom capabilities.
+		 * @since 4.0.1
+		 */
+		$hustle_capabilities = array(
+			'hustle_menu',
+			'hustle_edit_module',
+			'hustle_create',
+			'hustle_edit_integrations',
+			'hustle_access_emails',
+			'hustle_edit_settings',
+		);
+
+		$admin = get_role( 'administrator' );
+
+		if ( $admin ) {
+			// If there's an "administrator" role.
+			foreach ( $hustle_capabilities as $cap ) {
+				$admin->add_cap( $cap );
+			}
+
+		} else {
+			// If there's no "administrator".
+			$roles = get_editable_roles();
+
+			foreach( $roles as $role_name => $data ) {
+
+				// Add the capabilities to anyone who can manage options. This was the checked capability in 3.x.
+				if ( isset( $data['capabilities']['manage_options'] ) && $data['capabilities']['manage_options'] ) {
+
+					$role = get_role( $role_name );
+					foreach ( $hustle_capabilities as $cap ) {
+						if ( $role ) {
+							$role->add_cap( $cap );
+						}
+					}
+				}
+			}
+		}
+
 	}
 }
 register_activation_hook( __FILE__, 'hustle_activation' );

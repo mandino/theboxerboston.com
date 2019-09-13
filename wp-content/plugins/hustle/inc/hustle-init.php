@@ -17,27 +17,26 @@ class Hustle_Init {
 		if( is_admin() ) {
 			$module_admin = new Hustle_Module_Admin( $hustle );
 
-			$popup_admin = new Hustle_Popup_Admin( $hustle );
-			new Hustle_Popup_Admin_Ajax( $hustle, $popup_admin );
-			
-			$modules_common_admin = new Hustle_Modules_Common_Admin( $hustle );
-			new Hustle_Modules_Common_Admin_Ajax( $hustle, $modules_common_admin );
+			$modules_common_admin = new Hustle_Modules_Common_Admin();
+			new Hustle_Modules_Common_Admin_Ajax( $modules_common_admin );
 
-			$hustle_dashboard_admin = new Hustle_Dashboard_Admin();
+			new Hustle_Dashboard_Admin( $hustle ); // $hustle is unused here. Adding while the abstract class requires it.
 
-			// Global Integrations page
-			$hustle_providers_admin = new Hustle_Providers_Admin( $hustle );
-
-			new Hustle_Entries_Admin( $hustle );
-
-			$hustle_settings_admin = new Hustle_Settings_Admin( $hustle );
-			new Hustle_Settings_Admin_Ajax($hustle, $hustle_settings_admin );
+			new Hustle_Popup_Admin( $hustle );
 
 			new Hustle_Slidein_Admin( $hustle );
 
 			new Hustle_Embedded_Admin( $hustle );
 
-			new Hustle_SShare_Admin();
+			new Hustle_SShare_Admin( $hustle ); // $hustle is unused here. Adding while the abstract class requires it.
+			
+			// Global Integrations page
+			new Hustle_Providers_Admin( $hustle );
+
+			new Hustle_Entries_Admin( $hustle );
+
+			$hustle_settings_admin = new Hustle_Settings_Admin( $hustle );
+			new Hustle_Settings_Admin_Ajax( $hustle_settings_admin );
 		}
 
 		// Front

@@ -129,7 +129,7 @@ if ( ! class_exists( 'Hustle_ConstantContact' ) ) :
 				$api = new Hustle_ConstantContact_Api();
 				return $api;
 			} else {
-				return new WP_Error( 'error', __( 'API Class could not be initialized', Opt_In::TEXT_DOMAIN ) );
+				return new WP_Error( 'error', __( 'API Class could not be initialized', 'wordpress-popup' ) );
 			}
 
 		}
@@ -179,24 +179,24 @@ if ( ! class_exists( 'Hustle_ConstantContact' ) ) :
 
 				if ( ! $has_errors ) {
 					return array(
-						'html'         => Hustle_Api_Utils::get_modal_title_markup( __( 'Constant Contact Added', Opt_In::TEXT_DOMAIN ), __( 'You can now go to your forms and assign them to this integration', Opt_In::TEXT_DOMAIN ) ),
+						'html'         => Hustle_Api_Utils::get_modal_title_markup( __( 'Constant Contact Added', 'wordpress-popup' ), __( 'You can now go to your forms and assign them to this integration', 'wordpress-popup' ) ),
 						'buttons'      => array(
 							'close' => array(
-								'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'close' ),
+								'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', 'wordpress-popup' ), 'sui-button-ghost', 'close' ),
 							),
 						),
 						'redirect'     => false,
 						'has_errors'   => false,
 						'notification' => array(
 							'type' => 'success',
-							'text' => '<strong>' . $this->get_title() . '</strong> ' . __( 'Successfully connected', Opt_In::TEXT_DOMAIN ),
+							'text' => '<strong>' . $this->get_title() . '</strong> ' . __( 'Successfully connected', 'wordpress-popup' ),
 						),
 					);
 				}
 			}
 
 			if ( ! is_ssl() ) {
-				$error_message = __( 'Constant Contact requires your site to have SSL certificate.', Opt_In::TEXT_DOMAIN );
+				$error_message = __( 'Constant Contact requires your site to have SSL certificate.', 'wordpress-popup' );
 				$has_errors = true;
 			}
 
@@ -210,12 +210,12 @@ if ( ! class_exists( 'Hustle_ConstantContact' ) ) :
 			$link = '<a href="' . esc_url( $url ) . '">';
 
 			if ( $is_authorize ) {
-				$info = sprintf( __( 'You\'re successfully connected your Constant Contact account. Please, save this configuration or %1$sclick here%2$s to reconnect another Constant Contact account.', Opt_In::TEXT_DOMAIN ), $link, '</a>' );
+				$info = sprintf( __( 'You\'re successfully connected your Constant Contact account. Please, save this configuration or %1$sclick here%2$s to reconnect another Constant Contact account.', 'wordpress-popup' ), $link, '</a>' );
 			} else {
-				$info = sprintf( __( 'Please %1$sclick here%2$s to connect your Constant Contact account.', Opt_In::TEXT_DOMAIN ), $link, '</a>' );
+				$info = sprintf( __( 'Please %1$sclick here%2$s to connect your Constant Contact account.', 'wordpress-popup' ), $link, '</a>' );
 			}
 
-			$info .= ' ' . __( 'You will be asked to give us access to your selected account and will be redirected back to this page.', Opt_In::TEXT_DOMAIN );
+			$info .= ' ' . __( 'You will be asked to give us access to your selected account and will be redirected back to this page.', 'wordpress-popup' );
 
 			$options = array(
 			'wrapper' => array(
@@ -232,7 +232,7 @@ if ( ! class_exists( 'Hustle_ConstantContact' ) ) :
 			),
 			);
 
-			$step_html = Hustle_Api_Utils::get_modal_title_markup( __( 'Configure Constant Contact', Opt_In::TEXT_DOMAIN ), $info );
+			$step_html = Hustle_Api_Utils::get_modal_title_markup( __( 'Configure Constant Contact', 'wordpress-popup' ), $info );
 			$step_html .= Hustle_Api_Utils::get_html_for_options( $options );
 
 			if ( $has_errors ) {
@@ -243,25 +243,25 @@ if ( ! class_exists( 'Hustle_ConstantContact' ) ) :
 			if ( $is_edit ) {
 				$buttons = array(
 				'disconnect' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'disconnect', true ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', 'wordpress-popup' ), 'sui-button-ghost', 'disconnect', true ),
 				),
 				'save' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', Opt_In::TEXT_DOMAIN ), '', 'connect', true ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', 'wordpress-popup' ), '', 'connect', true ),
 				),
 				);
 			} else if ( $is_authorize ) {
 				$buttons = array(
 				'close' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'close' ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', 'wordpress-popup' ), 'sui-button-ghost', 'close' ),
 				),
 				'save' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', Opt_In::TEXT_DOMAIN ), '', 'connect', true ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', 'wordpress-popup' ), '', 'connect', true ),
 				),
 				);
 			} else {
 				$buttons = array(
 				'close' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'close' ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', 'wordpress-popup' ), 'sui-button-ghost', 'close' ),
 				),
 				);
 

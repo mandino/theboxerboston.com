@@ -39,19 +39,19 @@ class Opt_In_Condition_Posts extends Opt_In_Condition_Abstract {
 			switch( $this->args->filter_type ){
 				case "only":
 					return ( in_array("all", $this->args->posts, true) )
-						? __("All posts", Opt_In::TEXT_DOMAIN)
-						: sprintf( __("%d posts", Opt_In::TEXT_DOMAIN), $total );
+						? __("All posts", 'wordpress-popup')
+						: sprintf( __("%d posts", 'wordpress-popup'), $total );
 				case "except":
 					return ( in_array("all", $this->args->posts, true) )
-						? __("No posts", Opt_In::TEXT_DOMAIN)
-						: sprintf( __("All posts except %d", Opt_In::TEXT_DOMAIN), $total );
+						? __("No posts", 'wordpress-popup')
+						: sprintf( __("All posts except %d", 'wordpress-popup'), $total );
 				default:
 					return null;
 			}
 		} else {
 			return ( !isset($this->args->filter_type) || "except" === $this->args->filter_type )
-				? __("All posts", Opt_In::TEXT_DOMAIN)
-				: __("No posts", Opt_In::TEXT_DOMAIN);
+				? __("All posts", 'wordpress-popup')
+				: __("No posts", 'wordpress-popup');
 		}
 	}
 }

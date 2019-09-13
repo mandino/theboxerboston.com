@@ -18,12 +18,12 @@
 
 			<div class="sui-box-header">
 
-				<h3 id="dialogTitle" class="sui-box-title"><?php esc_html_e( 'Add Platform', Opt_In::TEXT_DOMAIN ); ?></h3>
+				<h3 id="dialogTitle" class="sui-box-title"><?php esc_html_e( 'Add Platform', 'wordpress-popup' ); ?></h3>
 
 				<div class="sui-actions-right">
 
 					<button class="hustle-discard-changes sui-dialog-close hustle-cancel-platforms">
-						<span class="sui-screen-reader-text"><?php esc_html_e( 'Close this dialog window', Opt_In::TEXT_DOMAIN ); ?></span>
+						<span class="sui-screen-reader-text"><?php esc_html_e( 'Close this dialog window', 'wordpress-popup' ); ?></span>
 					</button>
 
 				</div>
@@ -32,7 +32,7 @@
 
 			<div class="sui-box-body">
 
-				<p><?php esc_html_e( 'Choose the platforms to insert into your social sharing module.', Opt_In::TEXT_DOMAIN ); ?></p>
+				<p><?php esc_html_e( 'Choose the platforms to insert into your social sharing module.', 'wordpress-popup' ); ?></p>
 
 			</div>
 
@@ -45,13 +45,13 @@
 			<div class="sui-box-footer">
 
 				<button class="sui-button sui-button-ghost hustle-cancel-platforms">
-					<?php esc_html_e( 'Cancel', Opt_In::TEXT_DOMAIN ); ?>
+					<?php esc_html_e( 'Cancel', 'wordpress-popup' ); ?>
 				</button>
 
 				<div class="sui-actions-right">
 
 					<button id="hustle-add-platforms" class="sui-button sui-button-blue">
-						<span class="sui-loading-text"><?php esc_html_e( 'Add Platform', Opt_In::TEXT_DOMAIN ); ?></span>
+						<span class="sui-loading-text"><?php esc_html_e( 'Add Platform', 'wordpress-popup' ); ?></span>
 						<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 					</button>
 

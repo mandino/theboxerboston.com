@@ -15,8 +15,8 @@ $search_email = isset( $admin->filters['search_email'] ) ? $admin->filters['sear
 $order_by = isset( $admin->order['order_by'] ) ? $admin->order['order_by'] : '';
 
 $order_by_array = array(
-	'entries.entry_id' => esc_html__( 'Id', Opt_In::TEXT_DOMAIN ),
-	'entries.date_created' => esc_html__( 'Date submitted', Opt_In::TEXT_DOMAIN ),
+	'entries.entry_id' => esc_html__( 'Id', 'wordpress-popup' ),
+	'entries.date_created' => esc_html__( 'Date submitted', 'wordpress-popup' ),
 );
 ?>
 
@@ -38,8 +38,8 @@ $order_by_array = array(
 				class="sui-select-sm"
 				<?php if ( isset( $input_id ) ) echo ' form="' . esc_attr( $input_id ) . '"'; ?>
 			>
-				<option value=""><?php esc_html_e( 'Bulk actions', Opt_In::TEXT_DOMAIN ); ?></option>
-				<option value="delete-all"><?php esc_html_e( 'Delete', Opt_In::TEXT_DOMAIN ); ?></option>
+				<option value=""><?php esc_html_e( 'Bulk actions', 'wordpress-popup' ); ?></option>
+				<option value="delete-all"><?php esc_html_e( 'Delete', 'wordpress-popup' ); ?></option>
 			</select>
 
 			<input
@@ -55,7 +55,7 @@ $order_by_array = array(
 				<?php echo isset( $input_id ) ? 'form="' . esc_attr( $input_id ) . '"' : ''; ?>
 				<?php disabled( true ); ?>
 			>
-				<?php esc_html_e( 'Apply', Opt_In::TEXT_DOMAIN ); ?>
+				<?php esc_html_e( 'Apply', 'wordpress-popup' ); ?>
 			</button>
 
 		<?php
@@ -102,11 +102,11 @@ $order_by_array = array(
 				<div class="sui-col-md-6">
 
 					<div class="sui-form-field">
-						<label class="sui-label"><?php esc_html_e( 'Email id has keyword', Opt_In::TEXT_DOMAIN ); ?></label>
+						<label class="sui-label"><?php esc_html_e( 'Email id has keyword', 'wordpress-popup' ); ?></label>
 						<div class="sui-control-with-icon">
 							<input type="text"
 								name="search_email"
-								placeholder="<?php esc_html_e( 'E.g. gmail', Opt_In::TEXT_DOMAIN ); ?>"
+								placeholder="<?php esc_html_e( 'E.g. gmail', 'wordpress-popup' ); ?>"
 								class="sui-form-control"
 								value="<?php echo esc_attr( $search_email ); ?>" />
 							<i class="sui-icon-magnifying-glass-search" aria-hidden="true"></i>
@@ -118,7 +118,7 @@ $order_by_array = array(
 				<div class="sui-col-md-6">
 
 					<div class="sui-form-field">
-						<label class="sui-label"><?php esc_html_e( 'Sort by', Opt_In::TEXT_DOMAIN ); ?></label>
+						<label class="sui-label"><?php esc_html_e( 'Sort by', 'wordpress-popup' ); ?></label>
 						<select name="order_by">
 							<?php foreach ( $order_by_array as $key => $name ) { ?>
 								<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $key, $order_by ); ?>><?php echo esc_html( $name ); ?></option>
@@ -135,13 +135,13 @@ $order_by_array = array(
 				<div class="sui-col-md-6">
 
 					<div class="sui-form-field">
-						<label class="sui-label"><?php esc_html_e( 'Conversion date range', Opt_In::TEXT_DOMAIN ); ?></label>
+						<label class="sui-label"><?php esc_html_e( 'Conversion date range', 'wordpress-popup' ); ?></label>
 						<div class="sui-date">
 							<i class="sui-icon-calendar" aria-hidden="true"></i>
 							<input type="text"
 								name="date_range"
 								value="<?php echo esc_attr( $date_range ); ?>"
-								placeholder="<?php esc_html_e( 'Pick a date range', Opt_In::TEXT_DOMAIN ); ?>"
+								placeholder="<?php esc_html_e( 'Pick a date range', 'wordpress-popup' ); ?>"
 								class="hustle-entries-filter-date sui-form-control" />
 						</div>
 					</div>
@@ -153,11 +153,11 @@ $order_by_array = array(
 			<div class="sui-filter-footer">
 
 				<button type="button" class="sui-button sui-button-ghost hustle-entries-clear-filter">
-					<?php esc_html_e( 'Clear Filters', Opt_In::TEXT_DOMAIN ); ?>
+					<?php esc_html_e( 'Clear Filters', 'wordpress-popup' ); ?>
 				</button>
 
 				<button class="sui-button">
-					<?php esc_html_e( 'Apply', Opt_In::TEXT_DOMAIN ); ?>
+					<?php esc_html_e( 'Apply', 'wordpress-popup' ); ?>
 				</button>
 
 			</div>
@@ -174,27 +174,27 @@ $order_by_array = array(
 
 		<div class="sui-pagination-filters-list">
 
-			<label class="sui-label"><?php esc_html_e( 'Active filters', Opt_In::TEXT_DOMAIN ); ?></label>
+			<label class="sui-label"><?php esc_html_e( 'Active filters', 'wordpress-popup' ); ?></label>
 
 			<div class="sui-pagination-active-filters">
 
 				<?php if ( $search_email ) { ?>
 					<span class="sui-active-filter">
-						<?php esc_html_e( 'Has keyword:', Opt_In::TEXT_DOMAIN ); ?> <?php echo esc_html( $search_email ); ?>
-					<span class="sui-active-filter-remove" data-filter="search_email" role="button"><span class="sui-screen-reader-text"><?php esc_html_e( 'Remove this filter', Opt_In::TEXT_DOMAIN ); ?></span></span></span>
+						<?php esc_html_e( 'Has keyword:', 'wordpress-popup' ); ?> <?php echo esc_html( $search_email ); ?>
+					<span class="sui-active-filter-remove" data-filter="search_email" role="button"><span class="sui-screen-reader-text"><?php esc_html_e( 'Remove this filter', 'wordpress-popup' ); ?></span></span></span>
 				<?php } ?>
 
 				<?php if ( $ordered ) { ?>
 					<span class="sui-active-filter">
-						<?php esc_html_e( 'Sort by:', Opt_In::TEXT_DOMAIN ); ?> <?php echo esc_html( $order_by_array[ $get_order_by ] ); ?>
-					<span class="sui-active-filter-remove" data-filter="order_by" role="button"><span class="sui-screen-reader-text"><?php esc_html_e( 'Remove this filter', Opt_In::TEXT_DOMAIN ); ?></span></span></span>
+						<?php esc_html_e( 'Sort by:', 'wordpress-popup' ); ?> <?php echo esc_html( $order_by_array[ $get_order_by ] ); ?>
+					<span class="sui-active-filter-remove" data-filter="order_by" role="button"><span class="sui-screen-reader-text"><?php esc_html_e( 'Remove this filter', 'wordpress-popup' ); ?></span></span></span>
 				<?php } ?>
 
 				<?php if ( $date_range ) { ?>
-					<?php $date_range_to = str_replace( ' - ', __( ' to ', Opt_In::TEXT_DOMAIN ), $date_range ); ?>
+					<?php $date_range_to = str_replace( ' - ', __( ' to ', 'wordpress-popup' ), $date_range ); ?>
 					<span class="sui-active-filter">
-						<?php esc_html_e( 'Submission date range:', Opt_In::TEXT_DOMAIN ); ?> <?php echo esc_html( $date_range_to ); ?>
-					<span class="sui-active-filter-remove" data-filter="date_range" role="button"><span class="sui-screen-reader-text"><?php esc_html_e( 'Remove this filter', Opt_In::TEXT_DOMAIN ); ?></span></span></span>
+						<?php esc_html_e( 'Submission date range:', 'wordpress-popup' ); ?> <?php echo esc_html( $date_range_to ); ?>
+					<span class="sui-active-filter-remove" data-filter="date_range" role="button"><span class="sui-screen-reader-text"><?php esc_html_e( 'Remove this filter', 'wordpress-popup' ); ?></span></span></span>
 				<?php } ?>
 
 			</div>

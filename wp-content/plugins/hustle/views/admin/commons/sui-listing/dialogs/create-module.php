@@ -29,17 +29,17 @@ $hide_branding = apply_filters( 'wpmudev_branding_hide_branding', false );
 
 				<div class="sui-box-header sui-block-content-center">
 
-					<h3 id="dialogTitle" class="sui-box-title"><?php esc_html_e( 'Choose Content Type', Opt_In::TEXT_DOMAIN ); ?></h3>
+					<h3 id="dialogTitle" class="sui-box-title"><?php esc_html_e( 'Choose Content Type', 'wordpress-popup' ); ?></h3>
 
 					<button class="sui-dialog-close" data-a11y-dialog-hide="hustle-dialog--add-new-module">
-						<span class="sui-screen-reader-text"><?php esc_html_e( 'Close this dialog window', Opt_In::TEXT_DOMAIN ); ?></span>
+						<span class="sui-screen-reader-text"><?php esc_html_e( 'Close this dialog window', 'wordpress-popup' ); ?></span>
 					</button>
 
 				</div>
 
 				<div class="sui-box-body sui-box-body-slim sui-block-content-center">
 
-					<span class="sui-description"><?php esc_html_e( 'Let’s start by choosing an appropriate content type based on your goal.', Opt_In::TEXT_DOMAIN ); ?></span>
+					<span class="sui-description"><?php esc_html_e( 'Let’s start by choosing an appropriate content type based on your goal.', 'wordpress-popup' ); ?></span>
 
 				</div>
 
@@ -49,14 +49,14 @@ $hide_branding = apply_filters( 'wpmudev_branding_hide_branding', false );
 
 						<li><label for="optin" class="sui-box-selector">
 							<input type="radio" name="mode" id="optin" value="optin" checked="checked" />
-							<span><i class="sui-icon-mail" aria-hidden="true"></i> <?php esc_html_e( 'Email Opt-in', Opt_In::TEXT_DOMAIN ); ?></span>
-							<span><?php esc_html_e( 'Perfect for Newsletter signups, or collecting user data in general.', Opt_In::TEXT_DOMAIN ); ?></span>
+							<span><i class="sui-icon-mail" aria-hidden="true"></i> <?php esc_html_e( 'Email Opt-in', 'wordpress-popup' ); ?></span>
+							<span><?php esc_html_e( 'Perfect for Newsletter signups, or collecting user data in general.', 'wordpress-popup' ); ?></span>
 						</label></li>
 
 						<li><label for="informational" class="sui-box-selector">
 							<input type="radio" name="mode" id="informational" value="informational" />
-							<span><i class="sui-icon-info" aria-hidden="true"></i> <?php esc_html_e( 'Informational', Opt_In::TEXT_DOMAIN ); ?></span>
-							<span><?php esc_html_e( 'Perfect for promotional offers with Call to Action.', Opt_In::TEXT_DOMAIN ); ?></span>
+							<span><i class="sui-icon-info" aria-hidden="true"></i> <?php esc_html_e( 'Informational', 'wordpress-popup' ); ?></span>
+							<span><?php esc_html_e( 'Perfect for promotional offers with Call to Action.', 'wordpress-popup' ); ?></span>
 						</label></li>
 
 					</ul>
@@ -66,7 +66,7 @@ $hide_branding = apply_filters( 'wpmudev_branding_hide_branding', false );
 				<div class="sui-box-footer sui-box-footer-right">
 
 					<button id="hustle-select-mode" class="sui-button">
-						<span class="sui-loading-text"><?php esc_html_e( 'Next', Opt_In::TEXT_DOMAIN ); ?></span>
+						<span class="sui-loading-text"><?php esc_html_e( 'Next', 'wordpress-popup' ); ?></span>
 						<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 					</button>
 
@@ -75,7 +75,7 @@ $hide_branding = apply_filters( 'wpmudev_branding_hide_branding', false );
 <?php if ( ! $hide_branding ) { ?>
 				<img src="<?php echo esc_url( self::$plugin_url . 'assets/images/hustle-create.png' ); ?>"
 					srcset="<?php echo esc_url( self::$plugin_url . 'assets/images/hustle-create.png' ); ?> 1x, <?php echo esc_url( self::$plugin_url . 'assets/images/hustle-create@2x.png' ); ?> 2x"
-					alt="<?php printf( esc_html__( 'Create New %s', Opt_In::TEXT_DOMAIN ), esc_html( $capitalize_singular ) ); ?>"
+					alt="<?php printf( esc_html__( 'Create New %s', 'wordpress-popup' ), esc_html( $capitalize_singular ) ); ?>"
 					class="sui-image sui-image-center"
 					aria-hidden="true" />
 <?php } ?>
@@ -94,30 +94,30 @@ $hide_branding = apply_filters( 'wpmudev_branding_hide_branding', false );
 
 			<div class="sui-box-header sui-block-content-center">
 
-				<h3 class="sui-box-title" id="dialogTitle"><?php printf( esc_html__( 'Create %s', Opt_In::TEXT_DOMAIN ), esc_html( $capitalize_singular ) ); ?></h3>
+				<h3 class="sui-box-title" id="dialogTitle"><?php printf( esc_html__( 'Create %s', 'wordpress-popup' ), esc_html( $capitalize_singular ) ); ?></h3>
 
 				<button class="sui-dialog-back"<?php if ( $is_social_share ) { echo ' style="display: none;"'; } ?>>
-					<span class="sui-screen-reader-text"><?php esc_html_e( 'Choose content type', Opt_In::TEXT_DOMAIN ); ?></span>
+					<span class="sui-screen-reader-text"><?php esc_html_e( 'Choose content type', 'wordpress-popup' ); ?></span>
 				</button>
 
-				<button class="sui-dialog-close" aria-label="<?php esc_html_e( 'Close this dialog window', Opt_In::TEXT_DOMAIN ); ?>" data-a11y-dialog-hide></button>
+				<button class="sui-dialog-close" aria-label="<?php esc_html_e( 'Close this dialog window', 'wordpress-popup' ); ?>" data-a11y-dialog-hide></button>
 
 			</div>
 
 			<div class="sui-box-body sui-box-body-slim sui-block-content-center">
 
-				<span class="sui-description"><?php printf( esc_html__( "Let's give your new %s module a name. What would you like to name it?", Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?></span>
+				<span class="sui-description"><?php printf( esc_html__( "Let's give your new %s module a name. What would you like to name it?", 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?></span>
 
 				<div class="sui-form-field">
 
-					<label for="hustle-module-name" class="sui-screen-reader-text"><?php printf( esc_html__( '%s name', Opt_In::TEXT_DOMAIN ), esc_html( $capitalize_singular ) ); ?></label>
+					<label for="hustle-module-name" class="sui-screen-reader-text"><?php printf( esc_html__( '%s name', 'wordpress-popup' ), esc_html( $capitalize_singular ) ); ?></label>
 
 					<div class="sui-with-button sui-inside">
 
 						<input type="text"
 							name="name"
 							autofocus
-							placeholder="<?php esc_html_e( 'E.g. Newsletter', Opt_In::TEXT_DOMAIN ); ?>"
+							placeholder="<?php esc_html_e( 'E.g. Newsletter', 'wordpress-popup' ); ?>"
 							id="hustle-module-name"
 							class="sui-form-control sui-required"
 						/>
@@ -127,16 +127,16 @@ $hide_branding = apply_filters( 'wpmudev_branding_hide_branding', false );
 								<i class="sui-icon-arrow-right" aria-hidden="true"></i>
 							</span>
 							<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
-							<span class="sui-screen-reader-text"><?php esc_html_e( 'Done', Opt_In::TEXT_DOMAIN ); ?></span>
+							<span class="sui-screen-reader-text"><?php esc_html_e( 'Done', 'wordpress-popup' ); ?></span>
 						</button>
 
 					</div>
 
-					<span id="error-empty-name" class="sui-error-message" style="display: none;"><?php esc_html_e( 'Please add a name for this module.', Opt_In::TEXT_DOMAIN ); ?></span>
+					<span id="error-empty-name" class="sui-error-message" style="display: none;"><?php esc_html_e( 'Please add a name for this module.', 'wordpress-popup' ); ?></span>
 
-					<span id="error-saving-settings" class="sui-error-message" style="display: none;"><?php esc_html_e( 'Something went wrong saving the settings. Make sure everything is okay.', Opt_In::TEXT_DOMAIN ); ?></span>
+					<span id="error-saving-settings" class="sui-error-message" style="display: none;"><?php esc_html_e( 'Something went wrong saving the settings. Make sure everything is okay.', 'wordpress-popup' ); ?></span>
 
-					<span class="sui-description"><?php esc_html_e( 'This will not be visible anywhere on your website', Opt_In::TEXT_DOMAIN ); ?></span>
+					<span class="sui-description"><?php esc_html_e( 'This will not be visible anywhere on your website', 'wordpress-popup' ); ?></span>
 
 				</div>
 
@@ -144,7 +144,7 @@ $hide_branding = apply_filters( 'wpmudev_branding_hide_branding', false );
 <?php if ( ! $hide_branding ) { ?>
 			<img src="<?php echo esc_url( self::$plugin_url . 'assets/images/hustle-create.png' ); ?>"
 				srcset="<?php echo esc_url( self::$plugin_url . 'assets/images/hustle-create.png' ); ?> 1x, <?php echo esc_url( self::$plugin_url . 'assets/images/hustle-create@2x.png' ); ?> 2x"
-				alt="<?php printf( esc_html__( 'Create New %s', Opt_In::TEXT_DOMAIN ), esc_html( $capitalize_singular ) ); ?>"
+				alt="<?php printf( esc_html__( 'Create New %s', 'wordpress-popup' ), esc_html( $capitalize_singular ) ); ?>"
 				class="sui-image sui-image-center"
 				aria-hidden="true" />
 <?php } ?>

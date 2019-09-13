@@ -1,8 +1,8 @@
 <div class="sui-box-settings-row">
 
 	<div class="sui-box-settings-col-1">
-		<span class="sui-settings-label"><?php esc_html_e( 'Custom CSS', Opt_In::TEXT_DOMAIN ); ?></span>
-		<span class="sui-description"><?php esc_html_e( 'For more advanced customization options use custom CSS.', Opt_In::TEXT_DOMAIN ); ?></span>
+		<span class="sui-settings-label"><?php esc_html_e( 'Custom CSS', 'wordpress-popup' ); ?></span>
+		<span class="sui-description"><?php esc_html_e( 'For more advanced customization options use custom CSS.', 'wordpress-popup' ); ?></span>
 	</div>
 
 	<div class="sui-box-settings-col-2">
@@ -20,11 +20,11 @@
 			<span class="sui-toggle-slider" aria-hidden="true"></span>
 		</label>
 
-		<label for="hustle-customize-css"><?php esc_html_e( 'Enable custom CSS', Opt_In::TEXT_DOMAIN ); ?></label>
+		<label for="hustle-customize-css"><?php esc_html_e( 'Enable custom CSS', 'wordpress-popup' ); ?></label>
 
 		<div id="hustle-customize-css-toggle-wrapper" class="sui-background-frame {{ _.class( _.isFalse( customize_css ), 'sui-hidden' ) }}">
 
-			<label class="sui-label"><?php esc_html_e( 'Modal selectors', Opt_In::TEXT_DOMAIN ); ?></label>
+			<label class="sui-label"><?php esc_html_e( 'Modal selectors', 'wordpress-popup' ); ?></label>
 
 			<div class="sui-ace-selectors">
 
@@ -36,7 +36,7 @@
 
 			<?php if ( $is_optin ) { ?>
 
-				<label class="sui-label"><?php esc_html_e( 'Form selectors', Opt_In::TEXT_DOMAIN ); ?></label>
+				<label class="sui-label"><?php esc_html_e( 'Form selectors', 'wordpress-popup' ); ?></label>
 
 				<div class="sui-ace-selectors">
 
@@ -46,8 +46,8 @@
 
 				</div>
 
-				<label class="sui-label"><?php esc_html_e( 'Form options selectors', Opt_In::TEXT_DOMAIN ); ?></label>
-				<label class="sui-label" style="font-weight: 400;"><?php esc_html_e( 'These are added through "Integrations" like MailChimp that allow extra fields for users to select custom information requested.', Opt_In::TEXT_DOMAIN ); ?></label>
+				<label class="sui-label"><?php esc_html_e( 'Form options selectors', 'wordpress-popup' ); ?></label>
+				<label class="sui-label" style="font-weight: 400;"><?php esc_html_e( 'These are added through "Integrations" like MailChimp that allow extra fields for users to select custom information requested.', 'wordpress-popup' ); ?></label>
 
 				<div class="sui-ace-selectors">
 

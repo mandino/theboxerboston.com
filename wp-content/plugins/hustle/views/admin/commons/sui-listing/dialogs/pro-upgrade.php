@@ -18,24 +18,24 @@
 
 			<div class="sui-box-header sui-block-content-center">
 
-				<h3 id="dialogTitle" class="sui-box-title"><?php esc_html_e( 'Upgrade to Pro', Opt_In::TEXT_DOMAIN ); ?></h3>
+				<h3 id="dialogTitle" class="sui-box-title"><?php esc_html_e( 'Upgrade to Pro', 'wordpress-popup' ); ?></h3>
 
 				<button class="sui-dialog-close" data-a11y-dialog-hide="hustle-dialog--import">
-					<span class="sui-screen-reader-text"><?php esc_html_e( 'Close this dialog window', Opt_In::TEXT_DOMAIN ); ?></span>
+					<span class="sui-screen-reader-text"><?php esc_html_e( 'Close this dialog window', 'wordpress-popup' ); ?></span>
 				</button>
 
 			</div>
 
 			<div class="sui-box-body sui-box-body-slim sui-block-content-center">
 
-				<p id="dialogDescription" class="sui-description"><?php esc_html_e( 'Get unlimited Popups, Slide-ins, Embeds and social sharing widgets with the Pro version of Hustle. Get it as part of a WPMU DEV membership including Smush Pro, Hummingbird Pro and other popular professional plugins.', Opt_In::TEXT_DOMAIN ); ?></p>
+				<p id="dialogDescription" class="sui-description"><?php esc_html_e( 'Get unlimited Popups, Slide-ins, Embeds and social sharing widgets with the Pro version of Hustle. Get it as part of a WPMU DEV membership including Smush Pro, Hummingbird Pro and other popular professional plugins.', 'wordpress-popup' ); ?></p>
 
 				<a
 					target="_blank"
 					href="https://premium.wpmudev.org/project/hustle/?utm_source=hustle&utm_medium=plugin&utm_campaign=hustle_modal_upsell_notice"
 					class="sui-button sui-button-green"
 				>
-					<?php esc_html_e( 'Learn more', Opt_In::TEXT_DOMAIN ); ?>
+					<?php esc_html_e( 'Learn more', 'wordpress-popup' ); ?>
 				</a>
 
 			</div>
@@ -43,7 +43,7 @@
 			<img
 				src="<?php echo esc_url( self::$plugin_url . 'assets/images/hustle-upsell.png' ); ?>"
 				srcset="<?php echo esc_url( self::$plugin_url . 'assets/images/hustle-upsell.png' ); ?> 1x, <?php echo esc_url( self::$plugin_url . 'assets/images/hustle-upsell@2x.png' ); ?> 2x"
-				alt="<?php esc_html_e( 'Upgrade to Hustle Pro!', Opt_In::TEXT_DOMAIN ); ?>"
+				alt="<?php esc_html_e( 'Upgrade to Hustle Pro!', 'wordpress-popup' ); ?>"
 				class="sui-image sui-image-center"
 				style="max-width: 128px;"
 				aria-hidden="true"

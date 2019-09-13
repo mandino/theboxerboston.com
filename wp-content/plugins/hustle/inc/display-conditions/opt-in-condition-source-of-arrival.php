@@ -87,6 +87,6 @@ class Opt_In_Condition_Source_Of_Arrival extends Opt_In_Condition_Abstract {
 		return $response;
 	}
 	public function label(){
-		return __("Only from search engine", Opt_In::TEXT_DOMAIN);
+		return __("Only from search engine", 'wordpress-popup');
 	}
 }

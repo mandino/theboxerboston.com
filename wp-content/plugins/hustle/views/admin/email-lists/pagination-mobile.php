@@ -13,8 +13,8 @@ $search_email = isset( $admin->filters['search_email'] ) ? $admin->filters['sear
 $order_by = isset( $admin->order['order_by'] ) ? $admin->order['order_by'] : '';
 
 $order_by_array = array(
-	'entries.entry_id' => esc_html__( 'Id', Opt_In::TEXT_DOMAIN ),
-	'entries.date_created' => esc_html__( 'Date submitted', Opt_In::TEXT_DOMAIN ),
+	'entries.entry_id' => esc_html__( 'Id', 'wordpress-popup' ),
+	'entries.date_created' => esc_html__( 'Date submitted', 'wordpress-popup' ),
 );
 ?>
 

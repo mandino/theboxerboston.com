@@ -77,7 +77,7 @@ if ( 'label' === $type ) { ?>
             $params = $element;
             if( isset( $apikey ) && 'optin_api_key' === $element['id'] )
 				$params['value'] = $apikey;
-            Opt_In::static_render("general/option", $params);
+				self::static_render("general/option", $params);
             ?>
         <?php } ?>
     </div>
@@ -295,8 +295,8 @@ if ( 'label' === $type ) { ?>
 
 		<button class="sui-button-icon">
 			<i aria-hidden="true" class="sui-icon-eye"></i>
-			<span class="sui-password-text sui-screen-reader-text"><?php esc_html_e( 'Show Password', Opt_In::TEXT_DOMAIN ); ?></span>
-			<span class="sui-password-text sui-screen-reader-text sui-hidden"><?php esc_html_e( 'Hide Password', Opt_In::TEXT_DOMAIN ); ?></span>
+			<span class="sui-password-text sui-screen-reader-text"><?php esc_html_e( 'Show Password', 'wordpress-popup' ); ?></span>
+			<span class="sui-password-text sui-screen-reader-text sui-hidden"><?php esc_html_e( 'Hide Password', 'wordpress-popup' ); ?></span>
 		</button>
 
 	</div>

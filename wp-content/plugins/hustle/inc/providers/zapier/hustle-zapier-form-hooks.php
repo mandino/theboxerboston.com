@@ -58,7 +58,7 @@ class Hustle_Zapier_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 		} else {
 			return $this->get_status(
 				$key, true,
-				esc_html__( 'Successfully sent data to Zapier', Opt_In::TEXT_DOMAIN ),
+				esc_html__( 'Successfully sent data to Zapier', 'wordpress-popup' ),
 				$connection_name
 			);
 		}
@@ -129,22 +129,22 @@ class Hustle_Zapier_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 		$sub_entries = array();
 		if ( isset( $status['connection_name'] ) ) {
 			$sub_entries[] = array(
-				'label' => __( 'Integration Name', Opt_In::TEXT_DOMAIN ),
+				'label' => __( 'Integration Name', 'wordpress-popup' ),
 				'value' => $status['connection_name'],
 			);
 		}
 
 		if ( isset( $status['is_sent'] ) ) {
-			$is_sent = true === $status['is_sent'] ? __( 'Yes', Opt_In::TEXT_DOMAIN ) : __( 'No', Opt_In::TEXT_DOMAIN );
+			$is_sent = true === $status['is_sent'] ? __( 'Yes', 'wordpress-popup' ) : __( 'No', 'wordpress-popup' );
 			$sub_entries[] = array(
-				'label' => __( 'Sent To Zapier', Opt_In::TEXT_DOMAIN ),
+				'label' => __( 'Sent To Zapier', 'wordpress-popup' ),
 				'value' => $is_sent,
 			);
 		}
 
 		if ( isset( $status['description'] ) ) {
 			$sub_entries[] = array(
-				'label' => __( 'Info', Opt_In::TEXT_DOMAIN ),
+				'label' => __( 'Info', 'wordpress-popup' ),
 				'value' => $status['description'],
 			);
 		}

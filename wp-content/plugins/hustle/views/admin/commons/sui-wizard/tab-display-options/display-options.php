@@ -9,9 +9,9 @@ $inline_both = self::$plugin_url . 'assets/images/embed-position-both';
 
 	<div class="sui-box-settings-col-1">
 
-		<span class="sui-settings-label"><?php esc_html_e( 'Manage Display Options', Opt_In::TEXT_DOMAIN ); ?></span>
+		<span class="sui-settings-label"><?php esc_html_e( 'Manage Display Options', 'wordpress-popup' ); ?></span>
 
-		<span class="sui-description"><?php printf( esc_html__( 'Enable/Disable the various options available to display your embed on the front-end.', Opt_In::TEXT_DOMAIN ), 'aaa' ); ?></span>
+		<span class="sui-description"><?php printf( esc_html__( 'Enable/Disable the various options available to display your embed on the front-end.', 'wordpress-popup' ), 'aaa' ); ?></span>
 
 	</div>
 
@@ -28,14 +28,14 @@ $inline_both = self::$plugin_url . 'assets/images/embed-position-both';
 				<span class="sui-toggle-slider"></span>
 			</label>
 
-			<label for="hustle-module-inline"><?php esc_html_e( 'Inline Content', Opt_In::TEXT_DOMAIN ); ?></label>
+			<label for="hustle-module-inline"><?php esc_html_e( 'Inline Content', 'wordpress-popup' ); ?></label>
 
 			<div id="hustle-inline-toggle-wrapper" class="sui-toggle-content{{ ( _.isTrue( inline_enabled ) ) ? '' : ' sui-hidden' }}">
-				<span class="sui-description"><?php esc_html_e( 'Enable this to add your embed above, below or at both positions within the content of your posts and pages.', Opt_In::TEXT_DOMAIN ); ?></span>
+				<span class="sui-description"><?php esc_html_e( 'Enable this to add your embed above, below or at both positions within the content of your posts and pages.', 'wordpress-popup' ); ?></span>
 
 				<div class="sui-border-frame">
-					<span class="sui-settings-label"><?php esc_html_e( 'Position', Opt_In::TEXT_DOMAIN ); ?></span>
-					<span class="sui-description" style="margin-bottom: 10px;"><?php esc_html_e( 'Choose the position for the inline embed with respect to the content.', Opt_In::TEXT_DOMAIN ); ?></span>
+					<span class="sui-settings-label"><?php esc_html_e( 'Position', 'wordpress-popup' ); ?></span>
+					<span class="sui-description" style="margin-bottom: 10px;"><?php esc_html_e( 'Choose the position for the inline embed with respect to the content.', 'wordpress-popup' ); ?></span>
 
 					<label for="hustle-inline-below" class="sui-radio-image">
 
@@ -49,7 +49,7 @@ $inline_both = self::$plugin_url . 'assets/images/embed-position-both';
 								data-attribute="inline_position"
 								{{_.checked( ( 'below' === inline_position ) , true)}} />
 							<span aria-hidden="true"></span>
-							<span><?php esc_html_e( 'Below', Opt_In::TEXT_DOMAIN ); ?></span>
+							<span><?php esc_html_e( 'Below', 'wordpress-popup' ); ?></span>
 						</span>
 
 					</label>
@@ -66,7 +66,7 @@ $inline_both = self::$plugin_url . 'assets/images/embed-position-both';
 								data-attribute="inline_position"
 								{{_.checked( ( 'above' === inline_position ) , true)}} />
 							<span aria-hidden="true"></span>
-							<span><?php esc_html_e( 'Above', Opt_In::TEXT_DOMAIN ); ?></span>
+							<span><?php esc_html_e( 'Above', 'wordpress-popup' ); ?></span>
 						</span>
 
 					</label>
@@ -83,7 +83,7 @@ $inline_both = self::$plugin_url . 'assets/images/embed-position-both';
 								data-attribute="inline_position"
 								{{_.checked( ( 'both' === inline_position ) , true)}} />
 							<span aria-hidden="true"></span>
-							<span><?php esc_html_e( 'Both', Opt_In::TEXT_DOMAIN ); ?></span>
+							<span><?php esc_html_e( 'Both', 'wordpress-popup' ); ?></span>
 						</span>
 
 					</label>
@@ -106,19 +106,19 @@ $inline_both = self::$plugin_url . 'assets/images/embed-position-both';
 				<span class="sui-toggle-slider"></span>
 			</label>
 
-			<label for="hustle-module-widget"><?php esc_html_e( 'Widget', Opt_In::TEXT_DOMAIN ); ?></label>
+			<label for="hustle-module-widget"><?php esc_html_e( 'Widget', 'wordpress-popup' ); ?></label>
 
 			<div id="hustle-widget-toggle-wrapper" class="sui-toggle-content{{ ( _.isTrue( widget_enabled ) ) ? '' : ' sui-hidden' }}">
 				<span class="sui-description">
 					<?php printf(
-						esc_html__( 'Enabling this will add a new widget named "Hustle" under the Available Widgets list. You can go to %s and configure this widget to show your embed in the sidebars.', Opt_In::TEXT_DOMAIN ),
+						esc_html__( 'Enabling this will add a new widget named "Hustle" under the Available Widgets list. You can go to %s and configure this widget to show your embed in the sidebars.', 'wordpress-popup' ),
 						sprintf(
 							'<strong>%1$s > %2$s</strong>',
-							esc_html__('Appearance', Opt_In::TEXT_DOMAIN),
+							esc_html__('Appearance', 'wordpress-popup'),
 							sprintf(
 								'<a href="%1$s" target="_blank">%2$s</a>',
 								esc_url( admin_url( 'widgets.php' ) ),
-								esc_html__('Widgets', Opt_In::TEXT_DOMAIN)
+								esc_html__('Widgets', 'wordpress-popup')
 							)
 						)
 					); ?>
@@ -139,29 +139,29 @@ $inline_both = self::$plugin_url . 'assets/images/embed-position-both';
 				<span class="sui-toggle-slider"></span>
 			</label>
 
-			<label for="hustle-module-shortcode"><?php esc_html_e( 'Shortcode', Opt_In::TEXT_DOMAIN ); ?></label>
+			<label for="hustle-module-shortcode"><?php esc_html_e( 'Shortcode', 'wordpress-popup' ); ?></label>
 
 			<div id="hustle-shortcode-toggle-wrapper" class="sui-toggle-content{{ ( _.isTrue( shortcode_enabled ) ) ? '' : ' sui-hidden' }}">
-				<span class="sui-description"><?php esc_html_e( 'Use shortcode to display your embed anywhere you want to. Just copy the shortcode and paste it wherever you want to render your embed.', Opt_In::TEXT_DOMAIN ); ?></span>
+				<span class="sui-description"><?php esc_html_e( 'Use shortcode to display your embed anywhere you want to. Just copy the shortcode and paste it wherever you want to render your embed.', 'wordpress-popup' ); ?></span>
 
 				<div class="sui-border-frame">
-					<span class="sui-description"><?php esc_html_e( 'Shortcode to render your embed', Opt_In::TEXT_DOMAIN ); ?></span>
+					<span class="sui-description"><?php esc_html_e( 'Shortcode to render your embed', 'wordpress-popup' ); ?></span>
 
 					<div class="sui-with-button sui-with-button-inside">
 						<input type="text"
 							class="sui-form-control"
-							value='[wd_hustle id="<?php echo esc_attr( $shortcode_id ); ?>" type="embedded"]'
+							value='[wd_hustle id="<?php echo esc_attr( $shortcode_id ); ?>" type="embedded"/]'
 							readonly="readonly">
 						<button class="sui-button-icon hustle-copy-shortcode-button">
 							<i aria-hidden="true" class="sui-icon-copy"></i>
-							<span class="sui-screen-reader-text"><?php esc_html_e( 'Copy shortcode', Opt_In::TEXT_DOMAIN ); ?></span>
+							<span class="sui-screen-reader-text"><?php esc_html_e( 'Copy shortcode', 'wordpress-popup' ); ?></span>
 						</button>
 					</div>
 
 				</div>
 
 				<div class="sui-notice sui-notice-info">
-					<p><?php esc_html_e( 'You have full control over the shortcode. Visibility rules in the following section won\'t affect shortcode.', Opt_In::TEXT_DOMAIN ); ?></p>
+					<p><?php esc_html_e( 'You have full control over the shortcode. Visibility rules in the following section won\'t affect shortcode.', 'wordpress-popup' ); ?></p>
 				</div>
 			</div>
 

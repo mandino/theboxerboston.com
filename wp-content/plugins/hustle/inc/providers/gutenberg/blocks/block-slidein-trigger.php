@@ -36,7 +36,7 @@ class Hustle_GHBlock_slidein_Trigger extends Hustle_GHBlock_Abstract {
 	 */
 	public function render_block( $properties = array() ) {
 
-		$content = isset( $properties['content'] ) ? $properties['content'] : __( 'Click here', Opt_In::TEXT_DOMAIN );
+		$content = isset( $properties['content'] ) ? $properties['content'] : __( 'Click here', 'wordpress-popup' );
 		$css_class = isset( $properties['css_class'] ) ? $properties['css_class'] : '';
 
 		if ( isset( $properties['id'] ) ) {
@@ -69,7 +69,7 @@ class Hustle_GHBlock_slidein_Trigger extends Hustle_GHBlock_Abstract {
 				'admin_url' => admin_url( 'admin.php' ),
 				'nonce' => wp_create_nonce( 'hustle_gutenberg_get_module' ),
 				'shortcode_tag' => Hustle_Module_Front::SHORTCODE,
-				'text_domain' => Opt_In::TEXT_DOMAIN,
+				'text_domain' => 'wordpress-popup',
 				'l10n' => $this->localize(),
 			)
 		);
@@ -82,18 +82,18 @@ class Hustle_GHBlock_slidein_Trigger extends Hustle_GHBlock_Abstract {
 
 	private function localize() {
 		return array(
-			'module' => esc_html__( 'Module', Opt_In::TEXT_DOMAIN ),
-			'additional_css_classes' => esc_html__( 'Additional CSS Classes', Opt_In::TEXT_DOMAIN ),
-			'click_here' => esc_html__( 'Click here', Opt_In::TEXT_DOMAIN ),
-			'content_here' => esc_html__( 'Add the clickable text that will trigger the module.', Opt_In::TEXT_DOMAIN ),
-			'advanced' => esc_html__( 'Advanced', Opt_In::TEXT_DOMAIN ),
-			'trigger_content' => esc_html__( 'Trigger Content', Opt_In::TEXT_DOMAIN ),
-			'name' => esc_html__( 'Name', Opt_In::TEXT_DOMAIN ),
-			'customize_module' => esc_html__( 'Customize Slidein', Opt_In::TEXT_DOMAIN ),
-			'rendering' => esc_html__( 'Rendering...', Opt_In::TEXT_DOMAIN ), //Unused
-			'block_name' => esc_html__( 'Slidein Trigger', Opt_In::TEXT_DOMAIN ),
-			'block_description' => esc_html__( 'Embed the trigger button for a slidein module.', Opt_In::TEXT_DOMAIN ),
-			'block_more_description' => esc_html__( 'Note: the Trigger property of the Slidein should be set to Click to embed the trigger button for the module.', Opt_In::TEXT_DOMAIN ),
+			'module' => esc_html__( 'Module', 'wordpress-popup' ),
+			'additional_css_classes' => esc_html__( 'Additional CSS Classes', 'wordpress-popup' ),
+			'click_here' => esc_html__( 'Click here', 'wordpress-popup' ),
+			'content_here' => esc_html__( 'Add the clickable text that will trigger the module.', 'wordpress-popup' ),
+			'advanced' => esc_html__( 'Advanced', 'wordpress-popup' ),
+			'trigger_content' => esc_html__( 'Trigger Content', 'wordpress-popup' ),
+			'name' => esc_html__( 'Name', 'wordpress-popup' ),
+			'customize_module' => esc_html__( 'Customize Slidein', 'wordpress-popup' ),
+			'rendering' => esc_html__( 'Rendering...', 'wordpress-popup' ), //Unused
+			'block_name' => esc_html__( 'Slidein Trigger', 'wordpress-popup' ),
+			'block_description' => esc_html__( 'Embed the trigger button for a slidein module.', 'wordpress-popup' ),
+			'block_more_description' => esc_html__( 'Note: the Trigger property of the Slidein should be set to Click to embed the trigger button for the module.', 'wordpress-popup' ),
 		);
 	}
 }

@@ -152,17 +152,17 @@ class Hustle_MailerLite extends Hustle_Provider_Abstract {
 			if ( ! $has_errors ) {
 
 				return array(
-					'html'         => Hustle_Api_Utils::get_modal_title_markup( __( 'MailerLite Added', Opt_In::TEXT_DOMAIN ), __( 'You can now go to your forms and assign them to this integration', Opt_In::TEXT_DOMAIN ) ),
+					'html'         => Hustle_Api_Utils::get_modal_title_markup( __( 'MailerLite Added', 'wordpress-popup' ), __( 'You can now go to your forms and assign them to this integration', 'wordpress-popup' ) ),
 					'buttons'      => array(
 						'close' => array(
-							'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'close' ),
+							'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', 'wordpress-popup' ), 'sui-button-ghost', 'close' ),
 						),
 					),
 					'redirect'     => false,
 					'has_errors'   => false,
 					'notification' => array(
 						'type' => 'success',
-						'text' => '<strong>' . $this->get_title() . '</strong> ' . __( 'Successfully connected', Opt_In::TEXT_DOMAIN ),
+						'text' => '<strong>' . $this->get_title() . '</strong> ' . __( 'Successfully connected', 'wordpress-popup' ),
 					),
 				);
 
@@ -178,20 +178,20 @@ class Hustle_MailerLite extends Hustle_Provider_Abstract {
 					'label' => array(
 						'type'  => 'label',
 						'for'   => 'api_key',
-						'value' => __( 'API Key', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'API Key', 'wordpress-popup' ),
 					),
 					'api_key' => array(
 						'type'        => 'text',
 						'name'        => 'api_key',
 						'value'       => $current_data['api_key'],
-						'placeholder' => __( 'Enter Key', Opt_In::TEXT_DOMAIN ),
+						'placeholder' => __( 'Enter Key', 'wordpress-popup' ),
 						'id'          => 'api_key',
 						'icon'        => 'key',
 					),
 					'error' => array(
 						'type'  => 'error',
 						'class' => $api_key_validated ? 'sui-hidden' : '',
-						'value' => __( 'Please enter a valid MailerLite API key', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Please enter a valid MailerLite API key', 'wordpress-popup' ),
 					),
 				)
 			),
@@ -202,27 +202,27 @@ class Hustle_MailerLite extends Hustle_Provider_Abstract {
 					'label' => array(
 						'type'  => 'label',
 						'for'   => 'instance-name-input',
-						'value' => __( 'Identifier', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Identifier', 'wordpress-popup' ),
 					),
 					'name' => array(
 						'type'        => 'text',
 						'name'        => 'name',
 						'value'       => $current_data['name'],
-						'placeholder' => __( 'E.g. Business Account', Opt_In::TEXT_DOMAIN ),
+						'placeholder' => __( 'E.g. Business Account', 'wordpress-popup' ),
 						'id'          => 'instance-name-input',
 					),
 					'message' => array(
 						'type'  => 'description',
-						'value' => __( 'Helps to distinguish your integrations if you have connected to the multiple accounts of this integration.', Opt_In::TEXT_DOMAIN ),
+						'value' => __( 'Helps to distinguish your integrations if you have connected to the multiple accounts of this integration.', 'wordpress-popup' ),
 					),
 				)
 			),
 		);
 
 		$step_html = Hustle_Api_Utils::get_modal_title_markup(
-			__( 'Configure MailerLite', Opt_In::TEXT_DOMAIN ),
+			__( 'Configure MailerLite', 'wordpress-popup' ),
 			sprintf(
-				__( 'Log in to %1$sMailerLite Integrations%2$s page to get your API Key.', Opt_In::TEXT_DOMAIN ),
+				__( 'Log in to %1$sMailerLite Integrations%2$s page to get your API Key.', 'wordpress-popup' ),
 				'<a href="https://app.mailerlite.com/integrations/api/" target="_blank">',
 				'</a>'
 			)
@@ -236,16 +236,16 @@ class Hustle_MailerLite extends Hustle_Provider_Abstract {
 		if ( $is_edit ) {
 			$buttons = array(
 				'disconnect' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'disconnect', true ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', 'wordpress-popup' ), 'sui-button-ghost', 'disconnect', true ),
 				),
 				'save' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', Opt_In::TEXT_DOMAIN ), '', 'connect', true ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', 'wordpress-popup' ), '', 'connect', true ),
 				),
 			);
 		} else {
 			$buttons = array(
 				'connect' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Connect', Opt_In::TEXT_DOMAIN ), '', 'connect', true ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Connect', 'wordpress-popup' ), '', 'connect', true ),
 				),
 			);
 
@@ -285,7 +285,7 @@ class Hustle_MailerLite extends Hustle_Provider_Abstract {
 			}
 
 			if ( ! is_array( $_lists ) || is_wp_error( $_lists ) || isset( $_lists['error'] ) ) {
-				Hustle_Api_Utils::maybe_log( __METHOD__, __( 'Invalid MailerLite API key.', Opt_In::TEXT_DOMAIN ) );
+				Hustle_Api_Utils::maybe_log( __METHOD__, __( 'Invalid MailerLite API key.', 'wordpress-popup' ) );
 				return false;
 			}
 

@@ -1,15 +1,15 @@
 <div class="sui-box-settings-row">
 
 	<div class="sui-box-settings-col-1">
-		<span class="sui-settings-label"><?php printf( esc_html__( '%s Position', Opt_In::TEXT_DOMAIN ), esc_html( $capitalize_singular ) ); ?></span>
-		<span class="sui-description"><?php printf( esc_html__( 'Choose the position from which your %s will appear on screen.', Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?></span>
+		<span class="sui-settings-label"><?php printf( esc_html__( '%s Position', 'wordpress-popup' ), esc_html( $capitalize_singular ) ); ?></span>
+		<span class="sui-description"><?php printf( esc_html__( 'Choose the position from which your %s will appear on screen.', 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?></span>
 	</div>
 
 	<div class="sui-box-settings-col-2 wpmudev-ui">
 
-		<label class="sui-settings-label"><?php printf( esc_html__( 'Choose %s position', Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?></label>
+		<label class="sui-settings-label"><?php printf( esc_html__( 'Choose %s position', 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?></label>
 
-		<span class="sui-description"><?php printf( esc_html__( 'Select the position from which your %s will appear on the browser window.', Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?></span>
+		<span class="sui-description"><?php printf( esc_html__( 'Select the position from which your %s will appear on the browser window.', 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?></span>
 
 		<div class="hui-browser" style="margin-top: 10px;">
 
@@ -31,7 +31,7 @@
 						{{ _.checked( 'nw'=== display_position, true ) }}
 					/>
 					<span class="hui-browser-position--north-west" aria-hidden="true"></span>
-					<span class="sui-screen-reader-text"><?php printf( esc_html__( 'Show %s from top left', Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?></span>
+					<span class="sui-screen-reader-text"><?php printf( esc_html__( 'Show %s from top left', 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?></span>
 				</label></li>
 
 				<li class="hui-first-row"><label for="hustle-module-position--n">
@@ -44,7 +44,7 @@
 						{{ _.checked( 'n'=== display_position, true ) }}
 					/>
 					<span class="hui-browser-position--north" aria-hidden="true"></span>
-					<span class="sui-screen-reader-text"><?php printf( esc_html__( 'Show %s from top', Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?></span>
+					<span class="sui-screen-reader-text"><?php printf( esc_html__( 'Show %s from top', 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?></span>
 				</label></li>
 
 				<li class="hui-first-row"><label for="hustle-module-position--ne">
@@ -57,7 +57,7 @@
 						{{ _.checked( 'ne'=== display_position, true ) }}
 					/>
 					<span class="hui-browser-position--north-east" aria-hidden="true"></span>
-					<span class="sui-screen-reader-text"><?php printf( esc_html__( 'Show %s from top right', Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?></span>
+					<span class="sui-screen-reader-text"><?php printf( esc_html__( 'Show %s from top right', 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?></span>
 				</label></li>
 
 				<li><label for="hustle-module-position--w">
@@ -70,7 +70,7 @@
 						{{ _.checked( 'w'=== display_position, true ) }}
 					/>
 					<span class="hui-browser-position--west" aria-hidden="true"></span>
-					<span class="sui-screen-reader-text"><?php printf( esc_html__( 'Show %s from left', Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?></span>
+					<span class="sui-screen-reader-text"><?php printf( esc_html__( 'Show %s from left', 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?></span>
 				</label></li>
 
 				<li aria-hidden="true"></li>
@@ -85,7 +85,7 @@
 						{{ _.checked( 'e'=== display_position, true ) }}
 					/>
 					<span class="hui-browser-position--east" aria-hidden="true"></span>
-					<span class="sui-screen-reader-text"><?php printf( esc_html__( 'Show %s from right', Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?></span>
+					<span class="sui-screen-reader-text"><?php printf( esc_html__( 'Show %s from right', 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?></span>
 				</label></li>
 
 				<li class="hui-last-row"><label for="hustle-module-position--sw">
@@ -98,7 +98,7 @@
 						{{ _.checked( 'sw'=== display_position, true ) }}
 					/>
 					<span class="hui-browser-position--south-west" aria-hidden="true"></span>
-					<span class="sui-screen-reader-text"><?php printf( esc_html__( 'Show %s from bottom left', Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?></span>
+					<span class="sui-screen-reader-text"><?php printf( esc_html__( 'Show %s from bottom left', 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?></span>
 				</label></li>
 
 				<li class="hui-last-row"><label for="hustle-module-position--s">
@@ -111,7 +111,7 @@
 						{{ _.checked( 's'=== display_position, true ) }}
 					/>
 					<span class="hui-browser-position--south" aria-hidden="true"></span>
-					<span class="sui-screen-reader-text"><?php printf( esc_html__( 'Show %s from bottom', Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?></span>
+					<span class="sui-screen-reader-text"><?php printf( esc_html__( 'Show %s from bottom', 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?></span>
 				</label></li>
 
 				<li class="hui-last-row"><label for="hustle-module-position--se">
@@ -124,7 +124,7 @@
 						{{ _.checked( 'se'=== display_position, true ) }}
 					/>
 					<span class="hui-browser-position--south-east" aria-hidden="true"></span>
-					<span class="sui-screen-reader-text"><?php printf( esc_html__( 'Show %s from bottom right', Opt_In::TEXT_DOMAIN ), esc_html( $smallcaps_singular ) ); ?></span>
+					<span class="sui-screen-reader-text"><?php printf( esc_html__( 'Show %s from bottom right', 'wordpress-popup' ), esc_html( $smallcaps_singular ) ); ?></span>
 				</label></li>
 
 			</ul>

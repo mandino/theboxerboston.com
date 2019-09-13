@@ -5,28 +5,28 @@
 
 $sections = array(
 	'analytics' => array(
-		'label' => __( 'Dashboard Analytics', Opt_In::TEXT_DOMAIN ),
+		'label' => __( 'Dashboard Analytics', 'wordpress-popup' ),
 		'status' => 'hide',
 		'data' => array(
 			'settings' => isset( $hustle_settings['analytics'] ) ? $hustle_settings['analytics'] : array(),
 		),
 	),
 	'emails' => array(
-		'label' => __( 'Emails', Opt_In::TEXT_DOMAIN ),
+		'label' => __( 'Emails', 'wordpress-popup' ),
 		'status' => 'show',
 		'data' => array(
 			'settings' => isset( $hustle_settings['emails'] ) ? $hustle_settings['emails'] : array(),
 		),
 	),
 	'privacy' => array(
-		'label' => __( 'Viewer\'s Privacy', Opt_In::TEXT_DOMAIN ),
+		'label' => __( 'Viewer\'s Privacy', 'wordpress-popup' ),
 		'status' => 'show',
 		'data' => array(
 			'settings' => isset( $hustle_settings['privacy'] ) ? $hustle_settings['privacy'] : array(),
 		),
 	),
 	'permissions' => array(
-		'label' => __( 'Permissions', Opt_In::TEXT_DOMAIN ),
+		'label' => __( 'Permissions', 'wordpress-popup' ),
 		'status' => 'hide',
 		'data' => array(
 			'filter' => $filter,
@@ -41,28 +41,28 @@ $sections = array(
 		),
 	),
 	'recaptcha' => array(
-		'label' => __( 'reCAPTCHA', Opt_In::TEXT_DOMAIN ),
+		'label' => __( 'reCAPTCHA', 'wordpress-popup' ),
 		'status' => 'show',
 		'data' => array(
 			'settings' => isset( $hustle_settings['recaptcha'] ) ? $hustle_settings['recaptcha'] : array(),
 		),
 	),
 	'accessibility' => array(
-		'label' => __( 'Accessibility', Opt_In::TEXT_DOMAIN ),
+		'label' => __( 'Accessibility', 'wordpress-popup' ),
 		'status' => 'show',
 		'data' => array(
 			'settings' => isset( $hustle_settings['accessibility'] ) ? $hustle_settings['accessibility'] : array(),
 		),
 	),
 	'metrics' => array(
-		'label' => __( 'Top Metrics', Opt_In::TEXT_DOMAIN ),
+		'label' => __( 'Top Metrics', 'wordpress-popup' ),
 		'status' => 'hide',
 		'data' => array(
 			'hustle_settings' => $hustle_settings,
 		),
 	),
 	'unsubscribe' => array(
-		'label' => __( 'Unsubscribe', Opt_In::TEXT_DOMAIN ),
+		'label' => __( 'Unsubscribe', 'wordpress-popup' ),
 		'status' => 'show',
 		'data' => array(
 			'messages' => $unsubscription_messages,
@@ -75,7 +75,7 @@ $sections = array(
 ?>
 <main class="<?php echo implode( ' ', apply_filters( 'hustle_sui_wrap_class', null ) ); ?>">
 	<div class="sui-header">
-		<h1 class="sui-header-title"><?php esc_html_e( 'Settings', Opt_In::TEXT_DOMAIN ); ?></h1>
+		<h1 class="sui-header-title"><?php esc_html_e( 'Settings', 'wordpress-popup' ); ?></h1>
 		<?php $this->render( 'admin/commons/view-documentation' ); ?>
 	</div>
 	<div class="sui-row-with-sidenav">
@@ -114,9 +114,10 @@ foreach ( $sections as $key => $value ) {
 }
 ?>
 	</div>
-<?php
+
+<?php 
 // Global Footer
-$this->render( 'admin/footer/footer-simple' ); ?>
+$this->render( 'admin/footer/footer' ); ?>
 
 <?php
 // DIALOG: Delete All IPs

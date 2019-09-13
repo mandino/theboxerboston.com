@@ -36,7 +36,7 @@ class Hustle_Campaignmonitor_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstr
 			$api_key = $addon->get_setting( 'api_key', '', $global_multi_id );
 
 			if ( empty( $submitted_data['email'] ) ) {
-				throw new Exception( __('Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN ) );
+				throw new Exception( __('Required Field "email" was not filled by the user.', 'wordpress-popup' ) );
 			}
 
 			$list_id = $addon_setting_values['list_id'];
@@ -88,13 +88,29 @@ class Hustle_Campaignmonitor_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstr
 				$url_request = $api->_subscribers_base_route . '.json?email=' . rawurlencode($email);
 
 				if( ! $res->was_successful() ) {
-					$details = __( 'Something went wrong. Unable to add subscriber.', Opt_In::TEXT_DOMAIN );
+					$details = __( 'Something went wrong. Unable to add subscriber.', 'wordpress-popup' );
 				} else {
 					$is_sent = true;
-					$details = __( 'Successfully updated member on Campaign Monitor list', Opt_In::TEXT_DOMAIN );
+					$details = __( 'Successfully updated member on Campaign Monitor list', 'wordpress-popup' );
 				}
 
 			} else {
+				// Add new Custom Fields
+				$cf_api = new CS_REST_Lists( $list_id, array('api_key' => $api_key ) );
+				$existed_custom_fields = $cf_api->get_custom_fields();
+				$new_fields = is_object( $existed_custom_fields ) && isset( $existed_custom_fields->response )
+						? array_diff( array_keys( $custom_data ), array_map( 'trim', wp_list_pluck( $existed_custom_fields->response, 'Key' ), array( '[]' ) ) )
+						: array_keys( $custom_data );
+				foreach ( $new_fields as $new_key ) {
+					$custom_field_details = array(
+						'FieldName' => $new_key,
+						'DataType' => CS_REST_CUSTOM_FIELD_TYPE_TEXT, //we only support text type for now
+						'Options' => array(),
+						'VisibleInPreferenceCenter' => false,
+					);
+					$cf_api->create_custom_field( $custom_field_details );
+				}
+
 				$data_to_send = array(
 					'EmailAddress' => $email,
 					'Name'         => $name,
@@ -105,10 +121,10 @@ class Hustle_Campaignmonitor_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstr
 				$url_request = $api->_subscribers_base_route . '.json';
 
 				if( ! $res->was_successful() ) {
-					$details = __( 'Something went wrong. Unable to add subscriber.', Opt_In::TEXT_DOMAIN );
+					$details = __( 'Something went wrong. Unable to add subscriber.', 'wordpress-popup' );
 				} else {
 					$is_sent = true;
-					$details = __( 'Successfully added or updated member on Campaign Monitor list', Opt_In::TEXT_DOMAIN );
+					$details = __( 'Successfully added or updated member on Campaign Monitor list', 'wordpress-popup' );
 				}
 			}
 			$response = array(
@@ -173,7 +189,7 @@ class Hustle_Campaignmonitor_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstr
 		$global_multi_id 			= $addon_setting_values['selected_global_multi_id'];
 		$api_key 					= $addon->get_setting( 'api_key', '', $global_multi_id );
 		if ( empty( $submitted_data['email'] ) ) {
-			return __( 'Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN );
+			return __( 'Required Field "email" was not filled by the user.', 'wordpress-popup' );
 		}
 
 		if ( ! $allow_subscribed ) {

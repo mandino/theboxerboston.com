@@ -32,7 +32,7 @@ class Hustle_Mad_Mimi_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 
 		try {
 			if ( empty( $submitted_data['email'] ) ) {
-				throw new Exception( __('Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN ) );
+				throw new Exception( __('Required Field "email" was not filled by the user.', 'wordpress-popup' ) );
 			}
 
 			$global_multi_id = $addon_setting_values['selected_global_multi_id'];
@@ -47,7 +47,7 @@ class Hustle_Mad_Mimi_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 			$email_exist = $this->email_exist( $subscribe_data['email'], $api_key, $username, $list_id );
 
 			$is_sent = false;
-			$member_status = __( 'Member could not be subscribed.', Opt_In::TEXT_DOMAIN );
+			$member_status = __( 'Member could not be subscribed.', 'wordpress-popup' );
 
 			if( $email_exist ){
 
@@ -99,8 +99,8 @@ class Hustle_Mad_Mimi_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 				$details = $res->get_error_message();
 			} else {
 				$is_sent = true;
-				$member_status = __( 'OK', Opt_In::TEXT_DOMAIN );
-				$details = __( 'Successfully added or updated member on Mad Mimi list', Opt_In::TEXT_DOMAIN );
+				$member_status = __( 'OK', 'wordpress-popup' );
+				$details = __( 'Successfully added or updated member on Mad Mimi list', 'wordpress-popup' );
 			}
 			
 
@@ -153,7 +153,7 @@ class Hustle_Mad_Mimi_Form_Hooks extends Hustle_Provider_Form_Hooks_Abstract {
 		$addon_setting_values 		= $form_settings_instance->get_form_settings_values();
 
 		if ( empty( $submitted_data['email'] ) ) {
-			return __( 'Required Field "email" was not filled by the user.', Opt_In::TEXT_DOMAIN );
+			return __( 'Required Field "email" was not filled by the user.', 'wordpress-popup' );
 		}
 
 		if ( ! $allow_subscribed ) {

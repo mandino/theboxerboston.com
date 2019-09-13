@@ -330,10 +330,14 @@ class Hustle_Tracking_Model {
 		global $wpdb;
 		$entry = null;
 		if ( 'all' !== $module_type ) {
-			$sql = "SELECT `date_created` FROM {$this->table_name} WHERE `module_type` = %s AND `action` = 'conversion' ORDER BY `date_created` DESC";
-			$sql = $wpdb->prepare( $sql, $module_type ); // WPCS: unprepared SQL ok. false positive
+			if ( in_array( $module_type, [ 'social_sharing', 'embedded' ], true ) ) {
+				$where_query = 'WHERE `module_type` like \'' . $module_type . '%\'';
+			} else {
+				$where_query = $wpdb->prepare( 'WHERE `module_type` = %s', $module_type );
+			}
+			$sql = "SELECT `date_updated` FROM {$this->table_name} {$where_query} AND `action` = 'conversion' ORDER BY `date_updated` DESC";
 		} else {
-			$sql = "SELECT `date_created` FROM {$this->table_name} WHERE `action` = 'conversion' ORDER BY `date_created` DESC";
+			$sql = "SELECT `date_updated` FROM {$this->table_name} WHERE `action` = 'conversion' ORDER BY `date_updated` DESC";
 		}
 		$date = $wpdb->get_var( $sql ); // WPCS: unprepared SQL ok. false positive
 		return $date;
@@ -354,7 +358,7 @@ class Hustle_Tracking_Model {
 		if ( !empty( $sub_type ) ) {
 			$and_subtype = $wpdb->prepare( " AND `module_type` = %s", $sub_type );
 		}
-		$sql = "SELECT `date_created` FROM {$this->table_name} WHERE `module_id` = %d AND `action` = 'conversion' {$and_subtype} ORDER BY `date_created` DESC";
+		$sql = "SELECT `date_updated` FROM {$this->table_name} WHERE `module_id` = %d AND `action` = 'conversion' {$and_subtype} ORDER BY `date_updated` DESC";
 		$date = $wpdb->get_var( $wpdb->prepare( $sql, $module_id ) ); // WPCS: unprepared SQL ok. false positive
 		return $date;
 	}

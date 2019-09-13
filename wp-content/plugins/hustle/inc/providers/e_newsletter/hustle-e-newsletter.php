@@ -167,17 +167,17 @@ class Hustle_E_Newsletter extends Hustle_Provider_Abstract {
 			if ( ! $has_errors ) {
 
 				return array(
-					'html'         => Hustle_Api_Utils::get_modal_title_markup( __( 'e-Newsletter Added', Opt_In::TEXT_DOMAIN ), __( 'You can now go to your forms and assign them to this integration', Opt_In::TEXT_DOMAIN ) ),
+					'html'         => Hustle_Api_Utils::get_modal_title_markup( __( 'e-Newsletter Added', 'wordpress-popup' ), __( 'You can now go to your forms and assign them to this integration', 'wordpress-popup' ) ),
 					'buttons'      => array(
 						'close' => array(
-							'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'close' ),
+							'markup' => Hustle_Api_Utils::get_button_markup( __( 'Close', 'wordpress-popup' ), 'sui-button-ghost', 'close' ),
 						),
 					),
 					'redirect'     => false,
 					'has_errors'   => false,
 					'notification' => array(
 						'type' => 'success',
-						'text' => '<strong>' . $this->get_title() . '</strong> ' . __( 'Successfully connected', Opt_In::TEXT_DOMAIN ),
+						'text' => '<strong>' . $this->get_title() . '</strong> ' . __( 'Successfully connected', 'wordpress-popup' ),
 					),
 				);
 
@@ -189,7 +189,7 @@ class Hustle_E_Newsletter extends Hustle_Provider_Abstract {
 			$has_errors = true;
 			$e_newsletter_url = "https://github.com/wpmudev/e-newsletter";
 			$error_message = sprintf(
-				__( 'Please activate e-Newsletter plugin to use this integration. If you don\'t have it installed, %1$sdownload it here%2$s.', Opt_In::TEXT_DOMAIN ),
+				__( 'Please activate e-Newsletter plugin to use this integration. If you don\'t have it installed, %1$sdownload it here%2$s.', 'wordpress-popup' ),
 				'<a href="' . esc_url( $e_newsletter_url ) . '" target="_blank">',
 				'</a>'
 			);
@@ -211,7 +211,7 @@ class Hustle_E_Newsletter extends Hustle_Provider_Abstract {
 		if ( $has_errors ) {
 
 			$step_html = Hustle_Api_Utils::get_modal_title_markup(
-				__( 'Install e-Newsletter', Opt_In::TEXT_DOMAIN )
+				__( 'Install e-Newsletter', 'wordpress-popup' )
 			);
 
 			$step_html .= '<span class="sui-notice sui-notice-error hustle-installation-error" style="margin: 0;">';
@@ -221,8 +221,8 @@ class Hustle_E_Newsletter extends Hustle_Provider_Abstract {
 		} else {
 
 			$step_html = Hustle_Api_Utils::get_modal_title_markup(
-				__( 'Configure e-Newsletter', Opt_In::TEXT_DOMAIN ),
-				__( 'Activate e-Newsletter to start using it on your forms.', Opt_In::TEXT_DOMAIN )
+				__( 'Configure e-Newsletter', 'wordpress-popup' ),
+				__( 'Activate e-Newsletter to start using it on your forms.', 'wordpress-popup' )
 			);
 		}
 
@@ -235,16 +235,16 @@ class Hustle_E_Newsletter extends Hustle_Provider_Abstract {
 		} else if ( $is_edit ) {
 			$buttons = array(
 				'disconnect' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', Opt_In::TEXT_DOMAIN ), 'sui-button-ghost', 'disconnect', true ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Disconnect', 'wordpress-popup' ), 'sui-button-ghost', 'disconnect', true ),
 				),
 				'close' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', Opt_In::TEXT_DOMAIN ), '', 'close' ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Save', 'wordpress-popup' ), '', 'close' ),
 				),
 			);
 		} else {
 			$buttons = array(
 				'connect' => array(
-					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Activate', Opt_In::TEXT_DOMAIN ), '', 'connect', true ),
+					'markup' => Hustle_Api_Utils::get_button_markup( __( 'Activate', 'wordpress-popup' ), '', 'connect', true ),
 				),
 			);
 
