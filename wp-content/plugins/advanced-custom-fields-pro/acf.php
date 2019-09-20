@@ -1,7 +1,6 @@
 <?php
 /*
 Plugin Name: Advanced Custom Fields PRO
-Version: 5.3.7
 Plugin URI: https://www.advancedcustomfields.com/
 Description: Customize WordPress with powerful, professional and intuitive fields.
 Version: 5.7.10
