@@ -5,172 +5,78 @@ function wpcf7_plugin_path( $path = '' ) {
 }
 
 function wpcf7_plugin_url( $path = '' ) {
-	$url = untrailingslashit( WPCF7_PLUGIN_URL );
+	$url = plugins_url( $path, WPCF7_PLUGIN );
 
-	if ( ! empty( $path ) && is_string( $path ) && false === strpos( $path, '..' ) )
-		$url .= '/' . ltrim( $path, '/' );
+	if ( is_ssl()
+	and 'http:' == substr( $url, 0, 5 ) ) {
+		$url = 'https:' . substr( $url, 5 );
+	}
 
 	return $url;
 }
 
 function wpcf7_upload_dir( $type = false ) {
-	$uploads = wp_upload_dir();
+	$uploads = wp_get_upload_dir();
 
 	$uploads = apply_filters( 'wpcf7_upload_dir', array(
 		'dir' => $uploads['basedir'],
-		'url' => $uploads['baseurl'] ) );
+		'url' => $uploads['baseurl'],
+	) );
 
-	if ( 'dir' == $type )
+	if ( 'dir' == $type ) {
 		return $uploads['dir'];
-	if ( 'url' == $type )
+	} if ( 'url' == $type ) {
 		return $uploads['url'];
+	}
 
 	return $uploads;
 }
 
-function wpcf7_l10n() {
-	static $l10n = array();
-
-	if ( ! empty( $l10n ) ) {
-		return $l10n;
-	}
-
-	$l10n = array(
-		'af' => __( 'Afrikaans', 'contact-form-7' ),
-		'sq' => __( 'Albanian', 'contact-form-7' ),
-		'ar' => __( 'Arabic', 'contact-form-7' ),
-		'hy_AM' => __( 'Armenian', 'contact-form-7' ),
-		'az_AZ' => __( 'Azerbaijani', 'contact-form-7' ),
-		'bn_BD' => __( 'Bangla', 'contact-form-7' ),
-		'eu' => __( 'Basque', 'contact-form-7' ),
-		'be_BY' => __( 'Belarusian', 'contact-form-7' ),
-		'bs' => __( 'Bosnian', 'contact-form-7' ),
-		'pt_BR' => __( 'Brazilian Portuguese', 'contact-form-7' ),
-		'bg_BG' => __( 'Bulgarian', 'contact-form-7' ),
-		'ca' => __( 'Catalan', 'contact-form-7' ),
-		'ckb' => __( 'Central Kurdish', 'contact-form-7' ),
-		'zh_CN' => __( 'Chinese (Simplified)', 'contact-form-7' ),
-		'zh_TW' => __( 'Chinese (Traditional)', 'contact-form-7' ),
-		'hr' => __( 'Croatian', 'contact-form-7' ),
-		'cs_CZ' => __( 'Czech', 'contact-form-7' ),
-		'da_DK' => __( 'Danish', 'contact-form-7' ),
-		'nl_NL' => __( 'Dutch', 'contact-form-7' ),
-		'en_US' => __( 'English', 'contact-form-7' ),
-		'eo_EO' => __( 'Esperanto', 'contact-form-7' ),
-		'et' => __( 'Estonian', 'contact-form-7' ),
-		'fi' => __( 'Finnish', 'contact-form-7' ),
-		'fr_FR' => __( 'French', 'contact-form-7' ),
-		'gl_ES' => __( 'Galician', 'contact-form-7' ),
-		'gu_IN' => __( 'Gujarati', 'contact-form-7' ),
-		'ka_GE' => __( 'Georgian', 'contact-form-7' ),
-		'de_DE' => __( 'German', 'contact-form-7' ),
-		'el' => __( 'Greek', 'contact-form-7' ),
-		'ht' => __( 'Haitian', 'contact-form-7' ),
-		'he_IL' => __( 'Hebrew', 'contact-form-7' ),
-		'hi_IN' => __( 'Hindi', 'contact-form-7' ),
-		'hu_HU' => __( 'Hungarian', 'contact-form-7' ),
-		'bn_IN' => __( 'Indian Bengali', 'contact-form-7' ),
-		'id_ID' => __( 'Indonesian', 'contact-form-7' ),
-		'ga_IE' => __( 'Irish', 'contact-form-7' ),
-		'it_IT' => __( 'Italian', 'contact-form-7' ),
-		'ja' => __( 'Japanese', 'contact-form-7' ),
-		'ko_KR' => __( 'Korean', 'contact-form-7' ),
-		'lv' => __( 'Latvian', 'contact-form-7' ),
-		'lt_LT' => __( 'Lithuanian', 'contact-form-7' ),
-		'mk_MK' => __( 'Macedonian', 'contact-form-7' ),
-		'ms_MY' => __( 'Malay', 'contact-form-7' ),
-		'ml_IN' => __( 'Malayalam', 'contact-form-7' ),
-		'mt_MT' => __( 'Maltese', 'contact-form-7' ),
-		'nb_NO' => __( 'Norwegian', 'contact-form-7' ),
-		'fa_IR' => __( 'Persian', 'contact-form-7' ),
-		'pl_PL' => __( 'Polish', 'contact-form-7' ),
-		'pt_PT' => __( 'Portuguese', 'contact-form-7' ),
-		'ru_RU' => __( 'Russian', 'contact-form-7' ),
-		'ro_RO' => __( 'Romanian', 'contact-form-7' ),
-		'sr_RS' => __( 'Serbian', 'contact-form-7' ),
-		'si_LK' => __( 'Sinhala', 'contact-form-7' ),
-		'sk_SK' => __( 'Slovak', 'contact-form-7' ),
-		'sl_SI' => __( 'Slovene', 'contact-form-7' ),
-		'es_ES' => __( 'Spanish', 'contact-form-7' ),
-		'sv_SE' => __( 'Swedish', 'contact-form-7' ),
-		'ta' => __( 'Tamil', 'contact-form-7' ),
-		'th' => __( 'Thai', 'contact-form-7' ),
-		'tl' => __( 'Tagalog', 'contact-form-7' ),
-		'tr_TR' => __( 'Turkish', 'contact-form-7' ),
-		'uk' => __( 'Ukrainian', 'contact-form-7' ),
-		'vi' => __( 'Vietnamese', 'contact-form-7' )
-	);
-
-	return $l10n;
+function wpcf7_verify_nonce( $nonce, $action = 'wp_rest' ) {
+	return wp_verify_nonce( $nonce, $action );
 }
 
-function wpcf7_is_valid_locale( $locale ) {
-	$l10n = wpcf7_l10n();
-	return isset( $l10n[$locale] );
-}
-
-function wpcf7_is_rtl( $locale = '' ) {
-	if ( empty( $locale ) ) {
-		return function_exists( 'is_rtl' ) ? is_rtl() : false;
-	}
-
-	$rtl_locales = array(
-		'ar' => 'Arabic',
-		'he_IL' => 'Hebrew',
-		'fa_IR' => 'Persian' );
-
-	return isset( $rtl_locales[$locale] );
-}
-
-function wpcf7_ajax_loader() {
-	$url = wpcf7_plugin_url( 'images/ajax-loader.gif' );
-
-	if ( is_ssl() && 'http:' == substr( $url, 0, 5 ) )
-		$url = 'https:' . substr( $url, 5 );
-
-	return apply_filters( 'wpcf7_ajax_loader', $url );
-}
-
-function wpcf7_verify_nonce( $nonce, $action = -1 ) {
-	if ( substr( wp_hash( $action, 'nonce' ), -12, 10 ) == $nonce )
-		return true;
-
-	return false;
-}
-
-function wpcf7_create_nonce( $action = -1 ) {
-	return substr( wp_hash( $action, 'nonce' ), -12, 10 );
+function wpcf7_create_nonce( $action = 'wp_rest' ) {
+	return wp_create_nonce( $action );
 }
 
 function wpcf7_blacklist_check( $target ) {
 	$mod_keys = trim( get_option( 'blacklist_keys' ) );
 
-	if ( empty( $mod_keys ) )
+	if ( empty( $mod_keys ) ) {
 		return false;
+	}
 
 	$words = explode( "\n", $mod_keys );
 
 	foreach ( (array) $words as $word ) {
 		$word = trim( $word );
 
-		if ( empty( $word ) )
+		if ( empty( $word )
+		or 256 < strlen( $word ) ) {
 			continue;
+		}
 
-		if ( preg_match( '#' . preg_quote( $word, '#' ) . '#', $target ) )
+		$pattern = sprintf( '#%s#i', preg_quote( $word, '#' ) );
+
+		if ( preg_match( $pattern, $target ) ) {
 			return true;
+		}
 	}
 
 	return false;
 }
 
 function wpcf7_array_flatten( $input ) {
-	if ( ! is_array( $input ) )
+	if ( ! is_array( $input ) ) {
 		return array( $input );
+	}
 
 	$output = array();
 
-	foreach ( $input as $value )
+	foreach ( $input as $value ) {
 		$output = array_merge( $output, wpcf7_array_flatten( $value ) );
+	}
 
 	return $output;
 }
@@ -179,8 +85,9 @@ function wpcf7_flat_join( $input ) {
 	$input = wpcf7_array_flatten( $input );
 	$output = array();
 
-	foreach ( (array) $input as $value )
+	foreach ( (array) $input as $value ) {
 		$output[] = trim( (string) $value );
+	}
 
 	return implode( ', ', $output );
 }
@@ -191,6 +98,20 @@ function wpcf7_support_html5() {
 
 function wpcf7_support_html5_fallback() {
 	return (bool) apply_filters( 'wpcf7_support_html5_fallback', false );
+}
+
+function wpcf7_use_really_simple_captcha() {
+	return apply_filters( 'wpcf7_use_really_simple_captcha',
+		WPCF7_USE_REALLY_SIMPLE_CAPTCHA );
+}
+
+function wpcf7_validate_configuration() {
+	return apply_filters( 'wpcf7_validate_configuration',
+		WPCF7_VALIDATE_CONFIGURATION );
+}
+
+function wpcf7_autop_or_not() {
+	return (bool) apply_filters( 'wpcf7_autop_or_not', WPCF7_AUTOP );
 }
 
 function wpcf7_load_js() {
@@ -209,16 +130,18 @@ function wpcf7_format_atts( $atts ) {
 	foreach ( $prioritized_atts as $att ) {
 		if ( isset( $atts[$att] ) ) {
 			$value = trim( $atts[$att] );
-
-			if ( '' !== $value ) {
-				$html .= sprintf( ' %s="%s"', $att, esc_attr( $value ) );
-			}
-
+			$html .= sprintf( ' %s="%s"', $att, esc_attr( $value ) );
 			unset( $atts[$att] );
 		}
 	}
 
 	foreach ( $atts as $key => $value ) {
+		$key = strtolower( trim( $key ) );
+
+		if ( ! preg_match( '/^[a-z_:][a-z_:.0-9-]*$/', $key ) ) {
+			continue;
+		}
+
 		$value = trim( $value );
 
 		if ( '' !== $value ) {
@@ -231,61 +154,22 @@ function wpcf7_format_atts( $atts ) {
 	return $html;
 }
 
-function wpcf7_load_textdomain( $locale = null ) {
-	global $l10n;
+function wpcf7_link( $url, $anchor_text, $args = '' ) {
+	$defaults = array(
+		'id' => '',
+		'class' => '',
+	);
 
-	$domain = 'contact-form-7';
+	$args = wp_parse_args( $args, $defaults );
+	$args = array_intersect_key( $args, $defaults );
+	$atts = wpcf7_format_atts( $args );
 
-	if ( get_locale() == $locale ) {
-		$locale = null;
-	}
+	$link = sprintf( '<a href="%1$s"%3$s>%2$s</a>',
+		esc_url( $url ),
+		esc_html( $anchor_text ),
+		$atts ? ( ' ' . $atts ) : '' );
 
-	if ( empty( $locale ) ) {
-		if ( is_textdomain_loaded( $domain ) ) {
-			return true;
-		} else {
-			return load_plugin_textdomain( $domain, false, $domain . '/languages' );
-		}
-	} else {
-		$mo_orig = $l10n[$domain];
-		unload_textdomain( $domain );
-
-		$mofile = $domain . '-' . $locale . '.mo';
-		$path = WP_PLUGIN_DIR . '/' . $domain . '/languages';
-
-		if ( $loaded = load_textdomain( $domain, $path . '/'. $mofile ) ) {
-			return $loaded;
-		} else {
-			$mofile = WP_LANG_DIR . '/plugins/' . $mofile;
-			return load_textdomain( $domain, $mofile );
-		}
-
-		$l10n[$domain] = $mo_orig;
-	}
-
-	return false;
-}
-
-function wpcf7_load_modules() {
-	$dir = WPCF7_PLUGIN_MODULES_DIR;
-
-	if ( empty( $dir ) || ! is_dir( $dir ) ) {
-		return false;
-	}
-
-	$mods = array(
-		'acceptance', 'flamingo',
-		'akismet', 'jetpack', 'submit', 'captcha', 'number',
-		'text', 'checkbox', 'quiz', 'textarea', 'date',
-		'response', 'file', 'select', 'listo' );
-
-	foreach ( $mods as $mod ) {
-		$file = trailingslashit( $dir ) . $mod . '.php';
-
-		if ( file_exists( $file ) ) {
-			include_once $file; 
-		}
-	}
+	return $link;
 }
 
 function wpcf7_get_request_uri() {
@@ -310,7 +194,8 @@ function wpcf7_register_post_types() {
 function wpcf7_version( $args = '' ) {
 	$defaults = array(
 		'limit' => -1,
-		'only_major' => false );
+		'only_major' => false,
+	);
 
 	$args = wp_parse_args( $args, $defaults );
 
@@ -352,7 +237,8 @@ function wpcf7_enctype_value( $enctype ) {
 	$valid_enctypes = array(
 		'application/x-www-form-urlencoded',
 		'multipart/form-data',
-		'text/plain' );
+		'text/plain',
+	);
 
 	if ( in_array( $enctype, $valid_enctypes ) ) {
 		return $enctype;
@@ -367,4 +253,182 @@ function wpcf7_enctype_value( $enctype ) {
 	return '';
 }
 
-?>
+function wpcf7_rmdir_p( $dir ) {
+	if ( is_file( $dir ) ) {
+		$file = $dir;
+
+		if ( @unlink( $file ) ) {
+			return true;
+		}
+
+		$stat = stat( $file );
+
+		if ( @chmod( $file, $stat['mode'] | 0200 ) ) { // add write for owner
+			if ( @unlink( $file ) ) {
+				return true;
+			}
+
+			@chmod( $file, $stat['mode'] );
+		}
+
+		return false;
+	}
+
+	if ( ! is_dir( $dir ) ) {
+		return false;
+	}
+
+	if ( $handle = opendir( $dir ) ) {
+		while ( false !== ( $file = readdir( $handle ) ) ) {
+			if ( $file == "."
+			or $file == ".." ) {
+				continue;
+			}
+
+			wpcf7_rmdir_p( path_join( $dir, $file ) );
+		}
+
+		closedir( $handle );
+	}
+
+	if ( false !== ( $files = scandir( $dir ) )
+	and ! array_diff( $files, array( '.', '..' ) ) ) {
+		return rmdir( $dir );
+	}
+
+	return false;
+}
+
+/* From _http_build_query in wp-includes/functions.php */
+function wpcf7_build_query( $args, $key = '' ) {
+	$sep = '&';
+	$ret = array();
+
+	foreach ( (array) $args as $k => $v ) {
+		$k = urlencode( $k );
+
+		if ( ! empty( $key ) ) {
+			$k = $key . '%5B' . $k . '%5D';
+		}
+
+		if ( null === $v ) {
+			continue;
+		} elseif ( false === $v ) {
+			$v = '0';
+		}
+
+		if ( is_array( $v ) or is_object( $v ) ) {
+			array_push( $ret, wpcf7_build_query( $v, $k ) );
+		} else {
+			array_push( $ret, $k . '=' . urlencode( $v ) );
+		}
+	}
+
+	return implode( $sep, $ret );
+}
+
+/**
+ * Returns the number of code units in a string.
+ *
+ * @see http://www.w3.org/TR/html5/infrastructure.html#code-unit-length
+ *
+ * @return int|bool The number of code units, or false if mb_convert_encoding is not available.
+ */
+function wpcf7_count_code_units( $string ) {
+	static $use_mb = null;
+
+	if ( is_null( $use_mb ) ) {
+		$use_mb = function_exists( 'mb_convert_encoding' );
+	}
+
+	if ( ! $use_mb ) {
+		return false;
+	}
+
+	$string = (string) $string;
+	$string = str_replace( "\r\n", "\n", $string );
+
+	$encoding = mb_detect_encoding( $string, mb_detect_order(), true );
+
+	if ( $encoding ) {
+		$string = mb_convert_encoding( $string, 'UTF-16', $encoding );
+	} else {
+		$string = mb_convert_encoding( $string, 'UTF-16', 'UTF-8' );
+	}
+
+	$byte_count = mb_strlen( $string, '8bit' );
+
+	return floor( $byte_count / 2 );
+}
+
+function wpcf7_is_localhost() {
+	$server_name = strtolower( $_SERVER['SERVER_NAME'] );
+	return in_array( $server_name, array( 'localhost', '127.0.0.1' ) );
+}
+
+function wpcf7_deprecated_function( $function, $version, $replacement ) {
+	$trigger_error = apply_filters( 'deprecated_function_trigger_error', true );
+
+	if ( WP_DEBUG and $trigger_error ) {
+		if ( function_exists( '__' ) ) {
+			trigger_error( sprintf( __( '%1$s is <strong>deprecated</strong> since Contact Form 7 version %2$s! Use %3$s instead.', 'contact-form-7' ), $function, $version, $replacement ) );
+		} else {
+			trigger_error( sprintf( '%1$s is <strong>deprecated</strong> since Contact Form 7 version %2$s! Use %3$s instead.', $function, $version, $replacement ) );
+		}
+	}
+}
+
+function wpcf7_log_remote_request( $url, $request, $response ) {
+	$log = sprintf(
+		/* translators: 1: response code, 2: message, 3: body, 4: URL */
+		__( 'HTTP Response: %1$s %2$s %3$s from %4$s', 'contact-form-7' ),
+		(int) wp_remote_retrieve_response_code( $response ),
+		wp_remote_retrieve_response_message( $response ),
+		wp_remote_retrieve_body( $response ),
+		$url
+	);
+
+	$log = apply_filters( 'wpcf7_log_remote_request',
+		$log, $url, $request, $response
+	);
+
+	if ( $log ) {
+		trigger_error( $log );
+	}
+}
+
+function wpcf7_anonymize_ip_addr( $ip_addr ) {
+	if ( ! function_exists( 'inet_ntop' )
+	or ! function_exists( 'inet_pton' ) ) {
+		return $ip_addr;
+	}
+
+	$packed = inet_pton( $ip_addr );
+
+	if ( false === $packed ) {
+		return $ip_addr;
+	}
+
+	if ( 4 == strlen( $packed ) ) { // IPv4
+		$mask = '255.255.255.0';
+	} elseif ( 16 == strlen( $packed ) ) { // IPv6
+		$mask = 'ffff:ffff:ffff:0000:0000:0000:0000:0000';
+	} else {
+		return $ip_addr;
+	}
+
+	return inet_ntop( $packed & inet_pton( $mask ) );
+}
+
+function wpcf7_is_file_path_in_content_dir( $path ) {
+	if ( 0 === strpos( realpath( $path ), realpath( WP_CONTENT_DIR ) ) ) {
+		return true;
+	}
+
+	if ( defined( 'UPLOADS' )
+	and 0 === strpos( realpath( $path ), realpath( ABSPATH . UPLOADS ) ) ) {
+		return true;
+	}
+
+	return false;
+}
