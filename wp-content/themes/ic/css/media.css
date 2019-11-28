@@ -573,7 +573,7 @@ and (max-width : 1024px) {
 	}
 
 	.login-portal__trigger--secondary::after {
-		border-top: 20px solid #f27333;
+		border-top: 20px solid #ab0303;
 		border-left: 51px solid transparent;
 		border-right: 51px solid transparent;
 	}
