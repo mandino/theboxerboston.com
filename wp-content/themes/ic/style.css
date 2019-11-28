@@ -4737,6 +4737,7 @@ li.social_share_side a i:hover{
 /* Pride Banner in the heading */
  
 #property-nav {
+    display: none;
     overflow:hidden;
     position: relative;
     border-bottom: 2px solid #333333;

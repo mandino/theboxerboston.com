@@ -270,15 +270,56 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					<li class="blue-btn"><a href="//theboxerboston.com/blue"><i class="fa fa-info-circle"></i><span class="blue-mobile">why blue?</span></a></li>
 				</ul>
 			</nav>
-			
-			
-			
-	
+		</div>
+
+		<div class="login-portal" aria-label="Membership Portal" aria-modal="true" tabindex="0">
+			<form id="login-portal">
+				<input type="text" name="fname" placeholder="First Name">
+				<input type="text" name="lname" placeholder="Last Name">
+				<input type="text" name="email" placeholder="Email">
+				<input type="text" name="zipcode" placeholder="Zip Code">
+				<span class="btn--circle">
+					<input type="submit" name="submit" value="Join Us">
+				</span>	
+			</form>
+			<div class="postal-greetings">
+				<span>Your Perks are Waiting</span>
+			</div>
+			<span class="postal-signin">Already a Member? <a href="https://independentcollectionloyaltyqa.cendyn.com/">Sign In</a></span>
 		</div>
 	
 		<div id="primary-nav" style="overflow:visible;">
-		
+			<div class="login-portal__trigger--container">
+				<button class="login-portal__trigger">
+					<span class="login-portal__text">Sign In / Sign Up</span>
+					<div class="login-portal__close-btn">
+						<span class="line-one"></span>
+						<span class="line-two"></span>
+					</div>
+					
+				</button>
+			</div>
             <a href="<?php bloginfo('url'); ?>" class="logo droplogo"><img src="<?php echo get_option('cebo_logo'); ?>" alt="<?php echo the_title(); ?>" /></a>
+
+            <div class="login-portal__trigger--container">
+				<button class="login-portal__trigger--secondary desktop">
+					<span class="login-portal__text">Sign In / Sign Up</span>
+					<div class="login-portal__close-btn">
+					<span class="line-one"></span>
+					<span class="line-two"></span>
+				</div>
+				</button>
+			</div>
+			
+			<div class="login-portal__trigger--container">
+				<button class="login-portal__trigger--secondary mobile">
+					<span class="login-portal__text">Sign In / Sign Up</span>
+					<div class="login-portal__close-btn">
+					<span class="line-one"></span>
+					<span class="line-two"></span>
+				</div>
+				</button>
+			</div>
             
 			<a href="<?php bloginfo('url'); ?>" class="logo mobile"><img src="<?php echo get_option('cebo_logo'); ?>" alt="<?php echo the_title().'-mobile'; ?>" /></a>
 			

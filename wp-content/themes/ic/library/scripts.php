@@ -84,6 +84,60 @@
 		});
 	}
 	$(document).ready(function(){
+
+
+		$(document).on('keydown', function(e) {			
+			var input = $('#login-portal').find('input');
+			if ((e.keyCode || e.which) == 9) {
+	        	var focused = $(':focus');
+		        if ($(focused).hasClass('login-portal__trigger')) {  	
+		        	if ($('.login-portal').is(':visible')) {
+		        		
+						$('.login-portal').focus();
+					}
+		        }
+	    	}
+		    
+		});
+		
+		$('.login-portal__trigger--container, .click-nav ul li').on('click touchstart', function(e) {
+			
+			if (!$('body').hasClass('portal-active')) {
+				if (!$('.login-portal').is(':visible')) {
+					$('.login-portal').slideDown(1000);
+					$('#primary-nav').addClass('open-portal');
+					$('.login-portal__text').addClass('hidden');
+					$('.login-portal__close-btn').addClass('show');
+					$('body').addClass('portal-active');
+					if (e.keyCode === 13) {
+						if ($('.login-portal').is(':visible')) {
+							$('#login-portal').find('input[name="fname"]').addClass('first-item');
+							$('.login-portal').focus();
+						}
+					}
+
+					
+				}
+			} else {
+
+				if ($('.login-portal').is(':visible')) {
+					$('.login-portal').slideUp(1000);
+					$('#primary-nav').removeClass('open-portal');
+					$('.login-portal__text').removeClass('hidden');
+					$('.login-portal__close-btn').removeClass('show');
+					$('body').removeClass('portal-active');
+				}
+				if (e.keyCode === 13) {
+					if ($('.login-portal').is(':visible')) {
+						$('body').removeClass('portal-active');
+					}
+				}
+			}
+
+
+	
+		});
+
 		pressLogoDisplay()
 		$(".eat-tab-button").click(function() {
 			var id = "#"+$(this).data('class');
@@ -522,12 +576,28 @@
     
       if (verschil > 40) 
             
-           $('.droplogo').addClass('jumpshot');
+        $('.droplogo').addClass('jumpshot');
+    	if ($('.login-portal__trigger--secondary').hasClass('desktop')) {
+			$('.login-portal__trigger--secondary.desktop').addClass('active');
+        	$('.login-portal__trigger').addClass('inactive');
+		}
+
+		if ($('.login-portal__trigger--secondary').hasClass('mobile') && $('.login-portal__trigger--secondary').is(':visible')) {
+			$('.login-portal__trigger--secondary.mobile').addClass('active');
+        	$('.login-portal__trigger').addClass('inactive');
+		}
               
         
         else if (verschil < 40)
             
-           $('.droplogo').removeClass('jumpshot');
+           	$('.droplogo').removeClass('jumpshot');
+       		$('.login-portal__trigger--secondary.desktop').removeClass('active');
+	       	$('.login-portal__trigger').removeClass('inactive');
+
+	       	if ($('.login-portal__trigger--secondary').hasClass('mobile')) {
+    			$('.login-portal__trigger--secondary.mobile').removeClass('active');
+	        	$('.login-portal__trigger').removeClass('inactive');
+    		}
     });
     
 //    countdown picker

@@ -1,13 +1,218 @@
-/* ================================================  MAX WIDTH 1280 ======================================= */
-@media only screen
-and (max-width : 1280px) {
-	/* Navigation */
-	#primary-nav .container {
-	    width: 1040px;
+/* ================================================  MAX WIDTH 2560 ======================================= */
+
+@media only screen 
+and (max-width : 2560px) {
+
+	.btn--circle {
+		top: 120px;
+    	right: 45vw;
+    	width: 125px;
+	    height: 125px;
+	    border-radius: 70px;
 	}
-    
-    
+
+	.postal-greetings {
+	    top: 155px;
+    	right: 20vw;
+	}
+
+	.postal-greetings span {
+	    font-size: 55px;
+	}
+
+	#login-portal input[type="text"] {
+		font-size: 18px;
+	}
+
+	#login-portal .btn--circle input[type="submit"] {
+		font-size: 16px;
+	}
+
+
 }
+
+/* ================================================  MAX WIDTH 1920 ======================================= */
+
+@media only screen 
+and (max-width : 1920px) {
+
+	.btn--circle {
+		top: 90px;
+    	right: 42vw;
+	}
+
+	.postal-greetings {
+	    top: 125px;
+    	right: 12vw;
+	}
+
+	.postal-greetings span {
+	    font-size: 50px;
+	}
+
+	#login-portal input[type="text"] {
+    	font-size: 15px;
+	}
+	#login-portal .btn--circle input[type="submit"] {
+		font-size: 15px;
+	}
+
+}
+
+
+/* ================================================  MAX WIDTH 1680 ======================================= */
+
+@media only screen 
+and (max-width : 1680px) {
+
+	.btn--circle {
+		top: 85px;
+    	right: 42vw;
+    	width: 100px;
+		height: 100px;
+		border-radius: 50px;
+	}
+
+	.postal-greetings {
+	    top: 110px;
+    	right: 11vw;
+	}
+
+	#login-portal input[type="text"] {
+    	font-size: 13px;
+	}
+
+	#login-portal .btn--circle input[type="submit"] {
+		font-size: 14px;	
+	}
+
+	.postal-greetings span {
+    	font-size: 45px;
+	}
+
+
+}
+
+/* ================================================  MAX WIDTH 1440 ======================================= */
+
+@media only screen 
+and (max-width : 1440px) {
+
+	.btn--circle {
+		top: 80px;
+    	right: 42vw;
+    	width: 85px;
+		height: 85px;
+		border-radius: 50px;
+	}
+
+	.postal-greetings {
+	    top: 95px;
+    	right: 8vw;
+	}
+
+	#login-portal input[type="text"] {
+	    font-size: 13px;
+	}
+
+
+}
+
+
+/* ================================================  MAX WIDTH 1439 ======================================= */
+
+
+@media only screen 
+and (max-width : 1439px) {	
+
+
+
+	/* Navigation */
+
+	#primary-nav .container {
+	    width: 908px;
+	}
+
+	#primary-nav nav {
+	    margin: 25px 20px 22px 0;
+	}
+
+	#primary-nav nav ul li a {
+	    font-size: 12px;
+	}
+
+
+}
+
+/* ================================================  MAX WIDTH 1366 ======================================= */
+
+@media only screen 
+and (max-width : 1366px) {
+	.postal-greetings span {
+	    font-size: 45px;
+	}
+
+	.btn--circle {
+	    top: 80px;
+	    right: 43vw;
+	    width: 85px;
+	    height: 85px;
+	    border-radius: 50px;
+	}
+
+	.postal-greetings {
+	    top: 95px;
+	    right: 7vw;
+	}
+}
+
+/* ================================================  MAX WIDTH 1280 ======================================= */
+
+
+@media only screen 
+and (max-width : 1280px) {
+
+
+
+	/* Navigation */
+
+	#primary-nav .container {
+	    width: 720px;
+	}
+
+	#login-portal input[type="text"] {
+		width: 40%;
+	}
+
+	#login-portal .btn--circle input[type="submit"] {
+		font-size: 14px;
+	}
+
+	.btn--circle {
+		top: 65px;
+    	right: 40vw;
+        width: 100px;
+	    height: 100px;
+	    border-radius: 50px;
+
+	}
+
+	.postal-greetings {
+		top: 95px;
+		right: 5vw;
+	}
+
+	#login-portal input[type="text"] {
+	    font-size: 13px;
+	}
+
+	.postal-greetings span {
+	    font-size: 39px;
+	}
+
+}
+
+
 /* ================================================  MAX WIDTH 1439 ======================================= */
 @media only screen
 and (max-width : 1439px) {
@@ -325,6 +530,63 @@ and (max-width : 1024px) {
 	.press-logo__item {
 		width: calc(33% - 10%);
 	}
+
+	.login-portal__trigger {
+	    left: 2vw;
+	}
+	
+	.btn--circle {
+		top: 60px;
+    	right: 40vw;
+    	width: 80px;
+	    height: 80px;
+	    border-radius: 50px;
+	}
+
+	.postal-greetings {
+	    top: 80px;
+    	right: 4vw;
+	}
+
+	#login-portal input[type="text"] {
+	    font-size: 13px;
+	}
+
+	.postal-greetings span {
+	    font-size: 34px;
+	}
+
+	.login-portal__trigger--secondary.active {
+	    top: 45px;
+	}
+
+	.login-portal__trigger--secondary.desktop.active {
+	    display: block;
+	    top: 80px;
+	    left: 0;
+	    width: 102px;
+		height: 40px;
+	}
+
+	.login-portal__trigger--secondary span {
+		font-size: 11px;
+	}
+
+	.login-portal__trigger--secondary::after {
+		border-top: 20px solid #f27333;
+		border-left: 51px solid transparent;
+		border-right: 51px solid transparent;
+	}
+
+	#property-nav nav ul li a.clicknav-clicker {
+		font-size: 9px;
+	}
+
+	.postal-signin {
+		padding-left: 5%;
+    	bottom: 15%;
+	}
+
 }
 /* ================================================  MAX WIDTH 1023 ======================================= */
 @media only screen
@@ -875,6 +1137,49 @@ and (max-width : 939px) {
     .ticker-down {
         top:50px;
     }
+
+    #login-portal input[type="text"] {
+    	font-size: 11px;
+	}
+
+	#login-portal .btn--circle input[type="submit"] {
+	    font-size: 12px;
+	}
+
+	.btn--circle {
+	    top: 60px;
+	    right: 37vw;
+	    width: 70px;
+	    height: 70px;
+	    border-radius: 50px;
+	}
+
+	.postal-greetings span {
+	    font-size: 25px;
+	}
+	.login-portal__trigger {
+		display: none;
+	}
+	#primary-nav.open-portal {
+		position: relative;
+	}
+
+	.login-portal__trigger--secondary.desktop, .login-portal__trigger--secondary.desktop.active {
+		display: none;
+	}
+	
+	.login-portal__trigger--secondary.mobile {
+		display: block;
+		top: 68px;
+		width: 103px;
+		-webkit-transition: all 1s ease;
+    	transition: all 1s ease;
+	}
+	.login-portal__trigger--secondary.mobile.active {
+		top: 50px;
+		-webkit-transition: all 1s ease;
+    	transition: all 1s ease;
+	}
 }
 
 /* ================================================  MAX WIDTH 840 ======================================= */
@@ -946,6 +1251,44 @@ and (max-width : 768px) {
     .landing-page-logo a img {
         width: 200px;
     }
+
+    .login-portal__trigger {
+		display: none;
+	}
+	#primary-nav.open-portal {
+		position: relative;
+	}
+
+	.login-portal__trigger--secondary.desktop, .login-portal__trigger--secondary.desktop.active {
+		display: none;
+	}
+
+	.login-portal__trigger--secondary.mobile {
+		display: block;
+		top: 68px;
+		width: 105px;
+		-webkit-transition: all 1s ease;
+    	transition: all 1s ease;
+	}
+
+	.login-portal__trigger--secondary.mobile.active {
+		top: 50px;
+		-webkit-transition: all 1s ease;
+    	transition: all 1s ease;
+	}
+
+	#login-portal input[type="text"] {
+	    font-size: 11px;
+	}
+
+	.btn--circle {
+	    right: 35vw;
+    	top: 50px;
+	}
+
+	.postal-greetings span {
+	    font-size: 22px;
+	}
 }
 @media only screen
 and (min-width : 640px)
@@ -1317,6 +1660,36 @@ and (max-width : 640px)
     	width: 100%;
     }
 
+    #login-portal {
+    	width: 100%;
+	    box-sizing: border-box;
+    }
+
+    .postal-signin {
+    	padding-left: 35%;
+    	bottom: 12px;
+    }
+
+    .btn--circle {
+    	position: relative;
+    	display: inline-block;
+        right: 0;
+    	top: 0;
+    }
+
+    .postal-greetings {
+	    top: 155px;
+	    right: 15vw;
+	}
+
+	#login-portal input[type="text"] {
+	    width: 42%;
+	}
+
+	#login-portal input[type="text"]:nth-child(even) {
+		margin-right: 0;
+	}
+
 }
 /* ================================================  MOBILES BELOW 639 ======================================= */
 @media only screen
@@ -1604,6 +1977,18 @@ li.blue-btn {
     .landing-page-logo, .landing-page-logo-header {
         display:none;
     }
+
+    #login-portal input[type="text"] {
+	    width: 100%;
+	    box-sizing: border-box;
+	    padding: 5%;
+	}
+
+	.postal-greetings {
+	    top: auto;
+	    bottom: 47px;
+	    right: 9vw;
+	}
 }
 /* ================================================  MAX HEIGHT 480 ======================================= */
 @media only screen
