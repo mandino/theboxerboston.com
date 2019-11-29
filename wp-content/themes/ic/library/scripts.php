@@ -577,27 +577,13 @@
       if (verschil > 40) 
             
         $('.droplogo').addClass('jumpshot');
-    	if ($('.login-portal__trigger--secondary').hasClass('desktop')) {
-			$('.login-portal__trigger--secondary.desktop').addClass('active');
-        	$('.login-portal__trigger').addClass('inactive');
-		}
 
-		if ($('.login-portal__trigger--secondary').hasClass('mobile') && $('.login-portal__trigger--secondary').is(':visible')) {
-			$('.login-portal__trigger--secondary.mobile').addClass('active');
-        	$('.login-portal__trigger').addClass('inactive');
-		}
               
         
         else if (verschil < 40)
             
            	$('.droplogo').removeClass('jumpshot');
-       		$('.login-portal__trigger--secondary.desktop').removeClass('active');
-	       	$('.login-portal__trigger').removeClass('inactive');
-
-	       	if ($('.login-portal__trigger--secondary').hasClass('mobile')) {
-    			$('.login-portal__trigger--secondary.mobile').removeClass('active');
-	        	$('.login-portal__trigger').removeClass('inactive');
-    		}
+       		
     });
     
 //    countdown picker
@@ -608,9 +594,26 @@
         if (verschil > 40) {
             $('.droplogo').addClass('jumpshot');
             $('.ticker').addClass('ticker-down');
+            if ($('.login-portal__trigger--secondary').hasClass('desktop')) {
+				$('.login-portal__trigger--secondary.desktop').addClass('active');
+	        	$('.login-portal__trigger').addClass('inactive');
+	        	console.log($('.login-portal__trigger--secondary.desktop'));
+			}
+
+			if ($('.login-portal__trigger--secondary').hasClass('mobile') && $('.login-portal__trigger--secondary').is(':visible')) {
+				$('.login-portal__trigger--secondary.mobile').addClass('active');
+	        	$('.login-portal__trigger').addClass('inactive');
+			}
         } else if (verschil < 40) {
             $('.droplogo').removeClass('jumpshot');
             $('.ticker').removeClass('ticker-down');
+            $('.login-portal__trigger--secondary.desktop').removeClass('active');
+	       	$('.login-portal__trigger').removeClass('inactive');
+
+	       	if ($('.login-portal__trigger--secondary').hasClass('mobile')) {
+    			$('.login-portal__trigger--secondary.mobile').removeClass('active');
+	        	$('.login-portal__trigger').removeClass('inactive');
+    		}
         }
     });
 
